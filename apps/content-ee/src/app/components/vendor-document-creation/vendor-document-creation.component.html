@@ -1,0 +1,443 @@
+<!-- Tab page: Projects-style hero + portfolio (form opens in dialog) -->
+<ng-container *ngIf="!embedded">
+  <aca-page-layout class="adw-vendor-doc-page adw-vendor-doc-page--projects">
+    <!-- scrollable: ACA adds .aca-scrollable so .aca-page-layout-content gets overflow:auto (default is overflow:hidden). -->
+    <aca-page-layout-content [scrollable]="true">
+      <div class="adw-vendor-doc-projects">
+        <!-- ——— Hero (aligned with Create Project / Projects portfolio) ——— -->
+        <div class="adw-vdr-hero hero">
+          <button
+            *ngIf="!isSidenavExpanded"
+            class="hero-nav-link"
+            type="button"
+            (click)="openSidenav()"
+            aria-label="Expand navigation menu"
+            title="Expand navigation menu">
+            &raquo;
+          </button>
+
+          <div class="hero-container">
+            <div class="hero-content">
+              <h1 id="adw-vendor-doc-heading" class="hero-title">Vendor Document Registry</h1>
+              <div class="hero-lede">
+                <p>
+                  Register and track vendor submissions linked to purchase orders and VDR line items across your projects.
+                </p>
+                <p>
+                  Use the portfolio below to review status, filter by document state, and open registration when you are ready to submit files.
+                </p>
+              </div>
+              <div class="hero-buttons">
+                <button type="button" class="primary-btn" (click)="openRegistrationDialog()">+ Create VDR</button>
+              </div>
+            </div>
+
+            <ng-container *ngIf="vendorDashboardStripPrimary.length; else heroStatsPlaceholder">
+              <div class="hero-stats stats" role="group" aria-label="Document counts by status">
+                <button
+                  *ngFor="let card of vendorDashboardStripPrimary"
+                  type="button"
+                  class="stat-card"
+                  [ngClass]="'stat-card--' + card.variant"
+                  [class.stat-card--active]="isDashboardCardActive(card)"
+                  [disabled]="!card.selectable"
+                  [attr.aria-label]="card.label + ': ' + card.count"
+                  [attr.aria-pressed]="card.selectable ? isDashboardCardActive(card) : null"
+                  (click)="onDashboardCardClick(card)">
+                  <span class="stat-card__inner">
+                    <mat-icon class="stat-card__icon" aria-hidden="true">{{ card.icon }}</mat-icon>
+                    <span class="stat-card__meta">
+                      <span class="stat-card__value">{{ vendorDashboardLoading ? '—' : card.count }}</span>
+                      <span class="stat-card__label">{{ card.label }}</span>
+                      <span class="stat-card__trend" [ngClass]="'stat-card__trend--' + vendorDashboardTrendDirection(card)">
+                        <mat-icon aria-hidden="true">{{ vendorDashboardTrendIcon(card) }}</mat-icon>
+                        <span>from last 30 days</span>
+                      </span>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </ng-container>
+            <ng-template #heroStatsPlaceholder>
+              <div class="hero-stats stats hero-stats--placeholder" aria-hidden="true">
+                <article class="stat-card stat-card--placeholder" *ngFor="let lbl of heroStatPlaceholderLabels">
+                  <div class="stat-card__inner">
+                    <span class="stat-card__value">—</span>
+                    <span class="stat-card__label">{{ lbl }}</span>
+                  </div>
+                </article>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <!-- ——— Portfolio: search, filters, dashboard, table ——— -->
+        <div class="portfolio" id="vendor-documents-portfolio">
+          <div class="container">
+            <div class="filters">
+              <div class="input-shell input-shell--search filters__search">
+                <mat-icon class="input-shell__icon" aria-hidden="true">search</mat-icon>
+                <input
+                  type="text"
+                  [(ngModel)]="vendorTableSearch"
+                  (input)="onVendorTableSearchChange()"
+                  name="vendorTableSearch"
+                  placeholder="Search documents by title, project, PO, line item, or status..."
+                  aria-label="Search vendor documents"
+                />
+              </div>
+              <ng-container *ngTemplateOutlet="vendorVdrStatusFilterBar"></ng-container>
+            </div>
+
+            <h2 class="section-title">Vendor documents</h2>
+
+            <div class="applications-table-wrapper" *ngIf="!vendorVdrLoading && !vendorVdrLoadError">
+              <ng-container *ngTemplateOutlet="vendorVdrTableWithPaginator"></ng-container>
+            </div>
+
+            <p *ngIf="vendorVdrLoading" class="adw-vendor-vdr-status" role="status">Loading vendor documents…</p>
+            <p *ngIf="vendorVdrLoadError" class="adw-vendor-vdr-error" role="alert">{{ vendorVdrLoadError }}</p>
+          </div>
+        </div>
+      </div>
+    </aca-page-layout-content>
+  </aca-page-layout>
+</ng-container>
+
+<!-- Dialog: embedded form (opened from tab or Project Explorer) -->
+<div *ngIf="embedded" class="adw-vendor-doc-embedded">
+  <ng-container *ngTemplateOutlet="vendorRegistrationForm"></ng-container>
+</div>
+
+<ng-template #vendorRegistrationForm>
+  <div class="adw-vendor-doc-shell adw-vendor-doc-canvas">
+    <header *ngIf="!embedded" class="adw-vendor-doc-intro" aria-labelledby="adw-vendor-doc-heading-form">
+      <span class="adw-vendor-doc-eyebrow">Vendor workflow</span>
+      <h1 id="adw-vendor-doc-heading-form" class="adw-vendor-doc-title">Vendor Document Registry</h1>
+      <p class="adw-vendor-doc-subtitle">
+        Register vendor documents by linking your purchase order and VDR line item, then attach files and submit.
+      </p>
+    </header>
+    <header *ngIf="embedded" class="adw-vendor-doc-intro adw-vendor-doc-intro--embedded" aria-labelledby="adw-vendor-doc-heading-form">
+      <div class="adw-vendor-doc-intro__left">
+        <span class="adw-vendor-doc-intro__icon" aria-hidden="true">
+          <mat-icon>assignment</mat-icon>
+        </span>
+        <div class="adw-vendor-doc-intro__text">
+          <h1 id="adw-vendor-doc-heading-form" class="adw-vendor-doc-title">Vendor Document Registry</h1>
+          <p class="adw-vendor-doc-subtitle">
+            Register vendor documents by linking your purchase order and VDR line item, then attach files and submit.
+          </p>
+        </div>
+      </div>
+      <button type="button" mat-icon-button mat-dialog-close aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+    <div class="adw-vendor-doc-grid" [class.adw-vendor-doc-grid--minimal]="minimalFormOnly">
+      <mat-card class="adw-vendor-doc-card" appearance="outlined">
+        <div class="adw-vendor-doc-card__head">
+          <div class="adw-vendor-doc-card__icon" aria-hidden="true">
+            <mat-icon>assignment_add</mat-icon>
+          </div>
+          <div class="adw-vendor-doc-card__head-text">
+            <h2 class="adw-vendor-doc-card__title">Request details</h2>
+            <p class="adw-vendor-doc-card__lead">Fields marked with <span class="adw-vendor-doc-required">*</span> are required.</p>
+          </div>
+        </div>
+
+        <mat-card-content>
+          <div class="adw-vendor-doc-fields">
+            <div class="adw-vendor-doc-field-wrap">
+              <label class="adw-vendor-doc-field-label" for="adw-vd-project">
+                Project <span class="adw-vendor-doc-required">*</span>
+              </label>
+              <div class="input-shell input-shell--select">
+                <mat-icon class="input-shell__icon" aria-hidden="true">folder_special</mat-icon>
+                <mat-select
+                  id="adw-vd-project"
+                  [(ngModel)]="selectedProject"
+                  (ngModelChange)="onProjectChange($event)"
+                  (openedChange)="onProjectSelectOpened($event)"
+                  name="selectedProject"
+                  required
+                  panelClass="adw-vendor-doc-select-panel"
+                  placeholder="Select project"
+                  [disabled]="projectLoading">
+                  <mat-option class="adw-vendor-doc-search-option" [value]="'__project_search__'" disabled>
+                    <div
+                      class="adw-vendor-doc-search"
+                      (click)="$event.stopPropagation()"
+                      (mousedown)="$event.stopPropagation()">
+                      <mat-icon class="adw-vendor-doc-search__icon" aria-hidden="true">search</mat-icon>
+                      <input
+                        type="search"
+                        class="adw-vendor-doc-search__input"
+                        [(ngModel)]="projectSelectSearch"
+                        [ngModelOptions]="{ standalone: true }"
+                        placeholder="Search projects..."
+                        autocomplete="off"
+                        aria-label="Search projects"
+                        (click)="$event.stopPropagation()"
+                        (mousedown)="$event.stopPropagation()"
+                        (keydown)="$event.stopPropagation()"
+                        (keyup)="$event.stopPropagation()"
+                        (input)="$event.stopPropagation()"
+                        (keydown.space)="$event.stopPropagation()" />
+                    </div>
+                  </mat-option>
+                  <mat-option value="" [class.adw-vendor-doc-option--hidden]="!!projectSelectSearch.trim()">
+                    Select project
+                  </mat-option>
+                  <mat-option *ngIf="projectLoading" disabled>Loading projects...</mat-option>
+                  <mat-option *ngIf="!projectLoading && projectOptions.length === 0" disabled>No projects found</mat-option>
+                  <mat-option
+                    *ngFor="let project of projectOptions"
+                    [value]="project.id"
+                    [class.adw-vendor-doc-option--hidden]="!matchesProjectSearch(project)">
+                    {{ project.label }}
+                  </mat-option>
+                  <mat-option
+                    *ngIf="!projectLoading && projectOptions.length > 0 && !hasMatchingProjects()"
+                    disabled>
+                    No matching projects
+                  </mat-option>
+                </mat-select>
+              </div>
+              <p class="adw-vendor-doc-field-hint">Project linked to your purchase orders</p>
+            </div>
+
+            <div class="adw-vendor-doc-field-wrap">
+              <label class="adw-vendor-doc-field-label" for="adw-vd-po">
+                PO number <span class="adw-vendor-doc-required">*</span>
+              </label>
+              <div class="input-shell input-shell--select">
+                <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                <mat-select
+                  id="adw-vd-po"
+                  [(ngModel)]="poNumber"
+                  (ngModelChange)="onPoNumberChange($event)"
+                  name="poNumber"
+                  required
+                  panelClass="adw-vendor-doc-select-panel"
+                  placeholder="Select PO number"
+                  [disabled]="poLoading || poNodeLoading || !selectedProject">
+                  <mat-option value="">Select PO number</mat-option>
+                  <mat-option *ngIf="poLoading" disabled>Loading PO numbers...</mat-option>
+                  <mat-option *ngIf="poNodeLoading" disabled>Loading PO details...</mat-option>
+                  <mat-option *ngIf="!poLoading && poNumberOptions.length === 0" disabled>No PO numbers found</mat-option>
+                  <mat-option *ngFor="let po of poNumberOptions" [value]="po.id">{{ po.label }}</mat-option>
+                </mat-select>
+              </div>
+              <p class="adw-vendor-doc-field-hint">Purchase order reference</p>
+            </div>
+
+            <div class="adw-vendor-doc-field-wrap">
+              <label class="adw-vendor-doc-field-label" for="adw-vd-vdr">
+                VDR line item <span class="adw-vendor-doc-required">*</span>
+              </label>
+              <div class="input-shell input-shell--select">
+                <mat-icon class="input-shell__icon" aria-hidden="true">list_alt</mat-icon>
+                <mat-select
+                  id="adw-vd-vdr"
+                  [(ngModel)]="vprLift"
+                  (ngModelChange)="onVprLiftChange($event)"
+                  name="vprLift"
+                  required
+                  panelClass="adw-vendor-doc-select-panel"
+                  placeholder="Select VDR line item"
+                  [disabled]="vdrLoading || vprNodeLoading || !poNumber">
+                  <mat-option value="">Select VDR line item</mat-option>
+                  <mat-option *ngIf="vdrLoading" disabled>Loading VDR line items...</mat-option>
+                  <mat-option *ngIf="vprNodeLoading" disabled>Loading line item details...</mat-option>
+                  <mat-option *ngIf="!vdrLoading && poNumber && vprLiftOptions.length === 0" disabled>No line items found</mat-option>
+                  <mat-option *ngFor="let lift of vprLiftOptions" [value]="lift.id">{{ lift.label }}</mat-option>
+                </mat-select>
+              </div>
+              <p class="adw-vendor-doc-field-hint">Line item for this submission</p>
+            </div>
+          </div>
+
+          <div class="adw-vendor-doc-upload">
+            <div class="adw-vendor-doc-upload__head">
+              <mat-icon class="adw-vendor-doc-upload__head-icon" aria-hidden="true">cloud_upload</mat-icon>
+              <div>
+                <span class="adw-vendor-doc-upload-label">Documents</span>
+                <p class="adw-vendor-doc-upload-hint">
+                  Choose files to submit. They are submitted with your PO and VDR line item selection as vendor documents.
+                </p>
+              </div>
+            </div>
+
+            <div class="adw-vendor-doc-dropzone">
+              <input
+                #vendorFileInput
+                type="file"
+                multiple
+                class="adw-vendor-file-input"
+                (change)="onVendorFilesSelected($event)"
+                aria-label="Choose files to submit" />
+              <button type="button" class="adw-vendor-doc-dropzone__cta" (click)="vendorFileInput.click()">
+                <span class="adw-vendor-doc-dropzone__line-primary">
+                  <mat-icon aria-hidden="true">upload</mat-icon>
+                  <span>Choose files</span>
+                </span>
+                <span class="adw-vendor-doc-dropzone__line-secondary">or drag and drop here</span>
+              </button>
+              <span class="adw-vendor-doc-upload-status" *ngIf="selectedFiles.length > 0" role="status">
+                <mat-icon>attach_file</mat-icon>
+                {{ selectedFiles.length }} file(s) selected
+              </span>
+            </div>
+            <p class="adw-vendor-doc-upload-meta">
+              Accepted formats: .pdf, .doc, .docx, .xls, .xlsx, .dwg, .zip&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Max file size: 100 MB per file
+            </p>
+          </div>
+
+          <div class="adw-vendor-doc-actions" [class.adw-vendor-doc-actions--embedded]="embedded">
+            <button *ngIf="embedded" mat-stroked-button type="button" mat-dialog-close>
+              Cancel
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              class="adw-vendor-doc-submit"
+              [disabled]="submitting || !poNumber || !vprLift || selectedFiles.length === 0"
+              (click)="onSubmit()">
+              <mat-icon>send</mat-icon>
+              Submit registration
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <aside *ngIf="!minimalFormOnly" class="adw-vendor-doc-aside" aria-label="Tips">
+        <div class="adw-vendor-doc-aside__inner">
+          <div class="adw-vendor-doc-aside__badge">
+            <mat-icon aria-hidden="true">tips_and_updates</mat-icon>
+          </div>
+          <h3 class="adw-vendor-doc-aside__title">Before you submit</h3>
+          <ul class="adw-vendor-doc-aside__list">
+            <li>
+              <mat-icon aria-hidden="true">verified</mat-icon>
+              <span>Confirm the PO matches the contract or vendor agreement.</span>
+            </li>
+            <li>
+              <mat-icon aria-hidden="true">folder_special</mat-icon>
+              <span>Use clear file names so reviewers can identify drawings and certificates.</span>
+            </li>
+            <li>
+              <mat-icon aria-hidden="true">lock</mat-icon>
+              <span>Only upload documents you are allowed to share for this line item.</span>
+            </li>
+          </ul>
+          <div class="adw-vendor-doc-aside__foot">
+            <mat-icon aria-hidden="true">support_agent</mat-icon>
+            <span>Questions? Contact your document control team.</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section *ngIf="!minimalFormOnly" class="adw-vendor-vdr-section" aria-labelledby="adw-vendor-vdr-table-heading-form">
+      <div class="adw-vendor-vdr-section__head">
+        <h2 id="adw-vendor-vdr-table-heading-form" class="adw-vendor-vdr-section__title">Vendor documents</h2>
+      </div>
+
+      <ng-container *ngTemplateOutlet="vendorVdrStatusFilterBar"></ng-container>
+
+      <div class="adw-vendor-vdr-table-wrap" *ngIf="!vendorVdrLoading && !vendorVdrLoadError">
+        <ng-container *ngTemplateOutlet="vendorVdrTableWithPaginator"></ng-container>
+      </div>
+
+      <p *ngIf="vendorVdrLoading" class="adw-vendor-vdr-status" role="status">Loading vendor documents…</p>
+      <p *ngIf="vendorVdrLoadError" class="adw-vendor-vdr-error" role="alert">{{ vendorVdrLoadError }}</p>
+    </section>
+  </div>
+</ng-template>
+
+<ng-template #vendorVdrStatusFilterBar>
+  <div class="adw-vendor-vdr-status-filter">
+    <label class="adw-vendor-doc-field-label" for="adw-vd-status-filter">Document status</label>
+    <div class="input-shell input-shell--select">
+      <mat-icon class="input-shell__icon" aria-hidden="true">tune</mat-icon>
+      <mat-select
+        id="adw-vd-status-filter"
+        [(ngModel)]="vendorVdrStatusFilter"
+        (ngModelChange)="onVendorVdrStatusFilterChange()"
+        name="vendorVdrStatusFilter"
+        panelClass="adw-vendor-doc-select-panel"
+        placeholder="All status">
+        <mat-option value="">All status</mat-option>
+        <mat-option *ngFor="let opt of vendorVdrStatusFilterOptions" [value]="opt.value">{{ opt.label }}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #vendorVdrTableWithPaginator>
+  <ng-container *ngIf="filteredVendorVdrRows.length > 0; else vendorVdrEmptyState">
+    <div class="applications-table-scroll adw-vendor-vdr-table-scroll" role="region" aria-label="Vendor documents table">
+      <table class="applications-table adw-vendor-vdr-table">
+        <thead>
+          <tr>
+            <th scope="col" class="adw-vendor-vdr-col--icon" aria-label="Type"></th>
+            <th scope="col" class="adw-vendor-vdr-col--title">Title</th>
+            <th scope="col" class="adw-vendor-vdr-col--project">Project</th>
+            <th scope="col" class="adw-vendor-vdr-col--po">PO number</th>
+            <th scope="col" class="adw-vendor-vdr-col--line">VDR line item ID</th>
+            <th scope="col" class="adw-vendor-vdr-col--status">Document status</th>
+            <th scope="col" class="adw-vendor-vdr-actions-col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of paginatedVendorVdrRows">
+            <td class="adw-vendor-vdr-col--icon" aria-label="Document type">
+              <mat-icon class="adw-vendor-vdr-file-icon" [ngClass]="'adw-vendor-vdr-file-icon--' + iconForVendorDoc(row)">
+                {{ iconForVendorDoc(row) }}
+              </mat-icon>
+            </td>
+            <td class="adw-vendor-vdr-col--title">{{ row.title }}</td>
+            <td class="adw-vendor-vdr-col--project">{{ row.project }}</td>
+            <td class="adw-vendor-vdr-col--po">{{ row.poNumber }}</td>
+            <td class="adw-vendor-vdr-col--line">{{ row.vdrLineItemId }}</td>
+            <td class="adw-vendor-vdr-col--status">
+              <span
+                class="adw-vendor-vdr-status-text"
+                [ngClass]="'adw-vendor-vdr-status-text--' + normalizedVendorStatus(row.documentStatus)">
+                <mat-icon aria-hidden="true">{{ vendorStatusIcon(row.documentStatus) }}</mat-icon>
+                <span>{{ vendorStatusLabel(row.documentStatus) }}</span>
+              </span>
+            </td>
+            <td class="adw-vendor-vdr-actions-cell">
+              <button
+                mat-stroked-button
+                type="button"
+                class="adw-vendor-vdr-details-btn"
+                (click)="openVendorDocumentDetails(row); $event.stopPropagation()"
+                [disabled]="!row.nodeId"
+                aria-label="View details">
+                <mat-icon aria-hidden="true">visibility</mat-icon>
+                View Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <mat-paginator
+      class="adw-vendor-vdr-paginator"
+      [length]="filteredVendorVdrRows.length"
+      [pageSize]="vendorPageSize"
+      [pageIndex]="vendorPageIndex"
+      [pageSizeOptions]="vendorPageSizeOptions"
+      [showFirstLastButtons]="true"
+      (page)="onVendorVdrPageChange($event)">
+    </mat-paginator>
+  </ng-container>
+  <ng-template #vendorVdrEmptyState>
+    <p *ngIf="vendorVdrRows.length > 0" class="adw-vendor-vdr-empty">No documents match your search.</p>
+    <p *ngIf="vendorVdrRows.length === 0" class="adw-vendor-vdr-empty">No vendor documents match the current filter.</p>
+  </ng-template>
+</ng-template>

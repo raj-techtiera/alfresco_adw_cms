@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Anvend",
+        "CANCEL": "Annuller",
+        "SWITCH": "Skift",
+        "CONTINUE": "Fortsæt",
+        "RELOAD": "Reload"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Deklarer post",
+            "SUCCESS": "{{fileName}} er blevet deklareret som en post",
+            "FAIL": "{{fileName}} kan ikke deklareres som en post",
+            "DIALOG": {
+                "TITLE": "Deklarer post",
+                "MESSAGE": "Dette dokument blev tidligere erklæret som en post og blev afvist.",
+                "YES": "Deklarer post",
+                "NO": "Annuller",
+                "CLOSE": "Luk"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Erklæring af mappen som en post understøttes ikke i øjeblikket",
+                    "EXISTING-RECORD": "Er allerede deklareret som en post",
+                    "FAILED": "Kunne ikke deklareres som en post"
+                },
+                "SUCCESS": "Elementet er blevet deklareret som en post"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Afvist post",
+            "CLOSE_LABEL": "Luk",
+            "SUB-TITLE": "Filen '{{ nodeName }}' blev afvist som en post",
+            "BY": "Af",
+            "AT": "I",
+            "REASON": "Med årsagen",
+            "CONFIRM": "Bekræft",
+            "WARNING": "Hvis du fjerner advarslen om den afviste post, vil indstillingerne for erklæring af filen som en post være tilgængelige igen.",
+            "FAILED-REMOVE": "Den afviste advarsel for {{nodeName}} : {{errorMessage}} kunne ikke fjernes"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Afvist post",
+            "TOOLTIP-MESSAGE": "Fjern advarsel",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Afvist post",
+                "RECORD-HYPERLINK": "Deklareret som en post",
+                "REJECTED-RECORD-HYPERLINK": "Posten blev afvist. Du kan se flere detaljer i filoplysningerne"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Fjern",
+            "SUCCESS": "'{{ name }}' er blevet fjernet",
+            "FAIL": "{{recordId}} kunne ikke fjernes",
+            "DIALOG": {
+                "TITLE": "Fjern postforekomst",
+                "YES-ALL": "FJERN, OG VIS IKKE DETTE IGEN",
+                "YES": "Fjern",
+                "NO": "Annuller",
+                "MESSAGE": {
+                    "DELETE": "Denne forekomst af '{{name}}' bliver fjernet permanent, og den kan ikke hentes fra papirkurven.",
+                    "ADDITIONAL": "Posten '{{name}}', som findes i organisationens Records Management-system, berøres ikke."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Post"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Flyt",
+            "MOVE-ITEM": "Flyt '{{ name }}' til...",
+            "SAME-FOLDER-MOVE": "Der kan ikke flyttes til den samme mappe",
+            "SUCCESSFUL": "Posten blev flyttet"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Send til arkiv",
+                "SUCCESS": "Filen {{ name }} bliver arkiveret",
+                "FAIL": "{{ name }} kunne ikke arkiveres",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Elementet er allerede arkiveret.",
+                        "PENDING-RESTORE": " Elementet afventer gendannelse. ",
+                        "RESTORED": "De gendannede elementer kan ikke arkiveres",
+                        "FOLDER": "Det understøttes ikke at gendanne fra arkivet"
+                    },
+                    "FAIL": "Der kunne ikke arkiveres",
+                    "SUCCESS": "Elementet bliver arkiveret"
+                },
+                "DIALOG": {
+                    "TITLE": "Send til arkiv",
+                    "MESSAGE": "Du er ved at sende filer til et eksternt arkiv. Der kan være omkostninger forbundet med at hente filer fra arkivet. Er du sikker på, at du vil fortsætte?",
+                    "YES": "Send til arkiv",
+                    "NO": "Annuller"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Gendan fra arkiv",
+                "SYNC-ERROR": "Den fil, du forsøger at gendanne, er ikke blevet synkroniseret til arkivet endnu. Denne handling kan tage op til 24 timer. Prøv igen senere.",
+                "FAIL": "{{ name }} kunne ikke gendannes fra arkivet",
+                "DIALOG": {
+                    "TITLE": "Gendan fra arkiv",
+                    "LABEL": {
+                        "TYPE": "Gendannelseshastighed (begrænset til 250 MB pr. gendannelse)",
+                        "OPTION-FAST": "Hurtig – 1-5 minutter (dyrest)",
+                        "OPTION-STANDARD": "Standard – 3-5 timer",
+                        "OPTION-SLOW": "Langsom – 5-12 timer (billigst)",
+                        "DURATION": "Hvor længe skal filerne være gendannet? (dage)"
+                    },
+                    "YES": "Bekræft",
+                    "NO": "Annuller"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Gendan fra arkiv",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " De filer, du forsøger at gendanne, er ikke blevet synkroniseret til arkivet endnu. Denne handling kan tage op til 24 timer. Prøv igen senere.",
+                        "RESTORED": "Elementet er allerede gendannet",
+                        "PENDING-RESTORE": "Elementet afventer allerede gendannelse.",
+                        "NOT-STORED": "Det element, du forsøger at gendanne, er ikke blevet synkroniseret til arkivet endnu",
+                        "FAIL": "Der kunne ikke gendannes",
+                        "FOLDER": "Det understøttes ikke at gendanne en mappe"
+                    },
+                    "SUCCESS": "Elementet bliver gendannet"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Forlæng gendannelsestiden",
+                "SUCCESS": "Gendannelsen forlænges til '{{ days }}' dage fra {{ date }}",
+                "FAIL": "Gendannelsen af {{ name }} kunne ikke forlænges"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Denne fil er arkiveret. Hvis du vil gendanne den, skal du højreklikke på den og vælge at gendanne den fra arkivet.",
+                "RESTORED": "Gendannet",
+                "PENDING-RESTORE": "Der gendannes filer fra arkivet. Hvis du ikke kan få forhåndsvist filen eller downloade den, kan du prøve igen senere"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Status for massehandling",
+            "FAIL": "Handlingen kunne ikke udføres",
+            "CLOSE": "Luk"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Administrer Holds",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Fjern tilbageholdelse",
+            "DIALOG_TITLE": "Administrer Juridiske Holds",
+            "TAB_EXISTING_HOLDS": "Administrer Eksisterende Holds",
+            "TAB_CREATE_LEGAL_HOLD": "Opret Juridisk Hold",
+            "SAVE": "Gem",
+            "CLOSE": "Luk",
+            "CANCEL": "Annuller",
+            "NEW_HOLD_NAME": "Navn",
+            "NEW_HOLD_DESCRIPTION": "Varebeskrivelse",
+            "NEW_HOLD_REASON": "Årsag",
+            "DIALOG_WARNING_TITLE": "Advarsel",
+            "DIALOG_WARNING_MESSAGE": "Ændringer her vil ikke blive anvendt, hvis du skifter faneblade.",
+            "DOCUMENT_IN_HOLD": "Dokument i Juridisk Hold",
+            "FOLDER_IN_HOLD": "Mappe i Juridisk Hold",
+            "APPLY_HOLDS_SUCCESS": "Juridisk Hold handling var vellykket.",
+            "APPLY_HOLDS_NOT_FOUND": "Den valgte juridiske tilbageholdelse eller den specificerede fil findes ikke. Kontrollér dit valg, og prøv igen.",
+            "BULK_APPLY_HOLDS_SUCCESS": "Juridisk Hold handling lykkedes. {{ totalItems }} elementer er blevet tilføjet til Juridisk Hold.",
+            "BULK_APPLY_HOLDS_STARTED": "Bulk Legal Hold handling kører i baggrunden. Du får besked, når den er færdig.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Arkiveret, duplikeret eller låst indhold er blevet opdaget. {{ errorsCount }} elementer er ikke blevet tilføjet til Juridisk Hold.",
+            "BULK_APPLY_HOLDS_FAIL": "Placering af indhold på juridisk hold mislykkedes.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Bulk Legal Hold kan ikke anvendes på mapper",
+            "ACKNOWLEDGE": "Anerkendelse",
+            "EMPTY_HOLD_LIST": "Ingen juridiske besiddelser tilgængelige",
+            "WARNING_DIALOG_TITLE": "Advarsel: Masse Handling",
+            "WARNING_DIALOG_MESSAGE": "Denne handling vil ændre status for juridiske indehavere af <strong>Alle filer i denne søgefiler</strong>.<br><br>Denne juridiske Hold <strong>vil ikke blive anvendt på mapper</strong>.",
+            "WARNING_DIALOG_QUESTION": "Vil du fortsætte?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Admin skal oprette Record Management Site for at aktivere Juridiske Holds",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Filen blev fjernet fra Juridisk tilbageholdelse.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Filerne blev fjernet fra Juridisk tilbageholdelse.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Kunne ikke fjerne fil fra Juridisk tilbageholdelse.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Kunne ikke fjerne filer fra Juridisk tilbageholdelse.",
+            "LOADING_CAPABILITIES_ERROR": "Kunne ikke indlæse egenskaber",
+            "NODE_NOT_FOUND": "Valgte node kan ikke findes. Kontroller dit valg og prøv igen.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Slet elementer som indeholder indhold?",
+                "TITLE_PLURAL": "Slet valgte {{ count }} tilbageholdelser, og frigiv dokumenter?",
+                "MESSAGE_SINGULAR": "Du har valgt {{ name }} for at blive fjernet. Alle de elementer, den holder, vil blive frigivet. Denne handling kan ikke fortrydes.",
+                "MESSAGE_PLURAL": "Du har valgt {{ count }} elementer til at blive fjernet. Nogle af dem holder, alle de elementer, de holder, vil blive frigivet. Denne handling kan ikke fortrydes.",
+                "KEEP_HOLD": "Bevar tilbageholdelse"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Fejl ved lagring af sikkerhedsmærker",
+            "DIALOG_TITLE": "Redigér sikkerhedsmærker",
+            "MENU_TITLE": "Sikkerhedsmærker",
+            "SAVE": "Gem",
+            "CANCEL": "Annuller",
+            "HELP": "Hjælp",
+            "CLOSE": "Luk",
+            "SHOW_ALL": "Vis alle",
+            "APPLIED": "Anvendt",
+            "NOT_APPLIED": "Ikke anvendt",
+            "COLUMNS": {
+                "NAME": "Sikkerhedsmærker"
+            },
+            "NO_GROUPS_CREATED": "Ingen tilgængelige sikkerhedsgrupper",
+            "SECURITY_MARKS_HELP": "Sikkerhedsmærker hjælper",
+            "HELP_ICON_TEXT": "Anvendelse af sikkerhedsmærker vil begrænse adgangen til digitalt indhold. Kun personer med matchende mærker påført deres brugertilladelse vil kunne se eller redigere markeret indhold."
+        }
+    }
+}

@@ -1,0 +1,201 @@
+:host {
+  display: block;
+  --swm-brand: var(--adw-color-brand-primary, #1b1464);
+  --swm-brand-dark: var(--adw-color-brand-primary-dark, #14104f);
+  --swm-border: #e6e9f0;
+  --swm-text: #1a1d26;
+  --swm-muted: #6b7280;
+}
+
+.adw-select-wm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+}
+
+.adw-select-wm__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 16px 16px 24px;
+  border-bottom: 1px solid var(--swm-border);
+}
+
+.adw-select-wm__header-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.adw-select-wm__icon-wrap {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--swm-brand) 10%, #fff);
+  color: var(--swm-brand);
+
+  mat-icon {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.adw-select-wm__title {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--swm-brand);
+}
+
+.adw-select-wm__subtitle {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--swm-muted);
+
+  strong {
+    color: var(--swm-text);
+    font-weight: 650;
+    word-break: break-word;
+  }
+}
+
+.adw-select-wm__close {
+  color: var(--swm-muted);
+}
+
+.adw-select-wm__content {
+  display: block;
+  padding: 16px 24px !important;
+  margin: 0 !important;
+  max-height: min(62vh, 480px);
+  overflow: auto;
+}
+
+.adw-select-wm__loading,
+.adw-select-wm__empty,
+.adw-select-wm__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 140px;
+  margin: 0;
+  color: var(--swm-muted);
+  font-size: 0.875rem;
+}
+
+.adw-select-wm__error {
+  color: #b42318;
+}
+
+.adw-select-wm__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.adw-select-wm__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--swm-border);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--swm-brand) 35%, #fff);
+    background: color-mix(in srgb, var(--swm-brand) 4%, #fff);
+  }
+
+  &--selected {
+    border-color: var(--swm-brand);
+    box-shadow: 0 0 0 3px rgba(27, 20, 100, 0.12);
+    background: color-mix(in srgb, var(--swm-brand) 6%, #fff);
+  }
+}
+
+.adw-select-wm__preview {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  min-height: 48px;
+  padding: 6px;
+  border-radius: 8px;
+  background: #f7f8fc;
+  color: var(--swm-brand);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.25;
+  overflow: hidden;
+
+  &--image {
+    width: 72px;
+    height: 72px;
+    padding: 0;
+    background:
+      linear-gradient(45deg, #f3f4f6 25%, transparent 25%) 0 0 / 10px 10px,
+      linear-gradient(-45deg, #f3f4f6 25%, transparent 25%) 0 5px / 10px 10px,
+      #fff;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.adw-select-wm__meta {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.adw-select-wm__name {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  color: var(--swm-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.adw-select-wm__desc {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--swm-muted);
+}
+
+.adw-select-wm__actions {
+  padding: 12px 20px 18px !important;
+  gap: 8px;
+  border-top: 1px solid var(--swm-border);
+  background: #fafbfd;
+}
+
+:host ::ng-deep .adw-select-wm__actions .mat-mdc-unelevated-button {
+  --mdc-filled-button-container-color: var(--swm-brand);
+  --mdc-filled-button-label-text-color: #fff;
+}

@@ -1,0 +1,115 @@
+<div class="adf-upload-dialog">
+    <header class="adf-upload-dialog__header">
+        <span class="adf-upload-dialog__title">
+            {{ 'GOVERNANCE.BULK-OPERATION.TITLE' | translate }}
+        </span>
+    </header>
+    <section class="adf-upload-dialog__content">
+        <div *ngFor="let file of bulkRecordService.queuedOperations | async">
+            <div class="adf-file-uploading-row">
+                <aga-icon
+                    [node]="file.node"
+                    [attr.data-automation-id]="
+                        file?.node?.entry?.name + '-icon'
+                    "
+                    class="adf-file-uploading-row__type"
+                />
+                <span
+                    class="adf-file-uploading-row__name"
+                    [attr.data-automation-id]="
+                        file?.node?.entry?.name + '-name'
+                    "
+                >
+                    {{ file.node.entry.name }}
+                </span>
+                <span
+                    class="adf-file-uploading-row__name"
+                    [ngClass]="{
+                        'adf-file-uploading-row__error':
+                            file.status === operationStatus.Error
+                    }"
+                    [attr.data-automation-id]="
+                        file?.node?.entry?.name + '-message'
+                    "
+                >
+                    {{ file.message | translate }}
+                </span>
+                <div
+                    class="adf-file-uploading-row__group--toggle"
+                    [ngSwitch]="file.status"
+                >
+                    <ng-container *ngSwitchCase="operationStatus.Starting">
+                        <mat-spinner
+                            class="adf-declaring-record"
+                            [attr.data-automation-id]="
+                                file?.node?.entry?.name + '-spinner'
+                            "
+                            [diameter]="24"
+                        />
+                    </ng-container>
+                    <ng-container *ngSwitchCase="operationStatus.Pending">
+                        <mat-icon
+                            matListItemIcon
+                            [attr.data-automation-id]="
+                                file?.node?.entry?.name + '-pending'
+                            "
+                            >queue_play_next</mat-icon
+                        >
+                    </ng-container>
+                    <ng-container *ngSwitchCase="operationStatus.Error">
+                        <mat-icon
+                            color="warn"
+                            [attr.data-automation-id]="
+                                file?.node?.entry?.name + '-error'
+                            "
+                            >warning</mat-icon
+                        >
+                    </ng-container>
+                    <ng-container *ngSwitchCase="operationStatus.Complete">
+                        <ng-container
+                            *ngIf="file?.icon?.name; else defaultIcons"
+                        >
+                            <mat-icon
+                                class="adf-action-icon"
+                                *ngIf="file?.icon?.isSvg"
+                                svgIcon="{{ file.icon.name }}"
+                                [attr.data-automation-id]="
+                                    file?.node?.entry?.name + '-done'
+                                "
+                            />
+                            <mat-icon
+                                class="adf-action-icon"
+                                *ngIf="!file?.icon?.isSvg"
+                                [attr.data-automation-id]="
+                                    file?.node?.entry?.name + '-done'
+                                "
+                            >
+                                {{ file.icon.name }}
+                            </mat-icon>
+                        </ng-container>
+                        <ng-template #defaultIcons>
+                            <mat-icon
+                                class="adf-file-uploading-row__status--done"
+                                [attr.data-automation-id]="
+                                    file?.node?.entry?.name + '-done'
+                                "
+                            >
+                                check_circle
+                            </mat-icon>
+                        </ng-template>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="adf-upload-dialog__actions">
+        <button
+            mat-button
+            color="primary"
+            (click)="close()"
+            [attr.data-automation-id]="'bulk-dialog-upload-cancel'"
+        >
+            {{ 'GOVERNANCE.BULK-OPERATION.CLOSE' | translate }}
+        </button>
+    </footer>
+</div>

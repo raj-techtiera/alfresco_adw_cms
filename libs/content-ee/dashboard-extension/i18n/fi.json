@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Koontinäyttö"
+    },
+    "DASHBOARD": {
+        "TITLE": "Koontinäyttö"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Pienoisohjelman toiminnot",
+        "REFRESH": "Päivitä",
+        "VIEW_ALL": "Näytä kaikki",
+        "TASK_SUMMARY": {
+            "TITLE": "Tiivistelmä omista tehtävistä",
+            "SUMMARY_INFO_SUFFIX": "valmistunutta tehtävää!",
+            "NO_TASKS_ASSIGNED": "Sinulle ei ole osoitettu tehtäviä.",
+            "NO_TASKS_ERROR": "Tehtäviesi noudon yhteydessä tapahtui virhe. Päivitä pienoisohjelma.",
+            "COMPLETED": "Valmis",
+            "INCOMPLETE": "Keskeneräinen",
+            "OVERDUE": "Myöhässä",
+            "TASKS": "Tehtävät",
+            "ARROW_UP": "Nuoli ylös"
+        },
+        "TASK_LIST": {
+            "TITLE": "Tehtävien hallinnointi",
+            "OVERDUE": "Myöhässä",
+            "UNASSIGNED": "Osoittamatta",
+            "IN_PROGRESS": "Käynnissä",
+            "NO_OVERDUE_TASKS": "Sinulla ei ole myöhässä olevia tehtäviä.",
+            "NO_UNASSIGNED_TASKS": "Sinulla ei ole osoittamattomia tehtäviä.",
+            "NO_IN_PROGRESS_TASKS": "Sinulla ei ole käynnissä olevia tehtäviä.",
+            "ACTIONS": {
+                "VIEW": "Näytä tehtävä",
+                "COMMENT": "Lisää kommentti",
+                "CLAIM": "Nouda tehtävä"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Tehtävä on noudettu onnistuneesti.",
+                "CLAIMING_FAILED": "Tehtävää ei ollut mahdollista noutaa."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Tiedostot",
+            "RECENT": "Viimeisimmät",
+            "FAVORITES": "Suosikit",
+            "PERSONAL": "Henkilöstö",
+            "SHARED": "Jaetut",
+            "NO_RECENT_FILES": "Sinulla ei ole viimeisimpiä tiedostoja.",
+            "NO_FAVORITES_FILES": "Sinulla ei ole suosikkitiedostoja tai -kansioita.",
+            "NO_PERSONAL_FILES": "Sinulla ei ole henkilökohtaisia tiedostoja tai -kansioita.",
+            "NO_SHARED_FILES": "Sinulla ei ole jaettuja tiedostoja.",
+            "ACTIONS": {
+                "VIEW": "Näytä",
+                "DOWNLOAD": "Lataa",
+                "SHARE": "Jaa",
+                "SHARED_LINK_SETTINGS": "Jaettujen linkkien asetukset",
+                "FOLDER_INFORMATION": "Kansion tiedot"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Kirjastot",
+            "PERSONAL": "Omat kirjastot",
+            "ALL": "Kaikki",
+            "FAVOURITES": "Suosikit",
+            "NO_PERSONAL_LIBRARIES": "Sinulla ei ole henkilökohtaisia kirjastoja.",
+            "NO_ALL_LIBRARIES": "Sinulla ei ole kirjastoja.",
+            "NO_FAVORITE_LIBRARIES": "Sinulla ei ole suosikkikirjastoja."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Määräyksiin perustuvat säilytykset",
+            "NO_HOLDS": "Säilytystoimenpiteitä ei ole luotu.",
+            "HOLDS_NAME": "Säilytystoimenpiteen nimi",
+            "CREATED": "Luotu",
+            "REASON": "Syy",
+            "ACTIONS": {
+                "DOWNLOAD": "Lataa",
+                "INFORMATION": "Kansion tiedot",
+                "DELETE": "Poista"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Omien tehtävien edistyminen - kuukauden aikana",
+            "WEEK_LABEL": "Viikko",
+            "MONTH_LABEL": "Kuukausi",
+            "SUMMARY_INFO_SUFFIX": "valmistunutta tehtävää valitun kuukauden aikana!",
+            "SELECT_MONTH": "Valitse kuukausi",
+            "NO_TASKS_IN_MONTH": "Valitun kuukauden aikana ei ole tehtäviä.",
+            "EMPTY": "Ei tehtäviä"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Tiivistelmä omista prosesseista - 6 kuukauden ajalta",
+            "SUMMARY_INFO_SUFFIX": "valmistunutta tehtävää valitun 6 kuukauden aikana!",
+            "NO_PROCESSES": "Sinulla ei ole prosesseja.",
+            "NO_PROCESSES_ERROR": "Prosessiesi noudon yhteydessä tapahtui virhe. Päivitä pienoisohjelma.",
+            "NO_PROCESSES_IN_PERIOD": "Valitun kuukauden aikana ei ole prosesseja.",
+            "RUNNING": "Käynnissä",
+            "COMPLETED": "Valmis",
+            "NEXT": "Seuraava",
+            "NEXT_SCREEN_READER_LABEL": "Omat prosessit - Yhteenveto  - Siirry seuraavaan 6 kuukauteen",
+            "PREVIOUS": "Edellinen",
+            "PREVIOUS_SCREEN_READER_LABEL": "Omat prosessit - Yhteenveto  - Siirry edelliseen 6 kuukauteen",
+            "EMPTY": "Ei prosesseja"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Kommentit tehtävästä {{ taskName }}",
+        "CLOSE": "Sulje"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Pienoiskuva"
+    }
+}

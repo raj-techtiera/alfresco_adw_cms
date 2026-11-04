@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Åtgärden lyckades inte. Försök igen eller kontakta din IT-avdelning.",
+        "PERMISSION_DENIED": "Du har inte tillstånd att utföra denna åtgärd"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} ansökte om att gå med i {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} användare ansökte om att gå med i {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Hantera medlemmar",
+        "CLOSE": "Stäng",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Biblioteksinfo",
+            "MANAGE_MEMBERS": "Hantera medlemmar"
+        },
+        "TABS": {
+            "PROPERTIES": "Egenskaper",
+            "MEMBERS": "Medlemmar",
+            "GROUPS": "Grupper",
+            "PENDING": "Väntande"
+        },
+        "LOAD_MORE": "Läs in mer",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Bekräfta",
+            "MESSAGE": "Vill du fortsätta?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Avvisa medlemsförfrågan",
+            "COMMENT": "Skriv en kommentar här",
+            "YES_LABEL": "Avvisa",
+            "NO_LABEL": "Avbryt"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Gruppmedlemskapsinfo",
+            "DESCRIPTION": "Den här användaren har tillgång till biblioteket genom grupproller. Om du behöver ta bort den här användarens individuella medlemskap så måste du först ta bort dem från grupperna listade nedan.",
+            "CLOSE": "Stäng",
+            "GROUP": "Grupp",
+            "ROLE": "Roll"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Inga väntande medlemsförfrågningar",
+        "PENDING_REQUESTS": "Väntande medlemsförfrågningar",
+        "APPROVE": "Godkänn",
+        "REJECT": "Avvisa"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Medlemmar i detta bibliotek",
+        "NO_MEMBERS": "Inga medlemmar hittades",
+        "DELETE_MEMBERS": "Radera valda medlemmar",
+        "GROUP_ROLE": "Grupproll",
+        "REMOVE": "Ta bort",
+        "A11Y_AVATAR": "Användarbild",
+        "REFRESH": "Uppdatera"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Gruppmedlemskap för detta bibliotek",
+        "NO_GROUPS": "Inga grupper hittades",
+        "DELETE_GROUPS": "Radera valda grupper",
+        "REFRESH": "Uppdatera",
+        "REMOVE": "Ta bort"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Hanterare",
+        "SITE_CONTRIBUTOR": "Deltagare",
+        "SITE_CONSUMER": "Förbrukare",
+        "SITE_COLLABORATOR": "Medarbetare"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Ange användarroll",
+        "GROUP_SELECTOR": "Ange grupproll",
+        "ALL": "Ange alla roller till"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Lägg till användare/grupp",
+        "SEARCH_INPUT": "Sök användare eller grupper att lägga till",
+        "NAME": "Namn",
+        "TITLE_LABEL": "Lägg till användare eller grupp i",
+        "ADD_LABEL": "Lägg till",
+        "SELECT_LABEL": "Välj",
+        "CLOSE_LABEL": "Stäng",
+        "CANCEL_LABEL": "Avbryt"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Medlemmar"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Medlemsförfrågan avvisades",
+        "MEMBERSHIP_ACCEPTED": "Medlem lades till i bibliotek",
+        "USER_REMOVE_SUCCESS": "Användare borttagen",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} användare borttagna, {{skipped}} hoppades över",
+        "USER_REMOVE_FAILED": "Kunde inte ta bort användaren",
+        "GROUP_REMOVE_SUCCESS": "Grupp borttagen",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} grupper borttagna, {{skipped}} hoppades över",
+        "GROUP_REMOVE_FAILED": "Kunde inte ta bort gruppen",
+        "ADD_MEMBER_FAILED": "Kunde inte lägga till medlem i samarbetsytan",
+        "ADD_MEMBERS_FAILED": "Kunde inte lägga till {{count}} medlemmar",
+        "ADD_MEMBERS_SUCCESS": "Lade till {{userCount}} användare och {{groupCount}} grupp(er)",
+        "ADD_GROUPS_SUCCESS": "Lade till {{groupCount}} grupp(er)",
+        "ADD_USERS_SUCCESS": "Lade till {{userCount}} användare",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} medlem tillagd, {{skipped}} hoppades över",
+        "USER_ROLE_UPDATED": "Användarroll uppdaterad",
+        "GROUP_ROLE_UPDATED": "Grupproll uppdaterad",
+        "MEMBER_EXISTS": "Användaren är redan medlem i samarbetsytan",
+        "MANAGER_REQUIRED": "En samarbetsyta kräver minst en samarbetsytehanterare",
+        "ACTIONS": {
+            "CLOSE": "Stäng"
+        }
+    }
+}

@@ -1,0 +1,55 @@
+.app-process-list-by-category-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    padding: 0 42px;
+
+    .app-search-input {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+
+        .app-search-icon {
+            padding-bottom: 5px;
+            padding-left: 4px;
+        }
+
+        .app-input-form-field {
+            width: 100%;
+            font-size: var(--theme-title-font-size);
+        }
+    }
+
+    .app-processes-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 36px;
+        overflow: auto;
+        height: 65%;
+
+        .app-process-label {
+            font-size: 16px;
+            font-weight: bolder;
+        }
+
+        &-items {
+            row-gap: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .app-process-without-category-list {
+        font-weight: bold;
+        opacity: 0.5;
+    }
+
+    .app-loading-spinner,
+    .app-no-processes-message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 65%;
+    }
+}

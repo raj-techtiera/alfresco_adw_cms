@@ -1,0 +1,23 @@
+<div *ngIf="!isLoading && runningProcesses.length > 0" class="aps-linked-processes-title">{{ 'RUNNING_PROCESS.LINKED_PROCESS_PANEL.PART_OF_THE_PROCESS_TITLE' | translate }}</div>
+<ng-container *ngIf="!isLoading else loading">
+    <ng-container *ngIf="runningProcesses.length > 0 else noProcesses">
+        <div *ngFor="let runningProcess of runningProcesses" class="aps-linked-process-details-container">
+            <div class="aps-linked-process-details-wrapper">
+                <span class="aps-linked-process-name">{{ runningProcess.name }}</span>
+                <span class="aps-linked-process-date"
+                    >{{ 'RUNNING_PROCESS.LINKED_PROCESS_PANEL.CREATED' | translate }}: {{ runningProcess.started.toLocaleDateString() }}</span>
+            </div>
+            <div class="aps-view-linked-process-details-btn-wrapper">
+                <button mat-button class="aps-view-linked-process-details-btn" (click)="openProcessDetailsDialog(runningProcess)">
+                    {{ 'RUNNING_PROCESS.LINKED_PROCESS_PANEL.VIEW_DETAILS_BTN' | translate }}
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+<ng-template #loading>
+    <mat-progress-spinner color="primary" mode="indeterminate" class="aps-linked-processes-loading-spinner" />
+</ng-template>
+<ng-template #noProcesses>
+    <div class="aps-no-linked-processes">{{ 'RUNNING_PROCESS.LINKED_PROCESS_PANEL.NO_PROCESSES' | translate }}</div>
+</ng-template>

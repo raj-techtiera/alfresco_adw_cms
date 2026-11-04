@@ -1,0 +1,57 @@
+<div class="ic-page">
+  <!-- Header -->
+  <div class="ic-header">
+    <div>
+      <div class="ic-title-row">
+        <span class="ic-brain">🧠</span>
+        <h1 class="ic-title">Intelligence Centre</h1>
+        <span class="ic-badge">AI POWERED</span>
+      </div>
+    </div>
+
+    <!-- Select Project Dropdown -->
+    <label class="ic-filter-field">
+      <span class="ic-filter-field__label">Project</span>
+      <mat-form-field appearance="outline" class="ic-filter-mat-field" subscriptSizing="dynamic">
+        <mat-icon matPrefix class="ic-filter-mat-field__icon" aria-hidden="true">folder_special</mat-icon>
+        <mat-select
+          [(ngModel)]="selectedProject"
+          panelClass="ic-filter-select-panel"
+          placeholder="— Select project —"
+          aria-label="Select project">
+          <mat-option value="">— Select project —</mat-option>
+          <mat-option *ngFor="let project of projects" [value]="project">{{ project }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </label>
+  </div>
+
+  <div class="ic-body">
+  <p class="ic-subtitle">Real-time project intelligence · Executive view</p>
+  <!-- Tabs -->
+  <div class="ic-tabs-bar">
+    <div class="ic-tabs">
+      <button type="button" class="ic-tab" *ngFor="let tab of tabs; trackBy: trackByTabId"
+        [class.ic-tab--active]="activeTabId === tab.id" (click)="setActiveTab(tab.id)">
+        <span>{{ tab.emoji }}</span>
+        {{ tab.label }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="ic-content">
+    <h2 class="ic-content-title">{{ activeTab.title }}</h2>
+
+    <ng-container *ngIf="activeTabId === 'project-health' && selectedProject; else defaultMessage">
+      <p class="ic-content-text">
+        Health scores for <strong>{{ selectedProject }}</strong> will appear here.
+      </p>
+    </ng-container>
+
+    <ng-template #defaultMessage>
+      <p class="ic-content-muted">{{ activeTab.message }}</p>
+    </ng-template>
+  </div>
+  </div>
+</div>

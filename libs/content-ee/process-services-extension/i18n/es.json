@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Nuevo proceso",
+            "SELECT_APPLICATION": "Seleccionar aplicación",
+            "ERROR": "No puede iniciar un proceso porque no hay definiciones de procesos disponibles"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Gestión de procesos",
+            "PROCESS_LIST": {
+                "PROCESSES": "Procesos"
+            },
+            "START_PROCESS": "Iniciar proceso",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Ver detalles"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Mostrar comentarios"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Gestión de procesos",
+            "CREATE_NEW_PROCESS": "Iniciar proceso",
+            "CREATE_PROCESS_NOT_ALLOWED": "No se puede crear un nuevo proceso"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Mostrar más"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Comentarios",
+            "CANCEL_PROCESS": "Cancelar proceso"
+        },
+        "ERROR": {
+            "NO_FORM": "La definición del proceso no tiene un formulario definido",
+            "NO_CONTENT": "No se puede adjuntar el fichero desde su dispositivo",
+            "CAN_NOT_ATTACH": "No se puede adjuntar el contenido seleccionado",
+            "AUDIT_ERROR": "Error en Ver tarea: {{error}}",
+            "TASK_ACCESS_WARNING": "No tiene derechos para modificar la tarea",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "La vista previa del documento no está disponible porque la tarea aún no se ha completado."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Proceso '{{ processName }}' creado",
+            "BACKEND_SERVICE_ERROR": "Error de red desconocido. Se han desactivado las funciones asociadas al servicio de procesos.",
+            "ACTION": "Ver proceso en ejecución"
+        },
+        "NO_PROCESS_DEFINITIONS": "No hay definiciones de proceso disponibles",
+        "SIDE_NAV_TITLE": "Flujo de trabajo",
+        "STATUS": {
+            "COMPLETED": "Completado",
+            "RUNNING": "En ejecución",
+            "OPEN": "Abrir",
+            "UNKNOWN": "Desconocido"
+        },
+        "TASK_LIST": {
+            "TASKS": "Tareas",
+            "ACTIONS": {
+                "TASK_DETAILS": "Ver"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Ver"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formulario guardado correctamente",
+            "FORM_COMPLETED": "La tarea ha sido completada",
+            "CLOSE": "Cerrar",
+            "CLAIM_TASK": "La tarea ha sido pedida",
+            "UNCLAIM_TASK": "La tarea ha sido liberada",
+            "CLAIM_FAILED": "No se puede realizar esta acción"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "No se puede realizar esta acción",
+            "FAILED_TO_LOAD": "Error al cargar detalles de la tarea, vuelva a intentarlo más tarde",
+            "UPDATED": "Se ha actualizado {{ property }} correctamente",
+            "FAILED_TO_UPDATE": "Error al actualizar {{ property }}",
+            "METADATA_TOOLTIP": "Ver detalles",
+            "NO_TASK_NAME": "Sin nombre"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Cerrar"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "No hay definiciones de proceso disponibles"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Iniciado por",
+            "CREATED": "Fecha de inicio"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "No puede iniciar un proceso porque no hay definiciones de procesos disponibles",
+            "NO_START_FORM": "El proceso no requiere ninguna configuración adicional",
+            "NO_PROCESS_DEF_SELECTED": "No hay categoría/proceso seleccionado",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Seleccionar aplicación"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "¿Cancelar proceso?",
+                "DESCRIPTION": "Este proceso y todas las tareas asociadas se marcarán como finalizados.",
+                "CONFIRM_BTN": "Confirmar"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' se ha cancelado correctamente.",
+                "FAIL": "Error en el proceso de cancelación: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Fecha de creación"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Pedir",
+                "UNCLAIM": "Liberar"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Parte del proceso en curso",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Proceso vinculado",
+            "PART_OF_THE_PROCESS_TITLE": "Este documento forma parte de los siguientes procesos",
+            "NO_PROCESSES": "Este documento no forma parte de ningún proceso en curso",
+            "CREATED": "Creado",
+            "VIEW_DETAILS_BTN": "Ver detalles"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Autenticación automática para el servicio de procesos",
+        "ENABLED": "Habilitada",
+        "ENABLED_DESCRIPTION": "El sistema volverá a autenticar automáticamente para que el usuario pueda continuar con su trabajo sin interrupciones.",
+        "DISABLED": "Desactivado",
+        "DISABLED_DESCRIPTION": "El usuario deberá volver a autenticarse con sus credenciales cuando expire el tiempo de sesión.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

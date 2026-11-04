@@ -1,0 +1,65 @@
+<acs-widget-base
+    [emptyStateMessage]="emptyStateMessage"
+    [hasContent]="infiniteScrollDataSource.itemsCount > 0"
+    [isLoading$]="infiniteScrollDataSource.isLoading"
+    [widgetTitle]="'WIDGETS.TASK_LIST.TITLE'"
+    [widgetFilters]="widgetFilters"
+    (refreshWidget)="refreshWidget()"
+    (viewAllButtonClicked)="navigateToTaskList()"
+    (filterSelected)="filterSelected($event)">
+    <div class="acs-widget-task-list-container">
+        <acs-infinite-scroll-datatable
+            [rowsObservable]="infiniteScrollDataSource.tasksFetched"
+            [rowActions]="taskActions"
+            [virtualScrollDataSource]="infiniteScrollDataSource"
+            (rowActionExecuted)="executeRowAction($event)">
+            <data-columns>
+                <data-column
+                    key="name"
+                    type="text"
+                    title="ADF_TASK_LIST.PROPERTIES.NAME"
+                    [sortable]="false"
+                    class="adf-expand-cell-2"
+                    [draggable]="false">
+                    <ng-template let-entry="$implicit">
+                        <span
+                            role="link"
+                            tabindex="0"
+                            class="adf-datatable-cell-value adf-datatable-cell--link"
+                            [attr.aria-label]="entry.row.obj?.name"
+                            [title]="entry.row.obj?.name"
+                            (click)="onNameColumnClick(entry.row)"
+                            (keyup.enter)="onNameColumnClick(entry.row)">
+                            {{ entry.row.obj?.name }}
+                        </span>
+                    </ng-template>
+                </data-column>
+                <data-column
+                    key="dueDate"
+                    type="date"
+                    title="ADF_TASK_LIST.PROPERTIES.DUE_DATE"
+                    [sortable]="false"
+                    [draggable]="false"/>
+                <data-column
+                    key="priority"
+                    type="text"
+                    title="ADF_TASK_LIST.PROPERTIES.PRIORITY"
+                    [sortable]="false"
+                    [draggable]="false"/>
+                <data-column
+                    key="status"
+                    type="text"
+                    title="ADF_TASK_LIST.PROPERTIES.STATUS"
+                    [sortable]="false"
+                    [draggable]="false">
+                    <ng-template let-entry="$implicit">
+                        <div class="acs-widget-task-list-status"
+                            title="{{ 'PROCESS-EXTENSION.STATUS.' + (entry.row.obj?.endDate ? 'COMPLETED' : 'RUNNING') | translate }}">
+                            {{ 'PROCESS-EXTENSION.STATUS.' + (entry.row.obj?.endDate ? 'COMPLETED' : 'RUNNING') | translate }}
+                        </div>
+                    </ng-template>
+                </data-column>
+            </data-columns>
+        </acs-infinite-scroll-datatable>
+    </div>
+</acs-widget-base>

@@ -1,0 +1,95 @@
+.adf-content-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.adf-content-border {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    min-height: 0;
+    vertical-align: unset;
+    text-align: unset;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+adf-start-process {
+    min-height: 0;
+    height: 98%;
+    background-color: var(--theme-card-background-color);
+}
+
+adf-start-process .adf-start-process-definition-container {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+adf-start-process .adf-start-process {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+adf-start-process .adf-start-process-loading {
+    margin-top: 100px;
+}
+
+adf-start-process .adf-empty-content {
+    margin-top: 50px;
+}
+
+/* stylelint-disable-next-line */
+adf-start-process .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+adf-start-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+adf-start-form .adf-start-form-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+.adf-start-process-container adf-start-form .adf-start-form-container-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+.adf-start-process-container adf-start-form .adf-start-form-container .adf-start-form-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    min-height: 0;
+    padding: 0;
+}

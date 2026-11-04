@@ -1,0 +1,17 @@
+{
+    "extends": "../../../tsconfig.adf.aca.json",
+    "compilerOptions": {
+        "outDir": "../../../out-tsc/content-ee/microsoft-office-online-integration-extension-spec",
+        "types": [
+            "jasmine",
+            "node"
+        ]
+    },
+    "files": [
+        "src/test.ts"
+    ],
+    "include": [
+        "**/*.spec.ts",
+        "**/*.d.ts"
+    ]
+}

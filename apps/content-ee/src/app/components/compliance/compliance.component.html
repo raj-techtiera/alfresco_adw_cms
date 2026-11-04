@@ -1,0 +1,180 @@
+<div class="cmp-page">
+  <!-- Header -->
+  <div class="cmp-header">
+    <div>
+      <h1 class="cmp-title">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="M9 12l2 2 4-4" />
+        </svg>
+        Compliance &amp; Certifications
+      </h1>
+      <p class="cmp-subtitle">
+        ISO certifications, regulatory submissions, and statutory compliance tracker
+      </p>
+    </div>
+    <div class="cmp-header-actions">
+      <button type="button" class="cmp-btn cmp-btn--blue" (click)="openCertModal()">
+        <span class="cmp-btn-plus">+</span> Add Certificate
+      </button>
+      <button type="button" class="cmp-btn cmp-btn--purple" (click)="openRegModal()">
+        <span class="cmp-btn-plus">+</span> Add Regulatory
+      </button>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="cmp-kpi-grid">
+    <div class="cmp-kpi-card" [ngClass]="card.accentClass" *ngFor="let card of kpiCards; trackBy: trackByLabel">
+      <div class="cmp-kpi-icon">
+        <ng-container [ngSwitch]="card.icon">
+          <svg *ngSwitchCase="'check-badge'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            [attr.stroke]="card.color" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12l2 2 4-4" />
+            <path d="M12 2l2.4 1.8 3 .2.2 3L19.8 9.6 19 12.6l.4 3-2.8 1.2-1.6 2.6L12 18l-3 1.4-1.6-2.6L4.6 15.6 5 12.6 4.2 9.6 6.4 7l.2-3 3-.2z" />
+          </svg>
+          <svg *ngSwitchCase="'clock'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            [attr.stroke]="card.color" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <svg *ngSwitchCase="'warning'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            [attr.stroke]="card.color" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <svg *ngSwitchCase="'clipboard'" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            [attr.stroke]="card.color" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 2h6a1 1 0 011 1v1h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2V3a1 1 0 011-1z" />
+            <line x1="9" y1="12" x2="15" y2="12" />
+            <line x1="9" y1="16" x2="15" y2="16" />
+          </svg>
+        </ng-container>
+      </div>
+      <div class="cmp-kpi-value" [style.color]="card.color">{{ card.value }}</div>
+      <div class="cmp-kpi-label">{{ card.label }}</div>
+    </div>
+  </div>
+
+  <!-- ISO & Industry Certifications -->
+  <div class="cmp-section">
+    <div class="cmp-section-head">
+      <h2 class="cmp-section-title"><span class="cmp-section-emoji">🏆</span> ISO &amp; Industry Certifications</h2>
+      <span class="cmp-section-count">{{ certificates.length }} records</span>
+    </div>
+    <div class="cmp-empty" *ngIf="certificates.length === 0; else certList">
+      <span class="cmp-empty-emoji">🏆</span>
+      <p class="cmp-empty-text">No certificates yet</p>
+      <button type="button" class="cmp-btn cmp-btn--blue cmp-btn--lg" (click)="openCertModal()">
+        + Add First Certificate
+      </button>
+    </div>
+    <ng-template #certList>
+      <div class="cmp-section-body"></div>
+    </ng-template>
+  </div>
+
+  <!-- Regulatory Submissions — India -->
+  <div class="cmp-section">
+    <div class="cmp-section-head">
+      <h2 class="cmp-section-title"><span class="cmp-section-emoji">📋</span> Regulatory Submissions — India</h2>
+      <span class="cmp-section-count">{{ submissions.length }} records</span>
+    </div>
+    <div class="cmp-empty" *ngIf="submissions.length === 0; else regList">
+      <span class="cmp-empty-emoji">📋</span>
+      <p class="cmp-empty-text">No regulatory submissions yet</p>
+      <button mat-raised-button type="button" class="cmp-btn cmp-btn--purple cmp-btn--lg" (click)="openRegModal()">
+        + Add First Submission
+      </button>
+    </div>
+    <ng-template #regList>
+      <div class="cmp-section-body"></div>
+    </ng-template>
+  </div>
+
+  <!-- Add Certificate Modal -->
+  <div class="cmp-overlay" *ngIf="showCertModal" (click)="closeCertModal()">
+    <div class="cmp-modal" (click)="$event.stopPropagation()">
+      <div class="cmp-modal-head">
+        <h3 class="cmp-modal-title">Add Certificate</h3>
+        <button mat-icon-button type="button" class="cmp-modal-close" (click)="closeCertModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="cmp-modal-body">
+        <div class="cmp-field">
+          <label class="cmp-label">Certificate Name</label>
+          <input class="cmp-input cmp-input--blue" placeholder="e.g. ISO 9001:2015" />
+        </div>
+        <div class="cmp-field">
+          <label class="cmp-label">Standard</label>
+          <input class="cmp-input cmp-input--blue" placeholder="e.g. Quality Management" />
+        </div>
+        <div class="cmp-field">
+          <label class="cmp-label">Issued By</label>
+          <input class="cmp-input cmp-input--blue" placeholder="Certifying body" />
+        </div>
+        <div class="cmp-field-grid">
+          <div class="cmp-field">
+            <label class="cmp-label">Issue Date</label>
+            <input type="date" class="cmp-input cmp-input--blue" />
+          </div>
+          <div class="cmp-field">
+            <label class="cmp-label">Expiry Date</label>
+            <input type="date" class="cmp-input cmp-input--blue" />
+          </div>
+        </div>
+      </div>
+      <div class="cmp-modal-foot">
+        <button mat-raised-button type="button" class="cmp-text-btn" (click)="closeCertModal()">Cancel</button>
+        <button mat-raised-button type="button" class="cmp-btn cmp-btn--blue" (click)="closeCertModal()">Save Certificate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Regulatory Modal -->
+  <div class="cmp-overlay" *ngIf="showRegModal" (click)="closeRegModal()">
+    <div class="cmp-modal" (click)="$event.stopPropagation()">
+      <div class="cmp-modal-head">
+        <h3 class="cmp-modal-title">Add Regulatory Submission</h3>
+        <button type="button" class="cmp-modal-close" (click)="closeRegModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="cmp-modal-body">
+        <div class="cmp-field">
+          <label class="cmp-label">Submission Title</label>
+          <input class="cmp-input cmp-input--purple" placeholder="e.g. Environmental Clearance" />
+        </div>
+        <div class="cmp-field">
+          <label class="cmp-label">Regulatory Authority</label>
+          <input class="cmp-input cmp-input--purple" placeholder="e.g. MoEFCC" />
+        </div>
+        <div class="cmp-field-grid">
+          <div class="cmp-field">
+            <label class="cmp-label">Submitted Date</label>
+            <input type="date" class="cmp-input cmp-input--purple" />
+          </div>
+          <div class="cmp-field">
+            <label class="cmp-label">Due Date</label>
+            <input type="date" class="cmp-input cmp-input--purple" />
+          </div>
+        </div>
+      </div>
+      <div class="cmp-modal-foot">
+        <button mat-raised-button type="button" class="cmp-text-btn" (click)="closeRegModal()">Cancel</button>
+        <button mat-raised-button type="button" class="cmp-btn cmp-btn--purple" (click)="closeRegModal()">Save Submission</button>
+      </div>
+    </div>
+  </div>
+</div>

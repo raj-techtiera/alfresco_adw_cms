@@ -1,0 +1,53 @@
+.adw-group-info-table {
+    margin-top: 10px;
+    height: 210px;
+    border: 1px solid var(--theme-border-color);
+
+    .adw-group-info-table-header,
+    .adw-group-info-table-row {
+        & > span > span {
+            display: flex;
+            width: 100%;
+            flex-flow: wrap;
+        }
+
+        .adw-group-info-table-group-cell {
+            flex: 0 0 60%;
+            font-size: var(--theme-body-1-font-size);
+        }
+
+        .adw-group-info-table-role-cell {
+            flex: 0 0 40%;
+            font-size: var(--theme-body-1-font-size);
+        }
+    }
+
+    .adw-group-info-table-row {
+        height: 30px;
+    }
+
+    .adw-scrollable-group-list {
+        height: 170px;
+        overflow-y: auto;
+    }
+
+    .adw-group-info-table-header {
+        margin-top: -10px;
+
+        .adw-group-info-table-group-cell,
+        .adw-group-info-table-role-cell {
+            color: var(--theme-text-color);
+        }
+    }
+
+    .adw-loading-spinner {
+        margin-top: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.adw-groups-info-dialog .adw-group-dialog-content {
+    padding: 0;
+}

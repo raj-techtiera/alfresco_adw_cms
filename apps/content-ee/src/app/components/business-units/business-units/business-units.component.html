@@ -1,0 +1,134 @@
+<div class="bu-page">
+  <div class="bu-header">
+    <div class="bu-header__text">
+      <div class="bu-header__icon" aria-hidden="true">
+        <mat-icon>business</mat-icon>
+      </div>
+      <div>
+        <h1 class="bu-title">Business Units</h1>
+        <p class="bu-subtitle">Organisation portfolio — business units</p>
+      </div>
+    </div>
+    <button type="button" class="bu-create-btn" (click)="openCreateBusiness()">
+      <mat-icon aria-hidden="true">add</mat-icon>
+      Create New Business Unit
+    </button>
+  </div>
+
+  <div class="bu-toolbar">
+    <p class="bu-count" *ngIf="!loading && !loadError">
+      <mat-icon aria-hidden="true">folder_special</mat-icon>
+      {{ totalItems }} unit{{ totalItems === 1 ? '' : 's' }}
+    </p>
+    <p class="bu-count" *ngIf="loading">
+      <mat-icon aria-hidden="true">hourglass_empty</mat-icon>
+      Loading...
+    </p>
+
+    <div class="bu-toolbar__controls">
+      <div class="bu-search" [class.bu-search--active]="!!search">
+        <span class="bu-search__lead" aria-hidden="true">
+          <mat-icon>search</mat-icon>
+        </span>
+        <input
+          type="search"
+          [(ngModel)]="search"
+          name="buSearch"
+          placeholder="Search business units..."
+          aria-label="Search business units"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button
+          type="button"
+          class="bu-search__clear"
+          *ngIf="search"
+          (click)="clearSearch()"
+          aria-label="Clear search"
+          title="Clear search">
+          <mat-icon aria-hidden="true">close</mat-icon>
+        </button>
+      </div>
+
+      <div class="bu-sort input-shell input-shell--select">
+        <mat-icon class="input-shell__icon" aria-hidden="true">sort</mat-icon>
+        <mat-select
+          [(ngModel)]="sortOption"
+          name="buSort"
+          panelClass="adw-create-business-unit-select-panel"
+          aria-label="Sort business units"
+          (selectionChange)="onSortOptionChange()">
+          <mat-option value="created-desc">Newest Created</mat-option>
+          <mat-option value="created-asc">Oldest Created</mat-option>
+          <mat-option value="name-asc">Name A–Z</mat-option>
+          <mat-option value="name-desc">Name Z–A</mat-option>
+        </mat-select>
+      </div>
+    </div>
+  </div>
+
+  <p class="bu-error" *ngIf="loadError" role="alert">{{ loadError }}</p>
+
+  <div class="bu-empty" *ngIf="!loading && !loadError && filteredProjects.length === 0">
+    <mat-icon aria-hidden="true">folder_off</mat-icon>
+    <p>No business units found.</p>
+  </div>
+
+  <div class="bu-grid" *ngIf="!loading && filteredProjects.length > 0">
+    <div
+      class="bu-card adw-glass-card"
+      *ngFor="let project of filteredProjects; trackBy: trackById"
+      (click)="goToProject(project.id)"
+      (keydown.enter)="goToProject(project.id)"
+      tabindex="0"
+      role="link"
+      [attr.aria-label]="'Open ' + project.title">
+      <div class="bu-card__shine"></div>
+      <div class="bu-card__glow"></div>
+
+      <div class="bu-card__content">
+        <div class="bu-card__badge">{{ project.industryType || project.status || project.code }}</div>
+
+        <div class="bu-card__image adw-glass-card__banner">
+          <span class="bu-card__image-code">{{ project.code || '—' }}</span>
+        </div>
+
+        <div class="bu-card__text">
+          <p class="bu-card__title adw-glass-card__title">{{ project.title }}</p>
+          <p class="bu-card__description adw-glass-card__muted">
+            <ng-container *ngIf="project.description; else noDesc">{{ project.description }}</ng-container>
+            <ng-template #noDesc><span class="bu-no-desc">No description</span></ng-template>
+          </p>
+        </div>
+
+        <div class="bu-card__footer">
+          <div class="bu-card__price">
+            <span class="bu-card__count adw-glass-card__title">{{ project.status || '—' }}</span>
+            <span class="bu-card__count-label adw-glass-card__muted">Status</span>
+          </div>
+          <div class="bu-card__actions">
+            <button
+              type="button"
+              class="bu-card__button bu-card__button--info adw-glass-card__action"
+              title="View properties"
+              aria-label="View properties"
+              (click)="openProperties(project, $event)">
+              <mat-icon aria-hidden="true">info</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-paginator
+    *ngIf="!loading && !loadError && totalItems > 0"
+    class="bu-paginator"
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="pageSizeOptions"
+    [showFirstLastButtons]="true"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

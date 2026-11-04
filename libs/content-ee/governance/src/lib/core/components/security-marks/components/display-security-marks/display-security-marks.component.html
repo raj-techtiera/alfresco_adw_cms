@@ -1,0 +1,8 @@
+<ng-container *ngIf="marksData | async as securityMarks">
+    <adf-dynamic-chip-list
+        [chips]="securityMarks"
+        [roundUpChips]="true"
+        [showDelete]="false"
+        [limitChipsDisplayed]="true"
+        (displayNext)="showAll()"/>
+</ng-container>

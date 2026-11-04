@@ -1,0 +1,55 @@
+<acs-widget-base [widgetTitle]="'WIDGETS.LIBRARIES_LIST.TITLE'"
+                 [widgetFilters]="widgetFilters"
+                 [hasContent]="infiniteScrollDataSource.itemsCount > 0"
+                 [isLoading$]="infiniteScrollDataSource.isLoading"
+                 [emptyStateMessage]="emptyStateMessage"
+                 (refreshWidget)="infiniteScrollDataSource.reset()"
+                 (viewAllButtonClicked)="onViewAllBtnClick()"
+                 (filterSelected)="filterSelected($event)">
+    <div class="acs-widget-libraries-list-container">
+        <acs-infinite-scroll-datatable
+            [rowActions]="rowActions"
+            [virtualScrollDataSource]="infiniteScrollDataSource"
+            [rowsObservable]="infiniteScrollDataSource.librariesLoaded$"
+            (rowActionExecuted)="executeRowAction($event)">
+            <data-columns>
+                <data-column
+                    key="title"
+                    type="text"
+                    title="APP.DOCUMENT_LIST.COLUMNS.NAME"
+                    [sortable]="false">
+                    <ng-template let-entry="$implicit">
+                        <span
+                            role="link"
+                            tabindex="0"
+                            class="adf-datatable-cell--link"
+                            [attr.aria-label]="entry.row.obj.title"
+                            [title]="entry.row.obj.title"
+                            (click)="onNameClick(entry.row)"
+                            (keyup.enter)="onNameClick(entry.row)">
+                            {{ entry.row.obj.title }}
+                        </span>
+                    </ng-template>
+                </data-column>
+                <data-column
+                    key="role"
+                    type="text"
+                    title="APP.DOCUMENT_LIST.COLUMNS.ROLE"
+                    [sortable]="false">
+                    <ng-template let-context>
+                        <adf-library-role-column [context]="context"/>
+                    </ng-template>
+                </data-column>
+                <data-column
+                    key="visibility"
+                    type="text"
+                    title="APP.DOCUMENT_LIST.COLUMNS.VISIBILITY"
+                    [sortable]="false">
+                    <ng-template let-context>
+                        <adf-library-status-column [context]="context"/>
+                    </ng-template>
+                </data-column>
+            </data-columns>
+        </acs-infinite-scroll-datatable>
+    </div>
+</acs-widget-base>

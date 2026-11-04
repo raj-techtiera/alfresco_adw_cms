@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Instrumentpanel"
+    },
+    "DASHBOARD": {
+        "TITLE": "Instrumentpanel"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Handlinger for widget",
+        "REFRESH": "Oppdater side",
+        "VIEW_ALL": "Vis alle",
+        "TASK_SUMMARY": {
+            "TITLE": "Sammendrag av mine oppgaver",
+            "SUMMARY_INFO_SUFFIX": "fullførte oppgaver!",
+            "NO_TASKS_ASSIGNED": "Du har ingen tilordnede oppgaver.",
+            "NO_TASKS_ERROR": "Det oppsto en feil under henting av oppgavene dine. Oppdater widgeten.",
+            "COMPLETED": "Fullført",
+            "INCOMPLETE": "Ufullstendig",
+            "OVERDUE": "Forfalt",
+            "TASKS": "Oppgaver",
+            "ARROW_UP": "Pil opp"
+        },
+        "TASK_LIST": {
+            "TITLE": "Oppgaveadministrasjon",
+            "OVERDUE": "Forfalt",
+            "UNASSIGNED": "Ikke tilordnet",
+            "IN_PROGRESS": "Pågår",
+            "NO_OVERDUE_TASKS": "Du har ingen forfalte oppgaver.",
+            "NO_UNASSIGNED_TASKS": "Du har ingen oppgaver som ikke er tilordnet.",
+            "NO_IN_PROGRESS_TASKS": "Du har ingen oppgaver som pågår.",
+            "ACTIONS": {
+                "VIEW": "Vis oppgave",
+                "COMMENT": "Legge til kommentar",
+                "CLAIM": "Gjør krav på oppgave"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Oppgaven er gjort krav på.",
+                "CLAIMING_FAILED": "Oppgaven kunne ikke gjøres krav på."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Filer",
+            "RECENT": "Nylige",
+            "FAVORITES": "Favoritter",
+            "PERSONAL": "Personlige",
+            "SHARED": "Delte",
+            "NO_RECENT_FILES": "Du har ingen nylige filer.",
+            "NO_FAVORITES_FILES": "Du har ingen favorittfiler eller -mapper.",
+            "NO_PERSONAL_FILES": "Du har ingen personlige filer eller mapper.",
+            "NO_SHARED_FILES": "Du har ingen delte filer.",
+            "ACTIONS": {
+                "VIEW": "Vis",
+                "DOWNLOAD": "Last ned",
+                "SHARE": "Del",
+                "SHARED_LINK_SETTINGS": "Innstillinger for delt lenke",
+                "FOLDER_INFORMATION": "Mappeinformasjon"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Biblioteker",
+            "PERSONAL": "Mine biblioteker",
+            "ALL": "Alle",
+            "FAVOURITES": "Favoritter",
+            "NO_PERSONAL_LIBRARIES": "Du har ingen personlige biblioteker.",
+            "NO_ALL_LIBRARIES": "Du har ingen biblioteker.",
+            "NO_FAVORITE_LIBRARIES": "Du har ingen favorittbiblioteker."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Juridiske hold",
+            "NO_HOLDS": "Ingen hold er opprettet.",
+            "HOLDS_NAME": "Navn på hold",
+            "CREATED": "Opprettet",
+            "REASON": "Årsak",
+            "ACTIONS": {
+                "DOWNLOAD": "Last ned",
+                "INFORMATION": "Mappeinformasjon",
+                "DELETE": "Slett"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Min oppgavefremdrift – per måned",
+            "WEEK_LABEL": "Uke",
+            "MONTH_LABEL": "Måned",
+            "SUMMARY_INFO_SUFFIX": "fullførte oppgaver i den valgte måneden!",
+            "SELECT_MONTH": "Velg måned",
+            "NO_TASKS_IN_MONTH": "Det er ingen oppgaver i den valgte måneden.",
+            "EMPTY": "Ingen oppgaver"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Sammendrag av min fremdrift – per 6 måneder",
+            "SUMMARY_INFO_SUFFIX": "fullførte prosesser i løpet av de valgte 6 månedene!",
+            "NO_PROCESSES": "Du har ingen prosesser.",
+            "NO_PROCESSES_ERROR": "Det oppsto en feil under henting av prosessene dine. Oppdater widgeten.",
+            "NO_PROCESSES_IN_PERIOD": "Det er ingen prosesser i den valgte måneden.",
+            "RUNNING": "Kjører",
+            "COMPLETED": "Fullført",
+            "NEXT": "Neste",
+            "NEXT_SCREEN_READER_LABEL": "Oversikt over mine prosesser  - Gå til neste 6 måneder",
+            "PREVIOUS": "Forrige",
+            "PREVIOUS_SCREEN_READER_LABEL": "Oversikt over mine prosesser  - Gå til forrige 6 måneder",
+            "EMPTY": "Ingen prosesser"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Kommentarer for {{ taskName }}",
+        "CLOSE": "Lukk"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Miniatyrbilde"
+    }
+}

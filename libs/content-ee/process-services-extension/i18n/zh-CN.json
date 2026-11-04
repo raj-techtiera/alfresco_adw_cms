@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "新流程",
+            "SELECT_APPLICATION": "选择应用程序",
+            "ERROR": "无法启动流程，因为没有可用的流程定义"
+        },
+        "BREADCRUMB": {
+            "ROOT": "进程管理",
+            "PROCESS_LIST": {
+                "PROCESSES": "流程"
+            },
+            "START_PROCESS": "启动流程",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "查看详细信息"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "显示注释"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "进程管理",
+            "CREATE_NEW_PROCESS": "启动流程",
+            "CREATE_PROCESS_NOT_ALLOWED": "无法创建新进程"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "显示更多"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "注释",
+            "CANCEL_PROCESS": "取消流程"
+        },
+        "ERROR": {
+            "NO_FORM": "进程定义没有定义表单",
+            "NO_CONTENT": "无法从您的设备附加文件",
+            "CAN_NOT_ATTACH": "无法附加所选内容",
+            "AUDIT_ERROR": "查看任务出错：{{error}}",
+            "TASK_ACCESS_WARNING": "您无权修改任务",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "文档预览不可用，因为任务尚未完成。"
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "进程已创建 '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "出现未知网络错误。与进程服务相关的功能已被禁用。",
+            "ACTION": "查看正在运行的进程"
+        },
+        "NO_PROCESS_DEFINITIONS": "没有可用的进程定义",
+        "SIDE_NAV_TITLE": "工作流程",
+        "STATUS": {
+            "COMPLETED": "已完成",
+            "RUNNING": "运行中",
+            "OPEN": "打开",
+            "UNKNOWN": "未知"
+        },
+        "TASK_LIST": {
+            "TASKS": "任务",
+            "ACTIONS": {
+                "TASK_DETAILS": "查看"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "查看"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "表单已经保存成功",
+            "FORM_COMPLETED": "任务已完成",
+            "CLOSE": "关闭",
+            "CLAIM_TASK": "任务已声明",
+            "UNCLAIM_TASK": "任务已发布",
+            "CLAIM_FAILED": "无法执行操作"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "无法执行操作",
+            "FAILED_TO_LOAD": "无法加载任务详细信息，请稍后重试",
+            "UPDATED": "已成功更新 {{ property }}",
+            "FAILED_TO_UPDATE": "无法更新 {{ property }}",
+            "METADATA_TOOLTIP": "查看详细信息",
+            "NO_TASK_NAME": "没有名称"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "关闭"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "没有可用的进程定义"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "启动者",
+            "CREATED": "开始日期"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "无法启动流程，因为没有可用的流程定义",
+            "NO_START_FORM": "此进程无需任何额外配置",
+            "NO_PROCESS_DEF_SELECTED": "没有选择任何类别/进程",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "选择应用程序"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "是否取消流程？",
+                "DESCRIPTION": "此流程和所有相关任务将标记为完成。",
+                "CONFIRM_BTN": "确认"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "已成功取消‘{{ processName }}’。",
+                "FAIL": "取消流程错误：{{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "创建日期"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "申领",
+                "UNCLAIM": "释放"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "部分运行中的流程",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "链接流程",
+            "PART_OF_THE_PROCESS_TITLE": "此文档是以下流程的一部分",
+            "NO_PROCESSES": "此文档不属于任何运行中的流程",
+            "CREATED": "已创建",
+            "VIEW_DETAILS_BTN": "查看详情"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "进程服务的自动身份验证",
+        "ENABLED": "已启用",
+        "ENABLED_DESCRIPTION": "为了让用户能够继续他们已中断的工作，系统将自动重新进行身份验证。",
+        "DISABLED": "已禁用",
+        "DISABLED_DESCRIPTION": "当会话时间到期时，用户需要使用其凭证重新进行身份验证。",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "$version": "1.0.0",
+    "$id": "dashboard.plugin",
+    "$name": "adw dashboard extension",
+    "$description": "adw dashboard extension",
+    "$vendor": "Hyland Software, Inc. and its affiliates",
+    "$license": "Apache-2.0",
+    "settings": [
+        {
+            "id": "app.extensions.dashboard.settings",
+            "name": "Extensions: Dashboard",
+            "parameters": [
+                {
+                    "name": "Enable Dashboard Extensions",
+                    "key": "dashboard",
+                    "type": "boolean",
+                    "value": false
+                }
+            ]
+        }
+    ],
+    "routes": [
+        {
+            "id": "app.route.dashboard",
+            "parentRoute": "",
+            "path": "dashboard",
+            "layout": "app.layout.main",
+            "component": "dashboard.component.home",
+            "data": {
+                "plugin": "plugins.dashboardEnabled"
+            },
+            "auth": [
+                "dashboard-plugin-enabled-guard.auth",
+                "extension-data-loader-guard.auth"
+            ]
+        }
+    ],
+    "features": {
+        "navbar": [
+            {
+                "id": "app.navbar.dashboard.parent",
+                "order": 50,
+                "items": [
+                    {
+                        "id": "app.navbar.dashboard",
+                        "description": "Dashboard Home",
+                        "order": 50,
+                        "route": "dashboard",
+                        "component": "dashboard.component.sidenav",
+                        "rules": {
+                            "visible": "app.dashboard.isEnabled"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "appConfig": {
+        "landingPage": "/dms-dashboard"
+    }
+}

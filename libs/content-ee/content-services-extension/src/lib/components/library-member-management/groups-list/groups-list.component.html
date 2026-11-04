@@ -1,0 +1,68 @@
+<div class="adw-member-list-container">
+    <div class="adw-toolbar adw-toolbar-primary">
+        <span class="adw-toolbar-title">{{ 'GROUP_LIST.GROUP_COUNT' | translate }} ( {{ groups?.list?.pagination?.totalItems }} )
+        </span>
+        <button id="refresh-groups"
+                (click)="loadSiteGroups()"
+                mat-icon-button
+                [title]="'GROUP_LIST.REFRESH' | translate">
+            <mat-icon>refresh</mat-icon>
+        </button>
+
+        <button (click)="bulkDelete()"
+                [disabled]="!selectedRows.length"
+                mat-icon-button
+                [title]="'GROUP_LIST.DELETE_GROUPS' | translate">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+
+    <adw-data-table-extension (row-select)="setSelectedRows($event)"
+                              (row-unselect)="setSelectedRows($event)"
+                              (showRowContextMenu)="onShowRowContextMenu($event)"
+                              [contextMenu]="true"
+                              [items]="$any(groups)"
+                              [loading]="loading"
+                              [showHeader]="showHeader">
+        <data-columns>
+            <data-column class="adf-datatable-cell adf-datatable-cell--image" key="$thumbnail">
+                <ng-template let-context>
+                    <adf-user-icon-column [context]="context" />
+                </ng-template>
+            </data-column>
+
+            <data-column class="adf-ellipsis-cell adf-expand-cell-5 adw-member-column" key="person">
+                <ng-template let-context>
+                    <adf-user-name-column [context]="context" />
+                </ng-template>
+            </data-column>
+
+            <data-column class="adf-ellipsis-cell adf-expand-cell-2" key="role">
+                <ng-template let-context>
+                    <adw-role-selector (memberRoleChanged)="onRoleChanged($event,context?.row?.obj?.entry?.group)"
+                                       [attr.data-automation-id]="'site-group-' + context?.row?.obj?.entry?.group?.id"
+                                       [value]="context?.row?.obj?.entry?.role" />
+                </ng-template>
+            </data-column>
+
+            <data-column class="adf-ellipsis-cell adw-member-action" key="">
+                <ng-template let-context>
+                    <button (click)="onGroupRemoved($event, context?.row?.obj?.entry?.group.id)"
+                            [disabled]="context.row.obj?.readonly"
+                            [attr.data-automation-id]="'remove-group-' + context?.row?.obj?.entry?.group?.id"
+                            mat-icon-button
+                            [title]="'GROUP_LIST.REMOVE' | translate">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+                </ng-template>
+            </data-column>
+        </data-columns>
+
+        <adf-custom-empty-content-template>
+            <adf-empty-content icon="group_alt" title="GROUP_LIST.NO_GROUPS" />
+        </adf-custom-empty-content-template>
+    </adw-data-table-extension>
+
+    <adf-pagination *ngIf="groups?.list?.pagination" (change)="loadSiteGroups($event)" acaPagination [pagination]="groups?.list?.pagination" />
+</div>

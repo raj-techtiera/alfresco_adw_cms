@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Instrumentpanel"
+    },
+    "DASHBOARD": {
+        "TITLE": "Instrumentpanel"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Widget-åtgärder",
+        "REFRESH": "Uppdatera",
+        "VIEW_ALL": "Visa alla",
+        "TASK_SUMMARY": {
+            "TITLE": "Sammanfattning av mina uppgifter",
+            "SUMMARY_INFO_SUFFIX": "slutförda uppgifter!",
+            "NO_TASKS_ASSIGNED": "Du har inga tilldelade uppgifter.",
+            "NO_TASKS_ERROR": "Det uppstod ett fel när dina uppgifter hämtades. Uppdatera widgeten.",
+            "COMPLETED": "Slutförd",
+            "INCOMPLETE": "Ofullständig",
+            "OVERDUE": "Försenad",
+            "TASKS": "Uppgifter",
+            "ARROW_UP": "Uppåtpil"
+        },
+        "TASK_LIST": {
+            "TITLE": "Uppgiftshantering",
+            "OVERDUE": "Försenad",
+            "UNASSIGNED": "Ej tilldelad",
+            "IN_PROGRESS": "Pågår",
+            "NO_OVERDUE_TASKS": "Du har inga försenade uppgifter.",
+            "NO_UNASSIGNED_TASKS": "Du har inga otilldelade uppgifter.",
+            "NO_IN_PROGRESS_TASKS": "Du har inga pågående uppgifter.",
+            "ACTIONS": {
+                "VIEW": "Visa uppgift",
+                "COMMENT": "Lägg till kommentar",
+                "CLAIM": "Gör anspråk på uppgift"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Har gjort anspråk på uppgiften.",
+                "CLAIMING_FAILED": "Det gick inte att göra anspråk på uppgiften."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Filer",
+            "RECENT": "Senaste",
+            "FAVORITES": "Favoriter",
+            "PERSONAL": "Personlig",
+            "SHARED": "Delad",
+            "NO_RECENT_FILES": "Du har inga senaste filer.",
+            "NO_FAVORITES_FILES": "Du har inga favoritfiler eller -mappar.",
+            "NO_PERSONAL_FILES": "Du har inga personliga filer eller mappar.",
+            "NO_SHARED_FILES": "Du har inga delade filer.",
+            "ACTIONS": {
+                "VIEW": "Visa",
+                "DOWNLOAD": "Ladda ner",
+                "SHARE": "Dela",
+                "SHARED_LINK_SETTINGS": "Inställningar för delad länk",
+                "FOLDER_INFORMATION": "Information om mapp"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Bibliotek",
+            "PERSONAL": "Mina bibliotek",
+            "ALL": "Alla",
+            "FAVOURITES": "Favoriter",
+            "NO_PERSONAL_LIBRARIES": "Du har inga personliga bibliotek.",
+            "NO_ALL_LIBRARIES": "Du har inga bibliotek.",
+            "NO_FAVORITE_LIBRARIES": "Du har inga favoritbibliotek."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Juridiska spärrar",
+            "NO_HOLDS": "Inga spärrar skapade.",
+            "HOLDS_NAME": "Namn på spärr",
+            "CREATED": "Skapad",
+            "REASON": "Anledning",
+            "ACTIONS": {
+                "DOWNLOAD": "Ladda ner",
+                "INFORMATION": "Information om mapp",
+                "DELETE": "Radera"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Framsteg med mina uppgifter - per månad",
+            "WEEK_LABEL": "Vecka",
+            "MONTH_LABEL": "Månad",
+            "SUMMARY_INFO_SUFFIX": "slutförda uppgifter under den valda månaden!",
+            "SELECT_MONTH": "Välj månad",
+            "NO_TASKS_IN_MONTH": "Det finns inga uppgifter under den valda månaden.",
+            "EMPTY": "Inga uppgifter"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Sammanfattning av mina processer - per 6 månader",
+            "SUMMARY_INFO_SUFFIX": "slutförda processer under de valda 6 månaderna!",
+            "NO_PROCESSES": "Du har inga processer.",
+            "NO_PROCESSES_ERROR": "Det uppstod ett fel när dina processer hämtades. Uppdatera widgeten.",
+            "NO_PROCESSES_IN_PERIOD": "Det finns inga processer under den valda perioden.",
+            "RUNNING": "Körs",
+            "COMPLETED": "Slutförd",
+            "NEXT": "Nästa",
+            "NEXT_SCREEN_READER_LABEL": "Sammanfattning av mina processer  – Gå till nästa 6 månader",
+            "PREVIOUS": "Tidigare",
+            "PREVIOUS_SCREEN_READER_LABEL": "Sammanfattning av mina processer  – Gå till föregående 6 månader",
+            "EMPTY": "Inga processer"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Kommentarer för {{ taskName }}",
+        "CLOSE": "Stäng"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Miniatyrbild"
+    }
+}

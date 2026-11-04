@@ -1,0 +1,140 @@
+<div *ngIf="isLoading; else showInfoDrawer">
+    <mat-progress-bar mode="indeterminate"/>
+</div>
+<ng-template #showInfoDrawer>
+    <adf-info-drawer [title]="taskDetails?.name ? taskDetails.name : 'No name'" [selectedIndex]="selectedTabIndex" (currentTab)="onTabChange($event)" class="aps-task-metadata-drawer">
+        <adf-info-drawer-tab label="ADF_TASK_LIST.DETAILS.LABELS.INFO_DRAWER_TAB_DETAILS_TITLE">
+            <div class="aps-task-metadata-container">
+                <div class="aps-task-metadata-edit-panel">
+                    <button
+                        *ngIf="!editMode"
+                        mat-icon-button
+                        (click)="toggleEditing()"
+                        [disabled]="!!this.taskDetails?.endDate"
+                        [attr.title]="'CORE.METADATA.ACTIONS.EDIT' | translate"
+                        [attr.aria-label]="'CORE.METADATA.ACCESSIBILITY.EDIT' | translate"
+                        data-automation-id="meta-data-general-info-edit"
+                        class="adf-edit-icon-buttons">
+                        <mat-icon>mode_edit</mat-icon>
+                    </button>
+                    <div *ngIf="editMode" class="adf-metadata-action-buttons">
+                        <button
+                            mat-icon-button
+                            [attr.title]="'CORE.METADATA.ACTIONS.CANCEL' | translate"
+                            data-automation-id="reset-metadata"
+                            (click)="resetChanges()"
+                            class="adf-metadata-action-buttons-clear">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                        <button
+                            mat-icon-button
+                            [attr.title]="'CORE.METADATA.ACTIONS.SAVE' | translate"
+                            color="primary"
+                            (click)="saveChanges()"
+                            data-automation-id="save-general-info-metadata"
+                            [disabled]="!hasMetadataChanged">
+                            <mat-icon>check</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <adf-task-header [taskDetails]="taskDetails" [readOnly]="!editMode"
+                                 [resetChanges]="resetChangesEvent" [showClaimRelease]="false"/>
+            </div>
+        </adf-info-drawer-tab>
+        <adf-info-drawer-tab label="APP.INFO_DRAWER.TABS.COMMENTS">
+            <div class="aps-task-comments-container">
+                <adf-task-comments [taskId]="taskDetails.id" [readOnly]="false"/>
+            </div>
+        </adf-info-drawer-tab>
+        <adf-info-drawer-tab label="PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.TAB">
+            <div class="aps-task-reassign-container">
+                <div class="aps-task-reassign-loading" *ngIf="loadingUsers">
+                    <mat-spinner diameter="28"/>
+                    <span>{{ 'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.LOADING_USERS' | translate }}</span>
+                </div>
+
+                <div class="aps-task-reassign-labeled" *ngIf="!loadingUsers">
+                    <label class="aps-task-reassign-labeled__label" for="aps-task-reassign-select">
+                        {{ 'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.LABEL' | translate }}
+                    </label>
+                    <div
+                        class="aps-task-reassign-shell input-shell input-shell--select"
+                        [class.aps-task-reassign-shell--disabled]="!!taskDetails?.endDate || reassignSubmitting">
+                        <mat-select
+                            id="aps-task-reassign-select"
+                            [(ngModel)]="selectedAssigneeId"
+                            [disabled]="!!taskDetails?.endDate || reassignSubmitting"
+                            [placeholder]="'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.PLACEHOLDER' | translate"
+                            panelClass="aps-task-reassign-select-panel"
+                            (openedChange)="onAssigneeSelectOpened($event, assigneeSearchInput)"
+                            data-automation-id="aps-task-reassign-select">
+                            <mat-option disabled class="aps-task-reassign-search-option">
+                                <div class="aps-task-reassign-search" (click)="$event.stopPropagation()">
+                                    <mat-icon aria-hidden="true">search</mat-icon>
+                                    <input
+                                        #assigneeSearchInput
+                                        type="text"
+                                        class="aps-task-reassign-search-input"
+                                        [value]="assigneeSearch"
+                                        (input)="onAssigneeSearchInput($event)"
+                                        (click)="$event.stopPropagation()"
+                                        (keydown)="$event.stopPropagation()"
+                                        (keyup)="$event.stopPropagation()"
+                                        (keydown.space)="$event.stopPropagation()"
+                                        (keydown.enter)="$event.preventDefault()"
+                                        [placeholder]="'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.SEARCH_PLACEHOLDER' | translate"
+                                        [attr.aria-label]="'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.SEARCH_PLACEHOLDER' | translate"
+                                        autocomplete="off" />
+                                </div>
+                            </mat-option>
+
+                            <mat-option
+                                *ngFor="let user of reassignUsers"
+                                [value]="user.id"
+                                [class.aps-task-reassign-option-hidden]="!matchesAssigneeSearch(user)">
+                                {{ formatUserName(user) }}
+                            </mat-option>
+
+                            <mat-option *ngIf="!hasMatchingAssignees" disabled>
+                                {{ 'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.NO_MATCH' | translate }}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="aps-task-reassign-labeled" *ngIf="!loadingUsers">
+                    <label class="aps-task-reassign-labeled__label" for="aps-task-reassign-reason">
+                        {{ 'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.REASON_LABEL' | translate }}
+                        <span class="aps-task-reassign-labeled__req" aria-hidden="true">*</span>
+                    </label>
+                    <div
+                        class="aps-task-reassign-shell input-shell input-shell--textarea"
+                        [class.aps-task-reassign-shell--disabled]="!!taskDetails?.endDate || reassignSubmitting">
+                        <textarea
+                            id="aps-task-reassign-reason"
+                            rows="3"
+                            [(ngModel)]="reassignReason"
+                            [disabled]="!!taskDetails?.endDate || reassignSubmitting"
+                            [placeholder]="'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.REASON_PLACEHOLDER' | translate"
+                            data-automation-id="aps-task-reassign-reason"
+                            autocomplete="off"></textarea>
+                    </div>
+                </div>
+
+                <div class="aps-task-reassign-actions">
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        class="aps-task-reassign-submit"
+                        type="button"
+                        data-automation-id="aps-task-reassign-submit"
+                        [disabled]="!canSubmitReassign"
+                        (click)="submitReassign()">
+                        <mat-spinner *ngIf="reassignSubmitting" diameter="18" class="aps-task-reassign-submit-spinner"/>
+                        <span>{{ 'PROCESS-EXTENSION.TASK_DETAILS.REASSIGN.SUBMIT' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+        </adf-info-drawer-tab>
+    </adf-info-drawer>
+</ng-template>

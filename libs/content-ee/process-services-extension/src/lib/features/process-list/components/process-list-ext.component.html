@@ -1,0 +1,98 @@
+<aca-page-layout>
+    <aca-page-layout-header>
+        <h1 class="adw-task-list-title">
+            {{ currentFilter?.name || ('PROCESS-EXTENSION.BREADCRUMB.PROCESS_LIST.PROCESSES' | translate) }}
+        </h1>
+        <nav>
+            <div class="adf-breadcrumb-item adf-active" title="{{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}">
+                <div aria-current="location">
+                    <div class="adf-breadcrumb-item adf-active" role="listitem">
+                        <div>
+                            {{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}
+                        </div>
+                        <mat-icon class="adf-breadcrumb-item-chevron">
+                            chevron_right
+                        </mat-icon>
+                        <div>
+                            {{ 'PROCESS-EXTENSION.BREADCRUMB.PROCESS_LIST.PROCESSES' | translate }}
+                        </div>
+                        <mat-icon class="adf-breadcrumb-item-chevron" *ngIf="currentFilter">
+                            chevron_right
+                        </mat-icon>
+                        <div class="adf-breadcrumb-item-current" *ngIf="currentFilter">
+                            {{ currentFilter?.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <aca-toolbar [items]="actions"/>
+    </aca-page-layout-header>
+    <aca-page-layout-content>
+        <div class="aca-main-content" *ngIf="currentFilter">
+            <div class="adf-content-area">
+                <div class="adf-content-border">
+                    <adf-process-instance-list
+                        #processInstanceList
+                        id="aps-process-list-id"
+                        [appId]="appId || null"
+                        [stickyHeader]="true"
+                        [processDefinitionId]="currentFilter?.filter?.processDefinitionKey"
+                        [presetColumn]="processSchema"
+                        [selectFirstRow]="false"
+                        [selectionMode]="'multiple'"
+                        [multiselect]="true"
+                        [state]="currentFilter?.filter?.state"
+                        [sort]="currentFilter?.filter?.sort"
+                        [data]="dataProcesses"
+                        [isResizingEnabled]="true"
+                        [blurOnResize]="false"
+                        [size]="paginationPageSize"
+                        (rowsSelected)="onRowsSelected($event)"
+                        acaContextActions
+                        [customActions]="processListContextMenuActions"
+                    >
+                        <data-columns>
+                            <data-column
+                                key="status"
+                                type="text"
+                                title="ADF_PROCESS_LIST.PROPERTIES.STATUS"
+                                [sortable]="false"
+                                class="adf-ellipsis-cell"
+                                [draggable]="true"
+                            >
+                                <ng-template let-entry="$implicit">
+                                    <div title="{{ getProcessStatus(entry.row.obj) | translate }}">
+                                        {{ getProcessStatus(entry.row.obj) | translate }}
+                                    </div>
+                                </ng-template>
+                            </data-column>
+                            <data-column
+                                key="startedBy"
+                                title="ADF_PROCESS_LIST.PROPERTIES.CREATED_BY"
+                                [sortable]="false"
+                                class="adf-desktop-only adf-ellipsis-cell"
+                                [draggable]="true"
+                            >
+                                <ng-template let-entry="$implicit">
+                                    <div title="{{ entry.row.obj.startedBy | fullName }}">
+                                        {{ entry.row.obj.startedBy | fullName }}
+                                    </div>
+                                </ng-template>
+                            </data-column>
+                        </data-columns>
+                    </adf-process-instance-list>
+                    <adf-pagination
+                        *ngIf="processInstanceList"
+                        [target]="processInstanceList"
+                        [supportedPageSizes]="supportedPageSizes"
+                        (changePageSize)="onChangePageSize($event)"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="aps-sidebar" *ngIf="infoDrawerOpened && !!lastSelectedProcessId">
+            <aps-process-info-drawer [processInstanceDetails]="infoDrawerProcessDetails" [isLoading]="isLoading"/>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

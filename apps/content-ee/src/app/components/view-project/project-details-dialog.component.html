@@ -1,0 +1,177 @@
+<div class="adw-pdd adw-pdd--fullscreen">
+  <header class="adw-pdd__header">
+    <div class="adw-pdd__header-main">
+      <div class="adw-pdd__folder" aria-hidden="true">
+        <mat-icon>folder</mat-icon>
+      </div>
+      <div class="adw-pdd__header-text">
+        <h2 mat-dialog-title class="adw-pdd__heading">Program - {{ displayTitle }}</h2>
+        @if (statusBadge || typeBadge || customerBadge) {
+          <div class="adw-pdd__badges">
+            @if (statusBadge) {
+              <span class="adw-pdd__badge adw-pdd__badge--status">{{ statusBadge }}</span>
+            }
+            @if (typeBadge) {
+              <span class="adw-pdd__badge adw-pdd__badge--priority">{{ typeBadge }}</span>
+            }
+            @if (customerBadge) {
+              <span class="adw-pdd__badge adw-pdd__badge--business-unit">{{ customerBadge }}</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+    <div class="adw-pdd__header-actions">
+      <button type="button" mat-icon-button class="adw-pdd__icon-btn" mat-dialog-close aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <mat-dialog-content class="adw-pdd__content dialog-body">
+    <div class="adw-pdd__columns adw-pdd__columns--details-only">
+      <div class="adw-pdd__details">
+        <div class="adw-pdd__details-tabs-layout">
+          <nav class="adw-pdd__tablist" role="tablist" aria-label="Program detail sections">
+            @for (tab of tabs; track tab.id) {
+              <button
+                type="button"
+                role="tab"
+                class="adw-pdd__tab"
+                [class.adw-pdd__tab--active]="activeTabId === tab.id"
+                [attr.aria-selected]="activeTabId === tab.id"
+                [attr.id]="'pdd-tab-' + tab.id"
+                [attr.aria-controls]="'pdd-panel-' + tab.id"
+                (click)="selectTab(tab.id)"
+              >
+                <mat-icon aria-hidden="true">{{ tab.icon }}</mat-icon>
+                <span>{{ tab.title }}</span>
+              </button>
+            }
+          </nav>
+
+          <div class="adw-pdd__details-scroll details-scroll" role="region" aria-label="Program details">
+            @if (activeSection; as section) {
+              <section
+                class="details-section adw-pdd__section details-section--full"
+                role="tabpanel"
+                [attr.id]="'pdd-panel-' + activeTabId"
+                [attr.aria-labelledby]="'pdd-tab-' + activeTabId"
+                [attr.aria-label]="section.title"
+              >
+                <h3 class="details-section-title adw-pdd__section-title">
+                  <mat-icon class="adw-pdd__section-icon" aria-hidden="true">{{ section.icon }}</mat-icon>
+                  {{ section.title }}
+                </h3>
+                <dl class="details-list">
+                  @for (r of section.rows; track r.key) {
+                    <div class="details-pair">
+                      <dt class="details-key">{{ r.label }}</dt>
+                      <dd class="details-value">
+                        @if (r.multiline) {
+                          <pre class="value-pre">{{ r.value }}</pre>
+                        } @else {
+                          {{ r.value }}
+                        }
+                      </dd>
+                    </div>
+                  }
+                </dl>
+              </section>
+            }
+
+            @if (isGroupsTabActive) {
+              <section
+                class="details-dm adw-pdd__section"
+                role="tabpanel"
+                id="pdd-panel-__groups__"
+                aria-labelledby="pdd-tab-__groups__"
+                aria-label="Group permission"
+              >
+                <h3 class="details-section-title adw-pdd__section-title">
+                  <mat-icon class="adw-pdd__section-icon" aria-hidden="true">group</mat-icon>
+                  Group permission
+                </h3>
+                <div class="details-dm-table-wrap">
+                  <table class="details-dm-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Group</th>
+                        <th scope="col">Permission</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (gp of groupPermissionRows; track gp.name + gp.role) {
+                        <tr>
+                          <td>{{ gp.name || '—' }}</td>
+                          <td>{{ gp.role || '—' }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            }
+
+            @if (isMatrixTabActive) {
+              <section
+                class="details-dm adw-pdd__section"
+                role="tabpanel"
+                id="pdd-panel-__matrix__"
+                aria-labelledby="pdd-tab-__matrix__"
+                aria-label="Governance"
+              >
+                <h3 class="details-section-title adw-pdd__section-title">
+                  <mat-icon class="adw-pdd__section-icon" aria-hidden="true">account_tree</mat-icon>
+                  Governance
+                </h3>
+                @for (matrix of matrixSections; track matrix.title) {
+                  <h4 class="adw-pdd__matrix-subtitle">{{ matrix.title }}</h4>
+                  <div class="details-dm-table-wrap">
+                    <table class="details-dm-table">
+                      <thead>
+                        <tr>
+                          @for (col of matrix.columns; track col) {
+                            <th scope="col">{{ col }}</th>
+                          }
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (row of matrix.rows; track $index) {
+                          <tr>
+                            @for (cell of row; track $index) {
+                              <td>{{ cell || '—' }}</td>
+                            }
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                }
+              </section>
+            }
+
+            @if (!tabs.length) {
+              <p class="details-dm-empty">No program properties were returned for this item.</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (aboutText) {
+      <div class="adw-pdd__about">
+        <mat-icon class="adw-pdd__about-icon" aria-hidden="true">info</mat-icon>
+        <p class="adw-pdd__about-text">{{ aboutText }}</p>
+      </div>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions
+    align="end"
+    class="adw-pdd__footer-actions"
+    [class.adw-pdd__footer-actions--plain]="!aboutText"
+  >
+    <button mat-raised-button type="button" mat-flat-button color="primary" mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,92 @@
+aps-process-details-page-ext {
+    aca-page-layout-header {
+        justify-content: space-between;
+
+        nav {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .adf-breadcrumb-item {
+            display: flex;
+            align-items: center;
+            margin-top: 0;
+            line-height: 1.25;
+            min-width: 0;
+        }
+
+        .adf-breadcrumb-item[role='listitem'] {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .adf-breadcrumb-item-chevron,
+        mat-icon.adf-breadcrumb-item-chevron {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            width: 18px;
+            height: 18px;
+            font-size: 18px;
+            line-height: 18px;
+            flex-shrink: 0;
+        }
+
+        .adf-breadcrumb-item-current {
+            display: inline-flex;
+            align-items: center;
+            min-width: 0;
+            line-height: 1.25;
+        }
+
+        .aps-process-list-toolbar-actions {
+            display: flex;
+            align-items: center;
+
+            .aps-selected-action {
+                color: var(--theme-primary-color);
+            }
+        }
+    }
+
+    aca-page-layout-content {
+        display: flex !important;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    aps-process-details-ext.aca-main-content {
+        flex: 1 1 0;
+        min-width: 0;
+        overflow: hidden;
+    }
+}
+
+.aps-sidebar {
+    width: 400px;
+    min-width: 360px;
+    max-width: min(400px, 42vw);
+    box-sizing: border-box;
+    border-left: 1px solid #e5e7eb;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+
+    aps-task-info-drawer,
+    .aps-task-info-drawer,
+    aps-process-info-drawer {
+        flex: 1 1 auto;
+        min-height: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}

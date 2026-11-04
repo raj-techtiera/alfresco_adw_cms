@@ -1,0 +1,169 @@
+@if (!isLoading) {
+    <div role="grid" class="acs-infinite-scroll-list">
+        <div class="acs-infinite-scroll-header" role="rowgroup">
+            <adf-datatable-row data-automation-id="infinite-scroll-row-header"
+                               class="acs-infinite-scroll-header-row"
+                               role="row">
+                @for (col of data.getColumns(); track $index) {
+                    @if (col.title) {
+                        <div
+                            class="adf-datatable-cell--{{col.type || 'text'}} {{col.cssClass}} adf-datatable-cell-header"
+                            [attr.data-automation-id]="'auto_id_' + col.key"
+                            [attr.aria-label]="(col.title | translate)"
+                            role="columnheader"
+                            [attr.tabindex]="0">
+                            <div
+                                [attr.data-automation-id]="'auto_header_content_id_' + col.key"
+                                class="adf-datatable-cell-header-content">
+                                <span
+                                    title="{{col.title | translate}}"
+                                    class="adf-datatable-cell-value">
+                                    {{ col.title | translate }}
+                                </span>
+                            </div>
+                        </div>
+                    } @else {
+                        <div
+                            class="adf-datatable-cell--{{col.type || 'text'}} {{col.cssClass}} adf-datatable-cell-header"
+                            [attr.data-automation-id]="'auto_id_' + col.key">
+                        </div>
+                    }
+                }
+                <div class="adf-actions-column adf-datatable-actions-menu adf-datatable-cell-header">
+                </div>
+            </adf-datatable-row>
+        </div>
+        <div class="acs-infinite-scroll-body" role="rowgroup">
+            <cdk-virtual-scroll-viewport #viewport
+                                         appendOnly
+                                         [itemSize]="itemSize"
+                                         class="acs-infinite-scroll-viewport"
+                                         [minBufferPx]="minBufferPx"
+                                         [maxBufferPx]="maxBufferPx">
+                <adf-datatable-row
+                    *cdkVirtualFor="let row of virtualScrollDataSource; let idx = index; trackBy rowTracker; templateCacheSize: 0"
+                    [cdkContextMenuTriggerFor]="contextMenuContainer"
+                    [cdkContextMenuTriggerData]="{row}"
+                    class="acs-infinite-scroll-row"
+                    [row]="row"
+                    [attr.data-automation-id]="'infinite-scroll-row-' + idx">
+                    @for (col of data.getColumns(); track $index) {
+                        <div role="gridcell"
+                             class="adf-datatable-cell adf-datatable-cell--{{col.type || 'text'}} {{col.cssClass}}"
+                             [attr.title]="col.title ? (col.title | translate) : ''"
+                             [attr.aria-label]="col.title ? (col.title | translate) : null"
+                             tabindex="0">
+                            @if (!col.template) {
+                                <div class="adf-datatable-cell-container">
+                                    <ng-container [ngSwitch]="data.getColumnType(row, col)">
+                                        <div *ngSwitchCase="'image'" class="adf-cell-value">
+                                            <img
+                                                 [attr.alt]="(data.getValue(row, col) | fileType | uppercase)"
+                                                 ngSrc="{{ getRowThumbnail(row) }}"
+                                                 width="24"
+                                                 height="24">
+                                        </div>
+                                        <div
+                                            *ngSwitchCase="'date'"
+                                            class="adf-cell-value adf-cell-date"
+                                            [attr.data-automation-id]="'date_' + (data.getValue(row, col) | adfLocalizedDate: 'medium') ">
+                                            <adf-date-cell [data]="data"
+                                                           [column]="col"
+                                                           [row]="row"
+                                                           [tooltip]="getCellTooltip(row, col)"
+                                                           [dateConfig]="col.dateConfig"/>
+                                        </div>
+
+                                        <div *ngSwitchCase="'text'"
+                                             class="adf-cell-value"
+                                             [attr.data-automation-id]="'text_' + data.getValue(row, col)">
+                                            <adf-datatable-cell
+                                                [copyContent]="col.copyContent"
+                                                [data]="data"
+                                                [column]="col"
+                                                [row]="row"
+                                                [tooltip]="getCellTooltip(row, col)"/>
+                                        </div>
+                                        <div *ngSwitchCase="'number'"
+                                             class="adf-cell-value"
+                                             [attr.data-automation-id]="'number_' + data.getValue(row, col)">
+                                            <adf-number-cell
+                                                [data]="data"
+                                                [column]="col"
+                                                [row]="row"
+                                                [decimalConfig]="col.decimalConfig"/>
+                                        </div>
+                                        <div *ngSwitchCase="'fileSize'"
+                                             class="adf-cell-value"
+                                             [attr.data-automation-id]="'fileSize_' + data.getValue(row, col)">
+                                            <adf-filesize-cell
+                                                    [data]="data"
+                                                    [column]="col"
+                                                    [row]="row"
+                                                    [tooltip]="getCellTooltip(row, col)" />
+                                        </div>
+                                        <span *ngSwitchDefault class="adf-cell-value"></span>
+                                    </ng-container>
+                                </div>
+                            }
+                            @if (col.template) {
+                                <div class="adf-datatable-cell-container">
+                                    <div class="adf-cell-value">
+                                        <ng-container
+                                            [ngTemplateOutlet]="col.template"
+                                            [ngTemplateOutletContext]="{ $implicit: { data: data, row: row, col: col }, value: data.getValue(row, col) }"/>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    <div role="gridcell"
+                         tabindex="0"
+                         class="adf-datatable-cell adf-datatable-actions-menu">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" #actionsMenuTrigger="matMenuTrigger"
+                                [attr.aria-label]="'ADF-DATATABLE.ACCESSIBILITY.ROW_OPTION_BUTTON' | translate"
+                                [title]="'ADF-DATATABLE.CONTENT-ACTIONS.TOOLTIP' | translate"
+                                [attr.id]="'action_menu_right_' + idx"
+                                [attr.data-automation-id]="'action_menu_' + idx"
+                                (keydown.enter)="onContextMenuOpen($event, actionsMenuTrigger)">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            @for (action of getVisibleRowActions(row); track $index) {
+                                <button mat-menu-item
+                                        class="acs-infinite-scroll-menu-item"
+                                        [attr.data-automation-id]="action.title"
+                                        [attr.aria-label]="action.title | translate"
+                                        (click)="onExecuteRowAction(row, action)">
+                                    @if (action.icon) {
+                                        <mat-icon>{{ action.icon }}</mat-icon>
+                                    }
+                                    <span>{{ action.title | translate }}</span>
+                                </button>
+                            }
+                        </mat-menu>
+                    </div>
+                </adf-datatable-row>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </div>
+}
+
+<ng-template #contextMenuContainer let-row="row">
+    @if (!isLoading) {
+        <div class="acs-infinite-scroll-cdk-menu" cdkMenu>
+            @for (action of getVisibleRowActions(row); track $index) {
+                <button mat-menu-item cdkMenuItem
+                        class="acs-infinite-scroll-cdk-menu-item"
+                        [attr.data-automation-id]="action.title + row.getValue('id')"
+                        [attr.aria-label]="action.title | translate"
+                        (click)="onExecuteRowAction(row, action)">
+                    @if (action.icon) {
+                        <mat-icon>{{ action.icon }}</mat-icon>
+                    }
+                    <span>{{ action.title | translate }}</span>
+                </button>
+            }
+        </div>
+    }
+</ng-template>

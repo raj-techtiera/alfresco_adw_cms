@@ -1,0 +1,47 @@
+<div class="ai-page">
+  <!-- Header -->
+  <div class="ai-header">
+    <h1 class="ai-title">AI Usage &amp; Intelligence</h1>
+    <p class="ai-subtitle">Credits reset on 01 July 2026</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="ai-tabs">
+    <button type="button" class="ai-tab" *ngFor="let tab of tabs; trackBy: trackByTab"
+      [class.ai-tab--active]="activeTab === tab" (click)="setTab(tab)">
+      {{ tab }}
+    </button>
+  </div>
+
+  <!-- Overview -->
+  <div class="ai-stack" *ngIf="activeTab === 'Overview'">
+    <div class="ai-kpi-grid">
+      <div class="ai-kpi" *ngFor="let card of kpiCards; trackBy: trackByLabel">
+        <span class="ai-kpi-label">{{ card.label }}</span>
+        <span class="ai-kpi-value" [style.color]="card.valueColor">{{ card.value }}</span>
+        <span class="ai-kpi-sub">{{ card.sub }}</span>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-head">
+        <span class="ai-card-title">Monthly Credit Usage</span>
+        <span class="ai-card-credits">0 / 50 credits</span>
+      </div>
+      <div class="ai-progress"><div class="ai-progress-bar" style="width:0%"></div></div>
+      <span class="ai-card-note">100% remaining · Resets automatically on 1st of each month</span>
+    </div>
+
+    <div class="ai-card ai-card--minh">
+      <span class="ai-card-title">Top AI Features This Month</span>
+      <div class="ai-empty-row">
+        <span class="ai-empty-text">No AI feature usage recorded this month.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Placeholder tabs -->
+  <div class="ai-placeholder" *ngIf="activeTab !== 'Overview'">
+    <span class="ai-placeholder-text">{{ activeTab }} data will appear here.</span>
+  </div>
+</div>

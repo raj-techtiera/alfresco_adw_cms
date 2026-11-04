@@ -1,0 +1,31 @@
+<div class="adw-cad-viewer">
+  <header class="adw-cad-viewer__bar">
+    <div class="adw-cad-viewer__title">
+      <span class="adw-cad-viewer__eyebrow">MLightCAD</span>
+      <h2>{{ fileName }}</h2>
+      <span class="adw-cad-viewer__command" *ngIf="commandLabel">{{ commandLabel }}</span>
+    </div>
+    <div class="adw-cad-viewer__actions">
+      <span class="adw-cad-viewer__status" *ngIf="saveMessage">{{ saveMessage }}</span>
+      <button mat-stroked-button type="button" (click)="save()" [disabled]="status !== 'ready' || saving">
+        {{ saving ? 'Saving…' : 'Save' }}
+      </button>
+      <button mat-icon-button type="button" (click)="close()" aria-label="Close CAD viewer">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <section class="adw-cad-viewer__stage">
+    <div #viewerContainer class="adw-cad-viewer__canvas"></div>
+
+    <div class="adw-cad-viewer__overlay" *ngIf="status === 'loading'">
+      <p>Loading drawing…</p>
+      <span>Drag to pan. Scroll to zoom. Type a command, then Save.</span>
+    </div>
+
+    <div class="adw-cad-viewer__overlay adw-cad-viewer__overlay--error" *ngIf="status === 'error' && errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </section>
+</div>

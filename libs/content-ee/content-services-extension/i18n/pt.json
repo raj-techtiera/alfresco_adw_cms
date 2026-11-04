@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "A ação não foi bem-sucedida. Tente novamente ou entre em contato com a equipe de TI.",
+        "PERMISSION_DENIED": "Você não tem permissão para executar esta operação"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} solicitou ingresso {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} pessoas solicitadas a ingressar {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Gerenciar membros",
+        "CLOSE": "Fechado",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Detalhes da biblioteca",
+            "MANAGE_MEMBERS": "Gerenciar membros"
+        },
+        "TABS": {
+            "PROPERTIES": "Propriedades",
+            "MEMBERS": "Membros",
+            "GROUPS": "Grupos",
+            "PENDING": "Pendente"
+        },
+        "LOAD_MORE": "Carregar mais",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Confirmar",
+            "MESSAGE": "Deseja continuar?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Rejeitar solicitação de membro",
+            "COMMENT": "Deixar um comentário aqui",
+            "YES_LABEL": "Rejeitado",
+            "NO_LABEL": "Cancelar"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Informações de associação do grupo",
+            "DESCRIPTION": "Este usuário tem acesso à biblioteca por meio de funções de grupo. Se você precisar remover a associação individual deste usuário, primeiro será necessário removê-la dos grupos abaixo listados.",
+            "CLOSE": "Fechado",
+            "GROUP": "Grupo",
+            "ROLE": "Atividade"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Nenhuma solicitação de associação pendente",
+        "PENDING_REQUESTS": "Solicitações de associação pendentes",
+        "APPROVE": "APROVAR",
+        "REJECT": "REJEITAR"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Membros desta biblioteca",
+        "NO_MEMBERS": "Nenhum membro encontrado",
+        "DELETE_MEMBERS": "Excluir membros selecionados",
+        "GROUP_ROLE": "Função do grupo",
+        "REMOVE": "Remover",
+        "A11Y_AVATAR": "Avatar do usuário",
+        "REFRESH": "Atualizar"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Associação de grupo desta biblioteca",
+        "NO_GROUPS": "Nenhum grupos encontrado",
+        "DELETE_GROUPS": "Excluir grupos selecionados",
+        "REFRESH": "Atualizar",
+        "REMOVE": "Remover"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Gerente",
+        "SITE_CONTRIBUTOR": "Contribuidor",
+        "SITE_CONSUMER": "Consumidor",
+        "SITE_COLLABORATOR": "Colaborador"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Definir função de usuário",
+        "GROUP_SELECTOR": "Definir função de grupo",
+        "ALL": "Definir todas as funções para"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Adicionar usuário/grupo",
+        "SEARCH_INPUT": "Procurar usuários ou grupos para adicionar",
+        "NAME": "Nome",
+        "TITLE_LABEL": "Adicionar usuário ou grupo a",
+        "ADD_LABEL": "ADICIONAR",
+        "SELECT_LABEL": "SELECIONAR",
+        "CLOSE_LABEL": "FECHAR",
+        "CANCEL_LABEL": "CANCELAR"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Membros"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Solicitação de associação rejeitada",
+        "MEMBERSHIP_ACCEPTED": "Membro adicionado à biblioteca",
+        "USER_REMOVE_SUCCESS": "Usuário removido",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} usuários removidos, {{skipped}} foram ignorados",
+        "USER_REMOVE_FAILED": "Falha ao remover o usuário",
+        "GROUP_REMOVE_SUCCESS": "Grupo removido",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} grupos removidos, {{skipped}} foram ignorados",
+        "GROUP_REMOVE_FAILED": "Falha ao remover o grupo",
+        "ADD_MEMBER_FAILED": "Falha ao adicionar membro ao site",
+        "ADD_MEMBERS_FAILED": "Falha ao adicionar {{count}} membros",
+        "ADD_MEMBERS_SUCCESS": "Adicionado(s) {{userCount}} usuário(s) and {{groupCount}} grupos(s)",
+        "ADD_GROUPS_SUCCESS": "Adicionado(s) {{groupCount}} grupo(s)",
+        "ADD_USERS_SUCCESS": "Adicionado(s) {{userCount}} usuário(s)",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} membro adicionado, {{skipped}} foram ignorados",
+        "USER_ROLE_UPDATED": "Função de usuário atualizada",
+        "GROUP_ROLE_UPDATED": "Função do grupo atualizada",
+        "MEMBER_EXISTS": "O usuário já é membro do site",
+        "MANAGER_REQUIRED": "Um site requer pelo menos um gerente de site",
+        "ACTIONS": {
+            "CLOSE": "Fechado"
+        }
+    }
+}

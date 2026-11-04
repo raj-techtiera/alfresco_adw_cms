@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Nouveau processus",
+            "SELECT_APPLICATION": "Sélectionner l'application",
+            "ERROR": "Impossible de démarrer un processus car aucune définition de processus n'est disponible"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Gestion des processus",
+            "PROCESS_LIST": {
+                "PROCESSES": "Processus"
+            },
+            "START_PROCESS": "Démarrer le processus",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Afficher les détails"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Afficher les commentaires"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Gestion des processus",
+            "CREATE_NEW_PROCESS": "Démarrer le processus",
+            "CREATE_PROCESS_NOT_ALLOWED": "Impossible de créer un nouveau processus"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Afficher plus"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Commentaires",
+            "CANCEL_PROCESS": "Annuler le processus"
+        },
+        "ERROR": {
+            "NO_FORM": "Aucun formulaire défini pour la définition de processus",
+            "NO_CONTENT": "Impossible de joindre le fichier depuis votre appareil",
+            "CAN_NOT_ATTACH": "Impossible de joindre le contenu sélectionné",
+            "AUDIT_ERROR": "Afficher l'erreur de tâche : {{error}}",
+            "TASK_ACCESS_WARNING": "Vous n'avez pas les droits requis pour modifier la tâche",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "L'aperçu du document n'est pas disponible car la tâche n'est pas encore terminée."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Processus créé '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Une erreur réseau inconnue est survenue. Les fonctionnalités du service de gestion des processus sont désactivées.",
+            "ACTION": "Afficher le processus en cours"
+        },
+        "NO_PROCESS_DEFINITIONS": "Aucune définition de processus disponible",
+        "SIDE_NAV_TITLE": "Flux de travail",
+        "STATUS": {
+            "COMPLETED": "Achevé",
+            "RUNNING": "En cours d’exécution",
+            "OPEN": "Ouvrir",
+            "UNKNOWN": "Inconnu"
+        },
+        "TASK_LIST": {
+            "TASKS": "Tâches",
+            "ACTIONS": {
+                "TASK_DETAILS": "Afficher"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Afficher"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formulaire a bien été enregistré",
+            "FORM_COMPLETED": "La tâche a été effectuée",
+            "CLOSE": "Fermer",
+            "CLAIM_TASK": "La tâche a été revendiquée",
+            "UNCLAIM_TASK": "La tâche a été libérée",
+            "CLAIM_FAILED": "Impossible d'effectuer l'action"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Impossible d'effectuer l'action",
+            "FAILED_TO_LOAD": "Impossible de charger les détails de la tâche. Réessayez plus tard",
+            "UPDATED": "Mise à jour de {{ property }} réussie",
+            "FAILED_TO_UPDATE": "Echec de la mise à jour de {{ property }}",
+            "METADATA_TOOLTIP": "Afficher les détails",
+            "NO_TASK_NAME": "Aucun nom"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Fermer"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Aucune définition de processus disponible"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Démarré par",
+            "CREATED": "Date de début"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Impossible de démarrer un processus car aucune définition de processus n'est disponible",
+            "NO_START_FORM": "Ce processus ne requiert aucune configuration supplémentaire",
+            "NO_PROCESS_DEF_SELECTED": "Aucun processus/catégorie sélectionné",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Sélectionner l'application"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Annuler le processus ?",
+                "DESCRIPTION": "Ce processus et toutes les tâches associées seront marqués comme achevés.",
+                "CONFIRM_BTN": "Confirmer"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' annulé avec succès.",
+                "FAIL": "Erreur de processus d’annulation : {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Date de création"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "S'attribuer",
+                "UNCLAIM": "Libérer"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Partie du processus en cours d’exécution",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Processus lié",
+            "PART_OF_THE_PROCESS_TITLE": "Ce document fait partie des processus suivants",
+            "NO_PROCESSES": "Ce document ne fait partie d’aucun processus en cours d’exécution",
+            "CREATED": "Créé",
+            "VIEW_DETAILS_BTN": "Afficher les détails"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Authentification automatique pour les services de gestion des processus",
+        "ENABLED": "Activé",
+        "ENABLED_DESCRIPTION": "Le système procèdera automatiquement à une nouvelle authentification pour permettre à l’utilisateur de continuer son travail sans être interrompu.",
+        "DISABLED": "Désactivé",
+        "DISABLED_DESCRIPTION": "L’utilisateur devra s’authentifier de nouveau avec ses données d’identification au moment de l’expiration de la session.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

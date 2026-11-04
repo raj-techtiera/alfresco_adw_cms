@@ -1,0 +1,273 @@
+aps-file-preview-ext {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    /*
+     * Full-page route: parent often has no explicit height, so height:100% stays "auto" and the
+     * host grows with metadata — then no inner column gets a bounded height and scroll never appears.
+     */
+    height: 100vh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.aps-file-preview-ext-shell {
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background: #eceef2;
+}
+
+.aps-file-preview-ext-doc-bar {
+    flex-shrink: 0;
+    padding: 10px 20px 6px;
+    background: #eceef2;
+}
+
+.aps-file-preview-ext-doc-bar__name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #3d4450;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
+.aps-file-preview-ext-tabdeck {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px 16px;
+    box-sizing: border-box;
+}
+
+.aps-file-preview-ext-card {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+}
+
+/* Preview | Properties / Comments (right column hidden on Preview tab) */
+.aps-file-preview-ext-main-grid {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: stretch;
+
+    &.aps-file-preview-ext-main-grid--preview-only {
+        grid-template-columns: minmax(0, 1fr);
+
+        .aps-file-preview-ext-col--preview {
+            grid-column: 1 / -1;
+        }
+    }
+}
+
+.aps-file-preview-ext-top-bar {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 48px;
+    border-bottom: 1px solid #e4e8ef;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.aps-file-preview-ext-tabs {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.aps-file-preview-ext-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0 8px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:hover {
+        color: #1c1c1c;
+        background: rgba(0, 0, 0, 0.02);
+    }
+}
+
+.aps-file-preview-ext-tab--active {
+    color: #1c1c1c;
+    border-bottom-color: var(--theme-primary-color, #0b66c3);
+}
+
+.aps-file-preview-ext-header-actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 4px;
+    padding-left: 8px;
+    border-left: 1px solid #e4e8ef;
+
+    .mat-mdc-icon-button {
+        --mdc-icon-button-state-layer-size: 40px;
+        color: #5c6370;
+    }
+}
+
+.aps-file-preview-ext-col {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 1px solid #e4e8ef;
+    background: #fff;
+
+    &:last-child {
+        border-right: none;
+    }
+}
+
+.aps-file-preview-ext-properties-scroll {
+    flex: 1 1 0;
+    min-height: 0;
+    padding: 12px 16px;
+    box-sizing: border-box;
+}
+
+.aps-file-preview-ext-card-actions__muted {
+    opacity: 0.45;
+}
+
+.aps-file-preview-ext-tab-pane {
+    box-sizing: border-box;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 12px 16px;
+}
+
+.aps-file-preview-ext-tab-pane--viewer {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    adf-viewer {
+        flex: 1 1 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/*
+ * Properties pane uses both .aps-file-preview-ext-tab-pane and --properties.
+ * Base .tab-pane is defined above and must NOT win (it sets overflow-y: auto on the outer pane
+ * so the inner .aps-file-preview-ext-properties-scroll never gets a bounded height).
+ */
+.aps-file-preview-ext-tab-pane.aps-file-preview-ext-tab-pane--properties {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: stretch;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.aps-file-preview-ext-tab-pane.aps-file-preview-ext-tab-pane--comments {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-content: stretch;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.aps-file-preview-ext-tab-pane--properties > .aps-file-preview-ext-properties-scroll,
+.aps-file-preview-ext-tab-pane--comments > .aps-file-preview-ext-comments-scroll {
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+}
+
+.aps-file-preview-ext-col--meta {
+    min-height: 0;
+}
+
+.aps-file-preview-ext-panel-heading {
+    margin: 0;
+    padding: 10px 16px 6px;
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1e293b;
+    border-bottom: 1px solid #e2e8f0;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.aps-file-preview-ext-panel-heading--comments {
+    margin-top: 4px;
+    padding-top: 12px;
+    border-top: 1px solid #e4e8ef;
+}
+
+.aps-file-preview-ext-comments-scroll {
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 8px 16px 12px;
+    box-sizing: border-box;
+}
+
+.aps-file-preview-ext-comments-scroll adf-node-comments,
+.aps-file-preview-ext-comments-scroll adf-task-comments {
+    display: block;
+    min-width: 0;
+}
+
+.aps-file-preview-ext-tab-empty {
+    margin: 0;
+    padding: 16px 8px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.aps-file-preview-ext .adf-toolbar-container {
+    flex-direction: row-reverse;
+
+    .adf-toolbar-divider {
+        order: 3;
+    }
+
+    #adf-viewer-fullscreen {
+        order: 4;
+    }
+}

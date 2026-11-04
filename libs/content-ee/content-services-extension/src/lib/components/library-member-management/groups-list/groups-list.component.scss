@@ -1,0 +1,19 @@
+adw-groups-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    .adw-member-list-container {
+        flex-direction: column;
+        display: flex;
+        height: 100%;
+
+        .adw-user-initials,
+        .adf-datatable-selected {
+            display: flex;
+            place-content: center;
+            align-items: center;
+        }
+    }
+}

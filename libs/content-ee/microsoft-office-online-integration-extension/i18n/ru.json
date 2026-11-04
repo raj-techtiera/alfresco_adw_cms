@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Этот документ редактируется в Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Изменения, внесенные в этот документ, были отклонены.",
+        "CANCEL_SESSION_DENIED": "Произошла ошибка. Если проблема не устранена, обратитесь к администратору.",
+        "END_SESSION_SUCCESS": "Этот документ больше не редактируется в Office Online.",
+        "END_SESSION_DENIED": "Произошла ошибка. Если проблема не устранена, обратитесь к администратору.",
+        "RESUME_SESSION": "Данный файл редактируется в Office Online. Вы можете редактировать данный файл одновременно.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Сохранить все изменения в данном документе",
+            "END_OPTION_DETAILS": "Будет создана новая версия",
+            "CANCEL_OPTION": "Отменить все изменения",
+            "CHANGES": "Изменения какого уровня были внесены?",
+            "HEADER": "Завершить редактирование",
+            "DESCRIPTION": "В результате будет запрещено дальнейшее редактирование документа всем пользователям, которые в настоящее время имеют к нему доступ в Microsoft Office Online.",
+            "QUESTION": "Что делать с внесенными изменениями?",
+            "CANCEL": "Отмена",
+            "END": "Завершить редактирование"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Создать документ Word"
+            },
+            "EXCEL": {
+                "HEADER": "Создать электронную таблицу Excel"
+            },
+            "POWERPOINT": {
+                "HEADER": "Создать презентацию PowerPoint"
+            },
+            "CANCEL": "Отмена",
+            "CREATE": "Создать",
+            "CREATE_AND_OPEN": "Создать и открыть в Интернете",
+            "DESCRIPTION": {
+                "LABEL": "Описание",
+                "PLACEHOLDER": "Содержательное описание этого нового файла."
+            },
+            "NAME": {
+                "LABEL": "Имя"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Таблица Excel",
+                "TOOLTIP": "Создать новую электронную таблицу Excel"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Презентация Powerpoint",
+                "TOOLTIP": "Создать новую презентацию Powerpoint"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Документ Word",
+                "TOOLTIP": "Создать новый документ Word"
+            },
+            "END_SESSION": "Завершить редактирование",
+            "EDIT_WORD": "Редактировать в Word Online",
+            "EDIT_POWERPOINT": "Редактировать в PowerPoint Online",
+            "EDIT_EXCEL": "Редактировать в Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Расширения: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Включить расширение Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Описание слишком длинное"
+                }
+            }
+        }
+    }
+}

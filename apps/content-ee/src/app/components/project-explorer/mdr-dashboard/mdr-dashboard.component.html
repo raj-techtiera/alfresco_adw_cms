@@ -1,0 +1,403 @@
+<div class="mdr-dashboard">
+  <header class="mdr-dashboard__header">
+    <div class="mdr-dashboard__header-main">
+      <div>
+        <h2 class="mdr-dashboard__title">DVI Dashboard</h2>
+        <p class="mdr-dashboard__subtitle" *ngIf="projectName">
+          Master document register overview for {{ projectName }}.
+        </p>
+      </div>
+      <div class="mdr-dashboard__header-actions">
+        <button
+          mat-stroked-button
+          type="button"
+          class="mdr-btn mdr-btn--secondary"
+          (click)="refresh()"
+          [disabled]="loading">
+          <mat-icon aria-hidden="true">refresh</mat-icon>
+          Refresh
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          class="mdr-btn mdr-btn--primary"
+          (click)="openCreateMdrDialog()"
+          [disabled]="!projectId">
+          <mat-icon aria-hidden="true">add</mat-icon>
+          Request DVI
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mdr-dashboard__body">
+    <aside class="mdr-dashboard__filters" aria-label="MDR filters">
+      <div class="mdr-dashboard__filters-head">
+        <h3 class="mdr-dashboard__filters-title">Filters</h3>
+        <p class="mdr-dashboard__filters-hint">Search or narrow the DVI list.</p>
+      </div>
+
+      <div class="mdr-dashboard__filters-body">
+        <div class="mdr-dashboard__field">
+          <label for="mdr-filter-search">Search</label>
+          <div class="input-shell">
+            <mat-icon class="input-shell__icon" aria-hidden="true">search</mat-icon>
+            <input
+              id="mdr-filter-search"
+              type="search"
+              [(ngModel)]="filters.search"
+              placeholder="DVI number" />
+          </div>
+        </div>
+
+        <div class="mdr-dashboard__field">
+          <label for="mdr-filter-level">DVI Level</label>
+          <div class="input-shell input-shell--select">
+            <mat-icon class="input-shell__icon" aria-hidden="true">layers</mat-icon>
+            <mat-select
+              id="mdr-filter-level"
+              [(ngModel)]="filters.documentClass"
+              panelClass="adw-mdr-filter-select-panel"
+              placeholder="All"
+              aria-label="DVI Level">
+              <mat-option value="">All</mat-option>
+              @for (option of filterDocumentClasses; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="mdr-dashboard__field">
+          <label for="mdr-filter-component">Components</label>
+          <div class="input-shell input-shell--select">
+            <mat-icon class="input-shell__icon" aria-hidden="true">precision_manufacturing</mat-icon>
+            <mat-select
+              id="mdr-filter-component"
+              [(ngModel)]="filters.discipline"
+              panelClass="adw-mdr-filter-select-panel"
+              placeholder="All"
+              aria-label="Components">
+              <mat-option value="">All</mat-option>
+              @for (option of filterDisciplines; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="mdr-dashboard__field">
+          <label for="mdr-filter-status">DVI Status</label>
+          <div class="input-shell input-shell--select">
+            <mat-icon class="input-shell__icon" aria-hidden="true">flag</mat-icon>
+            <mat-select
+              id="mdr-filter-status"
+              [(ngModel)]="filters.status"
+              panelClass="adw-mdr-filter-select-panel"
+              placeholder="All"
+              aria-label="DVI Status">
+              <mat-option value="">All</mat-option>
+              @for (option of filterStatuses; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdr-dashboard__filter-actions">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          class="mdr-btn mdr-btn--primary"
+          (click)="applyFilters()"
+          [disabled]="loading || filtersApplying || !projectId">
+          <mat-icon aria-hidden="true">filter_alt</mat-icon>
+          {{ filtersApplying ? 'Applying…' : 'Apply' }}
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          class="mdr-btn mdr-btn--secondary"
+          (click)="resetFilters()"
+          [disabled]="loading || filtersApplying">
+          <mat-icon aria-hidden="true">restart_alt</mat-icon>
+          Reset
+        </button>
+      </div>
+    </aside>
+
+    <div class="mdr-dashboard__main">
+      <div *ngIf="loadError" class="mdr-dashboard__alert mdr-dashboard__alert--error" role="alert">
+        {{ loadError }}
+      </div>
+
+      <section class="mdr-dashboard__kpis" aria-label="MDR summary">
+        <article
+          *ngFor="let card of kpiCards"
+          class="mdr-kpi-card"
+          [ngClass]="'mdr-kpi-card--' + card.tone">
+          <span class="mdr-kpi-card__value">{{ loading ? '—' : card.value }}</span>
+          <span class="mdr-kpi-card__label">{{ card.label }}</span>
+          <span class="mdr-kpi-card__sub">{{ card.subtext }}</span>
+        </article>
+      </section>
+
+      <section class="mdr-dashboard__charts" aria-label="MDR analytics">
+        <article class="mdr-chart-card">
+          <h3>DVI Status</h3>
+          <div class="mdr-chart-card__content" *ngIf="statusLabels.length; else statusChartEmpty">
+            <div class="mdr-chart-card__donut">
+              <div class="mdr-chart-card__canvas">
+                <canvas
+                  baseChart
+                  [type]="'doughnut'"
+                  [labels]="statusLabels"
+                  [datasets]="statusDatasets"
+                  [options]="donutOptions"
+                  [legend]="chartLegend">
+                </canvas>
+                <div class="mdr-chart-card__center" aria-hidden="true">
+                  <span class="mdr-chart-card__center-value">{{ statusChartTotal }}</span>
+                  <span class="mdr-chart-card__center-label">Total</span>
+                </div>
+              </div>
+            </div>
+            <ul class="mdr-chart-legend">
+              <li *ngFor="let label of statusLabels; let i = index">
+                <div class="mdr-chart-legend__row">
+                  <span class="mdr-chart-legend__swatch" [style.backgroundColor]="chartColor(statusDatasets[0], i)"></span>
+                  <span class="mdr-chart-legend__text">
+                    <span class="mdr-chart-legend__name">{{ label }}</span>
+                    <span class="mdr-chart-legend__stat">
+                      {{ statusDatasets[0].data[i] }}
+                      ({{ percent(statusDatasets[0].data[i], statusChartTotal) }})
+                    </span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <ng-template #statusChartEmpty>
+            <div class="mdr-chart-card__empty">No DVI status data for the current filters.</div>
+          </ng-template>
+        </article>
+
+        <article class="mdr-chart-card">
+          <h3>DVI Level</h3>
+          <div class="mdr-chart-card__content" *ngIf="classLabels.length; else classChartEmpty">
+            <div class="mdr-chart-card__donut">
+              <div class="mdr-chart-card__canvas">
+                <canvas
+                  baseChart
+                  [type]="'doughnut'"
+                  [labels]="classLabels"
+                  [datasets]="classDatasets"
+                  [options]="donutOptions"
+                  [legend]="chartLegend">
+                </canvas>
+                <div class="mdr-chart-card__center" aria-hidden="true">
+                  <span class="mdr-chart-card__center-value">{{ classChartTotal }}</span>
+                  <span class="mdr-chart-card__center-label">Total</span>
+                </div>
+              </div>
+            </div>
+            <ul class="mdr-chart-legend">
+              <li *ngFor="let label of classLabels; let i = index">
+                <div class="mdr-chart-legend__row">
+                  <span class="mdr-chart-legend__swatch" [style.backgroundColor]="chartColor(classDatasets[0], i)"></span>
+                  <span class="mdr-chart-legend__text">
+                    <span class="mdr-chart-legend__name">{{ label }}</span>
+                    <span class="mdr-chart-legend__stat">
+                      {{ classDatasets[0].data[i] }}
+                      ({{ percent(classDatasets[0].data[i], classChartTotal) }})
+                    </span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <ng-template #classChartEmpty>
+            <div class="mdr-chart-card__empty">No DVI level data for the current filters.</div>
+          </ng-template>
+        </article>
+
+        <article class="mdr-chart-card">
+          <h3>Title</h3>
+          <div class="mdr-chart-card__content" *ngIf="deliverableLabels.length; else deliverableChartEmpty">
+            <div class="mdr-chart-card__donut">
+              <div class="mdr-chart-card__canvas">
+                <canvas
+                  baseChart
+                  [type]="'doughnut'"
+                  [labels]="deliverableLabels"
+                  [datasets]="deliverableDatasets"
+                  [options]="donutOptions"
+                  [legend]="chartLegend">
+                </canvas>
+                <div class="mdr-chart-card__center" aria-hidden="true">
+                  <span class="mdr-chart-card__center-value">{{ deliverableChartTotal }}</span>
+                  <span class="mdr-chart-card__center-label">Total</span>
+                </div>
+              </div>
+            </div>
+            <ul class="mdr-chart-legend">
+              <li *ngFor="let label of deliverableLabels; let i = index">
+                <div class="mdr-chart-legend__row">
+                  <span class="mdr-chart-legend__swatch" [style.backgroundColor]="chartColor(deliverableDatasets[0], i)"></span>
+                  <span class="mdr-chart-legend__text">
+                    <span class="mdr-chart-legend__name">{{ label }}</span>
+                    <span class="mdr-chart-legend__stat">
+                      {{ deliverableDatasets[0].data[i] }}
+                      ({{ percent(deliverableDatasets[0].data[i], deliverableChartTotal) }})
+                    </span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <ng-template #deliverableChartEmpty>
+            <div class="mdr-chart-card__empty">No deliverable type data for the current filters.</div>
+          </ng-template>
+        </article>
+
+        <article class="mdr-chart-card mdr-chart-card--wide">
+          <h3>Components</h3>
+          <div class="mdr-chart-card__content mdr-chart-card__content--bar" *ngIf="disciplineLabels.length; else disciplineChartEmpty">
+            <div class="mdr-chart-card__canvas mdr-chart-card__canvas--bar">
+              <canvas
+                baseChart
+                [type]="'bar'"
+                [labels]="disciplineLabels"
+                [datasets]="disciplineDatasets"
+                [options]="barOptions"
+                [legend]="chartLegend">
+              </canvas>
+            </div>
+          </div>
+          <ng-template #disciplineChartEmpty>
+            <div class="mdr-chart-card__empty">No components data for the current filters.</div>
+          </ng-template>
+        </article>
+      </section>
+
+      <section class="mdr-dashboard__table-section" aria-label="Recent DVIs">
+        <div class="mdr-dashboard__table-head">
+          <h3>Recent DVIs</h3>
+          <span class="mdr-dashboard__table-count">{{ filteredItems.length }} records</span>
+        </div>
+
+        <div class="mdr-table-wrap">
+          <table class="mdr-table">
+            <thead>
+              <tr>
+                <th>DVI Number</th>
+                <th>Title</th>
+                <th>Program</th>
+                <th>Component</th>
+                <th>Status</th>
+                <th>DVI Level</th>
+                <th class="mdr-table__actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loading || filtersApplying">
+                <td colspan="7" class="mdr-table__empty">{{ filtersApplying ? 'Applying filters…' : 'Loading DVI records…' }}</td>
+              </tr>
+              <tr *ngIf="!loading && !filtersApplying && tableItems.length === 0">
+                <td colspan="7" class="mdr-table__empty">No DVI records found for this project.</td>
+              </tr>
+              <tr *ngFor="let row of tableItems">
+                <td>{{ row.mdrNumber }}</td>
+                <td>{{ row.title }}</td>
+                <td>{{ row.program }}</td>
+                <td>{{ row.component }}</td>
+                <td>
+                  <span class="mdr-status" [ngClass]="statusClass(displayStatus(row))">{{ displayStatus(row) }}</span>
+                </td>
+                <td>{{ row.dviLevel }}</td>
+                <td class="mdr-table__actions-cell">
+                  <button
+                    mat-stroked-button
+                    type="button"
+                    class="mdr-details-btn"
+                    (click)="openMdrDetails(row); $event.stopPropagation()"
+                    [disabled]="!row.id"
+                    aria-label="View details">
+                    <mat-icon aria-hidden="true">visibility</mat-icon>
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mdr-paginator" *ngIf="!loading && filteredItems.length">
+          <div class="mdr-paginator__group">
+            <span class="mdr-paginator__label">Items per page</span>
+            <button
+              type="button"
+              class="mdr-paginator__select"
+              [matMenuTriggerFor]="pageSizeMenu"
+              aria-label="Items per page">
+              <span>{{ tablePageSize }}</span>
+              <mat-icon aria-hidden="true">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #pageSizeMenu="matMenu" class="mdr-paginator__menu">
+              <button
+                mat-menu-item
+                type="button"
+                *ngFor="let size of pageSizeOptions"
+                (click)="setPageSize(size)">
+                {{ size }}
+              </button>
+            </mat-menu>
+          </div>
+
+          <span class="mdr-paginator__range">{{ rangeLabel }}</span>
+
+          <div class="mdr-paginator__group">
+            <span class="mdr-paginator__label">Page</span>
+            <button
+              type="button"
+              class="mdr-paginator__select"
+              [matMenuTriggerFor]="pageMenu"
+              aria-label="Select page">
+              <span>{{ tablePageIndex + 1 }}</span>
+              <mat-icon aria-hidden="true">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #pageMenu="matMenu" class="mdr-paginator__menu mdr-paginator__menu--pages">
+              <button
+                mat-menu-item
+                type="button"
+                *ngFor="let page of pageNumbers"
+                (click)="goToPage(page - 1)">
+                {{ page }}
+              </button>
+            </mat-menu>
+            <span class="mdr-paginator__label">of {{ totalPages }}</span>
+            <button
+              type="button"
+              class="mdr-paginator__arrow"
+              [disabled]="tablePageIndex === 0"
+              (click)="prevPage()"
+              aria-label="Previous page">
+              <mat-icon aria-hidden="true">chevron_left</mat-icon>
+            </button>
+            <button
+              type="button"
+              class="mdr-paginator__arrow"
+              [disabled]="tablePageIndex >= totalPages - 1"
+              (click)="nextPage()"
+              aria-label="Next page">
+              <mat-icon aria-hidden="true">chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

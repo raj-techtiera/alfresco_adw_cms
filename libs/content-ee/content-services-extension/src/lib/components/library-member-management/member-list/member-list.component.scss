@@ -1,0 +1,16 @@
+adw-member-list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    .adw-member-list-container {
+        flex-direction: column;
+        display: flex;
+        height: 100%;
+
+        .adw-member-column {
+            flex: 40%;
+        }
+    }
+}

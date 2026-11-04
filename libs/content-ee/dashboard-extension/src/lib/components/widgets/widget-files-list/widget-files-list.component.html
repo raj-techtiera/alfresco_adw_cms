@@ -1,0 +1,86 @@
+<acs-widget-base
+    [emptyStateMessage]="emptyStateMessage"
+    [hasContent]="infiniteScrollDataSource.itemsCount > 0"
+    [isLoading$]="loading$"
+    [widgetTitle]="'WIDGETS.FILES_LIST.TITLE'"
+    [widgetFilters]="widgetFilters"
+    (refreshWidget)="refreshWidget()"
+    (viewAllButtonClicked)="navigateToFilesList()"
+    (filterSelected)="filterSelected($event)">
+    <div class="acs-widget-files-list-container">
+        <div [ngClass]="previewOpened ? 'acs-widget-files-list-datatable-with-preview' : 'acs-widget-files-list-datatable'">
+            <acs-infinite-scroll-datatable
+                [rowsObservable]="infiniteScrollDataSource.filesFetched"
+                [rowActions]="filesActions"
+                [virtualScrollDataSource]="infiniteScrollDataSource"
+                [preventDefaultEvents]="previewOpened"
+                (keydownArrowDown)="previewNext()"
+                (keydownArrowUp)="previewPrevious()"
+                (rowActionExecuted)="executeRowAction($event)">
+                <data-columns>
+                    <data-column
+                        key="content.mimeType"
+                        type="image"
+                        [sortable]="false"/>
+                    <data-column
+                        key="name"
+                        type="text"
+                        title="APP.DOCUMENT_LIST.COLUMNS.NAME"
+                        class="adf-expand-cell-2"
+                        [sortable]="false">
+                        <ng-template let-entry="$implicit">
+                        <span
+                            role="link"
+                            tabindex="0"
+                            class="adf-datatable-cell-value adf-datatable-cell--link"
+                            [attr.aria-label]="entry.row.obj?.name"
+                            [title]="entry.row.obj?.name"
+                            (click)="onNameColumnClick(entry.row)"
+                            (keyup.enter)="onNameColumnClick(entry.row)">
+                            {{ entry.row.obj?.name }}
+                        </span>
+                        </ng-template>
+                    </data-column>
+                    <data-column
+                        key="content.sizeInBytes"
+                        type="fileSize"
+                        title="APP.DOCUMENT_LIST.COLUMNS.SIZE"
+                        [sortable]="false"/>
+                    <data-column
+                        key="modifiedAt"
+                        type="date"
+                        title="APP.DOCUMENT_LIST.COLUMNS.MODIFIED_ON"
+                        format="timeAgo"
+                        [sortable]="false"/>
+                    <data-column
+                        key="modifiedByUser.displayName"
+                        type="text"
+                        title="APP.DOCUMENT_LIST.COLUMNS.MODIFIED_BY"
+                        format="timeAgo"
+                        [sortable]="false"/>
+                </data-columns>
+            </acs-infinite-scroll-datatable>
+        </div>
+        @if (previewOpened) {
+            <div class="acs-widget-files-list-preview">
+                <adf-alfresco-viewer
+                    [maxRetries]="1"
+                    [nodeId]="previewNodeId"
+                    [readOnly]="true"
+                    [allowNavigate]="false"
+                    [allowRightSidebar]="false"
+                    [allowPrint]="false"
+                    [showRightSidebar]="false"
+                    [allowDownload]="false"
+                    [allowFullScreen]="false"
+                    [overlayMode]="false"
+                    [hideInfoButton]="true"
+                    [showToolbarDividers]="false"
+                    [closeButtonPosition]="CloseButtonPosition.Right"
+                    (showViewerChange)="toggleFilePreview()"
+                    [canNavigateBefore]="false"
+                    [canNavigateNext]="false" />
+            </div>
+        }
+    </div>
+</acs-widget-base>

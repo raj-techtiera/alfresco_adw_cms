@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "لوحة معلومات"
+    },
+    "DASHBOARD": {
+        "TITLE": "لوحة معلومات"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "إجراءات عناصر واجهة المستخدم",
+        "REFRESH": "تحديث",
+        "VIEW_ALL": "عرض الكل",
+        "TASK_SUMMARY": {
+            "TITLE": "ملخص مهامي",
+            "SUMMARY_INFO_SUFFIX": "اكتملت المهام!",
+            "NO_TASKS_ASSIGNED": "لا توجد لديك أي مهام مخصصة.",
+            "NO_TASKS_ERROR": "حدث خطأ أثناء جلب مهامك. لذا، يُرجى تحديث عنصر واجهة المستخدم.",
+            "COMPLETED": "مكتمل",
+            "INCOMPLETE": "غير مكتمل",
+            "OVERDUE": "متأخر",
+            "TASKS": "المهام",
+            "ARROW_UP": "سهم لأعلى"
+        },
+        "TASK_LIST": {
+            "TITLE": "إدارة المهام",
+            "OVERDUE": "متأخر",
+            "UNASSIGNED": "غير مخصص",
+            "IN_PROGRESS": "قيد التقدم",
+            "NO_OVERDUE_TASKS": "لا توجد لديك أي مهام متأخرة.",
+            "NO_UNASSIGNED_TASKS": "لا توجد لديك أي مهام غير مخصصة.",
+            "NO_IN_PROGRESS_TASKS": "لا توجد لديك أي مهام قيد التقدم.",
+            "ACTIONS": {
+                "VIEW": "عرض المهمة",
+                "COMMENT": "إضافة تعليق",
+                "CLAIM": "المطالبة بمهمة"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "تمت المطالبة بالمهمة بنجاح.",
+                "CLAIMING_FAILED": "تعذرت المطالبة بالمهمة."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "ملفات",
+            "RECENT": "الأحدث",
+            "FAVORITES": "المُفضّلة",
+            "PERSONAL": "شخصي",
+            "SHARED": "مشترك",
+            "NO_RECENT_FILES": "لا توجد لديك أي ملفات حديثة.",
+            "NO_FAVORITES_FILES": "لا توجد لديك أي ملفات أو مجلدات مفضلة.",
+            "NO_PERSONAL_FILES": "لا توجد لديك أي ملفات أو مجلدات شخصية.",
+            "NO_SHARED_FILES": "لا توجد لديك أي ملفات مشتركة.",
+            "ACTIONS": {
+                "VIEW": "عرض",
+                "DOWNLOAD": "تنزيل",
+                "SHARE": "مشاركة",
+                "SHARED_LINK_SETTINGS": "إعدادات الرابط المشترك",
+                "FOLDER_INFORMATION": "معلومات المجلد"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "المكتبات",
+            "PERSONAL": "مكتباتي",
+            "ALL": "الكل",
+            "FAVOURITES": "المُفضّلة",
+            "NO_PERSONAL_LIBRARIES": "لا توجد لديك أي مكتبات شخصية.",
+            "NO_ALL_LIBRARIES": "لا توجد لديك أي مكتبات.",
+            "NO_FAVORITE_LIBRARIES": "لا توجد لديك أي مكتبات مفضلة."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "حجز قانوني",
+            "NO_HOLDS": "لم يتم إنشاء أي حجوزات.",
+            "HOLDS_NAME": "اسم الحجز",
+            "CREATED": "تم الإنشاء",
+            "REASON": "السبب",
+            "ACTIONS": {
+                "DOWNLOAD": "تنزيل",
+                "INFORMATION": "معلومات المجلد",
+                "DELETE": "حذف"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "تقدم مهامي - شهريًا",
+            "WEEK_LABEL": "أسبوع",
+            "MONTH_LABEL": "شهر",
+            "SUMMARY_INFO_SUFFIX": "المهام المكتملة في الشهر المحدد!",
+            "SELECT_MONTH": "تحديد شهر",
+            "NO_TASKS_IN_MONTH": "لا توجد مهام في الشهر المحدد.",
+            "EMPTY": "لا توجد مهام"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "ملخص عملياتي - كل 6 أشهر",
+            "SUMMARY_INFO_SUFFIX": "العمليات المكتملة الأشهر الستة أشهر المحددة!",
+            "NO_PROCESSES": "لا توجد لديك أي عمليات.",
+            "NO_PROCESSES_ERROR": "حدث خطأ أثناء جلب عملياتك. لذا، يُرجى تحديث عنصر واجهة المستخدم.",
+            "NO_PROCESSES_IN_PERIOD": "لا توجد عمليات في الفترة المحددة.",
+            "RUNNING": "تشغيل",
+            "COMPLETED": "مكتمل",
+            "NEXT": "التالي",
+            "NEXT_SCREEN_READER_LABEL": "ملخص عملياتي - انتقل إلى الأشهر الستة التالية",
+            "PREVIOUS": "السابق",
+            "PREVIOUS_SCREEN_READER_LABEL": "ملخص عملياتي  - انتقل إلى الأشهر الستة السابقة",
+            "EMPTY": "لا توجد عمليات"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "تعليقات على {{ taskName }}",
+        "CLOSE": "إغلاق"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "صورة مصغرة"
+    }
+}

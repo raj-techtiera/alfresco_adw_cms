@@ -1,0 +1,68 @@
+<aca-page-layout class="aps-task-details-layout">
+    <aca-page-layout-header>
+            <div
+                class="adf-breadcrumb-item adf-active"
+                title="{{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}"
+            >
+                <div aria-current="location">
+                    <div class="adf-breadcrumb-item adf-active" role="listitem">
+                        <div>
+                            {{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}
+                        </div>
+                        <mat-icon class="adf-breadcrumb-item-chevron">
+                            chevron_right
+                        </mat-icon>
+                        <div>
+                            {{ 'PROCESS-EXTENSION.TASK_LIST.TASKS' | translate }}
+                        </div>
+                        <mat-icon
+                            class="adf-breadcrumb-item-chevron">
+                            chevron_right
+                        </mat-icon>
+                        <div class="adf-breadcrumb-item-current">
+                            {{ (taskDetails$ | async)?.name ? (taskDetails$ | async)?.name : 'PROCESS-EXTENSION.TASK_DETAILS.NO_TASK_NAME' | translate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </aca-page-layout-header>
+    <aca-page-layout-content class="aps-task-details-page-content">
+        <adf-toolbar>
+            <adf-toolbar-title>
+                <adf-icon [value]="'adf:task'" />
+                <span class="adf-active">{{ (taskDetails$ | async)?.name ? (taskDetails$ | async)?.name : 'PROCESS-EXTENSION.TASK_DETAILS.NO_TASK_NAME' | translate }}</span>
+            </adf-toolbar-title>
+            <div class="adf-toolbar--spacer"></div>
+            <button
+                mat-icon-button
+                (click)="onCloseForm()"
+                data-automation-id="aps-task-details-form-close-icon"
+                [attr.aria-label]="'PROCESS-EXTENSION.TASK_FORM.CLOSE' | translate"
+                [attr.title]="'PROCESS-EXTENSION.TASK_FORM.CLOSE' | translate">
+                <mat-icon>close</mat-icon>
+            </button>
+        </adf-toolbar>
+        <div class="aca-main-content">
+            <div class="adf-content-area">
+                <div class="adf-content-border">
+                    <adf-task-form
+                        class="aps-task-form-container"
+                        id="apw-task-form-id"
+                        [taskId]="taskId"
+                        [showFormValidationIcon]="false"
+                        [showFormRefreshButton]="false"
+                        (cancel)="onCloseForm()"
+                        (taskClaimed)="onClaim()"
+                        (taskUnclaimed)="onUnClaim()"
+                        (formCompleted)="onFormCompleted()"
+                        (formLoaded)="onFormLoaded($event)"
+                        (formContentClicked)="onContentClick($event)"
+                        (executeOutcome)="onFormOutcomeExecute($event)"
+                        (completed)="onCompleteTaskForm()"
+                        (error)="onError()"
+                        #adfTaskForm />
+                </div>
+            </div>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

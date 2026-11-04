@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Tento dokument se upravuje v Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Úpravy provedené v tomto dokumentu byly zahozeny.",
+        "CANCEL_SESSION_DENIED": "Došlo k chybě. Pokud se bude opakovat, kontaktujte správce.",
+        "END_SESSION_SUCCESS": "Tento dokument již není v Office Online upravován.",
+        "END_SESSION_DENIED": "Došlo k chybě. Pokud se bude opakovat, kontaktujte správce.",
+        "RESUME_SESSION": "Tento soubor je upravován v Office Online. Můžete ho upravovat současně.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Uložit všechny úpravy tohoto dokumentu",
+            "END_OPTION_DETAILS": "Bude vytvořena nová verze",
+            "CANCEL_OPTION": "Zrušit všechny úpravy",
+            "CHANGES": "Jaké úrovně změn byly provedeny?",
+            "HEADER": "Ukončit úpravy",
+            "DESCRIPTION": "Tím zabráníte provádění dalších úprav dokumentu všem uživatelům, kteří k němu mají nyní přístup pomocí Microsoft Office Online.",
+            "QUESTION": "Co se má stát s provedenými úpravami?",
+            "CANCEL": "Zrušit",
+            "END": "Ukončit úpravy"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Vytvoření dokumentu aplikace Word"
+            },
+            "EXCEL": {
+                "HEADER": "Vytvoření tabulky aplikace Excel"
+            },
+            "POWERPOINT": {
+                "HEADER": "Vytvoření prezentace aplikace PowerPoint"
+            },
+            "CANCEL": "Zrušit",
+            "CREATE": "Vytvořit",
+            "CREATE_AND_OPEN": "Vytvořit a otevřít online",
+            "DESCRIPTION": {
+                "LABEL": "Popis",
+                "PLACEHOLDER": "Výstižný popis tohoto nového souboru."
+            },
+            "NAME": {
+                "LABEL": "Název"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Tabulka Excel",
+                "TOOLTIP": "Vytvořit novou tabulku aplikace Excel"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Prezentace Powerpoint",
+                "TOOLTIP": "Vytvořit novou prezentaci aplikace PowerPoint"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Dokument Word",
+                "TOOLTIP": "Vytvořit nový dokument aplikace Word"
+            },
+            "END_SESSION": "Ukončit úpravy",
+            "EDIT_WORD": "Upravit ve Wordu Online",
+            "EDIT_POWERPOINT": "Upravit v PowerPointu Online",
+            "EDIT_EXCEL": "Upravit v Excelu Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Rozšíření: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Povolit rozšíření Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Popis je příliš dlouhý"
+                }
+            }
+        }
+    }
+}

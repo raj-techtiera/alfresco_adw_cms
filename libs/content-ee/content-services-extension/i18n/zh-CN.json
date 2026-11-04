@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "此操作未成功，请重试或联系您的 IT 团队。",
+        "PERMISSION_DENIED": "您没有执行此操作的权限"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} 请求加入 {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} 人请求加入 {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "管理成员",
+        "CLOSE": "关闭",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "库详细信息",
+            "MANAGE_MEMBERS": "管理成员"
+        },
+        "TABS": {
+            "PROPERTIES": "属性",
+            "MEMBERS": "成员",
+            "GROUPS": "组",
+            "PENDING": "待定"
+        },
+        "LOAD_MORE": "加载更多",
+        "CONFIRM_DIALOG": {
+            "TITLE": "确认",
+            "MESSAGE": "是否要继续？"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "拒绝成员请求",
+            "COMMENT": "在此处添加评论",
+            "YES_LABEL": "拒绝",
+            "NO_LABEL": "取消"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "组成员关系信息",
+            "DESCRIPTION": "此用户可以通过组角色访问库。如果您需要删除此用户的个人成员资格，则首先需要将其从下面列出的组中删除。",
+            "CLOSE": "关闭",
+            "GROUP": "组",
+            "ROLE": "角色"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "没有待处理的成员资格请求",
+        "PENDING_REQUESTS": "待处理的成员资格请求",
+        "APPROVE": "批准",
+        "REJECT": "拒绝"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "此库的成员",
+        "NO_MEMBERS": "未找到任何成员",
+        "DELETE_MEMBERS": "删除所选成员的",
+        "GROUP_ROLE": "组角色",
+        "REMOVE": "移除",
+        "A11Y_AVATAR": "用户化身",
+        "REFRESH": "刷新"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "此库的组成员资格",
+        "NO_GROUPS": "未找到任何组",
+        "DELETE_GROUPS": "删除所选组的",
+        "REFRESH": "刷新",
+        "REMOVE": "移除"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "管理员",
+        "SITE_CONTRIBUTOR": "贡献者",
+        "SITE_CONSUMER": "使用者",
+        "SITE_COLLABORATOR": "合作者"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "设置用户角色",
+        "GROUP_SELECTOR": "设置组角色",
+        "ALL": "将所有角色设置为"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "添加用户/组",
+        "SEARCH_INPUT": "搜索要添加的用户或组",
+        "NAME": "名称",
+        "TITLE_LABEL": "将用户或组添加至",
+        "ADD_LABEL": "添加",
+        "SELECT_LABEL": "选择",
+        "CLOSE_LABEL": "关闭",
+        "CANCEL_LABEL": "取消"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "成员"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "成员资格请求被拒绝",
+        "MEMBERSHIP_ACCEPTED": "成员已添加至库",
+        "USER_REMOVE_SUCCESS": "已删除用户",
+        "USER_REMOVE_PARTIAL_SUCCESS": "已删除 {{count}} 个用户，其中跳过 {{skipped}} 个用户",
+        "USER_REMOVE_FAILED": "无法删除该用户",
+        "GROUP_REMOVE_SUCCESS": "已删除组",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "已删除 {{count}} 个组，其中跳过 {{skipped}} 个组",
+        "GROUP_REMOVE_FAILED": "无法删除该组",
+        "ADD_MEMBER_FAILED": "无法将成员添加至站点",
+        "ADD_MEMBERS_FAILED": "无法添加 {{count}} 个成员",
+        "ADD_MEMBERS_SUCCESS": "已添加 {{userCount}} 个用户和 {{groupCount}} 个组",
+        "ADD_GROUPS_SUCCESS": "已添加 {{groupCount}} 个组",
+        "ADD_USERS_SUCCESS": "已添加 {{userCount}} 个用户",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "已添加 {{count}} 个成员，其中跳过 {{skipped}} 个成员",
+        "USER_ROLE_UPDATED": "用户角色已更新",
+        "GROUP_ROLE_UPDATED": "组角色已更新",
+        "MEMBER_EXISTS": "用户已经是站点的成员",
+        "MANAGER_REQUIRED": "一个站点至少需要一个站点管理员",
+        "ACTIONS": {
+            "CLOSE": "关闭"
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "CUSTOM_NAV": {
+    "SEARCH": {
+      "ENGINEERING_DOCUMENTS": "Engineering Documents"
+    }
+  },
+  "TAGS_WORKSPACE": {
+    "TITLE": "Tags Workspace",
+    "SUBTITLE": "Browse and open documents by tag",
+    "BACK_TO_TAGS": "Back to all tags",
+    "RESULT_TITLE": "{{tag}} · {{selected}} selected",
+    "DOCUMENTS_FOR_TAG": "Documents tagged with “{{tag}}”",
+    "DISABLED": "Tags are not enabled for this repository.",
+    "TAGS_ERROR": "Unable to load tags. Please try again.",
+    "ALL_TAGS": "All Tags",
+    "TAGS_COUNT": "{{count}} tags",
+    "NO_TAGS": "No tags found.",
+    "SELECT_TAG_TITLE": "Select a tag",
+    "SELECT_TAG_MESSAGE": "Choose a tag from the list to view its documents.",
+    "DOCUMENTS_ERROR": "Unable to load documents for this tag.",
+    "SELECT_ALL": "Select all documents",
+    "SELECT_DOCUMENT": "Select {{name}}",
+    "NO_DOCUMENTS": "No documents found for “{{tag}}”.",
+    "COLUMNS": {
+      "NAME": "Name",
+      "SIZE": "Size",
+      "MODIFIED": "Modified",
+      "MODIFIED_BY": "Modified by"
+    },
+    "ACTIONS": {
+      "OPEN_MENU": "Open actions menu"
+    },
+    "PAGER": {
+      "SHOWING": "Showing {{start}}–{{end}} of {{total}}",
+      "PAGE": "Page {{current}} of {{total}}",
+      "PREVIOUS": "Previous page",
+      "NEXT": "Next page"
+    }
+  }
+}

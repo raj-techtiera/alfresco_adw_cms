@@ -1,0 +1,23 @@
+<div class="group-info-dialog-title" mat-dialog-title>{{ 'MEMBER_MANAGER.GROUPS_INFO_DIALOG.TITLE' | translate }}</div>
+<mat-dialog-content class="adw-group-dialog-content">
+    <div>{{ 'MEMBER_MANAGER.GROUPS_INFO_DIALOG.DESCRIPTION' | translate }}</div>
+    <mat-list role="list" class="adw-group-info-table">
+        <mat-list-item class="adw-group-info-table-header">
+            <div class="adw-group-info-table-group-cell">{{ 'MEMBER_MANAGER.GROUPS_INFO_DIALOG.GROUP' | translate }}</div>
+            <div class="adw-group-info-table-role-cell">{{ 'MEMBER_MANAGER.GROUPS_INFO_DIALOG.ROLE' | translate }}</div>
+        </mat-list-item>
+        <div class="adw-scrollable-group-list" *ngIf="!loading">
+            <mat-list-item *ngFor="let group of groupMemberships" class="adw-group-info-table-row">
+                <div class="adw-group-info-table-group-cell">{{group.entry.group.displayName}}</div>
+                <div class="adw-group-info-table-role-cell">{{ group.entry.role }}</div>
+            </mat-list-item>
+        </div>
+        <div *ngIf="loading" class="adw-loading-spinner">
+            <mat-progress-spinner color="primary" mode="indeterminate" />
+        </div>
+    </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ 'MEMBER_MANAGER.GROUPS_INFO_DIALOG.CLOSE' | translate }}</button>
+</mat-dialog-actions>

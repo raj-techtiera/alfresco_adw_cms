@@ -1,0 +1,35 @@
+aps-process-details-dialog-ext {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .aps-process-details-dialog-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: bold;
+        font-size: 16px;
+        margin: -4px 20px 12px 24px;
+
+        button {
+            line-height: 16px;
+        }
+    }
+
+    .aps-process-details-dialog-content {
+        padding: 0;
+        margin: 0;
+
+        .adf-datatable--empty {
+            border-bottom: none;
+        }
+
+        .adf-datatable-row {
+            padding-left: 11px;
+        }
+    }
+
+    .aps-process-details-dialog-content-actions {
+        border-top: 1px solid var(--adf-theme-foreground-text-color-007);
+    }
+}

@@ -1,0 +1,81 @@
+<div class="ah-page">
+  <!-- Header -->
+  <div class="ah-header">
+    <h1 class="ah-title">Administration Hub</h1>
+    <p class="ah-subtitle">Platform configuration, team management, and workspace settings</p>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="ah-grid">
+    <a class="ah-card-link" *ngFor="let card of cards; trackBy: trackByTitle" [routerLink]="card.href">
+      <div class="ah-card" [style.border-top-color]="card.borderColor">
+        <div class="ah-card-icon" [ngSwitch]="card.icon">
+          <svg *ngSwitchCase="'team'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="12" cy="10" r="4" fill="#4F6BED" opacity="0.85" />
+            <circle cx="20" cy="10" r="4" fill="#4F6BED" opacity="0.55" />
+            <path d="M4 24c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#4F6BED" stroke-width="2" stroke-linecap="round" fill="none" />
+            <path d="M20 16c2.21 0 4 1.79 4 4v4" stroke="#4F6BED" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55" />
+          </svg>
+          <svg *ngSwitchCase="'billing'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="8" width="24" height="16" rx="3" fill="#22C55E" opacity="0.15" stroke="#22C55E" stroke-width="1.5" />
+            <rect x="4" y="13" width="24" height="4" fill="#22C55E" opacity="0.35" />
+            <rect x="8" y="19" width="6" height="2" rx="1" fill="#22C55E" />
+          </svg>
+          <svg *ngSwitchCase="'branding'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="10" fill="#A855F7" opacity="0.12" stroke="#A855F7" stroke-width="1.5" />
+            <circle cx="11" cy="13" r="3" fill="#F87171" opacity="0.8" />
+            <circle cx="21" cy="13" r="3" fill="#60A5FA" opacity="0.8" />
+            <circle cx="16" cy="21" r="3" fill="#FBBF24" opacity="0.8" />
+            <circle cx="16" cy="16" r="2.5" fill="#A855F7" opacity="0.7" />
+          </svg>
+          <svg *ngSwitchCase="'settings'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="4" fill="#F59E0B" opacity="0.3" stroke="#F59E0B" stroke-width="1.5" />
+            <path d="M16 6v3M16 23v3M6 16H9M23 16h3M8.93 8.93l2.12 2.12M20.95 20.95l2.12 2.12M8.93 23.07l2.12-2.12M20.95 11.05l2.12-2.12" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <svg *ngSwitchCase="'migration'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="5" y="8" width="10" height="16" rx="2" fill="#06B6D4" opacity="0.15" stroke="#06B6D4" stroke-width="1.5" />
+            <rect x="17" y="8" width="10" height="16" rx="2" fill="#06B6D4" opacity="0.15" stroke="#06B6D4" stroke-width="1.5" />
+            <path d="M15 14l4-2-4-2" stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M17 18l-4 2 4 2" stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <svg *ngSwitchCase="'leadership'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="11" r="5" fill="#6366F1" opacity="0.25" stroke="#6366F1" stroke-width="1.5" />
+            <path d="M7 26c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round" fill="none" />
+            <path d="M20 8l1.5 1.5L24 7" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <svg *ngSwitchCase="'audit'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="14" cy="14" r="7" fill="#64748B" opacity="0.12" stroke="#64748B" stroke-width="1.5" />
+            <path d="M19.5 19.5L26 26" stroke="#64748B" stroke-width="2" stroke-linecap="round" />
+            <circle cx="14" cy="14" r="3" fill="#64748B" opacity="0.4" />
+          </svg>
+          <svg *ngSwitchCase="'organisation'" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="11" y="4" width="10" height="8" rx="2" fill="#10B981" opacity="0.2" stroke="#10B981" stroke-width="1.5" />
+            <rect x="4" y="20" width="8" height="8" rx="2" fill="#10B981" opacity="0.2" stroke="#10B981" stroke-width="1.5" />
+            <rect x="20" y="20" width="8" height="8" rx="2" fill="#10B981" opacity="0.2" stroke="#10B981" stroke-width="1.5" />
+            <path d="M16 12v4M16 16H8v4M16 16h8v4" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+        <p class="ah-card-title">{{ card.title }}</p>
+        <p class="ah-card-desc">{{ card.description }}</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- Floating Chat Button -->
+  <div class="ah-fab">
+    <div class="ah-fab-pill">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M14 2H2a1 1 0 00-1 1v8a1 1 0 001 1h3l3 3 3-3h3a1 1 0 001-1V3a1 1 0 00-1-1z" fill="#6366F1" opacity="0.85" />
+      </svg>
+      Ask me about EPCdoc
+    </div>
+    <div class="ah-fab-avatar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8" r="4" fill="white" opacity="0.9" />
+        <path d="M6 20c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" />
+        <circle cx="18" cy="6" r="3" fill="#FBBF24" />
+        <path d="M17 6h2M18 5v2" stroke="white" stroke-width="1" stroke-linecap="round" />
+      </svg>
+    </div>
+  </div>
+</div>

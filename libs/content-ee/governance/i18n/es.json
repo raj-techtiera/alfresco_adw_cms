@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Aplicar",
+        "CANCEL": "Cancelar",
+        "SWITCH": "Cambiar",
+        "CONTINUE": "Continuar",
+        "RELOAD": "Recargar"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Declarar como documento de archivo",
+            "SUCCESS": "{{fileName}} se ha declarado como documento de archivo",
+            "FAIL": "{{fileName}} no puede declararse como documento de archivo",
+            "DIALOG": {
+                "TITLE": "Declarar como documento de archivo",
+                "MESSAGE": "Este documento ya se declaró como documento de archivo anteriormente y fue rechazado.",
+                "YES": "Declarar como documento de archivo",
+                "NO": "Cancelar",
+                "CLOSE": "Cerrar"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Por ahora no se permite declarar una carpeta como documento de archivo",
+                    "EXISTING-RECORD": "Ya se ha declarado como documento de archivo",
+                    "FAILED": "Error al declarar como documento de archivo"
+                },
+                "SUCCESS": "El elemento se ha declarado como documento de archivo"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Documento de archivo de rechazado",
+            "CLOSE_LABEL": "Cerrar",
+            "SUB-TITLE": "El fichero '{{ nodeName }}' se ha rechazado como documento de archivo",
+            "BY": "Por",
+            "AT": "A las",
+            "REASON": "Con el motivo",
+            "CONFIRM": "Confirmar",
+            "WARNING": "Si elimina el aviso de documento de archivo rechazado, las opciones para declarar el fichero como documento de archivo estarán otra vez disponibles.",
+            "FAILED-REMOVE": "Error al eliminar mensaje de rechazo de {{nodeName}}: {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Documento de archivo rechazado",
+            "TOOLTIP-MESSAGE": "Eliminar aviso",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Documento de archivo de rechazado",
+                "RECORD-HYPERLINK": "Declarado como documento de archivo",
+                "REJECTED-RECORD-HYPERLINK": "Se ha rechazado el documento de archivo; consulte la información del fichero para más detalles"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Eliminar",
+            "SUCCESS": "'{{ name }}' se ha eliminado",
+            "FAIL": "Error al eliminar {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Eliminar instancia del documento de archivo",
+                "YES-ALL": "Eliminar y no volver a mostrar",
+                "YES": "Eliminar",
+                "NO": "Cancelar",
+                "MESSAGE": {
+                    "DELETE": "Esta instancia de '{{name}}' se eliminará permanentemente y no podrá recuperarse de la papelera.",
+                    "ADDITIONAL": "El documento de archivo '{{name}}' que reside en el sistema de gestión de documentos de archivo de su organización no se verá afectado."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Documento de archivo"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Mover",
+            "MOVE-ITEM": "Mover '{{ name }}' a...",
+            "SAME-FOLDER-MOVE": "No puede moverse a la misma carpeta",
+            "SUCCESSFUL": "Documento de archivo movido correctamente"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Enviar a archivo",
+                "SUCCESS": "El fichero {{ name }} se archivará",
+                "FAIL": "Error al archivar {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Elemento ya archivado.",
+                        "PENDING-RESTORE": " Elemento pendiente de restauración. ",
+                        "RESTORED": "No han podido archivarse los elementos restaurados",
+                        "FOLDER": "Actualmente no es posible restaurar del archivo"
+                    },
+                    "FAIL": "Error al archivar",
+                    "SUCCESS": "El elemento se archivará"
+                },
+                "DIALOG": {
+                    "TITLE": "Enviar a archivo",
+                    "MESSAGE": "Está a punto de enviar ficheros a un archivo externo. Puede que recuperarlos tenga un coste asociado. ¿Está seguro de que desea continuar?",
+                    "YES": "Enviar a archivo",
+                    "NO": "Cancelar"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Restaurar del archivo",
+                "SYNC-ERROR": "El fichero que está intentado restaurar todavía no se ha sincronizado para su archivado. Esta operación puede tardar 24 horas. Vuelva a intentarlo más tarde.",
+                "FAIL": "Error al restaurar {{ name }} del archivo",
+                "DIALOG": {
+                    "TITLE": "Restaurar del archivo",
+                    "LABEL": {
+                        "TYPE": "Velocidad de restauración (límite de 250 MB por restauración)",
+                        "OPTION-FAST": "Rápida: 1-5 min de duración (coste más alto)",
+                        "OPTION-STANDARD": "Estándar: 3-5 h de duración",
+                        "OPTION-SLOW": "Lenta: 5-12 h de duración (coste más bajo)",
+                        "DURATION": "¿Por cuánto tiempo se restaurarán los ficheros? (días)"
+                    },
+                    "YES": "Confirmar",
+                    "NO": "Cancelar"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Restaurar del archivo",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Los ficheros que está intentando restaurar todavía no se han sincronizado para su archivado. Esta operación puede tardar 24 horas. Vuelva a intentarlo más tarde.",
+                        "RESTORED": "El elemento ya está restaurado",
+                        "PENDING-RESTORE": "El elemento ya está pendiente de restauración.",
+                        "NOT-STORED": "El elemento que está intentando restaurar todavía no se ha sincronizado para su archivado",
+                        "FAIL": "Error al restaurar",
+                        "FOLDER": "Actualmente no es posible restaurar carpetas"
+                    },
+                    "SUCCESS": "Se restaurará el elemento"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Ampliar tiempo de restauración",
+                "SUCCESS": "El período de restauración se ampliará a '{{ days }}' días a partir de {{ date }}",
+                "FAIL": "Error al ampliar el tiempo de restauración de {{ name }} del archivo"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "El fichero se ha archivado. Para restaurarlo, haga clic con el botón derecho y seleccione la opción de restaurar del archivo.",
+                "RESTORED": "Restaurado",
+                "PENDING-RESTORE": "Restaurando ficheros del archivo. Si no puede obtener una vista previa o descargar el fichero, vuelva a intentarlo más tarde"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Estado de operación en masa",
+            "FAIL": "Error al ejecutar la operación",
+            "CLOSE": "Cerrar"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Administrar retenciones",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Eliminar retención",
+            "DIALOG_TITLE": "Administrar retenciones legales",
+            "TAB_EXISTING_HOLDS": "Administrar retenciones existentes",
+            "TAB_CREATE_LEGAL_HOLD": "Crear retención legal",
+            "SAVE": "Guardar",
+            "CLOSE": "Cerrar",
+            "CANCEL": "Cancelar",
+            "NEW_HOLD_NAME": "Nombre",
+            "NEW_HOLD_DESCRIPTION": "Descripción",
+            "NEW_HOLD_REASON": "Razón",
+            "DIALOG_WARNING_TITLE": "Advertencia",
+            "DIALOG_WARNING_MESSAGE": "Los cambios realizados aquí no se aplicarán si cambia de pestaña.",
+            "DOCUMENT_IN_HOLD": "Documento en retención legal",
+            "FOLDER_IN_HOLD": "Carpeta en retención legal",
+            "APPLY_HOLDS_SUCCESS": "La acción de retención legal se ha realizado correctamente.",
+            "APPLY_HOLDS_NOT_FOUND": "La retención legal seleccionada o el archivo especificado no existe. Verifique su selección e inténtelo de nuevo.",
+            "BULK_APPLY_HOLDS_SUCCESS": "La acción de retención legal se ha realizado correctamente. {{ totalItems }} elementos se han añadido a la retención legal.",
+            "BULK_APPLY_HOLDS_STARTED": "La acción de retención legal masiva se está ejecutando en segundo plano. Se le avisará cuando haya finalizado.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Se han detectado contenidos archivados, duplicados o bloqueados. {{ errorsCount }} elementos no se han añadido a la retención legal.",
+            "BULK_APPLY_HOLDS_FAIL": "Se ha producido un error al poner el contenido en retención legal.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "La retención legal masiva no puede aplicarse a las carpetas",
+            "ACKNOWLEDGE": "Confirmar",
+            "EMPTY_HOLD_LIST": "No hay retenciones legales disponibles",
+            "WARNING_DIALOG_TITLE": "Advertencia: acción masiva",
+            "WARNING_DIALOG_MESSAGE": "Esta acción cambiará el estado de las retenciones legales de <strong>Todos los ficheros de esta búsqueda</strong>.<br><br>Esta retención legal <strong>no se aplicará a las carpetas</strong>.",
+            "WARNING_DIALOG_QUESTION": "¿Desea continuar?",
+            "NO_RECORDS_MANAGEMENT_SITE": "El administrador debe crear un sitio de gestión de registros para activar las retenciones legales",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "El archivo se ha eliminado correctamente de la retención legal.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Los archivos se han eliminado correctamente de la retención legal.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "No se pudo eliminar el archivo de la retención legal.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "No se pudieron eliminar los archivos de la retención legal.",
+            "LOADING_CAPABILITIES_ERROR": "Error al cargar capacidades",
+            "NODE_NOT_FOUND": "El nodo seleccionado no se encuentra. Por favor, compruebe su selección e inténtelo de nuevo.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "¿Eliminar elementos que contienen retenciones?",
+                "TITLE_PLURAL": "¿Eliminar {{ count }} retenciones seleccionadas y liberar documentos?",
+                "MESSAGE_SINGULAR": "Ha seleccionado {{ name }} retención para eliminar. Todos los objetos que esté reteniendo se liberarán. Esta acción no puede deshacerse.",
+                "MESSAGE_PLURAL": "Ha seleccionado {{ count }} elementos para eliminar. Algunos de ellos están retenidos, todos los elementos que están reteniendo se liberarán. Esta acción no puede deshacerse.",
+                "KEEP_HOLD": "Mantener retención"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Error al guardar marcas de seguridad",
+            "DIALOG_TITLE": "Editar marcas de seguridad",
+            "MENU_TITLE": "Marcas de seguridad",
+            "SAVE": "Guardar",
+            "CANCEL": "Cancelar",
+            "HELP": "Ayuda",
+            "CLOSE": "Cerrar",
+            "SHOW_ALL": "Mostrar todas",
+            "APPLIED": "Aplicadas",
+            "NOT_APPLIED": "No aplicadas",
+            "COLUMNS": {
+                "NAME": "Marcas de seguridad"
+            },
+            "NO_GROUPS_CREATED": "No hay grupos de seguridad disponibles",
+            "SECURITY_MARKS_HELP": "Ayuda para las marcas de seguridad",
+            "HELP_ICON_TEXT": "La aplicación de las marcas de seguridad restringirá el acceso al contenido digital. Solo las personas con marcas coincidentes aplicadas a su permiso de usuario podrán ver o editar el contenido marcado."
+        }
+    }
+}

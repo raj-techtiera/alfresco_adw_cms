@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{ 'MEMBER_MANAGER.REJECT_DIALOG.TITLE' | translate }}</h1>
+<mat-dialog-content>
+    <mat-form-field class="adw-reject-member-comment">
+        <mat-label>{{ 'MEMBER_MANAGER.REJECT_DIALOG.COMMENT' | translate }}</mat-label>
+        <textarea matInput #comment></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button color="primary" [mat-dialog-close]="{ comment: comment.value }">
+        {{ 'MEMBER_MANAGER.REJECT_DIALOG.YES_LABEL' | translate | uppercase }}
+    </button>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>
+        {{ 'MEMBER_MANAGER.REJECT_DIALOG.NO_LABEL' | translate | uppercase }}
+    </button>
+</mat-dialog-actions>

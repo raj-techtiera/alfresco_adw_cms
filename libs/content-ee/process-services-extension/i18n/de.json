@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Neuer Prozess",
+            "SELECT_APPLICATION": "Anwendung auswählen",
+            "ERROR": "Sie können keinen Prozess starten, weil es keine Prozessdefinitionen gibt"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Prozessmanagement",
+            "PROCESS_LIST": {
+                "PROCESSES": "Prozesse"
+            },
+            "START_PROCESS": "Prozess starten",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Details anzeigen"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Kommentare anzeigen"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Prozessmanagement",
+            "CREATE_NEW_PROCESS": "Prozess starten",
+            "CREATE_PROCESS_NOT_ALLOWED": "Neuer Prozess kann nicht erstellt werden"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Mehr anzeigen"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Kommentare",
+            "CANCEL_PROCESS": "Prozess abbrechen"
+        },
+        "ERROR": {
+            "NO_FORM": "Kein Formular für Prozessdefinition definiert",
+            "NO_CONTENT": "Anhängen der Datei von Ihrem Gerät nicht möglich",
+            "CAN_NOT_ATTACH": "Anhängen des ausgewählten Inhalts nicht möglich",
+            "AUDIT_ERROR": "Fehler bei Aufgabenanzeige: {{error}}",
+            "TASK_ACCESS_WARNING": "Sie sind nicht berechtigt, die Aufgabe zu ändern",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Dokumentenvorschau ist nicht verfügbar, da die Aufgabe noch nicht abgeschlossen ist."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Prozess erstellt: '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Unbekannter Netzwerkfehler. Funktionen für den Prozess-Service wurden deaktiviert.",
+            "ACTION": "Laufenden Prozess anzeigen"
+        },
+        "NO_PROCESS_DEFINITIONS": "Keine Prozessdefinitionen verfügbar",
+        "SIDE_NAV_TITLE": "Workflow",
+        "STATUS": {
+            "COMPLETED": "Abgeschlossen",
+            "RUNNING": "Laufend",
+            "OPEN": "Öffnen",
+            "UNKNOWN": "Unbekannt"
+        },
+        "TASK_LIST": {
+            "TASKS": "Aufgaben",
+            "ACTIONS": {
+                "TASK_DETAILS": "Anzeigen"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Anzeigen"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formular erfolgreich gespeichert",
+            "FORM_COMPLETED": "Diese Aufgabe wurde abgeschlossen",
+            "CLOSE": "Schließen",
+            "CLAIM_TASK": "Aufgabe wurde beansprucht",
+            "UNCLAIM_TASK": "Beanspruchung der Aufgabe aufgehoben",
+            "CLAIM_FAILED": "Aktion kann nicht durchgeführt werden"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Aktion kann nicht durchgeführt werden",
+            "FAILED_TO_LOAD": "Aufgabendetails konnten nicht geladen werden. Versuchen Sie es später noch einmal.",
+            "UPDATED": "{{ property }} erfolgreich aktualisiert",
+            "FAILED_TO_UPDATE": "{{ property }} konnte nicht aktualisiert werden",
+            "METADATA_TOOLTIP": "Details anzeigen",
+            "NO_TASK_NAME": "Kein Name"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Schließen"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Keine Prozessdefinitionen verfügbar"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Gestartet von",
+            "CREATED": "Startdatum"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Sie können keinen Prozess starten, weil es keine Prozessdefinitionen gibt",
+            "NO_START_FORM": "Dieser Prozess erfordert keine weiteren Konfigurationen",
+            "NO_PROCESS_DEF_SELECTED": "Keine Kategorie/kein Prozess ausgewählt",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Anwendung auswählen"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Prozess abbrechen?",
+                "DESCRIPTION": "Dieser Prozess und alle damit verbundenen Aufgaben werden als abgeschlossen markiert.",
+                "CONFIRM_BTN": "Bestätigen"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' erfolgreich abgebrochen.",
+                "FAIL": "Fehler beim Abbrechen des Prozesses: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Datum der Erstellung"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Beanspruchen",
+                "UNCLAIM": "FREIGEBEN"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Teil des laufenden Prozesses",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Verknüpfter Prozess",
+            "PART_OF_THE_PROCESS_TITLE": "Dieses Dokument ist Teil der folgenden Prozesse",
+            "NO_PROCESSES": "Dieses Dokument ist nicht Teil eines laufenden Prozesses",
+            "CREATED": "Erstellt",
+            "VIEW_DETAILS_BTN": "Details anzeigen"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatische Authentifizierung für Prozessdienste",
+        "ENABLED": "Aktiviert",
+        "ENABLED_DESCRIPTION": "Das System wird sich automatisch neu authentifizieren, so dass der Benutzer seine Arbeit ununterbrochen fortsetzen kann.",
+        "DISABLED": "Deaktiviert",
+        "DISABLED_DESCRIPTION": "Der Benutzer muss sich erneut mit seinen Anmeldedaten authentifizieren, wenn die Sitzungszeit abläuft.",
+        "AUTH_FAILED": "Automatische Authentifizierung in Prozessdiensten fehlgeschlagen. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatische Authentifizierung für Prozessdienst-Status"
+    }
+}

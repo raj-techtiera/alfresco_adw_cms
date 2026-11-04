@@ -1,0 +1,46 @@
+.aga-security-mark-dialog {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .adw-dialog-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+
+        span {
+            padding-top: 12px;
+            padding-left: 24px;
+            flex: 1;
+        }
+    }
+
+    .aga-security-marks-group-container {
+        margin-bottom: 10px;
+    }
+
+    .aga-security-mark-chip {
+        border: 3px solid transparent;
+        border-radius: 20px;
+        padding: 6px;
+    }
+
+    .aga-security-mark-selected {
+        background-color: var(--theme-background-color);
+        border-color: var(--theme-blue-border-color);
+    }
+
+    .app-security-marks-help-icon {
+        color: var(--theme-black-font-color);
+    }
+
+    .aga-security-marks-loading-spinner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+}

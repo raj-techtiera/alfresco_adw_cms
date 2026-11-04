@@ -1,0 +1,54 @@
+<!-- Hero Section -->
+<div class="hero-section">
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-tagline">Your Case Management Hub</span>
+      <h1 class="animated-text">{{ welcomeMessage }}</h1>
+      <p class="hero-subtitle">Explore the latest case related resources and tools</p>
+      <div class="hero-actions">
+        <button class="cta-button cta-primary" (click)="routeToFolder('Personal Files')">Get Started</button>
+        <button class="cta-button cta-ghost" (click)="routeToFolder('Libraries')">Learn More</button>
+      </div>
+    </div>
+    <div class="hero-graphic">
+      <div class="diagonal-stripe"></div>
+    </div>
+  </div>
+</div>
+
+<!-- News Banner -->
+<div class="news-banner">
+  <div class="news-banner-content">
+    <div class="news-banner-text">
+      <span class="news-icon">&#9881;</span>
+      <div>
+        <h2>Latest News</h2>
+        <p>Stay updated with the latest news and announcements</p>
+      </div>
+    </div>
+    <button class="news-button" (click)="routeToFolder('News')">Read News</button>
+  </div>
+</div>
+
+<!-- Resources Section -->
+<div class="cards-section">
+  <div class="section-header">
+    <h2 class="section-heading">Resources</h2>
+    <p class="section-subtitle">Quick access to your tools and documents</p>
+  </div>
+  <div class="grid-container" [ngStyle]="{'--columns': numberOfColumns}">
+    <div class="grid-item glass-card"
+         *ngFor="let section of sections"
+         (click)="routeToFolder(section.name)"
+         [title]="section.name">
+      <div class="grid-item-icon">
+        <img [src]="section.image" [alt]="section.name" />
+      </div>
+      <div class="grid-item-text">
+        <h3>{{ section.name }}</h3>
+        <p>{{ section.description }}</p>
+      </div>
+      <span class="card-arrow">&rarr;</span>
+    </div>
+  </div>
+</div>

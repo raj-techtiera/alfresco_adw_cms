@@ -1,0 +1,134 @@
+{
+    "$version": "1.1.0",
+    "$id": "governance-glacier.plugin",
+    "$name": "governance-glacier",
+    "$vendor": "Hyland Software, Inc. and its affiliates",
+    "$license": "LGPL-3.0",
+    "$runtime": "1.8.0",
+    "$description": "Enables the governance glacier options",
+    "actions": [
+      {
+        "id": "app.glacier.action.store.execute",
+        "type": "GLACIER_STORE_ACTION",
+        "payload": "$(context.selection.nodes)"
+      },
+      {
+        "id": "app.glacier.action.restore.execute",
+        "type": "GLACIER_RESTORE_ACTION",
+        "payload": "$(context.selection.nodes)"
+      },
+      {
+        "id": "app.action.extend.restore.execute",
+        "type": "GLACIER_EXTEND_RESTORE_ACTION",
+        "payload": "$(context.selection.first.entry)"
+      }
+    ],
+    "features": {
+      "toolbar": [
+        {
+          "id": "app.toolbar.more",
+          "children": [
+            {
+              "id": "app.glacier.action.store",
+              "order": 405,
+              "title": "GOVERNANCE.GLACIER.STORE.TITLE",
+              "icon": "adf:store",
+              "actions": {
+                "click": "app.glacier.action.store.execute"
+              },
+              "rules": {
+                "visible": [
+                        "isLibraryAction",
+                        "app.glacier.canStoreRecord"
+                  ]
+              }
+            },
+            {
+                "id": "app.glacier.action.restore",
+                "order": 410,
+                "title": "GOVERNANCE.GLACIER.RESTORE.TITLE",
+                "icon": "adf:restore",
+                "actions": {
+                  "click": "app.glacier.action.restore.execute"
+                },
+                "rules": {
+                  "visible": [
+                        "isLibraryAction",
+                        "app.glacier.canRestoreRecord"
+                    ]
+                }
+            },
+            {
+                "id": "app.glacier.action.extend.restore",
+                "order": 415,
+                "title": "GOVERNANCE.GLACIER.EXTEND-RESTORE.TITLE",
+                "icon": "adf:extend-restore",
+                "actions": {
+                  "click": "app.action.extend.restore.execute"
+                },
+                "rules": {
+                  "visible": [
+                        "isLibraryAction",
+                        "app.selection.file",
+                        "app.glacier.canExtendRestoreRecord"
+                    ]
+                }
+              }
+          ]
+        }
+      ],
+      "contextMenu": [
+        {
+          "id": "app.glacier.action.store",
+          "order": 750,
+          "title": "GOVERNANCE.GLACIER.STORE.TITLE",
+          "icon": "adf:store",
+          "actions": {
+            "click": "app.glacier.action.store.execute"
+          },
+          "rules": {
+            "visible": [
+                    "isLibraryAction",
+                    "app.glacier.canStoreRecord"
+                ]
+          }
+        },
+        {
+            "id": "app.glacier.action.restore",
+            "order": 760,
+            "title": "GOVERNANCE.GLACIER.RESTORE.TITLE",
+            "icon": "adf:restore",
+            "actions": {
+              "click": "app.glacier.action.restore.execute"
+            },
+            "rules": {
+              "visible": [
+                    "isLibraryAction",
+                    "app.glacier.canRestoreRecord"
+                ]
+            }
+        },
+        {
+            "id": "app.glacier.action.extend.restore",
+            "order": 765,
+            "title": "GOVERNANCE.GLACIER.EXTEND-RESTORE.TITLE",
+            "icon": "adf:extend-restore",
+            "actions": {
+              "click": "app.action.extend.restore.execute"
+            },
+            "rules": {
+              "visible": [
+                    "isLibraryAction",
+                    "app.selection.file",
+                    "app.glacier.canExtendRestoreRecord"
+                ]
+            }
+        }
+      ],
+      "viewer": {
+        "rules": {
+          "canPreview": "app.glacier.canShowViewer"
+        }
+      }
+    }
+}

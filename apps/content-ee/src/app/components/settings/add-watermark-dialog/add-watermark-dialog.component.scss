@@ -1,0 +1,330 @@
+:host {
+  display: block;
+  --wm-brand: var(--adw-color-brand-primary, #1b1464);
+}
+
+.adw-add-watermark-dialog {
+  display: flex;
+  flex-direction: column;
+  min-width: min(100%, 480px);
+}
+
+.adw-add-watermark-dialog__title {
+  margin: 0;
+  padding: 20px 24px 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #0f172a;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.adw-add-watermark-dialog__content {
+  display: block;
+  padding: 16px 24px !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+.adw-add-watermark-dialog__hint {
+  margin: 0 0 16px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #64748b;
+}
+
+.adw-add-watermark-dialog__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  > label {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #475569;
+  }
+}
+
+.input-shell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  width: 100%;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: var(--wm-brand);
+    box-shadow: 0 0 0 3px rgba(27, 20, 100, 0.18);
+  }
+
+  &:focus-within .input-shell__icon {
+    color: var(--wm-brand);
+  }
+
+  &--textarea {
+    align-items: stretch;
+    min-height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  &--select {
+    position: relative;
+  }
+}
+
+.input-shell__icon {
+  flex-shrink: 0;
+  color: #9ca3af;
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+
+  &--top {
+    align-self: flex-start;
+    margin-top: 10px;
+  }
+}
+
+.input-shell input,
+.input-shell textarea,
+.input-shell .mat-mdc-select {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 10px 4px 10px 0 !important;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.35;
+  color: #111827;
+  font-family: inherit;
+}
+
+.input-shell input::placeholder,
+.input-shell textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+.input-shell--textarea textarea {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  resize: vertical;
+  min-height: 72px;
+}
+
+:host ::ng-deep .input-shell--select {
+  .mat-mdc-select {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px 4px 10px 0 !important;
+  }
+
+  .mat-mdc-select-trigger {
+    width: 100%;
+    height: auto;
+    min-height: 22px;
+  }
+
+  .mat-mdc-select-value {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .mat-mdc-select-value-text,
+  .mat-mdc-select-placeholder {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.35 !important;
+  }
+
+  .mat-mdc-select-value-text {
+    color: #111827 !important;
+  }
+
+  .mat-mdc-select-placeholder {
+    color: #9ca3af !important;
+  }
+
+  .mat-mdc-select-arrow {
+    color: var(--wm-brand) !important;
+  }
+}
+
+.adw-add-watermark-dialog__file {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.wm-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 164px;
+  padding: 20px 16px;
+  border: 1.5px dashed #c7d2fe;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(27, 20, 100, 0.04) 0%, rgba(255, 255, 255, 0.9) 100%);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+  &:hover,
+  &--active {
+    border-color: var(--wm-brand);
+    box-shadow: 0 0 0 3px rgba(27, 20, 100, 0.12);
+    background: rgba(27, 20, 100, 0.06);
+  }
+
+  &--filled {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    text-align: left;
+    min-height: 112px;
+    padding: 12px 16px;
+    border-style: solid;
+    border-color: #e5e7eb;
+    background: #fff;
+  }
+
+  &--filled:hover {
+    border-color: var(--wm-brand);
+  }
+
+  &--disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+}
+
+.wm-dropzone__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #fff;
+  color: var(--wm-brand);
+  box-shadow: 0 4px 12px rgba(27, 20, 100, 0.12);
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.wm-dropzone__title {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+
+  span {
+    color: var(--wm-brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.wm-dropzone__hint {
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.wm-dropzone__preview {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+  overflow: hidden;
+  background:
+    linear-gradient(45deg, #f3f4f6 25%, transparent 25%) 0 0 / 12px 12px,
+    linear-gradient(-45deg, #f3f4f6 25%, transparent 25%) 0 6px / 12px 12px,
+    #ffffff;
+  box-shadow: inset 0 0 0 1px #e5e7eb;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.wm-dropzone__meta {
+  min-width: 0;
+  flex: 1;
+}
+
+.wm-dropzone__name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wm-dropzone__size {
+  margin: 4px 0 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.wm-dropzone__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.wm-dropzone__link {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wm-brand);
+  cursor: pointer;
+
+  &--danger {
+    color: #dc2626;
+  }
+}
+
+.adw-add-watermark-dialog__error {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.adw-add-watermark-dialog__actions {
+  padding: 12px 24px 20px !important;
+  gap: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  button[mat-flat-button] {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

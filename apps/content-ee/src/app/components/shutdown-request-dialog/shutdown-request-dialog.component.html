@@ -1,0 +1,81 @@
+<div class="adw-shutdown-request-dialog">
+  <h2 mat-dialog-title class="adw-shutdown-request-dialog__title">Shutdown Request</h2>
+
+  <mat-dialog-content class="adw-shutdown-request-dialog__content">
+    <p class="adw-shutdown-request-dialog__hint">
+      All VDR documents for this project are approved for IFC. Complete the shutdown request details below.
+    </p>
+
+    <div class="adw-shutdown-request-dialog__project" role="status">
+      <mat-icon aria-hidden="true">folder_special</mat-icon>
+      <span class="adw-shutdown-request-dialog__project-label">Project</span>
+      <span class="adw-shutdown-request-dialog__project-name">{{ data.projectName }}</span>
+    </div>
+
+    <form class="adw-shutdown-request-dialog__form" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="adw-shutdown-request-dialog__field" subscriptSizing="dynamic">
+        <mat-label>Shutdown Type</mat-label>
+        <mat-select formControlName="shutdownType" panelClass="adw-shutdown-request-dialog__select-panel">
+          <mat-option *ngFor="let opt of shutdownTypeOptions" [value]="opt.value">
+            {{ opt.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.shutdownType.touched && form.controls.shutdownType.hasError('required')">
+          Select a shutdown type
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="adw-shutdown-request-dialog__field" subscriptSizing="dynamic">
+        <mat-label>Shutdown Reason</mat-label>
+        <textarea
+          matInput
+          formControlName="shutdownReason"
+          rows="4"
+          placeholder="Enter the reason for this shutdown request"></textarea>
+        <mat-error *ngIf="form.controls.shutdownReason.touched && form.controls.shutdownReason.hasError('required')">
+          Shutdown reason is required
+        </mat-error>
+      </mat-form-field>
+
+      <div class="adw-shutdown-request-dialog__date-row">
+        <mat-form-field appearance="outline" class="adw-shutdown-request-dialog__field" subscriptSizing="dynamic">
+          <mat-label>Shutdown Initiated Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="shutdownInitiatedPicker"
+            formControlName="shutdownInitiatedDate"
+            aria-label="Shutdown Initiated Date"
+            placeholder="Select date" />
+          <mat-datepicker-toggle matIconSuffix [for]="shutdownInitiatedPicker"></mat-datepicker-toggle>
+          <mat-datepicker #shutdownInitiatedPicker panelClass="adw-shutdown-request-dialog__datepicker-panel"></mat-datepicker>
+          <mat-error
+            *ngIf="form.controls.shutdownInitiatedDate.touched && form.controls.shutdownInitiatedDate.hasError('required')">
+            Shutdown initiated date is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="adw-shutdown-request-dialog__field" subscriptSizing="dynamic">
+          <mat-label>Reopen Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="reopenPicker"
+            formControlName="reopenDate"
+            aria-label="Reopen Date"
+            placeholder="Select date" />
+          <mat-datepicker-toggle matIconSuffix [for]="reopenPicker"></mat-datepicker-toggle>
+          <mat-datepicker #reopenPicker panelClass="adw-shutdown-request-dialog__datepicker-panel"></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <!-- <mat-form-field appearance="outline" class="adw-shutdown-request-dialog__field" subscriptSizing="dynamic">
+        <mat-label>Shutdown Initiated By</mat-label>
+        <input matInput formControlName="shutdownInitiatedBy" readonly aria-label="Shutdown Initiated By" />
+      </mat-form-field> -->
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-shutdown-request-dialog__actions">
+    <button type="button" mat-stroked-button (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="submit()" [disabled]="submitting">Submit</button>
+  </mat-dialog-actions>
+</div>

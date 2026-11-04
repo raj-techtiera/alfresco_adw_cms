@@ -1,0 +1,236 @@
+<div class="aps-file-preview-ext-shell">
+    <div class="aps-file-preview-ext-doc-bar" *ngIf="content?.name">
+        <span class="aps-file-preview-ext-doc-bar__name">{{ content.name }}</span>
+    </div>
+
+    <div class="aps-file-preview-ext-tabdeck" role="region" [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.COLUMNS_REGION' | translate">
+        <div class="aps-file-preview-ext-card">
+            <div
+                class="aps-file-preview-ext-main-grid"
+                [class.aps-file-preview-ext-main-grid--preview-only]="selectedTab === 0">
+                <div class="aps-file-preview-ext-top-bar">
+                    <div class="aps-file-preview-ext-tabs" role="tablist">
+                        <button
+                            type="button"
+                            role="tab"
+                            class="aps-file-preview-ext-tab"
+                            [class.aps-file-preview-ext-tab--active]="selectedTab === 0"
+                            [attr.aria-selected]="selectedTab === 0"
+                            (click)="selectTab(0)">
+                            {{ 'PROCESS-EXTENSION.FILE_PREVIEW.TAB_PREVIEW' | translate }}
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            class="aps-file-preview-ext-tab"
+                            [class.aps-file-preview-ext-tab--active]="selectedTab === 1"
+                            [attr.aria-selected]="selectedTab === 1"
+                            (click)="selectTab(1)">
+                            {{ 'PROCESS-EXTENSION.FILE_PREVIEW.TAB_PROPERTIES' | translate }}
+                        </button>
+                        <button
+                            type="button"
+                            role="tab"
+                            class="aps-file-preview-ext-tab"
+                            [class.aps-file-preview-ext-tab--active]="selectedTab === 2"
+                            [attr.aria-selected]="selectedTab === 2"
+                            (click)="selectTab(2)">
+                            {{ 'PROCESS-EXTENSION.FILE_PREVIEW.TAB_COMMENTS' | translate }}
+                        </button>
+                    </div>
+                    <div class="aps-file-preview-ext-header-actions">
+                        <ng-container [ngSwitch]="selectedTab">
+                            <ng-container *ngSwitchCase="0">
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="triggerFullscreen()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_FULLSCREEN' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_FULLSCREEN' | translate">
+                                    <mat-icon>open_in_full</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="popOutFile()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_POP_OUT' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_POP_OUT' | translate">
+                                    <mat-icon>open_in_new</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    [matMenuTriggerFor]="fileMoreMenu"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_MORE' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_MORE' | translate">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="1">
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    disabled
+                                    class="aps-file-preview-ext-card-actions__muted"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_RELATED' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_RELATED' | translate">
+                                    <mat-icon>hub</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="goToCommentsTab()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_OPEN_COMMENTS' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_OPEN_COMMENTS' | translate">
+                                    <mat-icon>chat_bubble_outline</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="openPreviewFullscreen()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_FULLSCREEN' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_FULLSCREEN' | translate">
+                                    <mat-icon>open_in_full</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="popOutFile()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_POP_OUT' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_POP_OUT' | translate">
+                                    <mat-icon>open_in_new</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    [matMenuTriggerFor]="fileMoreMenu"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_MORE' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_MORE' | translate">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="2">
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    disabled
+                                    class="aps-file-preview-ext-card-actions__muted"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_RELATED' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_RELATED' | translate">
+                                    <mat-icon>hub</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="selectTab(1)"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_OPEN_PROPERTIES' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_OPEN_PROPERTIES' | translate">
+                                    <mat-icon>tune</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="openPreviewFullscreen()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_FULLSCREEN' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_FULLSCREEN' | translate">
+                                    <mat-icon>open_in_full</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    (click)="popOutFile()"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_POP_OUT' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_POP_OUT' | translate">
+                                    <mat-icon>open_in_new</mat-icon>
+                                </button>
+                                <button
+                                    mat-icon-button
+                                    type="button"
+                                    [matMenuTriggerFor]="fileMoreMenu"
+                                    [attr.aria-label]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_MORE' | translate"
+                                    [attr.title]="'PROCESS-EXTENSION.FILE_PREVIEW.ACTION_MORE' | translate">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="aps-file-preview-ext-col aps-file-preview-ext-col--preview" role="tabpanel">
+                    <div class="aps-file-preview-ext-tab-pane aps-file-preview-ext-tab-pane--viewer">
+                        <adf-viewer
+                            id="adw-viewer-id"
+                            [(showViewer)]="showViewer"
+                            (showViewerChange)="onViewerVisibilityChanged()"
+                            [fileName]="content.name"
+                            [blobFile]="content.contentBlob"
+                            [customError]="customError">
+                            <adf-viewer-more-actions id="adw-viewer-more-action-id">
+                                <button mat-menu-item (click)="downloadContent()" data-automation-id="download-file-button">
+                                    <mat-icon>file_download</mat-icon>
+                                    <span>{{ 'ADF_VIEWER.ACTIONS.DOWNLOAD' | translate }}</span>
+                                </button>
+                            </adf-viewer-more-actions>
+                        </adf-viewer>
+                    </div>
+                </div>
+
+                <div
+                    *ngIf="selectedTab === 1 || selectedTab === 2"
+                    class="aps-file-preview-ext-col aps-file-preview-ext-col--meta"
+                    role="tabpanel">
+                    <ng-container [ngSwitch]="selectedTab">
+                        <div *ngSwitchCase="1" class="aps-file-preview-ext-tab-pane aps-file-preview-ext-tab-pane--properties">
+                            <h3 class="aps-file-preview-ext-panel-heading">{{ 'PROCESS-EXTENSION.FILE_PREVIEW.TAB_PROPERTIES' | translate }}</h3>
+                            <div class="aps-file-preview-ext-properties-scroll">
+                                <ng-container *ngIf="linkedNodeId; else noRepoLinkProps">
+                                    <ng-container *ngIf="metadataNode as node">
+                                        <adf-content-metadata-card
+                                            [node]="node"
+                                            [preset]="'custom'"
+                                            [displayEmpty]="false"
+                                            [editable]="true"
+                                            [readOnly]="false">
+                                        </adf-content-metadata-card>
+                                    </ng-container>
+                                </ng-container>
+                                <ng-template #noRepoLinkProps>
+                                    <p class="aps-file-preview-ext-tab-empty">{{ 'PROCESS-EXTENSION.FILE_PREVIEW.NO_REPOSITORY_LINK' | translate }}</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="2" class="aps-file-preview-ext-tab-pane aps-file-preview-ext-tab-pane--comments">
+                            <h3 class="aps-file-preview-ext-panel-heading">{{ 'PROCESS-EXTENSION.FILE_PREVIEW.TAB_TASK_COMMENTS' | translate }}</h3>
+                            <div class="aps-file-preview-ext-comments-scroll">
+                                <ng-container *ngIf="taskId; else noTaskComments">
+                                    <adf-task-comments [taskId]="taskId" [readOnly]="false"></adf-task-comments>
+                                </ng-container>
+                                <ng-template #noTaskComments>
+                                    <p class="aps-file-preview-ext-tab-empty">{{ 'PROCESS-EXTENSION.FILE_PREVIEW.NO_TASK_CONTEXT' | translate }}</p>
+                                </ng-template>
+                            </div>
+                            <h3 class="aps-file-preview-ext-panel-heading aps-file-preview-ext-panel-heading--comments">
+                                {{ 'PROCESS-EXTENSION.FILE_PREVIEW.TAB_DOCUMENT_COMMENTS' | translate }}
+                            </h3>
+                            <div class="aps-file-preview-ext-comments-scroll">
+                                <ng-container *ngIf="linkedNodeId; else noRepoLinkComments">
+                                    <adf-node-comments [nodeId]="linkedNodeId"></adf-node-comments>
+                                </ng-container>
+                                <ng-template #noRepoLinkComments>
+                                    <p class="aps-file-preview-ext-tab-empty">{{ 'PROCESS-EXTENSION.FILE_PREVIEW.NO_REPOSITORY_LINK' | translate }}</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-menu #fileMoreMenu="matMenu">
+        <button mat-menu-item (click)="downloadContent()">
+            <mat-icon>file_download</mat-icon>
+            <span>{{ 'ADF_VIEWER.ACTIONS.DOWNLOAD' | translate }}</span>
+        </button>
+    </mat-menu>
+</div>

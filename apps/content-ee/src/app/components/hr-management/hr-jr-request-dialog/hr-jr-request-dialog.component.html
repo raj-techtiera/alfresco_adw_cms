@@ -1,0 +1,135 @@
+<div class="adw-jr-request">
+  <header class="adw-jr-request__header">
+    <div class="adw-jr-request__header-main">
+      <mat-icon class="adw-jr-request__header-icon" aria-hidden="true">badge</mat-icon>
+      <div>
+        <h2 mat-dialog-title class="adw-jr-request__title">JR Request</h2>
+        <p class="adw-jr-request__subtitle">Enter the job requisition details and submit the request.</p>
+      </div>
+    </div>
+    <button mat-icon-button type="button" mat-dialog-close aria-label="Close" [disabled]="submitting">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content class="adw-jr-request__content">
+    <form class="adw-jr-request__form" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="adw-jr-request__field">
+        <label class="adw-jr-request__label" for="adw-jr-jobtitle">
+          Job title <span class="adw-jr-request__req">*</span>
+        </label>
+        <div class="input-shell" [class.input-shell--invalid]="isInvalid('jobtitle')">
+          <mat-icon class="input-shell__icon" aria-hidden="true">work</mat-icon>
+          <input id="adw-jr-jobtitle" type="text" formControlName="jobtitle" placeholder="e.g. Senior Design Engineer" autocomplete="off" />
+        </div>
+        @if (isInvalid('jobtitle')) {
+          <p class="adw-jr-request__error">Job title is required</p>
+        }
+      </div>
+
+      <div class="adw-jr-request__row">
+        <div class="adw-jr-request__field">
+          <label class="adw-jr-request__label" for="adw-jr-department">
+            Department <span class="adw-jr-request__req">*</span>
+          </label>
+          <div class="input-shell input-shell--select" [class.input-shell--invalid]="isInvalid('department')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">apartment</mat-icon>
+            <mat-select id="adw-jr-department" formControlName="department" placeholder="Select department">
+              @for (opt of departmentOptions; track opt) {
+                <mat-option [value]="opt">{{ opt }}</mat-option>
+              }
+            </mat-select>
+          </div>
+          @if (isInvalid('department')) {
+            <p class="adw-jr-request__error">Department is required</p>
+          }
+        </div>
+
+        <div class="adw-jr-request__field">
+          <label class="adw-jr-request__label" for="adw-jr-positions">
+            Number of positions <span class="adw-jr-request__req">*</span>
+          </label>
+          <div class="input-shell" [class.input-shell--invalid]="isInvalid('numberofpositions')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+            <input id="adw-jr-positions" type="number" min="1" formControlName="numberofpositions" placeholder="e.g. 2" />
+          </div>
+          @if (isInvalid('numberofpositions')) {
+            <p class="adw-jr-request__error">Enter at least 1 position</p>
+          }
+        </div>
+      </div>
+
+      <div class="adw-jr-request__row">
+        <div class="adw-jr-request__field">
+          <label class="adw-jr-request__label" for="adw-jr-priority">
+            Priority <span class="adw-jr-request__req">*</span>
+          </label>
+          <div class="input-shell input-shell--select" [class.input-shell--invalid]="isInvalid('priority')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">flag</mat-icon>
+            <mat-select id="adw-jr-priority" formControlName="priority" placeholder="Select priority">
+              @for (opt of priorityOptions; track opt) {
+                <mat-option [value]="opt">{{ opt }}</mat-option>
+              }
+            </mat-select>
+          </div>
+          @if (isInvalid('priority')) {
+            <p class="adw-jr-request__error">Priority is required</p>
+          }
+        </div>
+
+        <div class="adw-jr-request__field">
+          <label class="adw-jr-request__label" for="adw-jr-employment">
+            Employment type <span class="adw-jr-request__req">*</span>
+          </label>
+          <div class="input-shell input-shell--select" [class.input-shell--invalid]="isInvalid('employmenttype')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">badge</mat-icon>
+            <mat-select id="adw-jr-employment" formControlName="employmenttype" placeholder="Select employment type">
+              @for (opt of employmentTypeOptions; track opt) {
+                <mat-option [value]="opt">{{ opt }}</mat-option>
+              }
+            </mat-select>
+          </div>
+          @if (isInvalid('employmenttype')) {
+            <p class="adw-jr-request__error">Employment type is required</p>
+          }
+        </div>
+      </div>
+
+      <div class="adw-jr-request__field">
+        <label class="adw-jr-request__label" for="adw-jr-reason">
+          Reason for hiring <span class="adw-jr-request__req">*</span>
+        </label>
+        <div class="input-shell input-shell--textarea" [class.input-shell--invalid]="isInvalid('reasonforhiring')">
+          <textarea
+            id="adw-jr-reason"
+            formControlName="reasonforhiring"
+            rows="4"
+            placeholder="Describe why this position is needed"></textarea>
+        </div>
+        @if (isInvalid('reasonforhiring')) {
+          <p class="adw-jr-request__error">Reason for hiring is required</p>
+        }
+      </div>
+
+      <div class="adw-jr-request__field">
+        <label class="adw-jr-request__label" for="adw-jr-joining">
+          Expected joining date <span class="adw-jr-request__req">*</span>
+        </label>
+        <div class="input-shell" [class.input-shell--invalid]="isInvalid('expectedjoiningdate')">
+          <mat-icon class="input-shell__icon" aria-hidden="true">event</mat-icon>
+          <input id="adw-jr-joining" type="date" formControlName="expectedjoiningdate" />
+        </div>
+        @if (isInvalid('expectedjoiningdate')) {
+          <p class="adw-jr-request__error">Expected joining date is required</p>
+        }
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-jr-request__actions">
+    <button type="button" mat-stroked-button mat-dialog-close [disabled]="submitting">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="submit()" [disabled]="submitting">
+      {{ submitting ? 'Submitting…' : 'Submit' }}
+    </button>
+  </mat-dialog-actions>
+</div>

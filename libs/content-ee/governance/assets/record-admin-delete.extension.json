@@ -1,0 +1,84 @@
+{
+  "$version": "1.1.0",
+  "$id": "governance-admin-delete-record.plugin",
+  "$name": "governance-admin-delete-record",
+  "$vendor": "Hyland Software, Inc. and its affiliates",
+  "$license": "LGPL-3.0",
+  "$runtime": "1.8.0",
+  "$description": "Admin Delete record plugin",
+  "actions": [
+    {
+      "id": "admin-delete-record.actions.execute",
+      "type": "ADMIN_DELETE_RECORD",
+      "payload": "$(context.selection.first.entry)"
+    }
+  ],
+  "features": {
+    "toolbar": [
+      {
+        "id": "app.toolbar.more",
+        "children": [
+          {
+            "id": "app.toolbar.record.admin-delete",
+            "order": 1502,
+            "title": "GOVERNANCE.ADMIN-DELETE-RECORD.TITLE",
+            "icon": "delete_sweep",
+            "rules": {
+              "visible": [
+                "app.selection.file",
+                "app.selection.canUpdateRecord",
+                "!app.manage.holds.isNodeOnHold"
+              ]
+            },
+            "actions": {
+              "click": "admin-delete-record.actions.execute"
+            }
+          }
+        ]
+      }
+    ],
+    "contextMenu": [
+      {
+        "id": "app.context-menu.record.admin-delete",
+        "order": 1100,
+        "title": "GOVERNANCE.ADMIN-DELETE-RECORD.TITLE",
+        "icon": "delete_sweep",
+        "rules": {
+          "visible": [
+            "app.selection.file",
+            "app.selection.canUpdateRecord",
+            "!app.manage.holds.isNodeOnHold"
+          ]
+        },
+        "actions": {
+          "click": "admin-delete-record.actions.execute"
+        }
+      }
+    ],
+    "viewer": {
+      "toolbarActions": [
+        {
+          "id": "app.viewer.toolbar.more",
+          "children": [
+            {
+              "id": "app.toolbar.record.admin-delete",
+              "order": 500,
+              "title": "GOVERNANCE.ADMIN-DELETE-RECORD.TITLE",
+              "icon": "delete_sweep",
+              "rules": {
+                "visible": [
+                  "app.selection.file",
+                  "app.selection.canUpdateRecord",
+                  "!app.manage.holds.isNodeOnHold"
+                ]
+              },
+              "actions": {
+                "click": "admin-delete-record.actions.execute"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

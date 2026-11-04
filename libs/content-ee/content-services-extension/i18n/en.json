@@ -1,0 +1,112 @@
+{
+    "ERRORS": {
+        "GENERIC": "The action was unsuccessful. Try again or contact your IT Team.",
+        "PERMISSION_DENIED": "You don't have the permission to perform this operation"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} requested to join {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} people requested to join {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Manage members",
+        "CLOSE": "Close",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Library details",
+            "MANAGE_MEMBERS": "Manage members"
+        },
+        "TABS": {
+            "PROPERTIES": "Properties",
+            "MEMBERS": "Members",
+            "GROUPS": "Groups",
+            "PENDING": "Pending"
+        },
+        "LOAD_MORE": "Load more",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Confirm",
+            "MESSAGE": "Do you want to proceed?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Reject Member Request",
+            "COMMENT": "Leave a comment here",
+            "YES_LABEL": "Reject",
+            "NO_LABEL": "Cancel"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Group membership info",
+            "DESCRIPTION": "This user has access to the library through group roles. If you need to remove this user's individual membership, you will first need to remove them from the groups listed bellow.",
+            "CLOSE": "Close",
+            "GROUP": "Group",
+            "ROLE": "Role"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "No membership requests pending",
+        "PENDING_REQUESTS": "Membership requests pending",
+        "APPROVE": "APPROVE",
+        "REJECT": "REJECT"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Members of this library",
+        "NO_MEMBERS": "No members found",
+        "DELETE_MEMBERS": "Delete selected members",
+        "GROUP_ROLE": "Group role",
+        "REMOVE": "Remove",
+        "A11Y_AVATAR": "User avatar",
+        "REFRESH": "Refresh"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Group Membership of this library",
+        "NO_GROUPS": "No groups found",
+        "DELETE_GROUPS": "Delete selected groups",
+        "REFRESH": "Refresh",
+        "REMOVE": "Remove"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Manager",
+        "SITE_CONTRIBUTOR": "Contributor",
+        "SITE_CONSUMER": "Consumer",
+        "SITE_COLLABORATOR": "Collaborator"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Set user role",
+        "GROUP_SELECTOR": "Set group role",
+        "ALL": "Set all roles to"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Add user/group",
+        "SEARCH_INPUT": "Search for users or groups to add",
+        "NAME": "Name",
+        "TITLE_LABEL": "Add user or group to",
+        "ADD_LABEL": "ADD",
+        "SELECT_LABEL": "SELECT",
+        "CLOSE_LABEL": "CLOSE",
+        "CANCEL_LABEL": "CANCEL"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Members",
+        "PREVIEW": "Preview"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Membership request rejected",
+        "MEMBERSHIP_ACCEPTED": "Member added to library",
+        "USER_REMOVE_SUCCESS": "User removed",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} users removed, {{skipped}} were skipped",
+        "USER_REMOVE_FAILED": "Failed to remove the user",
+        "GROUP_REMOVE_SUCCESS": "Group removed",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} groups removed, {{skipped}} were skipped",
+        "GROUP_REMOVE_FAILED": "Failed to remove the group",
+        "ADD_MEMBER_FAILED": "Failed to add member to the site",
+        "ADD_MEMBERS_FAILED": "Failed to add {{count}} members",
+        "ADD_MEMBERS_SUCCESS": "Added {{userCount}} user(s) and {{groupCount}} group(s)",
+        "ADD_GROUPS_SUCCESS": "Added {{groupCount}} group(s)",
+        "ADD_USERS_SUCCESS": "Added {{userCount}} user(s)",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} member added, {{skipped}} were skipped",
+        "USER_ROLE_UPDATED": "User role updated",
+        "GROUP_ROLE_UPDATED": "Group role updated",
+        "MEMBER_EXISTS": "User is already a member of the site",
+        "MANAGER_REQUIRED": "A site requires at least one site manager",
+        "ACTIONS": {
+            "CLOSE": "Close"
+        }
+    }
+}

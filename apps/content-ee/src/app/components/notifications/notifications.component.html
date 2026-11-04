@@ -1,0 +1,91 @@
+<div class="nt-page">
+  <div class="nt-head">
+    <h1 class="nt-title">Notifications</h1>
+    <div class="nt-head-actions">
+      <button
+        mat-raised-button
+        type="button"
+        class="nt-btn nt-btn--ghost"
+        (click)="markAllRead()"
+        [disabled]="unreadCount === 0">
+        Mark all read
+      </button>
+      <button
+        mat-raised-button
+        type="button"
+        class="nt-btn nt-btn--amber"
+        (click)="refreshNotifications()"
+        [disabled]="refreshingNotifications">
+        {{ refreshingNotifications ? 'Refreshing…' : 'Refresh' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="nt-body">
+  <p class="nt-subtitle">{{ unreadCount }} unread · {{ notifications.length }} total</p>
+
+  <div class="nt-filters" role="group" aria-label="Notification filters">
+    <button
+      mat-raised-button
+      type="button"
+      class="nt-pill"
+      [class.nt-pill--active]="filter === 'all'"
+      (click)="setFilter('all')">
+      All
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      class="nt-pill"
+      [class.nt-pill--active]="filter === 'unread'"
+      (click)="setFilter('unread')">
+      Unread
+    </button>
+  </div>
+
+  <div class="nt-list-scroll" *ngIf="filteredNotifications.length > 0; else notificationsEmpty">
+    <mat-accordion class="nt-accordion" multi displayMode="flat">
+      <mat-expansion-panel
+        class="nt-panel"
+        *ngFor="let item of filteredNotifications; trackBy: trackByNotificationId"
+        [class.nt-panel--unread]="!item.read"
+        [class.nt-panel--error]="item.colorClass === 'nt-dot--red'"
+        [class.nt-panel--warn]="item.colorClass === 'nt-dot--amber'"
+        (opened)="onNotificationClick(item)">
+        <mat-expansion-panel-header collapsedHeight="76px" expandedHeight="76px" class="nt-panel-header">
+          <mat-panel-title class="nt-panel-title">
+            <span class="nt-item-icon" [ngClass]="item.colorClass" aria-hidden="true">
+              <mat-icon>{{ item.icon }}</mat-icon>
+            </span>
+            <span class="nt-panel-copy">
+              <span class="nt-panel-title-text">{{ item.title }}</span>
+              <span class="nt-panel-preview" *ngIf="item.message !== item.title">{{ item.message }}</span>
+            </span>
+          </mat-panel-title>
+          <mat-panel-description class="nt-panel-desc">
+            <span class="nt-item-time">{{ item.time }}</span>
+            <span class="nt-unread-pill" *ngIf="!item.read">Unread</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="nt-panel-body">
+          <div class="nt-detail-card">
+            <div class="nt-detail-card__label">
+              <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+              <span>Full details</span>
+            </div>
+            <p class="nt-panel-message">{{ item.message }}</p>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <ng-template #notificationsEmpty>
+    <div class="nt-empty">
+      <mat-icon class="nt-empty-icon" aria-hidden="true">notifications_none</mat-icon>
+      <p class="nt-empty-text">{{ filter === 'unread' ? 'No unread notifications' : 'No notifications yet' }}</p>
+    </div>
+  </ng-template>
+  </div>
+</div>

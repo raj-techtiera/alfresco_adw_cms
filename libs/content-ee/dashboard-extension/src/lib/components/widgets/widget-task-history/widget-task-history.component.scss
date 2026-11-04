@@ -1,0 +1,104 @@
+@use '../../../../mat-selectors' as ms;
+
+.acs-widget-task-history {
+    .acs-widget-task-history-container {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .acs-widget-task-history-info {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .acs-widget-task-history-success {
+                display: flex;
+                align-items: center;
+                color: var(--theme-dashboard-completed-color);
+            }
+        }
+
+        .acs-widget-task-history-legend {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+
+            .acs-widget-task-history-legend-item {
+                display: flex;
+                align-items: center;
+                overflow: hidden;
+
+                .acs-widget-task-history-legend-color {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                    flex-shrink: 0;
+                }
+
+                .acs-widget-task-history-legend-text {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    .acs-widget-task-history-legend-text-bold {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .acs-widget-task-history-filters {
+            display: flex;
+
+            .acs-widget-task-history-hidden-date-input {
+                width: 0;
+                height: 100%;
+                align-self: center;
+                opacity: 0;
+                border: 0;
+                margin-left: 20px;
+                padding: 0;
+            }
+
+            .acs-widget-task-history-date-chip {
+                border-radius: 16px;
+                background-color: var(--theme-active-filter-bg);
+                padding: 6px;
+
+                adf-icon {
+                    display: flex;
+                    padding-left: 10px;
+                }
+
+                span {
+                    font-size: 16px;
+
+                    .acs-widget-task-history-date-chip-label {
+                        color: var(--theme-secondary-text-color);
+                    }
+                }
+            }
+        }
+
+        .acs-widget-task-history-canvas-container {
+            height: 200px;
+            overflow: hidden;
+            margin-top: -10px;
+            padding: 0 15px 0 20px;
+        }
+    }
+}
+
+.acs-widget-task-history-month-picker {
+    #{ms.$mat-calendar-arrow} {
+        display: none;
+    }
+    #{ms.$mat-calendar-period-button} {
+        pointer-events: none;
+    }
+}

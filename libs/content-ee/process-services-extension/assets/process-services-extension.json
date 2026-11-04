@@ -1,0 +1,360 @@
+{
+    "$version": "1.0.0",
+    "$id": "process-services.plugin",
+    "$name": "adf process services extension",
+    "$description": "adf process services plugin",
+    "$vendor": "Hyland Software, Inc. and its affiliates",
+    "$license": "Apache-2.0",
+    "settings": [
+        {
+            "id": "alfresco.extensions.process-service.settings",
+            "name": "Extensions: Process Services",
+            "parameters": [
+                {
+                    "name": "Enable Process Services Extensions",
+                    "key": "processServices",
+                    "type": "boolean",
+                    "value": false
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "id": "alfresco.start-process.actions.execute",
+            "type": "START_PROCESS",
+            "payload": {
+                "selectedNodes": "$(context.selection.nodes)"
+            }
+        },
+        {
+            "id": "alfresco.start-process.actions.new.execute",
+            "type": "START_PROCESS",
+            "payload": {
+                "selectedNodes": []
+            }
+        },
+        {
+            "id": "app.process.toggleInfoDrawer",
+            "type": "TOGGLE_PROCESS_SERVICES_INFO_DRAWER"
+        },
+        {
+            "id": "app.process.toggleProcessServicesCommentsAction",
+            "type": "TOGGLE_PROCESS_SERVICES_COMMENTS"
+        },
+        {
+            "id": "app.process.navigateToTaskDetailsFromContextMenu",
+            "type": "NAVIGATE_TO_TASK_DETAILS_FROM_CONTEXT_MENU"
+        },
+        {
+            "id": "app.process.navigateToProcessDetailsFromContextMenu",
+            "type": "NAVIGATE_TO_PROCESS_DETAILS_FROM_CONTEXT_MENU"
+        },
+        {
+            "id": "app.process.cancelProcess",
+            "type": "CANCEL_PROCESS"
+        }
+    ],
+    "features": {
+        "navbar": [
+            {
+                "id": "app.navbar.primary",
+                "items": [
+                    {
+                        "id": "alfresco.app.navbar.process-management",
+                        "component": "process-services-plugin.components.process-services-side-nav-ext",
+                        "rules": {
+                            "visible": [
+                                "app.process.isProcessServicePluginEnabled",
+                                "app.process.isProcessServiceRunning"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "contextMenu": [
+            {
+                "id": "alfresco.app.context-menu.start.process",
+                "order": 410,
+                "icon": "assessment",
+                "title": "ADF_PROCESS_LIST.START_PROCESS.BUTTON",
+                "actions": {
+                    "click": "alfresco.start-process.actions.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.process.isProcessServicePluginEnabled",
+                        "app.process.isProcessServiceRunning",
+                        "app.process.canShowStartProcessFromContent"
+                    ]
+                }
+            }
+        ],
+        "toolbar": [
+            {
+                "id": "alfresco.app.main-action.start.process",
+                "title": "PROCESS-EXTENSION.MENU.CREATE_NEW_PROCESS",
+                "icon": "input",
+                "order": "5",
+                "type": "button",
+                "data": {
+                    "buttonType": "stroked-button"
+                },
+                "description": "PROCESS-EXTENSION.MENU.CREATE_NEW_PROCESS",
+                "description-disabled": "PROCESS-EXTENSION.MENU.CREATE_PROCESS_NOT_ALLOWED",
+                "actions": {
+                    "click": "alfresco.start-process.actions.new.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.process.isProcessServicePluginEnabled",
+                        "app.process.isProcessServiceRunning"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.process.comments",
+                "order": 90,
+                "title": "PROCESS-EXTENSION.TOOLBAR.SHOW_COMMENTS",
+                "icon": "comment",
+                "actions": {
+                    "click": "app.process.toggleProcessServicesCommentsAction"
+                },
+                "rules": {
+                    "visible": "app.process.canShowProcessToolbarItems"
+                }
+            },
+            {
+                "id": "app.toolbar.process.infoDrawer.separator",
+                "type": "separator",
+                "order": 99,
+                "rules": {
+                    "visible": "app.process.canShowProcessToolbarItems"
+                }
+            },
+            {
+                "id": "app.toolbar.process.infoDrawer",
+                "order": 200,
+                "icon": "view_sidebar",
+                "actions": {
+                    "click": "app.process.toggleInfoDrawer"
+                },
+                "rules": {
+                    "visible": "app.process.canShowProcessToolbarItems"
+                }
+            },
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "alfresco.app.toolbar.start.process",
+                        "order": 50,
+                        "icon": "assessment",
+                        "title": "ADF_PROCESS_LIST.START_PROCESS.BUTTON",
+                        "actions": {
+                            "click": "alfresco.start-process.actions.execute"
+                        },
+                        "rules": {
+                            "visible": [
+                                "app.process.isProcessServicePluginEnabled",
+                                "app.process.isProcessServiceRunning",
+                                "app.process.canShowStartProcessFromContent"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "viewer": {
+            "toolbarActions": [
+                {
+                    "id": "app.viewer.toolbar.more",
+                    "children": [
+                        {
+                            "id": "alfresco.app.viewer.start.process",
+                            "order": 50,
+                            "icon": "assessment",
+                            "title": "ADF_PROCESS_LIST.START_PROCESS.BUTTON",
+                            "actions": {
+                                "click": "alfresco.start-process.actions.execute"
+                            },
+                            "rules": {
+                                "visible": [
+                                    "app.process.isProcessServicePluginEnabled",
+                                    "app.process.isProcessServiceRunning",
+                                    "app.process.canShowStartProcessFromContent"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "badges": [
+            {
+                "id": "app.process.badge",
+                "component": "process-services-plugin.components.running-process-icon",
+                "rules": {
+                    "visible": [
+                        "app.process.isProcessServicePluginEnabled",
+                        "app.process.canDisplayBadgeAndPanel"
+                    ]
+                }
+            }
+        ],
+        "userProfileSections": [
+            {
+                "id": "app.process.auth.profile.section",
+                "component": "process-services-plugin.components.auth-section",
+                "rules": {
+                    "visible": [
+                        "app.process.isProcessServicePluginEnabled",
+                        "app.isSSOEnabled"
+                    ]
+                }
+            }
+        ],
+        "customMetadataPanels": [
+            {
+                "id": "app.process.linked-process-panel",
+                "title": "RUNNING_PROCESS.LINKED_PROCESS_PANEL.TITLE",
+                "component": "process-services-plugin.components.linked-process-panel",
+                "rules": {
+                    "visible": [
+                        "app.process.isProcessServicePluginEnabled",
+                        "app.process.canDisplayBadgeAndPanel"
+                    ]
+                }
+            }
+        ],
+        "taskListContextMenu": [
+            {
+                "id": "task-details",
+                "icon": "open_in_new",
+                "order": 100,
+                "title": "PROCESS-EXTENSION.TASK_LIST.ACTIONS.TASK_DETAILS",
+                "actions": {
+                  "click": "app.process.navigateToTaskDetailsFromContextMenu"
+                }
+            },
+            {
+                "id": "process_comments",
+                "icon": "comment",
+                "order": 200,
+                "title": "PROCESS-EXTENSION.CONTEXT_MENU.COMMENTS",
+                "actions": {
+                  "click": "app.process.toggleProcessServicesCommentsAction"
+                }
+            }
+        ],
+        "processListContextMenu": [
+            {
+
+                "id": "process-details",
+                "icon": "open_in_new",
+                "order": 100,
+                "title": "PROCESS-EXTENSION.PROCESS_LIST.ACTIONS.PROCESS_DETAILS",
+                "actions": {
+                    "click": "app.process.navigateToProcessDetailsFromContextMenu"
+                }
+            },
+            {
+                "id": "process_comments",
+                "icon": "comment",
+                "order": 200,
+                "title": "PROCESS-EXTENSION.CONTEXT_MENU.COMMENTS",
+                "actions": {
+                  "click": "app.process.toggleProcessServicesCommentsAction"
+                }
+            },
+            {
+                "id": "cancel-process",
+                "icon": "cancel",
+                "order": 300,
+                "title": "PROCESS-EXTENSION.CONTEXT_MENU.CANCEL_PROCESS",
+                "visible": "app.process.canCancelProcess",
+                "actions": {
+                    "click": "app.process.cancelProcess"
+                }
+            }
+        ]
+    },
+    "routes": [
+        {
+            "id": "alfresco.start-process",
+            "path": "start-process",
+            "parentRoute": "",
+            "layout": "app.layout.main",
+            "component": "process-services-plugin.components.start-process-ext",
+            "data": {
+                "plugin": "plugins.processService"
+            },
+            "auth": [
+                "process-services-plugin.auth",
+                "plugin-enabled-guard.auth",
+                "extension-data-loader-guard.auth"
+            ]
+        },
+        {
+            "id": "alfresco.process-services.tasks",
+            "path": "apps/:appId/tasks/:filterId",
+            "data": {
+                "plugin": "plugins.processService"
+            },
+            "parentRoute": "",
+            "layout": "app.layout.main",
+            "component": "process-services-plugin.components.task-list-ext",
+            "auth": [
+                "process-services-plugin.auth",
+                "extension-data-loader-guard.auth",
+                "plugin-enabled-guard.auth"
+            ]
+        },
+        {
+            "id": "task-details",
+            "path": "apps/:appId/task-details/:taskId",
+            "data": {
+                "plugin": "plugins.processService"
+            },
+            "parentRoute": "",
+            "layout": "app.layout.main",
+            "component": "process-services-plugin.components.task-details-ext",
+            "auth": [
+              "process-services-plugin.auth",
+              "plugin-enabled-guard.auth",
+              "extension-data-loader-guard.auth"
+            ]
+        },
+        {
+            "id": "alfresco.processes",
+            "path": "apps/:appId/processes/:filterId",
+            "data": {
+                "plugin": "plugins.processService"
+            },
+            "parentRoute": "",
+            "layout": "app.layout.main",
+            "component": "process-services-plugin.components.process-list-ext",
+            "auth": [
+                "process-services-plugin.auth",
+                "extension-data-loader-guard.auth",
+                "plugin-enabled-guard.auth"
+            ]
+        },
+        {
+            "id": "alfresco.process-details",
+            "path": "apps/:appId/process-details/:processId",
+            "data": {
+                "plugin": "plugins.processService"
+            },
+            "parentRoute": "",
+            "layout": "app.layout.main",
+            "component": "process-services-plugin.components.process-details-ext",
+            "auth": [
+                "process-services-plugin.auth",
+                "plugin-enabled-guard.auth",
+                "extension-data-loader-guard.auth"
+            ]
+        }
+    ]
+}

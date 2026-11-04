@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Nuovo processo",
+            "SELECT_APPLICATION": "Selezionare applicazione",
+            "ERROR": "Impossibile avviare un processo poiché non vi sono definizioni di processo disponibili"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Gestione processi",
+            "PROCESS_LIST": {
+                "PROCESSES": "Processi"
+            },
+            "START_PROCESS": "Avvia processo",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Visualizza dettagli"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Mostra commenti"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Gestione processi",
+            "CREATE_NEW_PROCESS": "Avvia processo",
+            "CREATE_PROCESS_NOT_ALLOWED": "Impossibile creare nuovo processo"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Altro"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Commenti",
+            "CANCEL_PROCESS": "Annulla processo"
+        },
+        "ERROR": {
+            "NO_FORM": "La definizione del processo non ha un modulo definito",
+            "NO_CONTENT": "Impossibile allegare il file dal proprio dispositivo",
+            "CAN_NOT_ATTACH": "Impossibile allegare il contenuto selezionato",
+            "AUDIT_ERROR": "Visualizza errore compito: {{error}}",
+            "TASK_ACCESS_WARNING": "Non si dispone dei diritti per modificare il compito",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "L'anteprima del documento non è disponibile perché l'attività non è ancora completata."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Creato il processo '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Errore di rete sconosciuto. Le funzioni relative al servizio del processo sono disabilitate.",
+            "ACTION": "Visualizza processo in esecuzione"
+        },
+        "NO_PROCESS_DEFINITIONS": "Nessuna definizione di processo disponibile",
+        "SIDE_NAV_TITLE": "Workflow",
+        "STATUS": {
+            "COMPLETED": "Completato",
+            "RUNNING": "In esecuzione",
+            "OPEN": "Apri",
+            "UNKNOWN": "Sconosciuto"
+        },
+        "TASK_LIST": {
+            "TASKS": "Compiti",
+            "ACTIONS": {
+                "TASK_DETAILS": "Visualizza"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Visualizza"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Il modulo è stato salvato correttamente",
+            "FORM_COMPLETED": "Compito completato",
+            "CLOSE": "Chiudi",
+            "CLAIM_TASK": "Il compito è stato richiesto",
+            "UNCLAIM_TASK": "Il compito è stato rilasciato",
+            "CLAIM_FAILED": "Impossibile eseguire l'azione"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Impossibile eseguire l'azione",
+            "FAILED_TO_LOAD": "Impossibile caricare i dettagli del compito. Riprovare più tardi",
+            "UPDATED": "Aggiornamento di {{ property }} completato",
+            "FAILED_TO_UPDATE": "Impossibile aggiornare {{ property }}",
+            "METADATA_TOOLTIP": "Visualizza dettagli",
+            "NO_TASK_NAME": "Nessun nome"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Chiudi"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Nessuna definizione di processo disponibile"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Avviato da",
+            "CREATED": "Data di inizio"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Impossibile avviare un processo poiché non vi sono definizioni di processo disponibili",
+            "NO_START_FORM": "Questo processo non richiede configurazioni aggiuntive",
+            "NO_PROCESS_DEF_SELECTED": "Nessuna categoria/processo selezionati",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Selezionare applicazione"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Annulla processo?",
+                "DESCRIPTION": "Questo processo e tutti i compiti associati verranno contrassegnati come completati.",
+                "CONFIRM_BTN": "Conferma"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' eliminato correttamente.",
+                "FAIL": "Elimina errore di processo: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Data di creazione"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Richiedi",
+                "UNCLAIM": "Rilascia"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Parte del processo in esecuzione",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Processo collegato",
+            "PART_OF_THE_PROCESS_TITLE": "Questo documento fa parte dei seguenti processi",
+            "NO_PROCESSES": "Questo documento non fa parte di alcun processo in esecuzione",
+            "CREATED": "Creato",
+            "VIEW_DETAILS_BTN": "Visualizza dettagli"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Autenticazione automatica per servizi del processo",
+        "ENABLED": "Abilitato",
+        "ENABLED_DESCRIPTION": "Il sistema effettuerà in automatico nuovamente l'autenticazione consentendo all’utente di continuare il lavoro senza interruzioni.",
+        "DISABLED": "Disabilitato",
+        "DISABLED_DESCRIPTION": "L’utente dovrà effettuare nuovamente l'autenticazione con le proprie credenziali quando scadrà il tempo di sessione.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

@@ -1,0 +1,101 @@
+<div class="adw-member-list-container">
+    <div *ngIf="showTotal" class="adw-toolbar adw-toolbar-primary">
+        <span class="adw-toolbar-title">
+            {{ 'MEMBER_LIST.MEMBER_COUNT' | translate }} ( {{ members?.list?.pagination?.totalItems }} )
+        </span>
+
+        <ng-container *ngIf="showActions">
+            <button (click)="reloadMembers()" id="refresh-members" mat-icon-button [title]="'MEMBER_LIST.REFRESH' | translate">
+                <mat-icon>refresh</mat-icon>
+            </button>
+
+            <button
+                (click)="bulkDelete.emit()"
+                [disabled]="!selectedRows.length"
+                mat-icon-button
+                [title]="'MEMBER_LIST.DELETE_MEMBERS' | translate">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </ng-container>
+    </div>
+
+    <adw-data-table-extension
+        *ngIf="userProfileService.userProfile$ | async as userProfile"
+        (row-select)="setSelectedRows($event)"
+        (row-unselect)="setSelectedRows($event)"
+        (showRowContextMenu)="showRowContextMenu.emit($event)"
+        [items]="$any(members)"
+        [loading]="loading"
+        [selectionMode]="selectionMode"
+        [contextMenu]="true"
+        [showHeader]="showHeader">
+
+        <data-columns>
+            <data-column class="adf-datatable-cell adf-datatable-cell--image" key="$thumbnail">
+                <ng-template let-context>
+                    <img *ngIf="context.row.obj.entry.person?.avatarId && !context.row.isSelected; else showInitial"
+                         class="adf-people-initial"
+                         [src]="getEcmAvatar(context.row.obj.entry?.person?.avatarId)"
+                         [alt]="'MEMBER_LIST.A11Y_AVATAR' | translate"
+                    />
+
+                    <ng-template #showInitial>
+                        <adf-user-icon-column [context]="context" />
+                    </ng-template>
+                </ng-template>
+            </data-column>
+
+            <data-column class="adf-ellipsis-cell adf-expand-cell-5 adw-member-column" key="person" title="Name">
+                <ng-template let-context>
+                    <adf-user-name-column [context]="context" />
+                </ng-template>
+            </data-column>
+
+            <data-column *ngIf="!collapsedView" class="adf-ellipsis-cell adf-expand-cell-5" key="role">
+                <ng-template let-context>
+                    <adw-role-selector
+                        *ngIf="!context.row.obj.entry.isMemberOfGroup"
+                        (memberRoleChanged)="onMemberRoleChanged($event, context.row.obj.entry)"
+                        [disabled]="context.row.obj.entry.isMemberOfGroup || context.row.obj.readonly"
+                        [attr.data-automation-id]="'site-role-' + context.row.obj.entry.id"
+                        [value]="context.row.obj.entry.role"
+                        [targetType]="context.row.obj.type" />
+
+                    <mat-chip-listbox *ngIf="context.row.obj.entry?.isMemberOfGroup && !collapsedView">
+                        <mat-chip-option
+                            data-automation-id="adw-member-list-group-role-chip"
+                            (click)="openGroupsInfoDialog(context.row.obj.entry)"
+                            [disabled]="context.row.obj.entry.person.displayName !== userProfile.userName && !userProfile.isAdmin">
+                            {{'MEMBER_LIST.GROUP_ROLE' | translate}}:&nbsp;
+                            <span data-automation-id="group-role"> {{ ACS_ROLES[context.row.obj.entry?.role] || context.row.obj.entry?.role }}</span>
+                        </mat-chip-option>
+                    </mat-chip-listbox>
+                </ng-template>
+            </data-column>
+
+            <data-column *ngIf="!collapsedView" class="adf-ellipsis-cell adw-member-action" key="">
+                <ng-template let-context>
+                    <button *ngIf="context.row.obj.type !== SiteMembershipType.REQUEST"
+                            [title]="'MEMBER_LIST.REMOVE' | translate"
+                            (click)="removeMember($event, context.row.obj.entry.id)"
+                            [disabled]="context.row.obj.entry?.isMemberOfGroup || context.row.obj.readonly"
+                            [attr.data-automation-id]="'remove-member-' + context.row.obj.entry?.id" mat-icon-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+
+                    <button
+                        *ngIf="context.row.obj.type === SiteMembershipType.REQUEST"
+                        [title]="'MEMBERSHIP_REQUESTS.REJECT' | translate"
+                        (click)="rejectMember($event, context.row.obj.entry?.id)"
+                        [attr.data-automation-id]="'reject-member-' + context?.row?.obj.entry?.id" mat-icon-button>
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </ng-template>
+            </data-column>
+        </data-columns>
+
+        <adf-custom-empty-content-template>
+            <adf-empty-content [title]="'MEMBER_LIST.NO_MEMBERS'" icon="people_alt" />
+        </adf-custom-empty-content-template>
+    </adw-data-table-extension>
+</div>

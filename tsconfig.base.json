@@ -1,0 +1,49 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "outDir": "./dist/out-tsc",
+    "importHelpers": true,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "target": "es2020",
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jasmine", "node", "jasminewd2"],
+    "lib": ["es2020", "dom"],
+    "inlineSources": true,
+    "module": "esnext",
+    "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+      "@alfresco/adf-content-services-extension": [
+        "libs/content-ee/content-services-extension/src/index.ts"
+      ],
+      "@alfresco/adf-governance": ["libs/content-ee/governance/src/index.ts"],
+      "@alfresco/adf-process-services-extension": [
+        "libs/content-ee/process-services-extension/src/index.ts"
+      ],
+      "@alfresco/analytics": ["libs/content-ee/analytics/src/index.ts"],
+      "@alfresco/dashboard-extension": [
+        "libs/content-ee/dashboard-extension/src/index.ts"
+      ],
+      "@alfresco/microsoft-office-online-integration-extension": [
+        "libs/content-ee/microsoft-office-online-integration-extension/src/index.ts"
+      ],
+      "package.json": ["./package.json"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false,
+    "strictTemplates": true
+  }
+}

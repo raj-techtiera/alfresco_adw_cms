@@ -1,0 +1,41 @@
+.aga-security-mark-help-dialog {
+    .adw-dialog-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+
+        span {
+            padding-top: 12px;
+            padding-left: 24px;
+            flex: 1;
+        }
+    }
+
+    .aga-ssecurity-marks-help-div {
+        display: flex;
+    }
+
+    .app-applied-btn,
+    .app-non-applied-btn {
+        margin-top: 12px;
+        margin-right: 12px;
+        padding: 3px;
+        border-radius: 20px;
+        display: inline-block;
+        height: 14px;
+    }
+
+    .app-applied-btn {
+        width: 30px;
+        border: 3px solid var(--theme-blue-border-color);
+        background-color: var(--theme-background-color);
+    }
+
+    .app-non-applied-btn {
+        background-color: var(--theme-grey-text-background);
+        width: 35px;
+    }
+}

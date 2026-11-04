@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Действие не выполнено. Повторите попытку или обратитесь к IT-специалистам.",
+        "PERMISSION_DENIED": "У вас нет разрешения на выполнение данной операции."
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{user}} попросил присоединиться к {{library}}",
+        "REQUEST_PLURAL": "{{number}} человек попросили присоединиться к {{library}}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Управлять участниками",
+        "CLOSE": "Закрыть",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Сведения о библиотеке",
+            "MANAGE_MEMBERS": "Управлять участниками"
+        },
+        "TABS": {
+            "PROPERTIES": "Свойства",
+            "MEMBERS": "Участники",
+            "GROUPS": "Группы",
+            "PENDING": "Ожидающие"
+        },
+        "LOAD_MORE": "Загрузить еще",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Подтвердить",
+            "MESSAGE": "Хотите продолжить?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Отклонить запрос участника",
+            "COMMENT": "Оставьте комментарий здесь",
+            "YES_LABEL": "Отклонить",
+            "NO_LABEL": "Отмена"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Информация о принадлежности к группе",
+            "DESCRIPTION": "Данный пользователь имеет доступ к библиотеке через роли группы. Если вам нужно удалить участие данного пользователя, сначала его нужно удалить из групп, указанных ниже.",
+            "CLOSE": "Закрыть",
+            "GROUP": "Группа",
+            "ROLE": "Роль"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Запросы на участие, ожидающие утверждения, отсутствуют",
+        "PENDING_REQUESTS": "Имеются запросы на участие, ожидающие утверждения",
+        "APPROVE": "Принять",
+        "REJECT": "Отклонить"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Участники данной библиотеки",
+        "NO_MEMBERS": "Пользователи не найдены",
+        "DELETE_MEMBERS": "Удалить выбранных участников",
+        "GROUP_ROLE": "Роль группы",
+        "REMOVE": "Удалить",
+        "A11Y_AVATAR": "Аватар пользователя",
+        "REFRESH": "Обновить"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Участие группы в данной библиотеке",
+        "NO_GROUPS": "Группы не найдены",
+        "DELETE_GROUPS": "Удалить выбранные группы",
+        "REFRESH": "Обновить",
+        "REMOVE": "Удалить"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Менеджер",
+        "SITE_CONTRIBUTOR": "Писатель",
+        "SITE_CONSUMER": "Читатель",
+        "SITE_COLLABORATOR": "Редактор"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Задать роль пользователя",
+        "GROUP_SELECTOR": "Задать роль группы",
+        "ALL": "Задать все роли"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Добавить пользователя/группу",
+        "SEARCH_INPUT": "Искать пользователей или группы для добавления",
+        "NAME": "Имя",
+        "TITLE_LABEL": "Добавить пользователя или группу в",
+        "ADD_LABEL": "Добавить",
+        "SELECT_LABEL": "Выбрать",
+        "CLOSE_LABEL": "Закрыть",
+        "CANCEL_LABEL": "Отмена"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Участники"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Запрос на участие отклонен",
+        "MEMBERSHIP_ACCEPTED": "Участник добавлен в библиотеку",
+        "USER_REMOVE_SUCCESS": "Пользователь удален",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} пользователей удалено, {{skipped}} пропущено",
+        "USER_REMOVE_FAILED": "Не удалось удалить пользователя",
+        "GROUP_REMOVE_SUCCESS": "Группа удалена",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} групп удалено, {{skipped}} пропущено",
+        "GROUP_REMOVE_FAILED": "Не удалось удалить группу",
+        "ADD_MEMBER_FAILED": "Не удалось добавить участника на сайт",
+        "ADD_MEMBERS_FAILED": "Не удалось добавить {{count}} участников",
+        "ADD_MEMBERS_SUCCESS": "Добавлены {{userCount}} пользователь(-ей) и {{groupCount}} групп(-а)",
+        "ADD_GROUPS_SUCCESS": "Добавлено групп: {{groupCount}}",
+        "ADD_USERS_SUCCESS": "Добавлено пользователей: {{userCount}}",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} участник добавлен, {{skipped}} пропущено",
+        "USER_ROLE_UPDATED": "Роль пользователя обновлена",
+        "GROUP_ROLE_UPDATED": "Роль группы обновлена",
+        "MEMBER_EXISTS": "Пользователь уже является участником сайта",
+        "MANAGER_REQUIRED": "Для сайта требуется минимум один диспетчер сайта",
+        "ACTIONS": {
+            "CLOSE": "Закрыть"
+        }
+    }
+}

@@ -1,0 +1,106 @@
+<div class="geo-page">
+  <!-- Page Header -->
+  <div class="geo-header">
+    <div>
+      <h1 class="geo-title">Geographic Overview</h1>
+      <p class="geo-subtitle">Project locations and company offices worldwide</p>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="geo-kpi-grid">
+    <article
+      class="geo-kpi-card"
+      *ngFor="let kpi of kpis; trackBy: trackByKpi"
+      [ngClass]="'geo-kpi-card--' + kpi.variant">
+      <div class="geo-kpi-card__icon" aria-hidden="true">
+        <svg *ngIf="kpi.variant === 'map'" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 22s7-5.33 7-12a7 7 0 1 0-14 0c0 6.67 7 12 7 12Z"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linejoin="round"/>
+          <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+        <svg *ngIf="kpi.variant === 'active'" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+          <path
+            d="M8 12.5 10.5 15 16 9.5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="geo-kpi-card__body">
+        <div class="geo-kpi-value">{{ kpi.value }}</div>
+        <div class="geo-kpi-label">{{ kpi.label }}</div>
+        <div class="geo-kpi-hint">{{ kpi.hint }}</div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Tabs -->
+  <div class="geo-tabs">
+    <button mat-raised-button type="button" class="geo-tab" *ngFor="let tab of tabs; trackBy: trackByTab"
+      [class.geo-tab--active]="activeTab === tab.key" (click)="setActiveTab(tab.key)">
+      <span class="geo-tab-icon">{{ tab.icon }}</span>
+      {{ tab.label }}
+    </button>
+  </div>
+
+  <!-- Tab Content: Map (kept in DOM so Leaflet survives tab switches) -->
+  <div class="geo-map-card" [hidden]="activeTab !== 'map'">
+    <div class="geo-map-status" *ngIf="projectsLoading">Loading project locations…</div>
+    <div class="geo-map-status geo-map-status--error" *ngIf="!projectsLoading && projectsError">{{ projectsError }}</div>
+    <div #geoMap class="geo-map-frame" role="application" aria-label="Geographic Overview Map"></div>
+  </div>
+
+  <!-- Tab Content: Projects -->
+  <div class="geo-projects-card" *ngIf="activeTab === 'projects'">
+    <div class="geo-empty-card" *ngIf="projectsLoading">
+      <p class="geo-empty-title">Loading projects…</p>
+    </div>
+    <div class="geo-empty-card" *ngIf="!projectsLoading && projectsError">
+      <div class="geo-empty-icon">⚠️</div>
+      <p class="geo-empty-title">{{ projectsError }}</p>
+    </div>
+    <div class="geo-empty-card" *ngIf="!projectsLoading && !projectsError && mapProjects.length === 0">
+      <div class="geo-empty-icon">📋</div>
+      <p class="geo-empty-title">No projects with location data yet.</p>
+      <p class="geo-empty-sub">Projects with coordinates will appear here.</p>
+    </div>
+    <div class="geo-projects-table-wrap" *ngIf="!projectsLoading && mapProjects.length > 0">
+      <table class="geo-projects-table">
+        <thead>
+          <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Type</th>
+            <th scope="col">Client</th>
+            <th scope="col">Latitude</th>
+            <th scope="col">Longitude</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of mapProjects; trackBy: trackByProject">
+            <td class="geo-projects-table__name">{{ project.name }}</td>
+            <td>{{ project.projectType || '—' }}</td>
+            <td>{{ project.client || '—' }}</td>
+            <td class="geo-projects-table__coord">{{ project.latitudeDisplay }}</td>
+            <td class="geo-projects-table__coord">{{ project.longitudeDisplay }}</td>
+            <td>
+              <span
+                class="geo-projects-table__status"
+                [class.geo-projects-table__status--active]="isProjectActive(project)"
+                [class.geo-projects-table__status--inactive]="!isProjectActive(project)">
+                {{ isProjectActive(project) ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

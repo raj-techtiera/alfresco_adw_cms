@@ -1,0 +1,160 @@
+<div class="adw-create-mdr-dialog">
+  <header class="adw-create-mdr-header">
+    <div class="adw-create-mdr-header__main">
+      <div class="adw-create-mdr-header__icon" aria-hidden="true">
+        <mat-icon>note_add</mat-icon>
+      </div>
+      <div class="adw-create-mdr-header__titles">
+        <h2 class="adw-create-mdr-title" id="adw-create-mdr-dialog-title">Request DVI</h2>
+        <p class="adw-create-mdr-subtitle">Component Register Item</p>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      type="button"
+      class="adw-create-mdr-header__close"
+      (click)="onClose()"
+      [disabled]="submitting || submitted"
+      aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="adw-create-mdr-body" [attr.aria-labelledby]="'adw-create-mdr-dialog-title'">
+    @if (submitted) {
+      <div class="adw-create-mdr-success" role="status">
+        <div class="adw-create-mdr-success__icon" aria-hidden="true">
+          <mat-icon>check</mat-icon>
+        </div>
+        <p class="adw-create-mdr-success__title">DVI Request Submitted</p>
+        <p class="adw-create-mdr-success__text">{{ form.dviTitle }} has been submitted.</p>
+      </div>
+    } @else {
+      <form id="adw-create-mdr-form" class="adw-create-mdr-form" (ngSubmit)="onSubmit()">
+        <div class="adw-create-mdr-row">
+          <div class="adw-create-mdr-labeled">
+            <label class="adw-create-mdr-labeled__label" for="adw-dvi-title">
+              DVI Title <span class="adw-create-mdr-labeled__req" aria-hidden="true">*</span>
+            </label>
+            <div class="input-shell">
+              <input
+                id="adw-dvi-title"
+                type="text"
+                name="dviTitle"
+                [(ngModel)]="form.dviTitle"
+                required
+                autocomplete="off"
+                placeholder="e.g. Testing_DVI" />
+            </div>
+          </div>
+
+          <div class="adw-create-mdr-labeled">
+            <label class="adw-create-mdr-labeled__label" for="adw-dvi-component">
+              Component <span class="adw-create-mdr-labeled__req" aria-hidden="true">*</span>
+            </label>
+            <div class="input-shell input-shell--select">
+              <mat-select
+                id="adw-dvi-component"
+                name="componentId"
+                [(ngModel)]="form.componentId"
+                required
+                panelClass="adw-create-mdr-select-panel"
+                placeholder="Select component"
+                [disabled]="componentsLoading">
+                @if (componentsLoading) {
+                  <mat-option disabled value="">Loading components…</mat-option>
+                } @else if (componentsError) {
+                  <mat-option disabled value="">{{ componentsError }}</mat-option>
+                } @else if (components.length === 0) {
+                  <mat-option disabled value="">No components found</mat-option>
+                } @else {
+                  @for (option of components; track option.id) {
+                    <mat-option [value]="option.id">{{ option.componentNumber }}</mat-option>
+                  }
+                }
+              </mat-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="adw-create-mdr-row">
+          <div class="adw-create-mdr-labeled">
+            <label class="adw-create-mdr-labeled__label" for="adw-dvi-level">
+              DVI Level <span class="adw-create-mdr-labeled__req" aria-hidden="true">*</span>
+            </label>
+            <div class="input-shell input-shell--select">
+              <mat-select
+                id="adw-dvi-level"
+                name="dviLevel"
+                [(ngModel)]="form.dviLevel"
+                required
+                panelClass="adw-create-mdr-select-panel"
+                placeholder="Select DVI level">
+                @for (option of dviLevelOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+            </div>
+          </div>
+
+          <div class="adw-create-mdr-labeled">
+            <label class="adw-create-mdr-labeled__label" for="adw-dvi-engineer">
+              Responsible Engineer <span class="adw-create-mdr-labeled__req" aria-hidden="true">*</span>
+            </label>
+            <div class="input-shell input-shell--select">
+              <mat-select
+                id="adw-dvi-engineer"
+                name="responsibleEngineer"
+                [(ngModel)]="form.responsibleEngineer"
+                required
+                panelClass="adw-create-mdr-select-panel"
+                placeholder="Select responsible engineer"
+                [disabled]="engineersLoading">
+                @if (engineersLoading) {
+                  <mat-option disabled value="">Loading engineers…</mat-option>
+                } @else if (engineersError) {
+                  <mat-option disabled value="">{{ engineersError }}</mat-option>
+                } @else if (engineers.length === 0) {
+                  <mat-option disabled value="">No engineers found</mat-option>
+                } @else {
+                  @for (option of engineers; track option.authorityId) {
+                    <mat-option [value]="option.authorityId">{{ option.name }}</mat-option>
+                  }
+                }
+              </mat-select>
+            </div>
+          </div>
+        </div>
+      </form>
+    }
+  </div>
+
+  @if (!submitted) {
+    <footer class="adw-create-mdr-footer">
+      <button
+        mat-raised-button
+        type="button"
+        class="adw-create-mdr-footer__cancel"
+        (click)="onClose()"
+        [disabled]="submitting">
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        form="adw-create-mdr-form"
+        class="adw-create-mdr-footer__submit"
+        [disabled]="!isValid || submitting">
+        @if (submitting) {
+          Submitting…
+        } @else {
+          <span class="adw-create-mdr-footer__submit-label">
+            <mat-icon aria-hidden="true">add</mat-icon>
+            Request DVI
+          </span>
+        }
+      </button>
+    </footer>
+  }
+</div>

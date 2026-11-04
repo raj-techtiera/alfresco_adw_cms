@@ -1,0 +1,621 @@
+<main class="user-management">
+  <header class="page-header">
+    <h1>User Management</h1>
+  </header>
+
+  <div class="um-body">
+  <p class="um-subtitle">Manage system users, roles, and access permissions</p>
+
+  <mat-tab-group [(selectedIndex)]="activeTab" class="management-tabs" animationDuration="150ms">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Users
+        <span class="tab-count">{{ userTotal }}</span>
+      </ng-template>
+
+      <section class="tab-content">
+        <div class="stats-actions-row">
+          <div class="stats" aria-label="User statistics">
+            <mat-card appearance="outlined" class="stat-card total-stat">
+              <strong>{{ userTotal }}</strong>
+              <span>Total Users</span>
+              <small>All records</small>
+            </mat-card>
+            <mat-card appearance="outlined" class="stat-card active-stat">
+              <strong>{{ activeCount }}</strong>
+              <span>Active</span>
+              <small>{{ userTotal ? ((activeCount / userTotal) * 100 | number: '1.0-0') : 0 }}% of total</small>
+            </mat-card>
+            <mat-card appearance="outlined" class="stat-card disabled-stat">
+              <strong>{{ disabledCount }}</strong>
+              <span>Disabled</span>
+              <small>{{ userTotal ? ((disabledCount / userTotal) * 100 | number: '1.0-0') : 0 }}% of total</small>
+            </mat-card>
+          </div>
+          <div class="tab-actions">
+            <button mat-button class="refresh-button" aria-label="Refresh users" (click)="loadUsers()" [disabled]="usersLoading">
+              <mat-icon>refresh</mat-icon>
+              Refresh
+            </button>
+            <button mat-flat-button class="add-button" (click)="openCreateDialog('user')">
+              <mat-icon>add</mat-icon>
+              Add User
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-card">
+          <div class="searchbox" [class.searchbox--active]="!!search">
+            <span class="searchbox__lead" aria-hidden="true">
+              <mat-icon class="searchbox__lead-icon">travel_explore</mat-icon>
+            </span>
+            <input
+              type="search"
+              class="searchbox__input"
+              [(ngModel)]="search"
+              placeholder="Search by name, ID, email, job title..."
+              aria-label="Search users"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            @if (search) {
+              <button type="button" class="searchbox__clear" (click)="search = ''" aria-label="Clear user search" title="Clear">
+                <mat-icon aria-hidden="true">close</mat-icon>
+                <span>Clear</span>
+              </button>
+            }
+            <button type="button" class="searchbox__submit" aria-label="Search users" title="Search">
+              <mat-icon aria-hidden="true">search</mat-icon>
+              <span>Search</span>
+            </button>
+          </div>
+
+          <div class="status-filter" role="group" aria-label="Filter users by status">
+            <button
+              type="button"
+              class="status-filter__btn"
+              [class.status-filter__btn--active]="userFilter === 'all'"
+              (click)="userFilter = 'all'"
+            >
+              @if (userFilter === 'all') {
+                <mat-icon aria-hidden="true">check</mat-icon>
+              }
+              All ({{ userTotal }})
+            </button>
+            <button
+              type="button"
+              class="status-filter__btn"
+              [class.status-filter__btn--active]="userFilter === 'active'"
+              (click)="userFilter = 'active'"
+            >
+              @if (userFilter === 'active') {
+                <mat-icon aria-hidden="true">check</mat-icon>
+              }
+              Active ({{ activeCount }})
+            </button>
+          </div>
+
+          @if (filteredUsers.length !== users.length) {
+            <span class="result-count">Showing <strong>{{ filteredUsers.length }}</strong> results</span>
+          }
+        </div>
+
+        @if (usersLoading) {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-spinner diameter="40"></mat-spinner>
+            <strong>Loading users…</strong>
+          </mat-card>
+        } @else if (usersError) {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-icon>error_outline</mat-icon>
+            <strong>{{ usersError }}</strong>
+            <button mat-stroked-button (click)="loadUsers()">Retry</button>
+          </mat-card>
+        } @else if (filteredUsers.length) {
+          <div class="table-card">
+            <div class="table-scroll">
+              <table mat-table [dataSource]="filteredUsers" class="management-table user-table">
+                <ng-container matColumnDef="user">
+                  <th mat-header-cell *matHeaderCellDef>User</th>
+                  <td mat-cell *matCellDef="let user">
+                    <div class="user-cell">
+                      <span class="avatar" [style.background-color]="avatarColor(user.id)">{{ initials(user.displayName) }}</span>
+                      <span class="user-details">
+                        <strong>{{ user.displayName }}</strong>
+                        @if (user.organization) {
+                          <small>{{ user.organization }}</small>
+                        }
+                      </span>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let user"><code>{{ user.id }}</code></td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef>Email</th>
+                  <td mat-cell *matCellDef="let user"><span class="truncate">{{ user.email || '—' }}</span></td>
+                </ng-container>
+
+                <ng-container matColumnDef="jobTitle">
+                  <th mat-header-cell *matHeaderCellDef>Job Title</th>
+                  <td mat-cell *matCellDef="let user">{{ user.jobTitle || '—' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef>Location</th>
+                  <td mat-cell *matCellDef="let user">
+                    @if (user.location) {
+                      <span class="location"><mat-icon>location_on</mat-icon>{{ user.location }}</span>
+                    } @else {
+                      —
+                    }
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef>Status</th>
+                  <td mat-cell *matCellDef="let user">
+                    <mat-chip [class.status-active]="user.enabled" [class.status-disabled]="!user.enabled">
+                      <span class="status-dot"></span>
+                      {{ user.enabled ? 'Active' : 'Disabled' }}
+                    </mat-chip>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef class="actions-heading">Actions</th>
+                  <td mat-cell *matCellDef="let user" class="actions-cell">
+                    <button
+                      mat-stroked-button
+                      class="view-details-button"
+                      matTooltip="View user details"
+                      aria-label="View user details"
+                      (click)="openUserDetails(user)"
+                    >
+                      <mat-icon>visibility</mat-icon>
+                      View Details
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: userColumns"></tr>
+              </table>
+            </div>
+
+            <mat-paginator
+              [length]="userTotal"
+              [pageSize]="userPageSize"
+              [pageIndex]="userPageIndex"
+              [pageSizeOptions]="pageSizeOptions"
+              [showFirstLastButtons]="true"
+              (page)="onUserPageChange($event)">
+            </mat-paginator>
+          </div>
+
+          <p class="table-summary">
+            Showing <strong>{{ filteredUsers.length }}</strong> of <strong>{{ userTotal }}</strong> users
+            <span>·</span> {{ activeCount }} active <span>·</span> {{ disabledCount }} disabled
+          </p>
+        } @else {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-icon>group_off</mat-icon>
+            <strong>No users found</strong>
+            <span>Try adjusting your search or filter criteria</span>
+          </mat-card>
+        }
+      </section>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Groups
+        <span class="tab-count">{{ groupTotal }}</span>
+      </ng-template>
+
+      <section class="tab-content">
+        <div class="stats-actions-row">
+          <div class="stats" aria-label="Group statistics">
+            <mat-card appearance="outlined" class="stat-card total-stat">
+              <strong>{{ groupTotal }}</strong>
+              <span>Total Groups</span>
+              <small>All records</small>
+            </mat-card>
+            <mat-card appearance="outlined" class="stat-card root-stat">
+              <strong>{{ rootGroupCount }}</strong>
+              <span>Root Groups</span>
+              <small>{{ groupTotal ? ((rootGroupCount / groupTotal) * 100 | number: '1.0-0') : 0 }}% of total</small>
+            </mat-card>
+            <mat-card appearance="outlined" class="stat-card sub-stat">
+              <strong>{{ groups.length - rootGroupCount }}</strong>
+              <span>Sub Groups</span>
+              <small>{{ groupTotal ? (((groups.length - rootGroupCount) / groupTotal) * 100 | number: '1.0-0') : 0 }}% of total</small>
+            </mat-card>
+          </div>
+          <div class="tab-actions">
+            <button mat-button class="refresh-button" aria-label="Refresh groups" (click)="loadGroups()" [disabled]="groupsLoading">
+              <mat-icon>refresh</mat-icon>
+              Refresh
+            </button>
+            <button mat-flat-button class="add-button" (click)="openCreateDialog('group')">
+              <mat-icon>add</mat-icon>
+              Add Group
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-card group-filter-card">
+          <div class="searchbox" [class.searchbox--active]="!!groupSearch">
+            <span class="searchbox__lead" aria-hidden="true">
+              <mat-icon class="searchbox__lead-icon">travel_explore</mat-icon>
+            </span>
+            <input
+              type="search"
+              class="searchbox__input"
+              [(ngModel)]="groupSearch"
+              placeholder="Search by display name or group ID..."
+              aria-label="Search groups"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            @if (groupSearch) {
+              <button type="button" class="searchbox__clear" (click)="groupSearch = ''" aria-label="Clear group search" title="Clear">
+                <mat-icon aria-hidden="true">close</mat-icon>
+                <span>Clear</span>
+              </button>
+            }
+            <button type="button" class="searchbox__submit" aria-label="Search groups" title="Search">
+              <mat-icon aria-hidden="true">search</mat-icon>
+              <span>Search</span>
+            </button>
+          </div>
+        </div>
+
+        @if (groupsLoading) {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-spinner diameter="40"></mat-spinner>
+            <strong>Loading groups…</strong>
+          </mat-card>
+        } @else if (groupsError) {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-icon>error_outline</mat-icon>
+            <strong>{{ groupsError }}</strong>
+            <button mat-stroked-button (click)="loadGroups()">Retry</button>
+          </mat-card>
+        } @else if (filteredGroups.length) {
+          <div class="group-split">
+            <div class="table-card">
+              <div class="table-scroll">
+                <table mat-table [dataSource]="filteredGroups" class="management-table group-table">
+                  <ng-container matColumnDef="displayName">
+                    <th mat-header-cell *matHeaderCellDef>Display Name</th>
+                    <td mat-cell *matCellDef="let group"><strong>{{ group.displayName }}</strong></td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>Group ID</th>
+                    <td mat-cell *matCellDef="let group"><code>{{ group.id }}</code></td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="isRoot">
+                    <th mat-header-cell *matHeaderCellDef>Is Root</th>
+                    <td mat-cell *matCellDef="let group">
+                      <mat-chip [class.root-chip]="group.isRoot" [class.sub-chip]="!group.isRoot">
+                        {{ group.isRoot ? 'Root' : 'Sub' }}
+                      </mat-chip>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="actions-heading">Actions</th>
+                    <td mat-cell *matCellDef="let group" class="actions-cell">
+                      <button
+                        mat-stroked-button
+                        class="add-members-button"
+                        matTooltip="Show users in this group"
+                        aria-label="Show users in group"
+                        (click)="showGroupMembers(group)"
+                      >
+                        <mat-icon>group</mat-icon>
+                        Show Users
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="groupColumns"></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: groupColumns"
+                    [class.row-selected]="selectedGroup?.id === row.id"
+                  ></tr>
+                </table>
+              </div>
+
+              <mat-paginator
+                [length]="groupTotal"
+                [pageSize]="groupPageSize"
+                [pageIndex]="groupPageIndex"
+                [pageSizeOptions]="pageSizeOptions"
+                [showFirstLastButtons]="true"
+                (page)="onGroupPageChange($event)">
+              </mat-paginator>
+            </div>
+
+            @if (selectedGroup) {
+              <aside class="members-panel" aria-label="Group members">
+                <header class="members-panel__header">
+                  <div class="members-panel__title">
+                    <strong>{{ selectedGroup.displayName }}</strong>
+                    <small>{{ groupMembersLoading ? 'Loading users…' : groupMembers.length + ' user' + (groupMembers.length === 1 ? '' : 's') }}</small>
+                  </div>
+                  <button
+                    mat-stroked-button
+                    class="members-panel__add"
+                    aria-label="Add users to group"
+                    (click)="openAddMembersDialog(selectedGroup)"
+                  >
+                    <mat-icon>person_add_alt</mat-icon>
+                    Add Users
+                  </button>
+                  <button
+                    mat-stroked-button
+                    class="members-panel__close"
+                    aria-label="Close members panel"
+                    (click)="closeGroupMembers()"
+                  >
+                    Close
+                  </button>
+                </header>
+
+                <div class="members-panel__body">
+                  @if (groupMembersLoading) {
+                    <div class="members-panel__state">
+                      <mat-spinner diameter="32"></mat-spinner>
+                      <span>Loading users…</span>
+                    </div>
+                  } @else if (groupMembersError) {
+                    <div class="members-panel__state">
+                      <mat-icon>error_outline</mat-icon>
+                      <span>{{ groupMembersError }}</span>
+                      <button mat-stroked-button (click)="showGroupMembers(selectedGroup)">Retry</button>
+                    </div>
+                  } @else if (groupMembers.length) {
+                    @for (member of groupMembers; track member.id) {
+                      <div class="member-row">
+                        <span class="avatar avatar--small" [style.background-color]="avatarColor(member.id)">{{ initials(member.displayName) }}</span>
+                        <span class="member-row__text">
+                          <strong>{{ member.displayName }}</strong>
+                          <small>{{ member.id }}</small>
+                        </span>
+                      </div>
+                    }
+                  } @else {
+                    <div class="members-panel__state">
+                      <mat-icon>group_off</mat-icon>
+                      <span>No users in this group yet</span>
+                    </div>
+                  }
+                </div>
+              </aside>
+            }
+          </div>
+
+          <p class="table-summary">
+            Showing <strong>{{ filteredGroups.length }}</strong> of <strong>{{ groupTotal }}</strong> groups
+          </p>
+        } @else {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-icon>search_off</mat-icon>
+            <strong>No groups found</strong>
+            <span>Try a different display name or group ID</span>
+          </mat-card>
+        }
+      </section>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Site Members
+        <span class="tab-count">{{ siteMemberTotal }}</span>
+      </ng-template>
+
+      <section class="tab-content">
+        <div class="stats-actions-row">
+          <div class="stats" aria-label="Site member statistics">
+            <mat-card appearance="outlined" class="stat-card total-stat">
+              <strong>{{ siteMemberTotal }}</strong>
+              <span>Total Site Members</span>
+              <small>Groups on {{ edmsCentralSiteId }}</small>
+            </mat-card>
+          </div>
+          <div class="tab-actions">
+            <button
+              mat-button
+              class="refresh-button"
+              aria-label="Refresh site members"
+              (click)="loadSiteMembers()"
+              [disabled]="siteMembersLoading">
+              <mat-icon>refresh</mat-icon>
+              Refresh
+            </button>
+            <button
+              mat-flat-button
+              class="add-button"
+              aria-label="Add site member"
+              (click)="openAddSiteMemberDialog()"
+              [disabled]="siteMembersLoading">
+              <mat-icon>add</mat-icon>
+              Add site member
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-card group-filter-card">
+          <div class="searchbox" [class.searchbox--active]="!!siteMemberSearch">
+            <span class="searchbox__lead" aria-hidden="true">
+              <mat-icon class="searchbox__lead-icon">travel_explore</mat-icon>
+            </span>
+            <input
+              type="search"
+              class="searchbox__input"
+              [(ngModel)]="siteMemberSearch"
+              placeholder="Search by display name, group ID, or role..."
+              aria-label="Search site members"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            @if (siteMemberSearch) {
+              <button
+                type="button"
+                class="searchbox__clear"
+                (click)="siteMemberSearch = ''"
+                aria-label="Clear site member search"
+                title="Clear">
+                <mat-icon aria-hidden="true">close</mat-icon>
+                <span>Clear</span>
+              </button>
+            }
+            <button type="button" class="searchbox__submit" aria-label="Search site members" title="Search">
+              <mat-icon aria-hidden="true">search</mat-icon>
+              <span>Search</span>
+            </button>
+          </div>
+        </div>
+
+        @if (siteMembersLoading) {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-spinner diameter="40"></mat-spinner>
+            <strong>Loading site members…</strong>
+          </mat-card>
+        } @else if (siteMembersError) {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-icon>error_outline</mat-icon>
+            <strong>{{ siteMembersError }}</strong>
+            <button mat-stroked-button (click)="loadSiteMembers()">Retry</button>
+          </mat-card>
+        } @else if (filteredSiteMembers.length) {
+          <div class="group-split">
+            <div class="table-card">
+              <div class="table-scroll">
+                <table mat-table [dataSource]="filteredSiteMembers" class="management-table group-table">
+                  <ng-container matColumnDef="displayName">
+                    <th mat-header-cell *matHeaderCellDef>Display Name</th>
+                    <td mat-cell *matCellDef="let member"><strong>{{ member.displayName }}</strong></td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>Group ID</th>
+                    <td mat-cell *matCellDef="let member"><code>{{ member.id }}</code></td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef>Role</th>
+                    <td mat-cell *matCellDef="let member">
+                      <mat-chip class="root-chip">{{ formatSiteRole(member.role) }}</mat-chip>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="actions-heading">Actions</th>
+                    <td mat-cell *matCellDef="let member" class="actions-cell">
+                      <button
+                        mat-stroked-button
+                        class="add-members-button"
+                        matTooltip="Show users in this group"
+                        aria-label="Show users in site group"
+                        (click)="showSiteGroupMembers(member)"
+                      >
+                        <mat-icon>group</mat-icon>
+                        Show Users
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="siteMemberColumns"></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: siteMemberColumns"
+                    [class.row-selected]="selectedSiteGroup?.id === row.id"
+                  ></tr>
+                </table>
+              </div>
+
+              <mat-paginator
+                [length]="siteMemberTotal"
+                [pageSize]="siteMemberPageSize"
+                [pageIndex]="siteMemberPageIndex"
+                [pageSizeOptions]="pageSizeOptions"
+                [showFirstLastButtons]="true"
+                (page)="onSiteMemberPageChange($event)">
+              </mat-paginator>
+            </div>
+
+            @if (selectedSiteGroup) {
+              <aside class="members-panel" aria-label="Site group members">
+                <header class="members-panel__header">
+                  <div class="members-panel__title">
+                    <strong>{{ selectedSiteGroup.displayName }}</strong>
+                    <small>{{ siteGroupMembersLoading ? 'Loading users…' : siteGroupMembers.length + ' user' + (siteGroupMembers.length === 1 ? '' : 's') }}</small>
+                  </div>
+                  <button
+                    mat-stroked-button
+                    class="members-panel__close"
+                    aria-label="Close members panel"
+                    (click)="closeSiteGroupMembers()"
+                  >
+                    Close
+                  </button>
+                </header>
+
+                <div class="members-panel__body">
+                  @if (siteGroupMembersLoading) {
+                    <div class="members-panel__state">
+                      <mat-spinner diameter="32"></mat-spinner>
+                      <span>Loading users…</span>
+                    </div>
+                  } @else if (siteGroupMembersError) {
+                    <div class="members-panel__state">
+                      <mat-icon>error_outline</mat-icon>
+                      <span>{{ siteGroupMembersError }}</span>
+                      <button mat-stroked-button (click)="showSiteGroupMembers(selectedSiteGroup)">Retry</button>
+                    </div>
+                  } @else if (siteGroupMembers.length) {
+                    @for (member of siteGroupMembers; track member.id) {
+                      <div class="member-row">
+                        <span class="avatar avatar--small" [style.background-color]="avatarColor(member.id)">{{ initials(member.displayName) }}</span>
+                        <span class="member-row__text">
+                          <strong>{{ member.displayName }}</strong>
+                          <small>{{ member.id }}</small>
+                        </span>
+                      </div>
+                    }
+                  } @else {
+                    <div class="members-panel__state">
+                      <mat-icon>group_off</mat-icon>
+                      <span>No users in this group yet</span>
+                    </div>
+                  }
+                </div>
+              </aside>
+            }
+          </div>
+
+          <p class="table-summary">
+            Showing <strong>{{ filteredSiteMembers.length }}</strong> of <strong>{{ siteMemberTotal }}</strong> site members
+          </p>
+        } @else {
+          <mat-card appearance="outlined" class="empty-state">
+            <mat-icon>search_off</mat-icon>
+            <strong>No site members found</strong>
+            <span>Try a different display name, group ID, or role</span>
+          </mat-card>
+        }
+      </section>
+    </mat-tab>
+  </mat-tab-group>
+  </div>
+</main>

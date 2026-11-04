@@ -1,0 +1,555 @@
+<div class="st-layout">
+  <div class="st-header">
+    <h1 class="st-page-title">Settings</h1>
+  </div>
+  <div class="st-body">
+  <!-- Left Sub-Navigation -->
+  <div class="st-subnav">
+    <button type="button" class="st-subnav-item" *ngFor="let item of subNavItems; trackBy: trackByKey"
+      [class.st-subnav-item--active]="activeSection === item.key" (click)="setSection(item.key)">
+      <span class="st-subnav-icon" [ngSwitch]="item.icon">
+        <svg *ngSwitchCase="'user'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0116 0" /></svg>
+        <svg *ngSwitchCase="'building'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1" /><line x1="9" y1="7" x2="9" y2="7.01" /><line x1="15" y1="7" x2="15" y2="7.01" /><line x1="9" y1="11" x2="9" y2="11.01" /><line x1="15" y1="11" x2="15" y2="11.01" /><line x1="10" y1="21" x2="14" y2="21" /></svg>
+        <svg *ngSwitchCase="'envelope'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+        <svg *ngSwitchCase="'storage'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" /><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" /></svg>
+        <svg *ngSwitchCase="'globe'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18" /></svg>
+        <svg *ngSwitchCase="'card'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></svg>
+        <svg *ngSwitchCase="'lock'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 018 0v4" /></svg>
+        <svg *ngSwitchCase="'key'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4" /><path d="M11 12l9-9M17 3l3 3M14 6l3 3" /></svg>
+        <svg *ngSwitchCase="'link'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1" /><path d="M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1" /></svg>
+        <svg *ngSwitchCase="'watermark'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 16l3.2-4.2 2.3 2.8L16 10l4 6" /><path d="M4 19l16-8" opacity="0.45" /></svg>
+        <svg *ngSwitchCase="'palette'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 100 18h1.2a2.3 2.3 0 000-4.6H12a1.6 1.6 0 01-1.6-1.6A9 9 0 0112 3z" /><circle cx="7.5" cy="10" r="0.8" fill="currentColor" /><circle cx="9.5" cy="7.2" r="0.8" fill="currentColor" /><circle cx="13.2" cy="6.6" r="0.8" fill="currentColor" /><circle cx="16" cy="9.2" r="0.8" fill="currentColor" /></svg>
+      </span>
+      <span>{{ item.label }}</span>
+    </button>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="st-main">
+    <!-- PROFILE -->
+    <div *ngIf="activeSection === 'profile'">
+      <h1 class="st-h1">Profile</h1>
+
+      <div class="st-profile-head">
+        <div class="st-avatar">R</div>
+        <div>
+          <p class="st-profile-name">Raj</p>
+          <p class="st-profile-meta">raj&#64;bhavath.com · <span class="st-muted">tenant_owner</span></p>
+        </div>
+      </div>
+
+      <!-- Personal Information -->
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Personal information</h2>
+          <p class="st-card-sub">Update your name and contact details</p>
+        </div>
+
+        <div class="st-grid st-grid--2">
+          <div class="st-field">
+            <label class="st-label">Full Name</label>
+            <input type="text" class="st-input st-input--focus" [(ngModel)]="fullName" placeholder="Full name" />
+          </div>
+          <div class="st-field">
+            <label class="st-label">Email Address</label>
+            <input type="email" class="st-input st-input--readonly" value="raj@bhavath.com" readonly />
+            <p class="st-hint">Email cannot be changed here</p>
+          </div>
+        </div>
+
+        <div class="st-grid st-grid--2">
+          <div class="st-field">
+            <label class="st-label">Mobile Number</label>
+            <input type="tel" class="st-input" [(ngModel)]="mobileNumber" placeholder="+91 XXXXX XXXXX" />
+          </div>
+          <div class="st-field">
+            <label class="st-label">Role</label>
+            <input type="text" class="st-input st-input--readonly" value="admin" readonly />
+            <p class="st-hint">Role is assigned by your administrator</p>
+          </div>
+        </div>
+
+        <div class="st-actions">
+          <button type="button" class="st-btn st-btn--gray" (click)="handleSaveChanges()">Save changes</button>
+          <span class="st-success" *ngIf="saveSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Saved successfully</span>
+        </div>
+      </div>
+
+      <!-- Change Password -->
+      <div class="st-card">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Change password</h2>
+          <p class="st-card-sub">Choose a strong password of at least 8 characters</p>
+        </div>
+
+        <div class="st-grid st-grid--3">
+          <div class="st-field">
+            <label class="st-label">Current Password</label>
+            <input type="password" class="st-input" [(ngModel)]="currentPassword" placeholder="Current password" />
+          </div>
+          <div class="st-field">
+            <label class="st-label">New Password</label>
+            <input type="password" class="st-input" [(ngModel)]="newPassword" placeholder="New password" />
+          </div>
+          <div class="st-field">
+            <label class="st-label">Confirm New Password</label>
+            <input type="password" class="st-input" [(ngModel)]="confirmPassword" placeholder="Confirm password" />
+          </div>
+        </div>
+
+        <div class="st-actions">
+          <button mat-raised-button type="button" class="st-btn st-btn--gray" (click)="handleChangePassword()">Change password</button>
+          <span class="st-success" *ngIf="passwordSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Password changed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORGANISATION -->
+    <div *ngIf="activeSection === 'organisation'">
+      <h1 class="st-h1 st-h1--mb6">Organisation</h1>
+
+      <div class="st-stats">
+        <div class="st-stat" *ngFor="let stat of orgStats; trackBy: trackByLabel">
+          <p class="st-stat-label">{{ stat.label }}</p>
+          <p class="st-stat-value">{{ stat.value }}</p>
+        </div>
+      </div>
+
+      <div class="st-card">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Organisation details</h2>
+          <p class="st-card-sub">Update your company name and domain settings</p>
+        </div>
+
+        <div class="st-grid st-grid--2">
+          <div class="st-field">
+            <label class="st-label">Organisation Name</label>
+            <input type="text" class="st-input st-input--focus" [(ngModel)]="orgName" placeholder="Organisation name" />
+          </div>
+          <div class="st-field">
+            <label class="st-label">Workspace Slug</label>
+            <input type="text" class="st-input st-input--readonly" value="bhavath" readonly />
+            <p class="st-hint">Workspace URL cannot be changed</p>
+          </div>
+        </div>
+
+        <div class="st-grid st-grid--2">
+          <div class="st-field">
+            <label class="st-label">Custom Domain</label>
+            <input type="text" class="st-input" [(ngModel)]="customDomainOrg" />
+            <p class="st-hint">Manage your custom domain in the Custom domain tab</p>
+          </div>
+          <div class="st-field">
+            <label class="st-label">Plan</label>
+            <input type="text" class="st-input st-input--readonly" value="Free · -1 users · 5GB" readonly />
+          </div>
+        </div>
+
+        <div class="st-grid st-grid--2">
+          <div class="st-field">
+            <label class="st-label">Status</label>
+            <input type="text" class="st-input st-input--readonly" value="trial" readonly />
+          </div>
+          <div class="st-field">
+            <label class="st-label">Member Since</label>
+            <input type="text" class="st-input st-input--readonly" value="26 June 2026" readonly />
+          </div>
+        </div>
+
+        <div class="st-actions">
+          <button mat-raised-button type="button" class="st-btn st-btn--gray" (click)="handleOrgSave()">Save changes</button>
+          <span class="st-success" *ngIf="orgSaveSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Saved successfully</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL & SMTP -->
+    <div *ngIf="activeSection === 'email-smtp'">
+      <h1 class="st-h1 st-h1--mb6">Email &amp; SMTP</h1>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Email provider</h2>
+          <p class="st-card-sub">Choose how emails are sent from your account</p>
+        </div>
+
+        <div class="st-grid st-grid--2 st-grid--tight">
+          <button type="button" class="st-option" [class.st-option--active]="emailProvider === 'epcdoc'"
+            (click)="emailProvider = 'epcdoc'">
+            <div class="st-option-head">
+              <span class="st-radio-dot" [class.st-radio-dot--on]="emailProvider === 'epcdoc'"></span>
+              <span class="st-option-title">EPCdoc (default)</span>
+            </div>
+            <p class="st-option-desc st-option-desc--indent">Sent via EPCdoc's email infrastructure. No setup needed.</p>
+          </button>
+
+          <button type="button" class="st-option st-option--alt" [class.st-option--active]="emailProvider === 'own'"
+            (click)="emailProvider = 'own'">
+            <div class="st-option-head">
+              <svg class="st-option-svg" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" /></svg>
+              <span class="st-option-title">Your own SMTP</span>
+            </div>
+            <p class="st-option-desc st-option-desc--indent5">Emails sent from your own email server/domain.</p>
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="st-btn st-btn--blue" (click)="handleEmailSave()">Save email settings</button>
+      <span class="st-success st-success--inline" *ngIf="emailSaveSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Saved</span>
+    </div>
+
+    <!-- STORAGE -->
+    <div *ngIf="activeSection === 'storage'">
+      <h1 class="st-h1 st-h1--mb6">Storage</h1>
+
+      <div class="st-card st-card--mb">
+        <h2 class="st-card-title st-card-title--mb1">Storage usage</h2>
+        <div class="st-storage-row">
+          <span>0.00 GB used</span>
+          <span>50 GB limit</span>
+        </div>
+        <div class="st-progress"><div class="st-progress-bar" style="width:0%"></div></div>
+      </div>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Storage provider</h2>
+          <p class="st-card-sub">Where your files and documents are stored</p>
+        </div>
+
+        <div class="st-grid st-grid--2 st-grid--tight">
+          <button type="button" class="st-option" [class.st-option--active]="storageProvider === 'epcdoc'"
+            (click)="storageProvider = 'epcdoc'">
+            <div class="st-option-head">
+              <svg class="st-option-svg" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" /></svg>
+              <span class="st-option-title">EPCdoc Cloud</span>
+            </div>
+            <p class="st-option-desc">Files stored on EPCdoc's Wasabi S3. No setup needed.</p>
+          </button>
+
+          <button type="button" class="st-option st-option--alt" [class.st-option--active]="storageProvider === 's3'"
+            (click)="storageProvider = 's3'">
+            <div class="st-option-head">
+              <svg class="st-option-svg" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="1" /><rect x="2" y="9" width="20" height="6" rx="1" /><rect x="2" y="15" width="20" height="6" rx="1" /><line x1="6" y1="6" x2="6" y2="6.01" /><line x1="6" y1="12" x2="6" y2="12.01" /><line x1="6" y1="18" x2="6" y2="18.01" /></svg>
+              <span class="st-option-title">Your own S3 / Wasabi</span>
+            </div>
+            <p class="st-option-desc">AWS S3, Wasabi, MinIO, or any S3-compatible storage.</p>
+          </button>
+
+          <button type="button" class="st-option" [class.st-option--active]="storageProvider === 'azure'"
+            (click)="storageProvider = 'azure'">
+            <div class="st-option-head">
+              <svg class="st-option-svg" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /></svg>
+              <span class="st-option-title">Azure Blob Storage</span>
+            </div>
+            <p class="st-option-desc">Microsoft Azure Blob Storage container.</p>
+          </button>
+
+          <button type="button" class="st-option st-option--alt" [class.st-option--active]="storageProvider === 'onprem'"
+            (click)="storageProvider = 'onprem'">
+            <div class="st-option-head">
+              <svg class="st-option-svg" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="12" rx="2" /><line x1="8" y1="20" x2="16" y2="20" /><line x1="12" y1="16" x2="12" y2="20" /></svg>
+              <span class="st-option-title">On-Premise / NFS</span>
+            </div>
+            <p class="st-option-desc">Local server storage or NFS mount. For air-gapped deployments.</p>
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="st-btn st-btn--blue" (click)="handleStorageSave()">Save storage settings</button>
+      <span class="st-success st-success--inline" *ngIf="storageSaveSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Saved</span>
+    </div>
+
+    <!-- CUSTOM DOMAIN -->
+    <div *ngIf="activeSection === 'custom-domain'">
+      <h1 class="st-h1 st-h1--mb6">Custom domain</h1>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Custom domain</h2>
+          <p class="st-card-sub">Serve EPCdoc on your own domain (e.g. infra.maharashtra.gov.in). Your users see only your branding.</p>
+        </div>
+
+        <label class="st-label-plain">Your domain</label>
+        <div class="st-domain-row">
+          <input type="text" class="st-input" [(ngModel)]="customDomain" placeholder="infra.maharashtra.gov.in" />
+          <button type="button" class="st-btn st-btn--blue" (click)="handleDomainSave()">Save domain</button>
+        </div>
+        <p class="st-success st-success--mt" *ngIf="domainSaveSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Domain saved</p>
+      </div>
+
+      <div class="st-card">
+        <h2 class="st-card-title st-card-title--mb2">SSL certificate</h2>
+        <p class="st-card-sub st-card-sub--mb4">After DNS is verified, contact your EPCdoc administrator to install an SSL certificate for your domain. Options:</p>
+        <ul class="st-ssl-list">
+          <li><span class="st-ssl-strong">Let's Encrypt (free)</span><span class="st-muted"> — automatic, renewed every 90 days</span></li>
+          <li><span class="st-ssl-strong">Government SSL cert</span><span class="st-muted"> — provide your .pem and .key files to EPCdoc admin</span></li>
+          <li><span class="st-ssl-strong">CDAC/NIC SSL</span><span class="st-muted"> — for NIC-hosted deployments, NIC provisions SSL automatically</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BILLING & PLAN -->
+    <div *ngIf="activeSection === 'billing'">
+      <h1 class="st-h1 st-h1--mb6">Billing &amp; plan</h1>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Current plan</h2>
+          <p class="st-card-sub">Your subscription and usage</p>
+        </div>
+
+        <div class="st-plan-row">
+          <div class="st-plan-box st-plan-box--trial">
+            <p class="st-plan-tag">FREE TRIAL</p>
+            <p class="st-plan-name">Free Trial</p>
+            <p class="st-plan-meta">-1 users · 5GB storage</p>
+            <p class="st-plan-cta">Trial — Upgrade to activate</p>
+          </div>
+          <div class="st-plan-box st-plan-box--status">
+            <p class="st-plan-tag">ACCOUNT STATUS</p>
+            <p class="st-plan-status">• Trial · expires 10/7/2026</p>
+            <p class="st-plan-meta">Workspace: bhavath.epcdoc.com</p>
+          </div>
+        </div>
+
+        <button type="button" class="st-btn st-btn--amber">Upgrade plan →</button>
+      </div>
+
+      <div class="st-card">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Invoice history</h2>
+          <p class="st-card-sub">Your past payments and invoices</p>
+        </div>
+        <div class="st-empty-block">
+          <p class="st-empty-text">No invoices yet — billing history will appear here once you upgrade.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div *ngIf="activeSection === 'security'">
+      <h1 class="st-h1 st-h1--mb6">Security</h1>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Change Password</h2>
+          <p class="st-card-sub">Update your account password</p>
+        </div>
+
+        <div class="st-field st-field--mb">
+          <label class="st-label">Current Password</label>
+          <input type="password" class="st-input" [(ngModel)]="secCurrentPassword" placeholder="Enter current password" />
+        </div>
+        <div class="st-field st-field--mb">
+          <label class="st-label">New Password</label>
+          <input type="password" class="st-input" [(ngModel)]="secNewPassword" placeholder="Minimum 8 characters" />
+        </div>
+        <div class="st-field st-field--mb">
+          <label class="st-label">Confirm New Password</label>
+          <input type="password" class="st-input" [(ngModel)]="secConfirmPassword" placeholder="Repeat new password" />
+        </div>
+
+        <div class="st-actions">
+          <button type="button" class="st-btn st-btn--amber" (click)="handleSecChangePassword()">Change Password</button>
+          <span class="st-success" *ngIf="secPasswordSuccess"><ng-container *ngTemplateOutlet="check"></ng-container> Password changed</span>
+        </div>
+      </div>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Two-factor authentication</h2>
+          <p class="st-card-sub">Add an extra layer of security to your account</p>
+        </div>
+        <div class="st-split-row">
+          <div>
+            <p class="st-split-title">Authenticator app (TOTP)</p>
+            <p class="st-split-sub">Use Google Authenticator, Authy, or Microsoft Authenticator</p>
+          </div>
+          <button type="button" class="st-btn st-btn--outline st-btn--nowrap">Enable 2FA</button>
+        </div>
+      </div>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Active sessions</h2>
+          <p class="st-card-sub">Devices currently logged in to your account</p>
+        </div>
+        <div class="st-split-row st-split-row--mb">
+          <div>
+            <p class="st-split-title st-split-title--amber">Current session</p>
+            <p class="st-split-sub">Browser · Last active now</p>
+          </div>
+          <span class="st-current-badge">Current</span>
+        </div>
+        <button type="button" class="st-btn st-btn--danger-outline">Sign out all other sessions</button>
+      </div>
+
+      <div class="st-card">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Login history</h2>
+          <p class="st-card-sub">Recent account activity</p>
+        </div>
+        <div class="st-empty-block st-empty-block--sm">
+          <p class="st-empty-text">Login history coming soon</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- API KEYS -->
+    <div *ngIf="activeSection === 'api-keys'">
+      <h1 class="st-h1 st-h1--mb6">API keys</h1>
+      <div class="st-card">
+        <div class="st-card-head">
+          <h2 class="st-card-title">API keys</h2>
+          <p class="st-card-sub">Allow external systems to authenticate with EPCdoc</p>
+        </div>
+        <button type="button" class="st-btn st-btn--outline st-btn--mb32">+ New API key</button>
+        <div class="st-empty-block st-empty-block--sm">
+          <p class="st-empty-text">No API keys yet — create one to connect external systems</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEBHOOKS -->
+    <div *ngIf="activeSection === 'webhooks'">
+      <h1 class="st-h1 st-h1--mb6">Webhooks</h1>
+      <div class="st-card">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Webhooks</h2>
+          <p class="st-card-sub">Send real-time HTTP POST events to your systems</p>
+        </div>
+        <div class="st-empty-block">
+          <p class="st-empty-text">Webhook configuration coming soon</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WATERMARK -->
+    @if (activeSection === 'watermark') {
+      <div>
+        <div class="st-section-head">
+          <h1 class="st-h1">Watermark</h1>
+          <button type="button" class="st-btn st-btn--blue" (click)="openAddWatermarkDialog()">Add watermark</button>
+        </div>
+
+        <mat-tab-group
+          class="st-watermark-tabs"
+          animationDuration="150ms"
+          mat-stretch-tabs="true"
+          [(selectedIndex)]="watermarkTabIndex"
+          (selectedIndexChange)="onWatermarkTabChange($event)">
+          @for (tab of watermarkTabs; track tab.kind) {
+            <mat-tab [label]="tab.label">
+              <div class="st-card st-card--tab">
+                <div class="st-card-head">
+                  <h2 class="st-card-title">{{ tab.heading }}</h2>
+                  <p class="st-card-sub">{{ tab.sub }}</p>
+                </div>
+                @let list = watermarkLists[tab.kind];
+                @if (list.loading) {
+                  <p class="st-hint">Loading {{ tab.kind }} watermarks…</p>
+                } @else if (list.error) {
+                  <p class="st-load-error">{{ list.error }}</p>
+                } @else if (list.items.length === 0) {
+                  <p class="st-empty-text">No {{ tab.kind }} watermarks found.</p>
+                } @else {
+                  <ul class="st-watermark-list">
+                    @for (item of list.items; track item.id) {
+                      <li class="st-watermark-item">
+                        <div
+                          class="st-watermark-item-preview"
+                          [class.st-watermark-item-preview--text]="tab.kind === 'text'"
+                          [class.st-watermark-item-preview--image]="tab.kind === 'image'"
+                          [title]="tab.kind === 'text' ? item.templateValue : ''">
+                          @if (tab.kind === 'image') {
+                            @if (item.contentUrl) {
+                              <img [src]="item.contentUrl" [alt]="item.templateDescription || item.name" />
+                            }
+                          } @else {
+                            {{ item.templateValue || item.name }}
+                          }
+                        </div>
+                        <div class="st-watermark-item-meta">
+                          @if (tab.kind === 'image') {
+                            <p class="st-watermark-item-name st-watermark-item-name--wrap" [title]="item.templateDescription || item.name">
+                              {{ item.templateDescription || item.name }}
+                            </p>
+                          } @else {
+                            <p class="st-watermark-item-name" [title]="item.templateValue">{{ item.templateValue || item.name }}</p>
+                            @if (item.templateDescription) {
+                              <p class="st-watermark-item-sub">{{ item.templateDescription }}</p>
+                            }
+                          }
+                        </div>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+            </mat-tab>
+          }
+        </mat-tab-group>
+      </div>
+    }
+
+    <!-- UI THEME CHANGE -->
+    <div *ngIf="activeSection === 'ui-theme'">
+      <h1 class="st-h1 st-h1--mb6">UI Theme Change</h1>
+
+      <div class="st-card st-card--mb">
+        <div class="st-card-head">
+          <h2 class="st-card-title">Colour theme</h2>
+          <p class="st-card-sub">The colour applies across this workspace immediately and stays in this browser.</p>
+        </div>
+
+        <div class="st-theme-custom">
+          <label class="st-label" for="st-theme-color">Custom colour</label>
+          <div class="st-theme-custom-row">
+            <input
+              id="st-theme-color"
+              class="st-theme-color"
+              type="color"
+              [value]="customThemeColor"
+              (input)="previewCustomTheme($any($event.target).value)"
+              (change)="commitCustomTheme()" />
+            <span class="st-theme-custom-hex">{{ customThemeColor }}</span>
+          </div>
+          <p class="st-hint">Pick any colour. Buttons, navigation, and headings follow it.</p>
+        </div>
+
+        <div class="st-grid st-grid--2 st-grid--tight">
+          <button
+            type="button"
+            class="st-option st-theme"
+            *ngFor="let theme of uiThemes; trackBy: trackByTheme"
+            [class.st-option--active]="selectedThemeId === theme.id"
+            (click)="selectTheme(theme.id)">
+            <span class="st-theme-swatches" aria-hidden="true">
+              <span [style.background]="theme.primaryDark"></span>
+              <span [style.background]="theme.primary"></span>
+              <span [style.background]="theme.accent"></span>
+            </span>
+            <span class="st-theme-copy">
+              <span class="st-option-title">{{ theme.name }}</span>
+              <span class="st-option-desc">{{ theme.description }}</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <p class="st-success" *ngIf="themeApplied">
+        <ng-container *ngTemplateOutlet="check"></ng-container> Theme applied
+      </p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Reusable check-circle icon -->
+<ng-template #check>
+  <svg class="st-check" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11.01" />
+  </svg>
+</ng-template>

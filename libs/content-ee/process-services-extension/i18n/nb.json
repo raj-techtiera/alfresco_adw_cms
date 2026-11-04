@@ -1,0 +1,100 @@
+{
+  "PROCESS-EXTENSION": {
+    "DIALOG": {
+      "NEW_PROCESS": "Ny prosess",
+      "SELECT_APPLICATION": "Velg program",
+      "ERROR": "Du kan ikke starte en prosess fordi det ikke finnes noen tilgjengelige prosessdefinisjoner"
+    },
+    "BREADCRUMB": {
+      "ROOT": "Prosessadministrasjon",
+      "PROCESS_LIST": {
+        "PROCESSES": "Prosesser"
+      },
+      "START_PROCESS": "Start prosess",
+      "ACTIONS": {
+        "INFO-TOOLTIP": "Vis detaljer"
+      }
+    },
+    "MENU": {
+      "PROCESS_MANAGEMENT": "Prosessadministrasjon",
+      "CREATE_NEW_PROCESS": "Start prosess",
+      "CREATE_PROCESS_NOT_ALLOWED": "Nye prosesser kan ikke opprettes"
+    },
+    "PROCESS_SUBMENU": {
+      "MORE": "Vis flere"
+    },
+    "ERROR": {
+      "NO_FORM": "Prosessdefinisjonen har ikke et definert skjema",
+      "NO_CONTENT": "Kan ikke legge ved filen fra enheten din",
+      "CAN_NOT_ATTACH": "Kan ikke legge ved det valgte innholdet",
+      "AUDIT_ERROR": "Vis oppgavefeil: {{error}}",
+      "TASK_ACCESS_WARNING": "Du har ikke rett til å endre oppgaven"
+    },
+    "SNACKBAR": {
+      "PROCESS-CREATED": "Prosess opprettet '{{ processName }}'",
+      "BACKEND_SERVICE_ERROR": "Det oppstod en ukjent nettverksfeil. Funksjoner knyttet til prosesstjenesten er deaktivert.",
+      "ACTION": "Vis kjørende prosess"
+    },
+    "NO_PROCESS_DEFINITIONS": "Ingen tilgjengelige prosessdefinisjoner",
+    "SIDE_NAV_TITLE": "Arbeidsflyt",
+    "TASK_LIST": {
+      "TASKS": "Oppgaver",
+      "ACTIONS": {
+        "TASK_DETAILS": "Vis"
+      }
+    },
+    "PROCESS_LIST": {
+      "ACTIONS": {
+        "PROCESS_DETAILS": "Vis"
+      }
+    },
+    "TASK_FORM": {
+      "FORM_SAVED": "Skjema lagret vellykket",
+      "FORM_COMPLETED": "Oppgaven er fullført",
+      "CLOSE": "Lukk",
+      "CLAIM_TASK": "Oppgaven er gjort krav på",
+      "UNCLAIM_TASK": "Oppgaven er frigitt",
+      "CLAIM_FAILED": "Kan ikke utføre handlingen"
+    },
+    "TASK_DETAILS": {
+      "ERROR": "Kan ikke utføre handlingen",
+      "FAILED_TO_LOAD": "Kunne ikke laste inn oppgavedetaljene, prøv igjen om en stund",
+      "UPDATED": "Vellykket oppdatering av {{ property }}",
+      "FAILED_TO_UPDATE": "Kunne ikke oppdatere {{ property }}",
+      "METADATA_TOOLTIP": "Vis detaljer",
+      "NO_TASK_NAME": "Navn mangler"
+    }
+  },
+  "SHARED": {
+    "PROCESSES_LIST": {
+      "NO_PROCESS_DEFINITIONS": "Ingen tilgjengelige prosessdefinisjoner"
+    }
+  },
+  "ADF_PROCESS_LIST": {
+    "PROPERTIES": {
+      "CREATED_BY": "Startet av",
+      "CREATED": "Startdato"
+    },
+    "START_PROCESS": {
+      "NO_PROCESS_DEFINITIONS": "Du kan ikke starte en prosess fordi det ikke finnes noen tilgjengelige prosessdefinisjoner",
+      "NO_START_FORM": "Denne prosessen krever ingen ytterligere konfigurasjoner",
+      "NO_PROCESS_DEF_SELECTED": "Ingen kategori/prosess valgt",
+      "FORM": {
+        "LABEL": {
+          "SELECT_APPLICATION": "Velg program"
+        }
+      }
+    }
+  },
+  "ADF_TASK_LIST": {
+    "PROPERTIES": {
+      "CREATED": "Opprettelsesdato"
+    },
+    "DETAILS": {
+      "BUTTON": {
+        "CLAIM": "Krev",
+        "UNCLAIM": "Frigi"
+      }
+    }
+  }
+}

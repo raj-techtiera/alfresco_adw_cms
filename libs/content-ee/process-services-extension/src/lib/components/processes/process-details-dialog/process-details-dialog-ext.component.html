@@ -1,0 +1,24 @@
+<h1
+    class="aps-process-details-dialog-title"
+    mat-dialog-title>
+    {{ data.name }}
+    <button
+        [title]="'PROCESS-EXTENSION.PROCESS_DETAILS_DIALOG.CLOSE' | translate"
+        data-automation-id="aps-process-details-dialog-close-icon"
+        mat-dialog-close
+        mat-icon-button>
+        <mat-icon>close</mat-icon>
+    </button>
+</h1>
+<aps-process-details-ext
+    [allowNavigateToTask]="false"
+    [processId]="data.id"
+    class="aps-process-details-dialog-content"
+    mat-dialog-content />
+<mat-dialog-actions align="end" class="aps-process-details-dialog-content-actions">
+    <button
+        mat-button
+        mat-dialog-close>
+        {{ 'PROCESS-EXTENSION.PROCESS_DETAILS_DIALOG.CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

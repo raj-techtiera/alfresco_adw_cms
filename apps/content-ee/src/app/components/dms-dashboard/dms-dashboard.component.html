@@ -1,0 +1,246 @@
+<div class="mdr-dashboard dms-dashboard">
+  <header class="mdr-dashboard__header">
+    <div class="mdr-dashboard__header-main">
+      <h2 class="mdr-dashboard__title">DMS Dashboard</h2>
+      <div class="mdr-dashboard__header-actions">
+        <button
+          mat-stroked-button
+          type="button"
+          class="mdr-btn mdr-btn--secondary"
+          (click)="loadDocuments('load')"
+          [disabled]="loading">
+          <mat-icon aria-hidden="true">refresh</mat-icon>
+          Refresh
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mdr-dashboard__body">
+    <p class="mdr-dashboard__subtitle">Document overview for DMS records.</p>
+    <section class="dms-toolbar" aria-label="DMS filters">
+      <div class="dms-toolbar__field dms-toolbar__field--search">
+        <label for="dms-filter-search">Search</label>
+        <div class="dms-toolbar__control">
+          <mat-icon class="dms-toolbar__icon" aria-hidden="true">search</mat-icon>
+          <input
+            id="dms-filter-search"
+            type="search"
+            [(ngModel)]="filters.search"
+            placeholder="Search document name" />
+        </div>
+      </div>
+
+      @for (field of filterSelects; track field.key) {
+        <div class="dms-toolbar__field">
+          <label [for]="field.id">{{ field.label }}</label>
+          <div class="dms-toolbar__control">
+            <mat-icon class="dms-toolbar__icon" aria-hidden="true">{{ field.icon }}</mat-icon>
+            <mat-select
+              [id]="field.id"
+              [(ngModel)]="filters[field.key]"
+              panelClass="adw-mdr-filter-select-panel"
+              placeholder="All"
+              [attr.aria-label]="field.label">
+              <mat-option value="">All</mat-option>
+              @for (option of field.options; track option) {
+                <mat-option [value]="option">{{ option }}</mat-option>
+              }
+            </mat-select>
+          </div>
+        </div>
+      }
+
+      <div class="dms-toolbar__actions">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          class="mdr-btn mdr-btn--primary"
+          (click)="applyFilters()"
+          [disabled]="loading || filtersApplying">
+          <mat-icon aria-hidden="true">filter_alt</mat-icon>
+          {{ filtersApplying ? 'Applying…' : 'Apply' }}
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          class="mdr-btn mdr-btn--secondary"
+          (click)="resetFilters()"
+          [disabled]="loading || filtersApplying">
+          Reset
+        </button>
+      </div>
+    </section>
+
+    <div class="mdr-dashboard__main">
+      @if (loadError) {
+        <mat-card class="mdr-dashboard__alert mdr-dashboard__alert--error" role="alert">
+          <mat-icon aria-hidden="true">error_outline</mat-icon>
+          <span>{{ loadError }}</span>
+        </mat-card>
+      }
+
+      <section class="mdr-dashboard__kpis" aria-label="DMS summary">
+        @for (card of kpiCards; track card.label) {
+          <mat-card [class]="'mdr-kpi-card mdr-kpi-card--' + card.tone">
+            <mat-card-content>
+              <span class="mdr-kpi-card__value">{{ loading ? '—' : card.value }}</span>
+              <span class="mdr-kpi-card__label">{{ card.label }}</span>
+              <span class="mdr-kpi-card__sub">{{ card.subtext }}</span>
+            </mat-card-content>
+          </mat-card>
+        }
+      </section>
+
+      <section class="mdr-dashboard__charts" aria-label="DMS analytics">
+        @for (chart of donutCharts; track chart.title) {
+          <mat-card class="mdr-chart-card">
+            <mat-card-header>
+              <mat-card-title>{{ chart.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              @if (chart.labels.length) {
+                <div class="mdr-chart-card__content">
+                  <div class="mdr-chart-card__donut">
+                    <div class="mdr-chart-card__canvas">
+                      <canvas
+                        baseChart
+                        [type]="'doughnut'"
+                        [labels]="chart.labels"
+                        [datasets]="chart.datasets"
+                        [options]="donutOptions"
+                        [legend]="false">
+                      </canvas>
+                      <div class="mdr-chart-card__center" aria-hidden="true">
+                        <span class="mdr-chart-card__center-value">{{ chart.total }}</span>
+                        <span class="mdr-chart-card__center-label">Total</span>
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="mdr-chart-legend">
+                    @for (label of chart.labels; track label; let i = $index) {
+                      <li>
+                        <div class="mdr-chart-legend__row">
+                          <span class="mdr-chart-legend__swatch" [style.backgroundColor]="chartColor(chart.datasets[0], i)"></span>
+                          <span class="mdr-chart-legend__text">
+                            <span class="mdr-chart-legend__name">{{ label }}</span>
+                            <span class="mdr-chart-legend__stat">
+                              {{ chart.datasets[0].data[i] }}
+                              ({{ percent(chart.datasets[0].data[i], chart.total) }})
+                            </span>
+                          </span>
+                        </div>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              } @else {
+                <div class="mdr-chart-card__empty">{{ chart.empty }}</div>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+
+        <mat-card class="mdr-chart-card mdr-chart-card--wide">
+          <mat-card-header>
+            <mat-card-title>Discipline</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (disciplineLabels.length) {
+              <div class="mdr-chart-card__content mdr-chart-card__content--bar">
+                <div class="mdr-chart-card__canvas mdr-chart-card__canvas--bar">
+                  <canvas
+                    baseChart
+                    [type]="'bar'"
+                    [labels]="disciplineLabels"
+                    [datasets]="disciplineDatasets"
+                    [options]="barOptions"
+                    [legend]="false">
+                  </canvas>
+                </div>
+              </div>
+            } @else {
+              <div class="mdr-chart-card__empty">No discipline data for the current filters.</div>
+            }
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <section class="mdr-dashboard__table-section" aria-label="DMS documents">
+        <div class="mdr-dashboard__table-head">
+          <h3>Documents</h3>
+          <span class="mdr-dashboard__table-count">{{ allItems.length }} records</span>
+        </div>
+
+        @if (loading || filtersApplying) {
+          <mat-progress-bar mode="indeterminate" [attr.aria-label]="filtersApplying ? 'Applying filters…' : 'Loading DMS documents…'"></mat-progress-bar>
+        }
+
+        <div class="mdr-table-wrap">
+          <table mat-table [dataSource]="tableItems" class="mdr-table dms-table">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+            </ng-container>
+            <ng-container matColumnDef="discipline">
+              <th mat-header-cell *matHeaderCellDef>Discipline</th>
+              <td mat-cell *matCellDef="let row">{{ row.discipline }}</td>
+            </ng-container>
+            <ng-container matColumnDef="documentType">
+              <th mat-header-cell *matHeaderCellDef>Document Type</th>
+              <td mat-cell *matCellDef="let row">{{ displayLabel(row.documentType) }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let row" class="dms-status-cell">
+                <span class="dms-status-chip" [ngClass]="statusClass(row.status)">{{ row.status }}</span>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="sheetNumber">
+              <th mat-header-cell *matHeaderCellDef>Sheet No</th>
+              <td mat-cell *matCellDef="let row">{{ row.sheetNumber }}</td>
+            </ng-container>
+            <ng-container matColumnDef="createdDate">
+              <th mat-header-cell *matHeaderCellDef>Created</th>
+              <td mat-cell *matCellDef="let row">{{ row.createdDate }}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="mdr-table__actions-col">Actions</th>
+              <td mat-cell *matCellDef="let row" class="mdr-table__actions-cell">
+                <button
+                  mat-stroked-button
+                  type="button"
+                  class="mdr-details-btn"
+                  (click)="openDetails(row); $event.stopPropagation()"
+                  [disabled]="!row.nodeId"
+                  aria-label="View details">
+                  <mat-icon aria-hidden="true">visibility</mat-icon>
+                  View Details
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+          @if (!loading && !filtersApplying && !tableItems.length) {
+            <p class="mdr-table__empty">No DMS documents found.</p>
+          }
+        </div>
+
+        @if (!loading && allItems.length) {
+          <mat-paginator
+            [length]="allItems.length"
+            [pageIndex]="tablePageIndex"
+            [pageSize]="tablePageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="onPage($event)"
+            aria-label="Documents pagination">
+          </mat-paginator>
+        }
+      </section>
+    </div>
+  </div>
+</div>

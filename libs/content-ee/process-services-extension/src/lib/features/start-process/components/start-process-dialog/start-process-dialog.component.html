@@ -1,0 +1,45 @@
+<div class="aca-start-process-dialog-wrapper">
+    <div class="aca-start-process-dialog-header">
+        <h1 class="aca-start-process-dialog-header-title">
+            {{ 'PROCESS-EXTENSION.DIALOG.NEW_PROCESS' | translate }}
+        </h1>
+        <button
+            mat-icon-button
+            matDialogClose
+            aria-label="close dialog"
+        >
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="!showLoadingProcessesError; else loadingErrorTemplate" class="aca-start-process-dialog-content">
+        <div class="aca-start-process-dialog-application-selector">
+            <mat-form-field [floatLabel]="'always'" class="adf-start-process-app-list">
+                <mat-label>{{ 'PROCESS-EXTENSION.DIALOG.SELECT_APPLICATION' | translate }}</mat-label>
+                <mat-select
+                    [formControl]="selectApplicationControl"
+                    [compareWith]="selectApplicationComparator"
+                    data-automation-id="aca-start-process-dialog-application-selector-id"
+                >
+                    <mat-option
+                        *ngFor="let application of applications$ | async"
+                        [value]="application"
+                        role="option"
+                    >
+                        {{application.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <process-list-by-category
+            class="aca-process-list"
+            [processes]="allProcesses$ | async"
+            [showLoadingSpinner]="loadingProcesses"
+            (selectProcess)="onSelectProcess($event)"
+        />
+    </div>
+    <ng-template #loadingErrorTemplate>
+        <div class="aca-loading-processes-error">
+            {{'PROCESS-EXTENSION.DIALOG.ERROR' | translate}}
+        </div>
+    </ng-template>
+</div>

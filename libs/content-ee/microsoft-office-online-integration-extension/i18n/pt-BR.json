@@ -1,0 +1,71 @@
+{
+  "MICROSOFT-ONLINE": {
+    "START_SESSION_SUCCESS": "Este documento está sendo editado no Office Online.",
+    "CANCEL_SESSION_SUCCESS": "As edições feitas neste documento foram descartadas.",
+    "CANCEL_SESSION_DENIED": "Ocorreu um erro. Entre em contato com o administrador se o erro persistir.",
+    "END_SESSION_SUCCESS": "Este documento não está mais sendo editado no Office Online.",
+    "END_SESSION_DENIED": "Ocorreu um erro. Entre em contato com o administrador se o erro persistir.",
+    "RESUME_SESSION": "O arquivo está sendo editado no Office Online. Você pode editar este arquivo ao mesmo tempo.",
+    "END_EDITING_DIALOG": {
+      "END_OPTION": "Salvar todas as edições neste documento",
+      "END_OPTION_DETAILS": "Uma nova versão será criada",
+      "CANCEL_OPTION": "Descartar todas as edições",
+      "CHANGES": "Que nível de alterações foram feitas?",
+      "HEADER": "Encerrar edição",
+      "DESCRIPTION": "Isso impedirá que todos os usuários atualmente acessando o documento com o Microsoft Office Online façam mais edições nele.",
+      "QUESTION": "O que deve acontecer com as edições feitas?",
+      "CANCEL": "Cancelar",
+      "END": "Encerrar edição"
+    },
+    "CREATE_DOCUMENT_DIALOG": {
+      "WORD": {
+        "HEADER": "Criar um documento do Word"
+      },
+      "EXCEL": {
+        "HEADER": "Criar uma planilha do Excel"
+      },
+      "POWERPOINT": {
+        "HEADER": "Criar uma apresentação de Powerpoint"
+      },
+      "CANCEL": "Cancelar",
+      "CREATE": "Criar",
+      "CREATE_AND_OPEN": "Criar e abrir online",
+      "DESCRIPTION": {
+        "LABEL": "Descrição",
+        "PLACEHOLDER": "Uma descrição significativa para este novo arquivo."
+      },
+      "NAME": {
+        "LABEL": "Nome"
+      }
+    },
+    "ACTIONS": {
+      "CREATE_EXCEL": {
+        "TITLE": "Planilha do Excel",
+        "TOOLTIP": "Criar uma nova planilha do Excel"
+      },
+      "CREATE_POWERPOINT": {
+        "TITLE": "Apresentação do Powerpoint",
+        "TOOLTIP": "Criar uma nova apresentação do Powerpoint"
+      },
+      "CREATE_WORD": {
+        "TITLE": "Documento do Word",
+        "TOOLTIP": "Criar um novo documento do Word"
+      },
+      "END_SESSION": "Encerrar edição",
+      "EDIT_WORD": "Editar no Word Online",
+      "EDIT_POWERPOINT": "Editar no PowerPoint Online",
+      "EDIT_EXCEL": "Editar no Excel Online"
+    },
+    "SETTINGS": {
+      "AVAILABILITY_HEADER": "Extensões: Microsoft Office Online",
+      "AVAILABILITY_TITLE": "Ativar Extensão do Microsoft Office Online"
+    },
+    "NODE_FROM_TEMPLATE": {
+      "FORM": {
+        "ERRORS": {
+          "DESCRIPTION_TOO_LONG": "A descrição é muito longa"
+        }
+      }
+    }
+  }
+}

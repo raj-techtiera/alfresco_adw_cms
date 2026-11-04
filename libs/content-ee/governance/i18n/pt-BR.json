@@ -1,0 +1,156 @@
+{
+  "GOVERNANCE": {
+    "DECLARE-RECORD": {
+      "TITLE": "Declarar como documento arquivístico",
+      "SUCCESS": "{{fileName}} foi declarado como documento arquivístico",
+      "FAIL": "Não é possível declarar {{fileName}} como documento arquivístico",
+      "DIALOG": {
+        "TITLE": "Declarar como documento arquivístico",
+        "MESSAGE": "Este documento foi declarado anteriormente como documento arquivístico e foi rejeitado.",
+        "YES": "Declarar como documento arquivístico",
+        "NO": "Cancelar",
+        "CLOSE": "Fechar"
+      },
+      "BULK-OPERATION": {
+        "ERRORS": {
+          "FOLDER": "Declarar pasta como documento arquivístico não possui suporte no momento",
+          "EXISTING-RECORD": "Já declarado como documento arquivístico",
+          "FAILED": "Falha ao declarar como documento arquivístico"
+        },
+        "SUCCESS": "O item foi declarado como documento arquivístico"
+      }
+    },
+    "REJECTED-INFO-RECORD": {
+      "TITLE_LABEL": "Documento arquivístico rejeitado",
+      "CLOSE_LABEL": "Fechar",
+      "SUB-TITLE": "O arquivo '{{ nodeName }}' foi rejeitado como documento arquivístico",
+      "BY": "Por",
+      "AT": "Em",
+      "REASON": "Com a razão",
+      "CONFIRM": "Confirmar",
+      "WARNING": "Se você remover a advertência de documento arquivístico rejeitado, as opções de declarar o arquivo como um documento arquivístico serão disponibilizadas novamente.",
+      "FAILED-REMOVE": "Falha ao remover a advertência de rejeitado de {{nodeName}}: {{errorMessage}}"
+    },
+    "RECORD-NAME": {
+      "REJECT": "Documento arquivístico rejeitado",
+      "TITLE": "Documento arquivístico",
+      "TOOLTIP-MESSAGE": "Remover advertência",
+      "ICONS-TOOLTIP-MESSAGE": {
+        "RECORD": "Documento arquivístico",
+        "REJECTED-RECORD": "Documento arquivístico rejeitado",
+        "RECORD-HYPERLINK": "Declarar como documento arquivístico",
+        "REJECTED-RECORD-HYPERLINK": "O documento arquivístico foi rejeitado, visualize as informações do arquivo para obter detalhes"
+      }
+    },
+    "DELETE-RECORD": {
+      "TITLE": "Excluir",
+      "SUCCESS": "'{{ name }}' foi removido",
+      "FAIL": "Falha ao remover {{recordId}}",
+      "DIALOG": {
+        "TITLE": "Excluir instância do documento arquivístico",
+        "YES-ALL": "Remover e não mostrar isso novamente",
+        "YES": "Excluir",
+        "NO": "Cancelar",
+        "MESSAGE": {
+          "DELETE": "A instância de '{{name}}' será removida permanentemente e não poderá ser recuperada da lixeira.",
+          "ADDITIONAL": "O documento arquivístico '{{name}}' localizado no sistema de gerenciamento de registros da sua empresa não será afetado."
+        }
+      }
+    },
+    "RECORD-PROPERTIES": {
+      "RECORD_GROUP_TITLE": "Documento arquivístico",
+      "RETENTION_SCHEDULE_GROUP_TITLE": "Programação de retenção",
+      "REJECTED_RECORD_GROUP_TITLE": "Documento arquivístico rejeitado"
+    },
+    "MOVE-RECORD": {
+      "TITLE": "Mover",
+      "MOVE-ITEM": "Mover '{{ name }}' para...",
+      "SAME-FOLDER-MOVE": "Não é possível mover para a mesma pasta",
+      "SUCCESSFUL": "Documento arquivístico movido com êxito"
+    },
+    "GLACIER": {
+      "STORE": {
+        "TITLE": "Enviar para arquivamento",
+        "SUCCESS": "O arquivo {{ name }} será arquivado",
+        "FAIL": "Falha ao arquivar {{ name }}",
+        "BULK-OPERATION": {
+          "ERRORS": {
+            "EXISTING-STORED-NODE": "Item já arquivado.",
+            "PENDING-RESTORE": " Item com restauração pendente. ",
+            "RESTORED": "Não é possível arquivar os itens restaurados",
+            "FOLDER": "A restauração a partir do arquivamento não possui suporte no momento"
+          },
+          "FAIL": "Falha ao arquivar",
+          "SUCCESS": "O item será arquivado"
+        },
+        "DIALOG": {
+          "TITLE": "Enviar para arquivamento",
+          "MESSAGE": "Você está prestes a enviar arquivos para um arquivamento externo. Poderá haver um custo associado à recuperação de arquivos do arquivamento. Tem certeza que deseja continuar?",
+          "YES": "Enviar para arquivamento",
+          "NO": "Cancelar"
+        }
+      },
+      "RESTORE": {
+        "TITLE": "Restaurar do arquivamento",
+        "SYNC-ERROR": "O arquivo que você está tentando restaurar ainda não foi sincronizado para o arquivamento. Essa operação pode levar até 24 horas. Tente novamente mais tarde.",
+        "FAIL": "Falha ao restaurar {{ name }} do arquivamento",
+        "DIALOG": {
+          "TITLE": "Restaurar do arquivamento",
+          "LABEL": {
+            "TYPE": "Velocidade da restauração (limite de 250 MB por restauração)",
+            "OPTION-FAST": "Rápida – duração 1 a 5 min. (custo mais alto)",
+            "OPTION-STANDARD": "Padrão – duração 3 a 5 hrs",
+            "OPTION-SLOW": "Lenta – duração 5 a 12 hrs (menor custo)",
+            "DURATION": "Por quanto tempo os arquivos ficarão restaurados? (dias)"
+          },
+          "YES": "Confirmar",
+          "NO": "Cancelar"
+        },
+        "BULK-OPERATION": {
+          "TITLE": "Restaurar do arquivamento",
+          "ERRORS": {
+            "EXISTING-SYNC-ERROR": " Os arquivos que você está tentando restaurar ainda não foram sincronizados para o arquivamento. Essa operação pode levar até 24 horas. Tente novamente mais tarde.",
+            "RESTORED": "O item já está restaurado",
+            "PENDING-RESTORE": "O item já está com a restauração pendente.",
+            "NOT-STORED": "Os arquivos que você está tentando restaurar ainda não foram sincronizados para o arquivamento",
+            "FAIL": "Falha ao restaurar",
+            "FOLDER": "A restauração de uma pasta não possui suporte no momento"
+          },
+          "SUCCESS": "O item será restaurado"
+        }
+      },
+      "EXTEND-RESTORE": {
+        "TITLE": "Aumentar tempo da restauração",
+        "SUCCESS": "A duração da restauração será estendida para '{{ days }}' dias a partir de {{ date }}",
+        "FAIL": "Falha ao estender o tempo de restauração de {{ name }} do arquivamento"
+      },
+      "ICONS-TOOLTIP-MESSAGE": {
+        "STORE": "Este arquivo está no arquivamento. Para restaurar, clique com o botão direito e selecione restaurar do arquivamento.",
+        "RESTORED": "Restaurado",
+        "PENDING-RESTORE": "Atualmente restaurando arquivos do arquivamento. Se você não conseguir visualizar o arquivo ou fazer o download, tente novamente mais tarde."
+      }
+    },
+    "BULK-OPERATION": {
+      "TITLE": "Status da operação em massa",
+      "FAIL": "Falha ao realizar a operação",
+      "CLOSE": "Fechar"
+    },
+    "SECURITY_MARKS": {
+      "EDIT_SECURITY_MARKS_ERROR": "Erro ao salvar marcas de segurança",
+      "DIALOG_TITLE": "Editar marcas de segurança",
+      "MENU_TITLE": "Marcas de segurança",
+      "SAVE": "Salvar",
+      "CANCEL": "Cancelar",
+      "HELP": "Ajuda",
+      "CLOSE": "Fechar",
+      "SHOW_ALL": "Mostrar todas",
+      "APPLIED": "Aplicada",
+      "NOT_APPLIED": "Não aplicada",
+      "COLUMNS": {
+        "NAME": "Marcas de segurança"
+      },
+      "SECURITY_MARKS_HELP": "Ajuda das marcas de segurança",
+      "HELP_ICON_TEXT": "Aplicar marcas de segurança irá restringir acesso a conteúdo digital. Somente pessoas com marcas correspondentes aplicadas às suas permissões de usuário poderão visualizar ou editar conteúdo marcado."
+    }
+  }
+}

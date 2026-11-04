@@ -1,0 +1,42 @@
+aps-sidenav-ext {
+    .adf-filters__entry {
+        padding: 0;
+        margin-left: 30px;
+        opacity: 1;
+        color: var(--theme-secondary-text-color);
+
+        &:hover {
+            color: var(--theme-selected-text-color);
+        }
+
+        &.adf-active {
+            color: var(--theme-selected-text-color);
+            background: var(--theme-selected-background-color);
+        }
+    }
+
+    .aps-filters-title {
+        margin-left: 30px;
+    }
+}
+
+.aps-filters-icon {
+    opacity: 1;
+}
+
+.aps-filters-title {
+    display: flex;
+    cursor: auto;
+    align-items: center;
+    color: var(--theme-secondary-text-color);
+    padding-top: 7px;
+
+    span {
+        padding: 0 8px 0 6px;
+    }
+}
+
+#processmanagement > div.aps-filters-title {
+    margin: 0;
+    font-size: var(--theme-body-1-font-size);
+}

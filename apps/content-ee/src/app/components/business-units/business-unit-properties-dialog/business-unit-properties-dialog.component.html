@@ -1,0 +1,108 @@
+<div class="bu-pdd">
+  <header class="bu-pdd__header">
+    <div class="bu-pdd__header-main">
+      <div class="bu-pdd__folder" aria-hidden="true">
+        <mat-icon>business</mat-icon>
+      </div>
+      <div class="bu-pdd__header-text">
+        <h2 mat-dialog-title class="bu-pdd__heading">{{ data.title }}</h2>
+        <p class="bu-pdd__sub" *ngIf="humanNodeType">{{ humanNodeType }}</p>
+      </div>
+    </div>
+    <button type="button" mat-icon-button class="bu-pdd__icon-btn" mat-dialog-close aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content class="bu-pdd__content">
+    <div class="bu-pdd__columns">
+      <nav class="bu-pdd__tablist" role="tablist" aria-label="Business unit sections">
+        <button
+          type="button"
+          role="tab"
+          class="bu-pdd__tab"
+          *ngFor="let tab of tabs"
+          [class.bu-pdd__tab--active]="activeTab === tab.id"
+          [attr.aria-selected]="activeTab === tab.id"
+          (click)="selectTab(tab.id)">
+          <mat-icon aria-hidden="true">{{ tab.icon }}</mat-icon>
+          <span>{{ tab.title }}</span>
+        </button>
+      </nav>
+
+      <div class="bu-pdd__panel" role="tabpanel">
+        <!-- Basic Details -->
+        <section *ngIf="activeTab === 'basic'" class="bu-pdd__section" aria-label="Basic Details">
+          <h3 class="bu-pdd__section-title">
+            <mat-icon aria-hidden="true">bookmark</mat-icon>
+            Basic Details
+          </h3>
+          <dl class="bu-pdd__list">
+            <div class="bu-pdd__pair">
+              <dt>Created at</dt>
+              <dd>{{ data.createdAt ? (data.createdAt | date: 'd MMM yyyy, hh:mm:ss a') : '—' }}</dd>
+            </div>
+            <div class="bu-pdd__pair">
+              <dt>Created by</dt>
+              <dd>{{ data.createdBy || '—' }}</dd>
+            </div>
+            <div class="bu-pdd__pair">
+              <dt>Modified at</dt>
+              <dd>{{ data.modifiedAt ? (data.modifiedAt | date: 'd MMM yyyy, hh:mm:ss a') : '—' }}</dd>
+            </div>
+            <div class="bu-pdd__pair">
+              <dt>Modified by</dt>
+              <dd>{{ data.modifiedBy || data.createdBy || '—' }}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Business information -->
+        <section *ngIf="activeTab === 'business'" class="bu-pdd__section" aria-label="Business information">
+          <h3 class="bu-pdd__section-title">
+            <mat-icon aria-hidden="true">business_center</mat-icon>
+            Business information
+          </h3>
+          <p class="bu-pdd__empty" *ngIf="!businessRows.length">No business properties available.</p>
+          <dl class="bu-pdd__list" *ngIf="businessRows.length">
+            <div class="bu-pdd__pair" *ngFor="let row of businessRows">
+              <dt [attr.title]="row.key">{{ row.label }}</dt>
+              <dd>{{ row.value }}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Business Groups table -->
+        <section *ngIf="activeTab === 'groups'" class="bu-pdd__section" aria-label="Business Groups">
+          <h3 class="bu-pdd__section-title">
+            <mat-icon aria-hidden="true">group</mat-icon>
+            Business Groups
+          </h3>
+          <p class="bu-pdd__empty" *ngIf="!groupRows.length">No business groups defined for this unit.</p>
+          <div class="bu-pdd__table-wrap" *ngIf="groupRows.length">
+            <table class="bu-pdd__table">
+              <thead>
+                <tr>
+                  <th scope="col">Group</th>
+                  <th scope="col">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of groupRows">
+                  <td>{{ row.name }}</td>
+                  <td>
+                    <span class="bu-pdd__role">{{ row.role }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <div mat-dialog-actions class="bu-pdd__footer" align="end">
+    <button type="button" mat-flat-button color="primary" mat-dialog-close>Close</button>
+  </div>
+</div>

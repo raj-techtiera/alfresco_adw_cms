@@ -1,0 +1,134 @@
+.aga-bulk-operation-dialog {
+    #aga-bulk-operation-dialog-container {
+        padding: 0;
+    }
+}
+
+aga-declare-record-dialog {
+    .adf-upload-dialog {
+        background: var(--theme-dialog-bg-color);
+        color: var(--theme-text-color);
+        position: fixed;
+        bottom: 20px;
+        width: 40%;
+        box-shadow: 1px 5px 15px #888;
+        z-index: 999;
+
+        &--padding {
+            padding: 1em;
+        }
+
+        &--position-left {
+            left: 25px;
+        }
+
+        &--position-right {
+            right: 25px;
+        }
+
+        &__header {
+            padding: 1em;
+            display: flex;
+            align-items: center;
+
+            button {
+                min-width: 0;
+                padding: 0;
+                line-height: 0;
+            }
+        }
+
+        &__title {
+            margin-left: 0.5em;
+            flex: 1 1 auto;
+        }
+
+        &__info {
+            padding: 0 1em 1em;
+        }
+
+        &__content {
+            overflow: auto;
+            max-height: 194px;
+            border-top: 1px solid var(--theme-border-color);
+            border-bottom: 1px solid var(--theme-border-color);
+        }
+
+        &__confirmation {
+            padding: 0 0.5em;
+        }
+
+        &__confirmation--title {
+            font-size: var(--theme-subheading-2-font-size);
+            line-height: 1.5;
+            letter-spacing: -0.4px;
+            color: var(--theme-text-bold-color);
+        }
+
+        &__confirmation--text {
+            margin-bottom: 0;
+        }
+
+        &__actions {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1em;
+
+            & > button {
+                text-transform: uppercase;
+            }
+        }
+
+        &--minimized {
+            width: 20%;
+
+            .adf-upload-dialog__content {
+                display: none;
+            }
+        }
+    }
+
+    .adf-file-uploading-row {
+        display: flex;
+        align-items: center;
+        padding: 0.5em 1em;
+        cursor: default;
+
+        &:hover {
+            background: #eee;
+        }
+
+        &__name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 1em 0 0.5em;
+        }
+
+        &__group,
+        &__block,
+        &__file-version {
+            min-width: 100px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        &__group--toggle {
+            cursor: default;
+            display: flex;
+
+            .adf-file-uploading-row__status {
+                display: flex;
+            }
+
+            .adf-file-uploading-row__action {
+                display: none;
+            }
+        }
+
+        &__error {
+            color: var(--theme-warn-color);
+        }
+    }
+}

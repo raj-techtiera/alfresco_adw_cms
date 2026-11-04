@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "此文件正在 Office Online 中编辑。",
+        "CANCEL_SESSION_SUCCESS": "已放弃对此文件所做的编辑。",
+        "CANCEL_SESSION_DENIED": "发生错误。如果此错误持续存在，请与管理员联系。",
+        "END_SESSION_SUCCESS": "此文件已不再在 Office Online 中编辑。",
+        "END_SESSION_DENIED": "发生错误。如果此错误持续存在，请与管理员联系。",
+        "RESUME_SESSION": "此文件正在 Office Online 中编辑。您可以同时编辑此文件。",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "将所有编辑内容保存至此文档",
+            "END_OPTION_DETAILS": "将创建新版本",
+            "CANCEL_OPTION": "放弃所有编辑",
+            "CHANGES": "进行了什么级别的更改？",
+            "HEADER": "结束编辑",
+            "DESCRIPTION": "这将防止当前通过 Microsoft Office Online 访问该文档的所有用户进一步编辑该文档。",
+            "QUESTION": "已进行的编辑会发生什么？",
+            "CANCEL": "取消",
+            "END": "结束编辑"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "创建 Word 文档"
+            },
+            "EXCEL": {
+                "HEADER": "创建 Excel 电子表格"
+            },
+            "POWERPOINT": {
+                "HEADER": "创建 Powerpoint 演示文稿"
+            },
+            "CANCEL": "取消",
+            "CREATE": "创建",
+            "CREATE_AND_OPEN": "在线创建并打开",
+            "DESCRIPTION": {
+                "LABEL": "说明",
+                "PLACEHOLDER": "此新文件的有意义的描述。"
+            },
+            "NAME": {
+                "LABEL": "名称"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel 电子表格",
+                "TOOLTIP": "创建新的 Excel 电子表格"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "PowerPoint 演示文稿",
+                "TOOLTIP": "创建新的 Powerpoint 演示文稿"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word 文档",
+                "TOOLTIP": "创建新的 Word 文档"
+            },
+            "END_SESSION": "结束编辑",
+            "EDIT_WORD": "在 Word Online 中编辑",
+            "EDIT_POWERPOINT": "在 PowerPoint Online 中编辑",
+            "EDIT_EXCEL": "在 Excel Online 中编辑"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "扩展: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "启用 Microsoft Office Online 扩展"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "描述太长"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,394 @@
+<div class="dn-wrap">
+  <div class="dn-header">
+    <h1 class="dn-title">Document Numbering Configuration</h1>
+  </div>
+
+  <div class="dn-body">
+  <p class="dn-subtitle">Configure disciplines, deliverable types and area codes. Document numbers are auto-generated on upload.</p>
+
+  <!-- Current Number Format Card -->
+  <div class="dn-format-card">
+    <div class="dn-format-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9" /><line x1="4" y1="15" x2="20" y2="15" /><line x1="10" y1="3" x2="8" y2="21" /><line x1="16" y1="3" x2="14" y2="21" /></svg>
+    </div>
+    <div>
+      <p class="dn-format-tag">CURRENT NUMBER FORMAT</p>
+      <p class="dn-format-pattern">[PROJ]-[DISC]-[AREA]-[TYPE]-[SEQ]</p>
+      <p class="dn-format-example">e.g. <span class="dn-format-sample">PROJ-CV-A1-DRG-0001</span></p>
+    </div>
+    <div class="dn-format-action">
+      <button type="button" class="dn-btn-amber-sm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+        Edit Format
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="dn-tabs">
+    <button type="button" class="dn-tab" *ngFor="let tab of tabs; trackBy: trackByKey"
+      [class.dn-tab--active]="activeTab === tab.key" (click)="setTab(tab.key)">
+      <span class="dn-tab-icon">{{ tab.icon }}</span>
+      {{ tab.label }}
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div>
+    <!-- Disciplines -->
+    <ng-container *ngIf="activeTab === 'disciplines'">
+      <div class="dn-row">
+        <span class="dn-count">0 active disciplines</span>
+        <button mat-raised-button type="button" class="dn-btn-add" (click)="showDisciplineModal = true">+ Add Discipline</button>
+      </div>
+
+      <div class="dn-table-card">
+        <table class="dn-table">
+          <thead>
+            <tr>
+              <th *ngFor="let col of ['CODE','NAME','DESCRIPTION','CUSTOM','STATUS','ACTIONS']; trackBy: trackByIndex">{{ col }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" class="dn-empty-cell">
+                <p class="dn-empty-1">No disciplines configured yet.</p>
+                <p class="dn-empty-2">Click the button above to add your first entry.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+
+    <!-- Deliverable Types -->
+    <ng-container *ngIf="activeTab === 'deliverable-types'">
+      <div class="dn-row">
+        <div class="dn-row-left">
+          <mat-form-field appearance="outline" class="dn-filter-mat-field dn-filter-mat-field--160" subscriptSizing="dynamic">
+            <mat-select
+              [(ngModel)]="typeDisciplineFilter"
+              panelClass="dn-filter-select-panel"
+              placeholder="All Disciplines"
+              aria-label="Filter by discipline">
+              <mat-option *ngFor="let option of disciplineFilterOptions" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span class="dn-count">0 types</span>
+        </div>
+        <button mat-raised-button type="button" class="dn-btn-add" (click)="showTypeModal = true">+ Add Deliverable Type</button>
+      </div>
+
+      <div class="dn-table-card">
+        <table class="dn-table">
+          <thead>
+            <tr>
+              <th *ngFor="let col of ['COMBINED CODE','DISCIPLINE','NAME','DESCRIPTION','CUSTOM','ACTIONS']; trackBy: trackByIndex">{{ col }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6" class="dn-empty-cell">
+                <p class="dn-empty-1">No deliverable types configured yet.</p>
+                <p class="dn-empty-2">Click the button above to add your first entry.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+
+    <!-- Area Codes -->
+    <ng-container *ngIf="activeTab === 'area-codes'">
+      <div class="dn-row">
+        <span class="dn-count">0 area codes configured</span>
+        <button type="button" class="dn-btn-add" (click)="showAreaModal = true">+ Add Area Code</button>
+      </div>
+
+      <div class="dn-area-empty">
+        <p class="dn-area-empty-title">No area codes yet</p>
+        <p class="dn-area-empty-text">Area codes identify specific units or equipment areas within a project.</p>
+        <p class="dn-area-empty-text dn-area-empty-text--mb">Example: EWE305 = External Piperack, EME410 = Module Train 2</p>
+        <button type="button" class="dn-btn-brown" (click)="showAreaModal = true">Add First Area Code</button>
+      </div>
+    </ng-container>
+
+    <!-- Section Codes -->
+    <ng-container *ngIf="activeTab === 'section-codes'">
+      <div class="dn-section-intro">
+        <p class="dn-muted">Section codes represent plant sections, floors, zones, or other subdivisions. Use them if your document numbering standard includes a section component.</p>
+      </div>
+      <div class="dn-row">
+        <div class="dn-row-left">
+          <span class="dn-count">0 section codes configured</span>
+        </div>
+        <button type="button" class="dn-btn-add" (click)="showSectionModal = true">+ Add Section Code</button>
+      </div>
+
+      <div class="dn-section-filter">
+        <mat-form-field appearance="outline" class="dn-filter-mat-field dn-filter-mat-field--200" subscriptSizing="dynamic">
+          <mat-select
+            [(ngModel)]="sectionCodesProjectFilter"
+            panelClass="dn-filter-select-panel"
+            placeholder="All Projects"
+            aria-label="Filter by project">
+            <mat-option *ngFor="let option of projectFilterOptions" [value]="option">{{ option }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="dn-table-card">
+        <table class="dn-table">
+          <thead>
+            <tr>
+              <th *ngFor="let col of ['CODE','NAME','DESCRIPTION','PROJECT','ACTIONS']; trackBy: trackByIndex">{{ col }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5" class="dn-empty-cell dn-empty-cell--sm">
+                <p class="dn-empty-1">No section codes yet. Add your first one above.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+
+    <!-- Numbering Scheme -->
+    <ng-container *ngIf="activeTab === 'numbering-scheme'">
+      <p class="dn-muted dn-muted--mb20">Define how document numbers are structured. Saved scheme applies to all uploads in the selected project.</p>
+
+      <div class="dn-block">
+        <p class="dn-section-label">APPLY TO PROJECT</p>
+        <mat-form-field appearance="outline" class="dn-filter-mat-field dn-filter-mat-field--240" subscriptSizing="dynamic">
+          <mat-select
+            [(ngModel)]="applyToProject"
+            panelClass="dn-filter-select-panel"
+            placeholder="Select project"
+            aria-label="Apply to project">
+            <mat-option *ngFor="let option of applyProjectOptions" [value]="option">{{ option }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="dn-block">
+        <p class="dn-section-label dn-section-label--mb12">NUMBERING STANDARD</p>
+        <div class="dn-standards">
+          <div class="dn-standard" *ngFor="let s of standards; trackBy: trackByStandard"
+            [class.dn-standard--active]="selectedStandard === s.key" (click)="selectedStandard = s.key">
+            <p class="dn-standard-title" [class.dn-standard-title--active]="selectedStandard === s.key">{{ s.title }}</p>
+            <p class="dn-standard-desc">{{ s.desc }}</p>
+            <p class="dn-standard-example">{{ s.example }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dn-preview">
+        <p class="dn-preview-label">LIVE PREVIEW</p>
+        <p class="dn-preview-value">{{ livePreview }}</p>
+        <div class="dn-preview-fields">
+          <div>
+            <p class="dn-preview-field-label">Discipline</p>
+            <input class="dn-preview-input" [(ngModel)]="schemeDiscipline" />
+          </div>
+          <div>
+            <p class="dn-preview-field-label">Doc Type</p>
+            <input class="dn-preview-input" [(ngModel)]="schemeDocType" />
+          </div>
+          <div>
+            <p class="dn-preview-field-label">Area</p>
+            <input class="dn-preview-input" [(ngModel)]="schemeArea" />
+          </div>
+          <div>
+            <p class="dn-preview-field-label">Section</p>
+            <input class="dn-preview-input" [(ngModel)]="schemeSection" />
+          </div>
+        </div>
+      </div>
+
+      <div class="dn-block dn-block--mb16">
+        <p class="dn-section-label dn-section-label--mb12">TOKEN SEQUENCE</p>
+        <div class="dn-token-bar">
+          <span class="dn-token" *ngFor="let token of tokens; trackBy: trackByToken"
+            [class.dn-token--sep]="token.type === 'separator'">
+            {{ token.label }}
+            <button type="button" class="dn-token-x" (click)="removeToken(token.id)">×</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="dn-add-tokens">
+        <button type="button" class="dn-chip" *ngFor="let btn of addTokenButtons; trackBy: trackByIndex"
+          (click)="addTokenFromButton(btn)">{{ btn }}</button>
+      </div>
+
+      <button type="button" class="dn-btn-save">
+        <span>🔖</span> Save Numbering Scheme
+      </button>
+    </ng-container>
+  </div>
+  </div>
+</div>
+
+<!-- Disciplines Modal -->
+<div class="dn-modal-overlay" *ngIf="showDisciplineModal" (click)="showDisciplineModal = false">
+  <div class="dn-modal" (click)="$event.stopPropagation()">
+    <div class="dn-modal-head">
+      <h2 class="dn-modal-title">Add Discipline Code</h2>
+      <button type="button" class="dn-modal-close" (click)="showDisciplineModal = false">
+        <ng-container *ngTemplateOutlet="closeIcon"></ng-container>
+      </button>
+    </div>
+    <div class="dn-modal-grid">
+      <div>
+        <label class="dn-flabel">CODE<span class="dn-req"> *</span></label>
+        <input class="dn-input" [(ngModel)]="discCode" placeholder="X" />
+      </div>
+      <div>
+        <label class="dn-flabel">COLOR</label>
+        <input type="color" class="dn-input dn-input--color" [(ngModel)]="discColor" />
+      </div>
+    </div>
+    <div class="dn-field-mb">
+      <label class="dn-flabel">NAME<span class="dn-req"> *</span></label>
+      <input class="dn-input" [(ngModel)]="discName" placeholder="e.g. Civil & Structural" />
+    </div>
+    <div class="dn-field-mb28">
+      <label class="dn-flabel">DESCRIPTION</label>
+      <input class="dn-input" [(ngModel)]="discDescription" placeholder="e.g. Foundations, structural drawings, fabrication" />
+    </div>
+    <div class="dn-modal-actions">
+      <button type="button" class="dn-btn-cancel" (click)="showDisciplineModal = false">Cancel</button>
+      <button type="button" class="dn-btn-amber" (click)="showDisciplineModal = false">Save Discipline</button>
+    </div>
+  </div>
+</div>
+
+<!-- Deliverable Type Modal -->
+<div class="dn-modal-overlay" *ngIf="showTypeModal" (click)="showTypeModal = false">
+  <div class="dn-modal" (click)="$event.stopPropagation()">
+    <div class="dn-modal-head">
+      <h2 class="dn-modal-title">Add Deliverable Type</h2>
+      <button type="button" class="dn-modal-close" (click)="showTypeModal = false">
+        <ng-container *ngTemplateOutlet="closeIcon"></ng-container>
+      </button>
+    </div>
+    <div class="dn-modal-grid">
+      <div>
+        <label class="dn-flabel">DISCIPLINE<span class="dn-req"> *</span></label>
+        <mat-form-field appearance="outline" class="dn-filter-mat-field dn-filter-mat-field--fill" subscriptSizing="dynamic">
+          <mat-select
+            [(ngModel)]="typeDiscipline"
+            panelClass="dn-filter-select-panel"
+            placeholder="Select discipline">
+            <mat-option value="">Select discipline</mat-option>
+            <mat-option *ngFor="let option of disciplineOptions" [value]="option">{{ option }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <label class="dn-flabel">TYPE CODE<span class="dn-req"> *</span></label>
+        <input class="dn-input" [(ngModel)]="typeCode" placeholder="65" />
+      </div>
+    </div>
+    <div class="dn-field-mb">
+      <label class="dn-flabel">NAME<span class="dn-req"> *</span></label>
+      <input class="dn-input" [(ngModel)]="typeName" placeholder="e.g. Fabrication Drawing" />
+    </div>
+    <div class="dn-field-mb28">
+      <label class="dn-flabel">DESCRIPTION</label>
+      <input class="dn-input" [(ngModel)]="typeDescription" placeholder="e.g. Structural steel fabrication drawings" />
+    </div>
+    <div class="dn-modal-actions">
+      <button type="button" class="dn-btn-cancel" (click)="showTypeModal = false">Cancel</button>
+      <button type="button" class="dn-btn-amber" (click)="showTypeModal = false">Save Type</button>
+    </div>
+  </div>
+</div>
+
+<!-- Area Code Modal -->
+<div class="dn-modal-overlay" *ngIf="showAreaModal" (click)="showAreaModal = false">
+  <div class="dn-modal" (click)="$event.stopPropagation()">
+    <div class="dn-modal-head">
+      <h2 class="dn-modal-title">Add Area / Unit Code</h2>
+      <button type="button" class="dn-modal-close" (click)="showAreaModal = false">
+        <ng-container *ngTemplateOutlet="closeIcon"></ng-container>
+      </button>
+    </div>
+    <div class="dn-modal-grid">
+      <div>
+        <label class="dn-flabel">CODE<span class="dn-req"> *</span></label>
+        <input class="dn-input" [(ngModel)]="areaCode" placeholder="EWE305" />
+      </div>
+      <div>
+        <label class="dn-flabel">PROJECT</label>
+        <mat-form-field appearance="outline" class="dn-filter-mat-field dn-filter-mat-field--fill" subscriptSizing="dynamic">
+          <mat-select
+            [(ngModel)]="areaProject"
+            panelClass="dn-filter-select-panel"
+            placeholder="All projects">
+            <mat-option value="">All projects</mat-option>
+            <mat-option *ngFor="let option of projectOptions" [value]="option">{{ option }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="dn-field-mb">
+      <label class="dn-flabel">AREA NAME<span class="dn-req"> *</span></label>
+      <input class="dn-input" [(ngModel)]="areaName" placeholder="e.g. External Piperack - Ingot Wafer" />
+    </div>
+    <div class="dn-field-mb28">
+      <label class="dn-flabel">DESCRIPTION</label>
+      <input class="dn-input" [(ngModel)]="areaDescription" placeholder="Optional description" />
+    </div>
+    <div class="dn-modal-actions">
+      <button type="button" class="dn-btn-cancel" (click)="showAreaModal = false">Cancel</button>
+      <button type="button" class="dn-btn-amber" (click)="showAreaModal = false">Save Area Code</button>
+    </div>
+  </div>
+</div>
+
+<!-- Section Code Modal -->
+<div class="dn-modal-overlay" *ngIf="showSectionModal" (click)="showSectionModal = false">
+  <div class="dn-modal" (click)="$event.stopPropagation()">
+    <div class="dn-modal-head">
+      <h2 class="dn-modal-title">Add Section Code</h2>
+      <button type="button" class="dn-modal-close" (click)="showSectionModal = false">
+        <ng-container *ngTemplateOutlet="closeIcon"></ng-container>
+      </button>
+    </div>
+    <div class="dn-field-mb">
+      <label class="dn-flabel">CODE<span class="dn-req"> *</span></label>
+      <input class="dn-input" [(ngModel)]="sectionCode" placeholder="100" />
+    </div>
+    <div class="dn-field-mb">
+      <label class="dn-flabel">NAME<span class="dn-req"> *</span></label>
+      <input class="dn-input" [(ngModel)]="sectionName" placeholder="Process Area" />
+    </div>
+    <div class="dn-field-mb">
+      <label class="dn-flabel">DESCRIPTION</label>
+      <input class="dn-input" [(ngModel)]="sectionDescription" placeholder="Optional description" />
+    </div>
+    <div class="dn-field-mb28">
+      <label class="dn-flabel">PROJECT (OPTIONAL)</label>
+      <mat-form-field appearance="outline" class="dn-filter-mat-field dn-filter-mat-field--fill" subscriptSizing="dynamic">
+        <mat-select
+          [(ngModel)]="sectionProject"
+          panelClass="dn-filter-select-panel"
+          placeholder="Global (all projects)">
+          <mat-option value="">Global (all projects)</mat-option>
+          <mat-option *ngFor="let option of sectionProjectOptions" [value]="option">{{ option }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="dn-modal-actions">
+      <button type="button" class="dn-btn-cancel" (click)="showSectionModal = false">Cancel</button>
+      <button type="button" class="dn-btn-amber" (click)="showSectionModal = false">Add Section Code</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #closeIcon>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+</ng-template>

@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Tillämpa",
+        "CANCEL": "Avbryt",
+        "SWITCH": "Växla",
+        "CONTINUE": "Fortsätt",
+        "RELOAD": "Reläad"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Deklarera handling",
+            "SUCCESS": "{{fileName}} har deklarerats som handling",
+            "FAIL": "Kan inte deklarera {{fileName}} som handling",
+            "DIALOG": {
+                "TITLE": "Deklarera handling",
+                "MESSAGE": "Det här dokumentet deklarerades tidigare som en handling och avvisades.",
+                "YES": "Deklarera handling",
+                "NO": "Avbryt",
+                "CLOSE": "Stäng"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Deklarera mapp som handling stöds för närvarande inte",
+                    "EXISTING-RECORD": "Redan deklarerad som handling",
+                    "FAILED": "Misslyckades att deklarera som handling"
+                },
+                "SUCCESS": "Objektet har deklarerats som handling"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Avvisad handling",
+            "CLOSE_LABEL": "Stäng",
+            "SUB-TITLE": "Filen '{{ nodeName }}' avvisades som en handling",
+            "BY": "Av",
+            "AT": "På",
+            "REASON": "Med orsaken",
+            "CONFIRM": "Bekräfta",
+            "WARNING": "Om du ta bort den avvisade handlingsvarning kommer alternativen att deklarera filen som en handling att bli tillgängliga igen.",
+            "FAILED-REMOVE": "Misslyckades att ta bort avvisad varning för {{nodeName}} : {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Handling avvisad",
+            "TOOLTIP-MESSAGE": "Ta bort varning",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Avvisad handling",
+                "RECORD-HYPERLINK": "Deklareras som handling",
+                "REJECTED-RECORD-HYPERLINK": "Handling avvisades, se filinformationen för mer detaljer"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Ta bort",
+            "SUCCESS": "'{{ name }}' har tagits bort",
+            "FAIL": "Misslyckades att ta bort {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Ta bort handlingsinstans",
+                "YES-ALL": "Ta bort och visa inte detta igen",
+                "YES": "Ta bort",
+                "NO": "Avbryt",
+                "MESSAGE": {
+                    "DELETE": "Den här instansen av '{{name}}' kommer att tas bort permanent och kommer inte att kunna hämtas från papperskorgen.",
+                    "ADDITIONAL": "Handlingen '{{name}}' som finns i din organisations system för handlingshantering kommer inte att påverkas."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Handling"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Flytta",
+            "MOVE-ITEM": "Flytta '{{ name }}' till...",
+            "SAME-FOLDER-MOVE": "Kan inte flytta till samma mapp",
+            "SUCCESSFUL": "Handlingen flyttades"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Skicka till arkiv",
+                "SUCCESS": "Filen {{ name }} kommer att arkiveras",
+                "FAIL": "Misslyckades att arkivera {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Objektet har redan arkiverats.",
+                        "PENDING-RESTORE": " Objektet väntar på att återställas. ",
+                        "RESTORED": "Kan inte arkivera de återställda objekten",
+                        "FOLDER": "Återställa från arkiv stöds för närvarande inte"
+                    },
+                    "FAIL": "Misslyckades att arkivera",
+                    "SUCCESS": "Objektet kommer att arkiveras"
+                },
+                "DIALOG": {
+                    "TITLE": "Skicka till arkiv",
+                    "MESSAGE": "Du är på väg att skicka filer till ett externt arkiv. Det kan vara en kostnad förknippad med att hämta filer från arkivet. Är du säker på att du vill fortsätta?",
+                    "YES": "Skicka till arkiv",
+                    "NO": "Avbryt"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Återställ från arkiv",
+                "SYNC-ERROR": "Filen du försöker återställa har inte synkroniserats till arkivet än. Åtgärden kan ta upp till 24 timmar. Försök igen senare.",
+                "FAIL": "Misslyckades att återställa {{ name }} från arkivet",
+                "DIALOG": {
+                    "TITLE": "Återställ från arkiv",
+                    "LABEL": {
+                        "TYPE": "Återställningshastighet (250 MB gräns per återställning)",
+                        "OPTION-FAST": "Snabb – varaktighet 1-5 minuter (högst kostnad)",
+                        "OPTION-STANDARD": "Standard – varaktighet 3-5 timmar",
+                        "OPTION-SLOW": "Långsam – varaktighet 5-12 timmar (lägst kostnad)",
+                        "DURATION": "Hur länge kommer filerna att återställas? (dagar)"
+                    },
+                    "YES": "Bekräfta",
+                    "NO": "Avbryt"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Återställ från arkiv",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Filerna du försöker återställa har inte synkroniserats till arkivet än. Den här åtgärden kan ta upp till 24 timmar. Försök igen senare.",
+                        "RESTORED": "Objektet har redan återställts",
+                        "PENDING-RESTORE": "Objektet väntar redan på att återställas.",
+                        "NOT-STORED": "Objektet du försöker återställa har inte synkroniserats till arkivet än",
+                        "FAIL": "Misslyckades att återställa",
+                        "FOLDER": "Återställa en mapp stöds för närvarande inte"
+                    },
+                    "SUCCESS": "Objektet kommer att återställas"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Förläng återställningstiden",
+                "SUCCESS": "Återställningens varaktighet kommer att förlängas till '{{ days }}' dagar från {{ date }}",
+                "FAIL": "Misslyckades att förlänga återställningstiden för {{ name }} från arkivet"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Den här filen är arkiverad. För att återställa den, högerklicka och välj återställ från arkivet.",
+                "RESTORED": "Återställd",
+                "PENDING-RESTORE": "Återställer för närvarande filer från arkivet. Om du inte kan förhandsgranska filen eller ladda ner den, försök igen senare"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Status för bulkåtgärd",
+            "FAIL": "Misslyckades att utföra åtgärden",
+            "CLOSE": "Stäng"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Hantera Holds",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Ta bort juridisk spärr",
+            "DIALOG_TITLE": "Hantera juridiska innehav",
+            "TAB_EXISTING_HOLDS": "Hantera befintliga Holds",
+            "TAB_CREATE_LEGAL_HOLD": "Skapa lagligt håll",
+            "SAVE": "Spara",
+            "CLOSE": "Stäng",
+            "CANCEL": "Avbryt",
+            "NEW_HOLD_NAME": "Namn",
+            "NEW_HOLD_DESCRIPTION": "Beskrivning",
+            "NEW_HOLD_REASON": "Anledning",
+            "DIALOG_WARNING_TITLE": "Varning",
+            "DIALOG_WARNING_MESSAGE": "Ändringar här kommer inte att tillämpas om du byter flik.",
+            "DOCUMENT_IN_HOLD": "Dokument i lagligt läge",
+            "FOLDER_IN_HOLD": "Mapp i lagligt håll",
+            "APPLY_HOLDS_SUCCESS": "Rättslig Hold-åtgärd lyckades.",
+            "APPLY_HOLDS_NOT_FOUND": "Den valda juridiska spärren eller den specificerade filen finns inte. Verifiera urvalet och försök igen.",
+            "BULK_APPLY_HOLDS_SUCCESS": "Åtgärden för laglig Hold lyckades. {{ totalItems }} objekt har lagts till i lagstadgad stadga.",
+            "BULK_APPLY_HOLDS_STARTED": "Bulk Legal Hold åtgärder körs i bakgrunden. Du kommer att meddelas när den är klar.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Arkiverat, duplicerat eller låst innehåll har upptäckts. {{ errorsCount }} objekt har inte lagts till i lagstadgat.",
+            "BULK_APPLY_HOLDS_FAIL": "Det gick inte att placera innehåll på lagligt håll.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Bulk Legal Hold kan inte tillämpas på mappar",
+            "ACKNOWLEDGE": "Bekräfta",
+            "EMPTY_HOLD_LIST": "Inga juridiska innehavare tillgängliga",
+            "WARNING_DIALOG_TITLE": "Varning: Massåtgärd",
+            "WARNING_DIALOG_MESSAGE": "Denna åtgärd kommer att ändra juridiska Innehar status <strong>Alla filer i denna sökfiler</strong>.<br><br>Denna juridiska innehav <strong>kommer inte att tillämpas på mappar</strong>.",
+            "WARNING_DIALOG_QUESTION": "Vill du fortsätta?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Admin måste skapa Record Management Site för att aktivera Legal Holds",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Filen har tagits bort från juridisk spärr.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Filerna har tagits bort från juridisk spärr.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Kunde inte ta bort fil från juridisk spärr.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Kunde inte ta bort filer från juridisk spärr.",
+            "LOADING_CAPABILITIES_ERROR": "Det gick inte att läsa in funktionerna",
+            "NODE_NOT_FOUND": "Vald nod kan inte hittas. Vänligen verifiera ditt val och försök igen.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Ta bort objekt som innehåller hål?",
+                "TITLE_PLURAL": "Ta bort valda {{ count }} spärrar och frisläppa dokument?",
+                "MESSAGE_SINGULAR": "Du har valt {{ name }} håll för att tas bort. Alla objekt som hålls kvar kommer att släppas. Denna åtgärd kan inte ångras.",
+                "MESSAGE_PLURAL": "Du har valt {{ count }} objekt som ska tas bort. Några av dem är innehavare, alla objekt de håller kommer att släppas. Denna åtgärd kan inte ångras.",
+                "KEEP_HOLD": "Behåll spärr"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Fel när säkerhetsmarkeringar skulle sparas",
+            "DIALOG_TITLE": "Lägg till säkerhetsmarkeringar",
+            "MENU_TITLE": "Säkerhetsmarkeringar",
+            "SAVE": "Spara",
+            "CANCEL": "Avbryt",
+            "HELP": "Hjälp",
+            "CLOSE": "Stäng",
+            "SHOW_ALL": "Visa alla",
+            "APPLIED": "Tillämpad",
+            "NOT_APPLIED": "Tillämpas inte",
+            "COLUMNS": {
+                "NAME": "Säkerhetsmarkeringar"
+            },
+            "NO_GROUPS_CREATED": "Inga säkerhetsgrupper tillgängliga",
+            "SECURITY_MARKS_HELP": "Säkerhetsmarkeringar hjälper",
+            "HELP_ICON_TEXT": "Användning av säkerhetsmarkeringar begränsar åtkomsten till digitalt innehåll. Endast personer med matchande märken som tillämpas på deras användarbehörighet kommer att kunna se eller redigera markerat innehåll."
+        }
+    }
+}

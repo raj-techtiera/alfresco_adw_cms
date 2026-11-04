@@ -1,0 +1,59 @@
+<div mat-dialog-title class="adw-dialog-title">
+    <span>{{ 'GOVERNANCE.SECURITY_MARKS.DIALOG_TITLE' | translate }}</span>
+    <div class="dialog-buttons-container">
+        <button mat-icon-button
+                data-automation-id="security-marks-help-icon"
+                (click)="showHelpDialog()">
+            <mat-icon>help_outline</mat-icon>
+        </button>
+        <button mat-icon-button mat-dialog-close title="{{ 'GOVERNANCE.SECURITY_MARKS.CLOSE' | translate }}">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+<mat-dialog-content>
+    <ng-container *ngIf="!showLoadingSpinner; else spinnerTemplate">
+        <ng-container *ngIf="availableGroupAndMarkMap.size > 0; else noSecurityGroupsTemplate">
+            <div *ngFor="let group of availableGroupAndMarkMap | keyvalue"
+                 class="aga-security-marks-group-container">
+                <mat-divider/>
+                <p>{{ group.key.groupName }} ({{ group.key.groupType  | titlecase }})</p>
+                <mat-chip-set>
+                    <mat-chip *ngFor="let mark of group.value"
+                              tabindex=0
+                              (keyup.enter)="manageSecurityMarksList(mark, group.key)"
+                              (click)="manageSecurityMarksList(mark, group.key)"
+                              class="aga-security-mark-chip"
+                              [class.aga-security-mark-selected]="isSelected(mark.id, group.key.id)">
+                        {{ mark.name }}
+                    </mat-chip>
+                </mat-chip-set>
+            </div>
+        </ng-container>
+        <ng-template #noSecurityGroupsTemplate>
+            {{ 'GOVERNANCE.SECURITY_MARKS.NO_GROUPS_CREATED' | translate }}
+        </ng-template>
+    </ng-container>
+    <ng-template #spinnerTemplate>
+        <div class="aga-security-marks-loading-spinner-container">
+            <mat-progress-spinner
+                color="primary"
+                mode="indeterminate"
+                data-automation-id="app-security-marks-loading-spinner" />
+        </div>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions class="adw-dialog-actions" align="end">
+    <button mat-button mat-dialog-close
+            data-automation-id="security-mark-cancel-button"
+            (click)="handleCancel()">
+        {{ 'GOVERNANCE.SECURITY_MARKS.CANCEL' | translate }}
+    </button>
+    <button mat-flat-button color="primary"
+            data-automation-id="security-marks-save-button"
+            [disabled]="!isSecurityMarksSelected"
+            (click)="onSave()">
+        {{ 'GOVERNANCE.SECURITY_MARKS.SAVE' | translate }}
+    </button>
+</mat-dialog-actions>

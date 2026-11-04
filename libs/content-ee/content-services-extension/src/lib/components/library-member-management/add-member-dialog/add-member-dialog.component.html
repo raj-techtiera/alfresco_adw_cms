@@ -1,0 +1,84 @@
+<h1 mat-dialog-title
+    class="adw-dialog-title">
+    {{ 'ADD_MEMBER.TITLE_LABEL' | translate }} {{ libraryName }}
+</h1>
+
+<ng-container *ngIf="!isSearchActive">
+    <mat-dialog-content class="adw-dialog-content">
+        <button mat-button
+                (click)="enableSearch()"
+                class="adw-search-members-button">
+            <span class="adw-search-members-button-text">
+                {{ 'ADD_MEMBER.SEARCH_INPUT' | translate }}
+            </span>
+            <span class="adw-search-members-button-icon">
+                <mat-icon>search</mat-icon>
+            </span>
+        </button>
+        <mat-card appearance="outlined" class="adw-selected-member-container">
+            <mat-card-header class="adw-add-member-header">
+                <div class="adw-header-name">
+                    {{ 'ADD_MEMBER.NAME' | translate }}
+                </div>
+
+                <div class="adw-header-role">
+                    <adw-role-selector class="adw-header-role-dropdown"
+                                       placeholder="ROLE_SELECTOR.ALL"
+                                       (memberRoleChanged)="bulkRoleUpdate($event)" />
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <adw-member-list *ngIf="members.length"
+                                 [members]="$any({ list: { entries: members } })"
+                                 [showTotal]="false"
+                                 (memberRemoved)="onMemberRemoved($event)"
+                                 (memberRejected)="onMemberRejected($event)"
+                                 (memberRoleChanged)="onMemberRoleChanged($event)"
+                                 [selectionMode]="'none'"
+                                 data-automation-id="adw-new-library-members" />
+            </mat-card-content>
+        </mat-card>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="adw-dialog-actions">
+        <button mat-button
+                mat-dialog-close
+                cdkFocusInitial
+                data-automation-id="cancel-member">
+            {{ 'ADD_MEMBER.CANCEL_LABEL' | translate }}
+        </button>
+        <button mat-button
+                color="primary"
+                (click)="onAdd()"
+                data-automation-id="add-member"
+                [disabled]="!membersToBeAdded.isValid()">
+            {{ 'ADD_MEMBER.ADD_LABEL' | translate }}
+        </button>
+    </mat-dialog-actions>
+
+</ng-container>
+
+<ng-container *ngIf="isSearchActive" >
+
+    <mat-dialog-content class="adw-dialog-content">
+        <adw-search-members (selectMembers)="onMembersSelected($event)" #adwSearchMember />
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="adw-dialog-actions">
+        <button
+            mat-button
+            (click)="onCancel()"
+            data-automation-id="add-permission-dialog-close-button"
+        >
+            {{ 'ADD_MEMBER.CLOSE_LABEL' | translate }}
+        </button>
+        <button
+            mat-button
+            data-automation-id="add-permission-dialog-confirm-button"
+            (click)="adwSearchMember.onAddClicked()"
+        >
+            {{ 'ADD_MEMBER.SELECT_LABEL' | translate }}
+        </button>
+    </mat-dialog-actions>
+</ng-container>

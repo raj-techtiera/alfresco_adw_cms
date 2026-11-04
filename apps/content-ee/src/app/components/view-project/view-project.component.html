@@ -1,0 +1,416 @@
+<!-- ================= HERO SECTION ================= -->
+<!--<div class="hero">
+  <button
+    *ngIf="!isSidenavExpanded"
+    class="hero-nav-link"
+    type="button"
+    (click)="openSidenav()"
+    aria-label="Expand navigation menu"
+    title="Expand navigation menu">
+    &raquo;
+  </button>
+
+  <div class="hero-container">
+    <div class="hero-layout">
+      <div class="hero-intro">
+        <div class="hero-illustration" aria-hidden="true">
+          <img
+            class="hero-illustration__img"
+            src="https://tse2.mm.bing.net/th/id/OIP.5ES3e29RQoWq_mZTewk9VQHaGn?cb=thfc1&pid=ImgDet&w=183&h=163&c=7&o=7&rm=3"
+            width="400"
+            height="400"
+            alt=""
+            decoding="async"
+            fetchpriority="high" />
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-title">PETRONAS EDMS</h1>
+          <p class="hero-subtitle">Engineering Document Management System</p>
+          <div class="hero-lede">
+            <p>
+              Comprehensive project portfolio management for PETRONAS’s oil &amp; gas infrastructure projects.
+            </p>
+            <p>
+              Track progress, manage documents, and collaborate across all project phases.
+            </p>
+          </div>
+
+          <div class="hero-buttons">
+            <button type="button" class="primary-btn" (click)="goToCreateProject()">
+              <mat-icon aria-hidden="true">add</mat-icon>
+              Create Project
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-metrics hero-stats stats" aria-label="Portfolio summary">
+        <article class="stat-card stat-card--blue">
+        <div class="stat-card__inner">
+          <div class="stat-card__icon-wrap">
+            <mat-icon class="stat-card__icon" aria-hidden="true">folder_special</mat-icon>
+          </div>
+          <span class="stat-card__label">Total projects</span>
+          <span class="stat-card__value">{{ projects.length }}</span>
+          <span class="stat-card__trend stat-card__trend--pos">↑ Live portfolio</span>
+        </div>
+        </article>
+
+        <article class="stat-card stat-card--teal">
+        <div class="stat-card__inner">
+          <div class="stat-card__icon-wrap">
+            <mat-icon class="stat-card__icon" aria-hidden="true">description</mat-icon>
+          </div>
+          <span class="stat-card__label">Filtered view</span>
+          <span class="stat-card__value">{{ totalItems }}</span>
+          <span class="stat-card__trend">Matches current filters</span>
+        </div>
+        </article>
+
+        <article class="stat-card stat-card--violet">
+        <div class="stat-card__inner">
+          <div class="stat-card__icon-wrap">
+            <mat-icon class="stat-card__icon" aria-hidden="true">account_tree</mat-icon>
+          </div>
+          <span class="stat-card__label">Project types</span>
+          <span class="stat-card__value">{{ uniqueTypeCount }}</span>
+          <span class="stat-card__trend stat-card__trend--pos">Distinct categories</span>
+        </div>
+        </article>
+
+        <article class="stat-card stat-card--amber">
+        <div class="stat-card__inner">
+          <div class="stat-card__icon-wrap">
+            <mat-icon class="stat-card__icon" aria-hidden="true">groups</mat-icon>
+          </div>
+          <span class="stat-card__label">Clients</span>
+          <span class="stat-card__value">{{ uniqueClientCount }}</span>
+          <span class="stat-card__trend">Active relationships</span>
+        </div>
+        </article>
+
+        <article class="stat-card stat-card--rose">
+        <div class="stat-card__inner">
+          <div class="stat-card__icon-wrap">
+            <mat-icon class="stat-card__icon" aria-hidden="true">today</mat-icon>
+          </div>
+          <span class="stat-card__label">New this month</span>
+          <span class="stat-card__value">{{ createdThisMonthCount }}</span>
+          <span class="stat-card__trend stat-card__trend--pos">Recently onboarded</span>
+        </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+*/
+<!-- ================= PORTFOLIO SECTION ================= -->
+<div class="portfolio">
+  <div class="container">
+    <div class="portfolio-header">
+      <h1 class="section-title">Program Portfolio</h1>
+      <button mat-raised-button type="button" class="create-project-btn" (click)="goToCreateProject()" title="Create program">
+        <mat-icon aria-hidden="true">add</mat-icon>
+        Create Program
+      </button>
+    </div>
+    <div class="filters-toolbar">
+      <div class="searchbox" [class.searchbox--active]="!!(search || appliedSearchActive)">
+        <span class="searchbox__lead" aria-hidden="true">
+          <mat-icon class="searchbox__lead-icon">travel_explore</mat-icon>
+        </span>
+        <input
+          type="search"
+          class="searchbox__input"
+          [(ngModel)]="search"
+          (keydown.enter)="$event.preventDefault(); submitSearch()"
+          placeholder="Search programs by name..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        @if (search || appliedSearchActive) {
+          <button
+            mat-raised-button
+            type="button"
+            class="searchbox__clear"
+            (click)="clearSearch()"
+            aria-label="Clear search"
+            title="Clear search">
+            <mat-icon aria-hidden="true">close</mat-icon>
+            <span>Clear</span>
+          </button>
+        }
+        <button
+          mat-raised-button
+          type="button"
+          class="searchbox__submit"
+          (click)="submitSearch()"
+          aria-label="Search programs"
+          title="Search">
+          <mat-icon aria-hidden="true">search</mat-icon>
+          <span>Search</span>
+        </button>
+      </div>
+      @for (field of filterFields; track field.key) {
+        <label class="filter-field">
+          <span class="filter-field__label">{{ field.label }}</span>
+          <mat-form-field appearance="outline" class="filter-mat-field" subscriptSizing="dynamic">
+            <mat-select
+              [(ngModel)]="filter[field.key]"
+              panelClass="adw-create-project-select-panel"
+              [placeholder]="field.placeholder"
+            >
+              <mat-option value="">{{ field.allLabel }}</mat-option>
+              @for (opt of field.options; track opt) {
+                <mat-option [value]="opt">{{ opt }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </label>
+      }
+
+      <button
+        mat-raised-button
+        type="button"
+        class="filters-apply-btn"
+        (click)="applyFilters()"
+        title="Apply selected filters">
+        <mat-icon aria-hidden="true">filter_alt</mat-icon>
+        Apply filter
+      </button>
+
+      <button
+        mat-raised-button
+        type="button"
+        class="filters-reset-btn"
+        [disabled]="!hasActiveFilters"
+        (click)="clearFilters()"
+        title="Clear search and filters">
+        <mat-icon aria-hidden="true">filter_alt_off</mat-icon>
+        Clear filters
+      </button>
+    </div>
+
+    <div class="section-head">
+      @if (!loading) {
+        <span class="section-meta">
+          {{ totalHits }} program{{ totalHits === 1 ? '' : 's' }}
+        </span>
+      }
+
+      <div class="section-head__right">
+        <div class="section-head__controls">
+          <div class="view-toggle" role="group" aria-label="View mode">
+            <button
+              mat-raised-button
+              type="button"
+              class="view-toggle__btn"
+              [class.is-active]="viewMode === 'grid'"
+              (click)="setViewMode('grid')"
+              [attr.aria-pressed]="viewMode === 'grid'">
+              <mat-icon aria-hidden="true">grid_view</mat-icon>
+              Grid
+            </button>
+            <button
+              mat-raised-button
+              type="button"
+              class="view-toggle__btn"
+              [class.is-active]="viewMode === 'list'"
+              (click)="setViewMode('list')"
+              [attr.aria-pressed]="viewMode === 'list'">
+              <mat-icon aria-hidden="true">view_list</mat-icon>
+              List
+            </button>
+          </div>
+
+          <label class="sort-field">
+            <mat-form-field appearance="outline" class="sort-mat-field" subscriptSizing="dynamic">
+              <mat-select
+                [(ngModel)]="sortOption"
+                (ngModelChange)="onSortOptionChange()"
+                panelClass="adw-create-project-select-panel"
+              >
+                @for (opt of sortOptions; track opt.value) {
+                  <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    @if (loading) {
+      <div class="loading">Loading programs...</div>
+    } @else if (filteredProjects.length === 0) {
+      <div class="no-data">No programs found.</div>
+    } @else {
+    <div class="applications-table-wrapper">
+      @if (viewMode === 'grid') {
+      <div class="projects-grid">
+        @for (project of filteredProjects; track project.id; let i = $index) {
+        <article
+          class="project-card"
+          [class]="'project-card project-card--' + projectCardAccent(project)"
+          [style.--card-index]="i"
+          (click)="goToProject(project.id)">
+          <div class="project-card__surface">
+            <div class="project-card__photo" aria-hidden="true">
+              <mat-icon class="project-card__photo-icon">{{ projectTypeIcon(project) }}</mat-icon>
+            </div>
+
+            <div class="project-card__content">
+              <div class="project-card__title-row">
+                <mat-icon class="project-card__title-icon" aria-hidden="true">{{ projectTypeIcon(project) }}</mat-icon>
+                <h3 class="project-card__name">{{ project.title || '-' }}</h3>
+                @if (scopeLabel(project); as status) {
+                  <span class="project-card__bg-title">{{ status }}</span>
+                }
+              </div>
+
+              <div class="project-card__details">
+                <button
+                  type="button"
+                  class="menu-btn project-card__details-menu"
+                  (click)="$event.stopPropagation(); openProjectDetails(project)"
+                  aria-label="Project options">
+                  <mat-icon aria-hidden="true">info</mat-icon>
+                </button>
+
+                <div class="project-card__details-top">
+                  <div class="project-card__field">
+                    <span class="project-card__field-label">Program type</span>
+                    <span class="project-card__field-value">
+                      <mat-icon aria-hidden="true">{{ projectTypeIcon(project) }}</mat-icon>
+                      {{ project.projectType || '-' }}
+                    </span>
+                  </div>
+                  <div class="project-card__field">
+                    <span class="project-card__field-label">Customer</span>
+                    <span class="project-card__field-value">
+                      <span class="project-card__avatar project-card__avatar--client" aria-hidden="true">{{
+                        initials(project.client)
+                      }}</span>
+                      {{ project.client || '-' }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="project-card__details-meta">
+                  <div class="project-card__field project-card__field--full">
+                    <span class="project-card__field-label">Created by</span>
+                    <span class="project-card__field-value">
+                      <span class="project-card__avatar project-card__avatar--user" aria-hidden="true">{{
+                        initials(project.createdBy)
+                      }}</span>
+                      {{ project.createdBy || '-' }}
+                    </span>
+                  </div>
+
+                  <div class="project-card__field">
+                    <span class="project-card__field-label">Created</span>
+                    <span class="project-card__field-value">{{ project.createdAt | date: 'mediumDate' }}</span>
+                  </div>
+
+                  <div class="project-card__field">
+                    <span class="project-card__field-label">Last activity</span>
+                    <span class="project-card__field-value">
+                      <mat-icon aria-hidden="true">schedule</mat-icon>
+                      {{ project.modifiedAt | date: 'mediumDate' }}
+                    </span>
+                  </div>
+
+                  <div class="project-card__field">
+                    <span class="project-card__field-label">Planned start date</span>
+                    <span class="project-card__field-value">
+                      <mat-icon aria-hidden="true">event</mat-icon>
+                      {{ project.plannedStartDate ? (project.plannedStartDate | date: 'dd MMM yyyy') : '-' }}
+                    </span>
+                  </div>
+
+                  <div class="project-card__field">
+                    <span class="project-card__field-label">Planned end date</span>
+                    <span class="project-card__field-value">
+                      <mat-icon aria-hidden="true">event_available</mat-icon>
+                      {{ project.targetCompletionDate ? (project.targetCompletionDate | date: 'dd MMM yyyy') : '-' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        }
+      </div>
+      }
+
+      @if (viewMode === 'list') {
+      <div class="projects-list">
+        @for (project of filteredProjects; track project.id; let i = $index) {
+        <article
+          class="project-list-item"
+          [class]="'project-list-item project-list-item--' + projectCardAccent(project)"
+          [style.--card-index]="i">
+          <div class="project-list-item__icon" aria-hidden="true">
+            <mat-icon>description</mat-icon>
+          </div>
+          <div class="project-list-item__main">
+            <div class="project-list-item__head">
+              <button type="button" class="project-list-item__name" (click)="goToProject(project.id)">
+                {{ project.title || '-' }}
+              </button>
+              @if (scopeLabel(project); as status) {
+                <span class="project-card__badge">{{ status }}</span>
+              }
+            </div>
+            <div class="project-list-item__details">
+              <span class="type-cell">
+                <mat-icon class="type-cell__icon" aria-hidden="true">{{ projectTypeIcon(project) }}</mat-icon>
+                <span>{{ project.projectType || '-' }}</span>
+              </span>
+              <span class="client-cell">
+                <span class="client-cell__mark" aria-hidden="true">{{ initials(project.client) }}</span>
+                <span>{{ project.client || '-' }}</span>
+              </span>
+            </div>
+          </div>
+            <div class="project-list-item__meta">
+              <span
+                class="activity-cell"
+                [attr.title]="'Start: ' + (project.plannedStartDate ? (project.plannedStartDate | date: 'dd MMM yyyy') : '-')">
+                <mat-icon aria-hidden="true">event</mat-icon>
+                <span>{{ project.plannedStartDate ? (project.plannedStartDate | date: 'dd MMM yyyy') : '-' }}</span>
+              </span>
+              <span
+                class="activity-cell"
+                [attr.title]="'Completion: ' + (project.targetCompletionDate ? (project.targetCompletionDate | date: 'dd MMM yyyy') : '-')">
+                <mat-icon aria-hidden="true">event_available</mat-icon>
+                <span>{{ project.targetCompletionDate ? (project.targetCompletionDate | date: 'dd MMM yyyy') : '-' }}</span>
+              </span>
+            </div>
+          <div class="project-list-item__actions">
+            <button
+              type="button"
+              class="menu-btn"
+              (click)="openProjectDetails(project)"
+              aria-label="Project options">
+              <mat-icon aria-hidden="true">info</mat-icon>
+            </button>
+          </div>
+        </article>
+        }
+      </div>
+      }
+
+      <mat-paginator
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true"
+        (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,15 @@
+aga-restore-dialog {
+    .aga-restore-form {
+        .aga-restore-form-types-radio-group {
+            .aga-restore-form-button:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        }
+
+        &,
+        .aga-restore-form-types-radio-group {
+            flex-direction: column;
+            display: flex;
+        }
+    }
+}

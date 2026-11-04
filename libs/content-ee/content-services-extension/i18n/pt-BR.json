@@ -1,0 +1,111 @@
+{
+  "ERRORS": {
+    "GENERIC": "A ação não teve êxito. Tente novamente ou entre em contato com a Equipe de TI.",
+    "PERMISSION_DENIED": "Você não tem permissão para realizar esta operação"
+  },
+  "LIBRARY_NOTIFICATIONS": {
+    "REQUEST_SINGULAR": "{{ user }} solicitou ingresso na {{ library }}",
+    "REQUEST_PLURAL": "{{ number }} pessoas solicitaram ingresso na {{ library }}"
+  },
+  "MEMBER_MANAGER": {
+    "TITLE": "Gerenciar membros",
+    "CLOSE": "Fechar",
+    "BREADCRUMB": {
+      "LIBRARY_DETAILS": "Detalhes da biblioteca",
+      "MANAGE_MEMBERS": "Gerenciar membros"
+    },
+    "TABS": {
+      "PROPERTIES": "Propriedades",
+      "MEMBERS": "Membros",
+      "GROUPS": "Grupos",
+      "PENDING": "Pendente"
+    },
+    "LOAD_MORE": "Carregar mais",
+    "CONFIRM_DIALOG": {
+      "TITLE": "Confirmar",
+      "MESSAGE": "Deseja continuar?"
+    },
+    "REJECT_DIALOG": {
+      "TITLE": "Rejeitar solicitação de membro",
+      "COMMENT": "Deixe um comentário aqui",
+      "YES_LABEL": "Rejeitar",
+      "NO_LABEL": "Cancelar"
+    },
+    "GROUPS_INFO_DIALOG": {
+      "TITLE": "Informações de associação a grupo",
+      "DESCRIPTION": "Este usuário tem acesso à biblioteca por funções de grupo. Se você desejar remover a associação individual deste usuário, primeiro remova-o dos grupos listados abaixo.",
+      "CLOSE": "Fechar",
+      "GROUP": "Grupo",
+      "ROLE": "Função"
+    }
+  },
+  "MEMBERSHIP_REQUESTS": {
+    "NO_MEMBERSHIPS": "Nenhuma solicitação de associação pendente",
+    "PENDING_REQUESTS": "Solicitações de associação pendentes",
+    "APPROVE": "Aprovar",
+    "REJECT": "Rejeitar"
+  },
+  "MEMBER_LIST": {
+    "MEMBER_COUNT": "Membros da biblioteca",
+    "NO_MEMBERS": "Nenhum membro encontrado",
+    "DELETE_MEMBERS": "Excluir membros selecionados",
+    "GROUP_ROLE": "Função do grupo",
+    "REMOVE": "Remover",
+    "A11Y_AVATAR": "Avatar de usuário",
+    "REFRESH": "Atualizar"
+  },
+  "GROUP_LIST": {
+    "GROUP_COUNT": "Associação de grupo desta biblioteca",
+    "NO_GROUPS": "Nenhum grupo encontrado",
+    "DELETE_GROUPS": "Excluir grupos selecionados",
+    "REFRESH": "Atualizar",
+    "REMOVE": "Remover"
+  },
+  "ROLES": {
+    "SITE_MANAGER": "Gerente",
+    "SITE_CONTRIBUTOR": "Contribuidor",
+    "SITE_CONSUMER": "Consumidor",
+    "SITE_COLLABORATOR": "Colaborador"
+  },
+  "ROLE_SELECTOR": {
+    "USER_SELECTOR": "Definir função do usuário",
+    "GROUP_SELECTOR": "Definir função do grupo",
+    "ALL": "Definir todas as funções como"
+  },
+  "ADD_MEMBER": {
+    "TITLE": "Adicionar usuário/grupo",
+    "SEARCH_INPUT": "Pesquisar usuários ou grupos para adicionar",
+    "NAME": "Nome",
+    "TITLE_LABEL": "Adicionar usuário ou grupo a",
+    "ADD_LABEL": "Adicionar",
+    "SELECT_LABEL": "Selecionar",
+    "CLOSE_LABEL": "Fechar",
+    "CANCEL_LABEL": "Cancelar"
+  },
+  "SIDEBAR": {
+    "MEMBERS": "Membros"
+  },
+  "NOTIFICATIONS": {
+    "MEMBERSHIP_REJECTED": "Solicitação de associação rejeitada",
+    "MEMBERSHIP_ACCEPTED": "Membro adicionado à biblioteca",
+    "USER_REMOVE_SUCCESS": "Usuário removido",
+    "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} usuários removidos, {{skipped}} foram ignorados",
+    "USER_REMOVE_FAILED": "Falha ao remover o usuário",
+    "GROUP_REMOVE_SUCCESS": "Grupo removido",
+    "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} grupos removidos, {{skipped}} foram ignorados",
+    "GROUP_REMOVE_FAILED": "Falha ao remover o grupo",
+    "ADD_MEMBER_FAILED": "Falha ao adicionar membro ao site",
+    "ADD_MEMBERS_FAILED": "Falha ao adicionar {{count}} membros",
+    "ADD_MEMBERS_SUCCESS": "Adicionado(s) {{userCount}} usuário(s) e {{groupCount}} grupo(s)",
+    "ADD_GROUPS_SUCCESS": "Adicionado(s) {{groupCount}} grupo(s)",
+    "ADD_USERS_SUCCESS": "Adicionado(s) {{userCount}} usuário(s)",
+    "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} membro adicionado, {{skipped}} foram ignorados",
+    "USER_ROLE_UPDATED": "Função de usuário atualizada",
+    "GROUP_ROLE_UPDATED": "Função de grupo atualizada",
+    "MEMBER_EXISTS": "Usuário já é membro do site",
+    "MANAGER_REQUIRED": "Um site exige pelo menos um gerente de local",
+    "ACTIONS": {
+      "CLOSE": "Fechar"
+    }
+  }
+}

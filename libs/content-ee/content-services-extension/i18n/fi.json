@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Toiminto ei onnistunut. Yritä uudelleen tai ota yhteyttä IT-tukeesi.",
+        "PERMISSION_DENIED": "Sinulla ei ole oikeuksia suorittaa tätä toimintoa."
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} pyysi liittyä kirjastoon {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} käyttäjää pyysi liittyä kirjastoon {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Hallitse jäseniä",
+        "CLOSE": "Sulje",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Kirjaston tiedot",
+            "MANAGE_MEMBERS": "Hallitse jäseniä"
+        },
+        "TABS": {
+            "PROPERTIES": "Ominaisuudet",
+            "MEMBERS": "Jäsenet",
+            "GROUPS": "Ryhmät",
+            "PENDING": "Odottaa"
+        },
+        "LOAD_MORE": "Lataa lisää",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Vahvista",
+            "MESSAGE": "Haluatko jatkaa?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Hylkää jäsenpyyntö",
+            "COMMENT": "Lisää kommentti",
+            "YES_LABEL": "Hylkää",
+            "NO_LABEL": "Peruuta"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Ryhmäjäsenyyden tiedot",
+            "DESCRIPTION": "Tällä käyttäjällä on pääsy kirjastoon ryhmäroolien kautta. Jos haluat poistaa tämän käyttäjän henkilökohtaisen jäsenyyden, sinun täytyy ensin poistaa hänet alla olevista ryhmistä.",
+            "CLOSE": "Sulje",
+            "GROUP": "Ryhmä",
+            "ROLE": "Rooli"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Ei vireillä olevia jäsenyyspyyntöjä",
+        "PENDING_REQUESTS": "Vireillä olevat jäsenyyspyynnöt",
+        "APPROVE": "Hyväksy",
+        "REJECT": "Hylkää"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Tämän kirjaston jäsenet",
+        "NO_MEMBERS": "Yhtään jäsentä ei löytynyt",
+        "DELETE_MEMBERS": "Poista valitut jäsenet",
+        "GROUP_ROLE": "Ryhmärooli",
+        "REMOVE": "Poista",
+        "A11Y_AVATAR": "Käyttäjän avatar",
+        "REFRESH": "Päivitä"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Tämän kirjaston ryhmäjäsenyys",
+        "NO_GROUPS": "Yhtään ryhmää ei löydy",
+        "DELETE_GROUPS": "Poista valitut ryhmät",
+        "REFRESH": "Päivitä",
+        "REMOVE": "Poista"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Vastaava",
+        "SITE_CONTRIBUTOR": "Osallistuja",
+        "SITE_CONSUMER": "Kuluttaja",
+        "SITE_COLLABORATOR": "Yhteistyökumppani"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Aseta käyttäjärooli",
+        "GROUP_SELECTOR": "Aseta ryhmärooli",
+        "ALL": "Aseta kaikki roolit:"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Lisää käyttäjä/ryhmä",
+        "SEARCH_INPUT": "Hae käyttäjiä tai ryhmiä lisättäväksi",
+        "NAME": "Nimi",
+        "TITLE_LABEL": "Lisää käyttäjä tai ryhmä",
+        "ADD_LABEL": "Lisää",
+        "SELECT_LABEL": "Valitse",
+        "CLOSE_LABEL": "Sulje",
+        "CANCEL_LABEL": "Peruuta"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Jäsenet"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Jäsenyyspyyntö hylättiin",
+        "MEMBERSHIP_ACCEPTED": "Jäsen lisättiin kirjastoon",
+        "USER_REMOVE_SUCCESS": "Käyttäjä poistettiin",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} käyttäjää poistettiin, {{skipped}} ohitettiin",
+        "USER_REMOVE_FAILED": "Käyttäjää ei voitu poistaa",
+        "GROUP_REMOVE_SUCCESS": "Ryhmä poistettiin",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} ryhmää poistettiin, {{skipped}} ohitettiin",
+        "GROUP_REMOVE_FAILED": "Ryhmää ei voitu poistaa",
+        "ADD_MEMBER_FAILED": "Jäsentä ei voitu lisätä sivustoon",
+        "ADD_MEMBERS_FAILED": "{{count}} jäsentä ei voitu lisätä",
+        "ADD_MEMBERS_SUCCESS": "Lisättiin {{userCount}} käyttäjä(ä) ja {{groupCount}} ryhmä(ä)",
+        "ADD_GROUPS_SUCCESS": "Lisättiin {{groupCount}} ryhmä(ä)",
+        "ADD_USERS_SUCCESS": "Lisättiin {{userCount}} käyttäjä(ä)",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} jäsentä lisättiin, {{skipped}} ohitettiin",
+        "USER_ROLE_UPDATED": "Käyttäjärooli päivitettiin",
+        "GROUP_ROLE_UPDATED": "Ryhmärooli päivitettiin",
+        "MEMBER_EXISTS": "Tämä käyttäjä on jo tämän sivuston jäsen",
+        "MANAGER_REQUIRED": "Sivustolla tulee olla vähintään yksi sivustovastaava",
+        "ACTIONS": {
+            "CLOSE": "Sulje"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Dieses Dokument wird in Office Online bearbeitet.",
+        "CANCEL_SESSION_SUCCESS": "Änderungen an diesem Dokument wurden verworfen.",
+        "CANCEL_SESSION_DENIED": "Ein Fehler ist aufgetreten. Falls Sie ihn nicht beheben können, kontaktieren Sie Ihren Administrator.",
+        "END_SESSION_SUCCESS": "Dieses Dokument wird nicht länger in Office Online bearbeitet.",
+        "END_SESSION_DENIED": "Ein Fehler ist aufgetreten. Falls Sie ihn nicht beheben können, kontaktieren Sie Ihren Administrator.",
+        "RESUME_SESSION": "Die Datei wird in Office Online bearbeitet. Sie können diese Datei gleichzeitig bearbeiten.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Alle Änderungen in diesem Dokument speichern",
+            "END_OPTION_DETAILS": "Eine neue Version wird erstellt.",
+            "CANCEL_OPTION": "Alle Änderungen verwerfen",
+            "CHANGES": "Welche Art von Änderungen wurden vorgenommen?",
+            "HEADER": "Bearbeitung beenden",
+            "DESCRIPTION": "Dadurch wird ein weiteres Bearbeiten des Dokuments für alle Benutzer verhindert, die mit Microsoft Office Online auf das Dokument zugreifen.",
+            "QUESTION": "Was soll mit vorgenommenen Änderungen passieren?",
+            "CANCEL": "Abbrechen",
+            "END": "Bearbeitung beenden"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Word-Dokument erstellen"
+            },
+            "EXCEL": {
+                "HEADER": "Excel-Arbeitsblatt erstellen"
+            },
+            "POWERPOINT": {
+                "HEADER": "PowerPoint-Präsentation erstellen"
+            },
+            "CANCEL": "Abbrechen",
+            "CREATE": "Erstellen",
+            "CREATE_AND_OPEN": "Online erstellen und öffnen",
+            "DESCRIPTION": {
+                "LABEL": "Beschreibung",
+                "PLACEHOLDER": "Eine aussagekräftige Beschreibung für diese neue Datei."
+            },
+            "NAME": {
+                "LABEL": "Name"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel-Tabelle",
+                "TOOLTIP": "Ein neues Excel-Arbeitsblatt erstellen"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "PowerPoint-Präsentation",
+                "TOOLTIP": "Eine neue PowerPoint-Präsentation erstellen"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word-Dokument",
+                "TOOLTIP": "Ein neues Word-Dokument erstellen"
+            },
+            "END_SESSION": "Bearbeitung beenden",
+            "EDIT_WORD": "In Word Online bearbeiten",
+            "EDIT_POWERPOINT": "In PowerPoint Online bearbeiten",
+            "EDIT_EXCEL": "In Excel Online bearbeiten"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Erweiterungen: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Erweiterung Microsoft Office Online aktivieren"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Beschreibung zu lang"
+                }
+            }
+        }
+    }
+}

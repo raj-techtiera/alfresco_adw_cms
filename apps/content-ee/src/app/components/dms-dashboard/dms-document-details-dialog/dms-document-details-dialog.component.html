@@ -1,0 +1,127 @@
+<div class="adw-mdrd">
+  <header class="adw-mdrd__header">
+    <div class="adw-mdrd__header-main">
+      <div class="adw-mdrd__icon" aria-hidden="true">
+        <mat-icon>description</mat-icon>
+      </div>
+      <div class="adw-mdrd__header-text">
+        <h2 mat-dialog-title class="adw-mdrd__heading">Document — {{ displayTitle }}</h2>
+      </div>
+    </div>
+    <div class="adw-mdrd__header-actions">
+      <button type="button" mat-icon-button mat-dialog-close aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <mat-dialog-content class="adw-mdrd__content">
+    @if (loading) {
+      <div class="adw-mdrd-loading">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span>Loading document details…</span>
+      </div>
+    } @else if (error) {
+      <p class="adw-mdrd-error" role="alert">{{ error }}</p>
+    } @else {
+      <div class="adw-mdrd__main">
+        <aside class="adw-mdrd__preview" aria-label="Document preview">
+          <h3 class="adw-mdrd__section-title">Preview</h3>
+          <div
+            class="adw-mdrd__preview-shell"
+            [class.adw-mdrd__preview-shell--pdf]="previewMode === 'pdf'"
+            [class.adw-mdrd__preview-shell--text]="previewMode === 'text'"
+            [class.adw-mdrd__preview-shell--cad]="previewMode === 'cad'">
+            @if (previewMode === 'loading') {
+              <div class="adw-mdrd__preview-loading" role="status">
+                <mat-spinner diameter="36"></mat-spinner>
+                <span>{{ previewLoadingMessage }}</span>
+              </div>
+            } @else if (previewMode === 'pdf' && previewSrc) {
+              <iframe
+                class="adw-mdrd__preview-iframe"
+                [src]="previewSrc"
+                [attr.data-node-id]="resolvedNodeId"
+                [attr.data-preview-gen]="previewGeneration"
+                title="Document preview"></iframe>
+            } @else if (previewMode === 'text' && previewTextContent !== null) {
+              <div class="adw-mdrd__preview-text-wrap">
+                <pre class="adw-mdrd__preview-text" [attr.aria-label]="'Text preview: ' + displayTitle">{{ previewTextContent }}</pre>
+              </div>
+            } @else if (previewMode === 'cad') {
+              <div #cadPreview class="adw-mdrd__preview-cad"></div>
+              @if (!cadReady) {
+                <div class="adw-mdrd__preview-loading" role="status">
+                  <mat-spinner diameter="36"></mat-spinner>
+                  <span>Loading drawing…</span>
+                </div>
+              }
+            } @else if (previewMode === 'image' && previewSrc) {
+              <img
+                class="adw-mdrd__preview-img"
+                [src]="previewSrc"
+                [attr.data-node-id]="resolvedNodeId"
+                [attr.data-preview-gen]="previewGeneration"
+                [alt]="'Preview: ' + displayTitle" />
+            } @else {
+              <div class="adw-mdrd__preview-fallback">
+                <p>{{ previewFallbackMessage ?? 'Preview is not available for this file.' }}</p>
+                @if (contentDirectUrl) {
+                  <button type="button" mat-stroked-button (click)="openContentInNewTab()">Open document</button>
+                }
+              </div>
+            }
+          </div>
+        </aside>
+
+        <div class="adw-mdrd__details" [class.adw-mdrd__details--full]="previewMode === 'idle'">
+          <div class="adw-mdrd__tabs-layout">
+            <nav class="adw-mdrd__tablist" role="tablist" aria-label="Document details">
+              @for (group of groups; track group.id) {
+                <button
+                  type="button"
+                  role="tab"
+                  class="adw-mdrd__tab"
+                  [class.adw-mdrd__tab--active]="selectedGroupId === group.id"
+                  [attr.aria-selected]="selectedGroupId === group.id"
+                  (click)="selectedGroupId = group.id">
+                  <mat-icon aria-hidden="true">{{ group.icon }}</mat-icon>
+                  <span>{{ group.label }}</span>
+                </button>
+              }
+            </nav>
+
+            <div class="adw-mdrd__panel-scroll" role="region" [attr.aria-label]="selectedGroup?.label">
+              @if (selectedGroup; as group) {
+                <section class="adw-mdrd__panel" role="tabpanel">
+                  @if (group.rows.length) {
+                    <dl class="adw-mdrd__list">
+                      @for (row of group.rows; track $index) {
+                        <div class="adw-mdrd__pair">
+                          <dt class="adw-mdrd__key">{{ row.label }}</dt>
+                          <dd class="adw-mdrd__value">
+                            @if (row.multiline) {
+                              <pre class="adw-mdrd__pre">{{ row.value }}</pre>
+                            } @else {
+                              {{ row.value }}
+                            }
+                          </dd>
+                        </div>
+                      }
+                    </dl>
+                  } @else {
+                    <p class="adw-mdrd__locked-hint">No {{ group.label.toLowerCase() }} available.</p>
+                  }
+                </section>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-stroked-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

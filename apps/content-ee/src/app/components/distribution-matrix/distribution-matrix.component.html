@@ -1,0 +1,232 @@
+<div class="adw-dm-dialog">
+  <header class="adw-dm-header">
+    <h2 class="adw-dm-title">
+      <mat-icon class="adw-dm-title-icon">account_tree</mat-icon>
+      Distribution Matrix
+    </h2>
+    <button mat-icon-button type="button" (click)="onClose()" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  @if (loading) {
+    <div class="adw-dm-loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading distribution matrix…</p>
+    </div>
+  }
+
+  @if (!loading) {
+    <div class="adw-dm-body">
+      <div class="adw-dm-toolbar">
+        <div class="input-shell input-shell--select adw-dm-shell adw-dm-function-select">
+          <mat-icon class="input-shell__icon" aria-hidden="true">tune</mat-icon>
+          <mat-select
+            [ngModel]="selectedRoutingFunction"
+            (ngModelChange)="onRoutingFunctionChange($event)"
+            panelClass="adw-dm-select-panel"
+            placeholder="Select function"
+            aria-label="Function matrix">
+            @for (field of functionFields; track field.key) {
+              <mat-option [value]="field.key">{{ field.label }}</mat-option>
+            }
+          </mat-select>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="openMatrixEditor()"
+          [disabled]="saving || showMatrixEditor">
+          <mat-icon>add</mat-icon>
+          Add row
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="refresh()"
+          [disabled]="saving || !hasProject">
+          <mat-icon>refresh</mat-icon>
+          Refresh
+        </button>
+        <button
+          mat-raised-button
+          type="button"
+          (click)="save()"
+          [disabled]="saving">
+          <mat-icon>save</mat-icon>
+          {{ saving ? 'Saving…' : 'Save' }}
+        </button>
+      </div>
+
+      @if (showMatrixEditor) {
+        <section
+          class="adw-dm-editor"
+          [class.adw-dm-editor--eng]="!isDviRoutingSelected"
+          aria-label="Manage routing rows">
+          <header class="adw-dm-editor__header">
+            <h3>{{ selectedFunctionLabel() }} routing</h3>
+            <button mat-icon-button type="button" (click)="closeMatrixEditor()" aria-label="Close routing editor">
+              <mat-icon>close</mat-icon>
+            </button>
+          </header>
+
+          @if (isDviRoutingSelected) {
+            <div class="adw-dm-editor-head">
+              <span>DVI</span>
+              <span>Approval group</span>
+              <button mat-icon-button type="button" (click)="addDraftMatrixRow()" aria-label="Add DVI row">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            @for (row of draftDviRows; track row.id) {
+              <div class="adw-dm-editor-row">
+                <div class="input-shell input-shell--select adw-dm-shell">
+                  <mat-select
+                    [ngModel]="row.dviValue"
+                    (ngModelChange)="onDraftDviSelected(row, $event)"
+                    panelClass="adw-dm-select-panel"
+                    placeholder="Select">
+                    <mat-option value="">Select</mat-option>
+                    @for (opt of dviOptions; track opt.value) {
+                      <mat-option [value]="opt.value" [disabled]="isDviDraftValueTaken(opt.value, row.id)">
+                        {{ opt.label }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </div>
+                <div class="input-shell input-shell--select adw-dm-shell">
+                  <mat-select
+                    [ngModel]="row.groupId"
+                    (ngModelChange)="onDraftDviGroupSelected(row, $event)"
+                    panelClass="adw-dm-select-panel"
+                    [placeholder]="groupsLoading ? 'Loading…' : 'Select group'"
+                    [disabled]="groupsLoading">
+                    <mat-option value="">{{ groupsLoading ? 'Loading…' : 'Select group' }}</mat-option>
+                    @for (group of availableGroups; track group.id) {
+                      <mat-option [value]="group.id">{{ group.displayName }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                <button mat-icon-button type="button" (click)="removeDraftDviRow(row.id)" aria-label="Delete row">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </div>
+            }
+          } @else {
+            <div class="adw-dm-editor-head adw-dm-editor-head--eng">
+              <span>Discipline</span>
+              <span>Reviewer group</span>
+              <span>Approver group</span>
+              <button mat-icon-button type="button" (click)="addDraftMatrixRow()" aria-label="Add row">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            @for (row of draftEngineeringRows; track row.id) {
+              <div class="adw-dm-editor-row adw-dm-editor-row--eng">
+                <div class="input-shell input-shell--select adw-dm-shell">
+                  <mat-select
+                    [ngModel]="row.discipline"
+                    (ngModelChange)="onDraftDisciplineSelected(row, $event)"
+                    panelClass="adw-dm-select-panel"
+                    placeholder="Select">
+                    <mat-option value="">Select</mat-option>
+                    @for (discipline of engineeringDisciplines; track discipline) {
+                      <mat-option [value]="discipline" [disabled]="isDisciplineTaken(discipline, row.id)">
+                        {{ discipline }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </div>
+                <div class="input-shell input-shell--select adw-dm-shell">
+                  <mat-select
+                    [ngModel]="row.reviewerGroupId"
+                    (ngModelChange)="onDraftEngineeringGroupSelected(row, 'reviewer', $event)"
+                    panelClass="adw-dm-select-panel"
+                    [placeholder]="groupsLoading ? 'Loading…' : 'Select'"
+                    [disabled]="groupsLoading">
+                    <mat-option value="">{{ groupsLoading ? 'Loading…' : 'Select' }}</mat-option>
+                    @for (group of availableGroups; track group.id) {
+                      <mat-option [value]="group.id">{{ group.displayName }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                <div class="input-shell input-shell--select adw-dm-shell">
+                  <mat-select
+                    [ngModel]="row.approverGroupId"
+                    (ngModelChange)="onDraftEngineeringGroupSelected(row, 'approver', $event)"
+                    panelClass="adw-dm-select-panel"
+                    [placeholder]="groupsLoading ? 'Loading…' : 'Select'"
+                    [disabled]="groupsLoading">
+                    <mat-option value="">{{ groupsLoading ? 'Loading…' : 'Select' }}</mat-option>
+                    @for (group of availableGroups; track group.id) {
+                      <mat-option [value]="group.id">{{ group.displayName }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                <button mat-icon-button type="button" (click)="removeDraftEngineeringRow(row.id)" aria-label="Delete row">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </div>
+            }
+          }
+
+          <div class="adw-dm-editor__footer">
+            <button mat-stroked-button type="button" (click)="closeMatrixEditor()">Cancel</button>
+            <button mat-raised-button color="primary" type="button" (click)="applyDraftRows()">Apply</button>
+          </div>
+        </section>
+      }
+
+      <div class="adw-dm-stack">
+        @for (field of functionFields; track field.key) {
+          <section
+            class="adw-dm-tab"
+            [class.adw-dm-tab--active]="selectedRoutingFunction === field.key">
+            <h4 class="adw-dm-tab__title">{{ field.label }}</h4>
+            <div class="adw-dm-tab__body">
+              @if (field.key === 'dvirequired') {
+                @if (savedDviRows.length > 0) {
+                  @for (row of savedDviRows; track row.id) {
+                    <div class="adw-dm-tab__item">
+                      <span class="adw-dm-tab__key">{{ row.dviValue }}</span>
+                      <span class="adw-dm-tab__value">{{ row.groupName || groupLabel(row.groupId) }}</span>
+                      <button
+                        mat-icon-button
+                        type="button"
+                        (click)="removeSavedDviRow(row.id)"
+                        [disabled]="saving"
+                        aria-label="Delete DVI row">
+                        <mat-icon>delete_outline</mat-icon>
+                      </button>
+                    </div>
+                  }
+                } @else {
+                  <p class="adw-dm-tab__empty">No DVI rows yet. Add a row only if needed.</p>
+                }
+              } @else if (functionRows(field.key).length > 0) {
+                @for (row of functionRows(field.key); track row.id) {
+                  <div class="adw-dm-tab__item adw-dm-tab__item--eng">
+                    <span class="adw-dm-tab__key">{{ row.discipline }}</span>
+                    <span class="adw-dm-tab__value">{{ row.reviewerGroupName || groupLabel(row.reviewerGroupId) }}</span>
+                    <span class="adw-dm-tab__value">{{ row.approverGroupName || groupLabel(row.approverGroupId) }}</span>
+                    <button
+                      mat-icon-button
+                      type="button"
+                      (click)="removeSavedFunctionRow(field.key, row.id)"
+                      [disabled]="saving"
+                      [attr.aria-label]="'Delete ' + field.label + ' row'">
+                      <mat-icon>delete_outline</mat-icon>
+                    </button>
+                  </div>
+                }
+              } @else {
+                <p class="adw-dm-tab__empty">No {{ field.label }} rows yet. Add a row only if needed.</p>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    </div>
+  }
+</div>

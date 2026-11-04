@@ -1,0 +1,677 @@
+<aca-page-layout>
+    <div class="aca-page-layout-content">
+        <!-- Command Centre Header -->
+        <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+            <div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+                    <div style="width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#0056B3,#0A6ED1); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(0,86,179,0.30);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+                        </svg>
+                    </div>
+                    <h1 style="font-size:22px; font-weight:700; color:#1F2937; letter-spacing:-0.02em; line-height:1.2;">Command Centre</h1>
+                </div>
+                <p style="font-size:13px; color:#64748B; margin-left:42px;">Projects · Performance · Risk · Intelligence — real time</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+                <div style="display:flex; align-items:center; gap:6px; padding:6px 12px; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.20); border-radius:10px; font-size:12px; color:#16A34A; font-weight:600;">
+                    <div style="width:6px; height:6px; border-radius:50%; background:#22C55E;"></div>
+                    Live Data
+                </div>
+                <button style="display:flex; align-items:center; gap:7px; padding:8px 16px; background:var(--adw-color-brand-primary-dark); color:white; border:none; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 2px 8px rgba(0,86,179,0.25);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                    </svg>
+                    Export Dashboard
+                </button>
+            </div>
+        </div>
+
+        <!-- Welcome Banner — cool icy white glass -->
+        <div class="adw-cc-hero">
+            <div aria-hidden="true" style="position:absolute; top:0; left:0; right:0; height:50%; background:linear-gradient(180deg,rgba(255,255,255,0.55),transparent); pointer-events:none;"></div>
+            <div aria-hidden="true" style="position:absolute; inset:0; opacity:0.05; background-image:linear-gradient(rgba(15,23,42,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.12) 1px, transparent 1px); background-size:40px 40px;"></div>
+
+            <div style="position:relative; z-index:10; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+                <div style="flex:1;">
+                    <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.6); border:1px solid rgba(148,163,184,0.22); border-radius:99px; padding:4px 12px; margin-bottom:12px;">
+                        <div style="width:6px; height:6px; border-radius:50%; background:#22C55E;"></div>
+                        <span style="color:#334155; font-size:11px; font-weight:600; letter-spacing:0.05em;">NGHI-LNG Phase 2 — Active</span>
+                    </div>
+
+                    <h2 style="font-size:24px; font-weight:700; color:#1E293B; margin-bottom:6px; letter-spacing:-0.02em;">Welcome back, {{userName | translate}}</h2>
+                    <p style="color:#64748B; font-size:14px; margin-bottom:20px; max-width:480px;">Your engineering document management platform. 47 items require attention today.</p>
+
+                    <div style="display:flex; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+                        <div style="background:rgba(255,255,255,0.55); border:1px solid rgba(148,163,184,0.18); border-radius:10px; padding:8px 14px;">
+                            <p style="color:#94A3B8; font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;">Active Workflows</p>
+                            <p style="color:#1E293B; font-size:16px; font-weight:700; margin-top:2px;">47</p>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.55); border:1px solid rgba(148,163,184,0.18); border-radius:10px; padding:8px 14px;">
+                            <p style="color:#94A3B8; font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;">Eng. Documents</p>
+                            <p style="color:#1E293B; font-size:16px; font-weight:700; margin-top:2px;">3,847</p>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.55); border:1px solid rgba(148,163,184,0.18); border-radius:10px; padding:8px 14px;">
+                            <p style="color:#94A3B8; font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;">Team Members</p>
+                            <p style="color:#1E293B; font-size:16px; font-weight:700; margin-top:2px;">24</p>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.55); border:1px solid rgba(148,163,184,0.18); border-radius:10px; padding:8px 14px;">
+                            <p style="color:#94A3B8; font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;">Last Sync</p>
+                            <p style="color:#1E293B; font-size:16px; font-weight:700; margin-top:2px;">2 min ago</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                        <button style="padding:10px 20px; background:#1E293B; color:white; border:none; border-radius:12px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:7px; box-shadow:0 4px 12px rgba(15,23,42,0.14);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                            </svg>
+                            Upload Documents
+                        </button>
+                        <button style="padding:10px 20px; background:rgba(255,255,255,0.7); color:#1E293B; border:1px solid rgba(148,163,184,0.28); border-radius:12px; font-size:13px; font-weight:600; cursor:pointer;">Create Transmittal</button>
+                        <button style="padding:10px 20px; background:rgba(255,255,255,0.5); color:#475569; border:1px solid rgba(148,163,184,0.22); border-radius:12px; font-size:13px; font-weight:500; cursor:pointer;">View Workflows</button>
+                    </div>
+                </div>
+
+                <div style="flex-shrink:0; width:200px; opacity:0.85;">
+                    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+                        <ellipse cx="60" cy="110" rx="30" ry="8" fill="rgba(15,23,42,0.04)" stroke="rgba(15,23,42,0.28)" stroke-width="1.5" />
+                        <rect x="30" y="60" width="60" height="50" fill="rgba(15,23,42,0.03)" stroke="rgba(15,23,42,0.28)" stroke-width="1.5" rx="2" />
+                        <ellipse cx="60" cy="60" rx="30" ry="8" fill="rgba(15,23,42,0.05)" stroke="rgba(15,23,42,0.32)" stroke-width="1.5" />
+                        <ellipse cx="140" cy="120" rx="22" ry="6" fill="rgba(15,23,42,0.04)" stroke="rgba(15,23,42,0.24)" stroke-width="1.5" />
+                        <rect x="118" y="78" width="44" height="42" fill="rgba(15,23,42,0.03)" stroke="rgba(15,23,42,0.24)" stroke-width="1.5" rx="2" />
+                        <ellipse cx="140" cy="78" rx="22" ry="6" fill="rgba(15,23,42,0.05)" stroke="rgba(15,23,42,0.28)" stroke-width="1.5" />
+                        <line x1="90" y1="90" x2="118" y2="90" stroke="rgba(15,23,42,0.32)" stroke-width="3" stroke-linecap="round" />
+                        <line x1="60" y1="110" x2="60" y2="130" stroke="rgba(15,23,42,0.28)" stroke-width="2" stroke-linecap="round" />
+                        <line x1="140" y1="120" x2="140" y2="135" stroke="rgba(15,23,42,0.24)" stroke-width="2" stroke-linecap="round" />
+                        <line x1="170" y1="40" x2="170" y2="120" stroke="rgba(15,23,42,0.30)" stroke-width="2" stroke-linecap="round" />
+                        <path d="M165 40 Q170 30 175 40" stroke="rgba(242,140,40,0.80)" stroke-width="2" fill="rgba(242,140,40,0.30)" />
+                        <line x1="30" y1="75" x2="118" y2="75" stroke="rgba(15,23,42,0.16)" stroke-width="1" stroke-dasharray="4 3" />
+                        <text x="60" y="50" text-anchor="middle" fill="rgba(15,23,42,0.55)" font-size="7" font-weight="600">T-101</text>
+                        <text x="140" y="68" text-anchor="middle" fill="rgba(15,23,42,0.55)" font-size="7" font-weight="600">T-102</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Strip -->
+        <div>
+            <div style="display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:12px;">
+                <!-- Total Projects -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Total Projects</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">0</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#F28C2812;">
+                            <svg width="18" height="18" fill="#F28C28" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#F28C28;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">0 Active Projects</p>
+                </div>
+                <!-- Total Contract Value -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Total Contract Value</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#0056B312;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0056B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#0056B3;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">0 contracts</p>
+                </div>
+                <!-- Overall SPI -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px); border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Overall SPI</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#22C55E12;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#22C55E;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Schedule Performance</p>
+                </div>
+                <!-- Overall CPI -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Overall CPI</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#22C55E12;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#22C55E;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Cost Performance</p>
+                </div>
+                <!-- Portfolio Value -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Portfolio Value</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#0F766E12;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#0F766E;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">0 contracts</p>
+                </div>
+                <!-- Backlog -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Backlog</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#0056B312;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0056B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#0056B3;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Active contract value</p>
+                </div>
+                <!-- On Site Today -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">On Site Today</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#0056B312;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0056B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#0056B3;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Total workforce on site</p>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:12px; max-width:512px;">
+                <!-- Avg SPI -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Avg SPI</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#F28C2812;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F28C28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#F28C28;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Schedule Performance Index</p>
+                </div>
+                <!-- Avg CPI -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Avg CPI</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#F28C2812;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F28C28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#F28C28;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Cost Performance Index</p>
+                </div>
+                <!-- Avg Progress -->
+                <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:14px; padding:14px; box-shadow:0 4px 12px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#94A3B8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Avg Progress</p>
+                            <p style="font-size:22px; font-weight:700; color:#1F2937; margin-top:4px; line-height:1; font-variant-numeric:tabular-nums;">—</p>
+                        </div>
+                        <div style="flex-shrink:0; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:#22C55E12;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+                        </div>
+                    </div>
+                    <div style="height:3px; width:28px; border-radius:99px; background:#22C55E;"></div>
+                    <p style="font-size:11px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Engineering % complete</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row: Portfolio Health / Performance Summary / Projects by Stage / Enterprise Alerts -->
+        <div style="display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px;">
+            <!-- Portfolio Health -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:16px; padding:18px; box-shadow:0 4px 16px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                    <h3 style="font-size:13px; font-weight:700; color:#1F2937;">Portfolio Health</h3>
+                    <button style="font-size:11px; color:#0056B3; font-weight:600; background:none; border:none; cursor:pointer;">View All</button>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:center; margin:4px 0;">
+                    <div style="position:relative; width:140px; height:140px;">
+                        <svg width="140" height="140" viewBox="0 0 140 140">
+                            <circle cx="70" cy="70" r="57" fill="none" stroke="#F1F5F9" stroke-width="18" />
+                        </svg>
+                        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;">
+                            <span style="font-size:24px; font-weight:700; color:#1F2937; line-height:1;">0</span>
+                            <span style="font-size:11px; color:#64748B; margin-top:2px;">Projects</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:10px; display:flex; flex-direction:column; gap:7px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; font-size:12px;">
+                        <div style="display:flex; align-items:center; gap:7px;"><span style="width:8px; height:8px; border-radius:50%; flex-shrink:0; background:#22C55E; display:block;"></span><span style="color:#64748B;">On Track</span></div>
+                        <span style="color:#94A3B8; font-weight:500;">0</span>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; font-size:12px;">
+                        <div style="display:flex; align-items:center; gap:7px;"><span style="width:8px; height:8px; border-radius:50%; flex-shrink:0; background:#F59E0B; display:block;"></span><span style="color:#64748B;">At Risk</span></div>
+                        <span style="color:#94A3B8; font-weight:500;">0</span>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; font-size:12px;">
+                        <div style="display:flex; align-items:center; gap:7px;"><span style="width:8px; height:8px; border-radius:50%; flex-shrink:0; background:#0056B3; display:block;"></span><span style="color:#64748B;">Completed</span></div>
+                        <span style="color:#94A3B8; font-weight:500;">0</span>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; font-size:12px;">
+                        <div style="display:flex; align-items:center; gap:7px;"><span style="width:8px; height:8px; border-radius:50%; flex-shrink:0; background:#E2E8F0; display:block;"></span><span style="color:#64748B;">Not Started</span></div>
+                        <span style="color:#94A3B8; font-weight:500;">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Summary -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:16px; padding:18px; box-shadow:0 4px 16px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                    <h3 style="font-size:13px; font-weight:700; color:#1F2937;">Performance Summary</h3>
+                    <button style="font-size:11px; color:#0056B3; font-weight:600; background:none; border:none; cursor:pointer;">Analytics →</button>
+                </div>
+                <div style="flex:1; overflow-x:auto;">
+                    <table style="width:100%; font-size:11px;">
+                        <thead>
+                            <tr style="border-bottom:1px solid #F1F5F9;">
+                                <th style="text-align:left; padding:6px 8px 6px 0; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;">Parameter</th>
+                                <th style="text-align:center; padding:6px 4px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px; white-space:nowrap;">This Mo.</th>
+                                <th style="text-align:center; padding:6px 4px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px; white-space:nowrap;">Last Mo.</th>
+                                <th style="text-align:center; padding:6px 0 6px 4px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;">Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid #F8FAFC;"><td style="padding:8px 8px 8px 0; color:#374151; font-weight:500;">Schedule Performance (SPI)</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 0 8px 4px; text-align:center; color:#94A3B8;">→</td></tr>
+                            <tr style="border-bottom:1px solid #F8FAFC;"><td style="padding:8px 8px 8px 0; color:#374151; font-weight:500;">Cost Performance (CPI)</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 0 8px 4px; text-align:center; color:#94A3B8;">→</td></tr>
+                            <tr style="border-bottom:1px solid #F8FAFC;"><td style="padding:8px 8px 8px 0; color:#374151; font-weight:500;">Budget Variance</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 0 8px 4px; text-align:center; color:#94A3B8;">→</td></tr>
+                            <tr style="border-bottom:1px solid #F8FAFC;"><td style="padding:8px 8px 8px 0; color:#374151; font-weight:500;">Forecast at Completion</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 0 8px 4px; text-align:center; color:#94A3B8;">→</td></tr>
+                            <tr style="border-bottom:1px solid #F8FAFC;"><td style="padding:8px 8px 8px 0; color:#374151; font-weight:500;">Estimate at Completion</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 0 8px 4px; text-align:center; color:#94A3B8;">→</td></tr>
+                            <tr style="border-bottom:1px solid #F8FAFC;"><td style="padding:8px 8px 8px 0; color:#374151; font-weight:500;">Documents IFC%</td><td style="padding:8px 4px; text-align:center; color:#64748B;">0%</td><td style="padding:8px 4px; text-align:center; color:#64748B;">—</td><td style="padding:8px 0 8px 4px; text-align:center; color:#94A3B8;">→</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Projects by Stage -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:16px; padding:18px; box-shadow:0 4px 16px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                    <h3 style="font-size:13px; font-weight:700; color:#1F2937;">Projects by Stage</h3>
+                    <button style="font-size:11px; color:#0056B3; font-weight:600; background:none; border:none; cursor:pointer;">Manage →</button>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+                    <div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;"><span style="font-size:11px; color:#374151; font-weight:500;">FEED</span><span style="font-size:11px; color:#94A3B8; font-weight:600;">0</span></div>
+                        <div style="height:5px; background:#F1F5F9; border-radius:99px; overflow:hidden;"><div style="height:100%; width:0%; background:#0056B3; border-radius:99px;"></div></div>
+                    </div>
+                    <div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;"><span style="font-size:11px; color:#374151; font-weight:500;">Detailed Design</span><span style="font-size:11px; color:#94A3B8; font-weight:600;">0</span></div>
+                        <div style="height:5px; background:#F1F5F9; border-radius:99px; overflow:hidden;"><div style="height:100%; width:0%; background:#0F766E; border-radius:99px;"></div></div>
+                    </div>
+                    <div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;"><span style="font-size:11px; color:#374151; font-weight:500;">Procurement</span><span style="font-size:11px; color:#94A3B8; font-weight:600;">0</span></div>
+                        <div style="height:5px; background:#F1F5F9; border-radius:99px; overflow:hidden;"><div style="height:100%; width:0%; background:#F28C28; border-radius:99px;"></div></div>
+                    </div>
+                    <div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;"><span style="font-size:11px; color:#374151; font-weight:500;">Construction</span><span style="font-size:11px; color:#94A3B8; font-weight:600;">0</span></div>
+                        <div style="height:5px; background:#F1F5F9; border-radius:99px; overflow:hidden;"><div style="height:100%; width:0%; background:#22C55E; border-radius:99px;"></div></div>
+                    </div>
+                    <div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;"><span style="font-size:11px; color:#374151; font-weight:500;">Commissioning</span><span style="font-size:11px; color:#94A3B8; font-weight:600;">0</span></div>
+                        <div style="height:5px; background:#F1F5F9; border-radius:99px; overflow:hidden;"><div style="height:100%; width:0%; background:#F59E0B; border-radius:99px;"></div></div>
+                    </div>
+                    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding-top:8px;">
+                        <p style="font-size:11px; color:#94A3B8; text-align:center;">No projects yet — create your first project</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enterprise Alerts -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:16px; padding:18px; box-shadow:0 4px 16px rgba(0,0,0,0.05); display:flex; flex-direction:column;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <h3 style="font-size:13px; font-weight:700; color:#1F2937;">Enterprise Alerts</h3>
+                        <span style="background:#DC2626; color:white; font-size:9px; font-weight:700; padding:1px 5px; border-radius:99px;">3</span>
+                    </div>
+                    <button style="font-size:11px; color:#0056B3; font-weight:600; background:none; border:none; cursor:pointer;">View All</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px; flex:1;">
+                    <div style="display:flex; align-items:flex-start; gap:10px; padding:9px 10px; border-radius:10px; background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.15); cursor:pointer;">
+                        <span style="font-size:14px; flex-shrink:0; line-height:1.4;">⚠️</span>
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:11.5px; font-weight:600; color:#1F2937; line-height:1.35; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">P&amp;ID Rev C awaiting review — 1 day overdue</p>
+                            <p style="font-size:10.5px; color:#DC2626; margin-top:2px; font-weight:500;">ENG-PIPI-2247-C</p>
+                        </div>
+                        <span style="font-size:10px; color:#94A3B8; flex-shrink:0; font-weight:500;">8m</span>
+                    </div>
+                    <div style="display:flex; align-items:flex-start; gap:10px; padding:9px 10px; border-radius:10px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15); cursor:pointer;">
+                        <span style="font-size:14px; flex-shrink:0; line-height:1.4;">📋</span>
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:11.5px; font-weight:600; color:#1F2937; line-height:1.35; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">3 documents overdue in Package EP-04</p>
+                            <p style="font-size:10.5px; color:#F59E0B; margin-top:2px; font-weight:500;">Action required</p>
+                        </div>
+                        <span style="font-size:10px; color:#94A3B8; flex-shrink:0; font-weight:500;">2h</span>
+                    </div>
+                    <div style="display:flex; align-items:flex-start; gap:10px; padding:9px 10px; border-radius:10px; background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.15); cursor:pointer;">
+                        <span style="font-size:14px; flex-shrink:0; line-height:1.4;">✅</span>
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:11.5px; font-weight:600; color:#1F2937; line-height:1.35; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Transmittal TRN-2026-0841 acknowledged</p>
+                            <p style="font-size:10.5px; color:#22C55E; margin-top:2px; font-weight:500;">PETRONAS Engineering</p>
+                        </div>
+                        <span style="font-size:10px; color:#94A3B8; flex-shrink:0; font-weight:500;">4h</span>
+                    </div>
+                    <div style="display:flex; align-items:flex-start; gap:10px; padding:9px 10px; border-radius:10px; background:rgba(0,86,179,0.06); border:1px solid rgba(0,86,179,0.15); cursor:pointer;">
+                        <span style="font-size:14px; flex-shrink:0; line-height:1.4;">🔔</span>
+                        <div style="flex:1; min-width:0;">
+                            <p style="font-size:11.5px; font-weight:600; color:#1F2937; line-height:1.35; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">SIS BoD approval pending — Project Director</p>
+                            <p style="font-size:10.5px; color:#0056B3; margin-top:2px; font-weight:500;">ENG-INST-1102-C</p>
+                        </div>
+                        <span style="font-size:10px; color:#94A3B8; flex-shrink:0; font-weight:500;">1d</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row: Business Unit / Global Map / Key Financials / Top 5 Projects -->
+        <div style="display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px;">
+            <!-- Business Unit Performance -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border:1px solid #E2E8F0; border-radius:16px; padding:18px; box-shadow:0 4px 16px rgba(0,0,0,0.05);">
+                <h3 style="font-size:13px; font-weight:700; color:#1F2937; margin-bottom:14px;">Business Unit Performance (YTD)</h3>
+                <table style="width:100%; font-size:11px;">
+                    <thead>
+                        <tr style="border-bottom:1px solid #F1F5F9;">
+                            <th style="text-align:left; padding:6px 8px 6px 0; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;">Business Unit</th>
+                            <th style="text-align:center; padding:6px 4px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;">Projects</th>
+                            <th style="text-align:center; padding:6px 4px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;">SPI</th>
+                            <th style="text-align:center; padding:6px 0 6px 4px; color:#94A3B8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; font-size:10px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid #F8FAFC;">
+                            <td style="padding:8px 8px 8px 0;"><div style="display:flex; align-items:center; gap:7px;"><div style="width:6px; height:6px; border-radius:50%; background:#0056B3; flex-shrink:0;"></div><span style="color:#374151; font-weight:500;">Oil &amp; Gas</span></div></td>
+                            <td style="padding:8px 4px; text-align:center; color:#64748B;">—</td>
+                            <td style="padding:8px 4px; text-align:center; color:#0056B3; font-weight:700;">0.93</td>
+                            <td style="padding:8px 0 8px 4px; text-align:center;"><span style="font-size:10px; color:#94A3B8; background:#F8FAFC; border:1px solid #E2E8F0; padding:2px 6px; border-radius:99px;">No data</span></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #F8FAFC;">
+                            <td style="padding:8px 8px 8px 0;"><div style="display:flex; align-items:center; gap:7px;"><div style="width:6px; height:6px; border-radius:50%; background:#0F766E; flex-shrink:0;"></div><span style="color:#374151; font-weight:500;">Petrochemicals</span></div></td>
+                            <td style="padding:8px 4px; text-align:center; color:#64748B;">—</td>
+                            <td style="padding:8px 4px; text-align:center; color:#0F766E; font-weight:700;">0.90</td>
+                            <td style="padding:8px 0 8px 4px; text-align:center;"><span style="font-size:10px; color:#94A3B8; background:#F8FAFC; border:1px solid #E2E8F0; padding:2px 6px; border-radius:99px;">No data</span></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #F8FAFC;">
+                            <td style="padding:8px 8px 8px 0;"><div style="display:flex; align-items:center; gap:7px;"><div style="width:6px; height:6px; border-radius:50%; background:#F28C28; flex-shrink:0;"></div><span style="color:#374151; font-weight:500;">Power</span></div></td>
+                            <td style="padding:8px 4px; text-align:center; color:#64748B;">—</td>
+                            <td style="padding:8px 4px; text-align:center; color:#F28C28; font-weight:700;">0.95</td>
+                            <td style="padding:8px 0 8px 4px; text-align:center;"><span style="font-size:10px; color:#94A3B8; background:#F8FAFC; border:1px solid #E2E8F0; padding:2px 6px; border-radius:99px;">No data</span></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #F8FAFC;">
+                            <td style="padding:8px 8px 8px 0;"><div style="display:flex; align-items:center; gap:7px;"><div style="width:6px; height:6px; border-radius:50%; background:#22C55E; flex-shrink:0;"></div><span style="color:#374151; font-weight:500;">Infrastructure</span></div></td>
+                            <td style="padding:8px 4px; text-align:center; color:#64748B;">—</td>
+                            <td style="padding:8px 4px; text-align:center; color:#22C55E; font-weight:700;">0.99</td>
+                            <td style="padding:8px 0 8px 4px; text-align:center;"><span style="font-size:10px; color:#94A3B8; background:#F8FAFC; border:1px solid #E2E8F0; padding:2px 6px; border-radius:99px;">No data</span></td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #F8FAFC;">
+                            <td style="padding:8px 8px 8px 0;"><div style="display:flex; align-items:center; gap:7px;"><div style="width:6px; height:6px; border-radius:50%; background:#0056B3; flex-shrink:0;"></div><span style="color:#374151; font-weight:500;">Renewables</span></div></td>
+                            <td style="padding:8px 4px; text-align:center; color:#64748B;">—</td>
+                            <td style="padding:8px 4px; text-align:center; color:#0056B3; font-weight:700;">0.98</td>
+                            <td style="padding:8px 0 8px 4px; text-align:center;"><span style="font-size:10px; color:#94A3B8; background:#F8FAFC; border:1px solid #E2E8F0; padding:2px 6px; border-radius:99px;">No data</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Global Operations Map -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+                <h3 style="font-weight:700; color:#1F2937; font-size:14px; margin-bottom:16px;">Global Operations Map</h3>
+                <div style="border-radius:8px; border:2px dashed rgba(0,161,154,0.3); background:rgba(0,161,154,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 0; gap:12px;">
+                    <div style="width:40px; height:40px; border-radius:8px; background:rgba(0,161,154,0.1); display:flex; align-items:center; justify-content:center;">
+                        <svg width="24" height="24" style="color:#00A19A;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <p style="font-size:14px; font-weight:600; color:#00A19A;">🗺 Geographic Overview</p>
+                    <p style="font-size:12px; color:#9CA3AF; text-align:center; max-width:320px;">Add projects with location data to see the map</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:16px; margin-top:12px; justify-content:center;">
+                    <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#6B7280;"><span style="width:10px; height:10px; border-radius:50%; background:#16A34A;"></span>On Track</div>
+                    <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#6B7280;"><span style="width:10px; height:10px; border-radius:50%; background:#F59E0B;"></span>At Risk</div>
+                    <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#6B7280;"><span style="width:10px; height:10px; border-radius:50%; background:#DC2626;"></span>Critical</div>
+                </div>
+            </div>
+
+            <!-- Key Financials -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+                <h3 style="font-weight:700; color:#1F2937; font-size:14px; margin-bottom:16px;">Key Financials (YTD)</h3>
+                <table style="width:100%; font-size:12px;">
+                    <thead>
+                        <tr style="border-bottom:1px solid #F3F4F6;">
+                            <th style="text-align:left; padding:8px 12px 8px 0; color:#9CA3AF; font-weight:500;"></th>
+                            <th style="text-align:center; padding:8px; color:#9CA3AF; font-weight:500;">USD</th>
+                            <th style="text-align:center; padding:8px 0 8px 8px; color:#9CA3AF; font-weight:500;">% of Target</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">Total Revenue</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">Gross Profit</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">EBITDA</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">Net Profit</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">Cash &amp; Bank Balance</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">Accounts Receivable</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                        <tr style="border-bottom:1px solid #F9FAFB;"><td style="padding:10px 12px 10px 0; color:#374151; font-weight:500;">Accounts Payable</td><td style="padding:10px 8px; text-align:center; color:#6B7280;">—</td><td style="padding:10px 0 10px 8px; text-align:center; color:#6B7280;">—</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size:12px; color:#9CA3AF; margin-top:12px; font-style:italic;">Financial data available when COM module is configured</p>
+            </div>
+
+            <!-- Top 5 Projects -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                    <h3 style="font-weight:700; color:#1F2937; font-size:14px;">Top 5 Projects</h3>
+                    <button style="font-size:12px; color:#00A19A; font-weight:500; background:none; border:none; cursor:pointer;">View All</button>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 0; gap:12px;">
+                    <div style="width:48px; height:48px; border-radius:8px; background:#F3F4F6; display:flex; align-items:center; justify-content:center;">
+                        <svg width="28" height="28" style="color:#9CA3AF;" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" /></svg>
+                    </div>
+                    <p style="font-size:14px; color:#6B7280; font-weight:500;">No projects yet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discipline Performance Summary -->
+        <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+            <h3 style="font-weight:700; color:#1F2937; font-size:14px; margin-bottom:20px;">Discipline Performance Summary</h3>
+            <div style="display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:16px;">
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:2px solid #0B3C6D;"><span style="font-size:16px;">📐</span><span style="font-size:12px; font-weight:700; color:#0B3C6D;">Engineering</span></div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Progress</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">SPI</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Open Deliverables</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:2px solid #92400E;"><span style="font-size:16px;">📦</span><span style="font-size:12px; font-weight:700; color:#92400E;">Procurement</span></div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Progress</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">On-Time Delivery</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Open POs</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:2px solid #F59E0B;"><span style="font-size:16px;">🏗</span><span style="font-size:12px; font-weight:700; color:#F59E0B;">Construction</span></div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Progress</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">On-Site Productivity</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Open WPs</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:2px solid #DC2626;"><span style="font-size:16px;">🦺</span><span style="font-size:12px; font-weight:700; color:#DC2626;">HSE</span></div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">TRIR (YTD)</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Incidents (YTD)</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">LTIR (YTD)</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:2px solid #16A34A;"><span style="font-size:16px;">✅</span><span style="font-size:12px; font-weight:700; color:#16A34A;">Quality (QMS)</span></div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Inspections</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">NCRs Open</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Quality Compliance</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:2px solid #7C3AED;"><span style="font-size:16px;">🔌</span><span style="font-size:12px; font-weight:700; color:#7C3AED;">Commissioning</span></div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Systems</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Pre-Commissioning</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:12px; color:#6B7280; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Commissioning</span><span style="font-size:12px; font-weight:500; color:#9CA3AF; flex-shrink:0;">—</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row: Project Risk Summary / Documents & Information -->
+        <div style="display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px;">
+            <!-- Project Risk Summary -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                    <h3 style="font-weight:700; color:#1F2937; font-size:14px;">Project Risk Summary</h3>
+                    <button style="font-size:12px; color:#00A19A; font-weight:500; background:none; border:none; cursor:pointer;">RAID →</button>
+                </div>
+                <div style="display:flex; align-items:center; gap:24px;">
+                    <div style="position:relative; width:144px; height:144px; flex-shrink:0;">
+                        <svg width="144" height="144" viewBox="0 0 144 144">
+                            <circle cx="72" cy="72" r="53" fill="none" stroke="#E5E7EB" stroke-width="18" />
+                        </svg>
+                        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none;">
+                            <span style="font-size:24px; font-weight:700; color:#1F2937;">0</span>
+                            <span style="font-size:12px; color:#9CA3AF;">Projects</span>
+                        </div>
+                    </div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:8px; width:80px; flex-shrink:0;"><span style="width:10px; height:10px; border-radius:50%; flex-shrink:0; background:#16A34A;"></span><span style="font-size:12px; color:#4B5563;">Low</span></div>
+                            <div style="flex:1; height:6px; background:#F3F4F6; border-radius:99px; overflow:hidden;"><div style="height:100%; border-radius:99px; width:29%; background:#16A34A;"></div></div>
+                            <span style="font-size:12px; color:#6B7280; width:32px; text-align:right; flex-shrink:0;">29%</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:8px; width:80px; flex-shrink:0;"><span style="width:10px; height:10px; border-radius:50%; flex-shrink:0; background:#F59E0B;"></span><span style="font-size:12px; color:#4B5563;">Medium</span></div>
+                            <div style="flex:1; height:6px; background:#F3F4F6; border-radius:99px; overflow:hidden;"><div style="height:100%; border-radius:99px; width:28%; background:#F59E0B;"></div></div>
+                            <span style="font-size:12px; color:#6B7280; width:32px; text-align:right; flex-shrink:0;">28%</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:8px; width:80px; flex-shrink:0;"><span style="width:10px; height:10px; border-radius:50%; flex-shrink:0; background:#DC2626;"></span><span style="font-size:12px; color:#4B5563;">High</span></div>
+                            <div style="flex:1; height:6px; background:#F3F4F6; border-radius:99px; overflow:hidden;"><div style="height:100%; border-radius:99px; width:15%; background:#DC2626;"></div></div>
+                            <span style="font-size:12px; color:#6B7280; width:32px; text-align:right; flex-shrink:0;">15%</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:8px; width:80px; flex-shrink:0;"><span style="width:10px; height:10px; border-radius:50%; flex-shrink:0; background:#7C3AED;"></span><span style="font-size:12px; color:#4B5563;">Extreme</span></div>
+                            <div style="flex:1; height:6px; background:#F3F4F6; border-radius:99px; overflow:hidden;"><div style="height:100%; border-radius:99px; width:8%; background:#7C3AED;"></div></div>
+                            <span style="font-size:12px; color:#6B7280; width:32px; text-align:right; flex-shrink:0;">8%</span>
+                        </div>
+                        <p style="font-size:12px; color:#9CA3AF; font-style:italic; margin-top:8px;">Risk distribution approximated from project data</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents & Information -->
+            <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+                    <h3 style="font-weight:700; color:#1F2937; font-size:14px;">Documents &amp; Information</h3>
+                    <button style="font-size:12px; color:#00A19A; font-weight:500; background:none; border:none; cursor:pointer;">View Document Dashboard →</button>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:16px;">
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+                        <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; background:#0B3C6D10;">📄</div>
+                        <div style="height:2px; width:32px; border-radius:99px; background:#0B3C6D;"></div>
+                        <span style="font-size:18px; font-weight:700; color:#1F2937;">0</span>
+                        <span style="font-size:12px; color:#6B7280; line-height:1.2;">Total Documents</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+                        <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; background:#00A19A10;">📋</div>
+                        <div style="height:2px; width:32px; border-radius:99px; background:#00A19A;"></div>
+                        <span style="font-size:18px; font-weight:700; color:#1F2937;">—</span>
+                        <span style="font-size:12px; color:#6B7280; line-height:1.2;">ITPs</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+                        <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; background:#0B3C6D10;">📐</div>
+                        <div style="height:2px; width:32px; border-radius:99px; background:#0B3C6D;"></div>
+                        <span style="font-size:18px; font-weight:700; color:#1F2937;">—</span>
+                        <span style="font-size:12px; color:#6B7280; line-height:1.2;">Drawings</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+                        <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; background:#F59E0B10;">📁</div>
+                        <div style="height:2px; width:32px; border-radius:99px; background:#F59E0B;"></div>
+                        <span style="font-size:18px; font-weight:700; color:#1F2937;">—</span>
+                        <span style="font-size:12px; color:#6B7280; line-height:1.2;">Submittals</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;">
+                        <div style="width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; background:#7C3AED10;">📊</div>
+                        <div style="height:2px; width:32px; border-radius:99px; background:#7C3AED;"></div>
+                        <span style="font-size:18px; font-weight:700; color:#1F2937;">—</span>
+                        <span style="font-size:12px; color:#6B7280; line-height:1.2;">Reports</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Strategic Highlights -->
+        <div style="background:rgba(255,255,255,0.55) !important; backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);; border-radius:12px; border:1px solid #F3F4F6; box-shadow:0 1px 2px rgba(0,0,0,0.05); padding:20px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                <h3 style="font-weight:700; color:#1F2937; font-size:14px;">Recent Strategic Highlights</h3>
+                <button style="font-size:12px; color:#00A19A; font-weight:500; background:none; border:none; cursor:pointer;">View All Highlights →</button>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:16px;">
+                <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:8px; background:#F9FAFB; border:1px solid #F3F4F6;">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">📁</span><span style="font-size:12px; font-weight:700; color:#F59E0B;">Projects Active</span></div>
+                    <p style="font-size:12px; color:#6B7280; line-height:1.4;">0 projects currently running</p>
+                    <button style="font-size:12px; font-weight:500; text-align:left; background:none; border:none; cursor:pointer; padding:0; color:#00A19A;">Projects</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:8px; background:#F9FAFB; border:1px solid #F3F4F6;">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">📄</span><span style="font-size:12px; font-weight:700; color:#8B5CF6;">Documents Registered</span></div>
+                    <p style="font-size:12px; color:#6B7280; line-height:1.4;">0 total in MDR</p>
+                    <button style="font-size:12px; font-weight:500; text-align:left; background:none; border:none; cursor:pointer; padding:0; color:#00A19A;">Documents</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:8px; background:#F9FAFB; border:1px solid #F3F4F6;">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">✅</span><span style="font-size:12px; font-weight:700; color:#16A34A;">IFC Documents</span></div>
+                    <p style="font-size:12px; color:#6B7280; line-height:1.4;">0 issued for construction</p>
+                    <button style="font-size:12px; font-weight:500; text-align:left; background:none; border:none; cursor:pointer; padding:0; color:#00A19A;">Engineering</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:8px; background:#F9FAFB; border:1px solid #F3F4F6;">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">🤖</span><span style="font-size:12px; font-weight:700; color:#7C3AED;">AI Copilot Active</span></div>
+                    <p style="font-size:12px; color:#6B7280; line-height:1.4;">Cross-project intelligence enabled</p>
+                    <button style="font-size:12px; font-weight:500; text-align:left; background:none; border:none; cursor:pointer; padding:0; color:#00A19A;">AI</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:8px; background:#F9FAFB; border:1px solid #F3F4F6;">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">🔒</span><span style="font-size:12px; font-weight:700; color:#F59E0B;">Platform Secure</span></div>
+                    <p style="font-size:12px; color:#6B7280; line-height:1.4;">All data encrypted at rest</p>
+                    <button style="font-size:12px; font-weight:500; text-align:left; background:none; border:none; cursor:pointer; padding:0; color:#00A19A;">Security</button>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:8px; background:#F9FAFB; border:1px solid #F3F4F6;">
+                    <div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">👥</span><span style="font-size:12px; font-weight:700; color:#0B3C6D;">Team Connected</span></div>
+                    <p style="font-size:12px; color:#6B7280; line-height:1.4;">— active users</p>
+                    <button style="font-size:12px; font-weight:500; text-align:left; background:none; border:none; cursor:pointer; padding:0; color:#00A19A;">People</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</aca-page-layout>

@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "هذا الملف قيد التعديل بواسطة Office Online",
+        "CANCEL_SESSION_SUCCESS": "تم إلغاء تعديلات هذا الملف.",
+        "CANCEL_SESSION_DENIED": "حدث خطأ. اتصل بالمسؤول إذا استمر.",
+        "END_SESSION_SUCCESS": "لم يعد هذا الملف قيد التعديل بواسطة Office Online",
+        "END_SESSION_DENIED": "حدث خطأ. اتصل بالمسؤول إذا استمر.",
+        "RESUME_SESSION": "تم تحرير هذا الملف في Office Online. يمكنك تحرير هذا الملف في الوقت نفسه.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "حفظ كل التحريرات على هذا المستند",
+            "END_OPTION_DETAILS": "سيتم إنشاء إصدار جديد",
+            "CANCEL_OPTION": "تجاهل كل التحريرات",
+            "CHANGES": "ما مستوى التغييرات التي أجريت؟",
+            "HEADER": "إنهاء التحرير",
+            "DESCRIPTION": "سيمنع ذلك أي تحرير إضافي للمستند لكل المستخدمين الذين يصلون إليه باستخدام Microsoft Office Online.",
+            "QUESTION": "ما الذي ينبغي أن يتم بالنسبة للتحريرات التي أجريت؟",
+            "CANCEL": "إلغاء",
+            "END": "إنهاء التحرير"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "قم بإنشاء مستند Word"
+            },
+            "EXCEL": {
+                "HEADER": "قم بإنشاء جدول بيانات Excel"
+            },
+            "POWERPOINT": {
+                "HEADER": "قم بإنشاء عرض PowerPoint تقديمي"
+            },
+            "CANCEL": "إلغاء",
+            "CREATE": "إنشاء",
+            "CREATE_AND_OPEN": "إنشاء وفتح عبر الإنترنت",
+            "DESCRIPTION": {
+                "LABEL": "الوصف",
+                "PLACEHOLDER": "وصف مفيد لهذا الملف الجديد."
+            },
+            "NAME": {
+                "LABEL": "الاسم"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "جدول بيانات Excel",
+                "TOOLTIP": "قم بإنشاء جدول بيانات Excel جديد"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "عرض تقديمي Powerpoint",
+                "TOOLTIP": "قم بإنشاء عرض تقديمي جديد لبرنامج Powerpoint"
+            },
+            "CREATE_WORD": {
+                "TITLE": "مستند Word",
+                "TOOLTIP": "قم بإنشاء مستند Word جديد"
+            },
+            "END_SESSION": "إنهاء التحرير",
+            "EDIT_WORD": "تحرير في Word Online",
+            "EDIT_POWERPOINT": "تحرير في PowerPoint Online",
+            "EDIT_EXCEL": "تحرير في Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "الامتدادات: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "قم بتمكين ملحق Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "الوصف طويل جدًا"
+                }
+            }
+        }
+    }
+}

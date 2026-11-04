@@ -1,0 +1,365 @@
+<div class="adw-reports-page">
+  <div class="adw-reports__dashboard">
+      <header class="adw-reports__header">
+        <button
+          *ngIf="!isSidenavExpanded"
+          class="adw-reports__nav-toggle"
+          type="button"
+          (click)="openSidenav()"
+          aria-label="Expand navigation menu"
+          title="Expand navigation menu">
+          &raquo;
+        </button>
+
+        <div class="adw-reports__header-main">
+          <h1 class="adw-reports__title">Reports Dashboard</h1>
+          <div class="adw-reports__header-actions">
+            <button mat-stroked-button type="button" class="adw-reports__refresh-btn" (click)="refresh()" [disabled]="loading">
+              <mat-icon aria-hidden="true">refresh</mat-icon>
+              Refresh
+            </button>
+
+            <!-- <mat-form-field appearance="outline" class="adw-reports__date-field" subscriptSizing="dynamic">
+              <mat-label>As of date</mat-label>
+              <input matInput [matDatepicker]="reportsDatePicker" [(ngModel)]="selectedDate" name="reportsDate" />
+              <mat-datepicker-toggle matIconSuffix [for]="reportsDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #reportsDatePicker></mat-datepicker>
+            </mat-form-field> -->
+          </div>
+        </div>
+      </header>
+
+      <section class="adw-reports__summary" aria-label="Document summary">
+        <button
+          *ngFor="let card of summaryCards"
+          type="button"
+          class="adw-reports-summary-card"
+          [ngClass]="[
+            'adw-reports-summary-card--' + card.variant,
+            isSummaryCardActive(card) ? 'adw-reports-summary-card--active' : ''
+          ]"
+          [attr.aria-pressed]="isSummaryCardActive(card)"
+          [attr.aria-label]="card.label + ': ' + card.count"
+          (click)="onSummaryCardClick(card)">
+          <div class="adw-reports-summary-card__icon-wrap">
+            <mat-icon aria-hidden="true">{{ card.icon }}</mat-icon>
+          </div>
+          <div class="adw-reports-summary-card__body">
+            <span class="adw-reports-summary-card__value">{{ loading ? '—' : card.count }}</span>
+            <span class="adw-reports-summary-card__label">{{ card.label }}</span>
+            <span class="adw-reports-summary-card__subtext">{{ card.subtext }}</span>
+          </div>
+        </button>
+      </section>
+
+      <section class="adw-reports__analytics" aria-label="Analytics">
+        <article class="adw-reports-panel adw-reports-panel--chart">
+          <div class="adw-reports-panel__head">
+            <h2 class="adw-reports-panel__title">By Document Type</h2>
+           
+          </div>
+          <div class="adw-reports-panel__chart">
+            <div class="adw-reports-donut">
+              <div class="adw-reports-donut__canvas">
+                <canvas
+                  #documentTypeChart
+                  baseChart
+                  [type]="'doughnut'"
+                  [datasets]="documentTypeDatasets"
+                  [labels]="documentTypeLabels"
+                  [options]="documentTypeChartOptions"
+                  [legend]="chartLegend">
+                </canvas>
+                <div class="adw-reports-donut__center" aria-hidden="true">
+                  <span class="adw-reports-donut__total">{{ documentTypeChartTotal }}</span>
+                  <span class="adw-reports-donut__label">Total</span>
+                </div>
+              </div>
+            </div>
+            <ul class="adw-reports-legend">
+              <li *ngFor="let label of documentTypeLabels; let i = index">
+                <button
+                  type="button"
+                  class="adw-reports-legend__item"
+                  [class.adw-reports-legend__item--active]="isDocumentTypeFilterActive(i)"
+                  [attr.aria-pressed]="isDocumentTypeFilterActive(i)"
+                  (click)="onDocumentTypeFilterClick(i)">
+                  <span class="adw-reports-legend__swatch" [style.backgroundColor]="documentTypeDatasets[0].backgroundColor[i]"></span>
+                  <span class="adw-reports-legend__text">
+                    <span class="adw-reports-legend__name">{{ label }}</span>
+                    <span class="adw-reports-legend__stat">
+                      {{ documentTypeDatasets[0].data[i] }}
+                      ({{ percentOfTotal(documentTypeDatasets[0].data[i], documentTypeChartTotal) }})
+                    </span>
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="adw-reports-panel adw-reports-panel--chart">
+          <div class="adw-reports-panel__head">
+            <h2 class="adw-reports-panel__title">Status of the Documents</h2>
+           
+          </div>
+          <div class="adw-reports-panel__chart">
+            <div class="adw-reports-donut">
+              <div class="adw-reports-donut__canvas">
+                <canvas
+                  #statusChart
+                  baseChart
+                  [type]="'doughnut'"
+                  [datasets]="statusDatasets"
+                  [labels]="statusLabels"
+                  [options]="statusChartOptions"
+                  [legend]="chartLegend">
+                </canvas>
+                <div class="adw-reports-donut__center" aria-hidden="true">
+                  <span class="adw-reports-donut__total">{{ statusChartTotal }}</span>
+                  <span class="adw-reports-donut__label">Total</span>
+                </div>
+              </div>
+            </div>
+            <ul class="adw-reports-legend">
+              <li *ngFor="let label of statusLabels; let i = index">
+                <div class="adw-reports-legend__row">
+                  <span class="adw-reports-legend__swatch" [style.backgroundColor]="statusDatasets[0].backgroundColor[i]"></span>
+                  <span class="adw-reports-legend__text">
+                    <span class="adw-reports-legend__name">{{ label }}</span>
+                    <span class="adw-reports-legend__stat">
+                      {{ statusDatasets[0].data[i] }}
+                      ({{ percentOfTotal(statusDatasets[0].data[i], statusChartTotal) }})
+                    </span>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="adw-reports-panel adw-reports-panel--transmittals">
+          <div class="adw-reports-panel__head">
+            <h2 class="adw-reports-panel__title">Transmittals</h2>
+            <button type="button" class="adw-reports-panel__link" (click)="onTransmittalFilterClick('transmittalsAll')">View all</button>
+          </div>
+          <div class="adw-reports-transmittals">
+            <div class="adw-reports-transmittal-card adw-reports-transmittal-card--outgoing">
+              <div class="adw-reports-transmittal-card__head">
+                <span class="adw-reports-transmittal-card__icon" aria-hidden="true">
+                  <mat-icon>outbox</mat-icon>
+                </span>
+                <span class="adw-reports-transmittal-card__title">Outgoing Transmittals</span>
+              </div>
+              <div class="adw-reports-transmittal-card__stats">
+                <button
+                  type="button"
+                  class="adw-reports-transmittal-stat"
+                  [class.adw-reports-transmittal-stat--active]="isTransmittalStatActive('outgoingDraft')"
+                  [attr.aria-pressed]="isTransmittalStatActive('outgoingDraft')"
+                  (click)="onTransmittalFilterClick('outgoingDraft')">
+                  <span class="adw-reports-transmittal-card__value">{{ transmittals.outgoing.draft }}</span>
+                  <span class="adw-reports-transmittal-card__label">Draft</span>
+                </button>
+                <button
+                  type="button"
+                  class="adw-reports-transmittal-stat"
+                  [class.adw-reports-transmittal-stat--active]="isTransmittalStatActive('outgoingIssued')"
+                  [attr.aria-pressed]="isTransmittalStatActive('outgoingIssued')"
+                  (click)="onTransmittalFilterClick('outgoingIssued')">
+                  <span class="adw-reports-transmittal-card__value">{{ transmittals.outgoing.issued }}</span>
+                  <span class="adw-reports-transmittal-card__label">Issued</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="adw-reports-transmittal-card adw-reports-transmittal-card--incoming">
+              <div class="adw-reports-transmittal-card__head">
+                <span class="adw-reports-transmittal-card__icon" aria-hidden="true">
+                  <mat-icon>move_to_inbox</mat-icon>
+                </span>
+                <span class="adw-reports-transmittal-card__title">Incoming Transmittals</span>
+              </div>
+              <div class="adw-reports-transmittal-card__stats">
+                <button
+                  type="button"
+                  class="adw-reports-transmittal-stat"
+                  [class.adw-reports-transmittal-stat--active]="isTransmittalStatActive('incomingDraft')"
+                  [attr.aria-pressed]="isTransmittalStatActive('incomingDraft')"
+                  (click)="onTransmittalFilterClick('incomingDraft')">
+                  <span class="adw-reports-transmittal-card__value">{{ transmittals.incoming.draft }}</span>
+                  <span class="adw-reports-transmittal-card__label">Draft</span>
+                </button>
+                <button
+                  type="button"
+                  class="adw-reports-transmittal-stat"
+                  [class.adw-reports-transmittal-stat--active]="isTransmittalStatActive('incomingApproved')"
+                  [attr.aria-pressed]="isTransmittalStatActive('incomingApproved')"
+                  (click)="onTransmittalFilterClick('incomingApproved')">
+                  <span class="adw-reports-transmittal-card__value">{{ transmittals.incoming.approved }}</span>
+                  <span class="adw-reports-transmittal-card__label">Approved</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+      </div>
+
+      <section class="adw-reports__documents" aria-labelledby="adw-reports-documents-heading">
+        <div class="adw-reports-panel__head adw-reports-panel__head--table">
+          <div class="adw-reports-panel__head-main">
+            <h2 id="adw-reports-documents-heading" class="adw-reports-panel__title">Documents List —</h2>
+            <p class="adw-reports-table-filter">{{ documentsFilterLabel }}</p>
+          </div>
+          <button type="button" class="adw-reports-panel__link" (click)="applyTableFilter('total')">View all</button>
+        </div>
+
+        <div class="adw-reports-table-wrap">
+          <p *ngIf="loadError && !hasDashboardData" class="adw-reports-error" role="alert">{{ loadError }}</p>
+          <p *ngIf="loadWarning && hasDashboardData" class="adw-reports-warning" role="status">{{ loadWarning }}</p>
+          <p *ngIf="tableLoading" class="adw-reports-message" role="status">Loading documents…</p>
+          <p *ngIf="!tableLoading && !loadError && documents.length === 0" class="adw-reports-message">No documents found.</p>
+
+          <div
+            class="adw-reports-table-scroll adw-reports-table-scroll--desktop"
+            role="region"
+            aria-label="Documents list"
+            *ngIf="!tableLoading && documents.length > 0">
+            <table class="adw-reports-table">
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Document Type</th>
+                  <th scope="col">Document Status</th>
+                  <th *ngFor="let column of transmittalTableColumns" scope="col">
+                    {{ transmittalColumnLabel(column) }}
+                  </th>
+                  <!-- <th scope="col">Security Level</th> -->
+                  <th scope="col">Created Date</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col" class="adw-reports-table__actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of paginatedDocuments">
+                  <td class="adw-reports-table__title">
+                    <div class="adw-reports-table__title-cell">
+                      <mat-icon class="adw-reports-file-icon" [ngClass]="fileIconClass(row.fileIcon)" aria-hidden="true">
+                        {{ row.fileIcon }}
+                      </mat-icon>
+                      <span class="adw-reports-table__title-text">{{ row.title }}</span>
+                    </div>
+                  </td>
+                  <td class="adw-reports-table__text">{{ row.documentType }}</td>
+                  <td class="adw-reports-table__status">
+                    <span class="adw-reports-status-badge" [ngClass]="statusClass(row.status)">
+                      {{ row.status }}
+                    </span>
+                  </td>
+                  <td *ngFor="let column of transmittalTableColumns" class="adw-reports-table__status">
+                    <span
+                      *ngIf="transmittalStatusValue(column, row) !== '—'; else transmittalDash"
+                      class="adw-reports-status-badge"
+                      [ngClass]="transmittalStatusClass(column, row)">
+                      {{ transmittalStatusValue(column, row) }}
+                    </span>
+                  </td>
+                  <!-- <td>{{ row.securityLevel }}</td> -->
+                  <td class="adw-reports-table__text adw-reports-table__text--nowrap">{{ row.createdDate }}</td>
+                  <td class="adw-reports-table__text">{{ row.createdBy }}</td>
+                  <td class="adw-reports-table__actions-cell">
+                    <button mat-icon-button type="button" [matMenuTriggerFor]="rowMenu" aria-label="Document actions">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #rowMenu="matMenu">
+                      <button mat-menu-item type="button" (click)="openDocument(row)" [disabled]="!row.nodeId">
+                        <mat-icon>visibility</mat-icon>
+                        <span>View</span>
+                      </button>
+                      <button mat-menu-item type="button" (click)="downloadDocument(row)" [disabled]="!row.nodeId">
+                        <mat-icon>download</mat-icon>
+                        <span>Download</span>
+                      </button>
+                    </mat-menu>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <ng-template #transmittalDash>—</ng-template>
+          </div>
+
+          <div class="adw-reports-doc-cards" *ngIf="!tableLoading && documents.length > 0">
+            <article *ngFor="let row of paginatedDocuments" class="adw-reports-doc-card">
+              <div class="adw-reports-doc-card__head">
+                <mat-icon class="adw-reports-file-icon" [ngClass]="fileIconClass(row.fileIcon)" aria-hidden="true">
+                  {{ row.fileIcon }}
+                </mat-icon>
+                <h3 class="adw-reports-doc-card__title">{{ row.title }}</h3>
+                <button mat-icon-button type="button" [matMenuTriggerFor]="mobileRowMenu" aria-label="Document actions">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #mobileRowMenu="matMenu">
+                  <button mat-menu-item type="button" (click)="openDocument(row)" [disabled]="!row.nodeId">
+                    <mat-icon>visibility</mat-icon>
+                    <span>View</span>
+                  </button>
+                  <button mat-menu-item type="button" (click)="downloadDocument(row)" [disabled]="!row.nodeId">
+                    <mat-icon>download</mat-icon>
+                    <span>Download</span>
+                  </button>
+                </mat-menu>
+              </div>
+              <dl class="adw-reports-doc-card__meta">
+                <div>
+                  <dt>Document Type</dt>
+                  <dd>{{ row.documentType }}</dd>
+                </div>
+                <div>
+                  <dt>Status</dt>
+                  <dd>
+                    <span class="adw-reports-status-badge" [ngClass]="statusClass(row.status)">{{ row.status }}</span>
+                  </dd>
+                </div>
+                <div *ngFor="let column of transmittalTableColumns">
+                  <dt>{{ transmittalColumnLabel(column) }}</dt>
+                  <dd>
+                    <span
+                      *ngIf="transmittalStatusValue(column, row) !== '—'"
+                      class="adw-reports-status-badge"
+                      [ngClass]="transmittalStatusClass(column, row)">
+                      {{ transmittalStatusValue(column, row) }}
+                    </span>
+                    <ng-container *ngIf="transmittalStatusValue(column, row) === '—'">—</ng-container>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Security Level</dt>
+                  <dd>{{ row.securityLevel }}</dd>
+                </div>
+                <div>
+                  <dt>Created Date</dt>
+                  <dd>{{ row.createdDate }}</dd>
+                </div>
+                <div class="adw-reports-doc-card__meta-wide">
+                  <dt>Created By</dt>
+                  <dd>{{ row.createdBy }}</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+
+          <mat-paginator
+            *ngIf="documents.length > 0"
+            class="adw-reports-paginator"
+            [length]="documents.length"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            [showFirstLastButtons]="true"
+            (page)="onPageChange($event)">
+          </mat-paginator>
+        </div>
+      </section>
+
+</div>

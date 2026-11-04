@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "仪表板"
+    },
+    "DASHBOARD": {
+        "TITLE": "仪表板"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "小组件操作",
+        "REFRESH": "刷新",
+        "VIEW_ALL": "查看全部",
+        "TASK_SUMMARY": {
+            "TITLE": "我的任务汇总",
+            "SUMMARY_INFO_SUFFIX": "的任务已完成!",
+            "NO_TASKS_ASSIGNED": "您尚未分配任何任务。",
+            "NO_TASKS_ERROR": "获取任务时出错。请刷新小组件。",
+            "COMPLETED": "已完成",
+            "INCOMPLETE": "未完成",
+            "OVERDUE": "过期",
+            "TASKS": "个任务",
+            "ARROW_UP": "向上箭头"
+        },
+        "TASK_LIST": {
+            "TITLE": "任务管理",
+            "OVERDUE": "过期",
+            "UNASSIGNED": "未分配",
+            "IN_PROGRESS": "进行中",
+            "NO_OVERDUE_TASKS": "您没有任何过期任务。",
+            "NO_UNASSIGNED_TASKS": "您没有任何未分配的任务。",
+            "NO_IN_PROGRESS_TASKS": "您没有任何进行中的任务。",
+            "ACTIONS": {
+                "VIEW": "查看任务",
+                "COMMENT": "添加备注",
+                "CLAIM": "认领任务"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "任务认领成功。",
+                "CLAIMING_FAILED": "任务无法认领。"
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "文件",
+            "RECENT": "最近",
+            "FAVORITES": "收藏",
+            "PERSONAL": "个人",
+            "SHARED": "共享",
+            "NO_RECENT_FILES": "您没有任何最近的任务。",
+            "NO_FAVORITES_FILES": "您没有任何收藏的文件和文件夹。",
+            "NO_PERSONAL_FILES": "您没有任何个人文件和文件夹。",
+            "NO_SHARED_FILES": "您没有任何共享文件。",
+            "ACTIONS": {
+                "VIEW": "查看",
+                "DOWNLOAD": "下载",
+                "SHARE": "共享",
+                "SHARED_LINK_SETTINGS": "共享链接设置",
+                "FOLDER_INFORMATION": "文件夹信息"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "库",
+            "PERSONAL": "我的库",
+            "ALL": "全部",
+            "FAVOURITES": "收藏",
+            "NO_PERSONAL_LIBRARIES": "您没有任何个人库。",
+            "NO_ALL_LIBRARIES": "您没有任何库。",
+            "NO_FAVORITE_LIBRARIES": "您没有任何收藏的库。"
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "合规暂停事项",
+            "NO_HOLDS": "未创建任何暂停事项。",
+            "HOLDS_NAME": "暂停事项名称",
+            "CREATED": "创建时间",
+            "REASON": "原因",
+            "ACTIONS": {
+                "DOWNLOAD": "下载",
+                "INFORMATION": "文件夹信息",
+                "DELETE": "删除"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "我的任务进度 - 每个月",
+            "WEEK_LABEL": "周",
+            "MONTH_LABEL": "月",
+            "SUMMARY_INFO_SUFFIX": "的任务已完成 (针对选定的月份)!",
+            "SELECT_MONTH": "选择月份",
+            "NO_TASKS_IN_MONTH": "选定的月份内没有任务。",
+            "EMPTY": "无任务"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "我的流程汇总 - 每 6 个月",
+            "SUMMARY_INFO_SUFFIX": "的流程已完成 (针对选定的 6个月)!",
+            "NO_PROCESSES": "您没有任何流程。",
+            "NO_PROCESSES_ERROR": "获取流程时出错。请刷新小组件。",
+            "NO_PROCESSES_IN_PERIOD": "选定的期间内没有流程。",
+            "RUNNING": "运行中",
+            "COMPLETED": "已完成",
+            "NEXT": "下一个",
+            "NEXT_SCREEN_READER_LABEL": "我的流程摘要  - 转至未来6个月",
+            "PREVIOUS": "上一个",
+            "PREVIOUS_SCREEN_READER_LABEL": "我的流程摘要  - 返回过去6个月",
+            "EMPTY": "无流程"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "{{ taskName }} 备注",
+        "CLOSE": "关闭"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "缩略图"
+    }
+}

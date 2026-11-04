@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+    <mat-form-field class="aga-full-width aga-manage-hold-control">
+        <mat-label data-automation-id="manage-hold-name-label">
+            {{ 'COMMON.NAME' | translate }}
+        </mat-label>
+        <input data-automation-id="manage-hold-name-input" matInput formControlName="name" />
+        <mat-error *ngIf="form.controls['name'].errors?.['required']" data-automation-id="manage-hold-name-error">
+            {{ 'FORM.FIELD.REQUIRED' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.controls['name'].errors?.['maxlength']" data-automation-id="manage-hold-name-error">
+            {{ maxLengthErrorMessage }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="aga-full-width aga-manage-hold-control">
+        <mat-label
+            data-automation-id="manage-hold-description-label">{{ 'GOVERNANCE.MANAGE_HOLDS.NEW_HOLD_DESCRIPTION' | translate }}
+        </mat-label>
+        <textarea
+            class="aga-manage-hold-description"
+            rows="3"
+            data-automation-id="manage-hold-description-input"
+            matInput
+            formControlName="description"
+        ></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="aga-full-width aga-manage-hold-control">
+        <mat-label data-automation-id="manage-hold-reason-label">
+            {{ 'GOVERNANCE.MANAGE_HOLDS.NEW_HOLD_REASON' | translate }}
+        </mat-label>
+        <textarea
+            class="aga-manage-hold-reason"
+            rows="3"
+            data-automation-id="manage-hold-reason-input"
+            matInput
+            formControlName="reason"
+        ></textarea>
+        <mat-error *ngIf="form.controls['reason'].errors?.['required']" data-automation-id="manage-hold-reason-error">
+            {{ 'FORM.FIELD.REQUIRED' | translate }}
+        </mat-error>
+    </mat-form-field>
+</form>

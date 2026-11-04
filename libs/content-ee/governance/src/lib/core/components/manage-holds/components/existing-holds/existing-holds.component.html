@@ -1,0 +1,48 @@
+<div *ngIf="isLoading$ | async; else noAvailableHolds" class="aga-loading-spinner-container-small" [attr.data-automation-id]="'existing-holds-loading-spinner'">
+    <mat-progress-spinner
+        [diameter]="50"
+        color="primary"
+        mode="indeterminate"
+    />
+</div>
+
+<ng-template #noAvailableHolds>
+    <div *ngIf="holdsDataSource.itemsCount === 0" class="aga-no-available-holds-container" [attr.data-automation-id]="'existing-holds-no-available-holds-message'">
+        {{ 'GOVERNANCE.MANAGE_HOLDS.EMPTY_HOLD_LIST' | translate }}
+        <span
+            *ngIf="isHoldCreationAllowed"
+            class="aga-no-available-holds-apply-hold"
+            [attr.data-automation-id]="'existing-holds-apply-new-hold-hyperlink'"
+            (click)="switchTabToApplyHold.emit()"
+            (keyup.enter)="switchTabToApplyHold.emit()"
+            tabindex="0"
+        >
+            {{'GOVERNANCE.MANAGE_HOLDS.TAB_CREATE_LEGAL_HOLD' | translate }}
+        </span>
+    </div>
+</ng-template>
+
+<mat-list class="aga-manage-holds-list-items">
+    <cdk-virtual-scroll-viewport #viewport itemSize="40" class="aga-manage-holds-list-items-viewport">
+        <mat-list-item
+            *cdkVirtualFor="let hold of holdsDataSource; let index = index;"
+            class="aga-manage-holds-list-items-item"
+            [class.aga-manage-holds-list-items-item-selected]="hold.selected"
+            [class.aga-manage-holds-list-items-item-non-selectable]="!isAdditionToHoldAllowed && !hold.changed"
+            [attr.data-automation-id]="'manage-existing-holds-list-item-' + index"
+            (click)="toggleSelection(hold)"
+            (keyup.enter)="toggleSelection(hold)"
+            tabindex="0"
+        >
+            <div matLine class="aga-manage-holds-list-items-item-line">
+                <p [matTooltip]="hold.name" class="aga-manage-holds-list-items-item-name" [attr.data-automation-id]="'manage-existing-holds-list-item-name-' + index">{{ hold.name }}</p>
+                <mat-icon
+                    *ngIf="operationMode === OperationMode.SINGLE && (hold.changed || hold.selected && isRemovalFromHoldAllowed || !hold.selected && isAdditionToHoldAllowed)"
+                    class="aga-add-hold-icon"
+                    [attr.data-automation-id]="'manage-existing-holds-list-item-toggle-' + index">
+                    {{ hold.selected ? 'check_circle' : 'add_circle_outline' }}
+                </mat-icon>
+            </div>
+        </mat-list-item>
+    </cdk-virtual-scroll-viewport>
+</mat-list>

@@ -1,0 +1,49 @@
+.aca-sidebar {
+    width: 550px;
+    max-width: 550px;
+}
+
+adw-preview-tab {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 164px);
+    position: relative;
+
+    .adf-viewer-inline {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: unset;
+
+        .adf-viewer__file-title {
+            position: unset;
+            transform: unset;
+        }
+
+        .adf-viewer-content,
+        .adf-viewer-container,
+        .adf-viewer-sidebars,
+        .adf-viewer__unknown-format-view {
+            height: 100%;
+        }
+
+        .adf-image-viewer {
+            height: 100%;
+
+            .adf-image-container {
+                height: 100%;
+            }
+        }
+
+        .adf-viewer-render {
+            &-main-loader {
+                position: unset;
+            }
+
+            &-layout-content > div,
+            &__loading-screen {
+                height: 100%;
+            }
+        }
+    }
+}

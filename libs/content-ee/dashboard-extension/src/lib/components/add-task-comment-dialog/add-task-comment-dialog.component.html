@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>
+    {{ 'ADD_TASK_COMMENT_DIALOG.TITLE' | translate: {taskName: data.taskName} }}
+</h1>
+
+<mat-dialog-content>
+    <adf-task-comments [taskId]="data.id"/>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button
+            mat-dialog-close
+            data-automation-id="add-task-comment-dialog-close-button">
+        {{ 'ADD_TASK_COMMENT_DIALOG.CLOSE' | translate }}
+    </button>
+</mat-dialog-actions>

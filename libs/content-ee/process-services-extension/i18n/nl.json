@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Nieuw proces",
+            "SELECT_APPLICATION": "Toepassing selecteren",
+            "ERROR": "U kunt geen proces starten omdat er geen procesdefinities beschikbaar zijn"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Procesbeheer",
+            "PROCESS_LIST": {
+                "PROCESSES": "Processen"
+            },
+            "START_PROCESS": "Proces starten",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Gegevens weergeven"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Toon opmerkingen"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Procesbeheer",
+            "CREATE_NEW_PROCESS": "Proces starten",
+            "CREATE_PROCESS_NOT_ALLOWED": "Nieuw proces kan niet worden gemaakt"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Meer weergeven"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Opmerkingen",
+            "CANCEL_PROCESS": "Proces annuleren"
+        },
+        "ERROR": {
+            "NO_FORM": "Voor de procesdefinitie is geen formulier gedefinieerd",
+            "NO_CONTENT": "Kan het bestand niet bijvoegen vanaf uw apparaat",
+            "CAN_NOT_ATTACH": "Kan de geselecteerde content niet bijvoegen",
+            "AUDIT_ERROR": "Taakfout weergeven: {{error}}",
+            "TASK_ACCESS_WARNING": "U hebt geen recht om de taak te wijzigen",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Een documentvoorbeeld is niet beschikbaar omdat de taak nog niet is voltooid."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Proces gemaakt '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Er is een onbekende netwerkfout opgetreden. Aan de processervice gerelateerde functies zijn uitgeschakeld.",
+            "ACTION": "Actief proces weergeven"
+        },
+        "NO_PROCESS_DEFINITIONS": "Geen procesdefinities beschikbaar",
+        "SIDE_NAV_TITLE": "Werkstroom",
+        "STATUS": {
+            "COMPLETED": "Voltooid",
+            "RUNNING": "Bezig",
+            "OPEN": "Openen",
+            "UNKNOWN": "Onbekend"
+        },
+        "TASK_LIST": {
+            "TASKS": "Taken",
+            "ACTIONS": {
+                "TASK_DETAILS": "Weergeven"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Weergeven"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formulier is opgeslagen",
+            "FORM_COMPLETED": "De taak is voltooid",
+            "CLOSE": "Sluiten",
+            "CLAIM_TASK": "Taak is geclaimd",
+            "UNCLAIM_TASK": "Taak is vrijgegeven",
+            "CLAIM_FAILED": "Kan de actie niet uitvoeren"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Kan de actie niet uitvoeren",
+            "FAILED_TO_LOAD": "Kan taakgegevens niet laden, probeer het later opnieuw",
+            "UPDATED": "{{ property }} is bijgewerkt",
+            "FAILED_TO_UPDATE": "Kan {{ property }} niet bijwerken",
+            "METADATA_TOOLTIP": "Gegevens weergeven",
+            "NO_TASK_NAME": "Geen naam"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Sluiten"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Geen procesdefinities beschikbaar"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Gestart door",
+            "CREATED": "Begindatum"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "U kunt geen proces starten omdat er geen procesdefinities beschikbaar zijn",
+            "NO_START_FORM": "Voor dit proces zijn geen extra configuraties nodig",
+            "NO_PROCESS_DEF_SELECTED": "Geen categorie/proces geselecteerd",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Toepassing selecteren"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Proces annuleren?",
+                "DESCRIPTION": "Dit proces en alle bijbehorende taken worden als voltooid gemarkeerd.",
+                "CONFIRM_BTN": "Bevestigen"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' succesvol geannuleerd.",
+                "FAIL": "Fout annuleringsproces: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Datum gemaakt"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Claimen",
+                "UNCLAIM": "Vrijgeven"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Onderdeel van lopend proces",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Gekoppeld proces",
+            "PART_OF_THE_PROCESS_TITLE": "Dit document maakt deel uit van de volgende processen",
+            "NO_PROCESSES": "Dit document maakt geen deel uit van lopende processen",
+            "CREATED": "Aangemaakt",
+            "VIEW_DETAILS_BTN": "Bekijk gegevens"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatische authenticatie voor procesdiensten",
+        "ENABLED": "Ingeschakeld",
+        "ENABLED_DESCRIPTION": "Het systeem zal automatisch opnieuw authenticeren, waardoor de gebruiker zijn of haar werk niet hoeft te onderbreken.",
+        "DISABLED": "Uitgeschakeld",
+        "DISABLED_DESCRIPTION": "De gebruiker zal opnieuw moeten authenticeren met zijn of haar aanmeldgegevens zodra de sessie afloopt.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

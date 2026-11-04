@@ -1,0 +1,498 @@
+<div class="classification-container fade-in">
+  <div class="main-content">
+    <div class="page-header">
+      <div>
+        <h1>{{ verticalService.labels.pageClassification }}</h1>
+        <p class="page-subtitle">Upload and classify documents using Knowledge Enrichment or manual categorization</p>
+      </div>
+      <div class="header-action-buttons">
+        <button mat-stroked-button class="manage-categories-btn" (click)="openCategoryManager()" matTooltip="Add or remove document categories">
+          <mat-icon>tune</mat-icon>
+          Manage Categories
+        </button>
+        <button mat-stroked-button class="manage-categories-btn" (click)="openMetadataManager()" matTooltip="Add or remove metadata fields">
+          <mat-icon>data_object</mat-icon>
+          Manage Metadata
+        </button>
+      </div>
+    </div>
+
+    <mat-card class="section-card hide-select-document-section">
+      <mat-card-header>
+        <mat-card-title>1. Select Document</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group [(ngModel)]="mode" class="mode-selection">
+          <mat-radio-button value="existing" class="hide-existing-option">Use Existing Document</mat-radio-button>
+          <mat-radio-button value="upload" class="hide-upload-option">Upload New File</mat-radio-button>
+        </mat-radio-group>
+
+        <div *ngIf="mode === 'existing'" class="mode-content">
+          <div class="document-search-container hide-search-panel">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Search Documents</mat-label>
+              <input
+                matInput
+                [value]="searchQuery"
+                (input)="onSearchInput($any($event.target).value)"
+                (focus)="onSearchFocus()"
+                (blur)="onSearchBlur()"
+                placeholder="Type to search by document name..." />
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+
+            <div *ngIf="showSearchDropdown" class="search-dropdown">
+              <div *ngIf="searching" class="search-loading">
+                <mat-spinner diameter="20"></mat-spinner>
+                <span>Searching...</span>
+              </div>
+              <div *ngFor="let node of searchResults" class="search-result-item" (mousedown)="selectSearchResult(node)">
+                <mat-icon class="search-result-icon">
+                  {{ node.content?.mimeType?.startsWith('image/') ? 'image' : node.content?.mimeType === 'application/pdf' ? 'picture_as_pdf' : 'description' }}
+                </mat-icon>
+                <div class="search-result-info">
+                  <strong>{{ node.name }}</strong>
+                  <span class="search-result-meta">
+                    {{ node.modifiedByUser?.displayName }}
+                    <span *ngIf="node.modifiedAt"> &middot; {{ node.modifiedAt | date:'mediumDate' }}</span>
+                    <span *ngIf="node.content?.sizeInBytes"> &middot; {{ (node.content!.sizeInBytes / 1024).toFixed(0) }} KB</span>
+                  </span>
+                </div>
+              </div>
+              <div *ngIf="!searching && searchResults.length === 0" class="search-no-results">No documents found</div>
+            </div>
+          </div>
+
+          <div class="document-id-fallback hide-direct-id">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Or enter Document ID directly</mat-label>
+              <input matInput [(ngModel)]="documentId" placeholder="Enter Alfresco document ID" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="loadDocument()" [disabled]="loading || !documentId.trim()">
+              <mat-icon>download</mat-icon>
+              Load
+            </button>
+          </div>
+
+          <div *ngIf="loading" class="loading-indicator">
+            <mat-spinner diameter="30"></mat-spinner>
+            <span>Loading document...</span>
+          </div>
+        </div>
+
+        <div *ngIf="mode === 'upload'" class="mode-content hide-upload-panel">
+          <div class="upload-section">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Target Folder</mat-label>
+              <mat-select [(ngModel)]="targetFolderId">
+                <mat-option *ngFor="let folder of folderOptions" [value]="folder.id">{{ folder.name }}</mat-option>
+              </mat-select>
+              <mat-hint>Select the folder where the document will be uploaded</mat-hint>
+            </mat-form-field>
+
+            <div
+              class="drop-zone"
+              [class.drag-over]="isDragOver"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)"
+              (click)="fileInput.click()">
+              <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none" />
+              <mat-icon class="drop-icon">cloud_upload</mat-icon>
+              <h3>{{ selectedFile ? selectedFile.name : 'Drag & Drop File Here' }}</h3>
+              <p>or click to browse</p>
+              <span class="supported-formats">Supported: PDF, DOC, DOCX, JPG, PNG</span>
+            </div>
+
+            <div class="file-input-wrapper" *ngIf="selectedFile">
+              <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="uploading">
+                <mat-icon>upload_file</mat-icon>
+                Change File
+              </button>
+              <span class="file-name">{{ selectedFile.name }}</span>
+            </div>
+
+            <button mat-raised-button color="accent" (click)="uploadAndClassify()" [disabled]="!selectedFile || uploading" class="upload-classify-button">
+              <mat-spinner *ngIf="uploading" diameter="20" style="display: inline-block; margin-right: 8px"></mat-spinner>
+              <mat-icon *ngIf="!uploading">cloud_upload</mat-icon>
+              {{ uploading ? 'Uploading...' : 'Upload and Classify' }}
+            </button>
+          </div>
+
+          <div *ngIf="uploading" class="loading-indicator">
+            <mat-spinner diameter="30"></mat-spinner>
+            <span>{{ checkingDuplicates ? 'Checking for duplicates...' : 'Uploading document to Alfresco...' }}</span>
+          </div>
+        </div>
+
+        <div *ngIf="duplicates.length > 0 && !duplicateResolved" class="duplicate-panel">
+          <div class="duplicate-header">
+            <mat-icon>warning</mat-icon>
+            <div>
+              <h3>Duplicate Detected</h3>
+              <p>This file already exists in the repository (identical content hash match).</p>
+            </div>
+          </div>
+
+          <div class="duplicate-comparison">
+            <div class="duplicate-item new-file">
+              <span class="dup-label">New Upload</span>
+              <div class="dup-details">
+                <mat-icon>upload_file</mat-icon>
+                <div>
+                  <strong>{{ documentName }}</strong>
+                  <span class="dup-meta">Just uploaded</span>
+                </div>
+              </div>
+            </div>
+
+            <mat-icon class="dup-arrow">sync_alt</mat-icon>
+
+            <div *ngFor="let dup of duplicates" class="duplicate-item existing-file">
+              <span class="dup-label">Existing</span>
+              <div class="dup-details">
+                <mat-icon>description</mat-icon>
+                <div>
+                  <strong>{{ dup.name }}</strong>
+                  <span class="dup-meta"> {{ dup.modifiedAt | date:'medium' }} &middot; {{ dup.modifiedByUser?.displayName }} </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="duplicate-actions">
+            <button mat-raised-button color="primary" (click)="resolveDuplicate('keep-both')">
+              <mat-icon>content_copy</mat-icon>
+              Keep Both
+            </button>
+            <button mat-raised-button color="warn" (click)="resolveDuplicate('remove-new')">
+              <mat-icon>delete</mat-icon>
+              Remove New Upload
+            </button>
+            <button mat-stroked-button (click)="resolveDuplicate('replace-original')">
+              <mat-icon>swap_horiz</mat-icon>
+              Replace Original
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="documentName && !uploading && !loading && (duplicates.length === 0 || duplicateResolved)" class="document-info">
+          <mat-icon color="primary">description</mat-icon>
+          <div>
+            <strong>{{ documentName }}</strong>
+            <p>Document loaded and ready for classification</p>
+          </div>
+        </div>
+
+        <div *ngIf="error && !classifying" class="error-message">
+          <mat-icon>error</mat-icon>
+          {{ error }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>Choose Classification Method</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="documentName" class="selected-file-banner">
+          <mat-icon color="primary">description</mat-icon>
+          <span>File: <strong>{{ documentName }}</strong></span>
+        </div>
+
+        <mat-radio-group [(ngModel)]="classificationType" class="classification-type-group">
+          <mat-radio-button value="ai" class="classification-option">
+            <div class="option-content">
+              <mat-icon color="primary">psychology</mat-icon>
+              <div>
+                <strong>AI Classification</strong>
+                <p>Uses Context Enrichment API for intelligent document analysis</p>
+              </div>
+            </div>
+          </mat-radio-button>
+
+          <mat-radio-button value="extract" class="classification-option">
+            <div class="option-content">
+              <mat-icon color="accent">schema</mat-icon>
+              <div>
+                <strong>Field Extraction</strong>
+                <p>Uses Data Curation API to extract structured fields (title, author, date, key terms)</p>
+              </div>
+            </div>
+          </mat-radio-button>
+
+          <mat-radio-button value="manual" class="classification-option">
+            <div class="option-content">
+              <mat-icon color="warn">person</mat-icon>
+              <div>
+                <strong>Manual Classification</strong>
+                <p>Manually select the document category</p>
+              </div>
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div *ngIf="classificationType === 'manual'" class="manual-selection">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Select Category</mat-label>
+            <mat-select [(ngModel)]="selectedCategory">
+              <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="action-buttons">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="handleClassifyClick()"
+            [disabled]="(mode === 'upload' ? !selectedFile : !documentId) || classifying || uploading"
+            class="classify-button">
+            <mat-spinner *ngIf="classifying || uploading" diameter="20" style="display: inline-block; margin-right: 8px"></mat-spinner>
+            <mat-icon *ngIf="!classifying && !uploading">play_arrow</mat-icon>
+            {{ classifying ? 'Classifying...' : uploading ? 'Uploading...' : 'Classify Document' }}
+          </button>
+          <button mat-button (click)="reset()" [disabled]="classifying">
+            <mat-icon>refresh</mat-icon>
+            Reset
+          </button>
+          <button mat-raised-button color="primary" (click)="cancel()" [disabled]="classifying || uploading">
+            <mat-icon>arrow_back</mat-icon>
+            Cancel
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="classifying" class="section-card progress-card">
+      <mat-card-content>
+        <div class="progress-content">
+          <mat-spinner diameter="40"></mat-spinner>
+          <div class="progress-text">
+            <h3>Classification in Progress</h3>
+            <p *ngIf="classificationType === 'ai'">Analyzing document with AI... This may take up to 5 minutes.</p>
+            <p *ngIf="classificationType === 'extract'">Extracting fields from document... This may take up to 5 minutes.</p>
+            <p *ngIf="classificationType === 'manual'">Saving manual classification...</p>
+          </div>
+        </div>
+        <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+
+    <div *ngIf="classificationResult && !classifying" class="results-layout">
+      <mat-card *ngIf="filePreviewUrl" class="section-card preview-card">
+        <mat-card-header>
+          <mat-icon>visibility</mat-icon>
+          <mat-card-title>Document Preview</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="document-preview">
+            <img *ngIf="filePreviewType === 'image'" [src]="filePreviewUrl" [alt]="documentName" class="preview-image" />
+            <iframe *ngIf="filePreviewType === 'pdf'" [src]="filePreviewSafeUrl" class="preview-pdf"></iframe>
+            <div *ngIf="filePreviewType === 'unsupported'" class="preview-unsupported">
+              <mat-icon>insert_drive_file</mat-icon>
+              <p>Preview not available for this file type</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="section-card result-card">
+        <mat-card-header>
+          <mat-icon class="result-icon">check_circle</mat-icon>
+          <mat-card-title>Classification Complete!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="result-grid">
+            <div class="result-item">
+              <label>Classification:</label>
+              <span class="result-value">{{ classificationResult.classification }}</span>
+            </div>
+            <div class="result-item">
+              <label>Confidence:</label>
+              <div class="confidence-display">
+                <span class="result-value">{{ (classificationResult.confidence * 100).toFixed(1) }}%</span>
+                <mat-progress-bar mode="determinate" [value]="classificationResult.confidence * 100" [color]="classificationResult.confidence > 0.7 ? 'primary' : 'warn'">
+                </mat-progress-bar>
+              </div>
+            </div>
+            <div class="result-item">
+              <label>Method:</label>
+              <span class="result-value">
+                <mat-icon>{{ classificationResult.classifiedBy === 'AI' ? 'psychology' : classificationResult.classifiedBy === 'Field Extraction' ? 'schema' : 'person' }}</mat-icon>
+                {{ classificationResult.classifiedBy }}
+              </span>
+            </div>
+            <div class="result-item">
+              <label>Timestamp:</label>
+              <span class="result-value">{{ classificationResult.timestamp | date:'medium' }}</span>
+            </div>
+          </div>
+
+          <div *ngIf="getDescription()" class="result-section">
+            <h3>
+              <mat-icon>image</mat-icon>
+              Description
+            </h3>
+            <p class="description-text">{{ getDescription() }}</p>
+          </div>
+
+          <div *ngIf="getSummary()" class="result-section">
+            <h3>
+              <mat-icon>summarize</mat-icon>
+              Summary
+            </h3>
+            <p class="summary-text">{{ getSummary() }}</p>
+          </div>
+
+          <div *ngIf="getExtractedFields()" class="result-section extracted-fields-section">
+            <h3>
+              <mat-icon>table_chart</mat-icon>
+              Extracted Fields
+            </h3>
+            <div class="extracted-fields-grid">
+              <div *ngFor="let field of getExtractedFields()" class="extracted-field">
+                <label>{{ field.key }}</label>
+                <span>{{ field.value }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="movingToFolder || moveSuccess || moveError" class="folder-move-status">
+            <div *ngIf="movingToFolder" class="move-in-progress">
+              <mat-spinner diameter="20"></mat-spinner>
+              <span>Moving document to classified folder...</span>
+            </div>
+            <div *ngIf="moveSuccess" class="move-success">
+              <mat-icon>folder_special</mat-icon>
+              <span>Document moved to <strong>{{ movedToFolder }}</strong></span>
+            </div>
+            <div *ngIf="moveError" class="move-error">
+              <mat-icon>warning</mat-icon>
+              <span>{{ moveError }}</span>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button mat-raised-button color="primary" (click)="classify()">
+              <mat-icon>refresh</mat-icon>
+              Reclassify
+            </button>
+            <button mat-button (click)="reset()">
+              <mat-icon>clear</mat-icon>
+              Clear
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card *ngIf="classificationResult && !classifying" class="section-card similar-documents-card">
+      <mat-card-header>
+        <mat-icon class="similar-icon">library_books</mat-icon>
+        <mat-card-title>Similar Documents</mat-card-title>
+        <span class="similar-subtitle" *ngIf="similarDocuments.length > 0">
+          {{ similarDocuments.length }} document{{ similarDocuments.length !== 1 ? 's' : '' }}
+          classified as "{{ classificationResult.classification }}"
+        </span>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="loadingSimilar" class="similar-loading">
+          <mat-spinner diameter="24"></mat-spinner>
+          <span>Searching for similar documents...</span>
+        </div>
+
+        <div *ngIf="similarError" class="similar-error">
+          <mat-icon>warning</mat-icon>
+          <span>{{ similarError }}</span>
+        </div>
+
+        <div *ngIf="!loadingSimilar && !similarError && similarDocuments.length === 0" class="similar-empty">
+          <mat-icon>search_off</mat-icon>
+          <p>No other documents found with this classification.</p>
+        </div>
+
+        <mat-list *ngIf="similarDocuments.length > 0" class="similar-list">
+          <mat-list-item *ngFor="let doc of similarDocuments">
+            <mat-icon matListItemIcon>description</mat-icon>
+            <div matListItemTitle>{{ doc.name }}</div>
+            <div matListItemLine class="similar-meta">
+              <span *ngIf="doc.modifiedAt"> Modified: {{ doc.modifiedAt | date:'mediumDate' }} </span>
+              <span *ngIf="doc.modifiedByUser?.displayName"> &middot; {{ doc.modifiedByUser.displayName }} </span>
+              <span *ngIf="doc.content?.sizeInBytes"> &middot; {{ (doc.content!.sizeInBytes / 1024).toFixed(0) }} KB </span>
+            </div>
+            <button mat-icon-button matListItemMeta (click)="openInDocumentBrowser(doc)" matTooltip="Open in Document Browser">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="info-sidebar">
+    <mat-card>
+      <div class="sidebar-accent-bar"></div>
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>auto_awesome</mat-icon>
+          How It Works
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-section">
+          <div class="info-section-icon">
+            <mat-icon>psychology</mat-icon>
+          </div>
+          <div class="info-section-body">
+            <h4>AI Classification</h4>
+            <p>Uses Hyland Context Enrichment API to analyze document content and automatically assign categories based on text and image analysis.</p>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="info-section-icon accent-purple">
+            <mat-icon>schema</mat-icon>
+          </div>
+          <div class="info-section-body">
+            <h4>Field Extraction</h4>
+            <p>Uses Hyland Data Curation API with a JSON schema to extract structured fields like title, author, date, type, and key terms from documents.</p>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="info-section-icon accent-teal">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="info-section-body">
+            <h4>Manual Classification</h4>
+            <p>Allows you to manually select the appropriate category for the document.</p>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="info-section-icon accent-green">
+            <mat-icon>folder_special</mat-icon>
+          </div>
+          <div class="info-section-body">
+            <h4>Classified Documents</h4>
+            <p>After classification, documents are automatically moved to a <strong>Classified/{{ '{' }}Category{{ '}' }}</strong> folder in Alfresco for organized storage.</p>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="info-section-icon accent-amber">
+            <mat-icon>category</mat-icon>
+          </div>
+          <div class="info-section-body">
+            <h4>Available Categories</h4>
+            <ul class="category-list">
+              <li *ngFor="let category of categories">{{ category }}</li>
+            </ul>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

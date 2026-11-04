@@ -1,0 +1,63 @@
+<ng-container *ngIf="data.state === 'expanded'; else iconMenu">
+    <mat-accordion>
+        <mat-expansion-panel id="processmanagement"
+                             #processmanagement
+                             [attr.data-automation-id]="'process-management-expanded-' + processmanagement.expanded"
+                             [expanded]="true"
+                             (expandedChange)="toggleProcessManagement($event)"
+                             class="aca-expansion-panel">
+            <mat-expansion-panel-header  expandedHeight="32px" collapsedHeight="32px" role="group" class="aca-expansion-panel-header">
+                <mat-panel-title class="aca-expansion-panel-header-title">
+                    <div class="aca-expansion-panel-item">
+                        <span
+                            [attr.aria-label]="'PROCESS-EXTENSION.SIDE_NAV_TITLE' | translate"
+                            data-automation-id="aps-process-management-button"
+                            class="aca-action-button aca-full-width">
+                            <span class="aca-action-button__label">{{ 'PROCESS-EXTENSION.SIDE_NAV_TITLE' | translate }}</span>
+                        </span>
+                    </div>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="item aps-filters-title aps-filters-icon">
+                <span>{{
+                    'PROCESS-EXTENSION.TASK_LIST.TASKS' | translate
+                }}</span>
+            </div>
+            <aps-task-filters-ext
+                [currentFilter]="currentFilter"
+                (filterSelected)="taskFilterSelected($event)"
+            />
+
+            <div class="item aps-filters-title aps-filters-icon">
+                <span>{{
+                    'PROCESS-EXTENSION.BREADCRUMB.PROCESS_LIST.PROCESSES'
+                        | translate
+                    }}</span>
+            </div>
+            <aps-process-filters-ext
+                [currentFilter]="currentFilter"
+                (filterSelected)="processFilterSelected($event)"
+            />
+        </mat-expansion-panel>
+    </mat-accordion>
+</ng-container>
+
+<ng-template #iconMenu>
+    <button [matMenuTriggerFor]="menu" class="action-button" mat-icon-button>
+        <adf-icon
+            value="adf:ic-process"
+            class="aps-filters-icon"
+        />
+    </button>
+
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <aps-task-filters-ext
+            [currentFilter]="currentFilter"
+            (filterSelected)="taskFilterSelected($event)"
+        />
+        <aps-process-filters-ext
+            [currentFilter]="currentFilter"
+            (filterSelected)="processFilterSelected($event)"
+        />
+    </mat-menu>
+</ng-template>

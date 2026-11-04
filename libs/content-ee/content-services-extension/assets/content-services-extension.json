@@ -1,0 +1,250 @@
+{
+    "$version": "1.0.0",
+    "$id": "content-services.plugin",
+    "$name": "adf content services extension",
+    "$description": "adf content services plugin",
+    "$vendor": "Hyland Software, Inc. and its affiliates",
+    "$license": "Apache-2.0",
+    "settings": [
+        {
+            "id": "app.extensions.content-service.settings",
+            "name": "Extensions: Content Services",
+            "provider": "ECM",
+            "parameters": [
+                {
+                    "name": "Enable Content Services Extensions",
+                    "key": "contentServices",
+                    "type": "boolean",
+                    "value": false
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "id": "app.action.info-drawer.execute",
+            "type": "MANAGE_MEMBERS",
+            "payload": "$(context.selection.library)"
+        },
+        {
+            "id": "app.action.add-user.execute",
+            "type": "ADD_MEMBER",
+            "payload": "$(context.selection.library)"
+        },
+        {
+            "id": "app.action.manage-members.execute",
+            "type": "MANAGE_MEMBERS",
+            "payload": "$(context.selection.library)"
+        }
+    ],
+    "features": {
+        "contextMenu": [
+            {
+                "id": "app.context.menu.deleteLibrary",
+                "rules": {
+                    "visible": [
+                        "app.selection.library"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.members.add-user",
+                "order": 100,
+                "title": "ADD_MEMBER.TITLE",
+                "icon": "person_add",
+                "actions": {
+                    "click": "app.action.add-user.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.library",
+                        "isLibraryManager",
+                        "app.content-services.isEnabled"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.manage-members",
+                "order": 150,
+                "title": "MEMBER_MANAGER.TITLE",
+                "icon": "people_alt",
+                "actions": {
+                    "click": "app.action.manage-members.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.library",
+                        "isLibraryManager",
+                        "!app.content-services.isMemberManagement",
+                        "app.content-services.isEnabled"
+                    ]
+                }
+            }
+        ],
+        "toolbar": [
+            {
+                "id": "app.toolbar.members.add-user",
+                "order": 100,
+                "title": "ADD_MEMBER.TITLE",
+                "icon": "person_add",
+                "actions": {
+                    "click": "app.action.add-user.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.library",
+                        "isLibraryManager",
+                        "app.content-services.isEnabled"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.members.manage-members",
+                "order": 200,
+                "title": "MEMBER_MANAGER.TITLE",
+                "icon": "people_alt",
+                "actions": {
+                    "click": "app.action.manage-members.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.library",
+                        "isLibraryManager",
+                        "!app.content-services.isMemberManagement",
+                        "app.content-services.isEnabled"
+                    ]
+                }
+            },
+            {
+                "id": "app.libraries.toolbar.infoDrawer",
+                "type": "custom",
+                "order": 800,
+                "component": "app.toolbar.toggleInfoDrawer",
+                "rules": {
+                    "visible.$replace": [
+                        "!app.content-services.isMemberManagement",
+                        "app.selection.library"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "app.toolbar.deleteLibrary",
+                        "rules": {
+                            "visible": [
+                                "app.selection.library"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "sidebar": {
+            "toolbar": [
+                {
+                    "id": "app.sidebar.preview",
+                    "disabled": true
+                },
+                {
+                    "id": "app.sidebar.expand",
+                    "order": 100,
+                    "title": "Expand",
+                    "icon": "aspect_ratio",
+                    "rules": {
+                        "visible": [
+                            "app.selection.library",
+                            "isLibraryManager"
+                        ]
+                    },
+                    "actions": {
+                        "click": "app.action.info-drawer.execute"
+                    }
+                },
+                {
+                    "id": "app.sidebar.expand-files",
+                    "order": 200,
+                    "title": "APP.INFO_DRAWER.TABS.EXPAND",
+                    "icon": "aspect_ratio",
+                    "actions": {
+                        "click": "EXPAND_INFO_DRAWER"
+                    },
+                    "rules": {
+                        "visible": [
+                            "!app.navigation.isLibraries",
+                            "!app.navigation.isDetails"
+                        ]
+                    }
+                }
+            ],
+            "tabs": [
+                {
+                    "id": "app.sidebar.preview",
+                    "order": 10,
+                    "title": "SIDEBAR.PREVIEW",
+                    "component": "content-services.components.preview-tab",
+                    "rules": {
+                        "visible": [
+                            "app.selection.file"
+                        ]
+                    }
+                },
+                {
+                    "id": "app.sidebar.library.properties",
+                    "order": 500,
+                    "rules": {
+                        "visible.$replace": [
+                            "app.selection.library"
+                        ]
+                    }
+                },
+                {
+                    "id": "app.sidebar.members",
+                    "order": 600,
+                    "title": "SIDEBAR.MEMBERS",
+                    "component": "content-services.components.members",
+                    "rules": {
+                        "visible": [
+                            "app.selection.library",
+                            "app.content-services.isEnabled"
+                        ]
+                    }
+                }
+            ]
+        },
+        "viewer": {
+            "extensions": []
+        },
+        "header": [
+            {
+                "id": "app.header.library-notifications",
+                "order": 50,
+                "type": "custom",
+                "component": "content-services.components.library-requests-notification",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isEnabled"
+                    ]
+                }
+            }
+        ]
+    },
+    "routes": [
+        {
+            "id": "app.route.member-manager",
+            "parentRoute": "",
+            "path": ":siteId/members/libraries",
+            "layout": "app.layout.main",
+            "component": "content-services.components.member-manager",
+            "data": {
+                "plugin": "plugins.contentService"
+            },
+            "auth": [
+                "content-services.auth",
+                "extension-data-loader-guard.auth",
+                "plugin-enabled-guard.auth"
+            ]
+        }
+    ]
+}

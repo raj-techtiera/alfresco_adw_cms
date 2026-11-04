@@ -1,0 +1,80 @@
+<div class="app-login-shell">
+  <div class="app-login-shell__backdrop" aria-hidden="true">
+    <div class="app-login-shell__backdrop-image"></div>
+    <!-- <video
+      #loginVideo
+      class="app-login-shell__backdrop-video"
+      src="assets/client.mp4"
+      poster="assets/images/bg-image.webp"
+      autoplay
+      muted
+      [muted]="true"
+      loop
+      playsinline
+      preload="metadata"
+      disablepictureinpicture
+      (loadeddata)="muteAndPlay(loginVideo)"
+      (play)="muteAndPlay(loginVideo)"></video> -->
+      <img class="app-login-shell__backdrop-image" src="https://static.vecteezy.com/system/resources/previews/047/939/268/non_2x/document-management-data-system-business-vector.jpg" alt="SafranHAL" width="100%" height="100%">
+    <div class="app-login-shell__backdrop-scrim"></div>
+  </div>
+
+  <div class="app-login-frame">
+    <!-- Left: visual panel -->
+    <aside class="app-login-frame__visual" aria-hidden="true">
+      <div class="app-login-visual__bg"></div>
+      <!-- <video
+        #loginVisualVideo
+        class="app-login-visual__video"
+        src="assets/petronas_1.mp4"
+        poster="assets/images/bg-image.webp"
+        autoplay
+        muted
+        [muted]="true"
+        loop
+        playsinline
+        preload="metadata"
+        disablepictureinpicture
+        (loadeddata)="muteAndPlay(loginVisualVideo)"
+        (play)="muteAndPlay(loginVisualVideo)"></video> -->
+        <img src="assets/images/left-pannel.png" alt="DMS" width="50%" height="100%">
+    </aside>
+
+    <!-- Right: sign-in form -->
+    <section class="app-login-frame__form">
+      <div class="app-login-form-header">
+        <div class="app-login-form-logo-frame">
+          <img
+            class="app-login-form-logo"
+            [src]="logoImage"
+            alt="Document Management System"
+          />
+        </div>
+        <h1>Sign in</h1>
+        <p>Access your engineering document management workspace</p>
+      </div>
+
+      <adf-login
+        class="app-login-modern"
+        copyrightText=""
+        (success)="onLoginSuccess()"
+        [logoImageUrl]="logoImage"
+        [showRememberMe]="false"
+        [showLoginActions]="false"
+      />
+
+      <div class="app-login-powered" aria-label="Powered by">
+        <span class="app-login-powered__label">Powered By</span>
+        <img
+          class="app-login-powered__logo"
+          src="assets/images/companylog.png"
+          alt="TechTiera"
+          width="140"
+          height="28"
+        />
+      </div>
+
+      <p class="app-login-copyright">{{ 'application.copyright' | adfAppConfig | translate }}</p>
+    </section>
+  </div>
+</div>

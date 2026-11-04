@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Detta dokument redigeras i Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Ändringar som gjorts i detta dokument har kasserats.",
+        "CANCEL_SESSION_DENIED": "Ett fel har uppstått. Kontakta din administratör om det kvarstår.",
+        "END_SESSION_SUCCESS": "Detta dokument redigeras inte längre i Office Online.",
+        "END_SESSION_DENIED": "Ett fel har uppstått. Kontakta din administratör om det kvarstår.",
+        "RESUME_SESSION": "Denna fil redigeras i Office Online. Du kan redigera den här filen samtidigt.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Spara alla ändringar av detta dokument",
+            "END_OPTION_DETAILS": "En ny version skapas",
+            "CANCEL_OPTION": "Avfärda alla ändringar",
+            "CHANGES": "Vilken nivå av ändringar gjordes?",
+            "HEADER": "Avsluta redigering",
+            "DESCRIPTION": "Detta kommer att förhindra vidare redigering av dokumentet för alla användare som för tillfället kommer åt den med Microsoft Office Online.",
+            "QUESTION": "Vad ska ske med alla ändringar som gjorts?",
+            "CANCEL": "Avbryt",
+            "END": "Avsluta redigering"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Skapa ett Word-dokument"
+            },
+            "EXCEL": {
+                "HEADER": "Skapa ett Excel-kalkylblad"
+            },
+            "POWERPOINT": {
+                "HEADER": "Skapa en Powerpoint-presentation"
+            },
+            "CANCEL": "Avbryt",
+            "CREATE": "Skapa",
+            "CREATE_AND_OPEN": "Skapa och öppna i online-läge",
+            "DESCRIPTION": {
+                "LABEL": "Beskrivning",
+                "PLACEHOLDER": "En meningsfull beskrivning för den här nya filen."
+            },
+            "NAME": {
+                "LABEL": "Namn"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel-kalkylblad",
+                "TOOLTIP": "Skapa ett nytt Excel-kalkylblad"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Powerpoint-presentation",
+                "TOOLTIP": "Skapa en ny Powerpoint-presentation"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word-dokument",
+                "TOOLTIP": "Skapa ett nytt Word-dokument"
+            },
+            "END_SESSION": "Avsluta redigering",
+            "EDIT_WORD": "Redigera i Word Online",
+            "EDIT_POWERPOINT": "Redigera i PowerPoint Online",
+            "EDIT_EXCEL": "Redigera i Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Tillägg: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Aktivera tillägg Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Beskrivning är för lång"
+                }
+            }
+        }
+    }
+}

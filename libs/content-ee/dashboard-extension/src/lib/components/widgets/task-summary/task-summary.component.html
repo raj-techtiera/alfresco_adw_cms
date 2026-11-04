@@ -1,0 +1,36 @@
+<acs-widget-base
+    [displayViewAllButton]="false"
+    [emptyStateMessage]="emptyStateMessage"
+    [hasContent]="hasAnyTask"
+    [isLoading$]="isLoading$"
+    [widgetTitle]="'WIDGETS.TASK_SUMMARY.TITLE'"
+    (refreshWidget)="loadTasks()">
+    <div class="acs-task-summary-info">
+        <span class="acs-task-summary-success">
+            <adf-icon [title]="'WIDGETS.TASK_SUMMARY.ARROW_UP' | translate" [value]="'arrow_upward'" /> {{ completedTasksPercentage }}%
+        </span>
+        &nbsp;{{'WIDGETS.TASK_SUMMARY.SUMMARY_INFO_SUFFIX' | translate }}
+    </div>
+    <div *ngIf="hasAnyTask" class="acs-task-summary-canvas-container">
+        <canvas baseChart
+            width="150"
+            height="150"
+            [type]="'doughnut'"
+            [datasets]="chartDatasets"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend">
+        </canvas>
+        <div class="acs-task-summary-legend">
+            @for (chartLabel of chartLabels; track i; let i = $index) {
+                <div class="acs-task-summary-legend-item">
+                    <div class="acs-task-summary-legend-color" [style.backgroundColor]="chartDatasets[0].backgroundColor[i]"></div>
+                    <div class="acs-task-summary-legend-text">
+                        <span>{{ chartLabel }}</span>
+                        <span class="acs-task-summary-legend-text-bold">{{ chartDatasets[0].data[i] }}</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</acs-widget-base>

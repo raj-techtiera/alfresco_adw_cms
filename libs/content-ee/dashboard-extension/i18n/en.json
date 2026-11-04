@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "DMS Dashboard"
+    },
+    "DASHBOARD": {
+        "TITLE": "DMS Dashboard"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Widget actions",
+        "REFRESH": "Refresh",
+        "VIEW_ALL": "View all",
+        "TASK_SUMMARY": {
+            "TITLE": "My Tasks Summary",
+            "SUMMARY_INFO_SUFFIX": "completed tasks!",
+            "NO_TASKS_ASSIGNED": "You don't have any tasks assigned.",
+            "NO_TASKS_ERROR": "There was an error while fetching your tasks. Please refresh the widget.",
+            "COMPLETED": "Completed",
+            "INCOMPLETE": "Incomplete",
+            "OVERDUE": "Overdue",
+            "TASKS": "Tasks",
+            "ARROW_UP": "Arrow Up"
+        },
+        "TASK_LIST": {
+            "TITLE": "Task Management",
+            "OVERDUE": "Overdue",
+            "UNASSIGNED": "Unassigned",
+            "IN_PROGRESS": "In Progress",
+            "NO_OVERDUE_TASKS": "You don't have any overdue tasks.",
+            "NO_UNASSIGNED_TASKS": "You don't have any unassigned tasks.",
+            "NO_IN_PROGRESS_TASKS": "You don't have any tasks in progress.",
+            "ACTIONS": {
+                "VIEW": "View task",
+                "COMMENT": "Add comment",
+                "CLAIM": "Claim task"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Task has been claimed successfully.",
+                "CLAIMING_FAILED": "Task could not be claimed."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Files",
+            "RECENT": "Recent",
+            "FAVORITES": "Favorites",
+            "PERSONAL": "Personal",
+            "SHARED": "Shared",
+            "NO_RECENT_FILES": "You don't have any recent files.",
+            "NO_FAVORITES_FILES": "You don't have any favorite files or folders.",
+            "NO_PERSONAL_FILES": "You don't have any personal files or folders.",
+            "NO_SHARED_FILES": "You don't have any shared files.",
+            "ACTIONS": {
+                "VIEW": "View",
+                "DOWNLOAD": "Download",
+                "SHARE": "Share",
+                "SHARED_LINK_SETTINGS": "Shared Link Settings",
+                "FOLDER_INFORMATION": "Folder information"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Libraries",
+            "PERSONAL": "My Libraries",
+            "ALL": "All",
+            "FAVOURITES": "Favorites",
+            "NO_PERSONAL_LIBRARIES": "You don't have any personal libraries.",
+            "NO_ALL_LIBRARIES": "You don't have any libraries.",
+            "NO_FAVORITE_LIBRARIES": "You don't have any favorite libraries."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Legal Holds",
+            "NO_HOLDS": "No Holds created.",
+            "HOLDS_NAME": "Hold Name",
+            "CREATED": "Created",
+            "REASON": "Reason",
+            "ACTIONS": {
+                "DOWNLOAD": "Download",
+                "INFORMATION": "Folder Information",
+                "DELETE": "Delete"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "My Tasks Progress - per month",
+            "WEEK_LABEL": "Week",
+            "MONTH_LABEL": "Month",
+            "SUMMARY_INFO_SUFFIX": "completed tasks in the selected month!",
+            "SELECT_MONTH": "Select Month",
+            "NO_TASKS_IN_MONTH": "There are no tasks in the selected month.",
+            "EMPTY": "No tasks"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "My Processes Summary - per 6 months",
+            "SUMMARY_INFO_SUFFIX": "completed processes in the selected 6 months!",
+            "NO_PROCESSES": "You don't have any processes.",
+            "NO_PROCESSES_ERROR": "There was an error while fetching your processes. Please refresh the widget.",
+            "NO_PROCESSES_IN_PERIOD": "There are no processes in the selected period.",
+            "RUNNING": "Running",
+            "COMPLETED": "Completed",
+            "NEXT": "Next",
+            "NEXT_SCREEN_READER_LABEL": "My Processes Summary - Go to next 6 months",
+            "PREVIOUS": "Previous",
+            "PREVIOUS_SCREEN_READER_LABEL": "My Processes Summary  - Go to previous 6 months",
+            "EMPTY": "No processes"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Comments for {{ taskName }}",
+        "CLOSE": "Close"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Thumbnail"
+    }
+}

@@ -1,0 +1,101 @@
+<div class="adw-bulk-upload-dialog" role="dialog" aria-labelledby="adw-bulk-upload-title">
+  <header class="adw-bulk-upload-dialog__header">
+    <div class="adw-bulk-upload-dialog__header-main">
+      <div class="adw-bulk-upload-dialog__header-icon" aria-hidden="true">
+        <mat-icon>drive_folder_upload</mat-icon>
+      </div>
+      <div class="adw-bulk-upload-dialog__header-text">
+        <h2 class="adw-bulk-upload-dialog__title" id="adw-bulk-upload-title">Bulk upload</h2>
+        <p class="adw-bulk-upload-dialog__subtitle">
+          Select both a ZIP package and a CSV metadata sheet
+          <ng-container *ngIf="data.projectName">
+            for <strong>{{ data.projectName }}</strong>
+          </ng-container>
+        </p>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      type="button"
+      class="adw-bulk-upload-dialog__close"
+      aria-label="Close"
+      [disabled]="uploading"
+      (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content class="adw-bulk-upload-dialog__content">
+    <div class="adw-bulk-upload-dialog__slots">
+      <section
+        class="adw-bulk-upload-dialog__slot"
+        *ngFor="let slot of slots"
+        [attr.aria-label]="slot.label">
+        <div class="adw-bulk-upload-dialog__slot-head">
+          <mat-icon class="adw-bulk-upload-dialog__slot-icon" aria-hidden="true">
+            {{ slot.kind === 'zip' ? 'archive' : 'table_view' }}
+          </mat-icon>
+          <div class="adw-bulk-upload-dialog__slot-text">
+            <h3 class="adw-bulk-upload-dialog__slot-title">{{ slot.label }}</h3>
+            <p class="adw-bulk-upload-dialog__slot-hint">{{ slot.hint }}</p>
+          </div>
+        </div>
+
+        <div class="adw-bulk-upload-dialog__actions">
+          <button
+            mat-stroked-button
+            type="button"
+            color="primary"
+            [disabled]="uploading"
+            (click)="triggerPick(slot.kind)">
+            <mat-icon aria-hidden="true">upload_file</mat-icon>
+            Choose file
+          </button>
+        </div>
+
+        <div class="adw-bulk-upload-dialog__file" *ngIf="slot.file">
+          <mat-icon aria-hidden="true">description</mat-icon>
+          <span class="adw-bulk-upload-dialog__file-name" [title]="slot.file.name">{{ slot.file.name }}</span>
+          <button
+            mat-icon-button
+            type="button"
+            class="adw-bulk-upload-dialog__file-clear"
+            aria-label="Remove selected file"
+            [disabled]="uploading"
+            (click)="clearFile(slot.kind)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <p class="adw-bulk-upload-dialog__error" *ngIf="slot.error">{{ slot.error }}</p>
+      </section>
+    </div>
+
+    <input
+      #zipInput
+      type="file"
+      class="adw-bulk-upload-dialog__hidden-input"
+      accept=".zip,application/zip,application/x-zip-compressed"
+      (change)="onFileSelected('zip', $event)" />
+    <input
+      #csvInput
+      type="file"
+      class="adw-bulk-upload-dialog__hidden-input"
+      accept=".csv,text/csv"
+      (change)="onFileSelected('csv', $event)" />
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-bulk-upload-dialog__footer">
+    <button mat-stroked-button type="button" [disabled]="uploading" (click)="close()">Cancel</button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      [disabled]="!canUpload"
+      (click)="upload()">
+      <mat-spinner *ngIf="uploading" diameter="18"></mat-spinner>
+      <span *ngIf="!uploading">Upload</span>
+      <span *ngIf="uploading">Uploading…</span>
+    </button>
+  </mat-dialog-actions>
+</div>

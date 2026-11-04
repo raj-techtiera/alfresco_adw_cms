@@ -1,0 +1,207 @@
+<div class="tr-page">
+  <!-- Header -->
+  <div class="tr-header">
+    <div>
+      <h1 class="tr-title">Team Members</h1>
+      <p class="tr-subtitle">{{ activeCount }} active · {{ members.length }} total · Manage your workspace team</p>
+    </div>
+    <div class="tr-header-actions">
+      <button mat-raised-button type="button" class="tr-btn tr-btn--ghost">
+        <svg class="tr-icon tr-icon--blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+        </svg>
+        Bulk Upload
+      </button>
+      <button mat-raised-button type="button" class="tr-btn tr-btn--primary" (click)="openModal()">
+        <svg class="tr-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Add Member
+      </button>
+    </div>
+  </div>
+
+  <!-- Search & Filters -->
+  <div class="tr-filters">
+    <div class="tr-search-wrap">
+      <svg class="tr-search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input type="text" class="tr-search" placeholder="Search name, email, employee ID..." [(ngModel)]="search" />
+    </div>
+
+    <mat-form-field appearance="outline" class="tr-filter-mat-field tr-filter-mat-field--dept" subscriptSizing="dynamic">
+      <mat-select
+        [(ngModel)]="department"
+        panelClass="tr-filter-select-panel"
+        placeholder="All Departments"
+        aria-label="Filter by department">
+        <mat-option *ngFor="let d of departments" [value]="d">{{ d }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="tr-filter-mat-field tr-filter-mat-field--status" subscriptSizing="dynamic">
+      <mat-select
+        [(ngModel)]="statusFilter"
+        panelClass="tr-filter-select-panel"
+        placeholder="Active only"
+        aria-label="Filter by status">
+        <mat-option *ngFor="let s of statusOptions" [value]="s">{{ s }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Table -->
+  <div class="tr-table-wrap">
+    <table class="tr-table">
+      <thead>
+        <tr>
+          <th class="tr-th tr-th--member">Member</th>
+          <th class="tr-th tr-th--emp">Emp ID</th>
+          <th class="tr-th tr-th--role">Role / Designation</th>
+          <th class="tr-th tr-th--dept">Department</th>
+          <th class="tr-th tr-th--projects">Projects</th>
+          <th class="tr-th tr-th--mobile">Mobile</th>
+          <th class="tr-th tr-th--status">Status</th>
+          <th class="tr-th">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tr-empty-row" *ngIf="filtered.length === 0">
+          <td colspan="8" class="tr-empty-cell">No members found</td>
+        </tr>
+        <tr class="tr-row" *ngFor="let member of filtered; trackBy: trackByMemberId">
+          <td class="tr-td tr-td--member">
+            <div class="tr-member">
+              <div class="tr-avatar" [style.background]="member.avatarColor">{{ initial(member.name) }}</div>
+              <div>
+                <p class="tr-member-name">{{ member.name }}</p>
+                <p class="tr-member-email">{{ member.email }}</p>
+              </div>
+            </div>
+          </td>
+          <td class="tr-td tr-td--muted">{{ member.empId }}</td>
+          <td class="tr-td tr-td--role">{{ member.role }}</td>
+          <td class="tr-td tr-td--muted">{{ member.department }}</td>
+          <td class="tr-td tr-td--dark">{{ member.projects }}</td>
+          <td class="tr-td tr-td--muted">{{ member.mobile }}</td>
+          <td class="tr-td">
+            <span class="tr-status" [class.tr-status--active]="member.status === 'Active'"
+              [class.tr-status--inactive]="member.status !== 'Active'">{{ member.status }}</span>
+          </td>
+          <td class="tr-td">
+            <div class="tr-row-actions">
+              <button type="button" class="tr-mini-btn">Edit</button>
+              <button type="button" class="tr-mini-btn tr-mini-btn--danger">Deactivate</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add Team Member Modal -->
+  <div class="tr-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="tr-modal" (click)="$event.stopPropagation()">
+      <!-- Modal Header -->
+      <div class="tr-modal-head">
+        <div>
+          <h2 class="tr-modal-title">Add Team Member</h2>
+          <p class="tr-modal-sub">Fill in details — set-password link will be emailed</p>
+        </div>
+        <button type="button" class="tr-modal-close" (click)="closeModal()">
+          <svg class="tr-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="tr-modal-body">
+        <!-- Email -->
+        <div class="tr-field">
+          <label class="tr-label">Email Address <span class="tr-required">*</span></label>
+          <input type="email" class="tr-input" [class.tr-input--error]="formErrors.email"
+            placeholder="john.doe@company.com" [(ngModel)]="form.email" (ngModelChange)="clearError('email')" />
+          <p class="tr-error" *ngIf="formErrors.email">{{ formErrors.email }}</p>
+        </div>
+
+        <!-- Full Name -->
+        <div class="tr-field">
+          <label class="tr-label">Full Name <span class="tr-required">*</span></label>
+          <input type="text" class="tr-input" [class.tr-input--error]="formErrors.name"
+            placeholder="John Doe" [(ngModel)]="form.name" (ngModelChange)="clearError('name')" />
+          <p class="tr-error" *ngIf="formErrors.name">{{ formErrors.name }}</p>
+        </div>
+
+        <!-- Mobile -->
+        <div class="tr-field">
+          <label class="tr-label">Mobile Number</label>
+          <input type="tel" class="tr-input" placeholder="+91 98765 43210" [(ngModel)]="form.mobile" />
+        </div>
+
+        <!-- Department -->
+        <div class="tr-field">
+          <label class="tr-label">Department / Discipline</label>
+          <select class="tr-input" [(ngModel)]="form.department">
+            <option value="">Select department...</option>
+            <option *ngFor="let d of departmentOptions" [value]="d">{{ d }}</option>
+          </select>
+        </div>
+
+        <!-- Role -->
+        <div class="tr-field">
+          <label class="tr-label">Role <span class="tr-required">*</span></label>
+          <input type="text" class="tr-input tr-input--mb" placeholder="Search roles..." [(ngModel)]="form.roleSearch" />
+          <select class="tr-input" [class.tr-input--error]="formErrors.role" [(ngModel)]="form.role"
+            (ngModelChange)="clearError('role')">
+            <option value="">Select role...</option>
+            <option *ngFor="let r of filteredRoles" [value]="r">{{ r }}</option>
+          </select>
+          <p class="tr-error" *ngIf="formErrors.role">{{ formErrors.role }}</p>
+        </div>
+
+        <!-- Designation -->
+        <div class="tr-field">
+          <label class="tr-label">Designation</label>
+          <input type="text" class="tr-input" placeholder="e.g. Senior Process Engineer" [(ngModel)]="form.designation" />
+        </div>
+
+        <!-- Employee ID -->
+        <div class="tr-field">
+          <label class="tr-label">Employee ID</label>
+          <input type="text" class="tr-input" placeholder="EMP-001" [(ngModel)]="form.empId" />
+        </div>
+
+        <!-- DDM Routing -->
+        <div class="tr-field">
+          <label class="tr-label">Project Role (DDM Routing) <span class="tr-required">*</span></label>
+          <select class="tr-input" [(ngModel)]="form.ddmRouting">
+            <option *ngFor="let opt of ddmRoutingOptions" [value]="opt">{{ opt }}</option>
+          </select>
+          <p class="tr-help">This controls which transmittals this person receives via DDM</p>
+        </div>
+
+        <!-- Assign to Projects -->
+        <div class="tr-field">
+          <label class="tr-label tr-label--mb">Assign to Projects</label>
+          <div class="tr-project-list">
+            <label class="tr-project-item" *ngFor="let project of sampleProjects; trackBy: trackByProjectId">
+              <input type="checkbox" class="tr-project-check" [checked]="isProjectAssigned(project.id)"
+                (change)="toggleProject(project.id)" />
+              <span class="tr-project-label">{{ project.label }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="tr-modal-foot">
+        <button type="button" class="tr-btn tr-btn--ghost" (click)="closeModal()">Cancel</button>
+        <button type="button" class="tr-btn tr-btn--orange" (click)="handleAddMember()">Add Member</button>
+      </div>
+    </div>
+  </div>
+</div>

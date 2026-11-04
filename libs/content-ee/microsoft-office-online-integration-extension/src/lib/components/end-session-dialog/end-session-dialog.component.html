@@ -1,0 +1,46 @@
+<header aria-level="2"
+        mat-dialog-title
+        role="heading">
+    {{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.HEADER' | translate }}
+</header>
+
+<section mat-dialog-content>
+
+    <p class="adw-end-session-text">{{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.DESCRIPTION' | translate }}</p>
+
+    <p class="adw-end-session-text">{{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.QUESTION' | translate }}</p>
+
+    <div class="adw-end-session-group">
+
+        <mat-radio-group class="adw-end-session-radio-group" [(ngModel)]="endingMethod">
+            <mat-radio-button class="adw-end-type-radio-button" id="adw-end-editing-radio-button" [value]="'end'">{{
+                'MICROSOFT-ONLINE.END_EDITING_DIALOG.END_OPTION' |
+                    translate }}
+            </mat-radio-button>
+            <p class="adw-end-session-tooltip">{{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.END_OPTION_DETAILS' | translate }}</p>
+            <mat-radio-button class="adw-end-type-radio-button" id="adw-cancel-editing-radio-button"
+                              [value]="'cancel'">{{
+                'MICROSOFT-ONLINE.END_EDITING_DIALOG.CANCEL_OPTION' |
+                    translate }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div *ngIf="endingMethod === 'end'" id="adf-version-upload-panel">
+        <p class="adw-end-session-text">{{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.CHANGES' | translate }}</p>
+
+        <adf-version-upload
+            [showCancelButton]="false"
+            [showUploadButton]="false"
+            [node]="node.entry"
+            (versionChanged)="handleVersionChange($event)"
+            (commentChanged)="handleCommentChange($event)"
+        />
+    </div>
+</section>
+
+<mat-dialog-actions align="end">
+    <span class="adf-fill-remaining-space"></span>
+    <button mat-button mat-dialog-close id="adw-end-dialog-button">{{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.CANCEL' | translate }}</button>
+    <button mat-button class="adf-dialog-action-button"  id="adw-submit-dialog-button" (click)="submitSession()">{{ 'MICROSOFT-ONLINE.END_EDITING_DIALOG.END' | translate }}</button>
+</mat-dialog-actions>

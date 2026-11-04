@@ -1,0 +1,10 @@
+{
+  "affected": {
+    "defaultBase": "develop"
+  },
+  "generators": {
+    "@nx/angular:component": {
+      "style": "css"
+    }
+  }
+}

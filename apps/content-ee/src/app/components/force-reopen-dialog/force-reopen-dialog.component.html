@@ -1,0 +1,54 @@
+<div class="adw-force-reopen-dialog">
+  <h2 mat-dialog-title class="adw-force-reopen-dialog__title">Force Reopen</h2>
+
+  <mat-dialog-content class="adw-force-reopen-dialog__content">
+    <p class="adw-force-reopen-dialog__hint">
+      This project is in shutdown state. Provide the details below to force reopen it.
+    </p>
+
+    <div class="adw-force-reopen-dialog__project" role="status">
+      <mat-icon aria-hidden="true">folder_special</mat-icon>
+      <span class="adw-force-reopen-dialog__project-label">Project</span>
+      <span class="adw-force-reopen-dialog__project-name">{{ data.projectName }}</span>
+    </div>
+
+    <form class="adw-force-reopen-dialog__form" [formGroup]="form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline" class="adw-force-reopen-dialog__field" subscriptSizing="dynamic">
+        <mat-label>Force reopen reason</mat-label>
+        <textarea
+          matInput
+          formControlName="forcedReopenReason"
+          rows="4"
+          placeholder="Enter the reason for forcing reopen"></textarea>
+        <mat-error *ngIf="form.controls.forcedReopenReason.touched && form.controls.forcedReopenReason.hasError('required')">
+          Force reopen reason is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="adw-force-reopen-dialog__field" subscriptSizing="dynamic">
+        <mat-label>Force reopen date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="forceReopenPicker"
+          formControlName="forceReopenDate"
+          aria-label="Force reopen date"
+          placeholder="Select date" />
+        <mat-datepicker-toggle matIconSuffix [for]="forceReopenPicker"></mat-datepicker-toggle>
+        <mat-datepicker #forceReopenPicker panelClass="adw-force-reopen-dialog__datepicker-panel"></mat-datepicker>
+        <mat-error *ngIf="form.controls.forceReopenDate.touched && form.controls.forceReopenDate.hasError('required')">
+          Force reopen date is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline" class="adw-force-reopen-dialog__field" subscriptSizing="dynamic">
+        <mat-label>Force reopened by</mat-label>
+        <input matInput formControlName="forcedReopenedBy" readonly aria-label="Force reopened by" />
+      </mat-form-field> -->
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-force-reopen-dialog__actions">
+    <button type="button" mat-stroked-button (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="submit()" [disabled]="submitting">Submit</button>
+  </mat-dialog-actions>
+</div>

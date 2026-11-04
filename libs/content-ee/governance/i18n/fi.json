@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Ota käyttöön",
+        "CANCEL": "Peruuta",
+        "SWITCH": "Vaihda",
+        "CONTINUE": "Jatka",
+        "RELOAD": "Lataa uudelleen"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Ilmoita tietue",
+            "SUCCESS": "{{fileName}} on ilmoitettu tietueena",
+            "FAIL": "Tiedostoa {{fileName}} ei voida ilmoittaa tietueena",
+            "DIALOG": {
+                "TITLE": "Ilmoita tietue",
+                "MESSAGE": "Tämä asiakirja ilmoitettiin aiemmin tietueeksi ja hylättiin.",
+                "YES": "Ilmoita tietue",
+                "NO": "Peruuta",
+                "CLOSE": "Sulje"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Kansion ilmoittamista tietueeksi ei tällä hetkellä tueta",
+                    "EXISTING-RECORD": "Ilmoitettu jo tietueena",
+                    "FAILED": "Tietueena ilmoittaminen epäonnistui"
+                },
+                "SUCCESS": "Kohde on ilmoitettu tietueena"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Hylätty tietue",
+            "CLOSE_LABEL": "Sulje",
+            "SUB-TITLE": "Tiedosto {{ nodeName }} hylättiin tietueena",
+            "BY": "Tekijä",
+            "AT": "Klo",
+            "REASON": "Syy:",
+            "CONFIRM": "Vahvista",
+            "WARNING": "Jos poistat hylätyn tietueen varoituksen, toiminnot tiedoston tietueeksi ilmoittamiseen ovat taas käytettävissä",
+            "FAILED-REMOVE": "Kohteen {{nodeName}} hylkäysvaroituksen poistaminen epäonnistui: {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Hylätty tietue",
+            "TOOLTIP-MESSAGE": "Poista varoitus",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Hylätty tietue",
+                "RECORD-HYPERLINK": "Ilmoitettu tietueena",
+                "REJECTED-RECORD-HYPERLINK": "Tietue hylättiin, saat lisätietoja tiedoston tiedoista"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Poista",
+            "SUCCESS": "'{{ name }}' on poistettu",
+            "FAIL": "Poistaminen epäonnistui: {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Poista tietue-esiintymä",
+                "YES-ALL": "Poista äläkä näytä tätä enää",
+                "YES": "Poista",
+                "NO": "Peruuta",
+                "MESSAGE": {
+                    "DELETE": "Tämä kohteen '{{name}}' esiintymä poistetaan pysyvästi. Sitä ei voi palauttaa roskakorista.",
+                    "ADDITIONAL": "Tämä ei vaikuta tietueeseen '{{name}}', joka on organisaatiosi tietuehallintajärjestelmässä."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Tietue"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Siirrä",
+            "MOVE-ITEM": "Siirrä '{{ name }}' kohteeseen...",
+            "SAME-FOLDER-MOVE": "Ei voi siirtää samaan kansioon",
+            "SUCCESSFUL": "Tietue siirrettiin"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Lähetä arkistoon",
+                "SUCCESS": "Tiedosto {{ name }} arkistoidaan",
+                "FAIL": "Kohteen {{ name }} arkistointi epäonnistui",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Kohde on jo arkistoitu.",
+                        "PENDING-RESTORE": " Kohde odottaa palautusta. ",
+                        "RESTORED": "Palautettuja kohteita ei voi arkistoida",
+                        "FOLDER": "Palauttamista arkistosta ei tällä hetkellä tueta"
+                    },
+                    "FAIL": "Arkistointi epäonnistui",
+                    "SUCCESS": "Kohde arkistoidaan"
+                },
+                "DIALOG": {
+                    "TITLE": "Lähetä arkistoon",
+                    "MESSAGE": "Olet lähettämässä tiedostoja ulkoiseen arkistoon. Tiedostojen noutaminen arkistosta saattaa olla maksullista. Haluatko varmasti jatkaa?",
+                    "YES": "Lähetä arkistoon",
+                    "NO": "Peruuta"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Palauta arkistosta",
+                "SYNC-ERROR": "Tiedostoa, jota yrität palauttaa, ei ole vielä synkronoitu arkistoon. Tämä toiminto voi kestää jopa 24 tuntia. Yritä myöhemmin uudelleen.",
+                "FAIL": "Kohteen {{ name }} palauttaminen arkistosta epäonnistui",
+                "DIALOG": {
+                    "TITLE": "Palauta arkistosta",
+                    "LABEL": {
+                        "TYPE": "Palautusnopeus (250  megatavun rajoitus per palautus)",
+                        "OPTION-FAST": "Nopea: kesto 1–5 minuuttia (suurin kustannus)",
+                        "OPTION-STANDARD": "Vakio: kesto 3–5 tuntia",
+                        "OPTION-SLOW": "Hidas: kesto 5–12 tuntia (pienin kustannus)",
+                        "DURATION": "Kuinka kauan tiedostojen palautus kestää (päivinä)?"
+                    },
+                    "YES": "Vahvista",
+                    "NO": "Peruuta"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Palauta arkistosta",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Tiedostoja, joita yrität palauttaa, ei ole vielä synkronoitu arkistoon. Tämä toiminto voi kestää jopa 24 tuntia. Yritä myöhemmin uudelleen.",
+                        "RESTORED": "Kohde on jo palautettu",
+                        "PENDING-RESTORE": "Kohde odottaa jo palautusta.",
+                        "NOT-STORED": "Kohdetta, jota yrität palauttaa, ei ole vielä synkronoitu arkistoon",
+                        "FAIL": "Palautus epäonnistui",
+                        "FOLDER": "Kansion palauttamista ei tueta tällä hetkellä"
+                    },
+                    "SUCCESS": "Kohde palautetaan"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Jatka palautusaikaa",
+                "SUCCESS": "Palautusaikaa jatketaan '{{ days }}' päivään päivästä {{ date }} alkaen",
+                "FAIL": "Kohteen {{ name }} arkistosta palauttamisen ajan jatkaminen epäonnistui"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Tämä tiedosto on arkistoitu. Jos haluat palauttaa sen, napsauta sitä hiiren kakkospainikkeella ja valitse Palauta arkistosta.",
+                "RESTORED": "Palautettu",
+                "PENDING-RESTORE": "Tiedostoja palautetaan parhaillaan arkistosta. Jos et voi esikatsella tai ladata tiedostoa, yritä myöhemmin uudelleen."
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Joukkotoiminnon tila",
+            "FAIL": "Toiminnon suorittaminen epäonnistui",
+            "CLOSE": "Sulje"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Säilytyksien hallinta",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Poista säilytys",
+            "DIALOG_TITLE": "Määräyksiin perustuvien säilytyksien hallinta",
+            "TAB_EXISTING_HOLDS": "Olemassa olevien säilytyksien hallinta",
+            "TAB_CREATE_LEGAL_HOLD": "Luo määräyksiin perustuva säilytys",
+            "SAVE": "Tallenna",
+            "CLOSE": "Sulje",
+            "CANCEL": "Peruuta",
+            "NEW_HOLD_NAME": "Nimi",
+            "NEW_HOLD_DESCRIPTION": "Kuvaus",
+            "NEW_HOLD_REASON": "Syy",
+            "DIALOG_WARNING_TITLE": "Varoitus",
+            "DIALOG_WARNING_MESSAGE": "Tässä tekemäsi muutokset eivät tallennu, jos vaihdat välilehteä.",
+            "DOCUMENT_IN_HOLD": "Asiakirja määräyksiin perustuvassa säilytyksessä",
+            "FOLDER_IN_HOLD": "Kansio määräyksiin perustuvassa säilytyksessä",
+            "APPLY_HOLDS_SUCCESS": "Määräyksiin perustuvaan säilytykseen siirto onnistui.",
+            "APPLY_HOLDS_NOT_FOUND": "Valittu määräyksiin perustuva säilytys tai määritetty tiedosto ei ole olemassa. Tarkista valintasi ja yritä uudestaan.",
+            "BULK_APPLY_HOLDS_SUCCESS": "Määräyksiin perustuvaan säilytykseen siirto onnistui. {{ totalItems }} kohdetta lisätty määräyksiin perustuvaan säilytykseen.",
+            "BULK_APPLY_HOLDS_STARTED": "Määräyksiin perustuvaan säilytykseen siirto on käynnissä taustalla. Saat ilmoituksen siirron päättymisestä.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Järjestelmä on tunnistanut arkistoidun, kopioidun tai lukitun sisällön. {{ errorsCount }} kohdetta on jäänyt lisäämättä määräyksiin perustuvaan säilytykseen.",
+            "BULK_APPLY_HOLDS_FAIL": "Sisällön asettaminen määräyksiin perustuvaan säilytykseen on epäonnistunut.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Määräyksiin perustuvaan säilytykseen siirtoa ei voida suorittaa usealle kansioille yhtäaikaisesti.",
+            "ACKNOWLEDGE": "Kuittaa",
+            "EMPTY_HOLD_LIST": "Määräyksiin perustuvan säilytyksen kohteita ei ole.",
+            "WARNING_DIALOG_TITLE": "Varoitus: joukkotoiminto",
+            "WARNING_DIALOG_MESSAGE": "Tämä toiminto muuttaa <strong>kaikkien tämän haun sisältämien tiedostojen</strong> määräyksiin perustuvan säilytyksen asetusta.<br><br>Asetus <strong>ei muuta kansioiden asetuksia</strong>.",
+            "WARNING_DIALOG_QUESTION": "Haluatko jatkaa?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Määräyksiin perustuvan säilytyksen aktivoimiseksi ylläpitäjän on luotava paikka asiakirjojen hallintaa varten.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Tiedosto on poistettu määräyksiin perustuvasta säilytyksestä.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Tiedostot ovat poistettu määräyksiin perustuvasta säilytyksestä.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Poistaminen määräyksiin perustuvasta säilytyksestä epäonnistui.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Poistaminen määräyksiin perustuvasta säilytyksestä epäonnistui.",
+            "LOADING_CAPABILITIES_ERROR": "Resurssien lataaminen epäonnistui.",
+            "NODE_NOT_FOUND": "Valittua palvelinta ei löytynyt. Tarkista valintasi ja yritä uudelleen.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Haluatko poistaa säilytettäviä kohteita sisältävät kohteet?",
+                "TITLE_PLURAL": "Haluatko poistaa {{ count }} säilytystoimenpidettä ja vapauttaa asiakirjojen lukituksen?",
+                "MESSAGE_SINGULAR": "Olet valinnut säilytyksen {{ name }} poistettavaksi. Kaikkien sen sisältämien säilytettävien kohteiden lukitus vapautuu. Tätä toimenpidettä ei voi peruuttaa.",
+                "MESSAGE_PLURAL": "Olet valinnut {{ count }} poistettavaa kohdetta. Eräät kohteista ovat säilytyksessä. Myös näiden kohteiden sisältämien muiden kohteiden lukitus vapautuu. Tätä toimenpidettä ei voi peruuttaa.",
+                "KEEP_HOLD": "Pidä säilytystoimenpide voimassa"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Virhe suojausmerkintöjen tallennuksessa",
+            "DIALOG_TITLE": "Muokkaa suojausmerkintöjä",
+            "MENU_TITLE": "Suojausmerkinnät",
+            "SAVE": "Tallenna",
+            "CANCEL": "Peruuta",
+            "HELP": "Ohje",
+            "CLOSE": "Sulje",
+            "SHOW_ALL": "Näytä kaikki",
+            "APPLIED": "Sovellettu",
+            "NOT_APPLIED": "Ei sovellettu",
+            "COLUMNS": {
+                "NAME": "Suojausmerkinnät"
+            },
+            "NO_GROUPS_CREATED": "Käyttöoikeusryhmiä ei ole käytettävissä.",
+            "SECURITY_MARKS_HELP": "Suojausmerkintäohjeita",
+            "HELP_ICON_TEXT": "Suojausmerkintöjen soveltaminen rajoittaa pääsyä digitaaliseen sisältöön. Vain ihmiset, joiden käyttöoikeuksiin kuuluu vastaavat merkit, voivat tarkastella tai muokata merkittyä sisältöä."
+        }
+    }
+}

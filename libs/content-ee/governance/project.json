@@ -1,0 +1,107 @@
+{
+    "name": "content-ee-governance",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/content-ee/governance/src",
+    "projectType": "library",
+    "prefix": "lib",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/content-ee/governance"],
+            "options": {
+                "project": "libs/content-ee/governance/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/content-ee/governance/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/content-ee/governance/tsconfig.lib.json"
+                },
+                "adf": {
+                    "tsConfig": "libs/content-ee/governance/tsconfig.lib.adf.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "codeCoverage": true,
+                "main": "libs/content-ee/governance/src/test.ts",
+                "tsConfig": "libs/content-ee/governance/tsconfig.spec.json",
+                "karmaConfig": "libs/content-ee/governance/karma.conf.js",
+                "stylePreprocessorOptions": {
+                    "includePaths": ["./node_modules"]
+                }
+            },
+            "configurations": {
+                "adf": {
+                    "tsConfig": "libs/content-ee/governance/tsconfig.spec.adf.json",
+                    "karmaConfig": "libs/content-ee/governance/karma.conf.js",
+                    "progress": false,
+                    "codeCoverage": false,
+                    "stylePreprocessorOptions": {
+                        "includePaths": ["../alfresco-ng2-components/lib/core/src/lib"]
+                    }
+                },
+                "aca": {
+                    "tsConfig": "libs/content-ee/governance/tsconfig.spec.aca.json",
+                    "karmaConfig": "libs/content-ee/governance/karma.conf.js",
+                    "progress": false,
+                    "codeCoverage": false
+                },
+                "adfaca": {
+                    "tsConfig": "libs/content-ee/governance/tsconfig.spec.adf.aca.json",
+                    "karmaConfig": "libs/content-ee/governance/karma.conf.js",
+                    "progress": false,
+                    "codeCoverage": false,
+                    "stylePreprocessorOptions": {
+                        "includePaths": ["../alfresco-ng2-components/lib/core/src/lib"]
+                    }
+                }
+            },
+            "outputs": ["{workspaceRoot}/coverage/libs/content-ee/governance"]
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/content-ee/governance/src/**/*.ts", "libs/content-ee/governance/src/**/*.html"]
+            },
+            "outputs": ["{options.outputFile}"]
+        },
+        "stylelint": {
+            "executor": "nx-stylelint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/content-ee/governance/**/*.scss"]
+            }
+        },
+        "npm-publish": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "cwd": "dist/libs/content-ee/governance",
+                "commands": [
+                    {
+                        "command": "npm version --allow-same-version --no-git-tag-version --force {args.new-version}",
+                        "forwardAllArgs": true
+                    },
+                    {
+                        "command": "echo @alfresco:registry=https://npm.pkg.github.com > .npmrc",
+                        "forwardAllArgs": false
+                    },
+                    {
+                        "command": "echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> .npmrc",
+                        "forwardAllArgs": false
+                    },
+                    {
+                        "command": "npm publish --access restricted --tag {args.tag}",
+                        "forwardAllArgs": true
+                    }
+                ],
+                "parallel": false
+            }
+        }
+    },
+    "tags": ["scope:content-ee-governance", "type:feature", "category:content-ee"]
+}

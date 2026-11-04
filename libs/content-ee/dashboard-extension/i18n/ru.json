@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Панель мониторинга"
+    },
+    "DASHBOARD": {
+        "TITLE": "Панель мониторинга"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Действия виджета",
+        "REFRESH": "Обновить",
+        "VIEW_ALL": "Просмотреть все",
+        "TASK_SUMMARY": {
+            "TITLE": "Сводка по моим задачам",
+            "SUMMARY_INFO_SUFFIX": "выполненные задачи!",
+            "NO_TASKS_ASSIGNED": "У вас нет назначенных задач.",
+            "NO_TASKS_ERROR": "Ошибка при получении задач. Обновите виджет.",
+            "COMPLETED": "Выполнено",
+            "INCOMPLETE": "Не выполнено",
+            "OVERDUE": "Просрочено",
+            "TASKS": "Задачи",
+            "ARROW_UP": "Стрелка вверх"
+        },
+        "TASK_LIST": {
+            "TITLE": "Управление задачами",
+            "OVERDUE": "Просрочено",
+            "UNASSIGNED": "Не назначено",
+            "IN_PROGRESS": "В процессе выполнения",
+            "NO_OVERDUE_TASKS": "У вас нет просроченных задач.",
+            "NO_UNASSIGNED_TASKS": "У вас нет не назначенных задач.",
+            "NO_IN_PROGRESS_TASKS": "У вас нет задач в процессе выполнения.",
+            "ACTIONS": {
+                "VIEW": "Просмотреть задачу",
+                "COMMENT": "Добавить комментарий",
+                "CLAIM": "Запрос задачи"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Задача успешно запрошена.",
+                "CLAIMING_FAILED": "Не удалось запросить задачу."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Файлы",
+            "RECENT": "Недавние",
+            "FAVORITES": "Избранное",
+            "PERSONAL": "Личные",
+            "SHARED": "Общие",
+            "NO_RECENT_FILES": "У вас нет не недавних файлов.",
+            "NO_FAVORITES_FILES": "У вас нет избранных файлов или папок.",
+            "NO_PERSONAL_FILES": "У вас нет личных файлов или папок.",
+            "NO_SHARED_FILES": "У вас нет не общих файлов.",
+            "ACTIONS": {
+                "VIEW": "Просмотреть",
+                "DOWNLOAD": "Скачать",
+                "SHARE": "Открыть доступ",
+                "SHARED_LINK_SETTINGS": "Настройки ссылки для общего доступа",
+                "FOLDER_INFORMATION": "Информация о папке"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Библиотеки",
+            "PERSONAL": "Мои библиотеки",
+            "ALL": "Все",
+            "FAVOURITES": "Избранное",
+            "NO_PERSONAL_LIBRARIES": "У вас нет личных библиотек.",
+            "NO_ALL_LIBRARIES": "У вас нет библиотек.",
+            "NO_FAVORITE_LIBRARIES": "У вас нет избранных библиотек."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Запреты на удаление данных",
+            "NO_HOLDS": "Запреты на удаление не созданы.",
+            "HOLDS_NAME": "Имя запрета на удаление",
+            "CREATED": "Создано",
+            "REASON": "Причина",
+            "ACTIONS": {
+                "DOWNLOAD": "Скачать",
+                "INFORMATION": "Информация о папке",
+                "DELETE": "Удалить"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Ход выполнения моих задач - за месяц",
+            "WEEK_LABEL": "Неделя",
+            "MONTH_LABEL": "Месяц",
+            "SUMMARY_INFO_SUFFIX": "выполненных задач в выбранном месяце!",
+            "SELECT_MONTH": "Выберите месяц",
+            "NO_TASKS_IN_MONTH": "Нет задач в выбранном месяце.",
+            "EMPTY": "Нет задач"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Сводка по моим процессам - за 6 месяцев",
+            "SUMMARY_INFO_SUFFIX": "завершенных процессов в выбранные 6 месяцев!",
+            "NO_PROCESSES": "У вас нет процессов.",
+            "NO_PROCESSES_ERROR": "Ошибка при получении процессов. Обновите виджет.",
+            "NO_PROCESSES_IN_PERIOD": "Нет процессов в выбранном периоде.",
+            "RUNNING": "Выполняется",
+            "COMPLETED": "Выполнено",
+            "NEXT": "Далее",
+            "NEXT_SCREEN_READER_LABEL": "Сводка моих процессов  - Перейти к следующим 6 месяцам",
+            "PREVIOUS": "Назад",
+            "PREVIOUS_SCREEN_READER_LABEL": "Сводка моих процессов  - Перейти к предыдущим 6 месяцам",
+            "EMPTY": "Нет процессов"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Комментарии к {{ taskName }}",
+        "CLOSE": "Закрыть"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Эскиз"
+    }
+}

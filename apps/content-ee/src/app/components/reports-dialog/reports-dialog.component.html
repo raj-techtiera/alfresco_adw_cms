@@ -1,0 +1,26 @@
+<div class="adw-reports-dialog">
+  <h2 mat-dialog-title class="adw-reports-dialog__title">Reports</h2>
+
+  <mat-dialog-content class="adw-reports-dialog__content">
+    <p class="adw-reports-dialog__hint">Select the report you need.</p>
+    <mat-form-field
+      appearance="outline"
+      class="adw-reports-dialog__field"
+      subscriptSizing="dynamic">
+      <mat-label>Report type</mat-label>
+      <mat-select [formControl]="reportTypeControl" panelClass="adw-reports-dialog__select-panel">
+        <mat-option *ngFor="let opt of reportOptions" [value]="opt.value">
+          {{ opt.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="reportTypeControl.touched && reportTypeControl.hasError('required')">
+        Choose a report type
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-reports-dialog__actions">
+    <button type="button" mat-stroked-button (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="confirm()" [disabled]="submitting">Create</button>
+  </mat-dialog-actions>
+</div>

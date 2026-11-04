@@ -1,0 +1,185 @@
+<div class="asm-dialog" role="dialog" [attr.aria-label]="dialogTitle">
+  <header class="asm-dialog__header">
+    <div class="asm-dialog__heading">
+      <div class="asm-dialog__badge" aria-hidden="true">
+        <mat-icon>lock</mat-icon>
+      </div>
+      <h2 class="asm-dialog__title">{{ dialogTitle }}</h2>
+    </div>
+    <button
+      mat-icon-button
+      type="button"
+      class="asm-dialog__close"
+      aria-label="Close"
+      [disabled]="submitting"
+      (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="asm-dialog__body">
+    <section class="asm-dialog__guide" aria-label="Role permissions guide">
+      <div class="asm-dialog__guide-head">
+        <mat-icon aria-hidden="true">info</mat-icon>
+        <h3>Role guide</h3>
+      </div>
+      <div class="asm-dialog__guide-grid">
+        @for (opt of roleOptions; track opt.value) {
+          <article class="asm-dialog__guide-card" [attr.data-role]="opt.value">
+            <div class="asm-dialog__guide-icon" aria-hidden="true">
+              <mat-icon>{{ opt.icon }}</mat-icon>
+            </div>
+            <h4>{{ opt.label }}</h4>
+            <p>{{ opt.description }}</p>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="asm-dialog__composer" aria-label="Add permission">
+      <div class="asm-dialog__labels">
+        <span class="asm-dialog__col-label">Groups</span>
+        <span class="asm-dialog__col-label">Permissions</span>
+        <span class="asm-dialog__col-spacer" aria-hidden="true"></span>
+      </div>
+
+      <div class="asm-dialog__composer-row">
+        <mat-form-field appearance="outline" class="asm-dialog__field" subscriptSizing="dynamic">
+          <mat-icon matPrefix class="asm-dialog__field-icon">group</mat-icon>
+          <mat-select
+            [(ngModel)]="draft.groupId"
+            [disabled]="submitting || groupsLoading"
+            placeholder="Select group"
+            (openedChange)="onGroupSelectOpened($event)">
+            <mat-option disabled class="asm-search-option">
+              <div class="asm-search">
+                <mat-icon aria-hidden="true">search</mat-icon>
+                <input
+                  type="search"
+                  class="asm-search-input"
+                  [(ngModel)]="groupSelectSearch"
+                  (click)="$event.stopPropagation()"
+                  (keydown)="$event.stopPropagation()"
+                  placeholder="Search groups..."
+                  aria-label="Search groups" />
+              </div>
+            </mat-option>
+            <mat-option value="">Select group</mat-option>
+            @for (group of groupsForDraft(); track trackGroup($index, group)) {
+              <mat-option
+                [value]="group.id"
+                [class.asm-option-hidden]="!matchesGroupSearch(group)">
+                {{ group.displayName }}
+              </mat-option>
+            }
+            @if (!hasMatchingGroupsForDraft()) {
+              <mat-option disabled>No groups found</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="asm-dialog__field" subscriptSizing="dynamic">
+          <mat-icon matPrefix class="asm-dialog__field-icon">verified_user</mat-icon>
+          <mat-select
+            [(ngModel)]="draft.role"
+            [disabled]="submitting || groupsLoading"
+            placeholder="Select permission">
+            <mat-option value="">Select permission</mat-option>
+            @for (opt of roleOptions; track opt.value) {
+              <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <div class="asm-dialog__composer-actions">
+          <button
+            type="button"
+            class="asm-dialog__add"
+            aria-label="Add permission"
+            [disabled]="!canAddDraft || submitting || groupsLoading"
+            (click)="addDraft()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button
+            type="button"
+            class="asm-dialog__clear"
+            aria-label="Clear selection"
+            [disabled]="submitting || (!draft.groupId && !draft.role)"
+            (click)="clearDraft()">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="asm-dialog__list-wrap" aria-label="Added permissions">
+      @if (groupsLoading) {
+        <div class="asm-dialog__state">
+          <mat-spinner diameter="28"></mat-spinner>
+          <span>Loading groups…</span>
+        </div>
+      } @else if (groupsError) {
+        <div class="asm-dialog__state asm-dialog__state--error">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ groupsError }}</span>
+          <button mat-stroked-button type="button" (click)="loadGroups()">Retry</button>
+        </div>
+      } @else if (!rows.length) {
+        <div class="asm-dialog__empty">
+          <div class="asm-dialog__empty-icon" aria-hidden="true">
+            <mat-icon>lock_person</mat-icon>
+          </div>
+          <h3>No permissions added yet</h3>
+          <p>Select a group and permission to get started.</p>
+        </div>
+      } @else {
+        <div class="asm-dialog__scroll">
+          <div class="asm-dialog__rows">
+            @for (row of rows; track trackRow($index, row)) {
+              <div class="asm-dialog__row">
+                <div class="asm-dialog__row-main">
+                  <div class="asm-dialog__chip asm-dialog__chip--group">
+                    <mat-icon aria-hidden="true">group</mat-icon>
+                    <span [title]="groupLabel(row.groupId)">{{ groupLabel(row.groupId) }}</span>
+                  </div>
+                  <div class="asm-dialog__chip asm-dialog__chip--role" [attr.data-role]="row.role">
+                    <mat-icon aria-hidden="true">{{ roleIcon(row.role) }}</mat-icon>
+                    <span>{{ roleLabel(row.role) }}</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="asm-dialog__delete"
+                  aria-label="Remove permission"
+                  [disabled]="submitting"
+                  (click)="removeRow(row.id)">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+    </section>
+  </div>
+
+  <footer class="asm-dialog__footer">
+    <button type="button" mat-stroked-button class="asm-dialog__cancel" [disabled]="submitting" (click)="close()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      mat-flat-button
+      class="asm-dialog__create"
+      [disabled]="!canSubmit"
+      (click)="create()">
+      @if (submitting) {
+        <mat-spinner diameter="18"></mat-spinner>
+        <span>Creating…</span>
+      } @else {
+        <span>Create</span>
+      }
+    </button>
+  </footer>
+</div>

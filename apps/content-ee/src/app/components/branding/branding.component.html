@@ -1,0 +1,120 @@
+<div class="br-page">
+  <!-- Header -->
+  <div class="br-header">
+    <div class="br-header-title">
+      <span class="br-header-emoji">🎨</span>
+      <span class="br-header-text">Branding &amp; Theme</span>
+    </div>
+    <div class="br-header-tabs">
+      <button type="button" class="br-pill" [class.br-pill--active]="activeTab === 'company'" (click)="setTab('company')">Company branding</button>
+      <button type="button" class="br-pill" [class.br-pill--active]="activeTab === 'theme'" (click)="setTab('theme')">Theme &amp; colours</button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="br-content">
+    <!-- COMPANY BRANDING -->
+    <div *ngIf="activeTab === 'company'">
+      <div class="br-section-head">
+        <h2 class="br-section-title">Sub-admin (tenant) branding</h2>
+        <p class="br-section-sub">Customise the look of your workspace. Uploaded logos appear in the navigation and emails.</p>
+      </div>
+
+      <!-- Organisation identity -->
+      <div class="br-card">
+        <h3 class="br-card-title">Organisation identity</h3>
+        <div class="br-field">
+          <label class="br-label">Display Name</label>
+          <input type="text" class="br-input" [(ngModel)]="displayName" />
+        </div>
+        <div>
+          <label class="br-label">Custom Domain</label>
+          <input type="text" class="br-input" [(ngModel)]="customDomain" />
+          <p class="br-hint">Enterprise only. Point your DNS CNAME to epcdoc-custom.com and enter <span class="br-link">the domain here</span>.</p>
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <div class="br-card">
+        <h3 class="br-card-title">Logo</h3>
+        <div class="br-logo-grid">
+          <!-- Logo Light -->
+          <div>
+            <p class="br-logo-label">Logo — Light Mode</p>
+            <div class="br-dropzone" (dragover)="onDragOver($event)" (drop)="onLogoDrop($event, 'light')" (click)="logoLightInput.click()">
+              <img *ngIf="logoLight; else lightPlaceholder" [src]="logoLight" alt="Logo light mode preview" class="br-logo-preview" />
+              <ng-template #lightPlaceholder><div class="br-logo-icon">🖼️</div></ng-template>
+              <p class="br-drop-text">Drag &amp; drop or click to upload</p>
+              <p class="br-drop-sub">SVG, PNG, JPG · Max 2 MB · Recommended: <span class="br-link">200×60px</span></p>
+              <input #logoLightInput type="file" accept=".svg,.png,.jpg,.jpeg" class="br-file-hidden" (change)="onLogoInput($event, 'light')" />
+            </div>
+          </div>
+          <!-- Logo Dark -->
+          <div>
+            <p class="br-logo-label">Logo — Dark Mode</p>
+            <div class="br-dropzone" (dragover)="onDragOver($event)" (drop)="onLogoDrop($event, 'dark')" (click)="logoDarkInput.click()">
+              <img *ngIf="logoDark; else darkPlaceholder" [src]="logoDark" alt="Logo dark mode preview" class="br-logo-preview" />
+              <ng-template #darkPlaceholder><div class="br-logo-icon">🖼️</div></ng-template>
+              <p class="br-drop-text">Drag &amp; drop or click to upload</p>
+              <p class="br-drop-sub">SVG, PNG, JPG · Max 2 MB · Recommended: <span class="br-link">200×60px</span></p>
+              <input #logoDarkInput type="file" accept=".svg,.png,.jpg,.jpeg" class="br-file-hidden" (change)="onLogoInput($event, 'dark')" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Powered by toggle -->
+        <div class="br-toggle-row">
+          <div>
+            <p class="br-toggle-title">Show "Powered by EPCdoc" in footer</p>
+            <p class="br-toggle-sub">Uncheck to white-label (Enterprise only)</p>
+          </div>
+          <button type="button" class="br-switch" [class.br-switch--on]="showPoweredBy" (click)="togglePoweredBy()">
+            <span class="br-switch-knob"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Accent colour -->
+      <div class="br-card br-card--mb6">
+        <h3 class="br-card-title">Accent colour</h3>
+        <div class="br-colour-grid">
+          <div>
+            <p class="br-logo-label">Primary Colour</p>
+            <div class="br-colour-row">
+              <div class="br-swatch" [style.background]="primaryColour"></div>
+              <input type="text" class="br-colour-input" [(ngModel)]="primaryColour" />
+              <input type="color" class="br-colour-picker" [(ngModel)]="primaryColour" title="Pick primary colour" />
+            </div>
+          </div>
+          <div>
+            <p class="br-logo-label">Accent Colour</p>
+            <div class="br-colour-row">
+              <div class="br-swatch" [style.background]="accentColour"></div>
+              <input type="text" class="br-colour-input" [(ngModel)]="accentColour" />
+              <input type="color" class="br-colour-picker" [(ngModel)]="accentColour" title="Pick accent colour" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button mat-raised-button type="button" class="br-save-btn">Save branding</button>
+    </div>
+
+    <!-- THEME & COLOURS -->
+    <div *ngIf="activeTab === 'theme'">
+      <div class="br-card br-card--p6">
+        <h3 class="br-theme-title">Theme &amp; colours</h3>
+        <p class="br-theme-sub">Choose how EPCdoc looks for you. This setting is saved to your browser.</p>
+        <div class="br-theme-grid">
+          <button type="button" class="br-theme-opt" *ngFor="let opt of themeOptions; trackBy: trackByKey"
+            [class.br-theme-opt--active]="selectedTheme === opt.key" (click)="selectedTheme = opt.key">
+            <span class="br-theme-emoji">{{ opt.emoji }}</span>
+            <span class="br-theme-label" [class.br-theme-label--active]="selectedTheme === opt.key">{{ opt.label }}</span>
+            <span class="br-theme-desc">{{ opt.desc }}</span>
+            <span class="br-theme-dot" *ngIf="selectedTheme === opt.key"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

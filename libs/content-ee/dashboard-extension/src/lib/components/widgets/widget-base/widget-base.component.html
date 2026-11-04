@@ -1,0 +1,70 @@
+@if (!(isLoading$ | async)) {
+    <div class="acs-widget-heading-container">
+        <h1>{{ widgetTitle | translate }}</h1>
+        <div class="acs-widget-actions">
+            @if (displayViewAllButton) {
+                <button mat-button
+                        class="acs-widget-actions-view-all"
+                        [attr.aria-label]="'WIDGETS.VIEW_ALL' | translate"
+                        [title]="'WIDGETS.VIEW_ALL' | translate"
+                        (click)="viewAllButtonClicked.emit()"
+                        (keydown.enter)="viewAllButtonClicked.emit()">
+                    {{ 'WIDGETS.VIEW_ALL' | translate }}
+                </button>
+            }
+            <button mat-icon-button
+                    class="acs-widget-actions-menu"
+                    [matMenuTriggerFor]="menu" #actionsMenuTrigger="matMenuTrigger"
+                    [attr.aria-label]="'WIDGETS.WIDGET_ACTIONS' | translate"
+                    [title]="'WIDGETS.WIDGET_ACTIONS' | translate"
+                    (click)="openMatMenu($event, actionsMenuTrigger)"
+                    (keydown.enter)="openMatMenu($event, actionsMenuTrigger)">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item
+                        data-automation-id="acs-widget-action-refresh"
+                        [attr.aria-label]="'WIDGETS.REFRESH' | translate"
+                        (click)="refreshWidget.emit()">
+                    <mat-icon>refresh</mat-icon>
+                    <span>{{ 'WIDGETS.REFRESH' | translate }}</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+    @if (widgetFilters?.length > 0) {
+        <div class="acs-widget-filters">
+            @for (filter of widgetFilters; track $index) {
+                @if (displayViewAllButton) {
+                    <button mat-button
+                            class="acs-widget-filter"
+                            [ngClass]="{ 'acs-widget-filter-active': filter.isActive }"
+                            [attr.aria-label]="filter.displayName | translate"
+                            [title]="filter.displayName | translate"
+                            (click)="widgetFilterSelected(filter)"
+                            (keydown.enter)="widgetFilterSelected(filter)">
+                        {{ filter.displayName | translate }}
+                    </button>
+                }
+            }
+        </div>
+    }
+    @if (hasContent) {
+        <ng-content/>
+    } @else {
+        <div class="acs-widget-empty">
+            <img
+                ngSrc="./assets/adw-dashboard-extension/images/dashboard-empty-content.svg"
+                [alt]="emptyStateMessage | translate"
+                priority
+                width="200"
+                height="200"/>
+            <span>{{ emptyStateMessage | translate }}</span>
+        </div>
+    }
+} @else {
+    <div class="acs-widget-loading-spinner-container">
+        <mat-progress-spinner color="primary" mode="indeterminate" data-automation-id="acs-widget-loading-spinner"/>
+    </div>
+}
+

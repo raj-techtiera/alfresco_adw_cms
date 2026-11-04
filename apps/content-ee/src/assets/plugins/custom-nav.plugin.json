@@ -1,0 +1,488 @@
+{
+  "$schema": "../../../extension.schema.json",
+  "$id": "app.custom.nav",
+  "$name": "Custom Navigation",
+  "$version": "1.0.0",
+  "actions": [
+    {
+      "id": "app.action.open.classification",
+      "type": "NAVIGATE_URL",
+      "payload": "$('/classification/' + context.selection.first.entry.id)"
+    }
+  ],
+  "features": {
+    "search": [
+      {
+        "id": "app.search.engineering-documents",
+        "order": 350,
+        "name": "CUSTOM_NAV.SEARCH.ENGINEERING_DOCUMENTS",
+        "default": false,
+        "filterWithContains": true,
+        "app:fields": [
+          "cm:name",
+          "cm:title",
+          "cm:description",
+          "eng:documenttitle",
+          "eng:documentno",
+          "eng:documenttype",
+          "eng:projectno",
+          "TEXT",
+          "TAG"
+        ],
+        "include": ["path", "allowableOperations", "properties"],
+        "sorting": {
+          "options": [
+            {
+              "key": "score",
+              "label": "SEARCH.SORT.RELEVANCE",
+              "type": "SCORE",
+              "field": "score",
+              "ascending": false
+            },
+            {
+              "key": "name",
+              "label": "SEARCH.SORT.FILENAME",
+              "type": "FIELD",
+              "field": "cm:name",
+              "ascending": true
+            },
+            {
+              "key": "title",
+              "label": "SEARCH.SORT.TITLE",
+              "type": "FIELD",
+              "field": "cm:title",
+              "ascending": true
+            },
+            {
+              "key": "created",
+              "label": "SEARCH.SORT.CREATE_DATE",
+              "type": "FIELD",
+              "field": "cm:created",
+              "ascending": true
+            }
+          ],
+          "defaults": [
+            {
+              "key": "score",
+              "type": "SCORE",
+              "field": "score",
+              "ascending": false
+            }
+          ]
+        },
+        "aca:triggeredOnChange": false,
+        "resetButton": true,
+        "filterQueries": [
+          { "query": "+TYPE:'cm:folder' OR +TYPE:'cm:content'" },
+          {
+            "query": "-TYPE:'cm:thumbnail' AND -TYPE:'cm:failedThumbnail' AND -TYPE:'cm:rating'"
+          },
+          { "query": "-cm:creator:System" },
+          {
+            "query": "-TYPE:'st:site' AND -ASPECT:'st:siteContainer' AND -ASPECT:'sys:hidden'"
+          },
+          {
+            "query": "-TYPE:'dl:dataList' AND -TYPE:'dl:todoList' AND -TYPE:'dl:issue'"
+          },
+          { "query": "-TYPE:'fm:topic' AND -TYPE:'fm:post'" },
+          { "query": "-TYPE:'lnk:link'" },
+          { "query": "-PATH:'//cm:wiki/*'" }
+        ],
+        "categories": [
+          {
+            "id": "logic",
+            "name": "SEARCH.CATEGORIES.LOGIC",
+            "enabled": true,
+            "component": {
+              "selector": "logical-filter",
+              "settings": {
+                "allowUpdateOnChange": false,
+                "hideDefaultAction": true,
+                "field": "cm:name,cm:title,cm:description,eng:documenttitle,eng:documentno,eng:documenttype,eng:projectno,TEXT,TAG"
+              }
+            }
+          },
+          {
+            "id": "createdModifiedDateRange",
+            "name": "SEARCH.CATEGORIES.DATE",
+            "enabled": true,
+            "component": {
+              "selector": "date-range",
+              "settings": {
+                "field": "cm:created,cm:modified",
+                "dateFormat": "dd-MMM-yy",
+                "maxDate": "today",
+                "displayedLabelsByField": {
+                  "cm:created": "SEARCH.CATEGORIES.DATE_TABS.CREATED",
+                  "cm:modified": "SEARCH.CATEGORIES.DATE_TABS.MODIFIED"
+                }
+              }
+            }
+          },
+          {
+            "id": "engDocumentTitle",
+            "name": "Document Title",
+            "enabled": true,
+            "expanded": true,
+            "component": {
+              "selector": "text",
+              "settings": {
+                "allowUpdateOnChange": false,
+                "hideDefaultAction": true,
+                "field": "eng:documenttitle",
+                "placeholder": "Enter document title"
+              }
+            }
+          },
+          {
+            "id": "engDocumentNo",
+            "name": "Document No",
+            "enabled": true,
+            "expanded": true,
+            "component": {
+              "selector": "text",
+              "settings": {
+                "allowUpdateOnChange": false,
+                "hideDefaultAction": true,
+                "field": "eng:documentno",
+                "placeholder": "Enter document number"
+              }
+            }
+          },
+          {
+            "id": "engDocumentType",
+            "name": "Document Type",
+            "enabled": true,
+            "expanded": true,
+            "component": {
+              "selector": "text",
+              "settings": {
+                "allowUpdateOnChange": false,
+                "hideDefaultAction": true,
+                "field": "eng:documenttype",
+                "placeholder": "Enter document type"
+              }
+            }
+          },
+          {
+            "id": "engProjectNo",
+            "name": "Project No",
+            "enabled": true,
+            "expanded": true,
+            "component": {
+              "selector": "text",
+              "settings": {
+                "allowUpdateOnChange": false,
+                "hideDefaultAction": true,
+                "field": "eng:projectno",
+                "placeholder": "Enter project number"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "navbar": [
+      {
+        "id": "app.navbar.primary",
+        "items": [
+          {
+            "id": "app.navbar.menu",
+            "children": [
+              {
+                "id": "app.navbar.personalFiles",
+                "icon": "person"
+              },
+              {
+                "id": "app.navbar.create-project",
+                "disabled": true,
+                "order": 50,
+                "title": "Program Portfolio",
+                "description": "create new project",
+                "icon": "folder",
+                "route": "listOf-Projects"
+              },
+              {
+                "id": "app.navbar.document-management",
+                "order": 50.5,
+                "title": "Document Management",
+                "description": "Browse document management folders",
+                "icon": "folder_open",
+                "route": "document-management"
+              },
+              {
+                "id": "app.navbar.business-units",
+                "disabled": true,
+                "order": 51,
+                "title": "Business Units",
+                "description": "View business units",
+                "icon": "business",
+                "route": "business-units"
+              },
+              {
+                "id": "app.navbar.geographic-overview",
+                "disabled": true,
+                "order": 53,
+                "title": "Geographic Overview",
+                "description": "View geographic overview",
+                "icon": "location_on",
+                "route": "geographicOverView"
+              },
+              {
+                "id": "app.navbar.kpi-dashboard",
+                "order": 54,
+                "title": "KPI Dashboard",
+                "description": "View KPI dashboard",
+                "icon": "dashboard",
+                "route": "kpiDashboard"
+              },
+              {
+                "id": "app.navbar.dms-dashboard",
+                "disabled": true,
+                "order": 54.5,
+                "title": "DMS Dashboard",
+                "description": "View DMS document dashboard",
+                "icon": "insert_chart",
+                "route": "dms-dashboard"
+              },
+              {
+                "id": "app.navbar.intelligence-center",
+                "order": 55,
+                "title": "Intelligence Center",
+                "description": "View Intelligence Center",
+                "icon": "psychology",
+                "route": "intelligenceDashboard"
+              },
+              {
+                "id": "app.navbar.compliance",
+                "disabled": true,
+                "order": 56,
+                "title": "Compliance",
+                "description": "View Compliance",
+                "icon": "security",
+                "route": "compliance"
+              },
+              {
+                "id": "app.navbar.master-data",
+                "disabled": true,
+                "order": 57,
+                "title": "Master Data",
+                "description": "Manage asset hierarchy master data",
+                "icon": "table_chart",
+                "route": "master-data"
+              },
+              {
+                "id": "app.navbar.tags-workspace",
+                "order": 58,
+                "title": "Tags",
+                "description": "Browse documents by tag",
+                "icon": "label",
+                "route": "tags"
+              },
+              {
+                "id": "app.navbar.audit-log",
+                "disabled": true,
+                "order": 59,
+                "title": "Audit Log",
+                "description": "View Audit Log",
+                "icon": "event_note",
+                "route": "auditLog"
+              },
+              {
+                "id": "app.navbar.notifications",
+                "order": 60,
+                "title": "Notifications",
+                "description": "View Notifications",
+                "icon": "notifications",
+                "route": "notifications"
+              },
+              {
+                "id": "app.navbar.team-resources",
+                "disabled": true,
+                "order": 61,
+                "title": "Team Resources",
+                "description": "View Team Resources",
+                "icon": "groups_2",
+                "route": "team-resources"
+              },
+              {
+                "id": "app.navbar.project-team",
+                "disabled": true,
+                "order": 62,
+                "title": "Project Team",
+                "description": "View Project Team",
+                "icon": "group",
+                "route": "project-team"
+              },
+              {
+                "id": "app.navbar.settings",
+                "order": 63,
+                "title": "Settings",
+                "description": "View Settings",
+                "icon": "settings",
+                "route": "settings"
+              },
+              {
+                "id": "app.navbar.doc-numbering-settings",
+                "order": 64,
+                "title": "Doc Numbering Settings",
+                "description": "View Doc Numbering Settings",
+                "icon": "tag",
+                "route": "doc-numbering-settings"
+              },
+              {
+                "id": "app.navbar.onboarding",
+                "disabled": true,
+                "order": 65,
+                "title": "Onboarding",
+                "description": "View Onboarding",
+                "icon": "rocket_launch",
+                "route": "onboarding"
+              },
+              {
+                "id": "app.navbar.billing",
+                "disabled": true,
+                "order": 66,
+                "title": "Billing",
+                "description": "View Billing",
+                "icon": "credit_card",
+                "route": "billing"
+              },
+              {
+                "id": "app.navbar.branding",
+                "disabled": true,
+                "order": 67,
+                "title": "Branding",
+                "description": "View Branding",
+                "icon": "branding_watermark",
+                "route": "branding"
+              },
+              {
+                "id": "app.navbar.data-migration",
+                "disabled": true,
+                "order": 68,
+                "title": "Data Migration",
+                "description": "View Data Migration",
+                "icon": "upload",
+                "route": "data-migration"
+              },
+              {
+                "id": "app.navbar.administration-hub",
+                "disabled": true,
+                "order": 69,
+                "title": "Administration Hub",
+                "description": "View Administration Hub",
+                "icon": "dashboard_2_gear",
+                "route": "administration-hub"
+              },
+              {
+                "id": "app.navbar.ai-usage-intelligence",
+                "disabled": true,
+                "order": 70,
+                "title": "AI Usage Intelligence",
+                "description": "View AI Usage Intelligence",
+                "icon": "satellite_alt",
+                "route": "ai-usage-intelligence"
+              },
+              {
+                "id": "app.navbar.user-management",
+                "order": 71,
+                "title": "User Management",
+                "description": "View User Management",
+                "icon": "dashboard",
+                "route": "user-management"
+              },
+              {
+                "id": "app.navbar.hr-management",
+                "disabled": true,
+                "order": 71.5,
+                "title": "HR Management",
+                "description": "View HR Management",
+                "icon": "badge",
+                "route": "hr-management"
+              },
+              {
+                "id": "app.navbar.assets-dashboard",
+                "disabled": true,
+                "order": 72,
+                "title": "Asset Hierarchy",
+                "description": "View Asset Hierarchy",
+                "icon": "dashboard",
+                "route": "assets-dashboard"
+              },              {
+                "id": "app.navbar.vendor-document-creation",
+                "order": 52,
+                "title": "Vendor Document Registry",
+                "description": "Register vendor documents",
+                "icon": "description",
+                "route": "vendor-document-creation"
+              },
+              {
+                "id": "app.navbar.construction-documents",
+                "order": 53,
+                "title": "My Construction Document",
+                "description": "View construction documents",
+                "icon": "construction",
+                "route": "construction-documents"
+              },
+              {
+                "id": "app.navbar.libraries.files",
+                "icon": "library_books"
+              },
+              {
+                "id": "app.navbar.libraries.favorite",
+                "icon": "star_border"
+              },
+              {
+                "id": "app.navbar.libraries.all",
+                "icon": "apps"
+              },
+              {
+                "id": "app.navbar.recentFiles",
+                "icon": "schedule"
+              },
+              {
+                "id": "app.navbar.favorites",
+                "icon": "star"
+              },
+              {
+                "id": "app.navbar.shared",
+                "icon": "people"
+              },
+              {
+                "id": "app.navbar.trashcan",
+                "icon": "delete"
+              },
+              {
+                "id": "app.navbar.reports",
+                "order": 240,
+                "title": "Reports Center",
+                "description": "View reports dashboard",
+                "icon": "assessment",
+                "route": "reports"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "contextMenu": [
+      {
+        "id": "app.context.menu.classification",
+        "order": 845,
+        "title": "Classification",
+        "description": "Open selected document in classification",
+        "icon": "psychology",
+        "actions": {
+          "click": "app.action.open.classification"
+        },
+        "rules": {
+          "visible": [
+            "app.selection.notEmpty",
+            "!app.navigation.isTrashcan"
+          ]
+        }
+      }
+    ]
+  }
+}

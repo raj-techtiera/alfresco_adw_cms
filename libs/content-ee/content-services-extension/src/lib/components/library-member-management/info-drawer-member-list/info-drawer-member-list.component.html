@@ -1,0 +1,13 @@
+<div class="adw-member-list-container">
+    <adw-member-list #membersList
+                     selectionMode="none"
+                     [title]="'MEMBER_LIST.MEMBER_COUNT' | translate"
+                     [collapsedView]="true"
+                     [siteId]="site?.entry?.id"
+                     [infinitePagination]="true"
+                     [loading]="loading | async"
+                     [members]="members | async" />
+    <adf-infinite-pagination [target]="membersList">
+        {{'MEMBER_MANAGER.LOAD_MORE' | translate}}
+    </adf-infinite-pagination>
+</div>

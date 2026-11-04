@@ -1,0 +1,138 @@
+<div class="adw-dncr">
+  <header class="adw-dncr__header">
+    <div class="adw-dncr__header-main">
+      <div class="adw-dncr__icon-wrap" aria-hidden="true">
+        <mat-icon>edit_note</mat-icon>
+      </div>
+      <div class="adw-dncr__header-text">
+        <h2 mat-dialog-title class="adw-dncr__title">Document number change request</h2>
+        <p class="adw-dncr__subtitle">Validate a new number, add a reason, then submit the request.</p>
+      </div>
+    </div>
+    <button
+      type="button"
+      mat-icon-button
+      class="adw-dncr__close"
+      aria-label="Close"
+      (click)="cancel()"
+      [disabled]="validating || submitting">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content class="adw-dncr__content">
+    <section class="adw-dncr__current" role="status" aria-label="Current document number">
+      <div class="adw-dncr__current-icon" aria-hidden="true">
+        <mat-icon>label</mat-icon>
+      </div>
+      <div class="adw-dncr__current-body">
+        <span class="adw-dncr__current-label">Current document number</span>
+        <span class="adw-dncr__current-value" [title]="data?.documentNumber || '—'">
+          {{ data?.documentNumber || '—' }}
+        </span>
+      </div>
+    </section>
+
+    <form class="adw-dncr__form" autocomplete="off">
+      <div class="adw-dncr__field-block">
+        <label class="adw-dncr__label" for="adw-dncr-proposed">Proposed document number</label>
+        <div class="adw-dncr__proposed-row">
+          <mat-form-field appearance="outline" class="adw-dncr__field" subscriptSizing="dynamic">
+            <input
+              id="adw-dncr-proposed"
+              matInput
+              [formControl]="proposedNumberControl"
+              placeholder="e.g. MY-PLS-001-EL-CD-0052-02"
+              (input)="onProposedNumberChanged()"
+              (keydown.enter)="$event.preventDefault(); validateProposedNumber()" />
+            <mat-icon
+              *ngIf="numberValidated"
+              matSuffix
+              class="adw-dncr__suffix-ok"
+              aria-hidden="true">
+              check_circle
+            </mat-icon>
+            <mat-error *ngIf="proposedNumberControl.touched && proposedNumberControl.hasError('required')">
+              Proposed document number is required
+            </mat-error>
+            <mat-error *ngIf="proposedNumberControl.touched && proposedNumberControl.hasError('alreadyExists')">
+              Proposed document number already exists
+            </mat-error>
+          </mat-form-field>
+
+          <button
+            type="button"
+            class="adw-dncr__validate-btn"
+            mat-flat-button
+            color="primary"
+            (click)="validateProposedNumber()"
+            [disabled]="!canValidate || validating || submitting">
+            <span class="adw-dncr__btn-content">
+              @if (validating) {
+                <mat-spinner diameter="18" class="adw-dncr__spinner"></mat-spinner>
+                <span>Checking…</span>
+              } @else {
+                <mat-icon aria-hidden="true">fact_check</mat-icon>
+                <span>Validate</span>
+              }
+            </span>
+          </button>
+        </div>
+
+        @if (validationError) {
+          <div class="adw-dncr__status adw-dncr__status--error" role="alert">
+            <mat-icon aria-hidden="true">error</mat-icon>
+            <span>{{ validationError }}</span>
+          </div>
+        } @else if (numberValidated) {
+          <div class="adw-dncr__status adw-dncr__status--ok" role="status">
+            <mat-icon aria-hidden="true">verified</mat-icon>
+            <span>Number is available. You can submit the request.</span>
+          </div>
+        } @else {
+          <p class="adw-dncr__helper">Validate the proposed number before submitting.</p>
+        }
+      </div>
+
+      <div class="adw-dncr__field-block">
+        <label class="adw-dncr__label" for="adw-dncr-reason">Reason for change</label>
+        <mat-form-field appearance="outline" class="adw-dncr__field" subscriptSizing="dynamic">
+          <textarea
+            id="adw-dncr-reason"
+            matInput
+            rows="2"
+            [formControl]="changeReasonControl"
+            placeholder="Describe why this document number needs to change"
+            class="adw-dncr__textarea"></textarea>
+          <mat-hint align="end">{{ changeReasonControl.value.length }}/2000</mat-hint>
+          <mat-error *ngIf="changeReasonControl.touched && changeReasonControl.hasError('required')">
+            Reason for change is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="adw-dncr__actions">
+    <button type="button" mat-stroked-button class="adw-dncr__btn-cancel" (click)="cancel()" [disabled]="validating || submitting">
+      Cancel
+    </button>
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      class="adw-dncr__btn-submit"
+      (click)="submit()"
+      [disabled]="!canSubmit">
+      <span class="adw-dncr__btn-content">
+        @if (submitting) {
+          <mat-spinner diameter="18" class="adw-dncr__spinner adw-dncr__spinner--light"></mat-spinner>
+          <span>Submitting…</span>
+        } @else {
+          <mat-icon aria-hidden="true">send</mat-icon>
+          <span>Submit request</span>
+        }
+      </span>
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,90 @@
+.adw-dashboard-home .aca-page-layout,
+.adw-dashboard-home .aca-page-layout-content {
+    background: transparent !important;
+}
+
+/* Cool icy white-blue glass — matches the frosted panel reference */
+.adw-cc-hero,
+.adw-dashboard-home .aca-page-layout-content [style*='backdrop-filter'] {
+    background: rgba(255, 255, 255, 0.58) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+    backdrop-filter: blur(16px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.78) !important;
+    box-shadow:
+        0 4px 24px rgba(15, 23, 42, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.adw-cc-hero {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+.adw-dashboard-home .aca-page-layout {
+    .aca-content-header {
+        display: none;
+    }
+
+    .aca-page-layout-content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        overflow-y: auto;
+        padding: 24px;
+
+        > * {
+            flex-shrink: 0;
+        }
+
+        .acs-widget-row {
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+
+            &-high .acs-widget-base {
+                height: 600px;
+            }
+
+            &-preview {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+
+                .acs-width-2 {
+                    width: 100%;
+                }
+            }
+
+            .acs-width {
+                &-1 {
+                    min-width: 350px;
+                    width: 33%;
+                }
+
+                &-2 {
+                    width: 50%;
+                }
+
+                &-3 {
+                    width: 66%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .adw-dashboard-home .aca-page-layout .aca-page-layout-content .acs-widget-row {
+        flex-direction: column;
+
+        .acs-width {
+            &-1,
+            &-2,
+            &-3 {
+                width: 100%;
+            }
+        }
+    }
+}

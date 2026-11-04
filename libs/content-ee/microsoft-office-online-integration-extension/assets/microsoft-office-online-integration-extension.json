@@ -1,0 +1,720 @@
+{
+    "$version": "1.0.0",
+    "$id": "microsoft-office-online-integration-extension.plugin",
+    "$name": "microsoft office online extension",
+    "settings": [
+        {
+            "id": "extensions.microsoft-office-online-integration.settings",
+            "name": "MICROSOFT-ONLINE.SETTINGS.AVAILABILITY_HEADER",
+            "parameters": [
+                {
+                    "name": "MICROSOFT-ONLINE.SETTINGS.AVAILABILITY_TITLE",
+                    "key": "microsoftOnline",
+                    "type": "boolean",
+                    "value": false
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "id": "app.action.edit-office.execute",
+            "type": "START_SESSION",
+            "payload": "$(context.selection.file)"
+        },
+        {
+            "id": "app.action.edit-office.end",
+            "type": "END_EDITING",
+            "payload": "$(context.selection.file)"
+        },
+        {
+            "id": "app.action.resume-office.execute",
+            "type": "RESUME_SESSION",
+            "payload": "$(context.selection.file)"
+        },
+        {
+            "id": "app.action.create-word.execute",
+            "type": "CREATE_DOCUMENT",
+            "payload": "WORD"
+        },
+        {
+            "id": "app.action.create-excel.execute",
+            "type": "CREATE_DOCUMENT",
+            "payload": "EXCEL"
+        },
+        {
+            "id": "app.action.create-powerpoint.execute",
+            "type": "CREATE_DOCUMENT",
+            "payload": "POWERPOINT"
+        }
+    ],
+    "rules": [
+        {
+            "id": "app.content-services.option.lock-handler",
+            "type": "core.some",
+            "parameters": [
+                { "type": "rule",
+                    "value": "core.every",
+                    "parameters": [
+                        { "type": "rule",  "value": "!app.content-services.isMicrosoftOnlinePluginEnabled" },
+                        { "type": "rule",  "value": "app.selection.file" },
+                        { "type": "rule",  "value": "!app.navigation.isTrashcan" },
+                        { "type": "rule",  "value": "canToggleFileLock" }
+                    ]
+                },
+                { "type": "rule",
+                    "value": "core.every",
+                    "parameters": [
+                        { "type": "rule",  "value": "app.content-services.isMicrosoftOnlinePluginEnabled" },
+                        { "type": "rule",  "value": "!app.content-services.isActiveMicrosoftSession" },
+                        { "type": "rule",  "value": "app.selection.file" },
+                        { "type": "rule",  "value": "!app.navigation.isTrashcan" },
+                        { "type": "rule",  "value": "canToggleFileLock" }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "app.content-services.option.upload-handler",
+            "type": "core.some",
+            "parameters": [
+                { "type": "rule",
+                    "value": "core.every",
+                    "parameters": [
+                        { "type": "rule",  "value": "!app.content-services.isMicrosoftOnlinePluginEnabled" },
+                        { "type": "rule",  "value": "app.selection.file.canUploadVersion" }
+                    ]
+                },
+                { "type": "rule",
+                    "value": "core.every",
+                    "parameters": [
+                        { "type": "rule",  "value": "app.content-services.isMicrosoftOnlinePluginEnabled" },
+                        { "type": "rule", "value": "!app.content-services.isActiveMicrosoftSession" },
+                        { "type": "rule",  "value": "app.selection.file.canUploadVersion" }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "app.content-services.option.canCreateOfficeFile",
+            "type": "core.every",
+            "parameters": [
+                {
+                    "type": "rule",
+                    "value": "app.isContentServiceEnabled"
+                },
+                {
+                    "type": "rule",
+                    "value": "app.navigation.folder.canCreate"
+                }
+            ]
+        }
+    ],
+    "features": {
+        "create": [
+            {
+              "id": "app.create.create-word",
+              "order": 301,
+              "icon": "adf:word_thumbnail",
+              "title": "MICROSOFT-ONLINE.ACTIONS.CREATE_WORD.TITLE",
+              "description": "MICROSOFT-ONLINE.ACTIONS.CREATE_WORD.TOOLTIP",
+              "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FILE_NOT_ALLOWED",
+              "actions": {
+                "click": "app.action.create-word.execute"
+              },
+              "rules": {
+                "enabled": "app.content-services.option.canCreateOfficeFile"
+              }
+            },
+            {
+                "id": "app.create.create-powerpoint",
+                "order": 302,
+                "icon": "adf:powerpoint_thumbnail",
+                "title": "MICROSOFT-ONLINE.ACTIONS.CREATE_POWERPOINT.TITLE",
+                "description": "MICROSOFT-ONLINE.ACTIONS.CREATE_POWERPOINT.TOOLTIP",
+                "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FILE_NOT_ALLOWED",
+                "actions": {
+                  "click": "app.action.create-powerpoint.execute"
+                },
+                "rules": {
+                  "enabled": "app.content-services.option.canCreateOfficeFile"
+                }
+            },
+            {
+                "id": "app.create.create-excel",
+                "order": 303,
+                "icon": "adf:excel_thumbnail",
+                "title": "MICROSOFT-ONLINE.ACTIONS.CREATE_EXCEL.TITLE",
+                "description": "MICROSOFT-ONLINE.ACTIONS.CREATE_EXCEL.TOOLTIP",
+                "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FILE_NOT_ALLOWED",
+                "actions": {
+                    "click": "app.action.create-excel.execute"
+                },
+                "rules": {
+                    "enabled": "app.content-services.option.canCreateOfficeFile"
+                }
+            },
+            {
+                "id": "app.create.separator.end-ooi",
+                "type": "separator",
+                "order": 304
+            }
+        ],
+        "contextMenu": [
+            {
+                "id": "content-services.components.edit-word",
+                "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_WORD",
+                "order": 450,
+                "icon": "edit",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isWordFile",
+                        "!app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty",
+                        "!app.content-services.isWriteLocked",
+                        "app.selection.first.canUpdate"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.edit-office.execute"
+                }
+            },
+            {
+                "id": "content-services.components.edit-powerpoint",
+                "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_POWERPOINT",
+                "order": 450,
+                "icon": "edit",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isPowerPointFile",
+                        "!app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty",
+                        "!app.content-services.isWriteLocked",
+                        "app.selection.first.canUpdate"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.edit-office.execute"
+                }
+            },
+            {
+                "id": "content-services.components.edit-excel",
+                "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_EXCEL",
+                "order": 450,
+                "icon": "edit",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isExcelFile",
+                        "!app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty",
+                        "!app.content-services.isWriteLocked",
+                        "app.selection.first.canUpdate"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.edit-office.execute"
+                }
+            },
+            {
+                "id": "content-services.components.resume-word",
+                "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_WORD",
+                "order": 450,
+                "icon": "edit",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isWordFile",
+                        "app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.resume-office.execute"
+                }
+            },
+            {
+                "id": "content-services.components.resume-powerpoint",
+                "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_POWERPOINT",
+                "order": 450,
+                "icon": "edit",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isPowerPointFile",
+                        "app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.resume-office.execute"
+                }
+            },
+            {
+                "id": "content-services.components.resume-excel",
+                "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_EXCEL",
+                "order": 450,
+                "icon": "edit",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isExcelFile",
+                        "app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.resume-office.execute"
+                }
+            },
+            {
+                "id": "content-services.components.end-microsoft-session",
+                "title": "MICROSOFT-ONLINE.ACTIONS.END_SESSION",
+                "order": 500,
+                "icon": "save",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isActiveMicrosoftSession",
+                        "app.content-services.isUserWriteLockOwner",
+                        "app.content-services.isMicrosoftOnlinePluginEnabled",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty"
+                    ]
+                },
+                "actions": {
+                    "click": "app.action.edit-office.end"
+                }
+            },
+            {
+                "id": "app.context.toggleLock",
+                "rules": {
+                    "visible": [
+                        "app.content-services.option.lock-handler"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.uploadNodeVersion",
+                "rules": {
+                    "visible": [
+                        "app.content-services.option.upload-handler"
+                    ]
+                }
+            }
+        ],
+        "icons": [
+            {
+                "id": "adf:excel_thumbnail",
+                "value": "./assets/images/ft_ic_ms_excel.svg"
+            },
+            {
+                "id": "adf:powerpoint_thumbnail",
+                "value": "./assets/images/ft_ic_ms_powerpoint.svg"
+            },
+            {
+                "id": "adf:word_thumbnail",
+                "value": "./assets/images/ft_ic_ms_word.svg"
+            }
+        ],
+        "toolbar": [
+            {
+                "id": "app.toolbar.create",
+                "children": [
+                    {
+                        "id": "app.create.create-word",
+                        "order": 301,
+                        "icon": "adf:word_thumbnail",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.CREATE_WORD.TITLE",
+                        "description": "MICROSOFT-ONLINE.ACTIONS.CREATE_WORD.TOOLTIP",
+                        "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FILE_NOT_ALLOWED",
+                        "actions": {
+                          "click": "app.action.create-word.execute"
+                        },
+                        "rules": {
+                          "visible": [
+                                "app.isContentServiceEnabled",
+                                "app.navigation.folder.canCreate"
+                            ]
+                        }
+                      },
+                      {
+                          "id": "app.create.create-powerpoint",
+                          "order": 302,
+                          "icon": "adf:powerpoint_thumbnail",
+                          "title": "MICROSOFT-ONLINE.ACTIONS.CREATE_POWERPOINT.TITLE",
+                          "description": "MICROSOFT-ONLINE.ACTIONS.CREATE_POWERPOINT.TOOLTIP",
+                          "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FILE_NOT_ALLOWED",
+                          "actions": {
+                            "click": "app.action.create-powerpoint.execute"
+                          },
+                          "rules": {
+                            "visible": [
+                                "app.isContentServiceEnabled",
+                                "app.navigation.folder.canCreate"
+                            ]
+                          }
+                      },
+                      {
+                          "id": "app.create.create-excel",
+                          "order": 303,
+                          "icon": "adf:excel_thumbnail",
+                          "title": "MICROSOFT-ONLINE.ACTIONS.CREATE_EXCEL.TITLE",
+                          "description": "MICROSOFT-ONLINE.ACTIONS.CREATE_EXCEL.TOOLTIP",
+                          "description-disabled": "APP.NEW_MENU.TOOLTIPS.CREATE_FILE_NOT_ALLOWED",
+                          "actions": {
+                              "click": "app.action.create-excel.execute"
+                          },
+                          "rules": {
+                              "visible": [
+                                "app.isContentServiceEnabled",
+                                "app.navigation.folder.canCreate"
+                              ]
+                          }
+                      }
+                ]
+            },
+            {
+                "id": "app.toolbar.more",
+                "children": [
+                    {
+                        "id": "content-services.components.edit-word",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_WORD",
+                        "order": 95,
+                        "icon": "edit",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isWordFile",
+                                "!app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty",
+                                "!app.content-services.isWriteLocked",
+                                "app.selection.first.canUpdate"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.edit-office.execute"
+                        }
+                    },
+                    {
+                        "id": "content-services.components.edit-powerpoint",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_POWERPOINT",
+                        "order": 95,
+                        "icon": "edit",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isPowerPointFile",
+                                "!app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty",
+                                "!app.content-services.isWriteLocked",
+                                "app.selection.first.canUpdate"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.edit-office.execute"
+                        }
+                    },
+                    {
+                        "id": "content-services.components.edit-excel",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_EXCEL",
+                        "order": 95,
+                        "icon": "edit",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isExcelFile",
+                                "!app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty",
+                                "!app.content-services.isWriteLocked",
+                                "app.selection.first.canUpdate"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.edit-office.execute"
+                        }
+                    },
+                    {
+                        "id": "content-services.components.resume-word",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_WORD",
+                        "order": 95,
+                        "icon": "edit",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isWordFile",
+                                "app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.resume-office.execute"
+                        }
+                    },
+                    {
+                        "id": "content-services.components.resume-powerpoint",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_POWERPOINT",
+                        "order": 95,
+                        "icon": "edit",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isPowerPointFile",
+                                "app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.resume-office.execute"
+                        }
+                    },
+                    {
+                        "id": "content-services.components.resume-excel",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_EXCEL",
+                        "order": 95,
+                        "icon": "edit",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isExcelFile",
+                                "app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.resume-office.execute"
+                        }
+                    },
+                    {
+                        "id": "content-services.components.end-microsoft-session",
+                        "title": "MICROSOFT-ONLINE.ACTIONS.END_SESSION",
+                        "order": 150,
+                        "icon": "save",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.isActiveMicrosoftSession",
+                                "app.content-services.isUserWriteLockOwner",
+                                "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty"
+                            ]
+                        },
+                        "actions": {
+                            "click": "app.action.edit-office.end"
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.toggleLock",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.option.lock-handler"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.uploadNodeVersion",
+                        "rules": {
+                            "visible": [
+                                "app.content-services.option.upload-handler"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "viewer": {
+            "toolbarActions": [
+                {
+                    "id": "app.viewer.toolbar.more",
+                    "children": [
+                        {
+                            "id": "content-services.components.edit-word",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_WORD",
+                            "order": 95,
+                            "icon": "edit",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isWordFile",
+                                    "!app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty",
+                                    "!app.content-services.isWriteLocked",
+                                    "app.selection.first.canUpdate"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.edit-office.execute"
+                            }
+                        },
+                        {
+                            "id": "content-services.components.edit-powerpoint",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_POWERPOINT",
+                            "order": 95,
+                            "icon": "edit",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isPowerPointFile",
+                                    "!app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty",
+                                    "!app.content-services.isWriteLocked",
+                                    "app.selection.first.canUpdate"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.edit-office.execute"
+                            }
+                        },
+                        {
+                            "id": "content-services.components.edit-excel",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_EXCEL",
+                            "order": 95,
+                            "icon": "edit",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isExcelFile",
+                                    "!app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty",
+                                    "!app.content-services.isWriteLocked",
+                                    "app.selection.first.canUpdate"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.edit-office.execute"
+                            }
+                        },
+                        {
+                            "id": "content-services.components.resume-word",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_WORD",
+                            "order": 95,
+                            "icon": "edit",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isWordFile",
+                                    "app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.resume-office.execute"
+                            }
+                        },
+                        {
+                            "id": "content-services.components.resume-powerpoint",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_POWERPOINT",
+                            "order": 95,
+                            "icon": "edit",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isPowerPointFile",
+                                    "app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.resume-office.execute"
+                            }
+                        },
+                        {
+                            "id": "content-services.components.resume-excel",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.EDIT_EXCEL",
+                            "order": 95,
+                            "icon": "edit",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isExcelFile",
+                                    "app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.resume-office.execute"
+                            }
+                        },
+                        {
+                            "id": "content-services.components.end-microsoft-session",
+                            "title": "MICROSOFT-ONLINE.ACTIONS.END_SESSION",
+                            "order": 150,
+                            "icon": "save",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.isActiveMicrosoftSession",
+                                    "app.content-services.isUserWriteLockOwner",
+                                    "app.content-services.isMicrosoftOnlinePluginEnabled",
+                                    "!app.navigation.isTrashcan",
+                                    "app.selection.notEmpty"
+                                ]
+                            },
+                            "actions": {
+                                "click": "app.action.edit-office.end"
+                            }
+                        },
+                        {
+                            "id": "app.viewer.toggleLock",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.option.lock-handler"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.toolbar.uploadNodeVersion",
+                            "rules": {
+                                "visible": [
+                                    "app.content-services.option.upload-handler"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "content-metadata-presets": [
+            {
+                "id": "app.content.metadata.custom",
+                "custom": [
+                    {
+                        "id": "app.content.metadata.customSetting",
+                        "exclude": [
+                            "ooi:editingInMSOffice"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "badges": [
+            {
+                "id": "app.resume-active-session.badge",
+                "component": "content-services.components.resume-active-session",
+                "rules": {
+                    "visible": [
+                        "app.content-services.isMicrosoftOnlinePluginEnabled"
+                    ]
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Řídicí panel"
+    },
+    "DASHBOARD": {
+        "TITLE": "Řídicí panel"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Akce widgetu",
+        "REFRESH": "Obnovit",
+        "VIEW_ALL": "Zobrazit vše",
+        "TASK_SUMMARY": {
+            "TITLE": "Souhrn mých úkolů",
+            "SUMMARY_INFO_SUFFIX": "dokončené úkoly!",
+            "NO_TASKS_ASSIGNED": "Nemáte přiřazeny žádné úkoly.",
+            "NO_TASKS_ERROR": "Při načítání vašich úkolů došlo k chybě. Aktualizujte widget.",
+            "COMPLETED": "Dokončeno",
+            "INCOMPLETE": "Nedokončeno",
+            "OVERDUE": "Po termínu",
+            "TASKS": "Úkoly",
+            "ARROW_UP": "Šipka nahoru"
+        },
+        "TASK_LIST": {
+            "TITLE": "Správa úkolů",
+            "OVERDUE": "Po termínu",
+            "UNASSIGNED": "Nepřiřazeno",
+            "IN_PROGRESS": "Probíhá",
+            "NO_OVERDUE_TASKS": "Nemáte žádné úkoly po termínu.",
+            "NO_UNASSIGNED_TASKS": "Nemáte žádné nepřiřazené úkoly.",
+            "NO_IN_PROGRESS_TASKS": "Nemáte žádné probíhající úkoly.",
+            "ACTIONS": {
+                "VIEW": "Zobrazit úkol",
+                "COMMENT": "Přidat komentář",
+                "CLAIM": "Nárokovat úkol"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Úkol byl úspěšně nárokován.",
+                "CLAIMING_FAILED": "Úkol nebylo možné nárokovat."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Soubory",
+            "RECENT": "Nedávné",
+            "FAVORITES": "Oblíbené",
+            "PERSONAL": "Osobní",
+            "SHARED": "Sdílené",
+            "NO_RECENT_FILES": "Nemáte žádné nedávné soubory.",
+            "NO_FAVORITES_FILES": "Nemáte žádné oblíbené soubory ani složky.",
+            "NO_PERSONAL_FILES": "Nemáte žádné osobní soubory ani složky.",
+            "NO_SHARED_FILES": "Nemáte žádné sdílené soubory.",
+            "ACTIONS": {
+                "VIEW": "Zobrazit",
+                "DOWNLOAD": "Stáhnout",
+                "SHARE": "Sdílet",
+                "SHARED_LINK_SETTINGS": "Nastavení sdíleného odkazu",
+                "FOLDER_INFORMATION": "Informace o složce"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Knihovny",
+            "PERSONAL": "Moje knihovny",
+            "ALL": "Vše",
+            "FAVOURITES": "Oblíbené",
+            "NO_PERSONAL_LIBRARIES": "Nemáte žádné osobní knihovny.",
+            "NO_ALL_LIBRARIES": "Nemáte žádné knihovny.",
+            "NO_FAVORITE_LIBRARIES": "Nemáte žádné oblíbené knihovny."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Záznamy pro případ soudního řízení",
+            "NO_HOLDS": "Nebyly vytvořeny žádné záznamy pro případ soudního řízení.",
+            "HOLDS_NAME": "Název záznamu pro případ soudního řízení",
+            "CREATED": "Vytvořeno",
+            "REASON": "Důvod",
+            "ACTIONS": {
+                "DOWNLOAD": "Stáhnout",
+                "INFORMATION": "Informace o složce",
+                "DELETE": "Odstranit"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Průběh mých úkolů – za měsíc",
+            "WEEK_LABEL": "Týden",
+            "MONTH_LABEL": "Měsíc",
+            "SUMMARY_INFO_SUFFIX": "dokončené úkoly / dokončených úkolů za vybraný měsíc!",
+            "SELECT_MONTH": "Vyberte měsíc",
+            "NO_TASKS_IN_MONTH": "Ve vybraném měsíci nejsou žádné úkoly.",
+            "EMPTY": "Žádné úkoly"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Souhrn mých procesů – za 6 měsíců",
+            "SUMMARY_INFO_SUFFIX": "dokončené procesy / dokončených procesů za vybraných 6 měsíců!",
+            "NO_PROCESSES": "Nemáte žádné procesy.",
+            "NO_PROCESSES_ERROR": "Při načítání vašich procesů došlo k chybě. Aktualizujte widget.",
+            "NO_PROCESSES_IN_PERIOD": "Ve vybraném období nejsou žádné procesy.",
+            "RUNNING": "Spuštěné",
+            "COMPLETED": "Dokončeno",
+            "NEXT": "Další",
+            "NEXT_SCREEN_READER_LABEL": "Shrnutí mých procesů  - Přejít na dalších 6 měsíců",
+            "PREVIOUS": "Předchozí",
+            "PREVIOUS_SCREEN_READER_LABEL": "Shrnutí mých procesů  – Přejít na předchozích 6 měsíců",
+            "EMPTY": "Žádné procesy"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Poznámky k úkolu {{ taskName }}",
+        "CLOSE": "Zavřít"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Miniatura"
+    }
+}

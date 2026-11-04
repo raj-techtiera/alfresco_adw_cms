@@ -1,0 +1,30 @@
+#adf-version-upload-panel {
+    width: 89%;
+    margin-left: 5.5%;
+}
+
+.adw-end-session {
+    &-group {
+        margin-bottom: 38px;
+    }
+
+    &-radio-group {
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    &-type-radio-button {
+        margin: 5px;
+    }
+
+    &-tooltip {
+        margin-left: 29px;
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: 13px;
+    }
+
+    &-text {
+        margin-bottom: 22px;
+    }
+}

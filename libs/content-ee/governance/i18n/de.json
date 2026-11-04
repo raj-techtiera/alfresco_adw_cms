@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Anwenden",
+        "CANCEL": "Abbrechen",
+        "SWITCH": "Wechseln",
+        "CONTINUE": "Weiter",
+        "RELOAD": "Reload"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Record deklarieren",
+            "SUCCESS": "{{fileName}} wurde als Record deklariert",
+            "FAIL": "{{fileName}} konnte nicht als Record deklariert werden",
+            "DIALOG": {
+                "TITLE": "Record deklarieren",
+                "MESSAGE": "Dieses Dokument wurde schon einmal als Record deklariert und abgelehnt.",
+                "YES": "Record deklarieren",
+                "NO": "Abbrechen",
+                "CLOSE": "Schließen"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Deklarieren des Ordners als Record wird derzeit nicht unterstützt",
+                    "EXISTING-RECORD": "Bereits als Record deklariert",
+                    "FAILED": "Konnte nicht als Record deklariert werden"
+                },
+                "SUCCESS": "Element wurde als Record deklariert"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Abgelehnter Record",
+            "CLOSE_LABEL": "Schließen",
+            "SUB-TITLE": "Die Datei '{{ nodeName }}' wurde als Record abgelehnt",
+            "BY": "Von",
+            "AT": "Bei",
+            "REASON": "Grund",
+            "CONFIRM": "Bestätigen",
+            "WARNING": "Wenn Sie die Warnung für den abgelehnten Record entfernen, sind die Optionen für die Deklaration der Datei als Record wieder verfügbar",
+            "FAILED-REMOVE": "Warnung für Ablehnung von {{nodeName}} konnte nicht entfernt werden: {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Abgelehnter Record",
+            "TOOLTIP-MESSAGE": "Warnung entfernen",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Abgelehnter Record",
+                "RECORD-HYPERLINK": "Als Record deklariert",
+                "REJECTED-RECORD-HYPERLINK": "Record wurde abgelehnt, Einzelheiten siehe Dateiinformationen"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Entfernen",
+            "SUCCESS": "'{{ name }}' wurde entfernt",
+            "FAIL": "{{recordId}} konnte nicht entfernt werden",
+            "DIALOG": {
+                "TITLE": "Record-Instanz entfernen",
+                "YES-ALL": "Entfernen und nicht mehr anzeigen",
+                "YES": "Entfernen",
+                "NO": "Abbrechen",
+                "MESSAGE": {
+                    "DELETE": "Diese Instanz von '{{name}}' wird endgültig gelöscht und kann auch nicht mehr aus dem Papierkorb wiederhergestellt werden.",
+                    "ADDITIONAL": "Der Record '{{name}}', der im Records-Management-System Ihres Unternehmens gespeichert ist, ist davon nicht betroffen."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Datensatz"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Verschieben",
+            "MOVE-ITEM": "'{{ name }}' verschieben nach...",
+            "SAME-FOLDER-MOVE": "Verschieben in denselben Ordner nicht möglich",
+            "SUCCESSFUL": "Record erfolgreich verschoben"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "An Archiv senden",
+                "SUCCESS": "Die Datei {{ name }} wird archiviert",
+                "FAIL": "{{ name }} konnte nicht archiviert werden",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Das Element wurde bereits archiviert.",
+                        "PENDING-RESTORE": " Wiederherstellung des Elements ausstehend. ",
+                        "RESTORED": "Die wiederhergestellten Elemente konnten nicht archiviert werden",
+                        "FOLDER": "Die Wiederherstellung aus dem Archiv wird derzeit nicht unterstützt"
+                    },
+                    "FAIL": "Archivierung fehlgeschlagen",
+                    "SUCCESS": "Element wird archiviert"
+                },
+                "DIALOG": {
+                    "TITLE": "An Archiv senden",
+                    "MESSAGE": "Sie sind im Begriff, Dateien an ein externes Archiv zu senden. Das Abrufen von Dateien aus diesem Archiv kann mit Kosten verbunden sein. Möchten Sie wirklich fortfahren?",
+                    "YES": "An Archiv senden",
+                    "NO": "Abbrechen"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Aus Archiv wiederherstellen",
+                "SYNC-ERROR": "Die Datei, die Sie wiederherstellen möchten, wurde noch nicht mit dem Archiv synchronisiert. Dieser Vorgang kann bis zu 24 Stunden dauern. Bitte versuchen Sie es später noch einmal.",
+                "FAIL": "{{ name }} konnte nicht aus dem Archiv wiederhergestellt werden",
+                "DIALOG": {
+                    "TITLE": "Aus Archiv wiederherstellen",
+                    "LABEL": {
+                        "TYPE": "Wiederherstellungsgeschwindigkeit (max. 250 MB pro Wiederherstellung)",
+                        "OPTION-FAST": "Schnell – Dauer 1–5 Min. (höchste Kosten)",
+                        "OPTION-STANDARD": "Standard – Dauer 3–5 Std.",
+                        "OPTION-SLOW": "Langsam – Dauer 5–12 Std. (niedrigste Kosten)",
+                        "DURATION": "Für wie lange werden die Dateien wiederhergestellt? (Tage)"
+                    },
+                    "YES": "Bestätigen",
+                    "NO": "Abbrechen"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Aus Archiv wiederherstellen",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Die Dateien, die Sie wiederherstellen möchten, wurden noch nicht mit dem Archiv synchronisiert. Dieser Vorgang kann bis zu 24 Stunden dauern. Bitte versuchen Sie es später noch einmal.",
+                        "RESTORED": "Element wurde bereits wiederhergestellt",
+                        "PENDING-RESTORE": "Wiederherstellung des Elements steht bereits aus.",
+                        "NOT-STORED": "Das Element, das Sie wiederherstellen möchten, wurde noch nicht mit dem Archiv synchronisiert.",
+                        "FAIL": "Wiederherstellung fehlgeschlagen",
+                        "FOLDER": "Die Wiederherstellung von Ordnern wird derzeit nicht unterstützt"
+                    },
+                    "SUCCESS": "Element wird wiederhergestellt"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Wiederherstellungszeit verlängern",
+                "SUCCESS": "Die Wiederherstellungszeit wird auf {{ days }} Tage ab {{ date }} verlängert",
+                "FAIL": "Die Zeit zur Wiederherstellung von {{ name }} aus dem Archiv konnte nicht verlängert werden"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Diese Datei wurde archiviert. Wenn Sie sie wiederherstellen möchten, klicken Sie mit der rechten Maustaste und wählen Sie die Option zum Wiederherstellen aus dem Archiv.",
+                "RESTORED": "Wiederhergestellt",
+                "PENDING-RESTORE": "Dateien werden gerade aus dem Archiv wiederhergestellt. Wenn Sie keine Vorschau der Datei anzeigen oder die Datei nicht herunterladen können, versuchen Sie es bitte später noch einmal"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Status des Massenvorgangs",
+            "FAIL": "Vorgang konnte nicht durchgeführt werden",
+            "CLOSE": "Schließen"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Aufbewahrungsverfügungen verwalten",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Aufbewahrungsverfügungen entfernen",
+            "DIALOG_TITLE": "Rechtliche Aufbewahrungsverfügungen verwalten",
+            "TAB_EXISTING_HOLDS": "Vorhandene Aufbewahrungsverfügungen verwalten",
+            "TAB_CREATE_LEGAL_HOLD": "Rechtliche Aufbewahrungsverfügung erstellen",
+            "SAVE": "Speichern",
+            "CLOSE": "Schließen",
+            "CANCEL": "Abbrechen",
+            "NEW_HOLD_NAME": "Name",
+            "NEW_HOLD_DESCRIPTION": "Beschreibung",
+            "NEW_HOLD_REASON": "Grund",
+            "DIALOG_WARNING_TITLE": "Warnung",
+            "DIALOG_WARNING_MESSAGE": "Änderungen hier werden nicht angewendet, wenn Sie Tabs wechseln.",
+            "DOCUMENT_IN_HOLD": "Dokument in rechtlicher Aufbewahrungsverfügung",
+            "FOLDER_IN_HOLD": "Ordner in rechtlicher Aufbewahrungsverfügung",
+            "APPLY_HOLDS_SUCCESS": "Aktion 'Rechtliche Aufbewahrungsverfügung' war erfolgreich.",
+            "APPLY_HOLDS_NOT_FOUND": "Die ausgewählte rechtliche Aufbewahrungsverfügungen oder die angegebene Datei existiert nicht. Bitte überprüfen Sie Ihre Auswahl und versuchen Sie es erneut.",
+            "BULK_APPLY_HOLDS_SUCCESS": "Rechtliche Aufbewahrungsverfügung war erfolgreich. {{ totalItems }} Artikel wurden der Rechtsmitteilung hinzugefügt.",
+            "BULK_APPLY_HOLDS_STARTED": "Massenaktion für rechtliche Aufbewahrungsverfügung läuft im Hintergrund. Sie werden benachrichtigt, sobald sie abgeschlossen ist.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Archivierter, duplizierter oder gesperrter Inhalt wurde erkannt. {{ errorsCount }} Elemente wurden nicht zur rechtlichen Aufbewahrungsverfügung hinzugefügt.",
+            "BULK_APPLY_HOLDS_FAIL": "Das Platzieren von Inhalten auf rechtliche Aufbewahrungsverfügung ist fehlgeschlagen.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Massenaktion für rechtliche Aufbewahrungsverfügung kann nicht auf Ordner angewendet werden",
+            "ACKNOWLEDGE": "Bestätigen",
+            "EMPTY_HOLD_LIST": "Keine rechtlichen Aufbewahrungsverfügungen verfügbar",
+            "WARNING_DIALOG_TITLE": "Warnung: Massenaktion",
+            "WARNING_DIALOG_MESSAGE": "Diese Aktion ändert die rechtlichen Aufbewahrungsverfügungen von <strong>Alle Dateien in diesen Suchdateien</strong>.<br><br>Diese rechtliche Aufbewahrungsverfügung  <strong>wird nicht auf Ordner</strong> angewendet.",
+            "WARNING_DIALOG_QUESTION": "Möchten Sie fortfahren?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Der Admin muss die Record Management Site erstellen, um rechtliche Aufbewahrungsverfügungen zu aktivieren",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Datei wurde erfolgreich aus der rechtlichen Aufbewahrungsverfügungen entfernt.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Dateien wurden erfolgreich aus der rechtlichen Aufbewahrungsverfügungen entfernt.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Datei konnte nicht aus der rechtlichen Aufbewahrungsverfügungen entfernt werden.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Dateien konnten nicht aus der rechtlichen Aufbewahrungsverfügungen entfernt werden.",
+            "LOADING_CAPABILITIES_ERROR": "Fehler beim Laden der Fähigkeiten",
+            "NODE_NOT_FOUND": "Ausgewählter Knoten konnte nicht gefunden werden. Bitte überprüfen Sie Ihre Auswahl und versuchen Sie es erneut.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Aufbewahrungsverfügungen '{{ name }}' löschen und Dokumente veröffentlichen?",
+                "TITLE_PLURAL": "Ausgewählte Aufbewahrungsverfügungen {{ count }} löschen und Dokumente veröffentlichen?",
+                "MESSAGE_SINGULAR": "Dies wird die ausgewählte Aufbewahrungsverfügung dauerhaft entfernen. Alle zugehörigen Dokumente und Dateien werden aus dieser Aufbewahrungsverfügung freigegeben. Alle Dokumente, die noch in Vorratsdatenspeicherung gespeichert sind, werden entsprechend der Politik wieder aufgenommen.",
+                "MESSAGE_PLURAL": "Dies wird die ausgewählte Aufbewahrungsverfügung dauerhaft entfernen. Alle zugehörigen Dokumente und Dateien werden von dieser Aufbewahrungsverfügung freigegeben. Alle Dokumente, die noch in Vorratsdatenspeicherung gespeichert sind, werden entsprechend der Politik wieder aufgenommen.",
+                "KEEP_HOLD": "Aufbewahrungsverfügungen beibehalten "
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Fehler beim Speichern von Sicherheitskennzeichen",
+            "DIALOG_TITLE": "Sicherheitskennzeichen hinzufügen",
+            "MENU_TITLE": "Sicherheitskennzeichen",
+            "SAVE": "Speichern",
+            "CANCEL": "Abbrechen",
+            "HELP": "Hilfe",
+            "CLOSE": "Schließen",
+            "SHOW_ALL": "Alle anzeigen",
+            "APPLIED": "Übernommen",
+            "NOT_APPLIED": "Nicht übernommen",
+            "COLUMNS": {
+                "NAME": "Sicherheitskennzeichen"
+            },
+            "NO_GROUPS_CREATED": "Keine Sicherheitsgruppen verfügbar",
+            "SECURITY_MARKS_HELP": "Hilfe für Sicherheitskennzeichen",
+            "HELP_ICON_TEXT": "Durch das Zuweisen von Sicherheitskennzeichen wird der Zugang zu digitalen Inhalten eingeschränkt. Nur Personen, deren Benutzerberechtigung mit den entsprechenden Kennzeichnungen übereinstimmt, können markierte Inhalte anzeigen oder bearbeiten."
+        }
+    }
+}

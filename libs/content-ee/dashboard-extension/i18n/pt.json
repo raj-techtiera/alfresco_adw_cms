@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Painel"
+    },
+    "DASHBOARD": {
+        "TITLE": "Painel"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Ações do widget",
+        "REFRESH": "Atualizar",
+        "VIEW_ALL": "Ver tudo",
+        "TASK_SUMMARY": {
+            "TITLE": "Resumo das Minhas Tarefas",
+            "SUMMARY_INFO_SUFFIX": "tarefas concluídas!",
+            "NO_TASKS_ASSIGNED": "Você não tem nenhuma tarefa atribuída.",
+            "NO_TASKS_ERROR": "Ocorreu um erro ao buscar suas tarefas. Por favor, atualize o widget.",
+            "COMPLETED": "Concluído",
+            "INCOMPLETE": "Incompleto",
+            "OVERDUE": "Vencido",
+            "TASKS": "Tarefas",
+            "ARROW_UP": "Seta para cima"
+        },
+        "TASK_LIST": {
+            "TITLE": "Gerenciamento de Tarefas",
+            "OVERDUE": "Vencido",
+            "UNASSIGNED": "Não atribuído",
+            "IN_PROGRESS": "Em andamento",
+            "NO_OVERDUE_TASKS": "Você não tem nenhuma tarefa em atraso.",
+            "NO_UNASSIGNED_TASKS": "Você não tem nenhuma tarefa não atribuída.",
+            "NO_IN_PROGRESS_TASKS": "Você não tem nenhuma tarefa em andamento.",
+            "ACTIONS": {
+                "VIEW": "Ver tarefa",
+                "COMMENT": "Adicionar comentário",
+                "CLAIM": "Aceitar tarefa"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "A tarefa foi assumida com sucesso.",
+                "CLAIMING_FAILED": "Não foi possível assumir a tarefa."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Arquivos",
+            "RECENT": "Recente",
+            "FAVORITES": "Favoritos",
+            "PERSONAL": "Pessoal",
+            "SHARED": "Compartilhado",
+            "NO_RECENT_FILES": "Você não tem nenhum arquivo recente.",
+            "NO_FAVORITES_FILES": "Você não tem nenhum arquivo ou pasta favorito.",
+            "NO_PERSONAL_FILES": "Você não tem nenhum arquivo ou pasta pessoal.",
+            "NO_SHARED_FILES": "Você não tem nenhum arquivo compartilhado.",
+            "ACTIONS": {
+                "VIEW": "Visualizar",
+                "DOWNLOAD": "Baixar",
+                "SHARE": "Compartilhar",
+                "SHARED_LINK_SETTINGS": "Configurações de links compartilhados",
+                "FOLDER_INFORMATION": "Informações da pasta"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Bibliotecas",
+            "PERSONAL": "Minhas bibliotecas",
+            "ALL": "Tudo",
+            "FAVOURITES": "Favoritos",
+            "NO_PERSONAL_LIBRARIES": "Você não tem nenhuma biblioteca pessoal.",
+            "NO_ALL_LIBRARIES": "Você não tem nenhuma biblioteca.",
+            "NO_FAVORITE_LIBRARIES": "Você não tem nenhuma biblioteca favorita."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Preservação legal",
+            "NO_HOLDS": "Nenhuma retenção criada.",
+            "HOLDS_NAME": "Nome da retenção",
+            "CREATED": "Criado",
+            "REASON": "Razão",
+            "ACTIONS": {
+                "DOWNLOAD": "Baixar",
+                "INFORMATION": "Informações da pasta",
+                "DELETE": "Excluir"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Progresso de minhas Tarefas – por mês",
+            "WEEK_LABEL": "Semana",
+            "MONTH_LABEL": "Mês",
+            "SUMMARY_INFO_SUFFIX": "tarefas concluídas no mês selecionado!",
+            "SELECT_MONTH": "Selecionar mês",
+            "NO_TASKS_IN_MONTH": "Não há tarefas no mês selecionado.",
+            "EMPTY": "Nenhuma tarefa"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Resumo de meus Processos – a cada 6 meses",
+            "SUMMARY_INFO_SUFFIX": "processos concluídos nos 6 meses selecionados!",
+            "NO_PROCESSES": "Você não tem nenhum processo.",
+            "NO_PROCESSES_ERROR": "Ocorreu um erro ao buscar seus processos. Por favor, atualize o widget.",
+            "NO_PROCESSES_IN_PERIOD": "Não há processos no período selecionado.",
+            "RUNNING": "Executando",
+            "COMPLETED": "Concluído",
+            "NEXT": "Avançar",
+            "NEXT_SCREEN_READER_LABEL": "Meu resumo de processos  - Ir para os próximos 6 meses",
+            "PREVIOUS": "Anterior",
+            "PREVIOUS_SCREEN_READER_LABEL": "Meu resumo de processos  - Ir para os últimos 6 meses",
+            "EMPTY": "Nenhum processo"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Comentários para {{ taskName }}",
+        "CLOSE": "Fechado"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Thumbnail"
+    }
+}

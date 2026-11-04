@@ -1,0 +1,978 @@
+{
+    "$version": "1.1.0",
+    "$id": "governance.plugin",
+    "$name": "governance",
+    "$vendor": "Hyland Software, Inc. and its affiliates",
+    "$license": "LGPL-3.0",
+    "$runtime": "1.8.0",
+    "$description": "Enable the governance options by overriding the existing ACA functions",
+    "actions": [
+        {
+            "id": "manage-security-mark.actions.execute",
+            "type": "MANAGE_SECURITY_MARK",
+            "payload": "$(context.selection.first.entry)"
+        },
+        {
+            "id": "declare-record.actions.execute",
+            "type": "DECLARE_RECORD_ACTION",
+            "payload": "$(context.selection.nodes)"
+        },
+        {
+            "id": "delete-record.actions.execute",
+            "type": "DELETE_RECORD",
+            "payload": "$(context.selection.first.entry)"
+        },
+        {
+            "id": "move-record.actions.execute",
+            "type": "MOVE_RECORD",
+            "payload": "$(context.selection.first.entry)"
+        },
+        {
+            "id": "manage-holds.actions.execute",
+            "type": "MANAGE_HOLDS",
+            "payload": "$(context.selection.first.entry)"
+        },
+        {
+            "id": "bulk-holds-warning.actions.execute",
+            "type": "BULK_HOLDS_WARNING"
+        },
+        {
+            "id": "manage-holds.actions.remove-from-hold",
+            "type": "REMOVE_FROM_HOLD",
+            "payload": "$(context.selection.nodes)"
+        }
+    ],
+    "features": {
+        "toolbar": [
+            {
+                "id": "app.toolbar.joinLibrary",
+                "rules": {
+                    "visible": [
+                        "app.selection.hasViewRecordsCapability"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.create",
+                "rules": {
+                    "visible": ["app.manage.holds.isNotInsideHoldsFolder", "isNotTransferContainer"]
+                },
+                "children": [
+                    {
+                        "id": "app.create.create-word",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordsManagement", "app.record.isNotRecordCategory"]
+                        }
+                    },
+                    {
+                        "id": "app.create.create-powerpoint",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordsManagement", "app.record.isNotRecordCategory"]
+                        }
+                    },
+                    {
+                        "id": "app.create.create-excel",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordsManagement", "app.record.isNotRecordCategory"]
+                        }
+                    },
+                    {
+                        "id": "app.create.fileFromTemplate",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordsManagement", "app.record.isNotRecordCategory"]
+                        }
+                    },
+                    {
+                        "id": "app.create.folderFromTemplate",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordsManagement"]
+                        }
+                    },
+                    {
+                        "id": "app.create.folder",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordFolder"]
+                        }
+                    },
+                    {
+                        "id": "app.create.folderFromTemplate",
+                        "rules": {
+                            "visible": ["app.record.isNotRecordFolder"]
+                        }
+                    }
+                ]
+          },
+            {
+                "id": "app.toolbar.upload",
+                "rules": {
+                    "visible": ["app.manage.holds.isNotInsideHoldsFolder", "isNotTransferContainer", "app.record.isNotRecordsManagement"]
+                },
+                "children": [
+                    {
+                        "id": "app.create.uploadFile",
+                        "rules": {
+                            "visible": "app.record.isNotRecordCategory"
+                        }
+                    },
+                    {
+                        "id": "app.create.uploadFolder",
+                        "rules": {
+                            "visible": "app.record.isNotRecordFolder"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "app.toolbar.share",
+                "rules": {
+                    "visible": [
+                        "app.record.canShareRecord"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.preview",
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "!app.navigation.isTrashcan",
+                        "!app.glacier.isStored"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.download",
+                "rules": {
+                    "visible": [
+                        "app.selection.notEmpty",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.canDownload",
+                        "!app.glacier.isStored"
+                    ]
+                }
+            },
+            {
+                "id": "app.toolbar.more",
+                "type": "menu",
+                "order": 10000,
+                "icon": "more_vert",
+                "title": "APP.ACTIONS.MORE",
+                "children": [
+                    {
+                        "id": "app.toolbar.editFolder",
+                        "rules": {
+                            "visible": ["app.manage.holds.canEditHold"]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.toggleLock",
+                        "order": 110,
+                        "rules": {
+                            "visible": [
+                                "app.selection.file",
+                                "!app.navigation.isTrashcan",
+                                "canToggleFileLock",
+                                "app.record.canUpdateVersion",
+                                "!app.selection.isRecord",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "content-services.components.edit-word",
+                        "rules": {
+                            "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                        }
+                    },
+                    {
+                        "id": "content-services.components.edit-powerpoint",
+                        "rules": {
+                            "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                        }
+                    },
+                    {
+                        "id": "content-services.components.edit-excel",
+                        "rules": {
+                            "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.uploadNodeVersion",
+                        "order": 200,
+                        "rules": {
+                            "visible": [
+                                "app.record.canUpdateVersion",
+                                "app.selection.file.canUploadVersion",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "declare-record.actions",
+                        "order": 415,
+                        "title": "GOVERNANCE.DECLARE-RECORD.TITLE",
+                        "icon": "inventory_2",
+                        "actions": {
+                            "click": "declare-record.actions.execute"
+                        },
+                        "rules": {
+                            "visible": [
+                                "app.selection.isRMSite",
+                                "isLibraryAction",
+                                "app.selection.canDeclareAsRecord",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.record.move",
+                        "order": 551,
+                        "title": "GOVERNANCE.MOVE-RECORD.TITLE",
+                        "icon": "drive_file_move",
+                        "rules": {
+                            "visible": [
+                                "app.selection.file",
+                                "app.selection.canUpdateRecord",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        },
+                        "actions": {
+                            "click": "move-record.actions.execute"
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.copy",
+                        "order": 600,
+                        "rules": {
+                            "visible": [
+                                "app.selection.notEmpty",
+                                "!app.navigation.isTrashcan",
+                                "!app.navigation.isLibraries",
+                                "!app.selection.isRecord",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.move",
+                        "order": 500,
+                        "rules": {
+                            "visible": [
+                                "!app.navigation.isTrashcan",
+                                "!app.navigation.isLibraries",
+                                "app.selection.notEmpty",
+                                "app.selection.canDelete",
+                                "!app.selection.isRecord",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.context.record.menu.delete",
+                        "title": "GOVERNANCE.DELETE-RECORD.TITLE",
+                        "order": 550,
+                        "icon": "delete_sweep",
+                        "actions": {
+                            "click": "delete-record.actions.execute"
+                        },
+                        "rules": {
+                            "visible": [
+                                "app.selection.file",
+                                "app.record.canDeleteStoredRecord",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.delete",
+                        "order": 800,
+                        "rules": {
+                            "visible.$replace": ["app.record.canDeleteStoredNode", "!app.manage.holds.isNodeOnHold", "app.manage.holds.isNotHoldFolder"]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.delete.hold",
+                        "order": 800,
+                        "title": "APP.ACTIONS.DELETE",
+                        "icon": "delete",
+                        "actions": {
+                          "click": "DELETE_HOLD"
+                        },
+                        "rules": {
+                          "visible": ["app.manage.holds.canDeleteHoldFolder"]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.versions",
+                        "order": 1100,
+                        "rules": {
+                            "visible": [
+                                "app.selection.file",
+                                "!app.navigation.isTrashcan",
+                                "!app.selection.file.isLocked",
+                                "app.record.canUpdateVersion",
+                                "!app.manage.holds.isNodeOnHold"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.permissions",
+                        "order": 1200,
+                        "rules": {
+                            "visible": [
+                                "app.selection.first.canUpdate",
+                                "!app.navigation.isTrashcan",
+                                "!isSmartFolder",
+                                "!isMultiSelection",
+                                "!app.selection.isRecord"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "alfresco.app.toolbar.start.process",
+                        "rules": {
+                            "visible": ["!app.manage.holds.isNodeOnHold"]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.aspects",
+                        "rules": {
+                            "visible": ["canEditAspects", "!app.manage.holds.isNodeOnHold", "app.manage.holds.canEditHold"]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.manageHolds",
+                        "title": "GOVERNANCE.MANAGE_HOLDS.MENU_TITLE",
+                        "order": 1300,
+                        "icon": "back_hand",
+                        "actions": {
+                            "click": "manage-holds.actions.execute"
+                        },
+                        "rules": {
+                            "visible": [
+                                "app.manage.holds.canManageHolds",
+                                "!app.selection.library",
+                                "!app.navigation.isTrashcan",
+                                "app.selection.notEmpty",
+                                "!isMultiSelection",
+                                "app.manage.holds.isManageHoldsAvailable"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "app.toolbar.removeFromHold",
+                        "title": "GOVERNANCE.MANAGE_HOLDS.REMOVE_FROM_HOLD_MENU_OPTION",
+                        "order": 1300,
+                        "icon": "adf:remove_from_hold",
+                        "actions": {
+                            "click": "manage-holds.actions.remove-from-hold"
+                        },
+                        "rules": {
+                            "visible": [
+                                "app.manage.holds.canRemoveFromHold"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "bulk-actions": [
+            {
+                "id": "app.bulk.actions.legalHold",
+                "title": "GOVERNANCE.MANAGE_HOLDS.DIALOG_TITLE",
+                "tooltip": "GOVERNANCE.MANAGE_HOLDS.DIALOG_TITLE",
+                "description": "Bulk Legal Hold option in bulk dropdown to assign legal hold to multiple files",
+                "icon": "back_hand",
+                "type": "custom",
+                "actions": {
+                    "click": "bulk-holds-warning.actions.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.manage.holds.canManageHolds",
+                        "app.manage.holds.isManageHoldsAvailable"
+                    ]
+                }
+            }
+        ],
+        "icons": [
+            {
+                "id": "adf:security_mark",
+                "value": "./assets/images/security-marks.svg"
+            },
+            {
+                "id": "adf:remove_from_hold",
+                "value": "./assets/images/remove-from-hold-icon.svg"
+            }
+        ],
+        "contextMenu": [
+            {
+                "id": "app.context.menu.editFolder",
+                "rules": {
+                    "visible": ["app.manage.holds.canEditHold"]
+                }
+            },
+            {
+                "id": "app.context.menu.joinLibrary",
+                "component": "app.menu.toggleJoinLibrary",
+                "rules": {
+                    "visible": [
+                        "app.selection.hasViewRecordsCapability"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.share",
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "canToggleSharedLink",
+                        "!app.selection.isRecord"
+                    ]
+                },
+                "order": 100
+            },
+            {
+                "id": "app.context.menu.preview",
+                "order": 300,
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "!app.navigation.isTrashcan",
+                        "!app.glacier.isStored"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.download",
+                "order": 200,
+                "rules": {
+                    "visible": [
+                        "app.selection.notEmpty",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.canDownload",
+                        "!app.glacier.isStored"
+                    ]
+                }
+            },
+            {
+                "id": "declare-record.actions",
+                "order": 800,
+                "title": "GOVERNANCE.DECLARE-RECORD.TITLE",
+                "icon": "inventory_2",
+                "actions": {
+                    "click": "declare-record.actions.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.isRMSite",
+                        "isLibraryAction",
+                        "app.selection.canDeclareAsRecord",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.record.menu.move",
+                "title": "GOVERNANCE.MOVE-RECORD.TITLE",
+                "order": 900,
+                "icon": "drive_file_move",
+                "actions": {
+                    "click": "move-record.actions.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "app.selection.canUpdateRecord",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.manageHolds",
+                "title": "GOVERNANCE.MANAGE_HOLDS.MENU_TITLE",
+                "order": 1600,
+                "icon": "back_hand",
+                "actions": {
+                    "click": "manage-holds.actions.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.manage.holds.canManageHolds",
+                        "!app.selection.library",
+                        "!app.navigation.isTrashcan",
+                        "app.selection.notEmpty",
+                        "!isMultiSelection",
+                        "app.manage.holds.isManageHoldsAvailable"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.removeFromHold",
+                "title": "GOVERNANCE.MANAGE_HOLDS.REMOVE_FROM_HOLD_MENU_OPTION",
+                "order": 1600,
+                "icon": "adf:remove_from_hold",
+                "actions": {
+                    "click": "manage-holds.actions.remove-from-hold"
+                },
+                "rules": {
+                    "visible": [
+                        "app.manage.holds.canRemoveFromHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.record.menu.securityMarks",
+                "title": "GOVERNANCE.SECURITY_MARKS.MENU_TITLE",
+                "order": 1550,
+                "icon": "adf:security_mark",
+                "actions": {
+                    "click": "manage-security-mark.actions.execute"
+                },
+                "rules": {
+                    "visible": ["isAGSInstalled", "!app.manage.holds.isNodeOnHold"]
+                }
+            },
+            {
+                "id": "app.context.menu.copy",
+                "order": 1000,
+                "rules": {
+                    "visible": [
+                        "app.selection.notEmpty",
+                        "!app.navigation.isTrashcan",
+                        "!app.navigation.isLibraries",
+                        "!app.selection.isRecord",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.move",
+                "order": 900,
+                "rules": {
+                    "visible": [
+                        "!app.navigation.isTrashcan",
+                        "!app.navigation.isLibraries",
+                        "app.selection.notEmpty",
+                        "app.selection.canDelete",
+                        "!app.selection.isRecord",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.delete",
+                "order": 1100,
+                "rules": {
+                    "visible": ["app.record.canDeleteStoredNode", "!app.manage.holds.isNodeOnHold", "app.manage.holds.isNotHoldFolder"]
+                }
+            },
+            {
+                "id": "app.context.menu.delete.hold",
+                "title": "APP.ACTIONS.DELETE",
+                "order": 1100,
+                "icon": "delete",
+                "actions": {
+                  "click": "DELETE_HOLD"
+                },
+                "rules": {
+                  "visible": ["app.manage.holds.canDeleteHoldFolder"]
+                }
+            },
+            {
+                "id": "app.context.menu.versions",
+                "order": 1400,
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "!app.navigation.isTrashcan",
+                        "!app.selection.file.isLocked",
+                        "app.record.canUpdateVersion",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.menu.permissions",
+                "order": 1500,
+                "rules": {
+                    "visible": [
+                        "app.selection.first.canUpdate",
+                        "!app.navigation.isTrashcan",
+                        "!isSmartFolder",
+                        "!isMultiSelection",
+                        "!app.selection.isRecord"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.toggleLock",
+                "order": 110,
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "!app.navigation.isTrashcan",
+                        "canToggleFileLock",
+                        "app.record.canUpdateVersion",
+                        "!app.selection.isRecord",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "content-services.components.edit-word",
+                "rules": {
+                    "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                }
+            },
+            {
+                "id": "content-services.components.edit-powerpoint",
+                "rules": {
+                    "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                }
+            },
+            {
+                "id": "content-services.components.edit-excel",
+                "rules": {
+                    "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                }
+            },
+            {
+                "id": "app.context.menu.uploadNodeVersion",
+                "order": 500,
+                "rules": {
+                    "visible": [
+                        "app.record.canUpdateVersion",
+                        "app.selection.file.canUploadVersion",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "app.context.record.menu.delete",
+                "title": "GOVERNANCE.DELETE-RECORD.TITLE",
+                "order": 800,
+                "icon": "delete_sweep",
+                "actions": {
+                    "click": "delete-record.actions.execute"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.file",
+                        "app.record.canDeleteStoredRecord",
+                        "!app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            },
+            {
+                "id": "alfresco.app.context-menu.start.process",
+                "rules": {
+                    "visible": ["!app.manage.holds.isNodeOnHold"]
+                }
+            },
+            {
+                "id": "app.context.menu.aspects",
+                "rules": {
+                    "visible": ["canEditAspects", "!app.manage.holds.isNodeOnHold", "app.manage.holds.canEditHold"]
+                }
+            }
+        ],
+        "viewer": {
+            "toolbarActions": [
+                {
+                    "id": "app.viewer.share",
+                    "rules": {
+                        "visible.$replace": [
+                            "app.record.canShareRecord"
+                        ]
+                    }
+                },
+                {
+                    "id": "app.viewer.toolbar.more",
+                    "children": [
+                        {
+                            "id": "app.viewer.toggleLock",
+                            "rules": {
+                                "visible": [
+                                    "app.selection.file",
+                                    "!app.navigation.isTrashcan",
+                                    "canToggleFileLock",
+                                    "app.record.canUpdateVersion",
+                                    "!app.selection.isRecord",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "content-services.components.edit-word",
+                            "rules": {
+                                "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                            }
+                        },
+                        {
+                            "id": "content-services.components.edit-powerpoint",
+                            "rules": {
+                                "visible": ["aos.canOpenRecordWithOffice", "!app.manage.holds.isNodeOnHold"]
+                            }
+                        },
+                        {
+                            "id": "content-services.components.edit-excel",
+                            "rules": {
+                                "visible": [
+                                    "aos.canOpenRecordWithOffice",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "declare-record.actions",
+                            "order": 410,
+                            "title": "GOVERNANCE.DECLARE-RECORD.TITLE",
+                            "icon": "inventory_2",
+                            "actions": {
+                                "click": "declare-record.actions.execute"
+                            },
+                            "rules": {
+                                "visible": [
+                                    "app.selection.isRMSite",
+                                    "isLibraryAction",
+                                    "app.selection.canDeclareAsRecord",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.context.record.menu.delete",
+                            "title": "GOVERNANCE.DELETE-RECORD.TITLE",
+                            "order": 300,
+                            "icon": "delete_sweep",
+                            "actions": {
+                                "click": "delete-record.actions.execute"
+                            },
+                            "rules": {
+                                "visible": [
+                                    "app.selection.file",
+                                    "app.record.canDeleteStoredRecord",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.toolbar.record.move",
+                            "order": 300,
+                            "title": "GOVERNANCE.MOVE-RECORD.TITLE",
+                            "icon": "drive_file_move",
+                            "rules": {
+                                "visible": [
+                                    "app.selection.file",
+                                    "app.selection.canUpdateRecord",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            },
+                            "actions": {
+                                "click": "move-record.actions.execute"
+                            }
+                        },
+                        {
+                            "id": "app.viewer.copy",
+                            "order": 700,
+                            "rules": {
+                                "visible": [
+                                    "app.selection.notEmpty",
+                                    "!app.navigation.isTrashcan",
+                                    "!app.navigation.isLibraries",
+                                    "!app.selection.isRecord",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.viewer.move",
+                            "order": 600,
+                            "rules": {
+                                "visible": [
+                                    "!app.navigation.isTrashcan",
+                                    "!app.navigation.isLibraries",
+                                    "app.selection.notEmpty",
+                                    "app.selection.canDelete",
+                                    "!app.selection.isRecord",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.viewer.delete",
+                            "rules": {
+                                "visible": [
+                                    "app.record.canDeleteStoredNode",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.toolbar.uploadNodeVersion",
+                            "rules": {
+                                "visible": [
+                                    "app.record.canUpdateVersion",
+                                    "app.selection.file.canUploadVersion",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.viewer.versions",
+                            "rules": {
+                                "visible": [
+                                    "app.selection.file",
+                                    "!app.navigation.isTrashcan",
+                                    "!app.selection.file.isLocked",
+                                    "app.record.canUpdateVersion",
+                                    "!app.manage.holds.isNodeOnHold"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "app.viewer.permissions",
+                            "rules": {
+                                "visible": [
+                                    "app.selection.first.canUpdate",
+                                    "!app.navigation.isTrashcan",
+                                    "!isSmartFolder",
+                                    "!isMultiSelection",
+                                    "!app.selection.isRecord"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "alfresco.app.viewer.start.process",
+                            "rules": {
+                                "visible": ["!app.manage.holds.isNodeOnHold"]
+                            }
+                        },
+                        {
+                            "id": "app.viewer.aspects",
+                            "rules": {
+                                "visible": ["!app.manage.holds.isNodeOnHold"]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "rules": {
+                "showNavigation": "!app.selection.isRecord"
+            }
+        },
+        "sidebar": {
+            "rules": {
+                "enabled": ["app.manage.holds.canEditHold"]
+            },
+            "toolbar": [
+                {
+                    "id": "app.toolbar.aspects",
+                    "rules": {
+                        "visible":["app.manage.holds.canEditHold"]
+                    }
+                }
+            ],
+            "tabs": [
+                {
+                    "id": "app.sidebar.versions",
+                    "rules": {
+                        "visible": [
+                            "!app.navigation.isLibraries",
+                            "app.record.canUpdateVersion",
+                            "!app.manage.holds.isNodeOnHold"
+                        ]
+                    }
+                }
+            ]
+        },
+        "documentList": {
+            "files": [
+                {
+                    "id": "app.files.securityMarks",
+                    "key": "securityMarks",
+                    "title": "GOVERNANCE.SECURITY_MARKS.COLUMNS.NAME",
+                    "type": "text",
+                    "class": "adf-ellipsis-cell adf-expand-cell-5",
+                    "desktopOnly": true,
+                    "order": 55,
+                    "template": "app.display.security.marks",
+                    "draggable": true,
+                    "rules": {
+                        "visible": [
+                            "isAGSInstalled"
+                        ]
+                    }
+                }
+            ]
+        },
+        "badges": [
+            {
+                "id": "app.record.badge",
+                "icon": "inventory_2",
+                "tooltip": "GOVERNANCE.RECORD-NAME.ICONS-TOOLTIP-MESSAGE.RECORD-HYPERLINK",
+                "actions": {
+                    "click": "OPEN_RECORD_INFO_DRAWER"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.isRecord"
+                    ]
+                }
+            },
+            {
+                "id": "app.rejected.record.badge",
+                "icon": "adf:rejected",
+                "tooltip": "GOVERNANCE.RECORD-NAME.ICONS-TOOLTIP-MESSAGE.REJECTED-RECORD",
+                "actions": {
+                    "click": "OPEN_RECORD_INFO_DRAWER"
+                },
+                "rules": {
+                    "visible": [
+                        "app.selection.isRejectedRecord"
+                    ]
+                }
+            },
+            {
+                "id": "app.glacier.stored.badge",
+                "icon": "adf:store",
+                "tooltip": "GOVERNANCE.GLACIER.ICONS-TOOLTIP-MESSAGE.STORE",
+                "rules": {
+                    "visible": [
+                        "app.glacier.isStored"
+                    ]
+                }
+            },
+            {
+                "id": "app.glacier.pending.restore.badge",
+                "icon": "autorenew",
+                "tooltip": "GOVERNANCE.GLACIER.ICONS-TOOLTIP-MESSAGE.PENDING-RESTORE",
+                "rules": {
+                    "visible": [
+                        "app.glacier.isPendingRestore"
+                    ]
+                }
+            },
+            {
+                "id": "app.glacier.restored.badge",
+                "icon": "adf:restore",
+                "tooltip": "GOVERNANCE.GLACIER.ICONS-TOOLTIP-MESSAGE.RESTORED",
+                "rules": {
+                    "visible": [
+                        "app.glacier.isRestored"
+                    ]
+                }
+            },
+            {
+                "id": "app.manage.holds.badge",
+                "component": "app.manage.holds.hold-icon",
+                "rules": {
+                    "visible": [
+                        "app.manage.holds.isNodeOnHold"
+                    ]
+                }
+            }
+        ]
+    }
+}

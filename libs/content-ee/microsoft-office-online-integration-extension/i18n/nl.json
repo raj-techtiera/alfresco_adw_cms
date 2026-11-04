@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Dit document wordt bewerkt in Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Bewerkingen aan dit document zijn genegeerd.",
+        "CANCEL_SESSION_DENIED": "Er is een fout opgetreden. Neem contact op met de beheerder als de fout zich blijft voordoen.",
+        "END_SESSION_SUCCESS": "Dit document wordt niet meer bewerkt in Office Online.",
+        "END_SESSION_DENIED": "Er is een fout opgetreden. Neem contact op met de beheerder als de fout zich blijft voordoen.",
+        "RESUME_SESSION": "Dit bestand wordt bewerkt in Office Online. U kunt dit bestand op hetzelfde moment bewerken.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Alle bewerkingen in dit document opslaan",
+            "END_OPTION_DETAILS": "Er wordt een nieuwe versie gemaakt",
+            "CANCEL_OPTION": "Alle bewerkingen negeren",
+            "CHANGES": "Welk niveau wijzigingen zijn gemaakt?",
+            "HEADER": "Bewerken beëindigen",
+            "DESCRIPTION": "Hiermee wordt verdere bewerking van het document voorkomen voor alle gebruikers die er momenteel toegang tot hebben via Microsoft Office Online.",
+            "QUESTION": "Wat moet er gebeuren met uitgevoerde bewerkingen?",
+            "CANCEL": "Annuleren",
+            "END": "Bewerken beëindigen"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Word-document maken"
+            },
+            "EXCEL": {
+                "HEADER": "Excel-werkblad maken"
+            },
+            "POWERPOINT": {
+                "HEADER": "PowerPoint-presentatie maken"
+            },
+            "CANCEL": "Annuleren",
+            "CREATE": "Maken",
+            "CREATE_AND_OPEN": "Online maken en openen",
+            "DESCRIPTION": {
+                "LABEL": "Beschrijving",
+                "PLACEHOLDER": "Een duidelijke beschrijving voor dit nieuwe bestand."
+            },
+            "NAME": {
+                "LABEL": "Naam"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel-werkblad",
+                "TOOLTIP": "Een nieuw Excel-werkblad maken"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Powerpoint-presentatie",
+                "TOOLTIP": "Een nieuwe PowerPoint-presentatie maken"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word-document",
+                "TOOLTIP": "Een nieuw Word-document maken"
+            },
+            "END_SESSION": "Bewerken beëindigen",
+            "EDIT_WORD": "Bewerken in Word Online",
+            "EDIT_POWERPOINT": "Bewerken in PowerPoint Online",
+            "EDIT_EXCEL": "Bewerken in Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Extensies: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Microsoft Office Online-extensie inschakelen"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Beschrijving is te lang"
+                }
+            }
+        }
+    }
+}

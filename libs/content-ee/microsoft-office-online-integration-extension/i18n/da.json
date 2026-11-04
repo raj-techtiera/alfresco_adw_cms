@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Dette dokument redigeres i øjeblikket i Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Ændringer foretaget i dette dokument er blevet kasseret.",
+        "CANCEL_SESSION_DENIED": "Der er opstået en fejl. Kontakt din administrator, hvis fejlen vedvarer.",
+        "END_SESSION_SUCCESS": "Dette dokument redigeres ikke længere i Office Online.",
+        "END_SESSION_DENIED": "Der er opstået en fejl. Kontakt din administrator, hvis fejlen vedvarer.",
+        "RESUME_SESSION": "Denne fil redigeres i øjeblikket i Office Online. Du kan redigere denne fil samtidig.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Gem alle ændringer i dette dokument",
+            "END_OPTION_DETAILS": "Der vil blive oprettet en ny version",
+            "CANCEL_OPTION": "Kassér alle ændringer",
+            "CHANGES": "Hvilket niveau af ændringer blev foretaget?",
+            "HEADER": "Afslut redigering",
+            "DESCRIPTION": "Dette vil forhindre yderligere redigering af dokumentet for alle, der for øjeblikket har adgang til det med Microsoft Office",
+            "QUESTION": "Hvad sker der med ændringerne?",
+            "CANCEL": "Annuller",
+            "END": "Afslut redigering"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Opret et Word-dokument"
+            },
+            "EXCEL": {
+                "HEADER": "Opret et Excel-regneark"
+            },
+            "POWERPOINT": {
+                "HEADER": "Opret en Powerpoint-præsentation"
+            },
+            "CANCEL": "Annuller",
+            "CREATE": "Opret",
+            "CREATE_AND_OPEN": "Opret og åbn online",
+            "DESCRIPTION": {
+                "LABEL": "Beskrivelse",
+                "PLACEHOLDER": "En meningsfuld beskrivelse af denne nye fil."
+            },
+            "NAME": {
+                "LABEL": "Navn"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel-regneark",
+                "TOOLTIP": "Opret et nyt Excel-regneark"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "PowerPoint-præsentation",
+                "TOOLTIP": "Opret en ny Powerpoint-præsentation"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word-dokument",
+                "TOOLTIP": "Opret et nyt Word-dokument"
+            },
+            "END_SESSION": "Afslut redigering",
+            "EDIT_WORD": "Redigér i Word Online",
+            "EDIT_POWERPOINT": "Redigér i PowerPoint Online",
+            "EDIT_EXCEL": "Redigér i Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Udvidelser: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Aktivér udvidelse Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Beskrivelse er for lang"
+                }
+            }
+        }
+    }
+}

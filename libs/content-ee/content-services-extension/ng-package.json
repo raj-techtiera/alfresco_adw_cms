@@ -1,0 +1,12 @@
+{
+    "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../dist/libs/content-ee/content-services-extension",
+    "assets": [
+        "assets",
+        "styles",
+        "i18n"
+    ],
+    "lib": {
+        "entryFile": "src/index.ts"
+    }
+}

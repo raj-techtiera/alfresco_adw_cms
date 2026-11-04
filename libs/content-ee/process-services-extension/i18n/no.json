@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Ny prosess",
+            "SELECT_APPLICATION": "Velg applikasjon",
+            "ERROR": "Du kan ikke starte en prosess, fordi ingen prosessdefinisjoner er tilgjengelige"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Prosessledelse",
+            "PROCESS_LIST": {
+                "PROCESSES": "Prosesser"
+            },
+            "START_PROCESS": "Start prosess",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Vis detaljer"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Vis kommentarer"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Prosessledelse",
+            "CREATE_NEW_PROCESS": "Start prosess",
+            "CREATE_PROCESS_NOT_ALLOWED": "Ny prosess kan ikke opprettes"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Vis mer"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Kommentarer",
+            "CANCEL_PROCESS": "Avbryt prosessen"
+        },
+        "ERROR": {
+            "NO_FORM": "Prosessdefinisjon har ikke et definert skjema",
+            "NO_CONTENT": "Kunne ikke legge ved filen fra enheten",
+            "CAN_NOT_ATTACH": "Kan ikke legge ved valgt innhold",
+            "AUDIT_ERROR": "Feil ved visning av oppgave: {{error}}",
+            "TASK_ACCESS_WARNING": "Du har ikke tillatelse til å endre oppgaven",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Forhåndsvisning av dokumentet er ikke tilgjengelig ettersom oppgaven ennå ikke er fullført."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Prosess opprettet «{{ processName }}»",
+            "BACKEND_SERVICE_ERROR": "Det oppstod en ukjent nettverksfeil. Prosesserelaterte funksjoner er deaktivert.",
+            "ACTION": "Vis pågående prosess"
+        },
+        "NO_PROCESS_DEFINITIONS": "Ingen prosessdefinisjoner er tilgjengelige",
+        "SIDE_NAV_TITLE": "Arbeidsflyt",
+        "STATUS": {
+            "COMPLETED": "Fullført",
+            "RUNNING": "Kjører",
+            "OPEN": "Åpne",
+            "UNKNOWN": "Ukjent"
+        },
+        "TASK_LIST": {
+            "TASKS": "Oppgaver",
+            "ACTIONS": {
+                "TASK_DETAILS": "Vis"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Vis"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Skjemaet er lagret",
+            "FORM_COMPLETED": "Oppgaven er fullført",
+            "CLOSE": "Lukk",
+            "CLAIM_TASK": "Det er gjort krav på oppgaven",
+            "UNCLAIM_TASK": "Oppgaven er frigitt",
+            "CLAIM_FAILED": "Kan ikke utføre handlingen"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Kan ikke utføre handlingen",
+            "FAILED_TO_LOAD": "Kunne ikke laste oppgavedetaljer, prøv på nytt om en liten stund",
+            "UPDATED": "Oppdatert {{ property }}",
+            "FAILED_TO_UPDATE": "Kunne ikke oppdatere {{ property }}",
+            "METADATA_TOOLTIP": "Vis detaljer",
+            "NO_TASK_NAME": "Ingen navn"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Lukk"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Ingen prosessdefinisjoner er tilgjengelige"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Startet av",
+            "CREATED": "Startdato"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Du kan ikke starte en prosess, fordi ingen prosessdefinisjoner er tilgjengelige",
+            "NO_START_FORM": "Denne prosessen krever ingen ekstra konfigurasjoner",
+            "NO_PROCESS_DEF_SELECTED": "Ingen kategori/prosess valgt",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Velg applikasjon"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Vil du avbryte prosessen?",
+                "DESCRIPTION": "Denne prosessen og alle tilknyttede oppgaver merkes som fullført.",
+                "CONFIRM_BTN": "Bekreft"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "«{{ processName }}» er avbrutt.",
+                "FAIL": "Feil ved avbryt prosess: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Opprettet dato"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "GJØR KRAV PÅ",
+                "UNCLAIM": "FRIGI"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Del av pågående prosess",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Koblet prosess",
+            "PART_OF_THE_PROCESS_TITLE": "Dette dokumentet er en del av følgende prosesser",
+            "NO_PROCESSES": "Dette dokumentet er ikke en del av noen pågående prosesser",
+            "CREATED": "Opprettet",
+            "VIEW_DETAILS_BTN": "Vis detaljer"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatisk autentisering for prosesstjenester",
+        "ENABLED": "Aktivert",
+        "ENABLED_DESCRIPTION": "Systemet vil automatisk autentisere på nytt, slik at brukeren kan fortsette arbeidet uavbrutt.",
+        "DISABLED": "Deaktivert",
+        "DISABLED_DESCRIPTION": "Brukeren må autentisere seg på nytt med påloggingsinformasjonen når økten utløper.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

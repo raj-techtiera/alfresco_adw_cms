@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "È in corso la modifica del documento in Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Le modifiche apportate al documento sono state ignorate.",
+        "CANCEL_SESSION_DENIED": "Si è verificato un errore. Se il problema persiste, contattare l'amministratore.",
+        "END_SESSION_SUCCESS": "Il documento non è più modificato in Office Online.",
+        "END_SESSION_DENIED": "Si è verificato un errore. Se il problema persiste, contattare l'amministratore.",
+        "RESUME_SESSION": "È in corso la modifica del file in Office Online. Può essere modificato contemporaneamente dall'utente.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Salva tutte le modifiche apportate al documento",
+            "END_OPTION_DETAILS": "Verrà creata una nuova versione",
+            "CANCEL_OPTION": "Rimuovi tutte le modifiche",
+            "CHANGES": "Indicare il livello di modifiche apportate",
+            "HEADER": "Termina modifica",
+            "DESCRIPTION": "Questa operazione impedirà che vengano apportate ulteriori modifiche al documento da tutti gli utenti che lo stanno utilizzando al momento tramite Microsoft Office Online.",
+            "QUESTION": "Cosa deve accadere alle modifiche apportate?",
+            "CANCEL": "Annulla",
+            "END": "Termina modifica"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Crea un documento Word"
+            },
+            "EXCEL": {
+                "HEADER": "Crea un foglio di calcolo Excel"
+            },
+            "POWERPOINT": {
+                "HEADER": "Crea una presentazione Powerpoint"
+            },
+            "CANCEL": "Annulla",
+            "CREATE": "Crea",
+            "CREATE_AND_OPEN": "Crea e apri online",
+            "DESCRIPTION": {
+                "LABEL": "Descrizione",
+                "PLACEHOLDER": "Una descrizione significativa per il nuovo file."
+            },
+            "NAME": {
+                "LABEL": "Nome"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Foglio di calcolo Excel",
+                "TOOLTIP": "Crea un nuovo foglio di calcolo Excel"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Presentazione Powerpoint",
+                "TOOLTIP": "Crea una nuova presentazione Powerpoint"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Documento Word",
+                "TOOLTIP": "Crea un nuovo documento Word"
+            },
+            "END_SESSION": "Termina modifica",
+            "EDIT_WORD": "Modifica in Word Online",
+            "EDIT_POWERPOINT": "Modifica in PowerPoint Online",
+            "EDIT_EXCEL": "Modifica in Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Estensioni: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Abilita estensione Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Descrizione troppo lunga"
+                }
+            }
+        }
+    }
+}

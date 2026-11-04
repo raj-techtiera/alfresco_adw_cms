@@ -1,0 +1,445 @@
+<div class="adw-create-po-dialog">
+    <header class="adw-create-po-header">
+        <div class="adw-create-po-header__text">
+            <div class="adw-create-po-header__title-row">
+                <mat-icon class="adw-create-po-header__doc-icon" aria-hidden="true">description</mat-icon>
+                <div class="adw-create-po-header__titles">
+                    <h2 class="adw-create-po-title" id="adw-create-po-dialog-title">Create Purchase Order</h2>
+                    <p class="adw-create-po-subtitle">Fill in the details below to create a new purchase order.</p>
+                </div>
+            </div>
+        </div>
+        <button mat-icon-button type="button" class="adw-create-po-header__close" (click)="onClose()" aria-label="Close">
+            <mat-icon>close</mat-icon>
+        </button>
+    </header>
+
+    <div class="adw-create-po-body">
+        <div class="adw-create-po-form-card">
+            <div class="adw-create-po-labeled">
+                <label class="adw-create-po-labeled__label" for="adw-po-type">
+                    PO Type <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                </label>
+                <div class="input-shell input-shell--select">
+                    <mat-icon class="input-shell__icon" aria-hidden="true">layers</mat-icon>
+                    <mat-select
+                        id="adw-po-type"
+                        name="poType"
+                        [(ngModel)]="poType"
+                        (ngModelChange)="onPoTypeChange()"
+                        required
+                        panelClass="adw-create-po-select-panel"
+                        placeholder="Select PO type"
+                        [disabled]="vendorsLoading">
+                        @for (e of vendorPoTypeEntries; track e.id) {
+                            <mat-option [value]="e.name">{{ e.name }}</mat-option>
+                        }
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="adw-create-po-labeled">
+                <label class="adw-create-po-labeled__label" for="adw-po-name">
+                    Name <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                </label>
+                <div class="input-shell">
+                    <mat-icon class="input-shell__icon" aria-hidden="true">badge</mat-icon>
+                    <input
+                        id="adw-po-name"
+                        type="text"
+                        name="poName"
+                        [(ngModel)]="name"
+                        required
+                        maxlength="255"
+                        placeholder="Enter purchase order name"
+                        autocomplete="off" />
+                </div>
+                <span class="adw-create-po-char-count">{{ name.length }} / 255</span>
+            </div>
+
+            <div class="adw-create-po-fields-row">
+                <div class="adw-create-po-labeled">
+                    <label class="adw-create-po-labeled__label" for="adw-po-vendor">
+                        Vendor name <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell input-shell--select">
+                        <mat-icon class="input-shell__icon" aria-hidden="true">apartment</mat-icon>
+                        <mat-select
+                            id="adw-po-vendor"
+                            name="vendorName"
+                            [(ngModel)]="vendorName"
+                            (ngModelChange)="onVendorNameChange()"
+                            required
+                            panelClass="adw-create-po-select-panel"
+                            placeholder="Select vendor"
+                            [disabled]="!poType || vendorsLoading">
+                            @if (!poType) {
+                                <mat-option disabled value="">Select PO type first</mat-option>
+                            } @else if (vendorsLoading) {
+                                <mat-option disabled value="">Loading vendors…</mat-option>
+                            } @else if (vendorsError) {
+                                <mat-option disabled value="">{{ vendorsError }}</mat-option>
+                            } @else if (vendorEntries.length === 0) {
+                                <mat-option disabled value="">No items in folder</mat-option>
+                            } @else {
+                                @for (e of vendorEntries; track e.id) {
+                                    <mat-option [value]="e.name">{{ e.name }}</mat-option>
+                                }
+                            }
+                        </mat-select>
+                    </div>
+                </div>
+
+                <div class="adw-create-po-labeled">
+                    <label class="adw-create-po-labeled__label" for="adw-po-number">
+                        PO Number <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                    </label>
+                    @if (isExistingModification) {
+                        <div class="input-shell input-shell--select">
+                            <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                            <mat-select
+                                id="adw-po-number"
+                                name="poNumber"
+                                [(ngModel)]="poNumber"
+                                (ngModelChange)="onPoNumberChange()"
+                                required
+                                panelClass="adw-create-po-select-panel"
+                                placeholder="Select PO number"
+                                [disabled]="!vendorName || poNumbersLoading">
+                                @if (!vendorName) {
+                                    <mat-option disabled value="">Select vendor first</mat-option>
+                                } @else if (poNumbersLoading) {
+                                    <mat-option disabled value="">Loading PO numbers…</mat-option>
+                                } @else if (poNumbersError) {
+                                    <mat-option disabled value="">{{ poNumbersError }}</mat-option>
+                                } @else if (poNumberEntries.length === 0) {
+                                    <mat-option disabled value="">No PO numbers in folder</mat-option>
+                                } @else {
+                                    @for (e of poNumberEntries; track e.id) {
+                                        <mat-option [value]="e.name">{{ e.name }}</mat-option>
+                                    }
+                                }
+                            </mat-select>
+                        </div>
+                    } @else {
+                        <div class="input-shell">
+                            <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                            <input
+                                id="adw-po-number"
+                                type="text"
+                                name="poNumber"
+                                [(ngModel)]="poNumber"
+                                required
+                                placeholder="Enter PO number"
+                                autocomplete="off" />
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="adw-create-po-hierarchy" aria-label="Asset location">
+                <div class="adw-create-po-hierarchy__head">
+                    <mat-icon aria-hidden="true">map</mat-icon>
+                    <div>
+                        <p class="adw-create-po-hierarchy__title">Asset location</p>
+                        <p class="adw-create-po-hierarchy__hint">
+                            Select region, field/asset, then facility for this purchase order.
+                        </p>
+                    </div>
+                </div>
+                <div class="adw-create-po-fields-row adw-create-po-fields-row--triple">
+                    <div class="adw-create-po-labeled">
+                        <label class="adw-create-po-labeled__label" for="adw-po-region">
+                            Region <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                        </label>
+                        <div class="input-shell input-shell--select">
+                            <mat-icon class="input-shell__icon" aria-hidden="true">map</mat-icon>
+                            <mat-select
+                                id="adw-po-region"
+                                name="region"
+                                [(ngModel)]="region"
+                                (ngModelChange)="onRegionChange()"
+                                required
+                                panelClass="adw-create-po-select-panel"
+                                placeholder="Select region"
+                                [disabled]="regionsLoading">
+                                @if (regionsLoading) {
+                                    <mat-option disabled value="">Loading regions…</mat-option>
+                                } @else if (regionsError) {
+                                    <mat-option disabled value="">{{ regionsError }}</mat-option>
+                                } @else if (regionOptions.length === 0) {
+                                    <mat-option disabled value="">No regions available</mat-option>
+                                } @else {
+                                    @for (option of regionOptions; track option.id) {
+                                        <mat-option [value]="optionLabel(option)">{{ optionLabel(option) }}</mat-option>
+                                    }
+                                }
+                            </mat-select>
+                        </div>
+                    </div>
+
+                    <div class="adw-create-po-labeled">
+                        <label class="adw-create-po-labeled__label" for="adw-po-asset">
+                            Field / Asset <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                        </label>
+                        <div class="input-shell input-shell--select">
+                            <mat-icon class="input-shell__icon" aria-hidden="true">view_in_ar</mat-icon>
+                            <mat-select
+                                id="adw-po-asset"
+                                name="asset"
+                                [(ngModel)]="asset"
+                                (ngModelChange)="onAssetChange()"
+                                required
+                                panelClass="adw-create-po-select-panel"
+                                placeholder="Select asset"
+                                [disabled]="!region || assetsLoading">
+                                @if (!region) {
+                                    <mat-option disabled value="">Select region first</mat-option>
+                                } @else if (assetsLoading) {
+                                    <mat-option disabled value="">Loading assets…</mat-option>
+                                } @else if (assetsError) {
+                                    <mat-option disabled value="">{{ assetsError }}</mat-option>
+                                } @else if (assetOptions.length === 0) {
+                                    <mat-option disabled value="">No assets available</mat-option>
+                                } @else {
+                                    @for (option of assetOptions; track option.id) {
+                                        <mat-option [value]="optionLabel(option)">{{ optionLabel(option) }}</mat-option>
+                                    }
+                                }
+                            </mat-select>
+                        </div>
+                    </div>
+
+                    <div class="adw-create-po-labeled">
+                        <label class="adw-create-po-labeled__label" for="adw-po-facility">
+                            Facility <span class="adw-create-po-labeled__req" aria-hidden="true">*</span>
+                        </label>
+                        <div class="input-shell input-shell--select">
+                            <mat-icon class="input-shell__icon" aria-hidden="true">factory</mat-icon>
+                            <mat-select
+                                id="adw-po-facility"
+                                name="facility"
+                                [(ngModel)]="facility"
+                                required
+                                panelClass="adw-create-po-select-panel"
+                                placeholder="Select facility"
+                                [disabled]="!asset || facilitiesLoading">
+                                @if (!asset) {
+                                    <mat-option disabled value="">Select asset first</mat-option>
+                                } @else if (facilitiesLoading) {
+                                    <mat-option disabled value="">Loading facilities…</mat-option>
+                                } @else if (facilitiesError) {
+                                    <mat-option disabled value="">{{ facilitiesError }}</mat-option>
+                                } @else if (facilityOptions.length === 0) {
+                                    <mat-option disabled value="">No facilities available</mat-option>
+                                } @else {
+                                    @for (option of facilityOptions; track option.id) {
+                                        <mat-option [value]="optionLabel(option)">{{ optionLabel(option) }}</mat-option>
+                                    }
+                                }
+                            </mat-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Same layout pattern as Distribution Matrix dialog: toolbar + table -->
+        <section class="adw-create-po-dm" aria-labelledby="adw-create-po-dm-heading">
+            <div class="adw-create-po-dm__head">
+                <div class="adw-create-po-dm__head-main">
+                    <mat-icon class="adw-create-po-dm__title-icon" aria-hidden="true">grid_on</mat-icon>
+                    <div class="adw-create-po-dm__head-titles">
+                        <h3 class="adw-create-po-dm__title" id="adw-create-po-dm-heading">VDR item</h3>
+                        <p class="adw-create-po-dm__lead">
+                            @if (isExistingModification) {
+                                Select VDR line items from the vendor submission folder.
+                            } @else {
+                                Add VDR line items to this purchase order.
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adw-create-po-dm__body">
+                <div class="adw-create-po-dm__toolbar">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        type="button"
+                        (click)="addMatrixRow()"
+                        [disabled]="matrixSaving || (isExistingModification && (!poNumber || vdrLinesLoading))">
+                        <mat-icon>add</mat-icon>
+                        Add row
+                    </button>
+                    <button
+                        mat-stroked-button
+                        type="button"
+                        class="adw-create-po-dm__toolbar-secondary"
+                        (click)="refreshMatrix()"
+                        [disabled]="!poType || vendorsLoading || vdrLinesLoading || matrixSaving">
+                        <mat-icon>refresh</mat-icon>
+                        Refresh
+                    </button>
+                    <button
+                        mat-stroked-button
+                        type="button"
+                        class="adw-create-po-dm__toolbar-secondary"
+                        (click)="saveMatrix()"
+                        [disabled]="matrixRows.length === 0 || matrixSaving">
+                        <mat-icon>save</mat-icon>
+                        {{ matrixSaving ? 'Saving…' : 'Save' }}
+                    </button>
+                </div>
+
+                @if (matrixRows.length > 0) {
+                    <div class="adw-create-po-dm__table-wrap">
+                        <table class="adw-create-po-dm__table">
+                            <thead>
+                                <tr>
+                                    <th>{{ isExistingModification ? 'VDR Line' : 'Title' }}</th>
+                                    <th>Equipment tag</th>
+                                    @if (isExistingModification) {
+                                        <th>Modification scope</th>
+                                    }
+                                    <th class="adw-create-po-dm__col-actions"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (row of matrixRows; track $index; let i = $index) {
+                                    <tr>
+                                        <td>
+                                            <div class="input-shell input-shell--select adw-create-po-dm__shell">
+                                                @if (isExistingModification) {
+                                                    <mat-select
+                                                        [(ngModel)]="row.vdrLineId"
+                                                        (ngModelChange)="onVdrLineSelected(row, $event)"
+                                                        [name]="'poDmVdrLine' + i"
+                                                        panelClass="adw-create-po-select-panel"
+                                                        placeholder="Select VDR line"
+                                                        [disabled]="!poNumber || vdrLinesLoading">
+                                                        @if (!poNumber) {
+                                                            <mat-option disabled value="">Select PO number first</mat-option>
+                                                        } @else if (vdrLinesLoading) {
+                                                            <mat-option disabled value="">Loading VDR lines…</mat-option>
+                                                        } @else if (vdrLinesError) {
+                                                            <mat-option disabled value="">{{ vdrLinesError }}</mat-option>
+                                                        } @else if (vdrLineEntries.length === 0) {
+                                                            <mat-option disabled value="">No VDR items in folder</mat-option>
+                                                        } @else {
+                                                            @for (e of vdrLineEntries; track e.id) {
+                                                                <mat-option [value]="e.id">{{ vdrLineLabel(e) }}</mat-option>
+                                                            }
+                                                        }
+                                                    </mat-select>
+                                                } @else {
+                                                    <mat-select
+                                                        [(ngModel)]="row.title"
+                                                        [name]="'poDmTitle' + i"
+                                                        panelClass="adw-create-po-select-panel"
+                                                        placeholder="Select title">
+                                                        @for (opt of titleOptions; track opt) {
+                                                            <mat-option [value]="opt">{{ opt }}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if (isExistingModification) {
+                                                <div class="input-shell adw-create-po-dm__shell">
+                                                    <input
+                                                        type="text"
+                                                        [value]="row.equipmentTag"
+                                                        [name]="'poDmTagReadonly' + i"
+                                                        placeholder="Auto-filled from VDR line"
+                                                        readonly />
+                                                </div>
+                                            } @else {
+                                                <div class="input-shell input-shell--select adw-create-po-dm__shell">
+                                                    <mat-select
+                                                        [(ngModel)]="row.equipmentTag"
+                                                        [name]="'poDmTag' + i"
+                                                        panelClass="adw-create-po-select-panel"
+                                                        placeholder="Select tag">
+                                                        @for (opt of equipmentTagOptions; track opt) {
+                                                            <mat-option [value]="opt">{{ opt }}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                </div>
+                                            }
+                                        </td>
+                                        @if (isExistingModification) {
+                                            <td>
+                                                <div class="input-shell input-shell--textarea adw-create-po-dm__shell">
+                                                    <textarea
+                                                        rows="2"
+                                                        [(ngModel)]="row.modificationScope"
+                                                        [name]="'poDmModificationScope' + i"
+                                                        placeholder="Describe the modification required"
+                                                        required></textarea>
+                                                </div>
+                                            </td>
+                                        }
+                                        <td class="adw-create-po-dm__col-actions">
+                                            <button
+                                                mat-icon-button
+                                                color="warn"
+                                                type="button"
+                                                (click)="removeMatrixRow(i)"
+                                                [disabled]="matrixSaving"
+                                                title="Remove row">
+                                                <mat-icon>delete_outline</mat-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                } @else {
+                    <div class="adw-create-po-dm__empty">
+                        <mat-icon class="adw-create-po-dm__empty-icon" aria-hidden="true">insert_drive_file</mat-icon>
+                        <p class="adw-create-po-dm__empty-text">No items added yet.</p>
+                        <p class="adw-create-po-dm__empty-hint">
+                            @if (isExistingModification) {
+                                @if (!poNumber) {
+                                    Select a PO number to load VDR lines.
+                                } @else if (vdrLinesLoading) {
+                                    Loading VDR lines…
+                                } @else {
+                                    Click ‘Add row’ to select VDR items.
+                                }
+                            } @else {
+                                Click ‘Add row’ to add VDR items.
+                            }
+                        </p>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+
+    <footer class="adw-create-po-footer">
+        <button mat-stroked-button type="button" class="adw-create-po-footer__cancel" (click)="onClose()" [disabled]="poCreating">
+            Cancel
+        </button>
+        <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            class="adw-create-po-footer__submit"
+            [disabled]="!isValid || poCreating"
+            (click)="onSubmit()">
+            @if (poCreating) {
+                Creating…
+            } @else {
+                Create Purchase Order
+            }
+            @if (!poCreating) {
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+            }
+        </button>
+    </footer>
+</div>

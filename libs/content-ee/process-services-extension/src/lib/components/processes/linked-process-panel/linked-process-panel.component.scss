@@ -1,0 +1,66 @@
+.aps-linked-process-panel {
+    .aps-linked-process-details-container {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--theme-grey-background);
+        padding: 15px 0;
+
+        .aps-linked-process-details-wrapper {
+            display: flex;
+            flex-direction: column;
+            padding-right: 10px;
+
+            .aps-linked-process-name {
+                font-size: 14px;
+                line-height: 24px;
+                word-break: break-word;
+            }
+
+            .aps-linked-process-date {
+                color: var(--theme-grey-font-color);
+                padding-top: 10px;
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+
+        .aps-view-linked-process-details-btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .aps-view-linked-process-details-btn {
+                height: 32px;
+                width: 110px;
+                line-height: 16px;
+                background-color: var(--theme-grey-text-background);
+            }
+        }
+    }
+
+    .aps-linked-processes-title,
+    .aps-no-linked-processes {
+        padding-top: 10px;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .aps-linked-processes-loading-spinner {
+        margin: auto;
+        margin-top: 15px;
+    }
+}
+
+.adw-process-details-dialog {
+    width: 68%;
+
+    > * {
+        /* stylelint-disable declaration-no-important */
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    @media only screen and (max-width: 876px) {
+        width: 90%;
+    }
+}

@@ -1,0 +1,435 @@
+:host {
+  --um-dialog-brand: var(--adw-color-brand-primary, #1b1464);
+  --um-dialog-brand-dark: var(--adw-color-brand-primary-dark, #0d2847);
+  --um-dialog-muted: #64748b;
+  --um-dialog-border: #e2e8f0;
+  display: block;
+  width: min(820px, calc(100vw - 32px));
+  color: #0f172a;
+}
+
+.um-dialog {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px 4px;
+
+  &__lead {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  &__text {
+    min-width: 0;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+  }
+
+  p {
+    margin: 3px 0 0;
+    color: var(--um-dialog-muted);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+.dialog-icon {
+  display: inline-flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--um-dialog-brand) 12%, #ffffff);
+  color: var(--um-dialog-brand-dark);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--um-dialog-brand) 16%, transparent);
+
+  mat-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+  }
+}
+
+.dialog-close {
+  margin: -6px -6px 0 0;
+  color: #94a3b8;
+
+  &:hover {
+    color: #475569;
+  }
+}
+
+mat-dialog-content {
+  padding: 8px 24px 4px !important;
+  max-height: min(70vh, 640px);
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+
+  &--end {
+    align-items: end;
+  }
+
+  .admin-check {
+    width: 100%;
+    min-height: 42px;
+    box-sizing: border-box;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+
+  &__label {
+    color: #1e293b;
+    font-size: 12.5px;
+    font-weight: 600;
+
+    em {
+      color: #2563eb;
+      font-style: normal;
+      font-weight: 700;
+    }
+  }
+
+  &__input {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    > mat-icon {
+      position: absolute;
+      left: 12px;
+      width: 18px;
+      height: 18px;
+      color: #94a3b8;
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    .field__control {
+      padding-left: 40px;
+    }
+
+    &:has(.field__toggle) .field__control {
+      padding-right: 42px;
+    }
+  }
+
+  &__control {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid var(--um-dialog-border);
+    border-radius: 8px;
+    background: #fff;
+    color: #0f172a;
+    font: inherit;
+    font-size: 13.5px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+
+    &:hover {
+      border-color: #cbd5e1;
+    }
+
+    &:focus {
+      border-color: color-mix(in srgb, var(--um-dialog-brand) 45%, #94a3b8);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--um-dialog-brand) 12%, transparent);
+    }
+  }
+
+  &__toggle {
+    position: absolute;
+    right: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+
+    mat-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+    }
+
+    &:hover {
+      background: #f8fafc;
+      color: #475569;
+    }
+  }
+
+  &__hint {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  &__hint--error {
+    color: #dc2626;
+  }
+}
+
+.admin-check {
+  --mdc-checkbox-selected-icon-color: var(--um-dialog-brand-dark);
+  --mdc-checkbox-selected-hover-icon-color: var(--um-dialog-brand-dark);
+  --mdc-checkbox-selected-focus-icon-color: var(--um-dialog-brand-dark);
+  --mdc-checkbox-selected-pressed-icon-color: var(--um-dialog-brand-dark);
+  --mdc-checkbox-selected-focus-state-layer-color: var(--um-dialog-brand);
+  --mdc-checkbox-selected-hover-state-layer-color: var(--um-dialog-brand);
+  padding: 8px 12px;
+  border: 1px solid var(--um-dialog-border);
+  border-radius: 8px;
+  background: #f8fafc;
+  white-space: normal;
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__label {
+    color: #1e293b;
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+
+  &:hover {
+    border-color: #cbd5e1;
+  }
+}
+
+:host ::ng-deep .admin-check {
+  .mdc-form-field {
+    align-items: flex-start;
+  }
+
+  .mdc-label {
+    white-space: normal;
+  }
+}
+
+.field__control--readonly,
+.field__control--readonly:hover,
+.field__control--readonly:focus {
+  background: #f8fafc;
+  border-color: var(--um-dialog-border);
+  color: #475569;
+  box-shadow: none;
+  cursor: default;
+}
+
+.member-option-note {
+  margin-left: 8px;
+  color: #94a3b8;
+  font-size: 11.5px;
+  font-style: italic;
+}
+
+.member-select {
+  width: 100%;
+}
+
+:host ::ng-deep .member-select.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    height: 42px;
+    padding: 0 12px 0 0;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .mat-mdc-form-field-flex {
+    height: 42px;
+    align-items: center;
+  }
+
+  .mat-mdc-form-field-infix {
+    min-height: 42px;
+    padding: 9px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .mat-mdc-form-field-icon-prefix {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 8px 0 12px;
+
+    mat-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+      color: #94a3b8;
+    }
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: var(--um-dialog-border);
+  }
+
+  &:hover .mdc-notched-outline__leading,
+  &:hover .mdc-notched-outline__notch,
+  &:hover .mdc-notched-outline__trailing {
+    border-color: #cbd5e1;
+  }
+
+  &.mat-focused .mdc-notched-outline__leading,
+  &.mat-focused .mdc-notched-outline__notch,
+  &.mat-focused .mdc-notched-outline__trailing {
+    border-color: color-mix(in srgb, var(--um-dialog-brand) 45%, #94a3b8);
+    border-width: 1px;
+  }
+
+  .mdc-notched-outline__leading {
+    border-radius: 8px 0 0 8px;
+  }
+
+  .mdc-notched-outline__trailing {
+    border-radius: 0 8px 8px 0;
+  }
+
+  .mat-mdc-select-value,
+  .mat-mdc-select-placeholder {
+    font-size: 13.5px;
+  }
+
+  .mat-mdc-select-placeholder {
+    color: #94a3b8;
+  }
+
+  .mat-mdc-select-arrow {
+    color: #94a3b8;
+  }
+}
+
+::ng-deep .um-member-select-panel {
+  border-radius: 10px !important;
+  max-height: 300px !important;
+
+  .mat-mdc-option {
+    font-size: 13.5px;
+    min-height: 40px;
+  }
+
+  .mat-pseudo-checkbox-checked,
+  .mat-pseudo-checkbox-indeterminate {
+    background: var(--adw-color-brand-primary-dark, #0d2847) !important;
+  }
+
+  /* Existing members: keep them visibly checked but clearly locked */
+  .mat-mdc-option.mdc-list-item--disabled {
+    opacity: 1;
+
+    .mdc-list-item__primary-text {
+      color: #94a3b8;
+      opacity: 1;
+    }
+
+    .mat-pseudo-checkbox-checked {
+      background: #94a3b8 !important;
+    }
+  }
+}
+
+.dialog-actions {
+  gap: 10px;
+  padding: 10px 24px 16px !important;
+  margin: 0;
+}
+
+.cancel-button {
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border-color: #dbe2ea;
+  color: #475569;
+  background: #f8fafc;
+}
+
+.create-button {
+  --mdc-filled-button-container-color: var(--um-dialog-brand-dark);
+  --mdc-filled-button-label-text-color: #fff;
+  --mat-icon-color: #fff;
+  --mdc-filled-button-disabled-container-color: #e2e8f0;
+  --mdc-filled-button-disabled-label-text-color: #94a3b8;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--um-dialog-brand-dark) 24%, transparent);
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+    font-size: 18px;
+  }
+
+  &:disabled {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 680px) {
+  :host {
+    width: min(100vw - 24px, 820px);
+  }
+
+  .dialog-header,
+  mat-dialog-content,
+  .dialog-actions {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

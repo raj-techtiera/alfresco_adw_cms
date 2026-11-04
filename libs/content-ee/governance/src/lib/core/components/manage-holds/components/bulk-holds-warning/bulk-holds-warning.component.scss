@@ -1,0 +1,12 @@
+.aga-bulk-holds-warning-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    color: var(--theme-text-color);
+
+    strong {
+        color: var(--theme-text-bold-color);
+    }
+}

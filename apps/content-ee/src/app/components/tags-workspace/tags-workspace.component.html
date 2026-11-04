@@ -1,0 +1,269 @@
+<aca-page-layout>
+    <div class="aca-page-layout-header adw-tags-page-header" [class.adw-tags-page-header-selected]="selectedTag">
+        @if (!selectedTag) {
+            <div class="adw-tags-page-title">
+                <h1 class="adw-tags-title">{{ 'TAGS_WORKSPACE.TITLE' | translate }}</h1>
+                <span class="adw-tags-subtitle">{{ 'TAGS_WORKSPACE.SUBTITLE' | translate }}</span>
+            </div>
+            <button mat-button class="adw-tags-refresh" (click)="loadTags()">
+                <mat-icon>refresh</mat-icon>
+                {{ 'WIDGETS.REFRESH' | translate }}
+            </button>
+        } @else {
+            <div class="adw-tags-documents-header adw-tags-documents-header-top">
+                <button mat-icon-button type="button" (click)="clearSelectedTag()" [attr.aria-label]="'TAGS_WORKSPACE.BACK_TO_TAGS' | translate">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div class="adw-tags-documents-header-text">
+                    <h2>{{ 'TAGS_WORKSPACE.RESULT_TITLE' | translate: { tag: selectedTag.name, selected: getSelectedCountLabel() } }}</h2>
+                    <span>{{ 'TAGS_WORKSPACE.DOCUMENTS_FOR_TAG' | translate: { tag: selectedTag.name } }}</span>
+                </div>
+                @if (documents.length && !(documentsLoading$ | async) && !(documentsError$ | async)) {
+                    <div class="adw-tags-results-toolbar">
+                        <aca-toolbar [items]="tagToolbarActionsBeforePreview" />
+                        <button
+                            mat-icon-button
+                            type="button"
+                            class="adw-tags-preview-toggle"
+                            [class.adw-tags-preview-toggle-active]="isPreviewPanelOpen"
+                            [disabled]="!canOpenPreviewPanel()"
+                            (click)="togglePreviewPanel()"
+                            [attr.aria-label]="'SIDEBAR.PREVIEW' | translate">
+                            <mat-icon>view_sidebar</mat-icon>
+                        </button>
+                        <aca-toolbar [items]="tagToolbarActionsAfterPreview" />
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="aca-page-layout-content">
+        @if (!tagsEnabled) {
+            <div class="adw-tags-empty">{{ 'TAGS_WORKSPACE.DISABLED' | translate }}</div>
+        } @else if (tagsLoading$ | async) {
+            <div class="adw-tags-loading">
+                <mat-progress-spinner color="primary" mode="indeterminate" diameter="48" />
+            </div>
+        } @else if (tagsError$ | async) {
+            <div class="adw-tags-empty">{{ 'TAGS_WORKSPACE.TAGS_ERROR' | translate }}</div>
+        } @else {
+            <div class="adw-tags-shell">
+                <section class="adw-tags-list-pane">
+                    <div class="adw-tags-pane-heading">
+                        <h2>{{ 'TAGS_WORKSPACE.ALL_TAGS' | translate }}</h2>
+                        <span>{{ 'TAGS_WORKSPACE.TAGS_COUNT' | translate: { count: (tags$ | async)?.length || 0 } }}</span>
+                    </div>
+
+                    @if ((tags$ | async)?.length) {
+                        <div class="adw-tags-list" role="tablist" [attr.aria-label]="'TAGS_WORKSPACE.ALL_TAGS' | translate">
+                            <button
+                                type="button"
+                                role="tab"
+                                class="adw-tags-list-item"
+                                *ngFor="let tag of tags$ | async; trackBy: trackByTag"
+                                [class.adw-tags-list-item-active]="selectedTag?.name === tag.name"
+                                [attr.aria-selected]="selectedTag?.name === tag.name"
+                                (click)="selectTag(tag)">
+                                <mat-icon aria-hidden="true">label</mat-icon>
+                                <span>{{ tag.name }}</span>
+                                <strong>{{ getDocumentCountLabel(tag) }}</strong>
+                            </button>
+                        </div>
+                    } @else {
+                        <div class="adw-tags-empty adw-tags-empty-compact">{{ 'TAGS_WORKSPACE.NO_TAGS' | translate }}</div>
+                    }
+                </section>
+
+                <section class="adw-tags-documents-pane">
+                    @if (!selectedTag) {
+                        <div class="adw-tags-documents-placeholder">
+                            <mat-icon>label</mat-icon>
+                            <h2>{{ 'TAGS_WORKSPACE.SELECT_TAG_TITLE' | translate }}</h2>
+                            <p>{{ 'TAGS_WORKSPACE.SELECT_TAG_MESSAGE' | translate }}</p>
+                        </div>
+                    } @else {
+                        @if (documentsLoading$ | async) {
+                            <div class="adw-tags-loading adw-tags-loading-documents">
+                                <mat-progress-spinner color="primary" mode="indeterminate" diameter="40" />
+                            </div>
+                        } @else if (documentsError$ | async) {
+                            <div class="adw-tags-empty">{{ 'TAGS_WORKSPACE.DOCUMENTS_ERROR' | translate }}</div>
+                        } @else if (documents.length) {
+                            <div class="adw-tags-results">
+                                <div
+                                    class="adw-tags-results-body"
+                                    [class.adw-tags-results-body-preview]="isPreviewPanelOpen && previewDocument"
+                                    [style.grid-template-columns]="previewGridTemplateColumns">
+                                    <div class="adw-tags-documents-table">
+                                        <table class="adw-glass-row-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="adw-tags-select-column">
+                                                        <mat-checkbox
+                                                            [checked]="areAllDocumentsSelected(documents)"
+                                                            [indeterminate]="areSomeDocumentsSelected(documents)"
+                                                            (change)="toggleAllDocuments(documents, $event.checked)"
+                                                            [attr.aria-label]="'TAGS_WORKSPACE.SELECT_ALL' | translate" />
+                                                    </th>
+                                                    <th class="adw-tags-file-type-column"></th>
+                                                    <th class="adw-tags-actions-column">
+                                                        <mat-icon>filter_list</mat-icon>
+                                                    </th>
+                                                    <th class="adw-tags-name-column">{{ 'TAGS_WORKSPACE.COLUMNS.NAME' | translate }}</th>
+                                                    <th>{{ 'TAGS_WORKSPACE.COLUMNS.SIZE' | translate }}</th>
+                                                    <th>{{ 'TAGS_WORKSPACE.COLUMNS.MODIFIED' | translate }}</th>
+                                                    <th>{{ 'TAGS_WORKSPACE.COLUMNS.MODIFIED_BY' | translate }}</th>
+                                                    <th class="adw-tags-layout-column">
+                                                        <mat-icon>view_column</mat-icon>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let document of documents; trackBy: trackByDocument"
+                                                    class="adw-glass-row"
+                                                    [class.adw-glass-row--active]="selectedDocumentId === document.id"
+                                                    [class.adw-tags-document-row-active]="selectedDocumentId === document.id"
+                                                    (contextmenu)="openDocumentContextMenu($event, document)"
+                                                    (click)="selectDocument(document)">
+                                                    <td class="adw-tags-select-column">
+                                                        <mat-checkbox
+                                                            [checked]="selectedDocumentIds.has(document.id)"
+                                                            (click)="$event.stopPropagation()"
+                                                            (change)="toggleDocumentSelection(document, $event.checked)"
+                                                            [attr.aria-label]="'TAGS_WORKSPACE.SELECT_DOCUMENT' | translate: { name: document.title }" />
+                                                    </td>
+                                                    <td class="adw-tags-file-type-column">
+                                                        <mat-icon [class]="getDocumentIconClass(document)">{{ getDocumentIcon(document) }}</mat-icon>
+                                                    </td>
+                                                    <td class="adw-tags-actions-column">
+                                                        <button
+                                                            mat-icon-button
+                                                            type="button"
+                                                            [matMenuTriggerFor]="documentActionsMenu"
+                                                            (click)="$event.stopPropagation(); selectDocument(document)"
+                                                            [attr.aria-label]="'TAGS_WORKSPACE.ACTIONS.OPEN_MENU' | translate">
+                                                            <mat-icon>more_vert</mat-icon>
+                                                        </button>
+                                                        <mat-menu #documentActionsMenu="matMenu" class="adw-tags-action-menu">
+                                                            <ng-container *ngFor="let action of documentActions; trackBy: trackByAction">
+                                                                <div class="adw-tags-menu-divider" *ngIf="action.type === contentActionType.separator"></div>
+                                                                <button
+                                                                    *ngIf="action.type !== contentActionType.separator"
+                                                                    mat-menu-item
+                                                                    (click)="executeDocumentAction(action, document)">
+                                                                    <mat-icon>{{ getActionIcon(action) }}</mat-icon>
+                                                                    <span>{{ getActionLabel(action) | translate }}</span>
+                                                                </button>
+                                                            </ng-container>
+                                                        </mat-menu>
+                                                    </td>
+                                                    <td class="adw-tags-name-column">
+                                                        <button type="button" class="adw-tags-document-link" (click)="openDocument(document)">
+                                                            <span>
+                                                                <strong>{{ document.title }}</strong>
+                                                                <small>{{ document.path || document.name }}</small>
+                                                            </span>
+                                                        </button>
+                                                    </td>
+                                                    <td>{{ formatFileSize(document.size) }}</td>
+                                                    <td>{{ document.modifiedAt ? (document.modifiedAt | date: 'mediumDate') : '-' }}</td>
+                                                    <td>{{ document.modifiedBy || '-' }}</td>
+                                                    <td class="adw-tags-layout-column"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    @if (isPreviewPanelOpen && previewDocument) {
+                                        <button
+                                            type="button"
+                                            class="adw-tags-preview-resize-handle"
+                                            (pointerdown)="startPreviewPanelResize($event)"
+                                            [attr.aria-label]="'Resize preview panel'">
+                                        </button>
+                                        <aside class="adw-tags-preview-panel">
+                                            <mat-tab-group class="adw-tags-preview-tabs" animationDuration="0" mat-stretch-tabs="true" preserveContent="true">
+                                                <mat-tab label="{{ 'SIDEBAR.PREVIEW' | translate }}">
+                                                    <ng-template matTabContent>
+                                                        <div class="adw-tags-preview-panel-header">
+                                                            <mat-icon [class]="getDocumentIconClass(previewDocument)">{{ getDocumentIcon(previewDocument) }}</mat-icon>
+                                                            <span>{{ previewDocument.name }}</span>
+                                                            <button
+                                                                mat-icon-button
+                                                                type="button"
+                                                                (click)="closePreviewPanel()"
+                                                                [attr.aria-label]="'APP.ACTIONS.CLOSE' | translate">
+                                                                <mat-icon>close</mat-icon>
+                                                            </button>
+                                                        </div>
+                                                        <adw-preview-tab [node]="$any(previewDocument.node.entry)" />
+                                                    </ng-template>
+                                                </mat-tab>
+
+                                                <mat-tab label="{{ 'APP.INFO_DRAWER.TABS.PROPERTIES' | translate }}">
+                                                    <ng-template matTabContent>
+                                                        <div class="adw-tags-preview-tab-content adw-tags-preview-properties">
+                                                            <adf-content-metadata
+                                                                [node]="$any(previewDocument.node.entry)"
+                                                                [displayEmpty]="false"
+                                                                [expanded]="true"
+                                                                [multi]="true"
+                                                                preset="custom"
+                                                                [displayDefaultProperties]="true"
+                                                                [displayTags]="true"
+                                                                [displayCategories]="true"
+                                                                [readOnly]="false" />
+                                                        </div>
+                                                    </ng-template>
+                                                </mat-tab>
+
+                                                <mat-tab label="{{ 'APP.INFO_DRAWER.TABS.COMMENTS' | translate }}">
+                                                    <ng-template matTabContent>
+                                                        <div class="adw-tags-preview-tab-content adw-tags-preview-comments">
+                                                            <adf-node-comments [nodeId]="previewDocument.id" [readOnly]="false" />
+                                                        </div>
+                                                    </ng-template>
+                                                </mat-tab>
+                                            </mat-tab-group>
+                                        </aside>
+                                    }
+                                </div>
+
+                                <div class="adw-tags-results-footer">
+                                    <span>{{ 'TAGS_WORKSPACE.PAGER.SHOWING' | translate: { start: 1, end: documents.length, total: documents.length } }}</span>
+                                    <span>{{ 'TAGS_WORKSPACE.PAGER.PAGE' | translate: { current: 1, total: 1 } }}</span>
+                                    <button mat-icon-button type="button" disabled [attr.aria-label]="'TAGS_WORKSPACE.PAGER.PREVIOUS' | translate">
+                                        <mat-icon>chevron_left</mat-icon>
+                                    </button>
+                                    <button mat-icon-button type="button" disabled [attr.aria-label]="'TAGS_WORKSPACE.PAGER.NEXT' | translate">
+                                        <mat-icon>chevron_right</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        } @else {
+                            <div class="adw-tags-empty">{{ 'TAGS_WORKSPACE.NO_DOCUMENTS' | translate: { tag: selectedTag?.name || '' } }}</div>
+                        }
+                    }
+                </section>
+            </div>
+        }
+    </div>
+</aca-page-layout>
+
+@if (contextMenuDocument) {
+    <button type="button" class="adw-tags-context-backdrop" aria-label="Close document context menu" (click)="closeDocumentContextMenu()"></button>
+    <div class="adw-tags-context-menu" [style.left]="contextMenuPosition.x" [style.top]="contextMenuPosition.y">
+        <ng-container *ngFor="let action of documentActions; trackBy: trackByAction">
+            <div class="adw-tags-menu-divider" *ngIf="action.type === contentActionType.separator"></div>
+            <button
+                *ngIf="action.type !== contentActionType.separator"
+                mat-menu-item
+                (click)="executeDocumentAction(action, contextMenuDocument)">
+                <mat-icon>{{ getActionIcon(action) }}</mat-icon>
+                <span>{{ getActionLabel(action) | translate }}</span>
+            </button>
+        </ng-container>
+    </div>
+}

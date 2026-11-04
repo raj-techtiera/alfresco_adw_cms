@@ -1,0 +1,34 @@
+<div class="dvi-track">
+  <div class="dvi-track__state" *ngIf="loading">
+    <mat-spinner diameter="36"></mat-spinner>
+    <span>Loading track…</span>
+  </div>
+
+  <p class="dvi-track__state dvi-track__state--error" *ngIf="!loading && error" role="alert">{{ error }}</p>
+
+  <p class="dvi-track__state" *ngIf="!loading && !error && steps.length === 0">No track steps found.</p>
+
+  <div class="dvi-flow" *ngIf="!loading && !error && steps.length">
+    <span class="dvi-flow__start" aria-hidden="true"></span>
+    <ng-container *ngFor="let step of steps">
+      <span class="dvi-flow__line" aria-hidden="true"></span>
+      <article
+        class="dvi-flow__step"
+        [attr.data-tone]="step.tone"
+        [class.dvi-flow__step--selected]="step.id === selectedStepId"
+        [class.dvi-flow__step--clickable]="step.tone === 'completed'"
+        [attr.role]="step.tone === 'completed' ? 'button' : null"
+        [attr.tabindex]="step.tone === 'completed' ? 0 : -1"
+        [attr.aria-disabled]="step.tone !== 'completed'"
+        [attr.aria-pressed]="step.tone === 'completed' ? step.id === selectedStepId : null"
+        (click)="onStepClick(step)"
+        (keydown.enter)="onStepClick(step)"
+        (keydown.space)="onStepClick(step); $event.preventDefault()">
+        <span class="dvi-flow__icon" aria-hidden="true">
+          <mat-icon>{{ step.tone === 'completed' ? 'folder' : 'lock' }}</mat-icon>
+        </span>
+        <span class="dvi-flow__name">{{ step.name }}</span>
+      </article>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Pannello di controllo"
+    },
+    "DASHBOARD": {
+        "TITLE": "Pannello di controllo"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Azioni widget",
+        "REFRESH": "Aggiorna",
+        "VIEW_ALL": "Visualizza tutti",
+        "TASK_SUMMARY": {
+            "TITLE": "Riepilogo attività personali",
+            "SUMMARY_INFO_SUFFIX": "attività completate!",
+            "NO_TASKS_ASSIGNED": "Non hai alcuna attività assegnata.",
+            "NO_TASKS_ERROR": "Si è verificato un errore durante il recupero delle attività. Aggiorna il widget.",
+            "COMPLETED": "Completate",
+            "INCOMPLETE": "Incompleto",
+            "OVERDUE": "Scadute",
+            "TASKS": "Attività",
+            "ARROW_UP": "Freccia su"
+        },
+        "TASK_LIST": {
+            "TITLE": "Gestione delle attività",
+            "OVERDUE": "Scadute",
+            "UNASSIGNED": "Assegnazione annullata",
+            "IN_PROGRESS": "In corso",
+            "NO_OVERDUE_TASKS": "Non hai alcuna attività scaduta.",
+            "NO_UNASSIGNED_TASKS": "Non hai alcuna attività di cui è stata annullata l'assegnazione.",
+            "NO_IN_PROGRESS_TASKS": "Non hai alcuna attività in corso.",
+            "ACTIONS": {
+                "VIEW": "Visualizza attività",
+                "COMMENT": "Aggiungi commento",
+                "CLAIM": "Richiedi attività"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "L’attività è stata richiesta.",
+                "CLAIMING_FAILED": "Non è stato possibile richiedere l'attività."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "File",
+            "RECENT": "Recenti",
+            "FAVORITES": "Preferiti",
+            "PERSONAL": "Personali",
+            "SHARED": "Condivisi",
+            "NO_RECENT_FILES": "Non hai alcun file recente.",
+            "NO_FAVORITES_FILES": "Non hai alcun file o cartella tra i preferiti.",
+            "NO_PERSONAL_FILES": "Non hai alcun file o cartella personale.",
+            "NO_SHARED_FILES": "Non hai alcun file condiviso.",
+            "ACTIONS": {
+                "VIEW": "Visualizza",
+                "DOWNLOAD": "Scarica",
+                "SHARE": "Condividi",
+                "SHARED_LINK_SETTINGS": "Impostazioni di collegamento condiviso",
+                "FOLDER_INFORMATION": "Informazioni cartella"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Librerie",
+            "PERSONAL": "Le mie librerie",
+            "ALL": "Tutte",
+            "FAVOURITES": "Preferite",
+            "NO_PERSONAL_LIBRARIES": "Non hai alcuna libreria personale.",
+            "NO_ALL_LIBRARIES": "Non hai alcuna libreria.",
+            "NO_FAVORITE_LIBRARIES": "Non hai alcuna libreria preferita."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Sospensioni legali",
+            "NO_HOLDS": "Nessuna sospensione creata.",
+            "HOLDS_NAME": "Nome sospensione",
+            "CREATED": "Creazione",
+            "REASON": "Motivo",
+            "ACTIONS": {
+                "DOWNLOAD": "Scarica",
+                "INFORMATION": "Informazioni cartella",
+                "DELETE": "Elimina"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Progresso attività personali - al mese",
+            "WEEK_LABEL": "Settimana",
+            "MONTH_LABEL": "Mese",
+            "SUMMARY_INFO_SUFFIX": "attività completate nel mese selezionato!",
+            "SELECT_MONTH": "Seleziona mese",
+            "NO_TASKS_IN_MONTH": "Non sono presenti attività nel mese selezionato.",
+            "EMPTY": "Nessuna attività"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Riepilogo processi personali - ogni 6 mesi",
+            "SUMMARY_INFO_SUFFIX": "processi completati nei 6 mesi selezionati!",
+            "NO_PROCESSES": "Non hai alcun processo.",
+            "NO_PROCESSES_ERROR": "Si è verificato un errore durante il recupero dei processi. Aggiorna il widget.",
+            "NO_PROCESSES_IN_PERIOD": "Non sono presenti processi nel periodo selezionato.",
+            "RUNNING": "In esecuzione",
+            "COMPLETED": "Completati",
+            "NEXT": "Successivo",
+            "NEXT_SCREEN_READER_LABEL": "Riepilogo dei miei processi  - Vai ai prossimi 6 mesi\n",
+            "PREVIOUS": "Precedente",
+            "PREVIOUS_SCREEN_READER_LABEL": "Riepilogo dei miei processi  - Vai ai precedenti 6 mesi",
+            "EMPTY": "Nessun processo"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Commenti per {{ taskName }}",
+        "CLOSE": "Chiudi"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Miniatura"
+    }
+}

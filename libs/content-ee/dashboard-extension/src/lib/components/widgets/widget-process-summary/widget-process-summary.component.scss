@@ -1,0 +1,109 @@
+.acs-widget-process-summary {
+    .acs-widget-process-summary-container {
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .acs-widget-process-summary-info {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .acs-widget-process-summary-success {
+                display: flex;
+                align-items: center;
+                color: var(--theme-dashboard-completed-color);
+            }
+        }
+
+        .acs-widget-process-summary-legend {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+
+            .acs-widget-process-summary-legend-item {
+                display: flex;
+                align-items: center;
+                overflow: hidden;
+
+                .acs-widget-process-summary-legend-color {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                    flex-shrink: 0;
+                }
+
+                .acs-widget-process-summary-legend-text {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+
+                    .acs-widget-process-summary-legend-text-bold {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .acs-widget-process-summary-filters {
+            display: flex;
+            align-items: flex-start;
+
+            .acs-widget-process-summary-date-chip {
+                margin-left: 20px;
+                border-radius: 16px;
+                background-color: var(--theme-active-filter-bg);
+                padding: 6px 0;
+                pointer-events: none;
+
+                &:hover {
+                    background-color: var(--theme-active-filter-bg);
+                }
+
+                .acs-widget-process-summary-date-chip-button {
+                    display: flex;
+                    border: none;
+                    background: none;
+                    padding: 0;
+                    cursor: pointer;
+                    border-radius: 16px;
+                    pointer-events: auto;
+
+                    &:disabled {
+                        opacity: 0.5;
+                        pointer-events: none;
+                    }
+
+                    adf-icon {
+                        display: flex;
+                    }
+                }
+
+                .acs-widget-process-summary-date-chip-text {
+                    font-size: 16px;
+                    padding: 0 10px;
+                }
+            }
+
+            .acs-widget-process-summary-hidden-date-input {
+                position: absolute;
+                width: 0;
+                height: 0;
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
+        .acs-widget-process-summary-canvas-container {
+            height: 200px;
+            overflow: hidden;
+            margin-top: -10px;
+            padding: 0 15px 0 20px;
+        }
+    }
+}

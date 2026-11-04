@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Nowy proces",
+            "SELECT_APPLICATION": "Wybierz aplikację",
+            "ERROR": "Nie można rozpocząć procesu, ponieważ brak dostępnych definicji procesu."
+        },
+        "BREADCRUMB": {
+            "ROOT": "Zarządzanie procesami",
+            "PROCESS_LIST": {
+                "PROCESSES": "Procesy"
+            },
+            "START_PROCESS": "Rozpocznij proces",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Wyświetl szczegóły"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Pokaż komentarze"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Zarządzanie procesami",
+            "CREATE_NEW_PROCESS": "Rozpocznij proces",
+            "CREATE_PROCESS_NOT_ALLOWED": "Nie można utworzyć nowego procesu"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Pokaż więcej"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Komentarze",
+            "CANCEL_PROCESS": "Anuluj proces"
+        },
+        "ERROR": {
+            "NO_FORM": "Definicja procesu nie zawiera zdefiniowanego formularza",
+            "NO_CONTENT": "Nie można dołączyć pliku z urządzenia",
+            "CAN_NOT_ATTACH": "Nie można dołączyć wybranego dokumentu",
+            "AUDIT_ERROR": "Wyświetl błąd zadania: {{error}}",
+            "TASK_ACCESS_WARNING": "Nie masz uprawnień do modyfikacji tego zadania",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Podgląd dokumentu jest niedostępny, ponieważ zadanie nie zostało jeszcze ukończone."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Utworzono proces „{{ processName }}”",
+            "BACKEND_SERVICE_ERROR": "Wystąpił nieznany błąd sieci. Funkcje usługi przetwarzania są wyłączone.",
+            "ACTION": "Wyświetl uruchomiony proces"
+        },
+        "NO_PROCESS_DEFINITIONS": "Brak definicji procesu",
+        "SIDE_NAV_TITLE": "Przepływ pracy",
+        "STATUS": {
+            "COMPLETED": "Zakończone",
+            "RUNNING": "Uruchamianie",
+            "OPEN": "Otwórz",
+            "UNKNOWN": "Nieznane"
+        },
+        "TASK_LIST": {
+            "TASKS": "Zadania",
+            "ACTIONS": {
+                "TASK_DETAILS": "Widok"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Widok"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formularz został zapisany pomyślnie",
+            "FORM_COMPLETED": "Zadanie zostało ukończone",
+            "CLOSE": "Zamknij",
+            "CLAIM_TASK": "Zadanie zostało przejęte",
+            "UNCLAIM_TASK": "Zadanie zostało zwolnione",
+            "CLAIM_FAILED": "Nie można wykonać czynności"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Nie można wykonać czynności",
+            "FAILED_TO_LOAD": "Nie udało się wczytać szczegółów zadania. Spróbuj ponownie później",
+            "UPDATED": "Właściwość {{ property }} została zaktualizowana pomyślnie",
+            "FAILED_TO_UPDATE": "Nie udało się zaktualizować właściwości {{ property }}",
+            "METADATA_TOOLTIP": "Wyświetl szczegóły",
+            "NO_TASK_NAME": "Bez nazwy"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Zamknij"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Brak definicji procesu"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Uruchomione przez",
+            "CREATED": "Data rozpoczęcia"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Nie można rozpocząć procesu, ponieważ brak dostępnych definicji procesu.",
+            "NO_START_FORM": "Proces nie wymaga żadnych dodatkowych konfiguracji",
+            "NO_PROCESS_DEF_SELECTED": "Nie wybrano kategorii/procesu",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Wybierz aplikację"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Anulować proces?",
+                "DESCRIPTION": "Ten proces i wszystkie powiązane zadania zostaną oznaczone jako zakończone.",
+                "CONFIRM_BTN": "Potwierdź"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' pomyślnie anulowano.",
+                "FAIL": "Anuluj błąd procesu: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Data utworzenia"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Przejmij",
+                "UNCLAIM": "Wydaj"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Część uruchomionego procesu",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Powiązany proces",
+            "PART_OF_THE_PROCESS_TITLE": "Niniejszy dokument jest częścią następujących procesów",
+            "NO_PROCESSES": "Ten dokument nie jest częścią żadnych uruchomionych procesów",
+            "CREATED": "Utworzono",
+            "VIEW_DETAILS_BTN": "Zobacz szczegóły"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatyczne uwierzytelnianie dla usług przetwarzania",
+        "ENABLED": "Włączone",
+        "ENABLED_DESCRIPTION": "System automatycznie uwierzytelni się, umożliwiając użytkownikowi kontynuowanie pracy bez zakłóceń.",
+        "DISABLED": "Wyłączone",
+        "DISABLED_DESCRIPTION": "Użytkownik będzie musiał ponownie uwierzytelnić się danymi, gdy upłynie czas sesji.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

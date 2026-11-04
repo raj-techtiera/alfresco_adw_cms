@@ -1,0 +1,173 @@
+<aca-page-layout class="adw-vendor-doc-page adw-vendor-doc-page--projects">
+  <aca-page-layout-content [scrollable]="true">
+    <div class="adw-vendor-doc-projects">
+      <div class="adw-vdr-hero hero">
+        <button
+          *ngIf="!isSidenavExpanded"
+          class="hero-nav-link"
+          type="button"
+          (click)="openSidenav()"
+          aria-label="Expand navigation menu"
+          title="Expand navigation menu">
+          &raquo;
+        </button>
+
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1 id="adw-construction-doc-heading" class="hero-title">My Construction Document</h1>
+            <div class="hero-lede">
+              <p>
+                Review and track engineering documents flagged as construction documents across your projects.
+              </p>
+              <p>
+                Use the portfolio below to review status, filter by document state, and open a document to submit a red line markup request.
+              </p>
+            </div>
+          </div>
+
+          <ng-container *ngIf="dashboardStripPrimary.length; else heroStatsPlaceholder">
+            <div class="hero-stats stats" role="group" aria-label="Document counts by status">
+              <button
+                *ngFor="let card of dashboardStripPrimary"
+                type="button"
+                class="stat-card"
+                [ngClass]="'stat-card--' + card.variant"
+                [class.stat-card--active]="isDashboardCardActive(card)"
+                [disabled]="!card.selectable"
+                [attr.aria-label]="card.label + ': ' + card.count"
+                [attr.aria-pressed]="card.selectable ? isDashboardCardActive(card) : null"
+                (click)="onDashboardCardClick(card)">
+                <span class="stat-card__inner">
+                  <mat-icon class="stat-card__icon" aria-hidden="true">{{ card.icon }}</mat-icon>
+                  <span class="stat-card__meta">
+                    <span class="stat-card__value">{{ dashboardLoading ? '—' : card.count }}</span>
+                    <span class="stat-card__label">{{ card.label }}</span>
+                    <span class="stat-card__trend" [ngClass]="'stat-card__trend--' + dashboardTrendDirection(card)">
+                      <mat-icon aria-hidden="true">{{ dashboardTrendIcon(card) }}</mat-icon>
+                      <span>from last 30 days</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </ng-container>
+          <ng-template #heroStatsPlaceholder>
+            <div class="hero-stats stats hero-stats--placeholder" aria-hidden="true">
+              <article class="stat-card stat-card--placeholder" *ngFor="let lbl of heroStatPlaceholderLabels">
+                <div class="stat-card__inner">
+                  <span class="stat-card__value">—</span>
+                  <span class="stat-card__label">{{ lbl }}</span>
+                </div>
+              </article>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="portfolio" id="construction-documents-portfolio">
+        <div class="container">
+          <div class="filters">
+            <div class="input-shell input-shell--search filters__search">
+              <mat-icon class="input-shell__icon" aria-hidden="true">search</mat-icon>
+              <input
+                type="text"
+                [(ngModel)]="tableSearch"
+                (input)="onTableSearchChange()"
+                name="constructionTableSearch"
+                placeholder="Search documents by title, project, PO, line item, or status..."
+                aria-label="Search construction documents"
+              />
+            </div>
+            <div class="adw-vendor-vdr-status-filter">
+              <label class="adw-vendor-doc-field-label" for="adw-cx-status-filter">Document status</label>
+              <div class="input-shell input-shell--select">
+                <mat-icon class="input-shell__icon" aria-hidden="true">tune</mat-icon>
+                <mat-select
+                  id="adw-cx-status-filter"
+                  [(ngModel)]="statusFilter"
+                  (ngModelChange)="onStatusFilterChange()"
+                  name="constructionStatusFilter"
+                  panelClass="adw-vendor-doc-select-panel"
+                  placeholder="All status">
+                  <mat-option value="">All status</mat-option>
+                  <mat-option *ngFor="let opt of statusFilterOptions" [value]="opt.value">{{ opt.label }}</mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="section-title">Construction documents</h2>
+
+          <div class="applications-table-wrapper" *ngIf="!loading && !loadError">
+            <ng-container *ngIf="filteredRows.length > 0; else emptyState">
+              <div class="applications-table-scroll adw-vendor-vdr-table-scroll" role="region" aria-label="Construction documents table">
+                <table class="applications-table adw-vendor-vdr-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="adw-vendor-vdr-col--icon" aria-label="Type"></th>
+                      <th scope="col" class="adw-vendor-vdr-col--title">Title</th>
+                      <th scope="col" class="adw-vendor-vdr-col--project">Project</th>
+                      <th scope="col" class="adw-vendor-vdr-col--po">PO number</th>
+                      <th scope="col" class="adw-vendor-vdr-col--line">VDR line item ID</th>
+                      <th scope="col" class="adw-vendor-vdr-col--status">Document status</th>
+                      <th scope="col" class="adw-vendor-vdr-actions-col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of paginatedRows">
+                      <td class="adw-vendor-vdr-col--icon" aria-label="Document type">
+                        <mat-icon class="adw-vendor-vdr-file-icon" [ngClass]="'adw-vendor-vdr-file-icon--' + iconForDoc(row)">
+                          {{ iconForDoc(row) }}
+                        </mat-icon>
+                      </td>
+                      <td class="adw-vendor-vdr-col--title">{{ row.title }}</td>
+                      <td class="adw-vendor-vdr-col--project">{{ row.project }}</td>
+                      <td class="adw-vendor-vdr-col--po">{{ row.poNumber }}</td>
+                      <td class="adw-vendor-vdr-col--line">{{ row.vdrLineItemId }}</td>
+                      <td class="adw-vendor-vdr-col--status">
+                        <span
+                          class="adw-vendor-vdr-status-text"
+                          [ngClass]="'adw-vendor-vdr-status-text--' + normalizedStatus(row.documentStatus)">
+                          <mat-icon aria-hidden="true">{{ statusIcon(row.documentStatus) }}</mat-icon>
+                          <span>{{ statusLabel(row.documentStatus) }}</span>
+                        </span>
+                      </td>
+                      <td class="adw-vendor-vdr-actions-cell">
+                        <button
+                          mat-stroked-button
+                          type="button"
+                          class="adw-vendor-vdr-details-btn"
+                          (click)="openDocumentDetails(row); $event.stopPropagation()"
+                          [disabled]="!row.nodeId"
+                          aria-label="View details">
+                          <mat-icon aria-hidden="true">visibility</mat-icon>
+                          View Actions
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <mat-paginator
+                class="adw-vendor-vdr-paginator"
+                [length]="filteredRows.length"
+                [pageSize]="pageSize"
+                [pageIndex]="pageIndex"
+                [pageSizeOptions]="pageSizeOptions"
+                [showFirstLastButtons]="true"
+                (page)="onPageChange($event)">
+              </mat-paginator>
+            </ng-container>
+            <ng-template #emptyState>
+              <p *ngIf="rows.length > 0" class="adw-vendor-vdr-empty">No documents match your search.</p>
+              <p *ngIf="rows.length === 0" class="adw-vendor-vdr-empty">No construction documents match the current filter.</p>
+            </ng-template>
+          </div>
+
+          <p *ngIf="loading" class="adw-vendor-vdr-status" role="status">Loading construction documents…</p>
+          <p *ngIf="loadError" class="adw-vendor-vdr-error" role="alert">{{ loadError }}</p>
+        </div>
+      </div>
+    </div>
+  </aca-page-layout-content>
+</aca-page-layout>

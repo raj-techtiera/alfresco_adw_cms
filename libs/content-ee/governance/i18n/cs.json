@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Použít",
+        "CANCEL": "Zrušit",
+        "SWITCH": "Přepínač",
+        "CONTINUE": "Pokračovat",
+        "RELOAD": "Reload"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Deklarovat záznam",
+            "SUCCESS": "Soubor {{fileName}} byl deklarován jako záznam.",
+            "FAIL": "Soubor {{fileName}} nelze deklarovat jako záznam.",
+            "DIALOG": {
+                "TITLE": "Deklarovat záznam",
+                "MESSAGE": "Tento dokument byl dříve deklarován jako záznam a byl odmítnut.",
+                "YES": "Deklarovat záznam",
+                "NO": "Zrušit",
+                "CLOSE": "Zavřít"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Deklarování složky jako záznam není momentálně podporováno",
+                    "EXISTING-RECORD": "Položka již byla deklarována jako záznam.",
+                    "FAILED": "Položku se nepodařilo deklarovat jako záznam."
+                },
+                "SUCCESS": "Položka byla deklarována jako záznam."
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Zamítnutý záznam",
+            "CLOSE_LABEL": "Zavřít",
+            "SUB-TITLE": "Soubor „{{ nodeName }}“ byl odmítnut jako záznam.",
+            "BY": "Autor",
+            "AT": "V",
+            "REASON": "Důvod:",
+            "CONFIRM": "Potvrdit",
+            "WARNING": "Pokud odstraníte upozornění na zamítnutý záznam, možnosti umožňující deklarovat soubor jako záznam budou znovu k dispozici",
+            "FAILED-REMOVE": "Nepodařilo se odstranit odmítnuté upozornění uzlu {{nodeName}}: {{errorMessage}}."
+        },
+        "RECORD-NAME": {
+            "REJECT": "Zamítnutý záznam",
+            "TOOLTIP-MESSAGE": "Odstranit upozornění",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Zamítnutý záznam",
+                "RECORD-HYPERLINK": "Deklarováno jako záznam.",
+                "REJECTED-RECORD-HYPERLINK": "Záznam byl odmítnut; podrobnosti zjistíte v informacích o souboru."
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Odebrat",
+            "SUCCESS": "Položka „{{ name }}“ byla odstraněna.",
+            "FAIL": "Nepodařilo se odstranit záznam {{recordId}}.",
+            "DIALOG": {
+                "TITLE": "Odstranit instanci záznamu",
+                "YES-ALL": "Odstranit a toto již nezobrazovat.",
+                "YES": "Odebrat",
+                "NO": "Zrušit",
+                "MESSAGE": {
+                    "DELETE": "Tato instance položky „{{name}}“ bude trvale odstraněna a nebude možné ji obnovit z koše.",
+                    "ADDITIONAL": "Na záznam „{{name}}“ nacházející se v systému správy záznamů vaší organizace to nebude mít žádný vliv."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Záznam"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Přesunout",
+            "MOVE-ITEM": "Přesunout položku '{{ name }}' do...",
+            "SAME-FOLDER-MOVE": "Nelze přesunout do stejné složky",
+            "SUCCESSFUL": "Záznam byl úspěšně přesunut"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Odeslat do archivu",
+                "SUCCESS": "Soubor {{ name }} bude archivován.",
+                "FAIL": "Nepodařilo se archivovat položku {{ name }}.",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Položka již byla archivována.",
+                        "PENDING-RESTORE": " Položka čeká na obnovení. ",
+                        "RESTORED": "Obnovené položky nelze archivovat.",
+                        "FOLDER": "Obnovení z archivu není momentálně podporováno."
+                    },
+                    "FAIL": "Archivace se nezdařila.",
+                    "SUCCESS": "Položka bude archivována."
+                },
+                "DIALOG": {
+                    "TITLE": "Odeslat do archivu",
+                    "MESSAGE": "Chystáte se odeslat soubory do externího archivu. Získání souborů z archivu může být zpoplatněno. Opravdu chcete pokračovat?",
+                    "YES": "Odeslat do archivu",
+                    "NO": "Zrušit"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Obnovit z archivu",
+                "SYNC-ERROR": "Soubor, který se pokoušíte obnovit, dosud nebyl s archivem synchronizován. Tato operace může trvat až 24 hodin. Zkuste to znovu později.",
+                "FAIL": "Položku {{ name }} se nepodařilo z archivu obnovit.",
+                "DIALOG": {
+                    "TITLE": "Obnovit z archivu",
+                    "LABEL": {
+                        "TYPE": "Rychlost obnovení (limit 250 MB na obnovení)",
+                        "OPTION-FAST": "Rychlé – trvání 1–5 min. (nejvyšší náklady)",
+                        "OPTION-STANDARD": "Standardní – trvání 3–5 hod.",
+                        "OPTION-SLOW": "Pomalé – trvání 5–12 hod. (nejnižší náklady)",
+                        "DURATION": "Jak dlouho bude obnova souborů trvat (ve dnech)?"
+                    },
+                    "YES": "Potvrdit",
+                    "NO": "Zrušit"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Obnovit z archivu",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Soubory, které se pokoušíte obnovit, dosud nebyly s archivem synchronizovány. Tato operace může trvat až 24 hodin. Zkuste to znovu později.",
+                        "RESTORED": "Položka již byla obnovena.",
+                        "PENDING-RESTORE": "Položka již čeká na obnovení.",
+                        "NOT-STORED": "Položka, kterou se pokoušíte obnovit, dosud nebyla s archivem synchronizována.",
+                        "FAIL": "Obnovení se nezdařilo.",
+                        "FOLDER": "Obnovení složky není momentálně podporováno."
+                    },
+                    "SUCCESS": "Položka bude obnovena."
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Prodloužit dobu obnovení",
+                "SUCCESS": "Trvání obnovení bude prodlouženo na „{{ days }}“ dny/dní od {{ date }}.",
+                "FAIL": "Nepodařilo se prodloužit dobu obnovení položky {{ name }} z archivu."
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Tento soubor je archivován. Chcete-li jej obnovit, klikněte na položku pravým tlačítkem a vyberte možnost Obnovit z archivu.",
+                "RESTORED": "Obnoveno",
+                "PENDING-RESTORE": "Nyní se obnovují soubory z archivu. Pokud nelze soubor zobrazit v náhledu ani stáhnout, zkuste to později znovu."
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Stav hromadné operace",
+            "FAIL": "Operaci se nepodařilo provést.",
+            "CLOSE": "Zavřít"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Spravovat podniky",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Odebrat záznam pro případ soudního řízení",
+            "DIALOG_TITLE": "Správa zákonného majetku",
+            "TAB_EXISTING_HOLDS": "Správa stávajících podniků",
+            "TAB_CREATE_LEGAL_HOLD": "Vytvořit legální držení",
+            "SAVE": "Uložit",
+            "CLOSE": "Zavřít",
+            "CANCEL": "Zrušit",
+            "NEW_HOLD_NAME": "Název",
+            "NEW_HOLD_DESCRIPTION": "Popis",
+            "NEW_HOLD_REASON": "Důvod",
+            "DIALOG_WARNING_TITLE": "Varování",
+            "DIALOG_WARNING_MESSAGE": "Změny zde nebudou použity, pokud přepínáte panely.",
+            "DOCUMENT_IN_HOLD": "Dokument v legálním držení",
+            "FOLDER_IN_HOLD": "Složka v legálním držení",
+            "APPLY_HOLDS_SUCCESS": "Zákonná akce byla úspěšná.",
+            "APPLY_HOLDS_NOT_FOUND": "Vybrané záznamy pro případ soudního řízení nebo zadané soubory neexistují. Zkontrolujte svůj výběr a zkuste to znovu.",
+            "BULK_APPLY_HOLDS_SUCCESS": "Akce legálního držení byla úspěšná. Položky {{ totalItems }} byly přidány do Zákonného držení.",
+            "BULK_APPLY_HOLDS_STARTED": "Hromadné zákonné držení je spuštěno na pozadí. Po dokončení budete upozorněni.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Byl detekován archivovaný, duplikovaný nebo uzamčený obsah. {{ errorsCount }} položky nebyly přidány do Zákonného držení.",
+            "BULK_APPLY_HOLDS_FAIL": "Umístění obsahu na zákonný požadavek selhalo.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Hromadné právní držení nelze použít na složky",
+            "ACKNOWLEDGE": "Přijmout",
+            "EMPTY_HOLD_LIST": "Žádný právní majetek není k dispozici",
+            "WARNING_DIALOG_TITLE": "Varování: Hromadná akce",
+            "WARNING_DIALOG_MESSAGE": "Tato akce změní stav <strong>Všechny soubory v těchto vyhledávacích souborech</strong>.<br><br>Tento legální držení <strong>nebude aplikováno na složky</strong>.",
+            "WARNING_DIALOG_QUESTION": "Chcete pokračovat?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Admin musí vytvořit stránku pro správu záznamů pro aktivaci Zákonného majetku",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Soubor byl úspěšně odebrán ze záznamů pro případ soudního řízení.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Soubory byly úspěšně odebrány ze záznamů pro případ soudního řízení.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Soubor se nepodařilo odebrat ze záznamů pro případ soudního řízení.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Soubory se nepodařilo odebrat ze záznamů pro případ soudního řízení.",
+            "LOADING_CAPABILITIES_ERROR": "Načtení možností se nezdařilo",
+            "NODE_NOT_FOUND": "Vybraný uzel nebyl nalezen. Zkontrolujte prosím výběr a zkuste to znovu.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Odstranit položky obsahující držení?",
+                "TITLE_PLURAL": "Odstranit tento počet vybraných záznamů pro případ soudního řízení (celkem: {{ count }}) a uvolnit dokumenty?",
+                "MESSAGE_SINGULAR": "Vybrali jste {{ name }} požadavek na odstranění. Všechny položky, které drží, budou uvolněny. Tuto akci nelze vrátit zpět.",
+                "MESSAGE_PLURAL": "Vybrali jste {{ count }} položky, které mají být odstraněny. Některé z nich jsou v držení, všechny položky budou uvolněny. Tuto akci nelze vrátit zpět.",
+                "KEEP_HOLD": "Ponechat záznam pro případ soudního řízení"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Chyba při ukládání bezpečnostních značek",
+            "DIALOG_TITLE": "Upravit bezpečnostní značky",
+            "MENU_TITLE": "Bezpečnostní značky",
+            "SAVE": "Uložit",
+            "CANCEL": "Zrušit",
+            "HELP": "Nápověda",
+            "CLOSE": "Zavřít",
+            "SHOW_ALL": "Zobrazit vše",
+            "APPLIED": "Použito",
+            "NOT_APPLIED": "Nepoužito",
+            "COLUMNS": {
+                "NAME": "Bezpečnostní značky"
+            },
+            "NO_GROUPS_CREATED": "Žádné bezpečnostní skupiny nejsou k dispozici",
+            "SECURITY_MARKS_HELP": "Nápověda k bezpečnostním značkám",
+            "HELP_ICON_TEXT": "Použití bezpečnostních značek omezí přístup k digitálnímu obsahu. Označený obsah budou moci prohlížet nebo upravovat pouze osoby, které mají u svého uživatelského oprávnění použity odpovídající značky."
+        }
+    }
+}

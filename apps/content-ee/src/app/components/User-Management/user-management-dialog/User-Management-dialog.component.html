@@ -1,0 +1,195 @@
+<div class="um-dialog">
+  <header class="dialog-header">
+    <div class="dialog-header__lead">
+      <div class="dialog-icon" aria-hidden="true">
+        <mat-icon>{{ mode === 'user' ? 'person_add' : mode === 'members' ? 'person_add_alt' : 'group_add' }}</mat-icon>
+      </div>
+      <div class="dialog-header__text">
+        <h2 mat-dialog-title>{{ mode === 'user' ? 'Add User' : mode === 'members' ? 'Add Users' : 'Add Group' }}</h2>
+        <p>
+          {{
+            mode === 'user'
+              ? 'Create a new system user account'
+              : mode === 'members'
+                ? 'Add users to this group'
+                : 'Create a new access group'
+          }}
+        </p>
+      </div>
+    </div>
+    <button mat-icon-button class="dialog-close" mat-dialog-close aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content>
+    @if (mode === 'user') {
+      <form id="management-dialog-form" class="dialog-form" (ngSubmit)="create()">
+        <div class="form-row">
+          <label class="field">
+            <span class="field__label">First name <em>*</em></span>
+            <input
+              class="field__control"
+              type="text"
+              [(ngModel)]="firstName"
+              name="firstName"
+              placeholder="Enter first name"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Last name</span>
+            <input
+              class="field__control"
+              type="text"
+              [(ngModel)]="lastName"
+              name="lastName"
+              placeholder="Enter last name"
+            />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label class="field">
+            <span class="field__label">Username <em>*</em></span>
+            <span class="field__input">
+              <mat-icon aria-hidden="true">badge</mat-icon>
+              <input
+                class="field__control"
+                type="text"
+                [(ngModel)]="username"
+                name="username"
+                placeholder="e.g. jsmith"
+                required
+              />
+            </span>
+            <small class="field__hint">Used to sign in and uniquely identify the user</small>
+          </label>
+
+          <label class="field">
+            <span class="field__label">Email address <em>*</em></span>
+            <span class="field__input">
+              <mat-icon aria-hidden="true">mail_outline</mat-icon>
+              <input
+                class="field__control"
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="name@company.com"
+                required
+              />
+            </span>
+          </label>
+        </div>
+
+        <div class="form-row form-row--end">
+          <label class="field">
+            <span class="field__label">Password <em>*</em></span>
+            <span class="field__input">
+              <mat-icon aria-hidden="true">lock_outline</mat-icon>
+              <input
+                class="field__control"
+                [type]="hidePassword ? 'password' : 'text'"
+                [(ngModel)]="password"
+                name="password"
+                placeholder="Enter password"
+                required
+              />
+              <button
+                type="button"
+                class="field__toggle"
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'"
+              >
+                <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+            </span>
+          </label>
+
+          <mat-checkbox class="admin-check" [(ngModel)]="isAdmin" name="isAdmin">
+            <span class="admin-check__copy">
+              <span class="admin-check__label">Is Admin</span>
+              <small class="field__hint">Grant this user administrator privileges</small>
+            </span>
+          </mat-checkbox>
+        </div>
+      </form>
+    } @else {
+      <form id="management-dialog-form" class="dialog-form" (ngSubmit)="create()">
+        <label class="field">
+          <span class="field__label">Group name @if (mode === 'group') {<em>*</em>}</span>
+          <span class="field__input">
+            <mat-icon aria-hidden="true">groups</mat-icon>
+            <input
+              class="field__control"
+              type="text"
+              [(ngModel)]="groupName"
+              name="groupName"
+              placeholder="e.g. EDMS_TESTING_LAST_USER"
+              [readonly]="mode === 'members'"
+              [class.field__control--readonly]="mode === 'members'"
+              [required]="mode === 'group'"
+            />
+          </span>
+          @if (mode === 'members') {
+            <small class="field__hint">Users will be added to this existing group</small>
+          } @else {
+            <small class="field__hint">Unique group identifier used for access control</small>
+          }
+        </label>
+
+        <div class="field">
+          <span class="field__label">{{ mode === 'members' ? 'Users' : 'Initial members' }} @if (mode === 'members') {<em>*</em>}</span>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="member-select">
+            <mat-icon matPrefix aria-hidden="true">person_add_alt</mat-icon>
+            <mat-select
+              multiple
+              [(ngModel)]="selectedMembers"
+              name="initialMembers"
+              [placeholder]="membersLoading ? 'Loading users…' : 'Select users to add'"
+              [disabled]="membersLoading"
+              panelClass="um-member-select-panel"
+            >
+              @for (user of memberOptions; track user.id) {
+                <mat-option [value]="user.id" [disabled]="mode === 'members' && existingMembers.has(user.id)">
+                  {{ user.displayName }} ({{ user.id }})
+                  @if (mode === 'members' && existingMembers.has(user.id)) {
+                    <span class="member-option-note">already a member</span>
+                  }
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (mode === 'members') {
+            @if (membersLoadError) {
+              <small class="field__hint field__hint--error">{{ membersLoadError }}</small>
+            } @else if (newMembers.length) {
+              <small class="field__hint">{{ newMembers.length }} new user{{ newMembers.length === 1 ? '' : 's' }} will be added</small>
+            } @else {
+              <small class="field__hint">Current members are pre-selected and locked; pick new users to add</small>
+            }
+          } @else if (selectedMembers.length) {
+            <small class="field__hint">{{ selectedMembers.length }} user{{ selectedMembers.length === 1 ? '' : 's' }} selected</small>
+          } @else {
+            <small class="field__hint">Users added to the group when it is created</small>
+          }
+        </div>
+      </form>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button class="cancel-button" mat-dialog-close type="button">Cancel</button>
+    <button
+      mat-flat-button
+      class="create-button"
+      form="management-dialog-form"
+      type="submit"
+      [disabled]="!isValid"
+    >
+      <mat-icon>add</mat-icon>
+      {{ mode === 'user' ? 'Create User' : mode === 'members' ? 'Add Users' : 'Create Group' }}
+    </button>
+  </mat-dialog-actions>
+</div>

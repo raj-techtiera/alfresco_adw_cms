@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "L'action a échoué. Réessayez ou contactez le service informatique.",
+        "PERMISSION_DENIED": "Vous n'êtes pas autorisé à effectuer cette opération"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} a demandé à rejoindre {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} personne(s) ont demandé à rejoindre {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Gérer les membres",
+        "CLOSE": "Fermer",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Détails de la bibliothèque",
+            "MANAGE_MEMBERS": "Gérer les membres"
+        },
+        "TABS": {
+            "PROPERTIES": "Propriétés",
+            "MEMBERS": "Membres",
+            "GROUPS": "Groupes",
+            "PENDING": "En attente"
+        },
+        "LOAD_MORE": "Charger plus",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Confirmer",
+            "MESSAGE": "Voulez-vous continuer ?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Rejeter la demande du membre",
+            "COMMENT": "Laisser un commentaire ici",
+            "YES_LABEL": "Rejeter",
+            "NO_LABEL": "Annuler"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Infos sur l'adhésion au groupe",
+            "DESCRIPTION": "Cet utilisateur a accès à la bibliothèque via les rôles des groupes. Pour supprimer l'adhésion individuelle de cet utilisateur, vous devez d'abord le supprimer des groupes listés ci-dessous.",
+            "CLOSE": "Fermer",
+            "GROUP": "Groupe",
+            "ROLE": "Rôle"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Aucune demande d'adhésion en attente",
+        "PENDING_REQUESTS": "Demandes d'adhésion en attente",
+        "APPROVE": "Approuver",
+        "REJECT": "Rejeter"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Membres de cette bibliothèque",
+        "NO_MEMBERS": "Aucun membre trouvé",
+        "DELETE_MEMBERS": "Supprimer les membres sélectionnés",
+        "GROUP_ROLE": "Rôle du groupe",
+        "REMOVE": "Supprimer",
+        "A11Y_AVATAR": "Avatar de l'utilisateur",
+        "REFRESH": "Actualiser"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Adhésion de groupe à cette bibliothèque",
+        "NO_GROUPS": "Aucun groupe trouvé",
+        "DELETE_GROUPS": "Supprimer les groupes sélectionnés",
+        "REFRESH": "Actualiser",
+        "REMOVE": "Supprimer"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Gestionnaire",
+        "SITE_CONTRIBUTOR": "Contributeur",
+        "SITE_CONSUMER": "Lecteur",
+        "SITE_COLLABORATOR": "Collaborateur"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Définir le rôle de l'utilisateur",
+        "GROUP_SELECTOR": "Définir le rôle du groupe",
+        "ALL": "Définir tous les rôles sur"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Ajouter un utilisateur/groupe",
+        "SEARCH_INPUT": "Rechercher des utilisateurs ou des groupes à ajouter",
+        "NAME": "Nom",
+        "TITLE_LABEL": "Ajouter un utilisateur ou un groupe à",
+        "ADD_LABEL": "Ajouter",
+        "SELECT_LABEL": "Sélectionner",
+        "CLOSE_LABEL": "Fermer",
+        "CANCEL_LABEL": "Annuler"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Membres"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Demande d'adhésion rejetée",
+        "MEMBERSHIP_ACCEPTED": "Membre ajouté à la bibliothèque",
+        "USER_REMOVE_SUCCESS": "Utilisateur supprimé",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} utilisateurs ont été supprimés, {{skipped}} ont été ignorés",
+        "USER_REMOVE_FAILED": "La suppression de l'utilisateur a échoué",
+        "GROUP_REMOVE_SUCCESS": "Groupe supprimé",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} groupes ont été supprimés, {{skipped}} ont été ignorés",
+        "GROUP_REMOVE_FAILED": "La suppression du groupe a échoué",
+        "ADD_MEMBER_FAILED": "L'ajout de membre(s) au site a échoué",
+        "ADD_MEMBERS_FAILED": "{{count}} membres n'ont pas pu être ajoutés",
+        "ADD_MEMBERS_SUCCESS": "{{userCount}} utilisateur(s) et {{groupCount}} groupe(s) ont été ajoutés",
+        "ADD_GROUPS_SUCCESS": "{{groupCount}} groupe(s) a/ont été ajouté(s)",
+        "ADD_USERS_SUCCESS": "{{userCount}} utilisateur(s) a/ont été ajouté(s)",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} membre a été ajouté, {{skipped}} ont été ignorés",
+        "USER_ROLE_UPDATED": "Le rôle de l'utilisateur a été mis à jour",
+        "GROUP_ROLE_UPDATED": "Le rôle du groupe a été mis à jour",
+        "MEMBER_EXISTS": "L'utilisateur est déjà membre de ce site",
+        "MANAGER_REQUIRED": "Au moins un gestionnaire de site doit être défini pour chaque site",
+        "ACTIONS": {
+            "CLOSE": "Fermer"
+        }
+    }
+}

@@ -1,0 +1,99 @@
+$highlight-hold: #e2eefa;
+
+.aga-loading-spinner-container-small {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aga-no-available-holds-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+}
+
+.aga-no-available-holds-apply-hold {
+    margin-top: 40px;
+    color: var(--theme-blue-border-color);
+    text-decoration: underline;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.aga-manage-holds-list {
+    display: block;
+    height: calc(100% - 24px);
+    border: 1px solid var(--theme-grey-background);
+    border-radius: 4px;
+    margin-top: 20px;
+
+    .aga-manage-holds-list-items {
+        overflow: auto;
+        height: 100%;
+        padding-top: 0;
+
+        &-viewport {
+            height: 100%;
+            overflow-x: hidden;
+            display: flex;
+
+            :first-child {
+                max-width: 100%;
+            }
+        }
+
+        &-item {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 23px;
+            height: 40px;
+            border-left: 4px solid transparent;
+
+            &:hover:not(&-non-selectable) {
+                background-color: $highlight-hold;
+                border-left: 4px solid var(--theme-blue-border-color);
+            }
+
+            &-selected {
+                background-color: $highlight-hold;
+                border-left: 4px solid var(--theme-blue-border-color);
+            }
+        }
+
+        p.aga-manage-holds-list-items-item-name {
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 0;
+            max-width: 90%;
+        }
+
+        &-item-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+    }
+
+    .aga-add-hold-icon {
+        padding-left: 16px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .aga-loading-spinner {
+        display: block;
+    }
+}

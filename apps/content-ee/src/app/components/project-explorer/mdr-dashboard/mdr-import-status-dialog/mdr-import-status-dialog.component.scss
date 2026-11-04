@@ -1,0 +1,61 @@
+.mdr-import-status {
+  padding: 8px 4px 4px;
+  max-width: 440px;
+  text-align: center;
+}
+
+.mdr-import-status__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-bottom: 12px;
+}
+
+.mdr-import-status__icon {
+  font-size: 42px;
+  width: 42px;
+  height: 42px;
+}
+
+.mdr-import-status[data-kind='timeout'] .mdr-import-status__icon {
+  color: #d97706;
+}
+
+.mdr-import-status[data-kind='failed'] .mdr-import-status__icon {
+  color: #dc2626;
+}
+
+.mdr-import-status[data-kind='success'] .mdr-import-status__icon {
+  color: #16a34a;
+}
+
+.mdr-import-status[data-kind='importing'] .mdr-import-status__icon {
+  color: var(--adw-color-brand-primary, #1b1464);
+}
+
+.mdr-import-status__title {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.mdr-import-status__body {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #475569;
+  text-align: left;
+}
+
+:host ::ng-deep .mat-mdc-dialog-content {
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+
+:host ::ng-deep .mat-mdc-dialog-actions {
+  padding: 8px 0 0;
+  min-height: auto;
+}

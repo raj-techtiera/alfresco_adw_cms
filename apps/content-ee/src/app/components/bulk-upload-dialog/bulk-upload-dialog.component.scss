@@ -1,0 +1,217 @@
+:host {
+  display: block;
+}
+
+.adw-bulk-upload-dialog {
+  --bu-accent: #1f4e8c;
+  --bu-accent-soft: rgba(31, 78, 140, 0.1);
+  --bu-border: #e2e8f0;
+  --bu-surface: #f8fafc;
+  --bu-text: #0f172a;
+  --bu-muted: #64748b;
+  --bu-danger: #b91c1c;
+
+  display: flex;
+  flex-direction: column;
+  min-width: min(100%, 520px);
+  max-width: 520px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.adw-bulk-upload-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--bu-border);
+}
+
+.adw-bulk-upload-dialog__header-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.adw-bulk-upload-dialog__header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--bu-accent-soft);
+  color: var(--bu-accent);
+
+  mat-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+  }
+}
+
+.adw-bulk-upload-dialog__header-text {
+  min-width: 0;
+}
+
+.adw-bulk-upload-dialog__title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--bu-text);
+}
+
+.adw-bulk-upload-dialog__subtitle {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--bu-muted);
+
+  strong {
+    color: var(--bu-text);
+    font-weight: 600;
+  }
+}
+
+.adw-bulk-upload-dialog__close {
+  flex-shrink: 0;
+  color: var(--bu-muted);
+}
+
+.adw-bulk-upload-dialog__content {
+  padding: 20px 24px !important;
+  margin: 0 !important;
+  max-height: min(70vh, 520px);
+}
+
+.adw-bulk-upload-dialog__slots {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.adw-bulk-upload-dialog__slot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--bu-border);
+  border-radius: 12px;
+  background: var(--bu-surface);
+}
+
+.adw-bulk-upload-dialog__slot-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.adw-bulk-upload-dialog__slot-icon {
+  color: var(--bu-accent);
+  flex-shrink: 0;
+}
+
+.adw-bulk-upload-dialog__slot-title {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--bu-text);
+}
+
+.adw-bulk-upload-dialog__slot-hint {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  color: var(--bu-muted);
+}
+
+.adw-bulk-upload-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  mat-spinner {
+    display: inline-block;
+    margin-right: 6px;
+  }
+}
+
+.adw-bulk-upload-dialog__file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--bu-border);
+
+  mat-icon {
+    flex-shrink: 0;
+    color: var(--bu-accent);
+  }
+}
+
+.adw-bulk-upload-dialog__file-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  color: var(--bu-text);
+}
+
+.adw-bulk-upload-dialog__file-clear {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--bu-muted);
+}
+
+.adw-bulk-upload-dialog__error {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--bu-danger);
+}
+
+.adw-bulk-upload-dialog__hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.adw-bulk-upload-dialog__footer {
+  padding: 12px 24px 20px !important;
+  margin: 0 !important;
+  border-top: 1px solid var(--bu-border);
+  gap: 8px;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  mat-spinner {
+    display: inline-block;
+    margin-right: 4px;
+  }
+}

@@ -1,0 +1,52 @@
+@if (!(infiniteScrollDataSource.loadingError$ | async)) {
+    <acs-widget-base [widgetTitle]="'WIDGETS.LEGAL_HOLDS.TITLE'"
+                     [emptyStateMessage]="emptyStateMessage"
+                     [hasContent]="infiniteScrollDataSource.itemsCount > 0"
+                     [isLoading$]="infiniteScrollDataSource.isLoading"
+                     (refreshWidget)="infiniteScrollDataSource.reset()"
+                     (viewAllButtonClicked)="onViewAllBtnClick()">
+        <div class="acs-widget-legal-holds-container">
+            <acs-infinite-scroll-datatable
+                [rowActions]="rowActions"
+                [virtualScrollDataSource]="infiniteScrollDataSource"
+                [rowsObservable]="infiniteScrollDataSource.legalHoldsLoaded$"
+                (rowActionExecuted)="executeRowAction($event)">
+                <data-columns>
+                    <data-column
+                        key="icon"
+                        type="image"
+                        [sortable]="false"/>
+                    <data-column
+                        key="name"
+                        type="text"
+                        title="WIDGETS.LEGAL_HOLDS.HOLDS_NAME"
+                        [sortable]="false">
+                        <ng-template let-entry="$implicit">
+                        <span
+                            role="link"
+                            tabindex="0"
+                            class="adf-datatable-cell--link"
+                            [attr.aria-label]="entry.row.obj.name"
+                            [title]="entry.row.obj.name"
+                            (click)="onNameClick(entry.row)"
+                            (keyup.enter)="onNameClick(entry.row)">
+                            {{ entry.row.obj.name }}
+                        </span>
+                        </ng-template>
+                    </data-column>
+                    <data-column
+                        key="createdAt"
+                        type="date"
+                        title="WIDGETS.LEGAL_HOLDS.CREATED"
+                        format="timeAgo"
+                        [sortable]="false"/>
+                    <data-column
+                        key="reason"
+                        type="text"
+                        title="WIDGETS.LEGAL_HOLDS.REASON"
+                        [sortable]="false"/>
+                </data-columns>
+            </acs-infinite-scroll-datatable>
+        </div>
+    </acs-widget-base>
+}

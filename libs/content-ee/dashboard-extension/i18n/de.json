@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "DMS Dashboard"
+    },
+    "DASHBOARD": {
+        "TITLE": "DMS Dashboard"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Widget-Aktionen",
+        "REFRESH": "Aktualisieren",
+        "VIEW_ALL": "Alle anzeigen",
+        "TASK_SUMMARY": {
+            "TITLE": "Zusammenfassung meiner Aufgaben",
+            "SUMMARY_INFO_SUFFIX": "erledigte Aufgaben!",
+            "NO_TASKS_ASSIGNED": "Ihnen sind keine Aufgaben zugeordnet.",
+            "NO_TASKS_ERROR": "Beim Abrufen Ihrer Aufgaben ist ein Fehler aufgetreten. Bitte aktualisieren Sie das Widget.",
+            "COMPLETED": "Abgeschlossen",
+            "INCOMPLETE": "Unvollständig",
+            "OVERDUE": "Überfällig",
+            "TASKS": "Aufgaben",
+            "ARROW_UP": "Pfeil nach oben"
+        },
+        "TASK_LIST": {
+            "TITLE": "Aufgaben-Management",
+            "OVERDUE": "Überfällig",
+            "UNASSIGNED": "Nicht zugewiesen",
+            "IN_PROGRESS": "In Bearbeitung",
+            "NO_OVERDUE_TASKS": "Sie haben keine überfälligen Aufgaben.",
+            "NO_UNASSIGNED_TASKS": "Sie haben keine nicht zugewiesenen Aufgaben.",
+            "NO_IN_PROGRESS_TASKS": "Sie haben keine laufenden Aufgaben.",
+            "ACTIONS": {
+                "VIEW": "Aufgabe anzeigen",
+                "COMMENT": "Kommentar hinzufügen",
+                "CLAIM": "Aufgabe beanspruchen"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Aufgabe wurde erfolgreich beansprucht.",
+                "CLAIMING_FAILED": "Die Aufgabe konnte nicht beansprucht werden."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Dateien",
+            "RECENT": "Neueste",
+            "FAVORITES": "Favoriten",
+            "PERSONAL": "Persönlich",
+            "SHARED": "Geteilt",
+            "NO_RECENT_FILES": "Sie haben keine aktuellen Dateien.",
+            "NO_FAVORITES_FILES": "Sie haben keine bevorzugten Dateien oder Ordner.",
+            "NO_PERSONAL_FILES": "Sie haben keine persönlichen Dateien oder Ordner.",
+            "NO_SHARED_FILES": "Sie haben keine freigegebenen Dateien.",
+            "ACTIONS": {
+                "VIEW": "Anzeigen",
+                "DOWNLOAD": "Herunterladen",
+                "SHARE": "Freigeben",
+                "SHARED_LINK_SETTINGS": "Einstellung für freigegebene Links",
+                "FOLDER_INFORMATION": "Ordnerinformation"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Bibliotheken",
+            "PERSONAL": "Meine Bibliotheken",
+            "ALL": "Alle",
+            "FAVOURITES": "Favoriten",
+            "NO_PERSONAL_LIBRARIES": "Sie haben keine persönlichen Bibliotheken.",
+            "NO_ALL_LIBRARIES": "Sie haben keine Bibliotheken.",
+            "NO_FAVORITE_LIBRARIES": "Sie haben keine favorisierten Bibliothek."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Rechtliche Aufbewahrungsverfügungen",
+            "NO_HOLDS": "Keine Aufbewahrungsverfügungen erstellt. ",
+            "HOLDS_NAME": "Aufbewahrungsverfügungsname ",
+            "CREATED": "Erstellt",
+            "REASON": "Grund",
+            "ACTIONS": {
+                "DOWNLOAD": "Herunterladen",
+                "INFORMATION": "Ordnerinformation",
+                "DELETE": "Löschen"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Meine Aufgaben-Fortschritt - pro Monat",
+            "WEEK_LABEL": "Woche",
+            "MONTH_LABEL": "Monat",
+            "SUMMARY_INFO_SUFFIX": "erledigte Aufgaben im ausgewählten Monat!",
+            "SELECT_MONTH": "Monat auswählen",
+            "NO_TASKS_IN_MONTH": "Es gibt keine Aufgaben im ausgewählten Monat.",
+            "EMPTY": "Keine Aufgaben"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Meine Prozessübersicht - pro 6 Monate",
+            "SUMMARY_INFO_SUFFIX": "abgeschlossene Prozesse in den ausgewählten 6 Monaten!",
+            "NO_PROCESSES": "Sie haben keine Prozesse.",
+            "NO_PROCESSES_ERROR": "Beim Abrufen Ihrer Prozesse ist ein Fehler aufgetreten. Bitte aktualisieren Sie das Widget.",
+            "NO_PROCESSES_IN_PERIOD": "Es gibt keine Prozesse in dem ausgewählten Zeitraum.",
+            "RUNNING": "Laufend",
+            "COMPLETED": "Abgeschlossen",
+            "NEXT": "Weiter",
+            "NEXT_SCREEN_READER_LABEL": "Meine Prozessübersicht - Gehe zu den nächsten 6 Monaten",
+            "PREVIOUS": "Vorherige",
+            "PREVIOUS_SCREEN_READER_LABEL": "Meine Prozessübersicht - Gehe zu den letzten 6 Monaten",
+            "EMPTY": "Keine Prozesse"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Kommentare für {{ taskName }}",
+        "CLOSE": "Schließen"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Thumbnail"
+    }
+}

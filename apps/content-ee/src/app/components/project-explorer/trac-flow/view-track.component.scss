@@ -1,0 +1,110 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+}
+
+.dvi-track {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  overflow: auto;
+  padding: 16px 12px 20px;
+  box-sizing: border-box;
+}
+
+.dvi-track__state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 140px;
+  color: #64748b;
+}
+
+.dvi-track__state--error {
+  color: #b91c1c;
+}
+
+.dvi-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.dvi-flow__start {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #2563eb;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.dvi-flow__line {
+  flex: 0 0 18px;
+  width: 2px;
+  height: 18px;
+  background: #94a3b8;
+}
+
+.dvi-flow__step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 280px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.dvi-flow__step[data-tone='completed'] {
+  background: #dcfce7; /* green-100 */
+  border: 1px solid #22c55e; /* same green as Approved in this app */
+  color: #166534;
+}
+
+.dvi-flow__step[data-tone='current'] {
+  background: #fde68a;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+}
+
+.dvi-flow__step[data-tone='upcoming'] {
+  background: #e2e8f0;/* blue-50 */
+  color: #44474e;
+}
+
+.dvi-flow__step--clickable {
+  cursor: pointer;
+}
+
+.dvi-flow__step--selected {
+  box-shadow: 0 0 0 2px var(--adw-color-brand-primary, #1b1464);
+}
+
+.dvi-flow__icon {
+  display: flex;
+  color: inherit;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.dvi-flow__name {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}

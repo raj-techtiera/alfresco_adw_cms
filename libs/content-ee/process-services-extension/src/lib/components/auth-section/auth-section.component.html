@@ -1,0 +1,77 @@
+@if (!isLoading) {
+    @if (ssoRepositoryId) {
+        <div class="aps-auth-section-container">
+            <div class="aps-auth-section-title-container">
+                <div class="aps-auth-section-title">
+                    <button
+                        mat-icon-button
+                        (click)="toggleSection()"
+                        [attr.title]="`APP.TOOLTIPS.${sectionExpanded ? 'COLLAPSE' : 'EXPAND'}_SECTION` | translate"
+                        [attr.aria-label]="`APP.TOOLTIPS.${sectionExpanded ? 'COLLAPSE' : 'EXPAND'}_SECTION` | translate">
+                        <mat-icon>{{ sectionExpanded ?  'expand_more' : 'chevron_right'}}</mat-icon>
+                    </button>
+                    <h4>{{'AUTO_AUTH_SECTION.TITLE' | translate}}</h4>
+                    <p class="aps-auth-section-description">{{ (autoAuthEnabled ? 'AUTO_AUTH_SECTION.ENABLED' : 'AUTO_AUTH_SECTION.DISABLED') | translate}}</p>
+                </div>
+                <div>
+                    @if (!editMode) {
+                        <button
+                            mat-icon-button
+                            (click)="toggleEditMode()"
+                            class="aps-auth-section-icon-btn"
+                            [attr.title]="'APP.TOOLTIPS.EDIT' | translate"
+                            [attr.aria-label]="'APP.TOOLTIPS.EDIT' | translate">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    } @else {
+                        <div>
+                            <button
+                                mat-icon-button
+                                class="aps-auth-section-icon-btn"
+                                [attr.title]="'APP.TOOLTIPS.CANCEL' | translate"
+                                [attr.aria-label]="'APP.TOOLTIPS.CANCEL' | translate"
+                                (click)="cancelEditing()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <button
+                                mat-icon-button
+                                color="primary"
+                                [attr.title]="'APP.TOOLTIPS.SAVE' | translate"
+                                [attr.aria-label]="'APP.TOOLTIPS.SAVE' | translate"
+                                (click)="saveChanges()">
+                                <mat-icon>check</mat-icon>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (sectionExpanded) {
+                <mat-divider />
+                <mat-radio-group
+                    color="primary"
+                    [attr.title]="'AUTO_AUTH_SECTION.RADIO_GROUP_LABEL' | translate"
+                    [attr.aria-label]="'AUTO_AUTH_SECTION.RADIO_GROUP_LABEL' | translate"
+                    class="aps-auth-section-radio"
+                    [disabled]="!editMode"
+                    [value]="autoAuthEnabled"
+                    (change)="autoAuthChange($event)">
+                    <mat-radio-button [value]="false">
+                        <div class="aps-auth-section-radio-label">
+                            <span>{{'AUTO_AUTH_SECTION.DISABLED' | translate}}</span>
+                            <span>{{'AUTO_AUTH_SECTION.DISABLED_DESCRIPTION' | translate}}</span>
+                        </div>
+                    </mat-radio-button>
+                    <mat-radio-button [value]="true">
+                        <div class="aps-auth-section-radio-label">
+                            <span>{{'AUTO_AUTH_SECTION.ENABLED' | translate}}</span>
+                            <span>{{'AUTO_AUTH_SECTION.ENABLED_DESCRIPTION' | translate}}</span>
+                        </div>
+                    </mat-radio-button>
+                </mat-radio-group>
+            }
+        </div>
+    }
+} @else {
+    <mat-progress-spinner color="primary" mode="indeterminate" class="aps-auth-section-loading-spinner" />
+}
+

@@ -1,0 +1,40 @@
+<div class="aps-attachment-viewer">
+     <div><h3>Supporting Documents</h3></div>
+    <div class="aps-attachment-viewer__toolbar">
+        @if (folderId) {
+            <adf-upload-button
+                [rootFolderId]="folderId"
+                [multipleFiles]="true"
+                (success)="onUploadSuccess()">
+            </adf-upload-button>
+        }
+    </div>
+
+    @if (folderId) {
+        <adf-document-list
+            [currentFolderId]="folderId"
+            [multiselect]="false"
+            [contentActions]="true"
+            (nodeClick)="onNodeClick($event)"
+            (nodeDblClick)="onNodeClick($event)"
+            (rowDblClick)="onNodeClick($event)">
+
+            <data-columns>
+                <data-column key="$thumbnail" type="image" [sortable]="false"></data-column>
+                <data-column key="name" type="text" title="Name" class="adf-expand-cell-2"></data-column>
+                <data-column key="content.sizeInBytes" type="fileSize" title="Size"></data-column>
+                <data-column key="modifiedAt" type="date" title="Modified" format="timeAgo"></data-column>
+            </data-columns>
+
+            <content-actions>
+                <content-action target="document" title="Download" icon="get_app" (execute)="onDownload($event)"></content-action>
+                <content-action target="document" title="Delete" icon="delete" handler="delete" (execute)="onDelete()"></content-action>
+            </content-actions>
+        </adf-document-list>
+    } @else {
+        <div class="aps-attachment-viewer__empty">
+            <mat-icon>folder_open</mat-icon>
+            <p>No folder configured for this field.</p>
+        </div>
+    }
+</div>

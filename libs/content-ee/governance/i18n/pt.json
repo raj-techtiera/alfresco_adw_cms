@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Aplicar",
+        "CANCEL": "Cancelar",
+        "SWITCH": "Alternar",
+        "CONTINUE": "Continuar",
+        "RELOAD": "Recarregar"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Declarar registro",
+            "SUCCESS": "{{fileName}} foi declarado como registro",
+            "FAIL": "Não é possível declarar {{fileName}} como registro",
+            "DIALOG": {
+                "TITLE": "Declarar registro",
+                "MESSAGE": "Este documento foi declarado anteriormente como um registro e foi rejeitado.",
+                "YES": "Declarar registro",
+                "NO": "Cancelar",
+                "CLOSE": "FECHAR"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Não há suporte para declarar pasta como registro no momento",
+                    "EXISTING-RECORD": "Já declarado como registro",
+                    "FAILED": "Falha ao declarar como registro"
+                },
+                "SUCCESS": "O item foi declarado como registro"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Registro rejeitado",
+            "CLOSE_LABEL": "Fechado",
+            "SUB-TITLE": "O arquivo '{{ nodeName }}' foi rejeitado como registro",
+            "BY": "Por",
+            "AT": "Em",
+            "REASON": "Com a razão",
+            "CONFIRM": "Confirmar",
+            "WARNING": "Se você remover o aviso de registro rejeitado, as opções para declarar o arquivo como um registro estarão disponíveis novamente",
+            "FAILED-REMOVE": "Falha ao remover aviso rejeitado de {{nodeName}}: {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Registro rejeitado",
+            "TOOLTIP-MESSAGE": "Remover aviso",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Registro rejeitado",
+                "RECORD-HYPERLINK": "Declarado como um registro",
+                "REJECTED-RECORD-HYPERLINK": "O registro foi rejeitado, exiba as informações do arquivo para obter detalhes"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Remover",
+            "SUCCESS": "'{{ name }}' foi removido",
+            "FAIL": "Falha ao remover {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Remover instância de registro",
+                "YES-ALL": "REMOVER E NÃO MOSTRAR ISSO NOVAMENTE",
+                "YES": "Remover",
+                "NO": "Cancelar",
+                "MESSAGE": {
+                    "DELETE": "Esta instância de '{{name}}' será permanentemente removida e não poderá ser recuperada do lixo.",
+                    "ADDITIONAL": "O registro '{{name}}' que reside no sistema de gerenciamento de registros da sua organização não será afetado."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Registro"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Mover",
+            "MOVE-ITEM": "Mover '{{ name }}' para...",
+            "SAME-FOLDER-MOVE": "Não é possível mover para a mesma pasta",
+            "SUCCESSFUL": "Registro movido com êxito"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Enviar para arquivo",
+                "SUCCESS": "O arquivo {{ name }} será arquivado",
+                "FAIL": "Falha ao arquivar {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Item já arquivado.",
+                        "PENDING-RESTORE": " Item com restauração pendente. ",
+                        "RESTORED": "Não é possível arquivar os itens restaurados",
+                        "FOLDER": "A restauração a partir do arquivo não é suportada no momento"
+                    },
+                    "FAIL": "Falha ao arquivar",
+                    "SUCCESS": "O item será arquivado"
+                },
+                "DIALOG": {
+                    "TITLE": "Enviar para arquivo",
+                    "MESSAGE": "Você está prestes a enviar arquivos para um arquivo externo. Pode haver um custo associado à recuperação de arquivos do arquivamento. Tem certeza de que deseja continuar?",
+                    "YES": "Enviar para arquivo",
+                    "NO": "Cancelar"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Restaurar do arquivamento",
+                "SYNC-ERROR": "O arquivo que você está tentando restaurar ainda não foi sincronizado para arquivamento. Esta operação pode levar até 24 horas. Tente novamente mais tarde.",
+                "FAIL": "Falha ao restaurar {{ name }} do arquivo",
+                "DIALOG": {
+                    "TITLE": "Restaurar do arquivamento",
+                    "LABEL": {
+                        "TYPE": "Velocidade de restauração (limite de 250 MB por restauração)",
+                        "OPTION-FAST": "Rápido - duração de 1 a 5 minutos (custo mais alto)",
+                        "OPTION-STANDARD": "Padrão - duração de 3 a 5 horas",
+                        "OPTION-SLOW": "Lento - duração de 5 a 12 horas (menor custo)",
+                        "DURATION": "Por quanto tempo os arquivos serão restaurados? (dias)"
+                    },
+                    "YES": "Confirmar",
+                    "NO": "Cancelar"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Restaurar do arquivamento",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Os arquivos que você está tentando restaurar ainda não foram sincronizados para arquivamento. Esta operação pode levar até 24 horas. Tente novamente mais tarde.",
+                        "RESTORED": "O item já foi restaurado",
+                        "PENDING-RESTORE": "A restauração do item já está pendente.",
+                        "NOT-STORED": "O item que você está tentando restaurar ainda não foi sincronizado para arquivamento",
+                        "FAIL": "Falha ao restaurar",
+                        "FOLDER": "Não há suporte para a restauração de uma pasta no momento"
+                    },
+                    "SUCCESS": "O item será restaurado"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Estender tempo de restauração",
+                "SUCCESS": "A duração da restauração será estendida para '{{ days }}' dias a partir de {{ date }}",
+                "FAIL": "Falha ao estender o tempo de restauração {{ name }} do arquivamento"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Este arquivo é arquivado. Para restaurar, clique com o botão direito do mouse e selecione restaurar a partir do arquivamento.",
+                "RESTORED": "Restaurado",
+                "PENDING-RESTORE": "Restaurando arquivos do arquivamento no momento. Se você não conseguir visualizar ou baixar o arquivo, tente novamente mais tarde"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Status da Operação em Massa",
+            "FAIL": "Não é possível executar a ação",
+            "CLOSE": "FECHAR"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Gerenciar Retenções",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Remover Retenção",
+            "DIALOG_TITLE": "Gerenciar Retenções Legais",
+            "TAB_EXISTING_HOLDS": "Gerenciar Retenções Existentes",
+            "TAB_CREATE_LEGAL_HOLD": "Criar Retenção Legal",
+            "SAVE": "Salvar",
+            "CLOSE": "Fechado",
+            "CANCEL": "Cancelar",
+            "NEW_HOLD_NAME": "Nome",
+            "NEW_HOLD_DESCRIPTION": "Descrição",
+            "NEW_HOLD_REASON": "Razão",
+            "DIALOG_WARNING_TITLE": "Aviso",
+            "DIALOG_WARNING_MESSAGE": "As alterações aqui não serão aplicadas se você alternar as guias.",
+            "DOCUMENT_IN_HOLD": "Documento em Retenção Legal",
+            "FOLDER_IN_HOLD": "Pasta em Retenção Legal",
+            "APPLY_HOLDS_SUCCESS": "A ação de Retenção Legal foi bem-sucedida.",
+            "APPLY_HOLDS_NOT_FOUND": "O Legal Hold (Retenção Legal) selecionado ou o arquivo especificado não existe. Verifique sua seleção e tente novamente.",
+            "BULK_APPLY_HOLDS_SUCCESS": "A ação de Retenção Legal foi bem-sucedida. {{ totalItems }} itens foram adicionados à retenção legal.",
+            "BULK_APPLY_HOLDS_STARTED": "A ação de Retenção Legal em Massa está sendo executada em segundo plano. Você será notificado quando estiver concluído.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Conteúdo arquivado, duplicado ou bloqueado detectado. {{ errorsCount }} itens não foram adicionados à retenção legal.",
+            "BULK_APPLY_HOLDS_FAIL": "Falha ao colocar conteúdo em retenção legal.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "A retenção legal em massa não pode ser aplicada a pastas",
+            "ACKNOWLEDGE": "Confirmar",
+            "EMPTY_HOLD_LIST": "Nenhuma retenção legal disponível",
+            "WARNING_DIALOG_TITLE": "Aviso: Ação em Massa",
+            "WARNING_DIALOG_MESSAGE": "Esta ação alterará o status Retenções legais de <strong>Todos os arquivos neste arquivo de pesquisa</strong>.<br><br>Esta Retenção legal <strong>não será aplicada às pastas</strong>.",
+            "WARNING_DIALOG_QUESTION": "Deseja continuar?",
+            "NO_RECORDS_MANAGEMENT_SITE": "O Administrador deve criar o Site de Gerenciamento de Registros para ativar Retenções Legais",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "O arquivo foi removido da retenção legal com sucesso.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Os arquivos foram removidos da retenção legal com sucesso.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Falha ao remover arquivo do Legal Hold.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Falha ao remover arquivos do Legal Hold.",
+            "LOADING_CAPABILITIES_ERROR": "Falha ao carregar as funcionalidades",
+            "NODE_NOT_FOUND": "O servidor selecionado não foi encontrado. Por favor, verifique sua seleção e tente novamente.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Excluir itens que contêm retenções?",
+                "TITLE_PLURAL": "Excluir selecionados {{ count }} Retenções e liberação de documentos?",
+                "MESSAGE_SINGULAR": "Você selecionou {{ name }} isenção a ser removida. Todos os itens que está segurando serão liberados. Esta ação não pode ser desfeita.",
+                "MESSAGE_PLURAL": "Você selecionou {{ count }} itens para serem removidos. Alguns deles são retenções, todos os itens que estão retidos serão liberados. Essa ação não pode ser desfeita.",
+                "KEEP_HOLD": "Manter retenção"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Erro ao salvar marcas de segurança",
+            "DIALOG_TITLE": "Editar marcas de segurança",
+            "MENU_TITLE": "Marcas de segurança",
+            "SAVE": "Salvar",
+            "CANCEL": "Cancelar",
+            "HELP": "Ajuda",
+            "CLOSE": "Fechado",
+            "SHOW_ALL": "Mostrar tudo",
+            "APPLIED": "Aplicado",
+            "NOT_APPLIED": "Não aplicado",
+            "COLUMNS": {
+                "NAME": "Marcas de segurança"
+            },
+            "NO_GROUPS_CREATED": "Nenhum grupo de segurança disponível",
+            "SECURITY_MARKS_HELP": "Ajuda de marcas de segurança",
+            "HELP_ICON_TEXT": "A aplicação de marcas de segurança restringirá o acesso a conteúdo digital. Somente as pessoas com marcas correspondentes aplicadas à sua permissão de usuário poderão exibir ou editar o conteúdo marcado."
+        }
+    }
+}

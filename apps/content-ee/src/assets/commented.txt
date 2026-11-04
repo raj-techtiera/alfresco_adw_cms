@@ -1,0 +1,11 @@
+custom-nav.plugin.json-
+       {
+            "id": "app.navbar.home",
+            "order": 50,
+            "title": "Home",
+           "description": "Go to Home",
+            "icon": "home",
+            "route": "home"
+        },
+
+        -------------------------------------------------------------

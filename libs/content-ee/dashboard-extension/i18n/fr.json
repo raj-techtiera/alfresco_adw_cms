@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Tableau de bord"
+    },
+    "DASHBOARD": {
+        "TITLE": "Tableau de bord"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Actions des widgets",
+        "REFRESH": "Actualiser",
+        "VIEW_ALL": "Tout afficher",
+        "TASK_SUMMARY": {
+            "TITLE": "Récapitulatif de mes tâches",
+            "SUMMARY_INFO_SUFFIX": "tâches terminées !",
+            "NO_TASKS_ASSIGNED": "Vous n'avez aucune tâche assignée.",
+            "NO_TASKS_ERROR": "Une erreur est survenue pendant la récupération de vos tâches. Veuillez actualiser le widget.",
+            "COMPLETED": "Achevé",
+            "INCOMPLETE": "Incomplet",
+            "OVERDUE": "En retard",
+            "TASKS": "Tâches",
+            "ARROW_UP": "Flèche vers le haut"
+        },
+        "TASK_LIST": {
+            "TITLE": "Gestion des tâches",
+            "OVERDUE": "En retard",
+            "UNASSIGNED": "Non assigné",
+            "IN_PROGRESS": "En cours",
+            "NO_OVERDUE_TASKS": "Vous n'avez aucune tâche en retard.",
+            "NO_UNASSIGNED_TASKS": "Vous n'avez aucune tâche non assignée.",
+            "NO_IN_PROGRESS_TASKS": "Vous n'avez aucune tâche en cours.",
+            "ACTIONS": {
+                "VIEW": "Afficher la tâche",
+                "COMMENT": "Ajouter un commentaire",
+                "CLAIM": "Demander une tâche"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "La tâche a bien été demandée.",
+                "CLAIMING_FAILED": "La tâche n’a pas pu être demandée."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Fichiers",
+            "RECENT": "Récent",
+            "FAVORITES": "Favoris",
+            "PERSONAL": "Personnel",
+            "SHARED": "Partagé",
+            "NO_RECENT_FILES": "Vous n'avez aucun fichier récent.",
+            "NO_FAVORITES_FILES": "Vous n'avez aucun fichier ou dossier favori.",
+            "NO_PERSONAL_FILES": "Vous n'avez aucun fichier ou dossier personnel.",
+            "NO_SHARED_FILES": "Vous n'avez aucun fichier partagé.",
+            "ACTIONS": {
+                "VIEW": "Afficher",
+                "DOWNLOAD": "Télécharger",
+                "SHARE": "Partager",
+                "SHARED_LINK_SETTINGS": "Paramètres du lien partagé",
+                "FOLDER_INFORMATION": "Informations sur le dossier"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Bibliothèques",
+            "PERSONAL": "Mes bibliothèques",
+            "ALL": "Tout",
+            "FAVOURITES": "Favoris",
+            "NO_PERSONAL_LIBRARIES": "Vous n'avez aucune bibliothèque personnelle.",
+            "NO_ALL_LIBRARIES": "Vous n'avez aucune bibliothèque.",
+            "NO_FAVORITE_LIBRARIES": "Vous n'avez aucune bibliothèque dans vos favoris."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Mises en suspens juridiques",
+            "NO_HOLDS": "Aucune mise en suspens créée.",
+            "HOLDS_NAME": "Nom de la mise en suspens",
+            "CREATED": "Créé",
+            "REASON": "Motif",
+            "ACTIONS": {
+                "DOWNLOAD": "Télécharger",
+                "INFORMATION": "Informations sur le dossier",
+                "DELETE": "Supprimer"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Progression de mes tâches - par mois",
+            "WEEK_LABEL": "Semaine",
+            "MONTH_LABEL": "Mois",
+            "SUMMARY_INFO_SUFFIX": "tâches terminées au cours du mois sélectionné !",
+            "SELECT_MONTH": "Sélectionner un mois",
+            "NO_TASKS_IN_MONTH": "Il n'y a aucune tâche pour le mois sélectionné.",
+            "EMPTY": "Aucune tâche"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Récapitulatif de mes processus - par période de 6 mois",
+            "SUMMARY_INFO_SUFFIX": "processus terminés pour les 6 mois sélectionnés !",
+            "NO_PROCESSES": "Vous n'avez aucun processus.",
+            "NO_PROCESSES_ERROR": "Une erreur est survenue pendant la récupération de vos processus. Veuillez actualiser le widget.",
+            "NO_PROCESSES_IN_PERIOD": "Il n'y a aucun processus pour la période sélectionnée.",
+            "RUNNING": "En cours d’exécution",
+            "COMPLETED": "Achevé",
+            "NEXT": "Suivant",
+            "NEXT_SCREEN_READER_LABEL": "Résumé de mes processus  - Passer aux 6 prochains mois",
+            "PREVIOUS": "Précédent",
+            "PREVIOUS_SCREEN_READER_LABEL": "Résumé de mes processus  - Passer aux 6 mois précédents",
+            "EMPTY": "Aucun processus"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Commentaires pour {{ taskName }}",
+        "CLOSE": "Fermer"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Vignette"
+    }
+}

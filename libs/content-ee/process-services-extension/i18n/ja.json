@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "新しいプロセス",
+            "SELECT_APPLICATION": "アプリケーションの選択",
+            "ERROR": "使用できるプロセス定義がないため、プロセスを開始できません"
+        },
+        "BREADCRUMB": {
+            "ROOT": "プロセスの管理",
+            "PROCESS_LIST": {
+                "PROCESSES": "プロセス"
+            },
+            "START_PROCESS": "プロセスの開始",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "詳細の表示"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "コメントを表示"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "プロセスの管理",
+            "CREATE_NEW_PROCESS": "プロセスの開始",
+            "CREATE_PROCESS_NOT_ALLOWED": "新しいプロセスは作成できません"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "続きを表示"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "コメント",
+            "CANCEL_PROCESS": "処理をキャンセル"
+        },
+        "ERROR": {
+            "NO_FORM": "プロセス定義にフォームが定義されていません",
+            "NO_CONTENT": "デバイスからファイルを添付することはできません",
+            "CAN_NOT_ATTACH": "選択したコンテンツは添付できません",
+            "AUDIT_ERROR": "タスクエラーの表示: {{error}}",
+            "TASK_ACCESS_WARNING": "このタスクの変更権限がありません",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "タスクがまだ完了していないため、ドキュメントのプレビューは利用できません。"
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "作成されたプロセス '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "不明なネットワークエラーが発生しました。プロセスサービス関連の機能が無効になっています。",
+            "ACTION": "実行中のプロセスの表示"
+        },
+        "NO_PROCESS_DEFINITIONS": "使用可能なプロセス定義がありません",
+        "SIDE_NAV_TITLE": "ワークフロー",
+        "STATUS": {
+            "COMPLETED": "完了",
+            "RUNNING": "実行中",
+            "OPEN": "開く",
+            "UNKNOWN": "不明"
+        },
+        "TASK_LIST": {
+            "TASKS": "タスク",
+            "ACTIONS": {
+                "TASK_DETAILS": "表示"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "表示"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "フォームが保存されました",
+            "FORM_COMPLETED": "このタスクは完了しています",
+            "CLOSE": "閉じる",
+            "CLAIM_TASK": "タスクは担当者に割り当てられています",
+            "UNCLAIM_TASK": "タスクの担当が解除されました",
+            "CLAIM_FAILED": "この処理は実行できません"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "この処理は実行できません",
+            "FAILED_TO_LOAD": "タスクの詳細を読み込めませんでした。しばらくしてから操作をやり直してください",
+            "UPDATED": "{{ property }} が更新されました",
+            "FAILED_TO_UPDATE": "{{ property }} を更新できませんでした",
+            "METADATA_TOOLTIP": "詳細の表示",
+            "NO_TASK_NAME": "名前なし"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "閉じる"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "使用可能なプロセス定義がありません"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "開始者",
+            "CREATED": "開始日"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "使用できるプロセス定義がないため、プロセスを開始できません",
+            "NO_START_FORM": "このプロセスには追加の設定は必要ありません",
+            "NO_PROCESS_DEF_SELECTED": "カテゴリ/プロセスが選択されていません",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "アプリケーションの選択"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "処理をキャンセルしますか？",
+                "DESCRIPTION": "このプロセスと関連するすべてのタスクを完了としてマークします。",
+                "CONFIRM_BTN": "確認"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}'を正常にキャンセルしました。",
+                "FAIL": "キャンセルプロセスエラー: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "作成日"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "担当する",
+                "UNCLAIM": "担当解除"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "実行中のプロセスの一部",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "リンクされたプロセス",
+            "PART_OF_THE_PROCESS_TITLE": "このドキュメントは、次のプロセスの一部です。",
+            "NO_PROCESSES": "このドキュメントは、実行中のプロセスの一部ではありません",
+            "CREATED": "作成済み",
+            "VIEW_DETAILS_BTN": "詳細を表示"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "プロセスサービス向け自動認証",
+        "ENABLED": "有効",
+        "ENABLED_DESCRIPTION": "システムが自動的に再認証を行うため、ユーザーは中断なく作業を継続できるようになります。",
+        "DISABLED": "無効",
+        "DISABLED_DESCRIPTION": "セッション時間が終了した場合、ユーザーはご自身の認証情報で再度認証を行う必要があります。",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

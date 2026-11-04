@@ -1,0 +1,209 @@
+@use '@angular/material' as mat;
+
+aps-task-list-ext adf-tasklist {
+    .adf-datatable-cell-header{
+        font-size: 16px !important;
+    }
+  
+}
+aps-process-details-ext {
+    &.adf-content-area {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
+        min-height: 0;
+    }
+
+    .adf-content-border {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        min-height: 0;
+        vertical-align: unset;
+        text-align: unset;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    adf-tasklist {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 0%;
+        min-height: 0;
+        height: auto;
+        overflow: hidden;
+        background-color: #fff;
+        --mat-sys-display-large-size: 48px;
+
+        adf-datatable,
+        .adf-datatable {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 1 0% !important;
+            min-height: 0 !important;
+            height: auto !important;
+            overflow: hidden !important;
+        }
+
+        .adf-datatable-list {
+            flex: 1 1 0%;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .adf-datatable-header {
+            flex-shrink: 0;
+        }
+
+        .adf-datatable-body {
+            flex: 1 1 0%;
+            min-height: 0;
+            overflow-x: auto;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+                display: none;
+            }
+        }
+
+        .adf-datatable-list .adf-datatable-header .adf-datatable-row,
+        .adf-datatable-list .adf-datatable-body .adf-datatable-row {
+            min-height: 48px;
+            height: auto;
+        }
+
+        .adf-datatable-list .adf-datatable-cell-header,
+        .adf-datatable-list .adf-datatable-cell {
+            min-height: 48px;
+            min-width: 0;
+            padding-left: 12px;
+            padding-right: 12px;
+            box-sizing: border-box;
+        }
+
+        .adf-datatable-list .adf-datatable-body .adf-datatable-cell-container,
+        .adf-datatable-list .adf-datatable-body .adf-cell-value,
+        .adf-datatable-list .adf-datatable-body .adf-datatable-cell-value {
+            min-height: 0;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .adf-datatable-list .adf-datatable-body .adf-datatable-row {
+            border-top: 1px solid #e4e8ef;
+        }
+
+        .adf-datatable-list .adf-datatable-body .adf-datatable-row:last-child {
+            border-bottom: 1px solid #e4e8ef;
+        }
+
+        .adf-datatable-checkbox {
+            flex: 0 0 48px !important;
+            min-width: 48px !important;
+            max-width: 52px !important;
+        }
+
+        .adf-datatable-cell.adf-no-grow-cell,
+        .adf-datatable-cell-header.adf-no-grow-cell {
+            flex: 0 0 auto !important;
+        }
+
+        .aps-col-name.adf-datatable-cell,
+        .aps-col-name.adf-datatable-cell-header {
+            flex: 1.4 1 160px !important;
+            min-width: 140px !important;
+            max-width: none;
+        }
+
+        .aps-col-due.adf-datatable-cell,
+        .aps-col-due.adf-datatable-cell-header,
+        .aps-col-created.adf-datatable-cell,
+        .aps-col-created.adf-datatable-cell-header {
+            flex: 0 0 118px !important;
+            min-width: 110px !important;
+            max-width: 140px !important;
+        }
+
+        .aps-col-priority.adf-datatable-cell,
+        .aps-col-priority.adf-datatable-cell-header {
+            flex: 0 0 80px !important;
+            min-width: 72px !important;
+            max-width: 96px !important;
+        }
+
+        .aps-col-status.adf-datatable-cell,
+        .aps-col-status.adf-datatable-cell-header {
+            flex: 0 0 118px !important;
+            min-width: 104px !important;
+            max-width: 140px !important;
+        }
+
+        .aps-col-assignee.adf-datatable-cell,
+        .aps-col-assignee.adf-datatable-cell-header {
+            flex: 1.1 1 180px !important;
+            min-width: 168px !important;
+            max-width: none;
+        }
+    }
+
+    adf-pagination {
+        flex: 0 0 auto;
+        padding: 4px 12px;
+        border-top: 1px solid #e4e8ef;
+        background: #fff;
+    }
+}
+
+.aps-task-status-cell,
+.aps-task-assignee-cell,
+.aps-task-date-cell {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.35;
+}
+
+.aps-task-date-cell {
+    font-variant-numeric: tabular-nums;
+    color: #334155;
+    font-size: 13px;
+}
+
+.aps-task-assignee-cell {
+    font-size: 13px;
+    color: #1e293b;
+}
+
+.aps-task-status-cell {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.aps-task-status-cell--open {
+    background: #eef2ff;
+    color: var(--adw-color-brand-primary, #1b1464);
+}
+
+.aps-task-status-cell--completed {
+    background: #ecfdf5;
+    color: #047857;
+}

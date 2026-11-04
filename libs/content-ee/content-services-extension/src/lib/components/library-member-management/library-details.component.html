@@ -1,0 +1,90 @@
+<aca-page-layout>
+    <div class="aca-page-layout-header" *ngIf="!loading && !notFound">
+        <div class="adw-breadcrumb-container" title="{{ 'WIDGETS.LIBRARIES_LIST.TITLE' | translate }}" role="navigation" aria-label="Breadcrumb">
+            <div class="adf-breadcrumb-item">
+                <a href="#" (click)="redirectToLibrary($event)" class="adf-breadcrumb-item-anchor" role="listitem">
+                    {{'WIDGETS.LIBRARIES_LIST.TITLE' | translate}}
+                </a>
+                <mat-icon class="adf-breadcrumb-item-chevron">chevron_right</mat-icon>
+            </div>
+            <div class="adf-breadcrumb-item adf-active" [title]="'MEMBER_MANAGER.BREADCRUMB.MANAGE_MEMBERS' | translate" role="listitem">
+                {{ 'MEMBER_MANAGER.BREADCRUMB.MANAGE_MEMBERS' | translate }}
+            </div>
+        </div>
+
+        <div class="adw-toolbar">
+            <ng-container *ngFor="let entry of actions; trackBy: trackByActionId">
+                <aca-toolbar-action [actionRef]="entry" />
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="aca-page-layout-content">
+        <div *ngIf="!loading && !notFound" class="acs-members-container">
+            <div class="acs-members-topbar">
+                <div class="acs-members-breadcrumb">
+                    <span class="acs-members-breadcrumb-library">{{ site?.entry.title }}</span>
+                    -
+                    <span class="acs-members-breadcrumb-item">{{'MEMBER_MANAGER.BREADCRUMB.LIBRARY_DETAILS' | translate}}</span>
+                    -
+                    <span class="acs-members-breadcrumb-item">{{'MEMBER_MANAGER.BREADCRUMB.MANAGE_MEMBERS' | translate}}</span>
+                </div>
+                <button mat-icon-button
+                        class="adw-library-close-button"
+                        (click)="onClick()"
+                        [title]="'MEMBER_MANAGER.CLOSE' | translate"
+                        data-automation-id="close-library">
+                    <mat-icon>fullscreen_exit</mat-icon>
+                </button>
+            </div>
+
+            <mat-tab-group [selectedIndex]="1"
+                           class="adw-member-manager-tabs"
+                           animationDuration="0"
+                           [attr.data-automation-id]="'adw-member-manager-tabs'">
+                <mat-tab label="{{ 'MEMBER_MANAGER.TABS.PROPERTIES' | translate | uppercase }}">
+                    <ng-template matTabContent>
+                        <div *ngIf="site">
+                            <adf-dynamic-tab
+                                [id]="'app.components.tabs.library.metadata'"
+                                [node]="$any(site)" />
+                        </div>
+                    </ng-template>
+                </mat-tab>
+                <mat-tab label="{{ 'MEMBER_MANAGER.TABS.MEMBERS' | translate | uppercase }}">
+                    <ng-template matTabContent>
+                        <adw-users-list [siteId]="site?.entry.id" />
+                    </ng-template>
+                </mat-tab>
+                <mat-tab label="{{ 'MEMBER_MANAGER.TABS.GROUPS' | translate | uppercase }}" *adf-acs-version="ACS_VERSIONS['7']">
+                    <ng-template matTabContent>
+                        <adw-groups-list [siteId]="site?.entry.id" />
+                    </ng-template>
+                </mat-tab>
+                <mat-tab>
+                    <ng-template matTabLabel>
+                        <span [matBadge]="$any(pendingRequests)"
+                              [matBadgeHidden]="!pendingRequests"
+                              matBadgeOverlap="false">{{ 'MEMBER_MANAGER.TABS.PENDING' | translate | uppercase }}</span>
+                    </ng-template>
+                    <ng-template matTabContent>
+                        <adw-pending-requests
+                            [siteId]="site?.entry.id"
+                            (pendingRequestsCounter)="onPendingRequestCounterChange($any($event))" />
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+
+        <adf-empty-content
+            *ngIf="notFound"
+            class="adw-library-not-found"
+            icon="library_books"
+            subtitle="{{ 'APP.BROWSE.LIBRARIES.EMPTY_STATE.ALL_LIBRARIES.TEXT' | translate }}"
+            title="{{ 'APP.BROWSE.LIBRARIES.EMPTY_STATE.ALL_LIBRARIES.TITLE' | translate }}" />
+
+        <div *ngIf="loading" class="adw-library-loading-spinner">
+            <mat-spinner />
+        </div>
+    </div>
+</aca-page-layout>

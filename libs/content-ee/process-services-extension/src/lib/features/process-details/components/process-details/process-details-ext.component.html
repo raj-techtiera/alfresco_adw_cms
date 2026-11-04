@@ -1,0 +1,107 @@
+<div class="adf-content-border" *ngIf="processId">
+    <adf-tasklist
+        id="aps-tasklist-id"
+        [processInstanceId]="processId"
+        [stickyHeader]="true"
+        [presetColumn]="presetColumn"
+        [selectFirstRow]="false"
+        [state]="'all'"
+        [sort]="'created-desc'"
+        [selectionMode]="'multiple'"
+        [multiselect]="true"
+        [isResizingEnabled]="true"
+        [blurOnResize]="false"
+        (rowsSelected)="onRowsSelected($event)"
+        #taskList
+        acaContextActions
+        [customActions]="taskListContextMenuActions"
+    >
+        <data-columns>
+            <data-column
+                key="name"
+                type="text"
+                title="ADF_TASK_LIST.PROPERTIES.TASK_NAME"
+                [sortable]="true"
+                [order]="1"
+                class="adf-ellipsis-cell adf-expand-cell-2 aps-col-name"
+                [draggable]="true">
+            </data-column>
+            <data-column
+                key="dueDate"
+                type="date"
+                title="ADF_TASK_LIST.PROPERTIES.DUE_DATE"
+                [sortable]="true"
+                [order]="2"
+                class="adf-ellipsis-cell adf-no-grow-cell aps-col-due"
+                [draggable]="true">
+                <ng-template let-entry="$implicit">
+                    <div
+                        class="aps-task-date-cell"
+                        [title]="entry.row.obj.dueDate ? (entry.row.obj.dueDate | date:'dd MMM yyyy') : ''">
+                        {{ entry.row.obj.dueDate ? (entry.row.obj.dueDate | date:'dd MMM yyyy') : '—' }}
+                    </div>
+                </ng-template>
+            </data-column>
+            <data-column
+                key="priority"
+                type="text"
+                title="ADF_TASK_LIST.PROPERTIES.PRIORITY"
+                [sortable]="true"
+                [order]="3"
+                class="adf-ellipsis-cell adf-no-grow-cell aps-col-priority"
+                [draggable]="true">
+            </data-column>
+            <data-column
+                key="endDate"
+                type="date"
+                title="ADF_TASK_LIST.PROPERTIES.STATUS"
+                [sortable]="true"
+                [order]="4"
+                class="adf-ellipsis-cell adf-no-grow-cell aps-col-status"
+                [draggable]="true">
+                <ng-template let-entry="$implicit">
+                    <div
+                        class="aps-task-status-cell"
+                        [class.aps-task-status-cell--completed]="!!entry.row.obj?.endDate"
+                        [class.aps-task-status-cell--open]="!entry.row.obj?.endDate"
+                        title="{{ ('PROCESS-EXTENSION.STATUS.' + (entry.row.obj?.endDate ? 'COMPLETED' : 'OPEN')) | translate }}">
+                        {{ ('PROCESS-EXTENSION.STATUS.' + (entry.row.obj?.endDate ? 'COMPLETED' : 'OPEN')) | translate }}
+                    </div>
+                </ng-template>
+            </data-column>
+            <data-column
+                key="assignee"
+                title="ADF_TASK_LIST.PROPERTIES.ASSIGNEE"
+                [sortable]="false"
+                [order]="5"
+                class="adf-desktop-only adf-ellipsis-cell adf-expand-cell-1 aps-col-assignee"
+                [draggable]="true">
+                <ng-template let-entry="$implicit">
+                    <div class="aps-task-assignee-cell" title="{{ entry.row.obj.assignee | fullName }}">
+                        {{ entry.row.obj.assignee | fullName }}
+                    </div>
+                </ng-template>
+            </data-column>
+            <data-column
+                key="created"
+                type="date"
+                title="ADF_TASK_LIST.PROPERTIES.CREATED"
+                [sortable]="true"
+                [order]="6"
+                class="adf-ellipsis-cell adf-no-grow-cell aps-col-created"
+                [draggable]="true">
+                <ng-template let-entry="$implicit">
+                    <div
+                        class="aps-task-date-cell"
+                        [title]="entry.row.obj.created ? (entry.row.obj.created | date:'dd MMM yyyy') : ''">
+                        {{ entry.row.obj.created ? (entry.row.obj.created | date:'dd MMM yyyy') : '—' }}
+                    </div>
+                </ng-template>
+            </data-column>
+        </data-columns>
+    </adf-tasklist>
+    <adf-pagination
+        [target]="taskList"
+        [supportedPageSizes]="supportedPageSizes"
+        (changePageSize)="onChangePageSize($event)" />
+</div>

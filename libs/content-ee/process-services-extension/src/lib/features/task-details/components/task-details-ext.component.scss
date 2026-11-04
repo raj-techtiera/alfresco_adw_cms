@@ -1,0 +1,871 @@
+.adf-content-area {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.adf-content-border {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    min-height: 0;
+    vertical-align: unset;
+    text-align: unset;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+aca-page-layout-header {
+    justify-content: space-between;
+
+    .adf-breadcrumb-item {
+        margin-top: inherit;
+    }
+}
+
+.aps-take-details-toolbar-actions {
+    display: flex;
+    align-items: center;
+
+    & > button {
+        text-align: center;
+        margin-left: 10px;
+
+        &:hover {
+            color: var(--theme-primary-color);
+        }
+    }
+}
+
+.aps-task-form-container {
+    min-height: 0;
+    height: 98%;
+    background-color: var(--theme-card-background-color);
+    --mdc-outlined-text-field-label-text-size: 14px;
+    --mdc-outlined-text-field-input-text-size: 16px;
+    --mdc-filled-text-field-label-text-size: 14px;
+    --mdc-filled-text-field-input-text-size: 16px;
+    --mat-form-field-container-text-size: 16px;
+
+    .mat-mdc-tab .mdc-tab__text-label {
+        font-size: 16px;
+    }
+
+    .adf-header-text,
+    .adf-header-widget,
+    .adf-container-widget-header {
+        font-size: 17px;
+    }
+
+    .adf-datatable-cell,
+    .adf-datatable-heading,
+    .adf-datatable-row,
+    .adf-dynamic-table,
+    .adf-dynamic-table-widget {
+        font-size: 15px;
+    }
+
+    .mat-mdc-form-field .mat-mdc-input-element,
+    .mat-mdc-form-field .mat-mdc-select-value,
+    .mat-mdc-form-field .mat-mdc-select-value-text {
+        font-size: 16px;
+    }
+}
+
+.aps-task-form-container .adf-dynamic-table tbody td {
+    cursor: pointer;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody tr:hover td {
+    background-color: #eef3fb;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody tr.adf-dynamic-table-widget__row-selected td,
+.aps-task-form-container .adf-dynamic-table tbody tr.adf-dynamic-table-widget__row-selected:hover td {
+    background-color: color-mix(in srgb, var(--theme-primary-color, var(--adw-color-brand-primary, #1b1464)) 14%, #ffffff);
+}
+
+.aps-task-form-container > .adf-task-form-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+.aps-task-form-container .adf-form-card-content {
+    display: flex;
+    overflow: hidden auto;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    min-height: 0;
+}
+
+adf-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+adf-form .adf-form-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+.aps-task-form-container .adf-form-container-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    overflow: hidden auto;
+    min-height: 0;
+}
+
+.aps-task-form-container .adf-form-container .adf-form-card-content {
+    display: flex;
+    overflow: hidden auto;
+    flex-direction: column;
+    flex: 1;
+    height: 98%;
+    min-height: 0;
+}
+
+/* Any number of fields in a form row share the width and wrap */
+.aps-task-form-container .adf-grid-list-column-view,
+.aps-task-form-container .adf-container-widget .adf-grid-list-column-view {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px 20px;
+    align-items: start;
+    margin-right: 0;
+
+    .adf-grid-list-column-view-item {
+        min-width: 0 !important;
+        max-width: none !important;
+        width: auto !important;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start !important;
+
+        /* Full-width form fields so labels and inputs align */
+        .mat-mdc-form-field,
+        adf-form-field {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
+            margin-top: 0;
+        }
+        .mat-mdc-form-field .mat-mdc-form-field-wrapper,
+        .mat-mdc-form-field .mdc-text-field {
+            width: 100% !important;
+        }
+        /* Keep label left-aligned above the input so all fields are equal */
+        .mat-mdc-form-field .mdc-floating-label,
+        .mat-mdc-form-field .mat-form-field-label,
+        .mat-mdc-form-field label {
+            left: 0 !important;
+            right: auto !important;
+            text-align: left !important;
+        }
+        .mat-mdc-form-field .mat-mdc-input-element,
+        .mat-mdc-form-field .mat-mdc-select-value {
+            text-align: left !important;
+        }
+    }
+}
+
+.aps-task-form-container .adf-form-container .mat-mdc-form-field-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.aps-task-form-container adf-form-field,
+.aps-task-form-container .mat-mdc-form-field {
+    width: 100%;
+}
+
+/* Attach / upload widgets sit beside text fields. The file name is a Material
+   list line (48px), which drops it below the 64px inputs. Match that box instead. */
+.aps-task-form-container .adf-upload-widget,
+.aps-task-form-container .adf-attach-widget {
+    position: relative;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100% !important;
+    height: 64px;
+    min-height: 64px;
+    max-height: 64px;
+    margin: 0 !important;
+    padding: 18px 12px 4px !important;
+    border: 1px solid var(--theme-border-color-light) !important;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    word-break: break-word;
+    --mdc-list-list-item-one-line-container-height: 28px;
+    --mdc-list-list-item-two-line-container-height: 28px;
+
+    > .adf-label {
+        position: absolute;
+        top: 6px;
+        left: 12px;
+        right: 12px;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .adf-upload-widget-container,
+    .adf-attach-widget-container {
+        margin: 0 !important;
+        display: flex;
+        align-items: center;
+        min-height: 0;
+        height: 28px;
+    }
+
+    .mat-mdc-list,
+    .mdc-list-item__content,
+    .mat-mdc-list-item,
+    .mdc-list-item,
+    .mat-mdc-list-item-line,
+    .mdc-list-item__secondary-text,
+    .adf-attach-widget__label,
+    .adf-upload-files-row {
+        height: 28px !important;
+        min-height: 0 !important;
+        max-height: 28px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 28px !important;
+    }
+
+    .mat-mdc-list,
+    .adf-attach-widget__label,
+    .adf-upload-files-row {
+        display: flex !important;
+        align-items: center;
+        width: 100%;
+        gap: 4px;
+    }
+
+    .mat-mdc-icon-button {
+        width: 28px;
+        height: 28px;
+        padding: 2px;
+        line-height: 28px;
+    }
+
+    .mat-mdc-raised-button,
+    a.mat-mdc-raised-button {
+        height: 28px;
+        min-height: 28px;
+        line-height: 28px;
+        margin: 0;
+        padding: 0 12px;
+    }
+}
+
+/* Same control height for single-line fields so Status/Purpose etc. stay even */
+.aps-task-form-container .mat-mdc-form-field {
+    .mat-mdc-form-field-flex,
+    .mat-mdc-text-field-wrapper,
+    .mdc-text-field {
+        min-height: 64px !important;
+        height: 64px !important;
+    }
+    .mat-mdc-form-field-infix {
+        min-height: 64px !important;
+        height: 64px !important;
+        display: flex !important;
+        align-items: center !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        box-sizing: border-box;
+    }
+}
+
+/* Reviewer / Approver comment fields: label and textarea alignment */
+.aps-task-form-container .adf-form-container .mat-mdc-form-field {
+    .mat-mdc-form-field-label,
+    .mdc-floating-label,
+    .mat-mdc-input-element {
+        text-align: left;
+    }
+    .mat-mdc-form-field-subscript-wrapper {
+        text-align: left;
+    }
+    textarea.mat-mdc-input-element {
+        display: block;
+        text-align: left;
+        padding: 12px 16px;
+        line-height: 1.5;
+        vertical-align: top;
+        box-sizing: border-box;
+    }
+}
+
+/* Modernized dropdowns and text areas in APS task form */
+.aps-task-form-container .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+        border-radius: 8px;
+        background-color: #fafafa;
+        border: 1px solid var(--theme-border-color-light);
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+        transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+    }
+
+    &.mat-focused .mat-mdc-text-field-wrapper {
+        background-color: #ffffff;
+        border-color: var(--theme-primary-color);
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--theme-primary-color) 40%, transparent),
+            0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    &.mat-mdc-form-field-invalid .mat-mdc-text-field-wrapper {
+        border-color: var(--theme-warn-color);
+    }
+
+    textarea.mat-mdc-input-element {
+        border-radius: 8px;
+    }
+
+    .mat-mdc-select-trigger {
+        padding-inline: 4px;
+    }
+
+    .mat-mdc-select-value-text {
+        font-weight: 500;
+    }
+
+    .mat-mdc-select-arrow {
+        color: var(--theme-grey-font-color);
+    }
+}
+
+/* Same height and width for ALL form fields in task form (dropdowns, inputs, date, textarea in rows) */
+.aps-task-form-container .adf-grid-list-column-view .adf-grid-list-column-view-item .mat-mdc-form-field,
+.aps-task-form-container .adf-container-widget .adf-grid-list-column-view .adf-grid-list-column-view-item .mat-mdc-form-field {
+    .mat-mdc-form-field-flex,
+    .mat-mdc-text-field-wrapper,
+    .mdc-text-field {
+        min-height: 64px !important;
+        height: 64px !important;
+    }
+    .mat-mdc-form-field-infix {
+        display: flex !important;
+        align-items: center !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        min-height: 64px !important;
+        height: 64px !important;
+        box-sizing: border-box;
+    }
+    textarea.mat-mdc-input-element {
+        min-height: 64px !important;
+        height: auto !important;
+        resize: vertical;
+        overflow-y: auto;
+    }
+}
+
+.aps-task-form-container .mat-mdc-form-field:has(textarea) {
+    .mat-mdc-form-field-flex,
+    .mat-mdc-text-field-wrapper,
+    .mdc-text-field,
+    .mat-mdc-form-field-infix {
+        height: auto !important;
+        min-height: 64px !important;
+        align-items: stretch !important;
+    }
+}
+
+/* Comment column: keep label and input at left end */
+.aps-task-form-container .adf-grid-list-column-view-item .mat-mdc-form-field .mdc-text-field {
+    padding-left: 8px;
+}
+.aps-task-form-container .adf-grid-list-column-view-item .mat-mdc-form-field .mdc-floating-label {
+    left: 0;
+}
+
+/*
+ * Form tabs (Details / Documents): ADF positions the tab header as fixed/absolute
+ * at the top of the viewport, which overlaps the breadcrumb and breaks the layout.
+ * Keep it in normal flow, sticky inside the scrolling form area.
+ */
+.aps-task-form-container .adf-form-container .mat-mdc-tab-header,
+.aps-task-form-container .alfresco-tabs-widget .mat-mdc-tab-header {
+    position: sticky !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+    background-color: var(--theme-card-background-color, #fff) !important;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mat-mdc-tab-body-wrapper {
+    padding-top: 0;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mat-mdc-tab-body {
+    margin-bottom: 0;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .adf-form-tab-content {
+    margin-top: 1em;
+    padding: 0 4px;
+}
+
+.adf-form-mat-card-actions {
+    text-align: right;
+}
+
+.aps-task-form-container adf-task-standalone .adf-form-mat-card-actions #adf-no-form-attach-form-button span {
+    display: none;
+}
+
+.adf-toolbar-title {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    adf-icon {
+        display: flex;
+    }
+
+    .adf-active {
+        color: var(--theme-primary-color);
+    }
+}
+
+.adf-form-title {
+    display: none;
+}
+
+aps-task-details-ext {
+    .aps-task-details-layout {
+        .aps-task-details-page-content {
+            flex-direction: column;
+            display: flex;
+
+            .aps-task-form-container {
+                flex-direction: column;
+                display: flex;
+                place-content: stretch space-between;
+                align-items: stretch;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+/* ---------- Task form visual polish (layout and behavior unchanged) ---------- */
+aps-task-details-ext .adf-toolbar,
+aps-task-details-ext .adf-toolbar-container,
+aps-task-details-ext .adf-toolbar-container-row {
+    background: #fff !important;
+    border-bottom: 1px solid #e7ebf2;
+    min-height: 52px;
+}
+
+aps-task-details-ext .adf-toolbar-title .adf-active {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--adw-color-brand-primary, #1b1464);
+}
+
+aps-task-details-ext .adf-toolbar .mat-mdc-icon-button {
+    color: #667085;
+}
+
+.aps-task-form-container .adf-form-card.mat-mdc-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    border: none !important;
+    box-shadow: none !important;
+    background: #fff;
+    border-radius: 0;
+}
+
+.aps-task-form-container .adf-form-card > .mat-mdc-card-header:not(:has(.adf-form-title, .adf-form-validation-button)) {
+    display: none;
+}
+
+.aps-task-form-container .adf-form-card > .adf-form-card-content,
+.aps-task-form-container .adf-form-card > .mat-mdc-card-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto !important;
+    overflow: auto;
+    padding: 0 20px 8px;
+}
+
+.aps-task-form-container .alfresco-tabs-widget {
+    --mdc-tab-indicator-active-indicator-color: var(--adw-color-brand-primary, #1b1464);
+    --mat-tab-header-active-label-text-color: var(--adw-color-brand-primary, #1b1464);
+    --mat-tab-header-active-ripple-color: rgba(27, 20, 100, 0.12);
+    --mat-tab-header-inactive-label-text-color: #667085;
+    --mdc-secondary-navigation-tab-container-height: 48px;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mat-mdc-tab-header {
+    border-bottom: 1px solid #e7ebf2;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mat-mdc-tab.mdc-tab {
+    flex-grow: 0 !important;
+    min-width: 132px;
+    height: 48px;
+    padding: 0 18px;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mdc-tab__text-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mdc-tab--active .mdc-tab__text-label {
+    color: var(--adw-color-brand-primary, #1b1464);
+}
+
+.aps-task-form-container .alfresco-tabs-widget .mdc-tab-indicator__content--underline {
+    border-color: var(--adw-color-brand-primary, #1b1464);
+    border-top-width: 3px;
+}
+
+.aps-task-form-container .alfresco-tabs-widget .adf-form-tab-content {
+    margin-top: 16px;
+    padding: 0 2px 12px;
+}
+
+.aps-task-form-container .adf-container-widget-header__text,
+.aps-task-form-container .adf-dynamic-table-scrolling > .adf-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 18px 0 12px;
+    padding: 0 0 0 12px !important;
+    border-bottom: none !important;
+    color: var(--adw-color-brand-primary, #1b1464) !important;
+    font-size: 14px !important;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+}
+
+.aps-task-form-container .adf-form-tab-content > :first-child .adf-container-widget-header__text,
+.aps-task-form-container .adf-form-tab-content > .adf-container-widget:first-child .adf-container-widget-header__text {
+    margin-top: 2px;
+}
+
+.aps-task-form-container .adf-container-widget-header__text::before,
+.aps-task-form-container .adf-dynamic-table-scrolling > .adf-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--adw-color-brand-primary, #1b1464);
+}
+
+.aps-task-form-container .adf-dynamic-table-scrolling > .adf-label .adf-asterisk {
+    margin-left: 2px;
+}
+
+.aps-task-form-container .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper,
+.aps-task-form-container .mat-form-field.mat-focused .mat-form-field-wrapper {
+    border-color: var(--adw-color-brand-primary, #1b1464) !important;
+    box-shadow: 0 0 0 3px rgba(27, 20, 100, 0.12) !important;
+}
+
+.aps-task-form-container .mat-mdc-form-field .mdc-floating-label,
+.aps-task-form-container .mat-mdc-form-field .mat-mdc-floating-label {
+    color: #667085 !important;
+}
+
+.aps-task-form-container .mat-mdc-form-field .mat-mdc-input-element,
+.aps-task-form-container .mat-mdc-form-field .mat-mdc-select-value-text {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+/* Related-document attach control: label and file sit in one field shell */
+.aps-task-form-container attach-widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 56px;
+    height: auto;
+    padding: 8px 10px 8px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    background: #f8fafc;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.aps-task-form-container attach-widget > .adf-attach-widget {
+    position: static !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+.aps-task-form-container attach-widget > .adf-attach-widget > .adf-label {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    display: block;
+    margin: 0;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 14px;
+    color: #667085;
+}
+
+.aps-task-form-container attach-widget [data-automation-id='adf-attach-widget-readonly-list'] {
+    min-width: 0;
+
+    .mat-mdc-list {
+        padding: 0;
+        --mdc-list-list-item-one-line-container-height: 28px;
+    }
+
+    .adf-attach-files-row.mdc-list-item,
+    .mat-mdc-list-item {
+        height: 28px !important;
+        min-height: 28px !important;
+        padding: 0 !important;
+    }
+
+    .adf-attach-widget__icon {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+    }
+
+    .adf-attach-widget__label,
+    .mdc-list-item__primary-text {
+        display: flex !important;
+        align-items: center;
+        gap: 2px;
+        min-width: 0;
+        width: 100%;
+        height: 28px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .adf-file {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 13.5px;
+        font-weight: 600;
+        line-height: 28px;
+        color: var(--adw-color-brand-primary, #1b1464);
+    }
+
+    .mat-mdc-icon-button {
+        width: 28px;
+        height: 28px;
+        padding: 2px;
+        color: #667085;
+    }
+}
+
+.aps-task-form-container .adf-table-container {
+    border: 1px solid #e6eaf0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.aps-task-form-container .adf-dynamic-table {
+    border: none !important;
+    white-space: normal !important;
+    font-size: 14px;
+}
+
+.aps-task-form-container .adf-dynamic-table thead th {
+    background: #f4f6fb;
+    color: #475467;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-align: left;
+    text-transform: none;
+    padding: 11px 16px;
+    border-bottom: 1px solid #e6eaf0;
+    white-space: nowrap;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody tr {
+    height: auto !important;
+    min-height: 48px;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody td {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #eef1f6;
+    color: #1e293b;
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: left;
+    vertical-align: middle;
+    white-space: normal !important;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody tr:hover td {
+    background-color: #f5f7fc;
+}
+
+.aps-task-form-container .adf-dynamic-table tbody td .mat-mdc-checkbox {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.aps-task-form-container .adf-form-mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 2;
+    margin: 0 !important;
+    padding: 12px 20px !important;
+    text-align: right;
+    background: #fff;
+    border-top: 1px solid #e7ebf2;
+    box-shadow: 0 -8px 18px rgba(15, 23, 42, 0.04);
+}
+
+.aps-task-form-container .adf-form-mat-card-actions .mat-mdc-button {
+    height: 36px;
+    min-width: 92px;
+    margin: 0 !important;
+    padding: 0 16px !important;
+    border-radius: 8px !important;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #475467;
+}
+
+.aps-task-form-container .adf-form-mat-card-actions .mat-mdc-button:hover:not(:disabled) {
+    background: #f4f6fb;
+}
+
+.aps-task-form-container .adf-form-mat-card-actions #adf-form-save:not(:disabled) {
+    color: var(--adw-color-brand-primary, #1b1464);
+}
+
+.aps-task-form-container .adf-form-mat-card-actions #adf-form-complete:not(:disabled) {
+    background: var(--adw-color-brand-primary, #1b1464);
+    color: #fff !important;
+    --mdc-text-button-label-text-color: #fff;
+    --mat-text-button-state-layer-color: #fff;
+}
+
+.aps-task-form-container .adf-form-mat-card-actions #adf-form-complete:not(:disabled):hover {
+    background: #14104d;
+}
+
+.aps-task-form-container .adf-form-mat-card-actions #adf-form-complete:disabled,
+.aps-task-form-container .adf-form-mat-card-actions #adf-form-complete.mat-mdc-button-disabled {
+    background: #eceef3;
+    color: #98a2b3 !important;
+    --mdc-text-button-disabled-label-text-color: #98a2b3;
+}
+
+/* Field groups and evidence tables each sit in their own section container. */
+.aps-task-form-container .adf-container-widget:has(> adf-header-widget):has(> .adf-grid-list-column-view, > .adf-grid-list):not(:has(.adf-dynamic-table, .adf-dynamic-table-scrolling)),
+.aps-task-form-container .adf-container-widget:has(.adf-dynamic-table-scrolling) {
+    box-sizing: border-box;
+    margin: 0 0 20px;
+    padding: 14px 16px 16px;
+    border: 1px solid #e6eaf0;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.aps-task-form-container .adf-container-widget:has(> adf-header-widget):has(> .adf-grid-list-column-view, > .adf-grid-list):not(:has(.adf-dynamic-table, .adf-dynamic-table-scrolling)) > adf-header-widget .adf-container-widget-header__text {
+    margin: 0 0 14px;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #e6eaf0 !important;
+}
+
+.aps-task-form-container .adf-container-widget:has(> adf-header-widget):has(> .adf-grid-list-column-view, > .adf-grid-list):not(:has(.adf-dynamic-table, .adf-dynamic-table-scrolling)) > adf-header-widget .adf-container-widget-header__text::before {
+    bottom: 12px;
+}
+
+.aps-task-form-container .adf-container-widget:has(> adf-header-widget):has(> .adf-grid-list-column-view, > .adf-grid-list):not(:has(.adf-dynamic-table, .adf-dynamic-table-scrolling)) .mat-mdc-text-field-wrapper,
+.aps-task-form-container .adf-container-widget:has(> adf-header-widget):has(> .adf-grid-list-column-view, > .adf-grid-list):not(:has(.adf-dynamic-table, .adf-dynamic-table-scrolling)) .mat-form-field-wrapper,
+.aps-task-form-container .adf-container-widget:has(> adf-header-widget):has(> .adf-grid-list-column-view, > .adf-grid-list):not(:has(.adf-dynamic-table, .adf-dynamic-table-scrolling)) attach-widget {
+    background: #fff !important;
+}
+
+.aps-task-form-container .adf-container-widget:has(.adf-dynamic-table-scrolling) .adf-dynamic-table-scrolling > .adf-label,
+.aps-task-form-container .adf-container-widget:has(.adf-dynamic-table-scrolling) > adf-header-widget .adf-container-widget-header__text {
+    margin: 0 0 14px;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #e6eaf0 !important;
+}
+
+.aps-task-form-container .adf-container-widget:has(.adf-dynamic-table-scrolling) .adf-dynamic-table-scrolling > .adf-label::before,
+.aps-task-form-container .adf-container-widget:has(.adf-dynamic-table-scrolling) > adf-header-widget .adf-container-widget-header__text::before {
+    bottom: 12px;
+}
+
+.aps-task-form-container .adf-container-widget:has(.adf-dynamic-table-scrolling) .adf-table-container {
+    background: #fff;
+}

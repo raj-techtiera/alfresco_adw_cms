@@ -1,0 +1,79 @@
+<div class="adw-member-list-container">
+    <div class="adw-toolbar adw-toolbar-primary">
+        <span class="adw-toolbar-title">
+            {{ 'MEMBERSHIP_REQUESTS.PENDING_REQUESTS' | translate }} ( {{ membershipRequests?.list?.entries?.length }} )
+        </span>
+    </div>
+
+    <adw-data-table-extension [contextMenu]="false"
+                              [items]="$any(membershipRequests)"
+                              [loading]="loading"
+                              [showHeader]="showHeader"
+                              selectionMode="none">
+
+        <data-columns>
+            <data-column class="adf-datatable-cell adf-datatable-cell--image" key="$thumbnail">
+                <ng-template let-context>
+                    <div class="adw-people-initial-wrapper">
+                        <div *ngIf="!context?.row?.obj?.entry?.person?.avatarId"
+                            [outerHTML]="context?.row?.obj?.entry?.person | usernameInitials:'adf-people-initial'"></div>
+                        <img
+                            *ngIf="context?.row?.obj?.entry?.person?.avatarId"
+                            class="adf-people-initial"
+                            [src]="getEcmAvatar(context?.row?.obj?.entry?.person?.avatarId)"
+                            [alt]="'MEMBER_LIST.A11Y_AVATAR' | translate"
+                        />
+                    </div>
+                </ng-template>
+            </data-column>
+
+            <data-column class="adf-ellipsis-cell adf-expand-cell-5 adw-member-column" key="person" title="Name">
+                <ng-template let-context>
+                    <adf-user-name-column [context]="context" />
+                </ng-template>
+            </data-column>
+
+            <data-column class="adf-ellipsis-cell adf-expand-cell-2" key="role">
+                <ng-template let-context>
+                    <adw-role-selector (memberRoleChanged)="context.row.obj.entry.role = $event"
+                                       [attr.data-automation-id]="'pending-user-' + context.row.obj.entry.person.id"
+                                       [value]="context.row.obj.entry.role" />
+                </ng-template>
+            </data-column>
+
+            <data-column class="adw-member-pending-actions" key="">
+                <ng-template let-context>
+                    <button
+                        (click)="
+                            approveMembershipRequest(
+                                context?.row?.obj?.entry,
+                                context?.row?.obj?.entry?.role
+                            )
+                        "
+                        [disabled]="!context?.row?.obj?.entry?.role"
+                        [attr.data-automation-id]="'approve-request-' + context?.row?.obj?.entry?.person?.id"
+                        color="primary"
+                        mat-button
+                    >
+                        {{ 'MEMBERSHIP_REQUESTS.APPROVE' | translate }}
+                    </button>
+                    <button
+                        (click)="rejectMembershipRequest(context?.row?.obj?.entry)"
+                        mat-button
+                        [attr.data-automation-id]="'reject-request-' + context?.row?.obj?.entry?.person?.id"
+                    >
+                        {{ 'MEMBERSHIP_REQUESTS.REJECT' | translate }}
+                    </button>
+                </ng-template>
+            </data-column>
+        </data-columns>
+
+        <adf-custom-empty-content-template>
+            <adf-empty-content
+                [title]="'MEMBERSHIP_REQUESTS.NO_MEMBERSHIPS'"
+                icon="people_alt" />
+        </adf-custom-empty-content-template>
+    </adw-data-table-extension>
+
+    <adf-pagination *ngIf="membershipRequests?.list?.pagination" (change)="onChange($any($event))" [pagination]="membershipRequests?.list?.pagination" />
+</div>

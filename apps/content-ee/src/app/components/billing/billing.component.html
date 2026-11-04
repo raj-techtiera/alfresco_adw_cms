@@ -1,0 +1,424 @@
+<div class="bl-wrap">
+  <!-- Header -->
+  <div class="bl-header">
+    <h1 class="bl-title">Billing and Subscription</h1>
+    <p class="bl-subtitle">Manage your plan and invoices for billinit.epcdoc.com</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="bl-tabs">
+    <button type="button" class="bl-tab" *ngFor="let tab of tabs; trackBy: trackByKey"
+      [class.bl-tab--active]="activeTab === tab.key" (click)="setTab(tab.key)">
+      {{ tab.label }}
+    </button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="bl-stack" *ngIf="activeTab === 'overview'">
+    <div class="bl-kpi-grid">
+      <div
+        class="bl-premium-card bl-premium-card--kpi"
+        *ngFor="let kpi of overviewKpis; trackBy: trackByIndex"
+        [style.--card-accent]="kpi.valueColor"
+      >
+        <div class="bl-premium-card__shine"></div>
+        <div class="bl-premium-card__glow"></div>
+        <div class="bl-premium-card__content">
+          <div class="bl-premium-card__image bl-premium-card__image--sm" [style.--bg-color]="kpi.valueColor">
+            <span class="bl-premium-card__image-code">{{ kpi.value }}</span>
+          </div>
+          <div class="bl-premium-card__text">
+            <p class="bl-premium-card__description bl-premium-card__description--upper">{{ kpi.label }}</p>
+            <p class="bl-premium-card__title" [style.color]="kpi.valueColor">{{ kpi.value }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <div class="bl-card-head">
+        <h3 class="bl-card-title">Usage this billing period</h3>
+        <span class="bl-card-meta">0 / Unlimited users</span>
+      </div>
+      <div class="bl-usage" *ngFor="let item of usageItems; trackBy: trackByIndex">
+        <div class="bl-usage-row">
+          <span class="bl-usage-label">{{ item.label }}</span>
+          <span class="bl-usage-meta">{{ item.used }} / {{ item.total }}</span>
+        </div>
+        <div class="bl-bar"><div class="bl-bar-fill" [style.width.%]="item.pct"></div></div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb1">AI credit top-up packs</h3>
+      <p class="bl-card-sub">Credits reset on the 1st of each month</p>
+      <div class="bl-pack-grid">
+        <div
+          class="bl-premium-card"
+          *ngFor="let pack of creditPacks; trackBy: trackByIndex"
+          style="--card-accent: #f59e0b"
+        >
+          <div class="bl-premium-card__shine"></div>
+          <div class="bl-premium-card__glow"></div>
+          <div class="bl-premium-card__content">
+            <div class="bl-premium-card__badge">PACK</div>
+            <div class="bl-premium-card__image" style="--bg-color: #f59e0b">
+              <span class="bl-premium-card__image-code">{{ pack.credits.split(' ')[0] }}</span>
+            </div>
+            <div class="bl-premium-card__text">
+              <p class="bl-premium-card__title">{{ pack.price }}</p>
+              <p class="bl-premium-card__description">{{ pack.sub }}</p>
+            </div>
+            <div class="bl-premium-card__footer">
+              <div class="bl-premium-card__price">
+                <span class="bl-premium-card__count">{{ pack.credits }}</span>
+              </div>
+              <button type="button" class="bl-premium-card__button" title="Buy pack">
+                <svg height="16" width="16" viewBox="0 0 24 24" fill="none">
+                  <path stroke-width="2" stroke="currentColor" d="M4 12H20M12 4V20"></path>
+                </svg>
+              </button>
+            </div>
+            <button type="button" class="bl-btn-amber-block">Buy pack</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb1">Module Add-ons</h3>
+      <p class="bl-card-sub">Select your platform with additional modules. Active modules are enabled immediately.</p>
+      <div class="bl-mod-grid">
+        <div
+          class="bl-premium-card"
+          *ngFor="let mod of overviewModuleAddons; trackBy: trackByName"
+          [style.--card-accent]="mod.color"
+        >
+          <div class="bl-premium-card__shine"></div>
+          <div class="bl-premium-card__glow"></div>
+          <div class="bl-premium-card__content">
+            <div class="bl-premium-card__badge" [style.background]="mod.color">{{ mod.tag }}</div>
+            <div class="bl-premium-card__image" [style.--bg-color]="mod.color">
+              <span class="bl-premium-card__image-code">{{ mod.tag }}</span>
+            </div>
+            <div class="bl-premium-card__text">
+              <p class="bl-premium-card__title">{{ mod.name }}</p>
+              <p class="bl-premium-card__description">{{ mod.desc }}</p>
+            </div>
+            <div class="bl-premium-card__footer">
+              <div class="bl-premium-card__price">
+                <span class="bl-premium-card__count">{{ mod.price }}</span>
+                <span class="bl-premium-card__count-label" *ngIf="mod.unit">{{ mod.unit }}</span>
+                <span class="bl-premium-card__count-label" *ngIf="mod.vat">{{ mod.vat }}</span>
+              </div>
+              <button type="button" class="bl-premium-card__button" [style.background]="mod.color" [attr.title]="mod.btn">
+                <svg height="16" width="16" viewBox="0 0 24 24" fill="none">
+                  <path stroke-width="2" stroke="currentColor" d="M4 12H20M12 4V20"></path>
+                </svg>
+              </button>
+            </div>
+            <button type="button" class="bl-btn-amber-block bl-mt-auto">{{ mod.btn }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFER & EARN -->
+  <div class="bl-empty-card" *ngIf="activeTab === 'refer-earn'">
+    <p class="bl-empty-text">Refer & Earn — coming soon</p>
+  </div>
+
+  <!-- SUBSCRIPTION -->
+  <div class="bl-stack" *ngIf="activeTab === 'subscription'">
+    <!-- Stepper -->
+    <div class="bl-stepper">
+      <ng-container *ngFor="let step of steps; let i = index; trackBy: trackByIndex">
+        <div class="bl-step" [class.bl-step--active]="step.num === activeStep" (click)="goToStep(step.num)">
+          <div class="bl-step-num"
+            [class.bl-step-num--done]="step.num < activeStep"
+            [class.bl-step-num--active]="step.num === activeStep">
+            {{ step.num < activeStep ? '✓' : step.num }}
+          </div>
+          <span class="bl-step-label"
+            [class.bl-step-label--active]="step.num === activeStep"
+            [class.bl-step-label--done]="step.num < activeStep">{{ step.label }}</span>
+        </div>
+        <div class="bl-step-divider" *ngIf="i < steps.length - 1"></div>
+      </ng-container>
+    </div>
+
+    <!-- Step 1: Choose Plan -->
+    <div class="bl-stack-sm" *ngIf="activeStep === 1">
+      <div class="bl-cycle">
+        <button type="button" class="bl-cycle-btn bl-cycle-btn--left"
+          [class.bl-cycle-btn--active]="billingCycle === 'monthly'" (click)="billingCycle = 'monthly'">Monthly billing</button>
+        <button type="button" class="bl-cycle-btn bl-cycle-btn--right"
+          [class.bl-cycle-btn--active]="billingCycle === 'annual'" (click)="billingCycle = 'annual'">Annual billing — save 15%</button>
+      </div>
+      <div class="bl-plan-grid">
+        <ng-container *ngTemplateOutlet="planCards; context: { $implicit: firstRowPlans }"></ng-container>
+      </div>
+      <div class="bl-plan-grid">
+        <ng-container *ngTemplateOutlet="planCards; context: { $implicit: secondRowPlans }"></ng-container>
+      </div>
+    </div>
+
+    <!-- Step 2: Choose Modules -->
+    <div class="bl-stack-sm" *ngIf="activeStep === 2">
+      <div class="bl-plan-info-row">
+        <div class="bl-plan-info">
+          <span class="bl-plan-info-text">Plan:</span>
+          <span class="bl-plan-info-name">Free</span>
+          <span class="bl-plan-info-text">· {{ billingCycle }}</span>
+          <button type="button" class="bl-link-btn" (click)="activeStep = 1">Change</button>
+        </div>
+        <div class="bl-cycle">
+          <button type="button" class="bl-cycle-btn bl-cycle-btn--left bl-cycle-btn--sm"
+            [class.bl-cycle-btn--active]="billingCycle === 'monthly'" (click)="billingCycle = 'monthly'">Monthly</button>
+          <button type="button" class="bl-cycle-btn bl-cycle-btn--right bl-cycle-btn--sm"
+            [class.bl-cycle-btn--active]="billingCycle === 'annual'" (click)="billingCycle = 'annual'">Annual (−15%)</button>
+        </div>
+      </div>
+
+      <div>
+        <p class="bl-mod-section-label">MODULE ADD-ONS</p>
+        <div class="bl-mod3-grid">
+          <div
+            class="bl-premium-card"
+            *ngFor="let mod of step2Modules; trackBy: trackByTag"
+            [style.--card-accent]="mod.color"
+          >
+            <div class="bl-premium-card__shine"></div>
+            <div class="bl-premium-card__glow"></div>
+            <div class="bl-premium-card__content">
+              <div class="bl-premium-card__badge">ACTIVE</div>
+              <div class="bl-premium-card__image" [style.--bg-color]="mod.color">
+                <span class="bl-premium-card__image-code">{{ mod.tag }}</span>
+              </div>
+              <div class="bl-premium-card__text">
+                <p class="bl-premium-card__title">{{ mod.name }}</p>
+                <p class="bl-premium-card__description">Currently active</p>
+              </div>
+              <div class="bl-premium-card__footer">
+                <div class="bl-premium-card__price">
+                  <span class="bl-premium-card__count">{{ formatINR(mod.price) }}</span>
+                  <span class="bl-premium-card__count-label">/mo</span>
+                </div>
+                <button type="button" class="bl-premium-card__button" [style.background]="mod.color">
+                  <svg height="16" width="16" viewBox="0 0 24 24" fill="none">
+                    <path stroke-width="2" stroke="currentColor" d="M4 12H20M12 4V20"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bl-sticky-bar">
+        <span class="bl-sticky-label">Free + {{ step2Modules.length }} modules · {{ billingCycle }}</span>
+        <div class="bl-sticky-right">
+          <div class="bl-sticky-total">
+            <div class="bl-sticky-total-row">
+              <span class="bl-sticky-amount">{{ formatINR(subtotal) }}</span>
+              <span class="bl-sticky-unit">/mo</span>
+            </div>
+            <p class="bl-sticky-gst">+18% GST</p>
+          </div>
+          <button type="button" class="bl-btn-amber-lg" (click)="activeStep = 3">Review order →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Review & Pay -->
+    <div class="bl-stack-sm" *ngIf="activeStep === 3">
+      <div class="bl-review-card">
+        <h3 class="bl-review-title">Order summary</h3>
+
+        <div class="bl-review-row">
+          <span class="bl-review-name">Free plan · monthly</span>
+          <span class="bl-review-val">₹0/mo</span>
+        </div>
+
+        <div class="bl-review-row" *ngFor="let mod of moduleAddons; trackBy: trackByTag">
+          <span class="bl-review-name bl-review-name--link">{{ mod.name }}</span>
+          <span class="bl-review-val">₹{{ mod.price.toLocaleString('en-IN') }}/mo</span>
+        </div>
+
+        <div class="bl-review-row bl-review-row--subtotal">
+          <span class="bl-review-name">Subtotal</span>
+          <span class="bl-review-val">₹3,12,985</span>
+        </div>
+
+        <div class="bl-review-row bl-review-row--gst">
+          <span class="bl-review-name">GST (18%)</span>
+          <span class="bl-review-val">₹56,337</span>
+        </div>
+
+        <div class="bl-review-row bl-review-row--total">
+          <span class="bl-review-total-label">Total this payment</span>
+          <span class="bl-review-total-val">₹3,69,322</span>
+        </div>
+
+        <p class="bl-review-note">Billed monthly · <span class="bl-review-cancel">Cancel anytime</span></p>
+
+        <div class="bl-refund">
+          <span class="bl-refund-strong">No refund policy: </span>
+          <span class="bl-refund-text">Module removal and plan downgrades take effect immediately. No refund or credit will be applied for unused periods.</span>
+        </div>
+
+        <div class="bl-review-actions">
+          <button type="button" class="bl-btn-back" (click)="activeStep = 2">← Back</button>
+          <button type="button" class="bl-btn-amber-lg">Pay ₹3,69,322 (incl. GST) →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT METHOD -->
+  <div class="bl-stack-sm" *ngIf="activeTab === 'payment-method'">
+    <div class="bl-security-banner">
+      <p class="bl-security-title">Payment security</p>
+      <p class="bl-security-text">EPCdoc processes all payments via Razorpay. Your card details are never stored on EPCdoc servers. All transactions are PCI-DSS Level 1 compliant.</p>
+    </div>
+
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb16">Current subscription</h3>
+      <div class="bl-sub-row" *ngFor="let row of subscriptionRows; let last = last; trackBy: trackByIndex"
+        [class.bl-sub-row--last]="last">
+        <span class="bl-sub-label">{{ row.label }}</span>
+        <span class="bl-sub-val">{{ row.value }}</span>
+      </div>
+    </div>
+
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb16">Accepted payment methods</h3>
+      <div class="bl-pm-grid">
+        <div
+          class="bl-premium-card bl-premium-card--compact"
+          *ngFor="let method of paymentMethods; trackBy: trackByIndex"
+          style="--card-accent: #0a84ff"
+        >
+          <div class="bl-premium-card__shine"></div>
+          <div class="bl-premium-card__glow"></div>
+          <div class="bl-premium-card__content">
+            <div class="bl-premium-card__badge">PAY</div>
+            <div class="bl-premium-card__image bl-premium-card__image--sm" style="--bg-color: #0a84ff">
+              <span class="bl-premium-card__image-code">{{ method.title.charAt(0) }}</span>
+            </div>
+            <div class="bl-premium-card__text">
+              <p class="bl-premium-card__title">{{ method.title }}</p>
+              <p class="bl-premium-card__description">{{ method.sub }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVOICES -->
+  <div class="bl-stack-sm" *ngIf="activeTab === 'invoices'">
+    <div class="bl-inv-head">
+      <p class="bl-inv-note">GST invoices auto-generated after each payment.</p>
+      <button type="button" class="bl-btn-amber">Generate Invoice</button>
+    </div>
+
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb16">Invoice history</h3>
+      <table class="bl-table">
+        <thead>
+          <tr>
+            <th *ngFor="let col of invoiceColumns; trackBy: trackByIndex">{{ col }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inv of invoices; trackBy: trackByIndex">
+            <td class="bl-td-link bl-td-bold">{{ inv.id }}</td>
+            <td class="bl-td-link">{{ inv.plan }}</td>
+            <td class="bl-td-dark">{{ inv.amount }}</td>
+            <td class="bl-td-muted">{{ inv.tax }}</td>
+            <td><span class="bl-status-badge">{{ inv.status }}</span></td>
+            <td><button type="button" class="bl-pdf-btn">PDF</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb20">GST invoice details</h3>
+      <div class="bl-gst-form">
+        <div>
+          <label class="bl-gst-label">LEGAL COMPANY NAME</label>
+          <input class="bl-gst-input" [(ngModel)]="legalName" />
+        </div>
+        <div>
+          <label class="bl-gst-label">GSTIN</label>
+          <input class="bl-gst-input" [(ngModel)]="gstin" />
+        </div>
+        <div>
+          <label class="bl-gst-label">BILLING ADDRESS</label>
+          <input class="bl-gst-input" [(ngModel)]="billingAddress" />
+        </div>
+        <div>
+          <button type="button" class="bl-btn-amber">Save GST details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT HISTORY -->
+  <div class="bl-stack-sm" *ngIf="activeTab === 'payment-history'">
+    <p class="bl-inv-note">All payment transactions processed through Razorpay.</p>
+    <div class="bl-card">
+      <h3 class="bl-card-title bl-mb16">Transaction history</h3>
+      <table class="bl-table">
+        <thead>
+          <tr>
+            <th *ngFor="let col of historyColumns; trackBy: trackByIndex">{{ col }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="6" class="bl-history-empty">No transactions yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Reusable plan card list -->
+<ng-template #planCards let-plans>
+  <div
+    class="bl-premium-card"
+    *ngFor="let plan of plans; trackBy: trackByName"
+    [class.bl-premium-card--current]="plan.isCurrent"
+    style="--card-accent: #f59e0b"
+    (click)="activeStep = 2"
+  >
+    <div class="bl-premium-card__shine"></div>
+    <div class="bl-premium-card__glow"></div>
+    <div class="bl-premium-card__content">
+      <div class="bl-premium-card__badge" *ngIf="plan.isCurrent">CURRENT</div>
+      <div class="bl-premium-card__image" style="--bg-color: #f59e0b">
+        <span class="bl-premium-card__image-code">{{ plan.name.charAt(0) }}</span>
+      </div>
+      <div class="bl-premium-card__text">
+        <p class="bl-premium-card__title">{{ plan.name }}</p>
+        <p class="bl-premium-card__description"
+          [class.bl-premium-card__description--price]="!plan.isFree">
+          {{ displayPrice(plan) }}<span *ngIf="!plan.isFree">/mo</span>
+        </p>
+      </div>
+      <div class="bl-premium-card__footer bl-premium-card__footer--stack">
+        <div class="bl-plan-features">
+          <div class="bl-plan-feature"><span>👥</span><span>{{ plan.users }}</span></div>
+          <div class="bl-plan-feature"><span>💾</span><span>{{ plan.storage }}</span></div>
+          <div class="bl-plan-feature"><span>🤖</span><span>{{ plan.credits }}</span></div>
+          <div class="bl-plan-feature"><span>📁</span><span>{{ plan.projects }}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

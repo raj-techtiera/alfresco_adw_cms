@@ -1,0 +1,111 @@
+{
+  "ERRORS": {
+    "GENERIC": "Handlingen var mislykket. Prøv på nytt, eller kontakt IT-teamet.",
+    "PERMISSION_DENIED": "Du har ikke tillatelse til å utføre denne operasjonen"
+  },
+  "LIBRARY_NOTIFICATIONS": {
+    "REQUEST_SINGULAR": "{{ user }} har bedt om å få bli med i {{ library }}",
+    "REQUEST_PLURAL": "{{ number }} personer har bedt om å få bli med i {{ library }}"
+  },
+  "MEMBER_MANAGER": {
+    "TITLE": "Administrer medlemmer",
+    "CLOSE": "Lukk",
+    "BREADCRUMB": {
+      "LIBRARY_DETAILS": "Bibliotekdetaljer",
+      "MANAGE_MEMBERS": "Administrer medlemmer"
+    },
+    "TABS": {
+      "PROPERTIES": "Egenskaper",
+      "MEMBERS": "Medlemmer",
+      "GROUPS": "Grupper",
+      "PENDING": "Venter"
+    },
+    "LOAD_MORE": "Last ned mer",
+    "CONFIRM_DIALOG": {
+      "TITLE": "Bekreft",
+      "MESSAGE": "Vil du fortsette?"
+    },
+    "REJECT_DIALOG": {
+      "TITLE": "Avvis medlemsforespørsel",
+      "COMMENT": "Legg igjen en kommentar her",
+      "YES_LABEL": "Avvis",
+      "NO_LABEL": "Avbryt"
+    },
+    "GROUPS_INFO_DIALOG": {
+      "TITLE": "Informasjon om gruppemedlemskap",
+      "DESCRIPTION": "Denne brukeren har tilgang til biblioteket gjennom grupperoller. Hvis du må fjerne denne brukerens individuelle medlemskap, må du først fjerne vedkommende fra gruppene opplistet nedenfor.",
+      "CLOSE": "Lukk",
+      "GROUP": "Gruppe",
+      "ROLE": "Rolle"
+    }
+  },
+  "MEMBERSHIP_REQUESTS": {
+    "NO_MEMBERSHIPS": "Ingen ventende medlemskapsforespørsler",
+    "PENDING_REQUESTS": "Ventende medlemskapsforespørsel",
+    "APPROVE": "Godkjenn",
+    "REJECT": "Avvis"
+  },
+  "MEMBER_LIST": {
+    "MEMBER_COUNT": "Medlemmer av dette biblioteket",
+    "NO_MEMBERS": "Fant ingen medlemmer",
+    "DELETE_MEMBERS": "Slett valgte medlemmer",
+    "GROUP_ROLE": "Grupperolle",
+    "REMOVE": "Fjern",
+    "A11Y_AVATAR": "Brukeravatar",
+    "REFRESH": "Oppdater"
+  },
+  "GROUP_LIST": {
+    "GROUP_COUNT": "Gruppemedlemskap i dette biblioteket",
+    "NO_GROUPS": "Fant ingen grupper",
+    "DELETE_GROUPS": "Slett valgte grupper",
+    "REFRESH": "Oppdater",
+    "REMOVE": "Fjern"
+  },
+  "ROLES": {
+    "SITE_MANAGER": "Administrator",
+    "SITE_CONTRIBUTOR": "Bidragsyter",
+    "SITE_CONSUMER": "Forbruker",
+    "SITE_COLLABORATOR": "Medarbeider"
+  },
+  "ROLE_SELECTOR": {
+    "USER_SELECTOR": "Angi brukerrolle",
+    "GROUP_SELECTOR": "Angi grupperolle",
+    "ALL": "Angi alle roller til"
+  },
+  "ADD_MEMBER": {
+    "TITLE": "Legg til bruker/gruppe",
+    "SEARCH_INPUT": "Søk etter brukere eller grupper å legge til",
+    "NAME": "Navn",
+    "TITLE_LABEL": "Legg til bruker eller gruppe i",
+    "ADD_LABEL": "Legg til",
+    "SELECT_LABEL": "Velg",
+    "CLOSE_LABEL": "Lukk",
+    "CANCEL_LABEL": "Avbryt"
+  },
+  "SIDEBAR": {
+    "MEMBERS": "Medlemmer"
+  },
+  "NOTIFICATIONS": {
+    "MEMBERSHIP_REJECTED": "Medlemskapsforespørsel avvist",
+    "MEMBERSHIP_ACCEPTED": "Medlem lagt til i biblioteket",
+    "USER_REMOVE_SUCCESS": "Bruker fjernet",
+    "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} brukere fjernet, {{skipped}} ble hoppet over",
+    "USER_REMOVE_FAILED": "Kunne ikke fjerne brukeren",
+    "GROUP_REMOVE_SUCCESS": "Gruppe fjernet",
+    "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} grupper fjernet, {{skipped}} ble hoppet over",
+    "GROUP_REMOVE_FAILED": "Kunne ikke fjerne gruppen",
+    "ADD_MEMBER_FAILED": "Kunne ikke legge medlem til på området",
+    "ADD_MEMBERS_FAILED": "Kunne ikke legge til {{count}} medlemmer",
+    "ADD_MEMBERS_SUCCESS": "La til {{userCount}} bruker(e) og {{groupCount}} gruppe(r)",
+    "ADD_GROUPS_SUCCESS": "La til {{groupCount}} gruppe(r)",
+    "ADD_USERS_SUCCESS": "La til {{userCount}} bruker(e)",
+    "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} medlem lagt til, {{skipped}} ble hoppet over",
+    "USER_ROLE_UPDATED": "Brukerrolle oppdatert",
+    "GROUP_ROLE_UPDATED": "Grupperolle oppdatert",
+    "MEMBER_EXISTS": "Brukeren er allerede medlem av området",
+    "MANAGER_REQUIRED": "Et område krever minst én områdeleder",
+    "ACTIONS": {
+      "CLOSE": "Lukk"
+    }
+  }
+}

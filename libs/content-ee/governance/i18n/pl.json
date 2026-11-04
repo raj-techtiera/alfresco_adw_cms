@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Zastosuj",
+        "CANCEL": "Anuluj",
+        "SWITCH": "Przełącz",
+        "CONTINUE": "Kontynuuj",
+        "RELOAD": "Wczytaj ponownie"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Zadeklaruj rekord",
+            "SUCCESS": "Plik {{fileName}} został zadeklarowany jako rekord",
+            "FAIL": "Pliku {{fileName}} nie można zadeklarować jako rekord",
+            "DIALOG": {
+                "TITLE": "Zadeklaruj rekord",
+                "MESSAGE": "Ten dokument został uprzednio zadeklarowany jako rekord i został odrzucony.",
+                "YES": "Zadeklaruj rekord",
+                "NO": "Anuluj",
+                "CLOSE": "Zamknij"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Deklarowanie folderu jako rekordu nie jest obecnie obsługiwane",
+                    "EXISTING-RECORD": "Już zadeklarowano jako rekord",
+                    "FAILED": "Nie udało się zadeklarować jako rekord"
+                },
+                "SUCCESS": "Element został zadeklarowany jako rekord"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Odrzucony rekord",
+            "CLOSE_LABEL": "Zamknij",
+            "SUB-TITLE": "Plik '{{ nodeName }}' został odrzucony jako rekord",
+            "BY": "Przez",
+            "AT": "w dn.",
+            "REASON": "Przyczyna:",
+            "CONFIRM": "Potwierdź",
+            "WARNING": "W przypadku usunięcia ostrzeżenia o odrzuconym rekordzie opcje umożliwiające zadeklarowanie pliku jako rekordu staną się ponownie dostępne",
+            "FAILED-REMOVE": "Nie udało się usunąć ostrzeżenia dotyczącego odrzuconego węzła {{nodeName}}: {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Odrzucony rekord",
+            "TOOLTIP-MESSAGE": "Ostrzeżenie dotyczące usunięcia",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Odrzucony rekord",
+                "RECORD-HYPERLINK": "Zadeklarowano jako rekord",
+                "REJECTED-RECORD-HYPERLINK": "Rekord został odrzucony, szczegóły znajdziesz w informacjach o pliku"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Usuń",
+            "SUCCESS": "Rekord '{{ name }}' został usunięty",
+            "FAIL": "Nie udało się usunąć rekordu {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Usuń wystąpienie rekordu",
+                "YES-ALL": "Usuń i nie pokazuj tego ponownie",
+                "YES": "Usuń",
+                "NO": "Anuluj",
+                "MESSAGE": {
+                    "DELETE": "To wystąpienie rekordu '{{name}}' zostanie trwale usunięte i nie będzie można go pobrać z kosza.",
+                    "ADDITIONAL": "Nie będzie to miało wpływu na rekord '{{name}}' znajdujący się w systemie zarządzania rekordami Twojej organizacji."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Rekord"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Przenieś",
+            "MOVE-ITEM": "Przenieś '{{ name }}' do...",
+            "SAME-FOLDER-MOVE": "Nie można przenieść do tego samego folderu",
+            "SUCCESSFUL": "Rekord został przeniesiony pomyślnie"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Wyślij do archiwum",
+                "SUCCESS": "Plik {{ name }} zostanie zarchiwizowany",
+                "FAIL": "Nie udało się zarchiwizować pliku {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Element już zarchiwizowany.",
+                        "PENDING-RESTORE": " Elementy oczekujące na przywrócenie. ",
+                        "RESTORED": "Nie można zarchiwizować przywróconych elementów",
+                        "FOLDER": "Przywracanie z archiwum nie jest obecnie obsługiwane"
+                    },
+                    "FAIL": "Nie udało się zarchiwizować",
+                    "SUCCESS": "Element zostanie zarchiwizowany"
+                },
+                "DIALOG": {
+                    "TITLE": "Wyślij do archiwum",
+                    "MESSAGE": "Zamierzasz wysłać pliki do archiwum zewnętrznego. Pobieranie plików z archiwum może wiązać się z kosztami. Czy na pewno chcesz kontynuować?",
+                    "YES": "Wyślij do archiwum",
+                    "NO": "Anuluj"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Przywracanie z archiwum",
+                "SYNC-ERROR": "Plik, który próbujesz przywrócić, nie został jeszcze zsynchronizowany z archiwum. Ta operacja może potrwać do 24 godzin. Spróbuj ponownie później.",
+                "FAIL": "Nie udało się przywrócić pliku {{ name }} z archiwum",
+                "DIALOG": {
+                    "TITLE": "Przywracanie z archiwum",
+                    "LABEL": {
+                        "TYPE": "Szybkość przywracania (limit 250 MB na jedną operację przywracania)",
+                        "OPTION-FAST": "Szybkie — czas trwania 1–5 min (najwyższy koszt)",
+                        "OPTION-STANDARD": "Standardowe — czas trwania 3–5 godzin",
+                        "OPTION-SLOW": "Wolne — czas trwania 5–12 godzin (najniższy koszt)",
+                        "DURATION": "Na jak długo pliki zostaną przywrócone? (dni)"
+                    },
+                    "YES": "Potwierdź",
+                    "NO": "Anuluj"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Przywracanie z archiwum",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Pliki, które próbujesz przywrócić, nie zostały jeszcze zsynchronizowane z archiwum. Ta operacja może potrwać do 24 godzin. Spróbuj ponownie później.",
+                        "RESTORED": "Element jest już przywrócony",
+                        "PENDING-RESTORE": "Element już oczekuje na przywrócenie.",
+                        "NOT-STORED": "Element, który próbujesz przywrócić, nie został jeszcze zsynchronizowany z archiwum",
+                        "FAIL": "Nie udało się przywrócić",
+                        "FOLDER": "Przywracanie folderu nie jest obecnie obsługiwane"
+                    },
+                    "SUCCESS": "Element zostanie przywrócony"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Przedłużenie czasu przywrócenia",
+                "SUCCESS": "Czas przywrócenia zostanie wydłużony do '{{ days }}' dni od {{ date }}",
+                "FAIL": "Nie udało się przedłużyć czasu przywrócenia pliku {{ name }} z archiwum"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Ten plik jest zarchiwizowany. Aby go przywrócić, kliknij prawym przyciskiem myszy i wybierz polecenie przywrócenia z archiwum.",
+                "RESTORED": "Przywrócono",
+                "PENDING-RESTORE": "Obecnie trwa przywracanie plików z archiwum. Jeśli nie możesz pobrać pliku lub wyświetlić jego podglądu, spróbuj ponownie później"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Status operacji masowej",
+            "FAIL": "Nie udało się wykonać operacji",
+            "CLOSE": "Zamknij"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Zarządzaj dokumentami chronionymi prawnie",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Usuń dokument chroniony prawnie",
+            "DIALOG_TITLE": "Zarządzaj dokumentami chronionymi prawnie",
+            "TAB_EXISTING_HOLDS": "Zarządzaj istniejącymi dokumentami chronionymi prawnie",
+            "TAB_CREATE_LEGAL_HOLD": "Utwórz dokument chroniony prawnie",
+            "SAVE": "Zapisz",
+            "CLOSE": "Zamknij",
+            "CANCEL": "Anuluj",
+            "NEW_HOLD_NAME": "Nazwa",
+            "NEW_HOLD_DESCRIPTION": "Opis",
+            "NEW_HOLD_REASON": "Powód",
+            "DIALOG_WARNING_TITLE": "Ostrzeżenie",
+            "DIALOG_WARNING_MESSAGE": "Zmiany nie zostaną zastosowane, jeśli przełączysz zakładki.",
+            "DOCUMENT_IN_HOLD": "Dokument w dokumentach chronionych prawnie",
+            "FOLDER_IN_HOLD": "Folder w dokumentach chronionych prawnie",
+            "APPLY_HOLDS_SUCCESS": "Akcja związana z dokumentami chronionymi prawnie zakończyła się sukcesem.",
+            "APPLY_HOLDS_NOT_FOUND": "Wybrany dokument chroniony prawnie lub określony plik nie istnieje. Zweryfikuj swój wybór i spróbuj ponownie.",
+            "BULK_APPLY_HOLDS_SUCCESS": "Czynność dokumentu chronionego prawnie powiodła się. {{ totalItems }} pozycje zostały dodane do dokumentu chronionego prawnie.",
+            "BULK_APPLY_HOLDS_STARTED": "Zbiorcze dokumenty chronione prawnie działają w tle. Zostaniesz powiadomiony, gdy zostaną ukończone.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Wykryto zarchiwizowane, zduplikowane lub zablokowane treści. Elementy {{ errorsCount }} nie zostały dodane do dokumentów chronionych prawnie.",
+            "BULK_APPLY_HOLDS_FAIL": "Umieszczanie treści do legalnego przechowywania nie powiodło się.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Zbiorcze dokumenty chronione prawnie nie mogą zostać zastosowane w folderach",
+            "ACKNOWLEDGE": "Potwierdź",
+            "EMPTY_HOLD_LIST": "Brak dostępnych dokumentów chronionych prawnie",
+            "WARNING_DIALOG_TITLE": "Ostrzeżenie: Działanie zbiorcze",
+            "WARNING_DIALOG_MESSAGE": "To działanie zmieni status dokumentów chronionych prawnie dla <strong>Wszystkich plików w tych plikach wyszukiwania</strong>.<br><br>Te dokumenty <strong>nie będą zastosowane w folderach</strong>.",
+            "WARNING_DIALOG_QUESTION": "Czy chcesz kontynuować?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Administrator musi utworzyć Record Management Site, aby aktywować dokumenty chronione prawnie",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Plik został pomyślnie usunięty z dokumentów chronionych prawnie.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Pliki zostały pomyślnie usunięte z dokumentów chronionych prawnie.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Nie udało się usunąć pliku z dokumentów chronionych prawnie.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Nie udało się usunąć plików z dokumentów chronionych prawnie.",
+            "LOADING_CAPABILITIES_ERROR": "Nie udało się załadować funkcji",
+            "NODE_NOT_FOUND": "Nie można odnaleźć wybranego węzła. Proszę sprawdzić wybór i spróbować ponownie.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Usunąć elementy zawierające dokumenty chronione prawnie?",
+                "TITLE_PLURAL": "Usunąć zaznaczone {{ count }} dokumenty chronione prawnie i zwolnione dokumenty?",
+                "MESSAGE_SINGULAR": "Wybrałeś {{ name }} przytrzymaj do usunięcia. Wszystkie trzymane przez niego przedmioty zostaną wydane. Tej czynności nie można cofnąć.",
+                "MESSAGE_PLURAL": "Wybrałeś elementy {{ count }} do usunięcia. Niektóre z nich są przechowywane, wszystkie posiadane przedmioty zostaną uwolnione. Tej czynności nie można cofnąć.",
+                "KEEP_HOLD": "Zachowaj dokument chroniony prawnie"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Błąd w zapisywaniu znaków zabezpieczeń",
+            "DIALOG_TITLE": "Edytuj znaki zabezpieczeń",
+            "MENU_TITLE": "Znaki zabezpieczeń",
+            "SAVE": "Zapisz",
+            "CANCEL": "Anuluj",
+            "HELP": "Pomoc",
+            "CLOSE": "Zamknij",
+            "SHOW_ALL": "Pokaż wszystko",
+            "APPLIED": "Zastosowano",
+            "NOT_APPLIED": "Nie zastosowano",
+            "COLUMNS": {
+                "NAME": "Znaki zabezpieczeń"
+            },
+            "NO_GROUPS_CREATED": "Brak dostępnych grup zabezpieczeń",
+            "SECURITY_MARKS_HELP": "Pomoc dotycząca znaków zabezpieczeń",
+            "HELP_ICON_TEXT": "Zastosowanie znaków zabezpieczeń ograniczy dostęp do treści cyfrowych. Tylko osoby ze zgodnymi znakami zastosowanymi do ich uprawnień użytkownika będą mogły wyświetlać lub edytować treści opatrzone znakiem."
+        }
+    }
+}

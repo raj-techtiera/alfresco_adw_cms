@@ -1,0 +1,21 @@
+adw-data-table-extension {
+    overflow: hidden;
+    height: 100%;
+
+    adf-datatable {
+        display: block;
+
+        .adw-member-action {
+            min-width: 80px;
+
+            .adf-datatable-cell-container {
+                place-content: flex-end;
+            }
+
+            .adf-cell-value {
+                width: 50px;
+                place-content: flex-end;
+            }
+        }
+    }
+}

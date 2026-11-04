@@ -1,0 +1,62 @@
+<div class="project-explorer-detail">
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <h3>Document Management</h3>
+      <span class="muted" *ngIf="nodeId">Viewing: {{ nodeId }}</span>
+    </div>
+    <div class="toolbar-right">
+      <input type="search" placeholder="Search files and folders" aria-label="Search" />
+      <button class="btn small">Create</button>
+      <button class="btn small outline">Upload</button>
+    </div>
+  </div>
+
+  <div class="folder-view">
+    <div *ngIf="loading" class="loading-line">Loading folder contents…</div>
+
+    <div class="table-wrap" *ngIf="!loading">
+      <table class="folder-table">
+        <thead>
+          <tr>
+            <th class="col-check"><input type="checkbox" /></th>
+            <th class="col-name">Name</th>
+            <th class="col-size">Size</th>
+            <th class="col-modified">Modified</th>
+            <th class="col-user">Modified by</th>
+            <th class="col-actions"> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of children" class="row-item">
+            <td class="col-check"><input type="checkbox" /></td>
+            <td class="col-name">
+              <span class="icon" aria-hidden="true">{{ isFolder(c) ? '📁' : '📄' }}</span>
+              <span class="name">{{ c.name }}</span>
+            </td>
+            <td class="col-size">{{ c.content?.size ? (c.content.size | number) + ' Bytes' : '-' }}</td>
+            <td class="col-modified">{{ c.modifiedAt ? (c.modifiedAt | date:'medium') : '-' }}</td>
+            <td class="col-user">{{ c.modifiedByUser?.displayName || '-' }}</td>
+            <td class="col-actions">
+              <button class="btn tiny">View</button>
+              <button class="btn tiny outline">More</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+
+    <div class="footer">
+      <div class="pagination">
+        <span>Showing {{ children.length }} items</span>
+        <div class="pages">
+          <button class="btn tiny">‹</button>
+          <button class="btn tiny">1</button>
+          <button class="btn tiny">›</button>
+        </div>
+      </div>
+      <div class="status muted">Page 1 of 1</div>
+    </div>
+
+  </div>
+</div>
+

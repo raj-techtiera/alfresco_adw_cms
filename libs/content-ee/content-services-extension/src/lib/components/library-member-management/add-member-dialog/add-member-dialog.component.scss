@@ -1,0 +1,108 @@
+@use '../../../mat-selectors' as ms;
+
+.adw-add-member-dialog {
+    #adw-add-member-dialog-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .adw-dialog-title {
+        margin-left: 20px;
+        margin-right: 24px;
+        font-size: var(--theme-title-font-size);
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.6;
+        letter-spacing: -0.5px;
+        color: var(--theme-text-bold-color);
+    }
+
+    .adw-dialog-content {
+        margin: 0;
+        overflow: hidden;
+        flex-grow: 1;
+        height: 80vh;
+
+        .adw-search-members-button:has(.adw-search-members-button-icon) {
+            width: 100%;
+            margin-bottom: 5px;
+
+            & > span:nth-of-type(2) {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                padding-left: 8px;
+                padding-right: 20px;
+                padding-top: 4px;
+            }
+        }
+    }
+
+    .adw-dialog-actions {
+        padding: 0 24px;
+        background-color: var(--theme-background-color);
+        display: flex;
+        justify-content: flex-end;
+        color: var(--theme-foreground-text-color);
+
+        button {
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+    }
+
+    #adf-add-permission-group-everyone {
+        display: none;
+    }
+
+    .adw-dialog-content .adw-selected-member-container {
+        height: 90%;
+        overflow: auto;
+        padding: 0;
+        border: 2px solid var(--theme-border-color);
+        box-shadow: none;
+
+        #{ms.$mat-card-content} {
+            padding: 0;
+        }
+
+        #{ms.$mat-form-field-infix}:has(#{ms.$mat-select}) {
+            padding: 4px 0;
+        }
+
+        #{ms.$mat-form-field} {
+            padding-top: 10px;
+            padding-bottom: 16px;
+        }
+
+        #{ms.$mat-icon-button}#{ms.$mat-button-base} {
+            display: flex;
+        }
+
+        .adw-add-member-header {
+            position: sticky;
+            top: 0;
+            background: whitesmoke;
+            z-index: 1000;
+            padding-top: 0;
+            padding-left: 32px;
+
+            .adw-header-name {
+                align-self: center;
+                flex: 1;
+                margin-right: 15px;
+            }
+
+            .adw-header-role {
+                margin-right: 85px;
+            }
+        }
+    }
+
+    #{ms.$mat-dialog-container} {
+        #{ms.$mat-dialog-surface} {
+            padding: 24px 0 0;
+        }
+    }
+}

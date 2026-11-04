@@ -1,0 +1,263 @@
+<div class="bu-create">
+  <header class="bu-create__header">
+    <div class="bu-create__heading">
+      <div class="bu-create__icon-wrap" aria-hidden="true">
+        <mat-icon>add_business</mat-icon>
+      </div>
+      <div>
+        <h2 mat-dialog-title class="bu-create__title">Create New Business Unit</h2>
+        <p class="bu-create__sub">Fill in the details below to start the Create Business Unit process.</p>
+      </div>
+    </div>
+    <button type="button" mat-icon-button class="bu-create__close" mat-dialog-close [disabled]="saving" aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" mat-dialog-content class="bu-create__body">
+    <section class="bu-create__card" aria-label="Business unit details">
+      <div class="bu-create__card-head">
+        <mat-icon aria-hidden="true">business_center</mat-icon>
+        <div>
+          <h3>Business details</h3>
+          <p>Name, code, status, and commercial information</p>
+        </div>
+      </div>
+
+      <div class="bu-create__grid">
+        <div class="bu-create__field">
+          <label for="bu-name">
+            Business unit name <span class="bu-create__req">*</span>
+          </label>
+          <div class="input-shell" [class.input-shell--invalid]="isInvalid('businessunitname')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">apartment</mat-icon>
+            <input
+              id="bu-name"
+              type="text"
+              formControlName="businessunitname"
+              maxlength="200"
+              placeholder="e.g. PETRONAS Malaysia"
+              autocomplete="off"
+            />
+          </div>
+          <small class="bu-create__field-error" *ngIf="isInvalid('businessunitname')">Name is required</small>
+        </div>
+
+        <div class="bu-create__field">
+          <label for="bu-code">
+            Business unit code <span class="bu-create__req">*</span>
+          </label>
+          <div class="input-shell" [class.input-shell--invalid]="isInvalid('businessunitcode')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+            <input
+              id="bu-code"
+              type="text"
+              formControlName="businessunitcode"
+              maxlength="50"
+              placeholder="e.g. BU-MY"
+              autocomplete="off"
+            />
+          </div>
+          <small class="bu-create__field-error" *ngIf="isInvalid('businessunitcode')">Code is required</small>
+        </div>
+
+        <div class="bu-create__field bu-create__field--full">
+          <label for="bu-desc">
+            Description <span class="bu-create__req">*</span>
+          </label>
+          <div
+            class="input-shell input-shell--textarea"
+            [class.input-shell--invalid]="isInvalid('businessunitdesc')">
+            <mat-icon class="input-shell__icon input-shell__icon--top" aria-hidden="true">notes</mat-icon>
+            <textarea
+              id="bu-desc"
+              formControlName="businessunitdesc"
+              rows="3"
+              maxlength="2000"
+              placeholder="Describe this business unit..."
+            ></textarea>
+          </div>
+          <small class="bu-create__field-error" *ngIf="isInvalid('businessunitdesc')">Description is required</small>
+        </div>
+
+        <div class="bu-create__field">
+          <label for="bu-budget">
+            Budget amount <span class="bu-create__req">*</span>
+          </label>
+          <div class="input-shell" [class.input-shell--invalid]="isInvalid('budgetamount')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">payments</mat-icon>
+            <input
+              id="bu-budget"
+              type="number"
+              formControlName="budgetamount"
+              min="0"
+              step="1"
+              placeholder="5000000"
+            />
+          </div>
+          <small class="bu-create__field-error" *ngIf="isInvalid('budgetamount')">
+            Enter a whole number budget
+          </small>
+        </div>
+
+        <div class="bu-create__field">
+          <label for="bu-status">
+            Status <span class="bu-create__req">*</span>
+          </label>
+          <div class="input-shell input-shell--select" [class.input-shell--invalid]="isInvalid('businessunitstatus')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">toggle_on</mat-icon>
+            <mat-select
+              id="bu-status"
+              formControlName="businessunitstatus"
+              panelClass="adw-create-business-unit-select-panel">
+              <mat-option *ngFor="let opt of statusOptions" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="bu-create__field bu-create__field--full">
+          <label for="bu-industry">
+            Industry type <span class="bu-create__req">*</span>
+          </label>
+          <div class="input-shell input-shell--select" [class.input-shell--invalid]="isInvalid('industrytype')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">domain</mat-icon>
+            <mat-select
+              id="bu-industry"
+              formControlName="industrytype"
+              placeholder="Select industry"
+              panelClass="adw-create-business-unit-select-panel">
+              <mat-option *ngFor="let opt of industryOptions" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
+          </div>
+          <small class="bu-create__field-error" *ngIf="isInvalid('industrytype')">Industry is required</small>
+        </div>
+
+        <div class="bu-create__field bu-create__field--full">
+          <label for="bu-contract">
+            Contract type <span class="bu-create__req">*</span>
+          </label>
+          <div class="input-shell input-shell--select" [class.input-shell--invalid]="isInvalid('contracttype')">
+            <mat-icon class="input-shell__icon" aria-hidden="true">handshake</mat-icon>
+            <mat-select
+              id="bu-contract"
+              formControlName="contracttype"
+              placeholder="Select contract"
+              panelClass="adw-create-business-unit-select-panel">
+              <mat-option *ngFor="let opt of contractOptions" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
+          </div>
+          <small class="bu-create__field-error" *ngIf="isInvalid('contracttype')">Contract type is required</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="bu-create__card bu-create__card--groups" aria-label="Business unit groups">
+      <div class="bu-create__groups-head">
+        <div class="bu-create__card-head">
+          <mat-icon aria-hidden="true">group</mat-icon>
+          <div>
+            <h3>Business unit groups</h3>
+            <p>Assign groups and roles (same pattern as Create Project)</p>
+          </div>
+        </div>
+        <button type="button" class="bu-create__add-btn" (click)="addGroupRow()" [disabled]="saving">
+          <mat-icon aria-hidden="true">add</mat-icon>
+          Add group
+        </button>
+      </div>
+
+      <p class="bu-create__hint" *ngIf="groupsLoading">Loading groups...</p>
+      <p class="bu-create__error" *ngIf="groupsError">{{ groupsError }}</p>
+      <p class="bu-create__error" *ngIf="groupsTouched && !hasValidGroups">
+        Add at least one group with a role.
+      </p>
+
+      <div class="bu-create__gp-table">
+        <div class="bu-create__gp-head">
+          <span>Group</span>
+          <span>Role</span>
+          <span class="bu-create__gp-actions" aria-hidden="true"></span>
+        </div>
+
+        <div class="bu-create__gp-row" *ngFor="let row of groupRows; trackBy: trackGroupRow">
+          <div class="input-shell input-shell--select">
+            <mat-icon class="input-shell__icon" aria-hidden="true">group</mat-icon>
+            <mat-select
+              [ngModel]="row.groupId"
+              [ngModelOptions]="{ standalone: true }"
+              (ngModelChange)="onGroupSelected(row, $event)"
+              (openedChange)="onGroupSelectOpened($event)"
+              [disabled]="groupsLoading || saving"
+              [placeholder]="groupsLoading ? 'Loading...' : 'Select group'"
+              panelClass="adw-create-business-unit-select-panel">
+              <mat-select-trigger>
+                {{ row.name || (groupsLoading ? 'Loading...' : 'Select group') }}
+              </mat-select-trigger>
+              <mat-option value="__gp_search__" disabled>
+                <div
+                  class="bu-create__gp-search"
+                  (click)="$event.stopPropagation()"
+                  (mousedown)="$event.stopPropagation()">
+                  <mat-icon aria-hidden="true">search</mat-icon>
+                  <input
+                    type="search"
+                    [(ngModel)]="groupSelectSearch"
+                    [ngModelOptions]="{ standalone: true }"
+                    placeholder="Search groups..."
+                    (click)="$event.stopPropagation()"
+                    (mousedown)="$event.stopPropagation()"
+                    (keydown)="$event.stopPropagation()"
+                  />
+                </div>
+              </mat-option>
+              <mat-option
+                *ngFor="let group of groupsForRow(row); trackBy: trackManagedGroup"
+                [value]="group.id"
+                [class.bu-create__gp-option--hidden]="!matchesGroupSearch(group)">
+                {{ group.displayName }}
+              </mat-option>
+            </mat-select>
+          </div>
+
+          <div class="input-shell input-shell--select">
+            <mat-icon class="input-shell__icon" aria-hidden="true">verified_user</mat-icon>
+            <mat-select
+              [(ngModel)]="row.role"
+              [ngModelOptions]="{ standalone: true }"
+              [disabled]="saving"
+              panelClass="adw-create-business-unit-select-panel">
+              <mat-option *ngFor="let opt of permissionOptions" [value]="opt.value">
+                {{ opt.value }}
+              </mat-option>
+            </mat-select>
+          </div>
+
+          <button
+            type="button"
+            class="bu-create__gp-remove"
+            (click)="removeGroupRow(row)"
+            [disabled]="saving"
+            aria-label="Remove group row"
+            title="Remove">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <p class="bu-create__error bu-create__error--banner" *ngIf="error" role="alert">{{ error }}</p>
+  </form>
+
+  <div mat-dialog-actions class="bu-create__footer">
+    <button type="button" class="bu-create__btn bu-create__btn--ghost" mat-dialog-close [disabled]="saving">
+      Cancel
+    </button>
+    <button type="button" class="bu-create__btn bu-create__btn--primary" (click)="submit()" [disabled]="saving">
+      <mat-spinner *ngIf="saving" diameter="18"></mat-spinner>
+      <ng-container *ngIf="!saving">
+        <mat-icon aria-hidden="true">check</mat-icon>
+        Create
+      </ng-container>
+    </button>
+  </div>
+</div>

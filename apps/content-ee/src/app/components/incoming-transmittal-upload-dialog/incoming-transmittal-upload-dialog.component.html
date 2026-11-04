@@ -1,0 +1,146 @@
+<div class="adw-it-upload-dialog">
+  <header class="adw-it-upload-dialog__header">
+    <div class="adw-it-upload-dialog__header-main">
+      <div class="adw-it-upload-dialog__header-icon" aria-hidden="true">
+        <mat-icon>move_to_inbox</mat-icon>
+      </div>
+      <div class="adw-it-upload-dialog__header-text">
+        <h2 class="adw-it-upload-dialog__title" id="adw-it-upload-dialog-title">Upload Incoming Transmittal</h2>
+        <p class="adw-it-upload-dialog__subtitle">
+          Add transmittal documents to
+          @if (data.folderName) {
+            <strong>{{ data.folderName }}</strong>
+          } @else {
+            Incoming Transmittal
+          }
+        </p>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      type="button"
+      class="adw-it-upload-dialog__close"
+      (click)="cancel()"
+      [disabled]="submitting"
+      aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <mat-dialog-content class="adw-it-upload-dialog__content" [attr.aria-labelledby]="'adw-it-upload-dialog-title'">
+    @if (data.projectName) {
+      <div class="adw-it-upload-dialog__context" role="status">
+        <span class="adw-it-upload-dialog__context-label">Project</span>
+        <span class="adw-it-upload-dialog__context-value">{{ data.projectName }}</span>
+      </div>
+    }
+
+    <form [formGroup]="form" class="adw-it-upload-dialog__form" (ngSubmit)="submit()">
+      <div class="adw-it-upload-dialog__field-block">
+        <label class="adw-it-upload-dialog__label" for="adw-it-transmittal-number">
+          Transmittal Number <span class="adw-it-upload-dialog__required" aria-hidden="true">*</span>
+        </label>
+        <mat-form-field appearance="outline" class="adw-it-upload-dialog__field" subscriptSizing="dynamic">
+          <mat-icon matPrefix class="adw-it-upload-dialog__field-icon" aria-hidden="true">tag</mat-icon>
+          <input
+            id="adw-it-transmittal-number"
+            matInput
+            formControlName="transmittalNumber"
+            placeholder="e.g. TR-2026-001"
+            autocomplete="off" />
+          @if (form.get('transmittalNumber')?.invalid && form.get('transmittalNumber')?.touched) {
+            <mat-error>Transmittal number is required.</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <section class="adw-it-upload-dialog__upload-section" aria-labelledby="adw-it-upload-files-title">
+        <div class="adw-it-upload-dialog__upload-heading">
+          <h3 class="adw-it-upload-dialog__section-title" id="adw-it-upload-files-title">Files</h3>
+          <span class="adw-it-upload-dialog__file-count">{{ uploadedFiles.length }} selected</span>
+        </div>
+
+        <div
+          class="adw-it-upload-dialog__dropzone"
+          [class.adw-it-upload-dialog__dropzone--active]="isDragOver"
+          (drop)="onFileDrop($event)"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)">
+          <div class="adw-it-upload-dialog__dropzone-inner">
+            <mat-icon class="adw-it-upload-dialog__dropzone-icon" aria-hidden="true">cloud_upload</mat-icon>
+            <p class="adw-it-upload-dialog__dropzone-title">Drag and drop files here</p>
+            <p class="adw-it-upload-dialog__dropzone-hint">or</p>
+            <button
+              mat-stroked-button
+              type="button"
+              class="adw-it-upload-dialog__browse-btn"
+              (click)="fileInput.click()"
+              [disabled]="submitting">
+              Browse Files
+            </button>
+            <input
+              #fileInput
+              type="file"
+              class="adw-it-upload-dialog__file-input"
+              multiple
+              (change)="onFileInputChange($event)" />
+            <p class="adw-it-upload-dialog__dropzone-meta">Max file size: {{ maxUploadSizeMb }} MB</p>
+          </div>
+        </div>
+
+        @if (!uploadedFiles.length) {
+          <div class="adw-it-upload-dialog__empty" role="status">
+            <mat-icon aria-hidden="true">description</mat-icon>
+            <span>No files selected yet</span>
+          </div>
+        } @else {
+          <ul class="adw-it-upload-dialog__file-list">
+            @for (file of uploadedFiles; track file.name + file.size; let i = $index) {
+              <li class="adw-it-upload-dialog__file-item">
+                <div class="adw-it-upload-dialog__file-icon" aria-hidden="true">
+                  <mat-icon>insert_drive_file</mat-icon>
+                </div>
+                <div class="adw-it-upload-dialog__file-meta">
+                  <span class="adw-it-upload-dialog__file-name" [title]="file.name">{{ file.name }}</span>
+                  <span class="adw-it-upload-dialog__file-size">{{ formatFileSize(file.size) }}</span>
+                </div>
+                <button
+                  type="button"
+                  mat-icon-button
+                  class="adw-it-upload-dialog__file-remove"
+                  (click)="removeUploadedFile(i)"
+                  [disabled]="submitting"
+                  [attr.aria-label]="'Remove ' + file.name">
+                  <mat-icon aria-hidden="true">close</mat-icon>
+                </button>
+              </li>
+            }
+          </ul>
+        }
+      </section>
+    </form>
+  </mat-dialog-content>
+
+  <footer mat-dialog-actions class="adw-it-upload-dialog__actions">
+    <button type="button" mat-stroked-button class="adw-it-upload-dialog__btn" (click)="cancel()" [disabled]="submitting">
+      Cancel
+    </button>
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      class="adw-it-upload-dialog__btn adw-it-upload-dialog__btn--primary"
+      (click)="submit()"
+      [disabled]="submitting">
+      <span class="adw-it-upload-dialog__btn-content">
+        @if (submitting) {
+          <mat-spinner diameter="18" class="adw-it-upload-dialog__btn-spinner"></mat-spinner>
+          <span>Uploading…</span>
+        } @else {
+          <mat-icon aria-hidden="true">upload</mat-icon>
+          <span>Submit</span>
+        }
+      </span>
+    </button>
+  </footer>
+</div>

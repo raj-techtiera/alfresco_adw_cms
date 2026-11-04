@@ -1,0 +1,70 @@
+adw-library-details {
+    .adw-breadcrumb-container {
+        display: flex;
+        flex: 1;
+
+        .adf-breadcrumb-item-anchor {
+            padding: 0;
+            text-align: left;
+
+            &:hover {
+                color: var(--adf-theme-foreground-text-color-064);
+            }
+        }
+    }
+
+    .adw-toolbar {
+        column-gap: 5px;
+    }
+
+    .adw-library-close-button {
+        margin-right: 15px;
+    }
+
+    .adw-library-loading-spinner {
+        background-color: var(--theme-card-background-color);
+        width: 100%;
+        display: flex;
+        place-content: center;
+        align-items: center;
+    }
+
+    .adw-library-not-found {
+        background-color: var(--theme-card-background-color);
+        width: 100%;
+    }
+
+    .acs-members-container {
+        background-color: var(--theme-card-background-color);
+        width: 100%;
+    }
+
+    .adw-member-manager-tabs {
+        margin-top: 40px;
+        height: calc(100% - 80px);
+
+        & > div {
+            height: 100%;
+        }
+    }
+
+    .acs-members-topbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .acs-members-breadcrumb {
+        font-size: var(--theme-adf-font-size-2);
+        margin-left: 20px;
+
+        .acs-members-breadcrumb-library {
+            font-weight: 900;
+        }
+
+        .acs-members-breadcrumb-item {
+            font-weight: 100;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<div class="mdr-import-status" [attr.data-kind]="data.kind">
+  <div class="mdr-import-status__icon-wrap" aria-hidden="true">
+    <mat-spinner *ngIf="showSpinner" diameter="40"></mat-spinner>
+    <mat-icon *ngIf="!showSpinner" class="mdr-import-status__icon">{{ icon }}</mat-icon>
+  </div>
+
+  <h2 class="mdr-import-status__title" mat-dialog-title>{{ title }}</h2>
+
+  <mat-dialog-content>
+    <p class="mdr-import-status__body">{{ body }}</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" *ngIf="showActions">
+    <button mat-flat-button color="primary" type="button" (click)="close()">
+      OK
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,33 @@
+adw-pending-requests {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    .adw-member-list-container {
+        flex-direction: column;
+        display: flex;
+        height: 100%;
+
+        adw-data-table-extension {
+            flex: 1;
+        }
+
+        .adw-people-initial-wrapper {
+            display: flex;
+            place-content: center;
+            align-items: center;
+        }
+
+        adf-datatable {
+            .adw-member-pending-actions {
+                margin-right: 10px;
+                min-width: 180px;
+            }
+
+            .adw-member-column {
+                flex: 40%;
+            }
+        }
+    }
+}

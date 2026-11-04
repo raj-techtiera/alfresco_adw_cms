@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "適用",
+        "CANCEL": "キャンセル",
+        "SWITCH": "スイッチ",
+        "CONTINUE": "続行",
+        "RELOAD": "再読み込み"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "レコードの宣言",
+            "SUCCESS": "{{fileName}} がレコードとして宣言されました",
+            "FAIL": "{{fileName}} をレコードとして宣言することはできません",
+            "DIALOG": {
+                "TITLE": "レコードの宣言",
+                "MESSAGE": "この文書は前回レコードとして宣言され、却下されました。",
+                "YES": "レコードの宣言",
+                "NO": "キャンセル",
+                "CLOSE": "閉じる"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "現在のバージョンでは、フォルダをレコードとして宣言できません",
+                    "EXISTING-RECORD": "既にレコードとして宣言されています",
+                    "FAILED": "レコードとして宣言できませんでした"
+                },
+                "SUCCESS": "アイテムがレコードとして宣言されました"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "却下されたレコード",
+            "CLOSE_LABEL": "閉じる",
+            "SUB-TITLE": "ファイル '{{ nodeName }}' のレコード宣言が却下されました",
+            "BY": "担当者",
+            "AT": "日時",
+            "REASON": "理由",
+            "CONFIRM": "確認",
+            "WARNING": "却下されたレコードの警告を削除すると、ファイルをレコードとして宣言するオプションがまた使用できるようになります。",
+            "FAILED-REMOVE": "{{nodeName}} の却下に関する警告を削除できませんでした: {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "却下されたレコード",
+            "TOOLTIP-MESSAGE": "削除の警告",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "却下されたレコード",
+                "RECORD-HYPERLINK": "レコードとして宣言されています",
+                "REJECTED-RECORD-HYPERLINK": "レコードが却下されました。詳細については、ファイル情報を確認してください"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "削除",
+            "SUCCESS": "'{{ name }}' が削除されました",
+            "FAIL": "{{recordId}} を削除できませんでした",
+            "DIALOG": {
+                "TITLE": "レコードインスタンスの削除",
+                "YES-ALL": "削除 (以下、確認せずにすべて削除)",
+                "YES": "削除",
+                "NO": "キャンセル",
+                "MESSAGE": {
+                    "DELETE": "'{{name}}' のこのインスタンスは完全に削除され、ごみ箱から戻せなくなります。",
+                    "ADDITIONAL": "組織のレコード管理システムにあるレコード '{{name}}' には影響しません。"
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "レコード"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "移動",
+            "MOVE-ITEM": "'{{ name }}' の移動先...",
+            "SAME-FOLDER-MOVE": "同じフォルダに移動することはできません",
+            "SUCCESSFUL": "フォームが移動されました"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "アーカイブに送信",
+                "SUCCESS": "ファイル {{ name }} はアーカイブされます",
+                "FAIL": "{{ name }} をアーカイブできませんでした",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "アイテムは既にアーカイブされています。",
+                        "PENDING-RESTORE": " アイテムの復元を保留しています。 ",
+                        "RESTORED": "復元されたアイテムをアーカイブできません",
+                        "FOLDER": "現在のバージョンでは、アーカイブから復元できません"
+                    },
+                    "FAIL": "アーカイブできませんでした",
+                    "SUCCESS": "アイテムはアーカイブされます"
+                },
+                "DIALOG": {
+                    "TITLE": "アーカイブに送信",
+                    "MESSAGE": "ファイルを外部のアーカイブに送信します。アーカイブからファイルを取得する際に料金がかかる場合があります。操作を続けますか?",
+                    "YES": "アーカイブに送信",
+                    "NO": "キャンセル"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "アーカイブから復元",
+                "SYNC-ERROR": "復元しようとしているファイルはまだアーカイブと同期されていません。この処理には最大 24 時間かかる場合があります。しばらくしてから操作をやり直してください。",
+                "FAIL": "{{ name }} をアーカイブから復元できませんでした",
+                "DIALOG": {
+                    "TITLE": "アーカイブから復元",
+                    "LABEL": {
+                        "TYPE": "復元速度 (復元 1 回につき最大 250MB)",
+                        "OPTION-FAST": "高速 – 1 ～ 5 分 (最高料金)",
+                        "OPTION-STANDARD": "標準 – 3 ～ 5 時間",
+                        "OPTION-SLOW": "低速 – 5 ～ 12 時間 (最低料金)",
+                        "DURATION": "ファイルの復元期間 (日数)"
+                    },
+                    "YES": "確認",
+                    "NO": "キャンセル"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "アーカイブから復元",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " 復元しようとしているファイルはまだアーカイブと同期されていません。この処理には最大 24 時間かかる場合があります。しばらくしてから操作をやり直してください。",
+                        "RESTORED": "アイテムは既に復元されています",
+                        "PENDING-RESTORE": "アイテムの復元は既に保留されています",
+                        "NOT-STORED": "復元しようとしているアイテムはまだアーカイブと同期されていません",
+                        "FAIL": "復元できませんでした",
+                        "FOLDER": "現在のバージョンでは、フォルダは復元できません"
+                    },
+                    "SUCCESS": "アイテムは復元されます"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "復元期間の延長",
+                "SUCCESS": "復元期間は {{ date }} から '{{ days }}' 日間延長されます",
+                "FAIL": "アーカイブから {{ name }} を復元する期間を延長できませんでした"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "このファイルはアーカイブされています。復元するには、ファイルを右クリックして、アーカイブから復元することを選択します。",
+                "RESTORED": "復元されています",
+                "PENDING-RESTORE": "現在ファイルをアーカイブから復元しています。ファイルをプレビューまたはダウンロードできない場合は、しばらくしてから操作をやり直してください"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "一括処理のステータス",
+            "FAIL": "処理を実行できませんでした",
+            "CLOSE": "閉じる"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "ホールド管理",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "ホールドの削除",
+            "DIALOG_TITLE": "訴訟ホールド管理",
+            "TAB_EXISTING_HOLDS": "既存ホールド管理",
+            "TAB_CREATE_LEGAL_HOLD": "訴訟ホールドを作成",
+            "SAVE": "保存",
+            "CLOSE": "閉じる",
+            "CANCEL": "キャンセル",
+            "NEW_HOLD_NAME": "名前",
+            "NEW_HOLD_DESCRIPTION": "説明",
+            "NEW_HOLD_REASON": "理由",
+            "DIALOG_WARNING_TITLE": "警告",
+            "DIALOG_WARNING_MESSAGE": "タブを切り替えると、ここで行った変更は適用されません。",
+            "DOCUMENT_IN_HOLD": "訴訟ホールドのドキュメント",
+            "FOLDER_IN_HOLD": "訴訟ホールドのフォルダ",
+            "APPLY_HOLDS_SUCCESS": "訴訟ホールドアクションが正常に実行されました。",
+            "APPLY_HOLDS_NOT_FOUND": "選択した訴訟ホールドまたは指定したファイルが存在しません。選択を確認し、もう一度やり直してください。",
+            "BULK_APPLY_HOLDS_SUCCESS": "訴訟ホールドアクションが正常に実行されました。{{ totalItems }}アイテムが訴訟ホールドに追加されました。",
+            "BULK_APPLY_HOLDS_STARTED": "一括訴訟ホールドアクションがバックグランウドで実行されています。完了すると通知されます。",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "アーカイブ、重複、またはロックされたコンテンツが検出されました。{{ errorsCount }}アイテムは、訴訟ホールドに追加されていません。",
+            "BULK_APPLY_HOLDS_FAIL": "コンテンツを訴訟ホールドに配置できませんでした。",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "一括訴訟ホールドをフォルダに適用できませんでした。",
+            "ACKNOWLEDGE": "確認",
+            "EMPTY_HOLD_LIST": "利用可能な訴訟ホールドはありません",
+            "WARNING_DIALOG_TITLE": "警告：一括アクション",
+            "WARNING_DIALOG_MESSAGE": "このアクションは、<strong>この検索ファイル内のすべてのファイル</strong>の訴訟ホールドステータスを変更します。<br><br>この訴訟ホールドは、<strong>フォルダに適用されません</strong>。",
+            "WARNING_DIALOG_QUESTION": "続行しますか？",
+            "NO_RECORDS_MANAGEMENT_SITE": "訴訟ホールドを有効にするには、管理者が記録管理サイトを作成する必要があります。",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "ファイルは訴訟ホールドから正常に削除されました。",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "ファイルは訴訟ホールドから正常に削除されました。",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "訴訟ホールドからファイルを削除できませんでした。",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "訴訟ホールドからファイルを削除できませんでした。",
+            "LOADING_CAPABILITIES_ERROR": "機能の読み込みに失敗しました",
+            "NODE_NOT_FOUND": "選択したノードが見つかりません。選択を確認して再度お試し下さい。",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "ホールドを含むアイテムを削除しますか？",
+                "TITLE_PLURAL": "削除が選択されました {{ count }} 文書を保留して公開しますか？",
+                "MESSAGE_SINGULAR": "削除する{{ name }}ホールドを選択しました。ホールドしているすべてのアイテムが解放されます。この操作は元に戻せません。",
+                "MESSAGE_PLURAL": "削除する{{ count }}アイテムを選択しました。一部はホールドされていますが、ホールド中のものはすべて解放されます。この操作は元に戻せま警告：一括アクションせん。",
+                "KEEP_HOLD": "保留を保持"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "セキュリティマーク保存時のエラー",
+            "DIALOG_TITLE": "セキュリティマークの編集",
+            "MENU_TITLE": "セキュリティマーク",
+            "SAVE": "保存",
+            "CANCEL": "キャンセル",
+            "HELP": "ヘルプ",
+            "CLOSE": "閉じる",
+            "SHOW_ALL": "すべて表示",
+            "APPLIED": "適用済み",
+            "NOT_APPLIED": "未適用",
+            "COLUMNS": {
+                "NAME": "セキュリティマーク"
+            },
+            "NO_GROUPS_CREATED": "利用できるセキュリティグループはありません。",
+            "SECURITY_MARKS_HELP": "セキュリティマークのヘルプ",
+            "HELP_ICON_TEXT": "セキュリティマークを適用すると、デジタルコンテンツへのアクセスが制限されます。ユーザー権限に一致するマークが適用されているユーザーのみが、マークされたコンテンツを表示または編集できます。"
+        }
+    }
+}

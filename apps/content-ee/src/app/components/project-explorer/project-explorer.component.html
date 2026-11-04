@@ -1,0 +1,814 @@
+<aca-page-layout class="adw-project-explorer-layout">
+  <aca-page-layout-header>
+    <h1 class="adw-project-explorer-title">Document Management</h1>
+    <!-- Breadcrumb (same as My Libraries) -->
+    @if (folderNode) {
+      <div class="adw-project-explorer-breadcrumb">
+        <adf-breadcrumb
+          [folderNode]="folderNode"
+          [root]="''"
+          [transform]="breadcrumbStartFromProjectName"
+          [target]="documentList"
+          [selectedRowItemsCount]="documentList?.selection?.length ?? 0"
+          (navigate)="onBreadcrumbNavigate($event)">
+        </adf-breadcrumb>
+      </div>
+    }
+
+
+    <!-- Toolbar and Upload fixed to the right -->
+    <div class="adw-project-explorer-header-actions">
+      @if (showHeaderStartProcess) {
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          class="adw-shutdown-request"
+          [disabled]="shutdownRequestStarting"
+          (click)="openShutdownRequest()">
+          <span class="adw-header-action-label">
+            <mat-icon>power_settings_new</mat-icon>
+            <span>Shutdown Request</span>
+          </span>
+        </button>
+      }
+
+      <!-- Start Process: extension toolbar does not show icon on stroked button; same action visibility, same handler as startProcess() -->
+      @if (showHeaderStartProcess) {
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          class="adw-start-process"
+          (click)="startProcess()">
+          <span class="adw-header-action-label">
+            <mat-icon>input</mat-icon>
+            <span>Start Process</span>
+          </span>
+        </button>
+      }
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        class="adw-header-create"
+        [matMenuTriggerFor]="headerCreateMenu"
+        aria-label="Create">
+        <span class="adw-header-action-label">
+          <span>Create</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+      </button>
+      <mat-menu #headerCreateMenu="matMenu">
+        <button mat-menu-item type="button" (click)="openCreateFolderDialog()">
+          <mat-icon>create_new_folder</mat-icon>
+          <span>Create Folder</span>
+        </button>
+        <button mat-menu-item type="button" (click)="createFileFromTemplate()">
+          <mat-icon>description</mat-icon>
+          <span>Create file from template</span>
+        </button>
+        <button mat-menu-item type="button" (click)="createOfficeDocument('WORD')">
+          <mat-icon svgIcon="adf:word_thumbnail"></mat-icon>
+          <span>Word Document</span>
+        </button>
+        <button mat-menu-item type="button" (click)="createOfficeDocument('POWERPOINT')">
+          <mat-icon svgIcon="adf:powerpoint_thumbnail"></mat-icon>
+          <span>Powerpoint Presentation</span>
+        </button>
+        <button mat-menu-item type="button" (click)="createOfficeDocument('EXCEL')">
+          <mat-icon svgIcon="adf:excel_thumbnail"></mat-icon>
+          <span>Excel Spreadsheet</span>
+        </button>
+        <button mat-menu-item type="button" (click)="createFolderFromTemplate()">
+          <mat-icon>create_new_folder</mat-icon>
+          <span>Create folder from template</span>
+        </button>
+      </mat-menu>
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="adw-header-upload"
+        [matMenuTriggerFor]="headerUploadMenu"
+        aria-label="Upload">
+        <span class="adw-header-action-label">
+          <span>Upload</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </span>
+      </button>
+      <mat-menu #headerUploadMenu="matMenu">
+        <button mat-menu-item type="button" (click)="headerFileInput.click()">
+          <mat-icon>file_upload</mat-icon>
+          <span>Upload File</span>
+        </button>
+        <button mat-menu-item type="button" (click)="headerFolderInput.click()">
+          <mat-icon>drive_folder_upload</mat-icon>
+          <span>Upload Folder</span>
+        </button>
+      </mat-menu>
+      <input
+        #headerFileInput
+        type="file"
+        hidden
+        multiple
+        (change)="onHeaderUploadSelected($event, false)" />
+      <input
+        #headerFolderInput
+        type="file"
+        hidden
+        [attr.webkitdirectory]="''"
+        [attr.directory]="''"
+        (change)="onHeaderUploadSelected($event, true)" />
+
+      @if (isProjectDetailsTab) {
+        <aca-toolbar [items]="toolbarItemsWithoutStartProcess"></aca-toolbar>
+      }
+
+      @if (isProjectDetailsTab && showRequestForReviewButton) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="adw-request-for-review"
+          (click)="openRequestForReviewDialog()">
+          <span class="adw-header-action-label">
+            <mat-icon>fact_check</mat-icon>
+            <span>Request for Review</span>
+          </span>
+        </button>
+      }
+
+      @if (isProjectDetailsTab && showUploadButton) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="adw-upload-button"
+          (click)="openDialog('0ms', '0ms')">
+          <span class="adw-header-action-label">
+            <mat-icon>upload</mat-icon>
+            <span>Upload file</span>
+          </span>
+        </button>
+      }
+
+      <!-- Bulk upload
+      @if (isProjectDetailsTab && showUploadButton) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="adw-upload-button adw-bulk-upload-button"
+          (click)="openBulkUploadDialog()">
+          <span class="adw-header-action-label">
+            <mat-icon>drive_folder_upload</mat-icon>
+            <span>Bulk upload</span>
+          </span>
+        </button>
+      }
+      -->
+
+      <!-- Legacy ADF upload overlay (kept for reference)
+      <div class="adw-upload-button-wrapper">
+        <adf-upload-button
+          #uploadFileTrigger
+          class="adw-upload-button-overlay"
+          [rootFolderId]="currentFolderId"
+          [multipleFiles]="true"
+          (success)="onUploadSuccessProjects()">
+        </adf-upload-button>
+      </div>
+      -->
+
+      <!-- Import CSV / JR Request
+      <input
+        #csvFileInput
+        type="file"
+        class="adw-mdr-csv-file-input"
+        accept=".csv,text/csv,application/vnd.ms-excel"
+        (change)="onCsvFileSelected($event)" />
+      @if (projectFolderId) {
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          class="adw-import-csv"
+          [disabled]="csvImporting || csvImportBlocked"
+          (click)="triggerCsvImport(csvFileInput)">
+          <span class="adw-header-action-label">
+            <mat-icon>{{ csvImporting ? 'hourglass_top' : 'upload_file' }}</mat-icon>
+            <span>{{ csvImporting ? 'Importing…' : csvImportBlocked ? 'Processing…' : 'Import CSV' }}</span>
+          </span>
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          class="adw-jr-request-btn"
+          (click)="openJobRequisitionRequest()">
+          <span class="adw-header-action-label">
+            <mat-icon>badge</mat-icon>
+            <span>JR Request</span>
+          </span>
+        </button>
+      }
+      -->
+
+      <!-- Actions
+      @if (showProjectActionsMenu) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="adw-project-actions-menu"
+          [matMenuTriggerFor]="projectActionsMenu"
+          aria-label="Project actions menu">
+          <span class="adw-header-action-label">
+            <mat-icon>apps</mat-icon>
+            <span>Actions</span>
+            <mat-icon class="adw-project-actions-menu__caret">arrow_drop_down</mat-icon>
+          </span>
+        </button>
+      }
+      <mat-menu #projectActionsMenu="matMenu" class="adw-project-actions-menu-panel">
+        <button mat-menu-item type="button" (click)="openDistributionMatrix()">
+          <mat-icon>account_tree</mat-icon>
+          <span>Distribution Matrix</span>
+        </button>
+        @if (showReportsButton) {
+          <button mat-menu-item type="button" (click)="openReports()">
+            <mat-icon>insert_chart</mat-icon>
+            <span>Reports</span>
+          </button>
+        }
+        @if (showHandoverButton) {
+          <button
+            mat-menu-item
+            type="button"
+            [disabled]="handoverStarting"
+            (click)="startHandoverPackageProcess()">
+            <mat-icon>move_to_inbox</mat-icon>
+            <span>Handover</span>
+          </button>
+        }
+        <button mat-menu-item type="button" (click)="openForceStop()">
+          <mat-icon>stop_circle</mat-icon>
+          <span>Force Reopen</span>
+        </button>
+      </mat-menu>
+      -->
+
+      @if (nodeId && showCreatePoButton) {
+        <button
+          mat-stroked-button
+          color="primary"
+          class="adw-create-po"
+          type="button"
+          (click)="openCreatePoDialog()">
+          <span class="adw-header-action-label">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Create PO</span>
+          </span>
+        </button>
+      }
+    </div>
+  </aca-page-layout-header>
+
+  <aca-page-layout-content>
+    @if (showMdrDashboardTab) {
+      <nav class="adw-project-explorer-main-tabs" aria-label="Project views" role="tablist">
+        <button
+          type="button"
+          class="adw-project-explorer-main-tabs__btn"
+          role="tab"
+          [class.is-active]="activeMainTab === 'mdr'"
+          [attr.aria-selected]="activeMainTab === 'mdr'"
+          (click)="setMainTab('mdr')">
+          <mat-icon aria-hidden="true">dashboard</mat-icon>
+          DVI Dashboard
+        </button>
+        <button
+          type="button"
+          class="adw-project-explorer-main-tabs__btn"
+          role="tab"
+          [class.is-active]="activeMainTab === 'details'"
+          [attr.aria-selected]="activeMainTab === 'details'"
+          (click)="setMainTab('details')">
+          <mat-icon aria-hidden="true">folder_open</mat-icon>
+          Project Hierarchy
+        </button>
+      </nav>
+    }
+
+    <div class="adw-project-explorer-tab-panels">
+      @if (showMdrDashboardTab) {
+        <section
+          class="adw-project-explorer-tab-panel adw-project-explorer-tab-panel--mdr"
+          role="tabpanel"
+          aria-label="MDR Dashboard"
+          [hidden]="activeMainTab !== 'mdr'">
+          <adw-mdr-dashboard
+            [projectId]="projectFolderId"
+            [projectName]="projectFolderName"
+            [active]="activeMainTab === 'mdr'">
+          </adw-mdr-dashboard>
+        </section>
+      }
+
+      <!-- Document list with side info drawer for metadata/preview (comments optional) -->
+      <div
+        class="adw-folder-view adw-project-explorer-tab-panel adw-project-explorer-tab-panel--details"
+        role="tabpanel"
+        aria-label="Project Hierarchy"
+        [hidden]="activeMainTab !== 'details'"
+        [class.adw-folder-view--with-split]="!!selectedNode"
+        [style.--adw-explorer-sidebar-px.px]="selectedNode ? sidebarWidth : null">
+      <div class="adw-folder-view-main">
+        <adf-document-list
+          #documentList
+          class="adw-dms-doc-list"
+          [class.adw-dms-doc-list--rich-list]="!viewModeGrid"
+          [currentFolderId]="currentFolderId"
+          [navigate]="false"
+          [multiselect]="true"
+          [contentActions]="true"
+          [contextMenuActions]="true"
+          [headerFilters]="true"
+          [maxItems]="pageSize"
+          [showHeader]="showHeaderMode"
+          [thumbnails]="viewModeGrid"
+          [stickyHeader]="false"
+          [isResizingEnabled]="true"
+          [blurOnResize]="false"
+          [includeFields]="documentListIncludeFields"
+          [imageResolver]="dmsListImageResolver"
+          [rowFilter]="searchRowFilter"
+          (nodeClick)="onProjectNodeClick($event)"
+          (nodeDblClick)="onProjectRowDblClick($event)"
+          (rowDblClick)="onProjectRowDblClick($event)"
+          (nodeSelected)="onDocumentNodeSelected($event)"
+          (folderChange)="onFolderChange()">
+          <data-columns>
+            @if (viewModeGrid) {
+              <data-column
+                key="$thumbnail"
+                type="image"
+                [sortable]="false"
+                [resizable]="true"></data-column>
+            }
+            <data-column
+              key="name"
+              type="text"
+              title="Name"
+              class="adf-expand-cell-2 adw-dms-name-column"
+              [sortable]="true"
+              [resizable]="true">
+              <ng-template let-context>
+                @if (viewModeGrid) {
+                  <span [title]="getDisplayName(context)">{{ getDisplayName(context) }}</span>
+                } @else {
+                  @if (dmsNameCellModel(context); as m) {
+                    <div class="adw-dms-name-cell">
+                      <div
+                        class="adw-dms-icon-wrap"
+                        [ngClass]="'adw-dms-icon-wrap--' + m.tone"
+                        [class.adw-dms-icon-wrap--locked]="m.locked"
+                        [attr.aria-hidden]="true">
+                        <mat-icon class="adw-dms-icon-wrap__main">{{ m.icon }}</mat-icon>
+                        @if (m.tree) {
+                          <span class="adw-dms-icon-wrap__tree">
+                            <mat-icon>account_tree</mat-icon>
+                          </span>
+                        }
+                      </div>
+                      <div class="adw-dms-name-cell__main">
+                        <div class="adw-dms-name-cell__title-row">
+                          <span
+                            class="adw-dms-name-cell__title"
+                            [class.adw-dms-name-cell__title--link]="m.isLink"
+                            [title]="m.name"
+                            (click)="onDmsNameClick($event, m.node)">{{ m.name }}</span>
+                        </div>
+                        @if (m.locked && m.node) {
+                          <aca-locked-by [node]="m.node"></aca-locked-by>
+                        }
+                      </div>
+                    </div>
+                  } @else {
+                    <span [title]="getDisplayName(context)">{{ getDisplayName(context) }}</span>
+                  }
+                }
+              </ng-template>
+            </data-column>
+            @if (!viewModeGrid) {
+              <data-column
+                key="modifiedAt"
+                type="text"
+                title="Modified"
+                [sortable]="true"
+                [resizable]="true"
+                class="adw-dms-date-col">
+                <ng-template let-context>
+                  @if (getNodeEntryFromContext(context); as entry) {
+                    <div class="adw-dms-metric">
+                      <mat-icon class="adw-dms-metric__icon" aria-hidden="true">event</mat-icon>
+                      @if (dmsModifiedParts(entry); as parts) {
+                        <div class="adw-dms-metric__stack">
+                          <span>{{ parts.d }}</span>
+                          <span class="adw-dms-metric__sub">{{ parts.t }}</span>
+                        </div>
+                      } @else {
+                        —
+                      }
+                    </div>
+                  }
+                </ng-template>
+              </data-column>
+              <data-column
+                key="modifiedByUser.displayName"
+                type="text"
+                title="Owner"
+                [sortable]="true"
+                [resizable]="true"
+                class="adw-dms-owner-col">
+                <ng-template let-context>
+                  @if (getNodeEntryFromContext(context); as entry) {
+                    <div class="adw-dms-owner">
+                      <div class="adw-dms-owner__avatar" [attr.aria-hidden]="true">
+                        {{ dmsOwnerInitials(entry) }}
+                      </div>
+                      <div class="adw-dms-owner__text">
+                        <span [title]="dmsOwnerName(entry)">{{ dmsOwnerName(entry) }}</span>
+                        @if (dmsOwnerSubtitle(entry); as sub) {
+                          <span class="adw-dms-owner__sub" [title]="sub">{{ sub }}</span>
+                        }
+                      </div>
+                    </div>
+                  }
+                </ng-template>
+              </data-column>
+              <data-column
+                key="status"
+                type="text"
+                title="Status"
+                [sortable]="false"
+                [resizable]="true"
+                class="adw-dms-status-col">
+                <ng-template let-context>
+                  @if (getNodeEntryFromContext(context); as entry) {
+                    @if (dmsDocumentStatus(entry); as status) {
+                      <span
+                        class="adw-dms-status-badge"
+                        [ngClass]="dmsStatusClass(status)"
+                        [title]="status">
+                        {{ status }}
+                      </span>
+                    } @else {
+                      —
+                    }
+                  }
+                </ng-template>
+              </data-column>
+            }
+          </data-columns>
+          <content-actions>
+            <content-action
+              target="document"
+              title="Start Process"
+              icon="input"
+              (execute)="startProcessFromMenu($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="View (MLightCAD view)"
+              icon="architecture"
+              [visible]="isCadDocumentAction"
+              (execute)="openInCadView($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Annotation (ARender)"
+              icon="edit_note"
+              (execute)="openInArenderView($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Edit Offline"
+              icon="edit"
+              (execute)="editOffline($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Upload New Version"
+              icon="publish"
+              (execute)="uploadNewVersion($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Favorite"
+              icon="star_border"
+              (execute)="toggleFavorite($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Declare Record"
+              icon="assignment_turned_in"
+              (execute)="declareRecord($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Move"
+              icon="drive_file_move"
+              (execute)="moveNode($event)">
+            </content-action>
+            <content-action
+              target="folder"
+              title="Move"
+              icon="drive_file_move"
+              (execute)="moveNode($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Copy"
+              icon="content_copy"
+              (execute)="copyNode($event)">
+            </content-action>
+            <content-action
+              target="folder"
+              title="Copy"
+              icon="content_copy"
+              (execute)="copyNode($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Share"
+              icon="link"
+              (execute)="shareNode($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Create Link"
+              icon="link"
+              (execute)="createLink($event)">
+            </content-action>
+            <content-action
+              target="folder"
+              title="Create Link"
+              icon="link"
+              (execute)="createLink($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Delete"
+              icon="delete"
+              (execute)="onDelete($event)">
+            </content-action>
+
+            <content-action
+              target="folder"
+              title="Delete"
+              icon="delete"
+              (execute)="onDelete($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Manage Versions"
+              icon="history"
+              (execute)="manageVersions($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Audit Trail"
+              icon="receipt_long"
+              (execute)="openAuditTrail($event)">
+            </content-action>
+
+            <content-action
+              target="folder"
+              title="Audit Trail"
+              icon="receipt_long"
+              (execute)="openAuditTrail($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Edit Aspects"
+              icon="tune"
+              (execute)="editAspects($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Permissions"
+              icon="lock_open"
+              (execute)="managePermissions($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Manage Holds"
+              icon="gavel"
+              (execute)="manageHolds($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Download"
+              icon="get_app"
+              (execute)="onDownload($event)">
+            </content-action>
+
+            <content-action
+              target="document"
+              title="Document number change request"
+              icon="edit_note"
+              (execute)="documentNumberChangeRequest($event)">
+            </content-action>
+          </content-actions>
+          <adf-custom-empty-content-template>
+            <div class="adw-empty-folder">
+              <mat-icon class="adw-empty-folder-icon">folder_open</mat-icon>
+              <p class="adw-empty-folder-title">This folder is empty</p>
+              <p class="adw-empty-folder-subtitle">Upload files or create a new folder to get started.</p>
+            </div>
+          </adf-custom-empty-content-template>
+        </adf-document-list>
+        <button
+          #wmOrigin
+          #wmTrigger="matMenuTrigger"
+          type="button"
+          class="adw-download-wm-origin"
+          tabindex="-1"
+          aria-hidden="true"
+          [class.adw-download-has-submenu]="hasWatermarkSubmenu()"
+          [style.left.px]="watermarkMenuPosition().left"
+          [style.top.px]="watermarkMenuPosition().top"
+          [style.height.px]="watermarkMenuPosition().height"
+          [matMenuTriggerFor]="wmMenu"
+          [matMenuTriggerRestoreFocus]="false"
+          (menuOpened)="watermarkMenuOpen.set(true)"
+          (menuClosed)="watermarkMenuOpen.set(false)"></button>
+        <mat-menu #wmMenu="matMenu" class="adw-download-watermark-submenu" [hasBackdrop]="false" xPosition="after">
+          @for (item of watermarkMenuItems; track item.kind) {
+            <button mat-menu-item type="button" (click)="pickWatermarkKind(item.kind, $event)">
+              <mat-icon>{{ item.icon }}</mat-icon>
+              <span>{{ item.label }}</span>
+            </button>
+          }
+        </mat-menu>
+
+        <!-- Pagination (same as My Libraries) -->
+        @if (documentList) {
+          @if (documentList.pagination | async; as pagination) {
+            <adf-pagination
+              [target]="documentList"
+              [pagination]="pagination"
+              [supportedPageSizes]="[25, 50, 100]">
+            </adf-pagination>
+          }
+        }
+      </div>
+
+      @if (selectedNode) {
+        <div
+          class="adw-sidebar-resizer"
+          role="separator"
+          aria-orientation="vertical"
+          [attr.aria-valuenow]="sidebarWidth"
+          [attr.aria-valuemin]="minSidebarWidth"
+          [attr.aria-valuemax]="maxSidebarWidth"
+          title="Drag to resize list and detail panels"
+          (mousedown)="startSidebarResize($event)"></div>
+      }
+
+      @if (selectedNode) {
+        <div class="aca-sidebar">
+        <adf-info-drawer [showHeader]="false">
+          <div info-drawer-content class="adw-project-explorer-drawer-with-tabs">
+            <div
+              class="adw-project-explorer-drawer-columns"
+              [class.adw-project-explorer-drawer-columns--isolated]="!isAllDetailPanelsVisible()">
+              @if (isDetailMetaColumnVisible()) {
+                <section
+                  class="adw-project-explorer-drawer-columns__col adw-project-explorer-drawer-columns__col--meta">
+                  <div class="adw-project-explorer-meta-stack">
+                    @if (isDetailSectionVisible('properties')) {
+                      <div
+                        class="adw-project-explorer-meta-block adw-project-explorer-meta-block--properties"
+                        id="adw-project-explorer-section-properties"
+                        role="region"
+                        aria-labelledby="adw-project-explorer-tab-trigger-properties">
+                        <h3 class="adw-project-explorer-drawer-columns__heading">Metadata</h3>
+                        <div class="adw-project-explorer-properties-scroll">
+                          <adf-content-metadata-card
+                            [node]="metadataNode ?? selectedNode"
+                            [preset]="'custom'"
+                            [displayEmpty]="false"
+                            [editable]="isSelectedNodeMetadataEditable"
+                            [readOnly]="!isSelectedNodeMetadataEditable">
+                          </adf-content-metadata-card>
+                        </div>
+                      </div>
+                    }
+                  <!-- Comments section (disabled)
+                  @if (isDetailSectionVisible('comments')) {
+                    <div
+                      class="adw-project-explorer-meta-block adw-project-explorer-meta-block--comments"
+                      id="adw-project-explorer-section-comments"
+                      role="region"
+                      aria-labelledby="adw-project-explorer-tab-trigger-comments">
+                      <h3 class="adw-project-explorer-drawer-columns__heading">Comments</h3>
+                      <div class="adw-project-explorer-comments-scroll">
+                        <adf-node-comments [nodeId]="selectedNode?.id"></adf-node-comments>
+                      </div>
+                    </div>
+                  }
+                  -->
+                  </div>
+                </section>
+              }
+              @if (isDetailSectionVisible('preview')) {
+                <section
+                  class="adw-project-explorer-drawer-columns__col adw-project-explorer-drawer-columns__col--preview"
+                  id="adw-project-explorer-section-preview"
+                  role="region"
+                  aria-labelledby="adw-project-explorer-tab-trigger-preview">
+                  <h3 class="adw-project-explorer-drawer-columns__heading">Preview</h3>
+                  <adw-preview-tab [node]="previewNode"></adw-preview-tab>
+                </section>
+              }
+              <aside
+                class="adw-project-explorer-drawer-rail"
+                aria-label="Metadata, Preview, MOC Request">
+                <div class="adw-project-explorer-drawer-rail__actions" role="group">
+                  <button
+                    mat-button
+                    type="button"
+                    id="adw-project-explorer-tab-trigger-properties"
+                    class="adw-project-explorer-footer-tabs__btn"
+                    [class.is-active]="isDetailRailActive('properties')"
+                    [attr.aria-pressed]="isDetailRailActive('properties') ? 'true' : 'false'"
+                    aria-controls="adw-project-explorer-section-properties"
+                    title="Metadata"
+                    aria-label="Metadata"
+                    (click)="toggleDetailPanel('properties')">
+                    <span class="adw-project-explorer-footer-tabs__label">Metadata</span>
+                  </button>
+                  @if (showPreviewButton) {
+                    <button
+                      mat-button
+                      type="button"
+                      id="adw-project-explorer-tab-trigger-preview"
+                      class="adw-project-explorer-footer-tabs__btn"
+                      [class.is-active]="isDetailRailActive('preview')"
+                      [attr.aria-pressed]="isDetailRailActive('preview') ? 'true' : 'false'"
+                      aria-controls="adw-project-explorer-section-preview"
+                      title="Preview"
+                      aria-label="Preview"
+                      (click)="toggleDetailPanel('preview')">
+                      <span class="adw-project-explorer-footer-tabs__label">Preview</span>
+                    </button>
+                  }
+                  @if (showMocRequestButton) {
+                    <button
+                      mat-button
+                      type="button"
+                      id="adw-project-explorer-tab-trigger-moc-request"
+                      class="adw-project-explorer-footer-tabs__btn adw-project-explorer-footer-tabs__btn--action"
+                      title="MOC Request"
+                      aria-label="MOC Request"
+                      (click)="openMocRequestDialog()">
+                      <span class="adw-project-explorer-footer-tabs__label">MOC Request</span>
+                    </button>
+                  }
+                </div>
+              </aside>
+            </div>
+          </div>
+        </adf-info-drawer>
+        </div>
+      }
+    </div>
+    </div>
+  </aca-page-layout-content>
+  <!-- Opened via MatDialog in component TS; referenced here so standalone imports are not flagged NG8113 -->
+  @if (false) {
+    <adf-confirm-dialog />
+    <adf-folder-dialog />
+  }
+</aca-page-layout>

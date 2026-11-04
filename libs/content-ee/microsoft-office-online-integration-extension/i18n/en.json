@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "This document is being edited in Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Edits made to this document have been discarded.",
+        "CANCEL_SESSION_DENIED": "An error has occurred. Contact your administrator if it persists.",
+        "END_SESSION_SUCCESS": "This document is no longer being edited in Office Online.",
+        "END_SESSION_DENIED": "An error has occurred. Contact your administrator if it persists.",
+        "RESUME_SESSION": "This file is being edited in Office Online. You can edit this file at the same time.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Save all edits to this document",
+            "END_OPTION_DETAILS": "A new version will be created",
+            "CANCEL_OPTION": "Discard all edits",
+            "CHANGES": "What level of changes were made?",
+            "HEADER": "End Editing",
+            "DESCRIPTION": "This will prevent further editing of the document for all users currently accessing it with Microsoft Office Online.",
+            "QUESTION": "What should happen to edits made?",
+            "CANCEL": "Cancel",
+            "END": "End Editing"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Create a Word Document"
+            },
+            "EXCEL" : {
+                "HEADER": "Create a Excel Spreadsheet"
+            },
+            "POWERPOINT" : {
+                "HEADER": "Create a Powerpoint Presentation"
+            },
+            "CANCEL": "Cancel",
+            "CREATE": "Create",
+            "CREATE_AND_OPEN": "Create and Open Online",
+            "DESCRIPTION": {
+                "LABEL": "Description",
+                "PLACEHOLDER": "A meaningful description for this new file."
+            },
+            "NAME": {
+                "LABEL": "Name"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel Spreadsheet",
+                "TOOLTIP": "Create a new Excel spreadsheet"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Powerpoint Presentation",
+                "TOOLTIP": "Create a new Powerpoint presentation"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word Document",
+                "TOOLTIP": "Create a new Word document"
+            },
+            "END_SESSION": "End Editing",
+            "EDIT_WORD": "Edit in Word Online",
+            "EDIT_POWERPOINT": "Edit in PowerPoint Online",
+            "EDIT_EXCEL": "Edit in Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Extensions: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Enable Microsoft Office Online Extension"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Description too long"
+                }
+            }
+        }
+    }
+}

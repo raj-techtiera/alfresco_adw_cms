@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Nový proces",
+            "SELECT_APPLICATION": "Vybrat aplikaci",
+            "ERROR": "Proces nelze zahájit, protože nejsou k dispozici žádné definice procesu"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Správa procesů",
+            "PROCESS_LIST": {
+                "PROCESSES": "Procesy"
+            },
+            "START_PROCESS": "Zahájit proces",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Zobrazit podrobnosti"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Zobrazit komentáře"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Správa procesů",
+            "CREATE_NEW_PROCESS": "Zahájit proces",
+            "CREATE_PROCESS_NOT_ALLOWED": "Nelze vytvořit nový proces"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Zobrazit více"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Komentáře",
+            "CANCEL_PROCESS": "Zrušit proces"
+        },
+        "ERROR": {
+            "NO_FORM": "Definice procesu nemá definovaný formulář",
+            "NO_CONTENT": "Nelze připojit soubor z vašeho zařízení",
+            "CAN_NOT_ATTACH": "Nelze připojit vybraný obsah",
+            "AUDIT_ERROR": "Zobrazit chybu úkolu: {{error}}",
+            "TASK_ACCESS_WARNING": "Nemáte oprávnění ke změně úkolu",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Náhled dokumentu není k dispozici, protože úloha ještě není dokončena."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Vytvořený proces '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Došlo k neznámé chybě sítě. Funkce související se službou procesu jsou zakázány.",
+            "ACTION": "Zobrazit spuštěný proces"
+        },
+        "NO_PROCESS_DEFINITIONS": "K dispozici nejsou žádné definice procesů",
+        "SIDE_NAV_TITLE": "Pracovní postup",
+        "STATUS": {
+            "COMPLETED": "Dokončeno",
+            "RUNNING": "Běh",
+            "OPEN": "Otevřít",
+            "UNKNOWN": "Neznámý"
+        },
+        "TASK_LIST": {
+            "TASKS": "Úkoly",
+            "ACTIONS": {
+                "TASK_DETAILS": "Zobrazit"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Zobrazit"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formulář byl úspěšně uložen",
+            "FORM_COMPLETED": "Úkol byl dokončen",
+            "CLOSE": "Zavřít",
+            "CLAIM_TASK": "Úkol byl převzat",
+            "UNCLAIM_TASK": "Úkol byl vydán",
+            "CLAIM_FAILED": "Akci nelze provést"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Akci nelze provést",
+            "FAILED_TO_LOAD": "Nepodařilo se načíst podrobnosti úkolu, opakujte akci později",
+            "UPDATED": "Vlastnost {{ property }} byla úspěšně aktualizována",
+            "FAILED_TO_UPDATE": "Nepodařilo se aktualizovat vlastnost {{ property }}",
+            "METADATA_TOOLTIP": "Zobrazit podrobnosti",
+            "NO_TASK_NAME": "Bez názvu"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Zavřít"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "K dispozici nejsou žádné definice procesů"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Zahájil(a)",
+            "CREATED": "Datum zahájení"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Proces nelze zahájit, protože nejsou k dispozici žádné definice procesu",
+            "NO_START_FORM": "Tento proces nevyžaduje žádné další konfigurace",
+            "NO_PROCESS_DEF_SELECTED": "Není vybrána žádná kategorie/proces",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Vybrat aplikaci"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Zrušit proces?",
+                "DESCRIPTION": "Tento proces a všechny související úkoly budou označeny jako úplné.",
+                "CONFIRM_BTN": "Potvrdit"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' byl úspěšně zrušen.",
+                "FAIL": "Zrušit chybu: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Datum vytvoření"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Převzít",
+                "UNCLAIM": "Vzdát se"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Část běhu procesu",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Proces propojení",
+            "PART_OF_THE_PROCESS_TITLE": "Tento dokument je součástí následujících procesů",
+            "NO_PROCESSES": "Tento dokument není součástí žádných spuštěných procesů",
+            "CREATED": "Vytvořeno",
+            "VIEW_DETAILS_BTN": "Zobrazit podrobnosti"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatické ověřování pro služby procesu",
+        "ENABLED": "Povoleno",
+        "ENABLED_DESCRIPTION": "Systém se znovu automaticky ověří a uživatel může pokračovat v práci bez přerušení.",
+        "DISABLED": "Zakázáno",
+        "DISABLED_DESCRIPTION": "Po vypršení relace se uživatel bude muset znovu přihlásit svými přihlašovacími údaji.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

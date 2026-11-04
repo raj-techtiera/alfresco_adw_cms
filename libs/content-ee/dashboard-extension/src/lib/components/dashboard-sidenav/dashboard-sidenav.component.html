@@ -1,0 +1,8 @@
+<a class="adw-dashboard-sidenav-link"
+   data-automation-id="dashboard-sidenav-link"
+   [routerLink]="['/dms-dashboard']"
+   routerLinkActive="adw-dashboard-sidenav-selected"
+   [routerLinkActiveOptions]="{ exact: false }"
+   (click)="navigateDashboard($event)">
+    <span class="adw-top-dashboard-label">{{ 'SIDEBAR.DASHBOARD' | translate }}</span>
+</a>

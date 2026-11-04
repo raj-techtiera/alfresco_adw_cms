@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "この文書は Office Online で編集中です。",
+        "CANCEL_SESSION_SUCCESS": "この文書に加えた変更が破棄されました。",
+        "CANCEL_SESSION_DENIED": "エラーが発生しました。問題が解決されない場合は管理者に連絡してください。",
+        "END_SESSION_SUCCESS": "この文書の Office Online での編集が終了しました。",
+        "END_SESSION_DENIED": "エラーが発生しました。問題が解決されない場合は管理者に連絡してください。",
+        "RESUME_SESSION": "このファイルは Office Online で編集中です。このファイルを同時に編集できます。",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "すべての変更をこの文書に保存",
+            "END_OPTION_DETAILS": "新しいバージョンが作成されます",
+            "CANCEL_OPTION": "すべての変更を破棄",
+            "CHANGES": "どのレベルの変更を加えましたか?",
+            "HEADER": "編集の終了",
+            "DESCRIPTION": "これにより、現在 Microsoft Office Online を使ってこの文書にアクセスしているユーザー全員がこの文書を変更できなくなります。",
+            "QUESTION": "加えた変更はどうしますか?",
+            "CANCEL": "キャンセル",
+            "END": "編集の終了"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Word ドキュメントの作成"
+            },
+            "EXCEL": {
+                "HEADER": "Excel スプレッドシートの作成"
+            },
+            "POWERPOINT": {
+                "HEADER": "Powerpoint プレゼンテーションの作成"
+            },
+            "CANCEL": "キャンセル",
+            "CREATE": "作成",
+            "CREATE_AND_OPEN": "Onlineで作成して開く",
+            "DESCRIPTION": {
+                "LABEL": "説明",
+                "PLACEHOLDER": "この新しいファイルのわかりやすい説明。"
+            },
+            "NAME": {
+                "LABEL": "名前"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel スプレッドシート",
+                "TOOLTIP": "新しい Excel スプレッドシートの作成"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Powerpoint プレゼンテーション",
+                "TOOLTIP": "新しい Powerpoint プレゼンテーションの作成"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word 文書",
+                "TOOLTIP": "新しい Word ドキュメントの作成"
+            },
+            "END_SESSION": "編集の終了",
+            "EDIT_WORD": "Word Online で編集",
+            "EDIT_POWERPOINT": "PowerPoint Online で編集",
+            "EDIT_EXCEL": "Excel Online で編集"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "拡張機能: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Microsoft Office Online拡張機能を有効化"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "説明が長すぎます"
+                }
+            }
+        }
+    }
+}

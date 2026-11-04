@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Tätä dokumenttia muokataan parhaillaan Office Online -sovelluksessa.",
+        "CANCEL_SESSION_SUCCESS": "Tähän dokumenttiin tehdyt muutokset hylättiin.",
+        "CANCEL_SESSION_DENIED": "Tapahtui virhe. Ota yhteyttä ylläpitoon, jos ongelma jatkuu.",
+        "END_SESSION_SUCCESS": "Tätä dokumenttia ei enää muokata Office Online -sovelluksessa.",
+        "END_SESSION_DENIED": "Tapahtui virhe. Ota yhteyttä ylläpitoon, jos ongelma jatkuu.",
+        "RESUME_SESSION": "Tätä tiedostoa muokataan parhaillaan Office Online -sovelluksessa. Voit muokata tiedostoa samanaikaisesti.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Tallenna kaikki muutokset dokumenttiin",
+            "END_OPTION_DETAILS": "Luodaan uusi versio",
+            "CANCEL_OPTION": "Hylkää kaikki muutokset",
+            "CHANGES": "Minkä tason muutoksia tehtiin?",
+            "HEADER": "Lopeta muokkaus",
+            "DESCRIPTION": "Tämä toiminto estää kaikkia dokumenttia tällä hetkellä Microsoft Office Online -sovelluksessa käyttäviä käyttäjiä muokkaamasta sitä.",
+            "QUESTION": "Mitä jo tehdyille muutoksille tulisi tapahtua?",
+            "CANCEL": "Peruuta",
+            "END": "Lopeta muokkaus"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Luo Word-asiakirja"
+            },
+            "EXCEL": {
+                "HEADER": "Luo Excel-laskentataulukko"
+            },
+            "POWERPOINT": {
+                "HEADER": "Luo Powerpoint-esitys"
+            },
+            "CANCEL": "Peruuta",
+            "CREATE": "Luo",
+            "CREATE_AND_OPEN": "Luo ja avaa Online-tilassa",
+            "DESCRIPTION": {
+                "LABEL": "Kuvaus",
+                "PLACEHOLDER": "Merkityksellinen kuvaus uudelle tiedostolle."
+            },
+            "NAME": {
+                "LABEL": "Nimi"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Excel-taulukko",
+                "TOOLTIP": "Luo uusi Excel-laskentataulukko"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Powerpoint-esitys",
+                "TOOLTIP": "Luo uusi Powerpoint-esitys"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Word-asiakirja",
+                "TOOLTIP": "Luo uusi Word-asiakirja"
+            },
+            "END_SESSION": "Lopeta muokkaus",
+            "EDIT_WORD": "Muokkaa Word Online -sovelluksessa",
+            "EDIT_POWERPOINT": "Muokkaa PowerPoint Online -sovelluksessa",
+            "EDIT_EXCEL": "Muokkaa Excel Online -sovelluksessa"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Laajennukset: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Ota Microsoft Office Online -laajennus käyttöön"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Kuvaus on liian pitkä"
+                }
+            }
+        }
+    }
+}

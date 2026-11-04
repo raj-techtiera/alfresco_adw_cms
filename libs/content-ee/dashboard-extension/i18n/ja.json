@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "ダッシュボード"
+    },
+    "DASHBOARD": {
+        "TITLE": "ダッシュボード"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "ウィジッドアクション",
+        "REFRESH": "更新",
+        "VIEW_ALL": "すべてを表示",
+        "TASK_SUMMARY": {
+            "TITLE": "マイタスク概要",
+            "SUMMARY_INFO_SUFFIX": "完了タスク！",
+            "NO_TASKS_ASSIGNED": "タスクが割り当てられていません。",
+            "NO_TASKS_ERROR": "タスク取得中にエラーが発生しました。ウィジッドを更新してください。",
+            "COMPLETED": "完了",
+            "INCOMPLETE": "未完了",
+            "OVERDUE": "期限切れ",
+            "TASKS": "タスク",
+            "ARROW_UP": "上向き→"
+        },
+        "TASK_LIST": {
+            "TITLE": "タスク管理",
+            "OVERDUE": "期限切れ",
+            "UNASSIGNED": "未割当",
+            "IN_PROGRESS": "進行中",
+            "NO_OVERDUE_TASKS": "期限切れのタスクはありません。",
+            "NO_UNASSIGNED_TASKS": "未割当のタスクはありません。",
+            "NO_IN_PROGRESS_TASKS": "進行中のタスクはありません。",
+            "ACTIONS": {
+                "VIEW": "タスクを表示",
+                "COMMENT": "コメントを追加",
+                "CLAIM": "タスクを要求"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "タスクは正常に要求されました。",
+                "CLAIMING_FAILED": "タスクを要求できませんでした。"
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "ファイル",
+            "RECENT": "最近",
+            "FAVORITES": "お気に入り",
+            "PERSONAL": "個人",
+            "SHARED": "共有",
+            "NO_RECENT_FILES": "最近使ったファイルはありません。",
+            "NO_FAVORITES_FILES": "お気に入りのファイルまたはフォルダはありません。",
+            "NO_PERSONAL_FILES": "個人用ファイルまたはフォルダはありません。",
+            "NO_SHARED_FILES": "共有ファイルはありません。",
+            "ACTIONS": {
+                "VIEW": "表示",
+                "DOWNLOAD": "ダウンロード",
+                "SHARE": "共有",
+                "SHARED_LINK_SETTINGS": "共有リンクの設定",
+                "FOLDER_INFORMATION": "フォルダ情報"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "ライブラリ",
+            "PERSONAL": "あなたのライブラリ",
+            "ALL": "すべて",
+            "FAVOURITES": "お気に入り",
+            "NO_PERSONAL_LIBRARIES": "個人用ライブラリはありません。",
+            "NO_ALL_LIBRARIES": "ライブラリはありません。",
+            "NO_FAVORITE_LIBRARIES": "お気に入りのライブラリはありません。"
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "訴訟ホールド",
+            "NO_HOLDS": "ホールドは作成されていません。",
+            "HOLDS_NAME": "ホールド名",
+            "CREATED": "作成済み",
+            "REASON": "理由",
+            "ACTIONS": {
+                "DOWNLOAD": "ダウンロード",
+                "INFORMATION": "フォルダ情報",
+                "DELETE": "削除"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "マイタスクの進捗 - 月ごと",
+            "WEEK_LABEL": "週",
+            "MONTH_LABEL": "付き",
+            "SUMMARY_INFO_SUFFIX": "選択された付きの完了したタスク！",
+            "SELECT_MONTH": "月を選択",
+            "NO_TASKS_IN_MONTH": "選択した月にタスクはありません。",
+            "EMPTY": "タスクなし"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "マイプロセスの概要 - 6か月ごと",
+            "SUMMARY_INFO_SUFFIX": "選択した6か月の完了したタスク！",
+            "NO_PROCESSES": "プロセスはありません。",
+            "NO_PROCESSES_ERROR": "プロセス取得中にエラーが発生しました。ウィジッドを更新してください。",
+            "NO_PROCESSES_IN_PERIOD": "選択した期間にプロセスはありません。",
+            "RUNNING": "実行中",
+            "COMPLETED": "完了",
+            "NEXT": "次へ",
+            "NEXT_SCREEN_READER_LABEL": "マイプロセス概要 - 次の6か月へ進む",
+            "PREVIOUS": "前へ",
+            "PREVIOUS_SCREEN_READER_LABEL": "マイプロセス概要 - 前の6か月へ進む",
+            "EMPTY": "プロセスなし"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "{{ taskName }}のコメント",
+        "CLOSE": "閉じる"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "サムネイル"
+    }
+}

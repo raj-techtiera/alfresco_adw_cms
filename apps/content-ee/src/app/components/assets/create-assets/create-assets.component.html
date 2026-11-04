@@ -1,0 +1,575 @@
+<div class="create-assets-page">
+  <!-- Page Header -->
+  <header class="create-header">
+    <div>
+      <h1 class="create-header__title">Create Asset Hierarchy</h1>
+      <p class="create-header__subtitle">
+        Define the asset hierarchy, folder template, permissions, and retention settings for the asset workspace.
+      </p>
+    </div>
+  </header>
+
+  <div class="create-layout">
+    <!-- Main Content -->
+    <main class="create-main">
+      <div class="create-info-banner">
+        <mat-icon>info</mat-icon>
+        <p>
+          Build the asset hierarchy using the standard 4-level structure. The selected folder template will be applied
+          to the facility level (Level 3).
+        </p>
+      </div>
+
+      <p *ngIf="hierarchyLoadError" class="create-hierarchy-error" role="alert">{{ hierarchyLoadError }}</p>
+
+      <div class="create-sections-top">
+        <!-- Section 1: Asset Hierarchy -->
+        <section class="create-section">
+          <div class="create-section__heading">
+            <span class="create-section__number">1</span>
+            <div>
+              <h2 class="create-section__title">Asset Hierarchy</h2>
+              <p class="create-section__desc">Select the path to define where this workspace will be created.</p>
+            </div>
+            <button mat-raised-button type="button" mat-flat-button class="create-btn create-btn--md create-section__md-btn" (click)="goToMasterData()">
+              <mat-icon>table_chart</mat-icon>
+              Master Data
+            </button>
+          </div>
+
+          <div class="create-hierarchy-path">
+            <div class="create-hierarchy-path__field">
+              <label class="create-field__label">
+                <mat-icon class="create-field__label-icon">place</mat-icon>
+                Region (Level 1)<span class="create-field__required">*</span>
+              </label>
+              <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+                <mat-select
+                  [ngModel]="selectedRegionId"
+                  (ngModelChange)="onRegionChange($event)"
+                  [disabled]="loadingRegions"
+                  [placeholder]="loadingRegions ? 'Loading regions...' : 'Select region'"
+                  panelClass="adw-create-assets-select-panel"
+                >
+                  <mat-option *ngFor="let option of regions; trackBy: trackById" [value]="option.id">
+                    {{ option.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <mat-icon class="create-hierarchy-path__arrow">chevron_right</mat-icon>
+
+            <div class="create-hierarchy-path__field">
+              <label class="create-field__label">
+                <mat-icon class="create-field__label-icon">business</mat-icon>
+                Asset / Field (Level 2)<span class="create-field__required">*</span>
+              </label>
+              <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+                <mat-select
+                  [ngModel]="selectedBlockId"
+                  (ngModelChange)="onBlockChange($event)"
+                  [disabled]="!selectedRegionId || loadingBlocks"
+                  [placeholder]="loadingBlocks ? 'Loading assets...' : (selectedRegionId ? 'Select asset / field' : 'Select a region first')"
+                  panelClass="adw-create-assets-select-panel"
+                >
+                  <mat-option *ngFor="let option of blocks; trackBy: trackById" [value]="option.id">
+                    {{ option.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <mat-icon class="create-hierarchy-path__arrow">chevron_right</mat-icon>
+
+            <div class="create-hierarchy-path__field">
+              <label class="create-field__label">
+                <mat-icon class="create-field__label-icon">directions_boat</mat-icon>
+                Facility (Level 3)<span class="create-field__required">*</span>
+              </label>
+              <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+                <mat-select
+                  [ngModel]="selectedAssetId"
+                  (ngModelChange)="onAssetChange($event)"
+                  [disabled]="!selectedBlockId || loadingAssets"
+                  [placeholder]="loadingAssets ? 'Loading facilities...' : (selectedBlockId ? 'Select facility' : 'Select an asset first')"
+                  panelClass="adw-create-assets-select-panel"
+                >
+                  <mat-option *ngFor="let option of assets; trackBy: trackById" [value]="option.id">
+                    {{ option.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="create-details-row create-details-row--single">
+            <div class="create-field">
+              <label class="create-field__label">Facility Type<span class="create-field__required">*</span></label>
+              <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+                <mat-select [(ngModel)]="facilityType" panelClass="adw-create-assets-select-panel">
+                  <mat-option *ngFor="let option of facilityTypeOptions" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Folder Template -->
+        <section class="create-section">
+          <div class="create-section__heading">
+            <span class="create-section__number">2</span>
+            <div>
+              <h2 class="create-section__title">Folder Template</h2>
+              <p class="create-section__desc">
+                Choose a folder template. The folders from the template will be created under the selected facility.
+              </p>
+            </div>
+          </div>
+
+          <div class="create-field create-field--template">
+            <label class="create-field__label">
+              <mat-icon class="create-field__label-icon">folder</mat-icon>
+              Folder Template<span class="create-field__required">*</span>
+            </label>
+            <mat-form-field appearance="outline" class="create-mat-field create-mat-field--template" subscriptSizing="dynamic">
+              <mat-select
+                [ngModel]="selectedTemplateId"
+                (ngModelChange)="onFolderTemplateChange($event)"
+                [disabled]="loadingFolderTemplates || !folderTemplates.length"
+                [placeholder]="loadingFolderTemplates ? 'Loading templates...' : 'Select folder template'"
+                panelClass="adw-create-assets-select-panel"
+              >
+                <mat-option *ngFor="let template of folderTemplates; trackBy: trackByTemplateFolderId" [value]="template.id">
+                  {{ template.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <p *ngIf="templateLoadError" class="create-template-error" role="alert">{{ templateLoadError }}</p>
+
+          <p class="create-folder-preview__label">Folders that will be created</p>
+          <p *ngIf="loadingTemplatePreview" class="create-folder-preview__status">Loading folders...</p>
+          <div class="create-folder-preview" *ngIf="!loadingTemplatePreview">
+            <div class="create-folder-preview__item" *ngFor="let folder of templateFolders; trackBy: trackByTemplateFolderId">
+              <mat-icon>folder</mat-icon>
+              <span>{{ folder.name }}</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Section 3: Workspace Settings -->
+      <section class="create-section create-section--settings">
+        <div class="create-section__heading">
+          <span class="create-section__number">3</span>
+          <div>
+            <h2 class="create-section__title">Settings</h2>
+            <p class="create-section__desc">Configure status, retention period, and access model for this workspace.</p>
+          </div>
+        </div>
+
+        <div class="create-settings-row">
+          <div class="create-field">
+            <label class="create-field__label">
+              <span class="create-status-dot create-status-dot--active"></span>
+              Status<span class="create-field__required">*</span>
+            </label>
+            <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+              <mat-select [(ngModel)]="status" panelClass="adw-create-assets-select-panel">
+                <mat-option *ngFor="let option of statusOptions" [value]="option">{{ option }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="create-field">
+            <label class="create-field__label">
+              <mat-icon class="create-field__label-icon">calendar_today</mat-icon>
+              Retention Period<span class="create-field__required">*</span>
+            </label>
+            <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+              <mat-select [(ngModel)]="retentionPeriod" panelClass="adw-create-assets-select-panel">
+                <mat-option *ngFor="let option of retentionOptions" [value]="option">{{ option }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="create-field">
+            <label class="create-field__label">
+              <mat-icon class="create-field__label-icon">shield</mat-icon>
+              Access Model<span class="create-field__required">*</span>
+            </label>
+            <mat-form-field appearance="outline" class="create-mat-field" subscriptSizing="dynamic">
+              <mat-select [(ngModel)]="accessModel" panelClass="adw-create-assets-select-panel">
+                <mat-option *ngFor="let option of accessModelOptions" [value]="option">{{ option }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="create-info-banner create-info-banner--compact">
+          <mat-icon>info</mat-icon>
+          <p>Retention period and access model can be updated later by authorized administrators.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Sidebar Preview -->
+    <aside class="create-sidebar" #hierarchyPreview>
+      <section class="create-sidebar-card">
+        <div class="create-sidebar-card__header">
+          <mat-icon>account_tree</mat-icon>
+          <h3>Hierarchy Preview</h3>
+        </div>
+        <dl class="create-preview-list">
+          <div class="create-preview-list__item">
+            <dt>Level 1 Region</dt>
+            <dd>{{ selectedRegion?.label || '—' }}</dd>
+          </div>
+          <div class="create-preview-list__item">
+            <dt>Level 2 Asset / Field</dt>
+            <dd>{{ selectedBlock?.label || '—' }}</dd>
+          </div>
+          <div class="create-preview-list__item">
+            <dt>Level 3 Facility</dt>
+            <dd>{{ selectedAsset?.label || '—' }}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="create-sidebar-card">
+        <div class="create-sidebar-card__header">
+          <mat-icon>folder</mat-icon>
+          <h3>Folder Template Preview</h3>
+        </div>
+        <span class="create-template-badge">{{ folderTemplateLabel }}</span>
+        <p class="create-sidebar-card__sub">Folders ({{ templateFolders.length }})</p>
+        <ul class="create-folder-list">
+          <li *ngFor="let folder of templateFolders; trackBy: trackByTemplateFolderId">
+            <mat-icon>folder</mat-icon>
+            {{ folder.name }}
+          </li>
+        </ul>
+      </section>
+
+      <section class="create-sidebar-card">
+        <div class="create-sidebar-card__header">
+          <mat-icon>description</mat-icon>
+          <h3>Summary</h3>
+        </div>
+        <dl class="create-summary-dl">
+          <div class="create-summary-dl__item">
+            <dt>Status</dt>
+            <dd>
+              <span class="create-status-dot create-status-dot--active"></span>
+              {{ status }}
+            </dd>
+          </div>
+          <div class="create-summary-dl__item">
+            <dt>Retention Period</dt>
+            <dd>{{ retentionPeriod }}</dd>
+          </div>
+          <div class="create-summary-dl__item">
+            <dt>Access Model</dt>
+            <dd>{{ accessModel }}</dd>
+          </div>
+        </dl>
+      </section>
+    </aside>
+  </div>
+
+  <!-- Footer Actions — pinned outside the scroll area so they stay above the app footer -->
+  <div class="create-footer">
+    <button type="button" mat-stroked-button class="create-btn create-btn--preview" (click)="previewHierarchy()">
+      <mat-icon>visibility</mat-icon>
+      Preview Hierarchy
+    </button>
+    <div class="create-footer__right">
+      <button type="button" mat-stroked-button class="create-btn create-btn--secondary" (click)="cancelCreate()">Cancel</button>
+      <button
+        type="button"
+        mat-flat-button
+        class="create-btn create-btn--primary"
+        [disabled]="saving"
+        (click)="saveAssetWorkspace()"
+      >
+        <mat-icon>add</mat-icon>
+        {{ saving ? 'Creating...' : 'Create Asset Hierarchy' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Master Data Management Modal -->
+<div
+  *ngIf="showMasterDataModal"
+  class="md-modal-backdrop"
+  role="presentation"
+  (click)="closeMasterDataModal()"
+>
+  <div class="md-modal" role="dialog" aria-modal="true" aria-labelledby="md-modal-title" (click)="$event.stopPropagation()">
+    <div class="md-modal__header">
+      <div class="md-modal__header-left">
+        <div class="md-modal__header-icon">
+          <mat-icon>table_chart</mat-icon>
+        </div>
+        <div>
+          <h2 id="md-modal-title" class="md-modal__title">Master Data Management</h2>
+          <p class="md-modal__subtitle">Manage regions, assets, and facilities in the asset hierarchy.</p>
+        </div>
+      </div>
+      <button type="button" mat-icon-button class="md-modal__close" aria-label="Close" (click)="closeMasterDataModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="md-modal__body">
+      <!-- Regions -->
+      <div class="md-column">
+        <div class="md-column__header">
+          <div class="md-column__icon"><mat-icon>place</mat-icon></div>
+          <h3 class="md-column__title">Regions <span>({{ mdRegions.length }})</span></h3>
+        </div>
+        <div class="md-column__search">
+          <mat-icon>search</mat-icon>
+          <input type="search" [(ngModel)]="mdRegionSearch" placeholder="Search region..." />
+        </div>
+        <div class="md-column__list">
+          <p *ngIf="loadingMdRegions" class="md-column__empty">Loading regions...</p>
+          <button
+            type="button"
+            mat-button
+            class="md-item"
+            *ngFor="let region of filteredMdRegions; trackBy: trackByMdId"
+            [class.md-item--selected]="selectedMdRegion?.id === region.id"
+            (click)="selectMdRegion(region)"
+          >
+            <div class="md-item__icon"><mat-icon>business</mat-icon></div>
+            <div class="md-item__content">
+              <p class="md-item__name">{{ region.name }}</p>
+              <p class="md-item__code">{{ region.code }}</p>
+            </div>
+            <span class="md-status" [class.md-status--inactive]="region.status === 'Inactive'">
+              <span class="md-status__dot"></span>{{ region.status }}
+            </span>
+          </button>
+        </div>
+        <div class="md-column__footer">
+          <button type="button" mat-stroked-button class="md-add-btn" [class.md-add-btn--active]="showAddRegion" (click)="toggleAddRegion()">
+            <mat-icon>add</mat-icon> Add Region
+          </button>
+          <div *ngIf="showAddRegion" class="md-add-form">
+            <p class="md-add-form__title">New Region</p>
+            <div class="md-add-form__field">
+              <label>Region Name <span>*</span></label>
+              <input type="text" [(ngModel)]="newRegionName" placeholder="e.g. Sarawak3" />
+            </div>
+            <div class="md-add-form__field">
+              <label>Region Code <span>*</span></label>
+              <input type="text" [(ngModel)]="newRegionCode" placeholder="e.g. SWK3" />
+            </div>
+            <div class="md-add-form__field">
+              <label>Status</label>
+              <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                <mat-select [(ngModel)]="newRegionStatus" panelClass="adw-create-assets-select-panel">
+                  <mat-option value="Active">Active</mat-option>
+                  <mat-option value="Inactive">Inactive</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-add-form__field">
+              <label>Created By</label>
+              <input type="text" [(ngModel)]="newRegionCreatedBy" placeholder="e.g. admin" />
+            </div>
+            <div class="md-add-form__actions">
+              <button type="button" mat-stroked-button class="md-add-form__cancel" (click)="cancelAddRegion()" [disabled]="savingMdRegion">Cancel</button>
+              <button type="button" mat-flat-button class="md-add-form__save" (click)="saveMdRegion()" [disabled]="savingMdRegion">
+                {{ savingMdRegion ? 'Saving...' : 'Save' }}
+              </button>
+            </div>
+          </div>
+          <p class="md-column__total">Total {{ mdRegions.length }} regions</p>
+        </div>
+      </div>
+
+      <!-- Assets -->
+      <div class="md-column">
+        <div class="md-column__header">
+          <div class="md-column__icon"><mat-icon>business</mat-icon></div>
+          <h3 class="md-column__title">Assets <span>({{ mdBlocks.length }})</span></h3>
+        </div>
+        <div class="md-column__search">
+          <mat-icon>search</mat-icon>
+          <input type="search" [(ngModel)]="mdBlockSearch" placeholder="Search asset..." />
+        </div>
+        <div class="md-context-group" *ngIf="selectedMdRegion">
+          <div class="md-context md-context--region">
+            <mat-icon>place</mat-icon>
+            <span class="md-context__label">Selected Region:</span>
+            <strong>{{ selectedMdRegion.name }} ({{ selectedMdRegion.code }})</strong>
+          </div>
+        </div>
+        <div class="md-column__list">
+          <p *ngIf="loadingMdBlocks" class="md-column__empty">Loading assets...</p>
+          <p *ngIf="!loadingMdBlocks && !selectedMdRegion" class="md-column__empty">Select a region first</p>
+          <p *ngIf="!loadingMdBlocks && selectedMdRegion && !filteredMdBlocks.length" class="md-column__empty">No assets for this region</p>
+          <button
+            type="button"
+            mat-button
+            class="md-item"
+            *ngFor="let block of filteredMdBlocks; trackBy: trackByMdId"
+            [class.md-item--selected]="selectedMdBlock?.id === block.id"
+            (click)="selectMdBlock(block)"
+          >
+            <div class="md-item__icon"><mat-icon>business</mat-icon></div>
+            <div class="md-item__content">
+              <p class="md-item__name">{{ block.name }}</p>
+              <p class="md-item__code">{{ block.code }}</p>
+            </div>
+            <span class="md-status" [class.md-status--inactive]="block.status === 'Inactive'">
+              <span class="md-status__dot"></span>{{ block.status }}
+            </span>
+          </button>
+        </div>
+        <div class="md-column__footer">
+          <button
+            type="button"
+            mat-stroked-button
+            class="md-add-btn"
+            [class.md-add-btn--active]="showAddBlock"
+            [disabled]="!selectedMdRegion"
+            (click)="toggleAddBlock()"
+          >
+            <mat-icon>add</mat-icon> Add Asset
+          </button>
+          <div *ngIf="showAddBlock && selectedMdRegion" class="md-add-form">
+            <p class="md-add-form__title">New Asset</p>
+            <div class="md-add-form__field">
+              <label>Region</label>
+              <div class="md-add-form__fixed-value">
+                {{ selectedMdRegion.name }} ({{ selectedMdRegion.code }})
+              </div>
+            </div>
+            <div class="md-add-form__field">
+              <label>Asset Name <span>*</span></label>
+              <input type="text" [(ngModel)]="newBlockName" placeholder="e.g. SK309" />
+            </div>
+            <div class="md-add-form__field">
+              <label>Asset Code <span>*</span></label>
+              <input type="text" [(ngModel)]="newBlockCode" placeholder="e.g. SK309" />
+            </div>
+            <div class="md-add-form__field">
+              <label>Status</label>
+              <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                <mat-select [(ngModel)]="newBlockStatus" panelClass="adw-create-assets-select-panel">
+                  <mat-option value="Active">Active</mat-option>
+                  <mat-option value="Inactive">Inactive</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-add-form__field">
+              <label>Created By</label>
+              <input type="text" [(ngModel)]="newBlockCreatedBy" placeholder="e.g. admin" />
+            </div>
+            <div class="md-add-form__actions">
+              <button type="button" mat-stroked-button class="md-add-form__cancel" (click)="cancelAddBlock()" [disabled]="savingMdBlock">Cancel</button>
+              <button type="button" mat-flat-button class="md-add-form__save" (click)="saveMdBlock()" [disabled]="savingMdBlock">
+                {{ savingMdBlock ? 'Saving...' : 'Save' }}
+              </button>
+            </div>
+          </div>
+          <p class="md-column__total">Total {{ mdBlocks.length }} assets</p>
+        </div>
+      </div>
+
+      <!-- Facilities -->
+      <div class="md-column md-column--last">
+        <div class="md-column__header">
+          <div class="md-column__icon"><mat-icon>category</mat-icon></div>
+          <h3 class="md-column__title">Facilities <span>({{ mdAssets.length }})</span></h3>
+        </div>
+        <div class="md-column__search">
+          <mat-icon>search</mat-icon>
+          <input type="search" [(ngModel)]="mdAssetSearch" placeholder="Search facility..." />
+        </div>
+        <div class="md-context-group" *ngIf="selectedMdRegion || selectedMdBlock">
+          <div *ngIf="selectedMdRegion" class="md-context md-context--region">
+            <mat-icon>place</mat-icon>
+            <span class="md-context__label">Region:</span>
+            <strong>{{ selectedMdRegion.name }}</strong>
+          </div>
+          <div *ngIf="selectedMdBlock" class="md-context md-context--block">
+            <mat-icon>business</mat-icon>
+            <span class="md-context__label">Asset:</span>
+            <strong>{{ selectedMdBlock.name }}</strong>
+          </div>
+        </div>
+        <div class="md-column__list">
+          <p *ngIf="loadingMdAssets" class="md-column__empty">Loading facilities...</p>
+          <p *ngIf="!loadingMdAssets && !selectedMdBlock" class="md-column__empty">Select an asset first</p>
+          <p *ngIf="!loadingMdAssets && selectedMdBlock && !filteredMdAssets.length" class="md-column__empty">No facilities for this asset</p>
+          <div class="md-item md-item--static" *ngFor="let asset of filteredMdAssets; trackBy: trackByMdId">
+            <div class="md-item__icon"><mat-icon>category</mat-icon></div>
+            <div class="md-item__content">
+              <p class="md-item__name">{{ asset.name }}</p>
+              <p class="md-item__code">{{ asset.code }}</p>
+            </div>
+            <span class="md-status" [class.md-status--inactive]="asset.status === 'Inactive'">
+              <span class="md-status__dot"></span>{{ asset.status }}
+            </span>
+          </div>
+        </div>
+        <div class="md-column__footer">
+          <button
+            type="button"
+            mat-stroked-button
+            class="md-add-btn"
+            [class.md-add-btn--active]="showAddAsset"
+            [disabled]="!selectedMdBlock"
+            (click)="toggleAddAsset()"
+          >
+            <mat-icon>add</mat-icon> Add Facility
+          </button>
+          <div *ngIf="showAddAsset && selectedMdBlock" class="md-add-form">
+            <p class="md-add-form__title">New Facility</p>
+            <div class="md-add-form__field">
+              <label>Asset</label>
+              <div class="md-add-form__fixed-value">
+                {{ selectedMdBlock.name }} ({{ selectedMdBlock.code }})
+              </div>
+            </div>
+            <div class="md-add-form__field">
+              <label>Facility Name <span>*</span></label>
+              <input type="text" [(ngModel)]="newAssetName" placeholder="e.g. TEST FACILITY 001 - Production Platform" />
+            </div>
+            <div class="md-add-form__field">
+              <label>Facility Code <span>*</span></label>
+              <input type="text" [(ngModel)]="newAssetCode" placeholder="e.g. TF001" />
+            </div>
+            <div class="md-add-form__field">
+              <label>Status</label>
+              <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                <mat-select [(ngModel)]="newAssetStatus" panelClass="adw-create-assets-select-panel">
+                  <mat-option value="Active">Active</mat-option>
+                  <mat-option value="Inactive">Inactive</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-add-form__field">
+              <label>Created By</label>
+              <input type="text" [(ngModel)]="newAssetCreatedBy" placeholder="e.g. admin" />
+            </div>
+            <div class="md-add-form__actions">
+              <button type="button" mat-stroked-button class="md-add-form__cancel" (click)="cancelAddAsset()" [disabled]="savingMdAsset">Cancel</button>
+              <button type="button" mat-flat-button class="md-add-form__save" (click)="saveMdAsset()" [disabled]="savingMdAsset">
+                {{ savingMdAsset ? 'Saving...' : 'Save' }}
+              </button>
+            </div>
+          </div>
+          <p class="md-column__total">Total {{ mdAssets.length }} facilities</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

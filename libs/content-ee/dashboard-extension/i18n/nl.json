@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "DMS Dashboard"
+    },
+    "DASHBOARD": {
+        "TITLE": "DMS Dashboard"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Widget-acties",
+        "REFRESH": "Vernieuwen",
+        "VIEW_ALL": "Alles bekijken",
+        "TASK_SUMMARY": {
+            "TITLE": "Overzicht Mijn taken",
+            "SUMMARY_INFO_SUFFIX": "voltooide taken!",
+            "NO_TASKS_ASSIGNED": "U heeft geen toegewezen taken.",
+            "NO_TASKS_ERROR": "Er is een fout opgetreden bij het ophalen van uw taken. Vernieuw de widget.",
+            "COMPLETED": "Voltooid",
+            "INCOMPLETE": "Incompleet",
+            "OVERDUE": "Te laat",
+            "TASKS": "Taken",
+            "ARROW_UP": "Pijl omhoog"
+        },
+        "TASK_LIST": {
+            "TITLE": "Takenbeheer",
+            "OVERDUE": "Te laat",
+            "UNASSIGNED": "Niet toegewezen",
+            "IN_PROGRESS": "Bezig",
+            "NO_OVERDUE_TASKS": "U heeft geen achterstallige taken.",
+            "NO_UNASSIGNED_TASKS": "U heeft geen niet toegewezen taken.",
+            "NO_IN_PROGRESS_TASKS": "U heeft geen taken in bewerking.",
+            "ACTIONS": {
+                "VIEW": "Taak bekijken",
+                "COMMENT": "Opmerking toevoegen",
+                "CLAIM": "Taak opeisen"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Taak is met succes opgeëist.",
+                "CLAIMING_FAILED": "Taak kon niet worden opgeëist."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Bestanden",
+            "RECENT": "Recente",
+            "FAVORITES": "Favorieten",
+            "PERSONAL": "Persoonlijk",
+            "SHARED": "Gedeeld",
+            "NO_RECENT_FILES": "U heeft geen recente bestanden.",
+            "NO_FAVORITES_FILES": "U heeft geen favoriete bestanden of mappen.",
+            "NO_PERSONAL_FILES": "U heeft geen persoonlijk bestanden of mappen.",
+            "NO_SHARED_FILES": "U heeft geen gedeelde bestanden.",
+            "ACTIONS": {
+                "VIEW": "Weergeven",
+                "DOWNLOAD": "Downloaden",
+                "SHARE": "Delen",
+                "SHARED_LINK_SETTINGS": "Instellingen gedeelde koppeling",
+                "FOLDER_INFORMATION": "Mapgegevens"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Bibliotheken",
+            "PERSONAL": "Mijn bibliotheken",
+            "ALL": "Alle",
+            "FAVOURITES": "Favorieten",
+            "NO_PERSONAL_LIBRARIES": "U heeft geen persoonlijke bibliotheken.",
+            "NO_ALL_LIBRARIES": "U heeft geen bibliotheken.",
+            "NO_FAVORITE_LIBRARIES": "U heeft geen favoriete bibliotheken."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Wettelijke bewaarplichten",
+            "NO_HOLDS": "Geen bewaarplichten aangemaakt.",
+            "HOLDS_NAME": "Naam bewaarplicht",
+            "CREATED": "Aangemaakt",
+            "REASON": "Reden",
+            "ACTIONS": {
+                "DOWNLOAD": "Downloaden",
+                "INFORMATION": "Mapgegevens",
+                "DELETE": "Verwijderen"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Voortgang mijn taken - per maand",
+            "WEEK_LABEL": "Week",
+            "MONTH_LABEL": "Maand",
+            "SUMMARY_INFO_SUFFIX": "voltooide taken in de geselecteerde maand!",
+            "SELECT_MONTH": "Maand selecteren",
+            "NO_TASKS_IN_MONTH": "Er zijn geen taken in de geselecteerde maand.",
+            "EMPTY": "Geen taken"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Overzicht mijn processen - per 6 maanden",
+            "SUMMARY_INFO_SUFFIX": "voltooide processen in de geselecteerde 6 maanden!",
+            "NO_PROCESSES": "U heeft geen processen.",
+            "NO_PROCESSES_ERROR": "Er is een fout opgetreden bij het ophalen van uw processen. Vernieuw de widget.",
+            "NO_PROCESSES_IN_PERIOD": "Er zijn geen processen in de geselecteerde periode.",
+            "RUNNING": "Bezig",
+            "COMPLETED": "Voltooid",
+            "NEXT": "Volgende",
+            "NEXT_SCREEN_READER_LABEL": "Overzicht van mijn processen  - Ga naar de komende 6 maanden",
+            "PREVIOUS": "Vorige",
+            "PREVIOUS_SCREEN_READER_LABEL": "Overzicht van mijn processen  - Ga naar de afgelopen 6 maanden",
+            "EMPTY": "Geen processen"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Opmerkingen bij {{ taskName }}",
+        "CLOSE": "Sluiten"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Miniatuur"
+    }
+}

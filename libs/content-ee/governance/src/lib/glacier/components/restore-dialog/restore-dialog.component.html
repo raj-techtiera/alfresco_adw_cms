@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>{{ title | translate }}</h1>
+<mat-dialog-content>
+    <form [formGroup]="form" class="aga-restore-form">
+        <ng-container *ngIf="canShowTypes">
+            <label htmlFor="type-radio-group">{{
+                'GOVERNANCE.GLACIER.RESTORE.DIALOG.LABEL.TYPE' | translate
+            }}</label>
+            <mat-radio-group
+                class="aga-restore-form-types-radio-group"
+                formControlName="type"
+                id="type-radio-group"
+                style="margin: 15px 0;"
+            >
+                <mat-radio-button *ngFor="let type of types"
+                                  [attr.data-automation-id]="'radio-button-type-' + type.id"
+                                  [value]="type.id"
+                                  class="aga-restore-form-button">
+                    {{ type.desc | translate }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </ng-container>
+
+        <mat-form-field>
+            <mat-label>{{
+                'GOVERNANCE.GLACIER.RESTORE.DIALOG.LABEL.DURATION' | translate
+            }}</mat-label>
+            <input
+                formControlName="days"
+                matInput
+                max="1000"
+                min="1"
+                type="number"
+            />
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button
+        [disabled]="form.invalid"
+        [mat-dialog-close]="form.value"
+        data-automation-id="restore-yes-action"
+        mat-button
+    >
+        {{ yesLabel | translate }}
+    </button>
+    <button [mat-dialog-close]="false" cdkFocusInitial mat-button>
+        {{ noLabel | translate }}
+    </button>
+</mat-dialog-actions>

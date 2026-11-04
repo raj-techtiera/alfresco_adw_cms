@@ -1,0 +1,209 @@
+<div class="ud-dialog" role="dialog" [attr.aria-label]="'User details'">
+  <header class="ud-dialog__header">
+    <div class="ud-dialog__heading">
+      <div class="ud-dialog__badge" aria-hidden="true">
+        <mat-icon>badge</mat-icon>
+      </div>
+      <div class="ud-dialog__title-block">
+        <h2>User details</h2>
+        <p>Full profile and company information</p>
+      </div>
+    </div>
+    <button mat-icon-button type="button" class="ud-dialog__close" aria-label="Close" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="ud-dialog__body">
+    @if (loading && !user) {
+      <div class="ud-dialog__state">
+        <mat-spinner diameter="32"></mat-spinner>
+        <span>Loading user details…</span>
+      </div>
+    } @else if (error && !user) {
+      <div class="ud-dialog__state ud-dialog__state--error">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ error }}</span>
+        <button mat-stroked-button type="button" (click)="load()">Retry</button>
+      </div>
+    } @else if (user) {
+      <section class="ud-dialog__hero">
+        <span class="ud-dialog__avatar" aria-hidden="true">{{ initials(user.displayName) }}</span>
+        <div class="ud-dialog__hero-text">
+          <div class="ud-dialog__hero-top">
+            <h3>{{ user.displayName }}</h3>
+            <span
+              class="ud-dialog__status"
+              [class.ud-dialog__status--active]="user.enabled"
+              [class.ud-dialog__status--disabled]="!user.enabled"
+            >
+              {{ user.enabled ? 'Active' : 'Disabled' }}
+            </span>
+          </div>
+          <p class="ud-dialog__subtitle">
+            @if (user.jobTitle) {
+              <span>{{ user.jobTitle }}</span>
+            }
+            @if (user.jobTitle && user.organization) {
+              <span class="ud-dialog__dot">·</span>
+            }
+            @if (user.organization) {
+              <span>{{ user.organization }}</span>
+            }
+            @if (!user.jobTitle && !user.organization) {
+              <span>{{ user.id }}</span>
+            }
+          </p>
+          <div class="ud-dialog__meta">
+            <span><mat-icon>alternate_email</mat-icon>{{ user.id }}</span>
+            @if (user.email) {
+              <span class="ud-dialog__meta-sep" aria-hidden="true"></span>
+              <span><mat-icon>mail_outline</mat-icon>{{ user.email }}</span>
+            }
+            @if (user.location) {
+              <span class="ud-dialog__meta-sep" aria-hidden="true"></span>
+              <span><mat-icon>location_on</mat-icon>{{ user.location }}</span>
+            }
+          </div>
+        </div>
+        @if (loading) {
+          <mat-spinner diameter="22"></mat-spinner>
+        }
+      </section>
+
+      @if (identityRows.length) {
+        <section class="ud-dialog__section" aria-label="Identity">
+          <div class="ud-dialog__section-head">
+            <mat-icon aria-hidden="true">person</mat-icon>
+            <h4>Identity</h4>
+            <span class="ud-dialog__section-line" aria-hidden="true"></span>
+          </div>
+          <div class="ud-dialog__grid">
+            @for (row of identityRows; track row.label) {
+              <article class="ud-dialog__card" [class.ud-dialog__card--wide]="row.wide">
+                <div class="ud-dialog__card-icon" aria-hidden="true">
+                  <mat-icon>{{ row.icon || 'info' }}</mat-icon>
+                </div>
+                <div class="ud-dialog__card-body">
+                  <span class="ud-dialog__card-label">{{ row.label }}</span>
+                  @if (row.toggle) {
+                    <div class="ud-dialog__toggle">
+                      <mat-slide-toggle
+                        [checked]="emailNotificationsEnabled"
+                        [disabled]="true"
+                        color="primary"
+                        aria-label="Email notifications"
+                      ></mat-slide-toggle>
+                      <strong>{{ row.value }}</strong>
+                    </div>
+                  } @else {
+                    <p>{{ row.value }}</p>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      @if (contactRows.length) {
+        <section class="ud-dialog__section" aria-label="Contact">
+          <div class="ud-dialog__section-head">
+            <mat-icon aria-hidden="true">contact_mail</mat-icon>
+            <h4>Contact</h4>
+            <span class="ud-dialog__section-line" aria-hidden="true"></span>
+          </div>
+          <div class="ud-dialog__grid">
+            @for (row of contactRows; track row.label) {
+              <article class="ud-dialog__card" [class.ud-dialog__card--wide]="row.wide || contactRows.length === 1">
+                <div class="ud-dialog__card-icon" aria-hidden="true">
+                  <mat-icon>{{ row.icon || 'info' }}</mat-icon>
+                </div>
+                <div class="ud-dialog__card-body">
+                  <span class="ud-dialog__card-label">{{ row.label }}</span>
+                  <p>{{ row.value }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      @if (aboutRows.length) {
+        <section class="ud-dialog__section" aria-label="About">
+          <div class="ud-dialog__section-head">
+            <mat-icon aria-hidden="true">info</mat-icon>
+            <h4>About</h4>
+            <span class="ud-dialog__section-line" aria-hidden="true"></span>
+          </div>
+          <div class="ud-dialog__grid">
+            @for (row of aboutRows; track row.label) {
+              <article class="ud-dialog__card" [class.ud-dialog__card--wide]="row.wide">
+                <div class="ud-dialog__card-icon" aria-hidden="true">
+                  <mat-icon>{{ row.icon || 'info' }}</mat-icon>
+                </div>
+                <div class="ud-dialog__card-body">
+                  <span class="ud-dialog__card-label">{{ row.label }}</span>
+                  <p>{{ row.value }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      <section class="ud-dialog__section" aria-label="Company">
+        <div class="ud-dialog__section-head">
+          <mat-icon aria-hidden="true">business</mat-icon>
+          <h4>Company</h4>
+          <span class="ud-dialog__section-line" aria-hidden="true"></span>
+        </div>
+
+        @if (hasCompanyDetails) {
+          <div class="ud-dialog__company">
+            @if (user.company?.organization || user.organization) {
+              <div class="ud-dialog__company-banner">
+                <div class="ud-dialog__card-icon" aria-hidden="true">
+                  <mat-icon>apartment</mat-icon>
+                </div>
+                <div>
+                  <strong>{{ user.company?.organization || user.organization }}</strong>
+                  @if (companyLocationLine) {
+                    <small>{{ companyLocationLine }}</small>
+                  }
+                </div>
+              </div>
+            }
+            <div class="ud-dialog__grid">
+              @for (row of companyRows; track row.label) {
+                <article class="ud-dialog__card" [class.ud-dialog__card--wide]="row.wide">
+                  <div class="ud-dialog__card-icon" aria-hidden="true">
+                    <mat-icon>{{ row.icon || 'info' }}</mat-icon>
+                  </div>
+                  <div class="ud-dialog__card-body">
+                    <span class="ud-dialog__card-label">{{ row.label }}</span>
+                    <p>{{ row.value }}</p>
+                  </div>
+                </article>
+              }
+            </div>
+          </div>
+        } @else {
+          <div class="ud-dialog__empty-company">
+            <div class="ud-dialog__card-icon" aria-hidden="true">
+              <mat-icon>domain_disabled</mat-icon>
+            </div>
+            <div>
+              <strong>No company details</strong>
+              <span>This user has no company information in the response.</span>
+            </div>
+          </div>
+        }
+      </section>
+    }
+  </div>
+
+  <footer class="ud-dialog__footer">
+    <button type="button" mat-flat-button class="ud-dialog__close-btn" (click)="close()">Close</button>
+  </footer>
+</div>

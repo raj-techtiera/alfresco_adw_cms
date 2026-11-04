@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Akce se nezdařila. Zkuste to znovu nebo se obraťte na oddělení IT.",
+        "PERMISSION_DENIED": "K provedení této operace nemáte oprávnění."
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "Uživatel {{ user }} požádal o připojení ke knihovně {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} osob požádalo o připojení ke knihovně {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Spravovat členy",
+        "CLOSE": "Zavřít",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Podrobnosti o knihovně",
+            "MANAGE_MEMBERS": "Spravovat členy"
+        },
+        "TABS": {
+            "PROPERTIES": "Vlastnosti",
+            "MEMBERS": "Členové",
+            "GROUPS": "Skupiny",
+            "PENDING": "Nevyřízeno"
+        },
+        "LOAD_MORE": "Načíst další",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Potvrdit",
+            "MESSAGE": "Chcete pokračovat?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Zamítnout žádost o členství",
+            "COMMENT": "Sem zadejte komentář",
+            "YES_LABEL": "Zamítnout",
+            "NO_LABEL": "Zrušit"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Informace o členství ve skupině",
+            "DESCRIPTION": "Tento uživatel má přístup ke knihovně prostřednictvím rolí skupiny. Pokud chcete uživateli odebrat individuální členství, musíte ho nejprve odebrat ze skupin uvedených níže.",
+            "CLOSE": "Zavřít",
+            "GROUP": "Skupina",
+            "ROLE": "Role"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Žádné nevyřízené žádosti o členství",
+        "PENDING_REQUESTS": "Nevyřízené žádosti o členství",
+        "APPROVE": "Schválit",
+        "REJECT": "Zamítnout"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Členové této knihovny",
+        "NO_MEMBERS": "Nenalezeni žádní členové",
+        "DELETE_MEMBERS": "Odstranit vybrané členy",
+        "GROUP_ROLE": "Role skupiny",
+        "REMOVE": "Odstranit",
+        "A11Y_AVATAR": "Avatar uživatele",
+        "REFRESH": "Obnovit"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Členství ve skupině této knihovny",
+        "NO_GROUPS": "Nenalezeny žádné skupiny",
+        "DELETE_GROUPS": "Odstranit vybrané skupiny",
+        "REFRESH": "Obnovit",
+        "REMOVE": "Odstranit"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Správce",
+        "SITE_CONTRIBUTOR": "Přispěvatel",
+        "SITE_CONSUMER": "Spotřebitel",
+        "SITE_COLLABORATOR": "Spolupracovník"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Nastavit roli uživatele",
+        "GROUP_SELECTOR": "Nastavit roli skupiny",
+        "ALL": "Nastavit všechny role na"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Přidat uživatele/skupinu",
+        "SEARCH_INPUT": "Hledat uživatele nebo skupiny pro přidání",
+        "NAME": "Název",
+        "TITLE_LABEL": "Přidat uživatele nebo skupinu do",
+        "ADD_LABEL": "Přidat",
+        "SELECT_LABEL": "Vybrat",
+        "CLOSE_LABEL": "Zavřít",
+        "CANCEL_LABEL": "Zrušit"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Členové"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Žádost o členství byla zamítnuta",
+        "MEMBERSHIP_ACCEPTED": "Člen byl přidán do knihovny",
+        "USER_REMOVE_SUCCESS": "Uživatel byl odebrán",
+        "USER_REMOVE_PARTIAL_SUCCESS": "Odebraní uživatelé: {{count}}, vynechaní uživatelé: {{skipped}}",
+        "USER_REMOVE_FAILED": "Odebrání uživatele se nezdařilo",
+        "GROUP_REMOVE_SUCCESS": "Skupina byla odebrána",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "Odebrané skupiny: {{count}}, vynechané skupiny: {{skipped}}",
+        "GROUP_REMOVE_FAILED": "Odebrání knihovny se nezdařilo",
+        "ADD_MEMBER_FAILED": "Přidání člena do místa se nezdařilo",
+        "ADD_MEMBERS_FAILED": "Nepodařilo se přidat {{count}} členů",
+        "ADD_MEMBERS_SUCCESS": "Bylo přidáno {{userCount}} uživatelů a {{groupCount}} skupin",
+        "ADD_GROUPS_SUCCESS": "Úspěšně přidané skupiny: {{groupCount}}",
+        "ADD_USERS_SUCCESS": "Úspěšně přidaní uživatelé: {{userCount}}",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "Úspěšně přidaní uživatelé: {{count}}, vynechaní uživatelé: {{skipped}}",
+        "USER_ROLE_UPDATED": "Role uživatele je aktualizovaná",
+        "GROUP_ROLE_UPDATED": "Role skupiny je aktualizovaná",
+        "MEMBER_EXISTS": "Uživatel již je členem místa",
+        "MANAGER_REQUIRED": "Místo vyžaduje alespoň jednoho správce místa",
+        "ACTIONS": {
+            "CLOSE": "Zavřít"
+        }
+    }
+}

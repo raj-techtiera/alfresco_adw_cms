@@ -1,0 +1,428 @@
+{
+    "name": "content-ee",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/content-ee/src",
+    "projectType": "application",
+    "prefix": "app",
+    "generators": {
+        "@schematics/angular:component": {
+            "style": "scss"
+        }
+    },
+    "targets": {
+        "prepare-config": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/prepare-app-config.js"
+            }
+        },
+        "build": {
+            "executor": "@ngx-env/builder:browser",
+            "dependsOn": ["prepare-config"],
+            "options": {
+                "baseHref": ".",
+                "allowedCommonJsDependencies": ["minimatch", "minimatch-browser", "superagent", "event-emitter", "cropperjs", "jszip", "pdf-lib", "lodash-es", "three", "loglevel"],
+                "outputPath": "dist/DMS",
+                "index": "apps/content-ee/src/index.html",
+                "main": "apps/content-ee/src/main.ts",
+                "polyfills": "apps/content-ee/src/polyfills.ts",
+                "stylePreprocessorOptions": {
+                    "includePaths": ["node_modules", "node_modules/@alfresco/adf-core/lib"]
+                },
+                "tsConfig": "apps/content-ee/tsconfig.app.json",
+                "assets": [
+                    {
+                        "glob": "app.config.json",
+                        "input": "apps/content-ee/src",
+                        "output": "/"
+                    },
+                    {
+                        "input": "apps/content-ee/src/assets/images",
+                        "output": "assets/images",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "apps/content-ee/src/assets",
+                        "output": "/assets",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/leaflet/dist/images",
+                        "output": "/assets/leaflet",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/assets",
+                        "output": "/assets",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/about/assets",
+                        "output": "/assets/plugins",
+                        "glob": "about.plugin.json"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/folder-rules/assets",
+                        "output": "/assets/plugins",
+                        "glob": "folder-rules.plugin.json"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/folder-rules/assets/i18n",
+                        "output": "/assets/folder-rules/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/ms-office/assets",
+                        "output": "/assets/plugins",
+                        "glob": "aos.plugin.json"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/aca-content/ms-office/assets/i18n",
+                        "output": "/assets/ms-office/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/governance/i18n",
+                        "output": "/assets/adf-governance/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/governance/assets/icons",
+                        "output": "/assets/images/",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/process-services-extension/i18n",
+                        "output": "/assets/adf-process-services-extension/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/content-services-extension/i18n",
+                        "output": "/assets/adf-content-services-extension/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/dashboard-extension/i18n",
+                        "output": "/assets/adw-dashboard-extension/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/dashboard-extension/assets/images",
+                        "output": "/assets/adw-dashboard-extension/images/",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/microsoft-office-online-integration-extension/assets/blank-documents",
+                        "output": "/assets/blank-documents/",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/adf-process-services/bundles/assets",
+                        "output": "/assets",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/adf-core/bundles/assets",
+                        "output": "/assets",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/@alfresco/adf-content-services/bundles/assets",
+                        "output": "/assets",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "node_modules/pdfjs-dist/build",
+                        "output": "/",
+                        "glob": "pdf.worker.min.mjs"
+                    },
+                    {
+                        "input": "libs/content-ee/governance/assets",
+                        "output": "/assets/plugins",
+                        "glob": "*.json"
+                    },
+                    {
+                        "input": "libs/content-ee/process-services-extension/assets",
+                        "output": "/assets/plugins",
+                        "glob": "*.json"
+                    },
+                    {
+                        "input": "libs/content-ee/dashboard-extension/assets",
+                        "output": "/assets/plugins",
+                        "glob": "*.json"
+                    },
+                    {
+                        "input": "libs/content-ee/content-services-extension/assets",
+                        "output": "/assets/plugins",
+                        "glob": "*.json"
+                    },
+                    {
+                        "input": "libs/content-ee/microsoft-office-online-integration-extension/i18n",
+                        "output": "/assets/adf-microsoft-office-online-integration-extension/i18n",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/microsoft-office-online-integration-extension/assets/icons",
+                        "output": "/assets/icons/",
+                        "glob": "**/*"
+                    },
+                    {
+                        "input": "libs/content-ee/microsoft-office-online-integration-extension/assets",
+                        "output": "/assets/plugins",
+                        "glob": "*.json"
+                    },
+                    {
+                        "input": "node_modules/@mlightcad/libredwg-converter/dist",
+                        "output": "/assets/mlightcad",
+                        "glob": "libredwg-parser-worker.js"
+                    },
+                    {
+                        "input": "node_modules/@mlightcad/libredwg-converter/dist",
+                        "output": "/assets/mlightcad",
+                        "glob": "libredwg-web.wasm"
+                    },
+                    {
+                        "input": "node_modules/@mlightcad/cad-simple-viewer/dist",
+                        "output": "/assets/mlightcad",
+                        "glob": "mtext-renderer-worker.js"
+                    },
+                    {
+                        "input": "node_modules/@mlightcad/libredwg-web/wasm",
+                        "output": "/wasm",
+                        "glob": "**/*"
+                    }
+                ],
+                "styles": [
+                    "node_modules/pdfjs-dist/web/pdf_viewer.css",
+                    "node_modules/cropperjs/dist/cropper.min.css",
+                    "node_modules/katex/dist/katex.min.css",
+                    "node_modules/prismjs/themes/prism-okaidia.css",
+                    "node_modules/leaflet/dist/leaflet.css",
+                    "apps/content-ee/src/styles.scss"
+                ],
+                "scripts": [
+                    "node_modules/mermaid/dist/mermaid.min.js",
+                    "node_modules/katex/dist/katex.min.js",
+                    "node_modules/katex/dist/contrib/auto-render.min.js",
+                    "node_modules/prismjs/prism.js",
+                    "node_modules/prismjs/components/prism-csharp.min.js",
+                    "node_modules/prismjs/components/prism-css.min.js"
+                ]
+            },
+            "configurations": {
+                "adf": {
+                    "tsConfig": "apps/content-ee/tsconfig.app.adf.json",
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "buildOptimizer": false,
+                    "sourceMap": true,
+                    "optimization": false,
+                    "namedChunks": true,
+                    "stylePreprocessorOptions": {
+                        "includePaths": ["node_modules", "../alfresco-ng2-components/lib/core/src/lib"]
+                    }
+                },
+                "aca": {
+                    "tsConfig": "apps/content-ee/tsconfig.app.aca.json",
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "buildOptimizer": false,
+                    "sourceMap": true,
+                    "optimization": false,
+                    "namedChunks": true
+                },
+                 "adfaca": {
+                    "tsConfig": "apps/content-ee/tsconfig.app.adf.aca.json",
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "buildOptimizer": false,
+                    "sourceMap": true,
+                    "optimization": false,
+                    "namedChunks": true,
+                    "stylePreprocessorOptions": {
+                    "includePaths": [
+                        "node_modules",
+                        "../alfresco-ng2-components/lib/core/src/lib"
+                    ]
+                }
+                },
+                "production": {
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/content-ee/src/environments/environment.ts",
+                            "with": "apps/content-ee/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "6mb",
+                            "maximumError": "12mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "6kb"
+                        }
+                    ]
+                },
+                "adfprod": {
+                    "tsConfig": "apps/content-ee/tsconfig.app.adf.json",
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/content-ee/src/environments/environment.ts",
+                            "with": "apps/content-ee/src/environments/environment.prod.ts"
+                        }
+                    ]
+                },
+                "acaprod": {
+                    "tsConfig": "apps/content-ee/tsconfig.app.aca.json",
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/content-ee/src/environments/environment.ts",
+                            "with": "apps/content-ee/src/environments/environment.prod.ts"
+                        }
+                    ]
+                },
+                "adfacaprod": {
+                    "tsConfig": "apps/content-ee/tsconfig.app.adf.aca.json",
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/content-ee/src/environments/environment.ts",
+                            "with": "apps/content-ee/src/environments/environment.prod.ts"
+                        }
+                    ]
+                },
+                "release": {
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/content-ee/src/environments/environment.ts",
+                            "with": "apps/content-ee/src/environments/environment.release.ts"
+                        }
+                    ],
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "6mb",
+                            "maximumError": "10mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "6kb"
+                        }
+                    ]
+                },
+                "compose": {
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/content-ee/src/environments/environment.ts",
+                            "with": "apps/content-ee/src/environments/environment.compose.ts"
+                        }
+                    ],
+                    "budgets": [
+                        {
+                            "type": "initial",
+                            "maximumWarning": "6mb",
+                            "maximumError": "10mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "6kb"
+                        }
+                    ]
+                },
+                "development": {
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "buildOptimizer": false,
+                    "sourceMap": true,
+                    "optimization": false,
+                    "namedChunks": true
+                }
+            },
+            "outputs": ["{options.outputPath}"],
+            "defaultConfiguration": "development"
+        },
+        "pack": {
+            "dependsOn": ["build"],
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "mkdir -p dist/artifacts/alfresco-digital-workspace",
+                    "FILENAME=\"alfresco-digital-workspace-$(node -p \"require('./package.json').releaseVersions['content-ee']\")\" && cd dist/alfresco-digital-workspace && jar -cvf ../artifacts/alfresco-digital-workspace/${FILENAME}.war ./ && cd ../artifacts/alfresco-digital-workspace && shasum ${FILENAME}.war > ${FILENAME}.war.sha1",
+                    "FILENAME=\"alfresco-digital-workspace-$(node -p \"require('./package.json').releaseVersions['content-ee']\")\" && cd dist/alfresco-digital-workspace && zip -r ../artifacts/alfresco-digital-workspace/${FILENAME}.zip ./ && cd ../artifacts/alfresco-digital-workspace && shasum ${FILENAME}.zip > ${FILENAME}.zip.sha1"
+                ],
+                "parallel": false
+            },
+            "configurations": {
+                "production": {}
+            }
+        },
+        "serve": {
+            "executor": "@ngx-env/builder:dev-server",
+            "dependsOn": ["prepare-config"],
+            "options": {
+                "port": 4200,
+                "host": "0.0.0.0",
+                "open": true,
+                "proxyConfig": "apps/content-ee/proxy.conf.js"
+            },
+            "configurations": {
+                "adf": {
+                    "buildTarget": "content-ee:build:adf"
+                },
+                "aca": {
+                    "buildTarget": "content-ee:build:aca"
+                },
+                "adfaca": {
+                    "buildTarget": "content-ee:build:adfaca"
+                },
+                "production": {
+                    "buildTarget": "content-ee:build:production"
+                },
+                "release": {
+                    "buildTarget": "content-ee:build:release"
+                },
+                "development": {
+                    "buildTarget": "content-ee:build:development"
+                },
+                "compose": {
+                    "buildTarget": "content-ee:build:compose"
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["apps/content-ee/src/**/*.ts", "apps/content-ee/src/**/*.html"]
+            },
+            "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+            "executor": "@ngx-env/builder:karma",
+            "options": {
+                "codeCoverage": true,
+                "main": "apps/content-ee/src/test.ts",
+                "tsConfig": "apps/content-ee/tsconfig.spec.json",
+                "karmaConfig": "apps/content-ee/karma.conf.js",
+                "stylePreprocessorOptions": {
+                    "includePaths": ["./node_modules"]
+                }
+            },
+            "outputs": ["{workspaceRoot}/coverage/content-ee"]
+        },
+        "compose": {
+            "executor": "nx:run-script",
+            "options": {
+                "script": "compose-serve"
+            }
+        }
+    },
+    "tags": ["scope:content-ee", "category:content-ee"]
+}

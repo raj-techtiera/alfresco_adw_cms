@@ -1,0 +1,370 @@
+<div class="assets-page">
+  <!-- LEFT PANEL -->
+  <aside class="assets-left-panel">
+    <div class="assets-left-header">
+      <div class="assets-left-header__row">
+        <h2 class="assets-left-title">Asset Hierarchy</h2>
+      </div>
+      <div class="assets-search">
+        <mat-icon class="assets-search__icon assets-search__icon--left">search</mat-icon>
+        <input
+          type="search"
+          class="assets-search__input"
+          [(ngModel)]="search"
+          placeholder="Search hierarchy..."
+        />
+        <mat-icon class="assets-search__icon assets-search__icon--right">tune</mat-icon>
+      </div>
+      <div class="assets-icon-legend" aria-label="Hierarchy icon legend">
+        <ng-container *ngFor="let item of hierarchyIconLegend; let last = last; trackBy: trackByLabel">
+          <span class="assets-icon-legend__item">
+            <mat-icon [class]="'assets-icon-legend__icon assets-icon-legend__icon--' + item.type">{{ item.icon }}</mat-icon>
+            <span class="assets-icon-legend__label">{{ item.label }}</span>
+          </span>
+          <mat-icon *ngIf="!last" class="assets-icon-legend__arrow" aria-hidden="true">arrow_forward</mat-icon>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="assets-tree">
+      <p *ngIf="loadingTree" class="assets-tree__status">Loading asset hierarchy...</p>
+      <p *ngIf="loadError" class="assets-tree__status assets-tree__status--error">{{ loadError }}</p>
+      <p *ngIf="!loadingTree && !loadError && filteredTreeData.length === 0" class="assets-tree__status">
+        No asset folders found.
+      </p>
+      <ng-container *ngFor="let node of filteredTreeData; trackBy: trackById">
+        <ng-container *ngTemplateOutlet="treeNode; context: { $implicit: node, depth: 0 }"></ng-container>
+      </ng-container>
+    </div>
+
+    <div class="assets-left-footer">
+      <button
+        type="button"
+        mat-stroked-button
+        class="assets-expand-all-btn"
+        [disabled]="expandCollapseBusy || !treeData.length"
+        (click)="toggleExpandCollapseAll()"
+      >
+        <mat-icon>{{ isAllExpanded ? 'close_fullscreen' : 'open_in_full' }}</mat-icon>
+        {{
+          expandCollapseBusy
+            ? isAllExpanded
+              ? 'Collapsing…'
+              : 'Expanding…'
+            : isAllExpanded
+              ? 'Collapse All'
+              : 'Expand All'
+        }}
+      </button>
+    </div>
+
+    <!--
+    <div class="assets-quick-access">
+      <p class="assets-quick-access__label">Quick Access</p>
+      <button
+        type="button"
+        class="assets-quick-access__item"
+        *ngFor="let item of quickAccessItems; trackBy: trackByLabel"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        {{ item.label }}
+      </button>
+    </div>
+    -->
+
+    <!-- <div class="assets-user-profile">
+      <div class="assets-user-profile__avatar">DU</div>
+      <div class="assets-user-profile__info">
+        <p class="assets-user-profile__name">Demo User</p>
+        <p class="assets-user-profile__role">Document Controller</p>
+      </div>
+      <mat-icon class="assets-user-profile__chevron">expand_more</mat-icon>
+    </div> -->
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <div class="assets-right-panel">
+    <div class="assets-top-bar">
+      <nav class="assets-breadcrumb" aria-label="Breadcrumb">
+        <ng-container *ngFor="let crumb of breadcrumbs; let i = index; let last = last">
+          <span class="assets-breadcrumb__item" [class.assets-breadcrumb__item--active]="last">{{ crumb }}</span>
+          <mat-icon *ngIf="!last" class="assets-breadcrumb__sep">chevron_right</mat-icon>
+        </ng-container>
+      </nav>
+      <div class="assets-top-actions">
+        <button mat-raised-button type="button" mat-flat-button class="assets-btn assets-btn--primary" (click)="createAssetWorkspace()">
+          <mat-icon>add</mat-icon>
+          Create Asset Hierarchy
+          <!--<mat-icon class="assets-btn__chevron">expand_more</mat-icon>--> 
+        </button>
+        <button mat-raised-button type="button" mat-stroked-button class="assets-btn assets-btn--secondary" *ngFor="let btn of actionButtons; trackBy: trackByLabel">
+          <mat-icon>{{ btn.icon }}</mat-icon>
+          {{ btn.label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="assets-scroll-area">
+      <!-- Filters — match Create Project filter pill style -->
+      <div class="assets-filters">
+        <label class="assets-filter" *ngFor="let filter of filters; trackBy: trackByLabel">
+          <span class="assets-filter__label">{{ filter.label }}</span>
+          <mat-form-field appearance="outline" class="assets-filter-mat-field" subscriptSizing="dynamic">
+            <mat-select
+              [ngModel]="filterValues[filter.key]"
+              (ngModelChange)="setFilter(filter.key, $event)"
+              panelClass="adw-assets-filter-select-panel"
+              [placeholder]="filterPlaceholder(filter.key)"
+            >
+              <mat-option *ngFor="let option of filter.options" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </label>
+        <button mat-raised-button type="button" mat-button class="assets-clear-filters" (click)="clearFilters()">
+          <mat-icon>refresh</mat-icon>
+          Clear Filters
+        </button>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="assets-kpi-grid">
+        <div class="assets-kpi-card" *ngFor="let kpi of kpiCards; trackBy: trackByLabel">
+          <div class="assets-kpi-card__icon" [style.background]="kpi.iconBg">
+            <mat-icon [style.color]="kpi.iconColor">{{ kpi.icon }}</mat-icon>
+          </div>
+          <div>
+            <p class="assets-kpi-card__value">{{ kpi.value }}</p>
+            <p class="assets-kpi-card__label">{{ kpi.label }}</p>
+            <p class="assets-kpi-card__sub">{{ kpi.sub }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asset Folders Table -->
+      <div class="assets-table-card">
+        <div class="assets-table-card__header">
+          <div class="assets-table-card__title-row">
+            <span class="assets-table-card__title">
+              Asset Folders<span *ngIf="selectedFacilityLabel"> – {{ selectedFacilityLabel }}</span>
+            </span>
+            <span class="assets-table-card__badge">{{ folderRows.length }} items</span>
+          </div>
+          <!--<div class="assets-icon-btn-group">
+            <button type="button" class="assets-icon-btn assets-icon-btn--active" aria-label="List view">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <button type="button" class="assets-icon-btn" aria-label="Grid view">
+              <mat-icon>grid_view</mat-icon>
+            </button>
+            <button type="button" class="assets-icon-btn" aria-label="Info">
+              <mat-icon>info</mat-icon>
+            </button>
+          </div>-->
+        </div>
+        <div class="assets-table-wrap">
+          <table class="assets-table">
+            <thead>
+              <tr>
+<!--<th class="assets-table__check-col">
+                  <input type="checkbox" aria-label="Select all folders" />
+                </th>-->
+                <th>
+                  <span class="assets-table__th-content">
+                    Name
+                    <mat-icon>arrow_upward</mat-icon>
+                  </span>
+                </th>
+                <th>
+                  <span class="assets-table__th-content">
+                    Modified
+                    <mat-icon>unfold_more</mat-icon>
+                  </span>
+                </th>
+                <th>Owner</th>
+                <th>Access</th>
+                <!--<th>Document Count</th>-->
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loadingFolders">
+                <td colspan="7" class="assets-table__empty">Loading folders...</td>
+              </tr>
+              <tr *ngIf="!loadingFolders && folderRows.length === 0">
+                <td colspan="7" class="assets-table__empty">No folders found for the selected facility.</td>
+              </tr>
+              <tr
+                *ngFor="let row of folderRows; let idx = index; trackBy: trackById"
+                [class.assets-table__row--selected]="isRowSelected(row.id)"
+                [class.assets-table__row--alt]="idx % 2 !== 0"
+              >
+                <!--<td>
+                  <input
+                    type="checkbox"
+                    [checked]="isRowSelected(row.id)"
+                    (change)="toggleRow(row.id)"
+                    [attr.aria-label]="'Select ' + row.name"
+                  />
+                </td>-->
+                <td>
+                  <div class="assets-table__name">
+                    <mat-icon class="assets-table__folder-icon">folder</mat-icon>
+                    <span>{{ row.name }}</span>
+                  </div>
+                </td>
+                <td class="assets-table__muted">{{ row.modified }}</td>
+                <td>{{ row.owner }}</td>
+                <td>
+                  <span [ngClass]="accessBadgeClass(row.accessColor)">{{ row.access }}</span>
+                </td>
+                <!--<td class="assets-table__count">{{ row.docCount | number }}</td>-->
+                <td>
+                  <div class="assets-table__actions">
+                    <button type="button" mat-stroked-button class="assets-table__open-btn" (click)="openFolder(row.id)">
+                      <mat-icon>folder_open</mat-icon>
+                      Open
+                    </button>
+                    <!--<button type="button" class="assets-icon-btn" aria-label="More actions">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>-->
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Detail Panel -->
+      <div class="assets-detail-card">
+        <div class="assets-detail-tabs" role="tablist">
+          <button
+            type="button"
+            mat-button
+            role="tab"
+            class="assets-detail-tab"
+            *ngFor="let tab of tabs"
+            [class.assets-detail-tab--active]="activeTab === tab"
+            [attr.aria-selected]="activeTab === tab"
+            (click)="activeTab = tab"
+          >
+            {{ tab }}
+          </button>
+        </div>
+
+        <div *ngIf="activeTab === 'Details'" class="assets-detail-body">
+          <div class="assets-detail-fields">
+            <div class="assets-detail-field" *ngFor="let field of detailFields; trackBy: trackByLabel">
+              <mat-icon class="assets-detail-field__icon">{{ field.icon }}</mat-icon>
+              <div>
+                <p class="assets-detail-field__label">{{ field.label }}</p>
+                <span *ngIf="field.isStatus" class="assets-status-badge">{{ field.value }}</span>
+                <p *ngIf="!field.isStatus" class="assets-detail-field__value">{{ field.value }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!--
+          <div class="assets-quick-actions">
+            <p class="assets-quick-actions__title">Quick Actions</p>
+            <button
+              type="button"
+              class="assets-quick-actions__item"
+              *ngFor="let action of quickActions; trackBy: trackByLabel"
+            >
+              <mat-icon>{{ action.icon }}</mat-icon>
+              <div>
+                <p class="assets-quick-actions__label">{{ action.label }}</p>
+                <p class="assets-quick-actions__sub">{{ action.sub }}</p>
+              </div>
+            </button>
+          </div>
+          -->
+        </div>
+
+        <div *ngIf="activeTab === 'Permissions'" class="assets-detail-body">
+          <div class="assets-detail-fields">
+            <div class="assets-detail-field" *ngFor="let field of permissionFields; trackBy: trackByLabel">
+              <mat-icon class="assets-detail-field__icon">{{ field.icon }}</mat-icon>
+              <div>
+                <p class="assets-detail-field__label">{{ field.label }}</p>
+                <p class="assets-detail-field__value">{{ field.value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab === 'Retention & Compliance'" class="assets-detail-body">
+          <div class="assets-detail-fields">
+            <div class="assets-detail-field" *ngFor="let field of retentionFields; trackBy: trackByLabel">
+              <mat-icon class="assets-detail-field__icon">{{ field.icon }}</mat-icon>
+              <div>
+                <p class="assets-detail-field__label">{{ field.label }}</p>
+                <p class="assets-detail-field__value">{{ field.value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="activeTab === 'Audit Trail'" class="assets-detail-body">
+          <div class="assets-detail-fields">
+            <div class="assets-detail-field" *ngFor="let field of auditFields; trackBy: trackByLabel">
+              <mat-icon class="assets-detail-field__icon">{{ field.icon }}</mat-icon>
+              <div>
+                <p class="assets-detail-field__label">{{ field.label }}</p>
+                <p class="assets-detail-field__value">{{ field.value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #treeNode let-node let-depth="depth">
+  <div class="assets-tree-node">
+    <div
+      class="assets-tree-item"
+      role="button"
+      tabindex="0"
+      [class.assets-tree-item--active]="isActive(node.id)"
+      [style.paddingLeft.px]="8 + depth * 16"
+      (click)="onNodeClick(node)"
+      (keydown.enter)="onNodeClick(node)"
+      (keydown.space)="$event.preventDefault(); onNodeClick(node)"
+    >
+      <span class="assets-tree-item__chevron" *ngIf="hasChildren(node); else treeSpacer">
+        <mat-icon>{{ isExpanded(node.id) ? 'expand_more' : 'chevron_right' }}</mat-icon>
+      </span>
+      <ng-template #treeSpacer>
+        <span class="assets-tree-item__spacer"></span>
+      </ng-template>
+      <mat-icon
+        class="assets-tree-item__icon"
+        [class.assets-tree-item__icon--region]="node.type === 'region'"
+        [class.assets-tree-item__icon--block]="node.type === 'block'"
+        [class.assets-tree-item__icon--facility]="node.type === 'facility'"
+      >
+        {{ nodeIcon(node) }}
+      </mat-icon>
+      <span class="assets-tree-item__label">{{ node.label }}</span>
+      <!--
+      <button
+        type="button"
+        class="assets-tree-item__menu"
+        *ngIf="node.type === 'facility' && isActive(node.id)"
+        (click)="$event.stopPropagation()"
+        aria-label="Facility options"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      -->
+    </div>
+    <ng-container *ngIf="isExpanded(node.id) && node.children">
+      <ng-container *ngFor="let child of node.children; trackBy: trackById">
+        <ng-container *ngTemplateOutlet="treeNode; context: { $implicit: child, depth: depth + 1 }"></ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>

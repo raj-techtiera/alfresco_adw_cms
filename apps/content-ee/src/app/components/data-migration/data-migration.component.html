@@ -1,0 +1,162 @@
+<div class="dm-page">
+  <!-- Header with tabs -->
+  <div class="dm-header">
+    <div class="dm-header-title">
+      <span class="dm-header-emoji">🔄</span>
+      <span class="dm-header-text">Data Migration</span>
+    </div>
+    <div class="dm-header-tabs">
+      <button type="button" class="dm-pill" *ngFor="let tab of tabs; trackBy: trackByKey"
+        [class.dm-pill--active]="activeTab === tab.key" (click)="setTab(tab.key)">
+        <span>{{ tab.icon }}</span>{{ tab.label }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="dm-content">
+    <!-- IMPORT TAB -->
+    <div *ngIf="activeTab === 'import'">
+      <!-- Stepper -->
+      <div class="dm-stepper">
+        <ng-container *ngFor="let step of steps; let idx = index; trackBy: trackByNum">
+          <div class="dm-step">
+            <div class="dm-step-circle"
+              [class.dm-step-circle--active]="currentStep === step.num"
+              [class.dm-step-circle--done]="currentStep > step.num">
+              {{ step.num }}
+            </div>
+            <span class="dm-step-label" [class.dm-step-label--active]="currentStep === step.num">{{ step.label }}</span>
+          </div>
+          <div class="dm-step-line" [class.dm-step-line--done]="currentStep > step.num" *ngIf="idx < steps.length - 1"></div>
+        </ng-container>
+      </div>
+
+      <!-- Step 1: Select Data Source -->
+      <div class="dm-card dm-card--wide" *ngIf="currentStep === 1">
+        <h2 class="dm-card-title">Select Data Source</h2>
+        <p class="dm-card-sub">Where is your existing data stored?</p>
+        <div class="dm-source-grid">
+          <button type="button" class="dm-source" *ngFor="let source of dataSources; trackBy: trackById"
+            [class.dm-source--active]="selectedSource === source.id" (click)="selectedSource = source.id">
+            <div class="dm-source-icon">{{ source.icon }}</div>
+            <div class="dm-source-name">{{ source.name }}</div>
+            <div class="dm-source-type">{{ source.type }}</div>
+          </button>
+        </div>
+        <div class="dm-actions-end">
+          <button type="button" class="dm-btn-gradient" (click)="currentStep = 2">Next →</button>
+        </div>
+      </div>
+
+      <!-- Steps 2-6: Placeholder -->
+      <div class="dm-card dm-card--wide dm-card--center" *ngIf="currentStep > 1">
+        <div class="dm-big-icon">⚙️</div>
+        <h2 class="dm-card-title dm-card-title--center">{{ currentStepLabel }}</h2>
+        <p class="dm-placeholder-sub">Configure step {{ currentStep }} of the import process.</p>
+        <div class="dm-actions-center">
+          <button type="button" class="dm-btn-gray" (click)="goBack()">← Back</button>
+          <button type="button" class="dm-btn-gradient" *ngIf="currentStep < 6" (click)="goNext()">Next →</button>
+          <button type="button" class="dm-btn-green" *ngIf="currentStep === 6">▶ Run Import</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOBS TAB -->
+    <div class="dm-narrow" *ngIf="activeTab === 'jobs'">
+      <div class="dm-jobs-head">
+        <h2 class="dm-h2">Migration Jobs</h2>
+        <button type="button" class="dm-btn-outline"><span>↻</span> Refresh</button>
+      </div>
+      <div class="dm-empty">
+        <div class="dm-empty-icon">📋</div>
+        <p class="dm-empty-text">No migration jobs yet. Start a new import.</p>
+      </div>
+    </div>
+
+    <!-- NUMBERING TAB -->
+    <div class="dm-card-wrap" *ngIf="activeTab === 'numbering'">
+      <h2 class="dm-h2 dm-mb1">Custom Document Numbering</h2>
+      <p class="dm-card-sub">Define your own document numbering format using tokens. This is optional — EPCdoc standard is used if not configured.</p>
+      <div class="dm-panel">
+        <h3 class="dm-panel-title">Build Format</h3>
+        <div class="dm-mb5">
+          <p class="dm-field-label dm-mb10">ADD TOKENS (CLICK TO ADD)</p>
+          <div class="dm-token-list">
+            <button type="button" class="dm-token" *ngFor="let token of tokens; trackBy: trackByToken"
+              [class.dm-token--active]="selectedTokens.includes(token.key)" (click)="toggleToken(token.key)">
+              <span class="dm-token-key">{{ token.key }}</span>
+              <span class="dm-token-example">({{ token.example }})</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="dm-form-grid">
+          <div>
+            <label class="dm-field-label">Format Name *</label>
+            <input type="text" class="dm-input" [(ngModel)]="formatName" placeholder="e.g. ADNOC Standard" />
+          </div>
+          <div>
+            <label class="dm-field-label">Separator</label>
+            <select class="dm-select" [(ngModel)]="separator">
+              <option value="-">-</option>
+              <option value="_">_</option>
+              <option value=".">.</option>
+              <option value="/">/</option>
+              <option value="">(none)</option>
+            </select>
+          </div>
+          <div>
+            <label class="dm-field-label">Scope</label>
+            <select class="dm-select" [(ngModel)]="scope">
+              <option value="Company-wide">Company-wide</option>
+              <option value="Project-specific">Project-specific</option>
+              <option value="Business Unit">Business Unit</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" class="dm-btn-gradient-sm">Save Format</button>
+      </div>
+    </div>
+
+    <!-- EXPORT REQUEST TAB -->
+    <div class="dm-card-wrap" *ngIf="activeTab === 'export'">
+      <h2 class="dm-h2 dm-mb1">Request Data Export</h2>
+      <p class="dm-card-sub">Data export requires platform admin approval. Exports &gt; 1TB incur billing charges.</p>
+
+      <div class="dm-policy">
+        <p class="dm-policy-title">⚠️ Export Policy</p>
+        <ul class="dm-policy-list">
+          <li *ngFor="let item of exportPolicy; trackBy: trackByIndex">{{ item }}</li>
+        </ul>
+      </div>
+
+      <div class="dm-panel">
+        <div class="dm-mb5">
+          <label class="dm-field-label">Reason for Export *</label>
+          <textarea class="dm-textarea" rows="4" [(ngModel)]="exportReason"
+            placeholder="e.g. Project handover to client, backup for new system migration, regulatory audit"></textarea>
+        </div>
+
+        <div class="dm-mb5">
+          <label class="dm-field-label dm-mb10">What Data to Export</label>
+          <div class="dm-checkbox-row">
+            <label class="dm-checkbox" *ngFor="let opt of exportDataOptions; trackBy: trackById">
+              <input type="checkbox" class="dm-checkbox-input" [checked]="exportData.includes(opt.id)" (change)="toggleExportData(opt.id)" />
+              <span>{{ opt.icon }}</span>
+              <span>{{ opt.label }}</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="dm-mb6">
+          <label class="dm-field-label">Estimated Data Size (GB)</label>
+          <input type="text" class="dm-input dm-input--sm" [(ngModel)]="estimatedSize" placeholder="e.g. 12.5" />
+        </div>
+
+        <button type="button" class="dm-btn-gradient-sm">Submit Export Request</button>
+      </div>
+    </div>
+  </div>
+</div>

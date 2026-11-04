@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Toepassen",
+        "CANCEL": "Annuleren",
+        "SWITCH": "Schakelaar",
+        "CONTINUE": "Doorgaan",
+        "RELOAD": "Opnieuw laden"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Declareren als archiefstuk",
+            "SUCCESS": "{{fileName}} is gedeclareerd als archiefstuk",
+            "FAIL": "Kan {{fileName}} niet declareren als archiefstuk",
+            "DIALOG": {
+                "TITLE": "Declareren als archiefstuk",
+                "MESSAGE": "Dit document is eerder gedeclareerd als een archiefstuk en is afgewezen.",
+                "YES": "Declareren als archiefstuk",
+                "NO": "Annuleren",
+                "CLOSE": "Sluiten"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "Map declareren als archiefstuk wordt momenteel niet ondersteund",
+                    "EXISTING-RECORD": "Al gedeclareerd als archiefstuk",
+                    "FAILED": "Declareren als archiefstuk mislukt"
+                },
+                "SUCCESS": "Item is gedeclareerd als archiefstuk"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Afgewezen archiefstuk",
+            "CLOSE_LABEL": "Sluiten",
+            "SUB-TITLE": "Het bestand '{{ nodeName }}' is afgewezen als een archiefstuk",
+            "BY": "Door",
+            "AT": "Om",
+            "REASON": "Met de reden",
+            "CONFIRM": "Bevestigen",
+            "WARNING": "Als u de afgewezen-archiefstukwaarschuwing verwijdert, zijn de opties voor het declareren van het bestand als een archiefstuk weer beschikbaar",
+            "FAILED-REMOVE": "Kan afgewezen-archiefstukwaarschuwing niet verwijderen van {{nodeName}} : {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Afgewezen archiefstuk",
+            "TOOLTIP-MESSAGE": "Waarschuwing verwijderen",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Afgewezen archiefstuk",
+                "RECORD-HYPERLINK": "Gedeclareerd als een archiefstuk",
+                "REJECTED-RECORD-HYPERLINK": "Archiefstuk is afgewezen, bekijk de bestandsgegevens voor meer informatie"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Verwijderen",
+            "SUCCESS": "'{{ name }}' is verwijderd",
+            "FAIL": "Kan {{recordId}} niet verwijderen",
+            "DIALOG": {
+                "TITLE": "Archiefstuk-instance verwijderen",
+                "YES-ALL": "Verwijderen en dit niet opnieuw weergeven",
+                "YES": "Verwijderen",
+                "NO": "Annuleren",
+                "MESSAGE": {
+                    "DELETE": "Deze instance van '{{name}}' wordt definitief verwijderd en kan niet worden opgehaald uit de prullenbak.",
+                    "ADDITIONAL": "Dit heeft geen gevolgen voor het archiefstuk '{{name}}' dat zich bevindt in het Records Management System van uw organisatie."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Archiefstuk"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Verplaatsen",
+            "MOVE-ITEM": "'{{ name }}' verplaatsen naar...",
+            "SAME-FOLDER-MOVE": "Verplaatsen naar dezelfde map is niet mogelijk",
+            "SUCCESSFUL": "Archiefstuk is verplaatst"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Verzenden naar archief",
+                "SUCCESS": "Het bestand {{ name }} wordt gearchiveerd",
+                "FAIL": "Kan {{ name }} niet archiveren",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Item is al gearchiveerd.",
+                        "PENDING-RESTORE": " Herstellen van item is in behandeling. ",
+                        "RESTORED": "Kan de herstelde items niet archiveren",
+                        "FOLDER": "Herstellen uit archief wordt momenteel niet ondersteund"
+                    },
+                    "FAIL": "Archiveren is mislukt",
+                    "SUCCESS": "Item wordt gearchiveerd"
+                },
+                "DIALOG": {
+                    "TITLE": "Verzenden naar archief",
+                    "MESSAGE": "U staat op het punt om bestanden naar een extern archief te sturen. Er kunnen kosten verbonden zijn aan het ophalen van bestanden uit het archief. Weet u zeker dat u wilt doorgaan?",
+                    "YES": "Verzenden naar archief",
+                    "NO": "Annuleren"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Herstellen uit archief",
+                "SYNC-ERROR": "Het bestand dat u wilt herstellen is nog niet gesynchroniseerd met het archief. Deze bewerking kan tot 24 uur duren. Probeer het later opnieuw.",
+                "FAIL": "Kan {{ name }} niet herstellen uit het archief",
+                "DIALOG": {
+                    "TITLE": "Herstellen uit archief",
+                    "LABEL": {
+                        "TYPE": "Herstelsnelheid (limiet van 250 MB per herstelbewerking)",
+                        "OPTION-FAST": "Snel – duur: 1-5 min (hoogste kosten)",
+                        "OPTION-STANDARD": "Standaard – duur: 3-5 uur",
+                        "OPTION-SLOW": "Langzaam – duur: 5-12 uur (laagste kosten)",
+                        "DURATION": "Hoe lang blijven de bestanden hersteld? (dagen)"
+                    },
+                    "YES": "Bevestigen",
+                    "NO": "Annuleren"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Herstellen uit archief",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " De bestanden die u wilt herstellen zijn nog niet gesynchroniseerd met het archief. Deze bewerking kan tot 24 uur duren. Probeer het later opnieuw.",
+                        "RESTORED": "Item is al hersteld",
+                        "PENDING-RESTORE": "Herstellen van item is al in behandeling.",
+                        "NOT-STORED": "Het item dat u wilt herstellen is nog niet gesynchroniseerd met het archief",
+                        "FAIL": "Herstellen is mislukt",
+                        "FOLDER": "Het herstellen van een map wordt momenteel niet ondersteund"
+                    },
+                    "SUCCESS": "Item wordt hersteld"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Herstelduur verlengen",
+                "SUCCESS": "Herstelduur wordt verlengd met '{{ days }}' dagen vanaf {{ date }}",
+                "FAIL": "Kan herstelduur van {{ name }} uit het archief niet verlengen"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Dit bestand is gearchiveerd. Om het te herstellen, klikt u met de rechtermuisknop en selecteert u de optie voor herstellen uit het archief.",
+                "RESTORED": "Hersteld",
+                "PENDING-RESTORE": "Bezig met het herstellen van bestanden uit het archief. Als u geen preview van het bestand kunt weergeven of het bestand niet kunt downloaden, probeert u het later opnieuw"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Status bulkbewerking",
+            "FAIL": "Kan de bewerking niet uitvoeren",
+            "CLOSE": "Sluiten"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Bewaarplichten beheren",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Bewaarplichten verwijderen",
+            "DIALOG_TITLE": "Wettelijke bewaarplichten beheren",
+            "TAB_EXISTING_HOLDS": "Bestaande bewaarplichten beheren",
+            "TAB_CREATE_LEGAL_HOLD": "Wettelijke bewaarplicht creëren",
+            "SAVE": "Opslaan",
+            "CLOSE": "Sluiten",
+            "CANCEL": "Annuleren",
+            "NEW_HOLD_NAME": "Naam",
+            "NEW_HOLD_DESCRIPTION": "Beschrijving",
+            "NEW_HOLD_REASON": "Reden",
+            "DIALOG_WARNING_TITLE": "Waarschuwing",
+            "DIALOG_WARNING_MESSAGE": "Hier aangebrachte wijzigingen worden niet toegepast als u van tabblad wisselt.",
+            "DOCUMENT_IN_HOLD": "Document onder bewaarplicht",
+            "FOLDER_IN_HOLD": "Map onder bewaarplicht",
+            "APPLY_HOLDS_SUCCESS": "Wettelijke bewaarplicht was succesvol.",
+            "APPLY_HOLDS_NOT_FOUND": "De geselecteerde wettelijke bewaarplicht of het opgegeven bestand bestaat niet. Controleer uw selectie en probeer het opnieuw.",
+            "BULK_APPLY_HOLDS_SUCCESS": "De bewaarplichtactie is geslaagd. {{ totalItems }} Items zijn toegevoegd aan de bewaarplicht.",
+            "BULK_APPLY_HOLDS_STARTED": "Bulkactie bewaarplicht wordt op de achtergrond uitgevoerd. U ontvangt een melding wanneer deze is voltooid.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Gearchiveerde, gedupliceerde of vergrendelde inhoud is gedetecteerd. {{ errorsCount }} Items zijn niet toegevoegd aan de bewaarplicht.",
+            "BULK_APPLY_HOLDS_FAIL": "Het plaatsen van inhoud in de bewaarplicht is mislukt.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "Bulk bewaarplicht kan niet worden toegepast op mappen",
+            "ACKNOWLEDGE": "Bevestigen",
+            "EMPTY_HOLD_LIST": "Geen bewaarplichten beschikbaar",
+            "WARNING_DIALOG_TITLE": "Waarschuwing: bulkactie",
+            "WARNING_DIALOG_MESSAGE": "Deze actie wijzigt de bewaarplichtstatus van <strong>Alle bestanden in deze zoekbestanden</strong>.<br><br>Deze bewaarplicht <strong>wordt niet op mappen toegepast</strong>.",
+            "WARNING_DIALOG_QUESTION": "Doorgaan?",
+            "NO_RECORDS_MANAGEMENT_SITE": "Admin moet Record Managementsite aanmaken om bewaarplichten te activeren",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Bestand is met succes uit de wettelijke bewaarplicht verwijderd.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Bestanden zijn met succes uit de wettelijke bewaarplicht verwijderd.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Kan bestand niet uit wettelijke bewaarplicht verwijderen",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Kan bestanden niet uit wettelijke bewaarplicht verwijderen",
+            "LOADING_CAPABILITIES_ERROR": "Kan capaciteiten niet laden",
+            "NODE_NOT_FOUND": "Geselecteerde node kan niet worden gevonden. Controleer uw selectie en probeer het opnieuw.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Items met bewaarplicht verwijderen?",
+                "TITLE_PLURAL": "Geselecteerde {{ count }} bewaarplichten verwijderen en documenten vrijgeven?",
+                "MESSAGE_SINGULAR": "U heeft {{ name }} items geselecteerd die verwijderd moeten worden. Op sommige daarvan rust bewaarplicht, alle items die ze vasthouden worden vrijgegeven. Deze actie kan niet ongedaan worden gemaakt.",
+                "MESSAGE_PLURAL": "U heeft {{ count }} items geselecteerd die verwijderd moeten worden. Op sommige daarvan rust bewaarplicht, alle items die ze vasthouden worden vrijgegeven. Deze actie kan niet ongedaan worden gemaakt.",
+                "KEEP_HOLD": "Bewaarplicht behouden"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Fout bij het opslaan van beveiligingsmarkeringen",
+            "DIALOG_TITLE": "Beveiligingsmarkeringen bewerken",
+            "MENU_TITLE": "Beveiligingsmarkeringen",
+            "SAVE": "Opslaan",
+            "CANCEL": "Annuleren",
+            "HELP": "Help",
+            "CLOSE": "Sluiten",
+            "SHOW_ALL": "Alle weergeven",
+            "APPLIED": "Toegepast",
+            "NOT_APPLIED": "Niet toegepast",
+            "COLUMNS": {
+                "NAME": "Beveiligingsmarkeringen"
+            },
+            "NO_GROUPS_CREATED": "Geen beveiligingsgroepen beschikbaar",
+            "SECURITY_MARKS_HELP": "Help voor beveiligingsmarkeringen",
+            "HELP_ICON_TEXT": "Door beveiligigingsmarkeringen toe te passen, wordt de toegang tot digitale content beperkt. Alleen mensen met overeenkomstige markeringen in hun gebruikersrechten mogen de gemarkeerde content bekijken of bewerken."
+        }
+    }
+}

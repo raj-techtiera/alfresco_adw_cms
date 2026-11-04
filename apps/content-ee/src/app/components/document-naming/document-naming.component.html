@@ -1,0 +1,325 @@
+<div class="document-naming">
+  <header mat-dialog-title class="document-naming__header">
+    <div class="document-naming__header-main">
+      <mat-icon class="document-naming__header-icon" aria-hidden="true">description</mat-icon>
+      <div class="document-naming__header-text">
+        <h2 class="document-naming__title">Document Numbering</h2>
+        <p class="document-naming__subtitle">Generate a document number and upload the document to Alfresco.</p>
+      </div>
+    </div>
+    <button
+      mat-icon-button
+      type="button"
+      class="document-naming__close"
+      (click)="onClose()"
+      [disabled]="uploading"
+      aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="document-naming__context" role="region" aria-label="Project context">
+    <span class="document-naming__context-label">Project:</span>
+    <span class="document-naming__context-chip">{{ projectCode || projectName || '—' }}</span>
+  </div>
+
+  <mat-dialog-content class="document-naming__content">
+    <div class="document-naming__layout">
+      <div class="document-naming__main">
+        <section class="document-naming__section" aria-labelledby="doc-naming-section-category">
+          <div class="document-naming__section-heading">
+            <span class="document-naming__section-badge">1</span>
+            <h3 class="document-naming__section-title" id="doc-naming-section-category">Category</h3>
+          </div>
+
+          <div class="document-naming__section-body">
+            <div class="document-naming__row document-naming__row--2">
+              <div class="document-naming__labeled">
+                <label class="document-naming__label" for="doc-naming-category">
+                  Category <span class="document-naming__required" aria-hidden="true">*</span>
+                </label>
+                <div class="input-shell input-shell--select">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">category</mat-icon>
+                      <mat-select
+                    id="doc-naming-category"
+                    [(value)]="selectedCategory"
+                    (selectionChange)="onCategoryChange($event)"
+                    placeholder="Select category" panelClass="adw-document-naming-select-panel">
+                    @for (option of categoryOptions; track option.id || option.categoryCode) {
+                      <mat-option [value]="optionValue(option, 'categoryCode', 'code', 'id')">
+                        {{ optionLabel(option, 'categoryName', 'name', 'label') }}
+                      </mat-option>
+                    }
+                  </mat-select>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        @if (selectedCategory === 'ENGINEERING' || selectedCategory === 'VENDOR_DATA' || selectedCategory === 'CORRESPONDENCE') {
+          <form class="document-naming__form" [formGroup]="activeDocForm">
+            <section class="document-naming__section" aria-labelledby="doc-naming-section-details">
+              <div class="document-naming__section-heading">
+                <span class="document-naming__section-badge">2</span>
+                <h3 class="document-naming__section-title" id="doc-naming-section-details">Document Details</h3>
+              </div>
+
+              <div class="document-naming__section-body">
+                <div class="document-naming__grid">
+                  @if (selectedCategory === 'CORRESPONDENCE') {
+                    <div class="document-naming__labeled">
+                      <label class="document-naming__label" for="doc-naming-recipient">
+                        Recipient Code <span class="document-naming__required" aria-hidden="true">*</span>
+                      </label>
+                      <div class="input-shell input-shell--select">
+                        <mat-icon class="input-shell__icon" aria-hidden="true">mail</mat-icon>
+                        <mat-select id="doc-naming-recipient" formControlName="recipientCode" placeholder="Select recipient" panelClass="adw-document-naming-select-panel">
+                          @for (option of recipients; track optionValue(option, 'recipientCode', 'code', 'id')) {
+                            <mat-option [value]="optionValue(option, 'recipientCode', 'code', 'id')">
+                              {{ optionLabel(option, 'recipientName', 'name', 'label', 'recipientCode', 'code') }}
+                            </mat-option>
+                          }
+                        </mat-select>
+                      </div>
+                    </div>
+                  }
+
+                  @if (selectedCategory === 'ENGINEERING') {
+                    <div class="document-naming__labeled">
+                      <label class="document-naming__label" for="doc-naming-discipline">
+                        Discipline <span class="document-naming__required" aria-hidden="true">*</span>
+                      </label>
+                      <div class="input-shell input-shell--select">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">engineering</mat-icon>
+                      <mat-select id="doc-naming-discipline" formControlName="disciplineCode" placeholder="Select discipline" panelClass="adw-document-naming-select-panel">
+                          @for (option of disciplines; track optionValue(option, 'disciplineCode', 'code', 'id')) {
+                            <mat-option [value]="optionValue(option, 'disciplineCode', 'code', 'id')">
+                              {{ optionLabel(option, 'disciplineName', 'name', 'label', 'disciplineCode', 'code') }}
+                            </mat-option>
+                          }
+                        </mat-select>
+                    </div>
+                    </div>
+                  } @else {
+                    <div class="document-naming__labeled">
+                      <label class="document-naming__label" for="doc-naming-vendor-data">
+                        Vendor Data Code <span class="document-naming__required" aria-hidden="true">*</span>
+                      </label>
+                      <div class="input-shell input-shell--select">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">storefront</mat-icon>
+                      <mat-select id="doc-naming-vendor-data" formControlName="vendorDataCode" placeholder="Select vendor data" panelClass="adw-document-naming-select-panel">
+                          @for (
+                            option of vendorDataCodes;
+                            track optionValue(option, 'vendorDataCode', 'code', 'id')
+                          ) {
+                            <mat-option [value]="optionValue(option, 'vendorDataCode', 'code', 'id')">
+                              {{ optionLabel(option, 'vendorDataName', 'name', 'label', 'vendorDataCode', 'code') }}
+                            </mat-option>
+                          }
+                        </mat-select>
+                    </div>
+                    </div>
+                  }
+
+                  <div class="document-naming__labeled">
+                    <label class="document-naming__label" for="doc-naming-doc-type">
+                      Document Type <span class="document-naming__required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell input-shell--select">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">article</mat-icon>
+                      <mat-select id="doc-naming-doc-type" formControlName="documentTypeCode" placeholder="Select document type" panelClass="adw-document-naming-select-panel">
+                        @for (option of documentTypes; track optionValue(option, 'documentTypeCode', 'code', 'id')) {
+                          <mat-option [value]="optionValue(option, 'documentTypeCode', 'code', 'id')">
+                            {{ optionLabel(option, 'documentTypeName', 'name', 'label', 'documentTypeCode', 'code') }}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                  </div>
+
+                  <div class="document-naming__labeled">
+                    <label class="document-naming__label" for="doc-naming-sheet">
+                      Sheet No <span class="document-naming__required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell input-shell--select">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">layers</mat-icon>
+                      <mat-select id="doc-naming-sheet" formControlName="sheetNo" placeholder="Select sheet no" panelClass="adw-document-naming-select-panel">
+                        @for (option of sheetNo; track optionValue(option, 'sheetNo', 'code', 'id') || option) {
+                          <mat-option [value]="optionValue(option, 'sheetNo', 'code', 'id')">
+                            {{ optionLabel(option, 'sheetNo', 'name', 'label', 'code') }}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                  </div>
+
+                  <div class="document-naming__labeled">
+                    <label class="document-naming__label" for="doc-naming-created-by">
+                      Created By <span class="document-naming__required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">person</mat-icon>
+                      <input type="text"
+                        id="doc-naming-created-by"
+                        formControlName="createdBy"
+                        [placeholder]="getCreatedBy() || 'Enter created by'" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </form>
+        } @else if (selectedCategory === 'OPEN_CATEGORY') {
+          <form class="document-naming__form" [formGroup]="openCategoryDocumentsForm">
+            <section class="document-naming__section" aria-labelledby="doc-naming-section-open-details">
+              <div class="document-naming__section-heading">
+                <span class="document-naming__section-badge">2</span>
+                <h3 class="document-naming__section-title" id="doc-naming-section-open-details">Document Details</h3>
+              </div>
+
+              <div class="document-naming__section-body">
+                <div class="document-naming__grid">
+                  <div class="document-naming__labeled">
+                    <label class="document-naming__label" for="doc-naming-source-system">
+                      Source System <span class="document-naming__required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell input-shell--select">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">dns</mat-icon>
+                      <mat-select
+                        id="doc-naming-source-system"
+                        formControlName="sourceSystem"
+                        placeholder="Select source system" panelClass="adw-document-naming-select-panel">
+                        @for (option of sourceSystemOptions; track option) {
+                          <mat-option [value]="option">{{ option }}</mat-option>
+                        }
+        </mat-select>
+                    </div>
+                  </div>
+
+                  <div class="document-naming__labeled document-naming__labeled--full">
+                    <label class="document-naming__label" for="doc-naming-free-text">
+                      Free Text Document Number <span class="document-naming__required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">edit</mat-icon>
+                      <input type="text"
+                        id="doc-naming-free-text"
+                        formControlName="freeTextDocumentNumber"
+                        placeholder="Enter document number" />
+                    </div>
+                  </div>
+
+                  <div class="document-naming__labeled">
+                    <label class="document-naming__label" for="doc-naming-open-created-by">
+                      Created By <span class="document-naming__required" aria-hidden="true">*</span>
+                    </label>
+                    <div class="input-shell">
+                      <mat-icon class="input-shell__icon" aria-hidden="true">person</mat-icon>
+                      <input type="text"
+                        id="doc-naming-open-created-by"
+                        formControlName="createdBy"
+                        [placeholder]="getCreatedBy() || 'Enter created by'" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+      </form>
+        }
+      </div>
+
+      <aside class="document-naming__aside" aria-label="Upload document">
+        <section class="document-naming__aside-card" aria-labelledby="doc-naming-upload-title">
+          <div class="document-naming__aside-section-heading">
+            <span class="document-naming__section-badge">3</span>
+            <h4 class="document-naming__aside-title" id="doc-naming-upload-title">Upload Document</h4>
+          </div>
+
+          <div
+            class="document-naming__dropzone"
+            (drop)="onFileDrop($event)"
+            (dragover)="onDragOver($event)">
+            <mat-icon class="document-naming__dropzone-icon" aria-hidden="true">cloud_upload</mat-icon>
+            <p class="document-naming__dropzone-title">Drag and drop files here</p>
+            <p class="document-naming__dropzone-hint">or</p>
+            <button mat-stroked-button type="button" class="document-naming__browse-btn" (click)="fileInput.click()">
+              Browse Files
+            </button>
+            <input
+              #fileInput
+              type="file"
+              class="document-naming__file-input"
+              multiple
+              (change)="onFileInputChange($event)" />
+            <p class="document-naming__dropzone-meta">
+              Max file size: {{ maxUploadSizeMb }} MB<br />
+              Allowed: {{ allowedFileTypes }}
+            </p>
+          </div>
+
+          <div class="document-naming__uploaded">
+            <h5 class="document-naming__uploaded-title">Uploaded Files ({{ uploadedFileEntries.length }})</h5>
+            @if (!uploadedFileEntries.length) {
+              <div class="document-naming__uploaded-empty">
+                <mat-icon aria-hidden="true">description</mat-icon>
+                <span>No file uploaded</span>
+              </div>
+            } @else {
+              <ul class="document-naming__uploaded-list">
+                @for (entry of uploadedFileEntries; track entry.id; let i = $index) {
+                  <li class="document-naming__uploaded-item">
+                    <mat-icon aria-hidden="true">insert_drive_file</mat-icon>
+                    <span class="document-naming__uploaded-name" [title]="entry.file.name">{{ entry.file.name }}</span>
+                    <button
+                      type="button"
+                      class="document-naming__uploaded-remove"
+                      (click)="removeUploadedFile(i)"
+                      [attr.aria-label]="'Remove ' + entry.file.name">
+                      <mat-icon aria-hidden="true">close</mat-icon>
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        </section>
+      </aside>
+    </div>
+</mat-dialog-content>
+
+  <footer mat-dialog-actions class="document-naming__actions">
+    <p class="document-naming__actions-hint">
+      Fields marked with <span class="document-naming__required" aria-hidden="true">*</span> are required.
+    </p>
+    <div class="document-naming__actions-buttons">
+      <button
+        mat-flat-button
+        color="primary"
+        cdkFocusInitial
+        type="button"
+        class="document-naming__submit-btn"
+        (click)="onGenerateAndUpload()"
+        [disabled]="!canGenerateAndUpload">
+        <mat-icon
+          [class.document-naming__btn-spinner]="uploading"
+          aria-hidden="true">
+          {{ uploading ? 'hourglass_top' : 'cloud_upload' }}
+        </mat-icon>
+        {{ uploading ? 'Uploading…' : 'Generate & Upload' }}
+      </button>
+      <button
+        mat-stroked-button
+        type="button"
+        class="document-naming__action-btn"
+        (click)="onClose()"
+        [disabled]="uploading">
+        Cancel
+      </button>
+      <button mat-stroked-button type="button" class="document-naming__action-btn" (click)="onReset()" [disabled]="uploading">
+        <mat-icon aria-hidden="true">refresh</mat-icon>
+        Reset
+      </button>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,11 @@
+{
+    "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../dist/libs/content-ee/microsoft-office-online-integration-extension",
+    "assets": [
+        "assets",
+        "i18n"
+    ],
+    "lib": {
+        "entryFile": "src/index.ts"
+    }
+}

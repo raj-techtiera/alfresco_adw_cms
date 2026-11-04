@@ -1,0 +1,155 @@
+<div class="pt-page">
+  <!-- Header -->
+  <div class="pt-header">
+    <div>
+      <h1 class="pt-title">Project Team Builder</h1>
+      <p class="pt-subtitle">Stage-gate team assembly · assign roles · publish to onboard</p>
+    </div>
+    <div class="pt-header-actions">
+      <mat-form-field appearance="outline" class="pt-filter-mat-field" subscriptSizing="dynamic">
+        <mat-select
+          [(ngModel)]="selectedProject"
+          panelClass="pt-filter-select-panel"
+          placeholder="Select project"
+          aria-label="Select project">
+          <mat-option *ngFor="let p of projects" [value]="p.id">{{ p.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Stepper -->
+  <div class="pt-stepper-card">
+    <div class="pt-stepper">
+      <ng-container *ngFor="let step of stepperSteps; let idx = index; let last = last; trackBy: trackByLabel">
+        <div class="pt-step">
+          <div class="pt-step-icon" [style.borderColor]="stepBorderColor(step, idx)"
+            [style.background]="stepBackground(step, idx)">
+            <span>{{ step.icon }}</span>
+          </div>
+          <div class="pt-step-label" [style.color]="stepLabelColor(step, idx)">{{ step.label }}</div>
+          <div class="pt-step-sub">{{ step.sub }}</div>
+        </div>
+        <div class="pt-connector" *ngIf="!last" [style.background]="connectorColor(step, idx)"></div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="pt-kpi-grid">
+    <div class="pt-kpi-card" *ngFor="let kpi of kpis; trackBy: trackByLabel">
+      <div class="pt-kpi-value" [style.color]="kpi.color">{{ kpi.value }}</div>
+      <div class="pt-kpi-label">{{ kpi.label }}</div>
+    </div>
+  </div>
+
+  <!-- Stage Sections -->
+  <div class="pt-stages">
+    <div class="pt-stage" *ngFor="let stage of stages; trackBy: trackByStageId" [style.borderLeftColor]="stage.color">
+      <!-- Stage Header -->
+      <div class="pt-stage-head">
+        <div class="pt-stage-head-left">
+          <div class="pt-stage-num" [style.background]="stage.color">{{ stage.id }}</div>
+          <div>
+            <div class="pt-stage-title">{{ stage.title }}</div>
+            <div class="pt-stage-sub">{{ stage.subtitle }}</div>
+          </div>
+          <span class="pt-slot-count">{{ stage.slots.length }} slot{{ stage.slots.length !== 1 ? 's' : '' }}</span>
+        </div>
+        <div class="pt-stage-head-actions">
+          <button type="button" class="pt-template-btn" (click)="handleTemplateRoles(stage)">+ Template Roles</button>
+          <button type="button" class="pt-addslot-btn" [style.background]="stage.color" (click)="toggleForm(stage.id)">
+            + Add Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Inline Add Slot Form -->
+      <div class="pt-form" *ngIf="openFormStage === stage.id">
+        <div class="pt-form-grid">
+          <div class="pt-field">
+            <label class="pt-field-label">Role <span class="pt-required">*</span></label>
+            <mat-form-field appearance="outline" class="pt-filter-mat-field pt-filter-mat-field--fill" subscriptSizing="dynamic">
+              <mat-select
+                [(ngModel)]="formData.role"
+                panelClass="pt-filter-select-panel"
+                placeholder="Select role...">
+                <mat-option value="">Select role...</mat-option>
+                <mat-option *ngFor="let r of roleOptions" [value]="r">{{ r }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="pt-field">
+            <label class="pt-field-label">Department</label>
+            <mat-form-field appearance="outline" class="pt-filter-mat-field pt-filter-mat-field--fill" subscriptSizing="dynamic">
+              <mat-select
+                [(ngModel)]="formData.department"
+                panelClass="pt-filter-select-panel"
+                placeholder="Auto from role / select...">
+                <mat-option *ngFor="let d of departmentOptions" [value]="d">{{ d }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="pt-field">
+            <label class="pt-field-label">Assign to (existing)</label>
+            <mat-form-field appearance="outline" class="pt-filter-mat-field pt-filter-mat-field--fill" subscriptSizing="dynamic">
+              <mat-select
+                [(ngModel)]="formData.assignee"
+                panelClass="pt-filter-select-panel"
+                placeholder="Leave vacant">
+                <mat-option *ngFor="let a of assigneeOptions" [value]="a">{{ a }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="pt-field">
+            <label class="pt-field-label">Or invite by email</label>
+            <input type="email" class="pt-field-input" placeholder="email@company.com" [(ngModel)]="formData.email" />
+          </div>
+          <div class="pt-field">
+            <label class="pt-field-label">Full Name</label>
+            <input type="text" class="pt-field-input" placeholder="Full Name" [(ngModel)]="formData.fullName" />
+          </div>
+        </div>
+        <div class="pt-form-actions">
+          <button type="button" class="pt-save-btn" (click)="handleAddSlot(stage)">Save</button>
+          <button type="button" class="pt-cancel-btn" (click)="cancelForm()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Slots List -->
+      <div class="pt-slots">
+        <p class="pt-slots-empty" *ngIf="stage.slots.length === 0">
+          No slots yet — click "Template Roles" or "Add Slot"
+        </p>
+        <div class="pt-slot-items" *ngIf="stage.slots.length > 0">
+          <div class="pt-slot" *ngFor="let slot of stage.slots; trackBy: trackBySlotId">
+            <div class="pt-slot-left">
+              <div class="pt-slot-avatar" [style.background]="stage.color">{{ slotInitial(slot.role) }}</div>
+              <div>
+                <div class="pt-slot-role">{{ slot.role }}</div>
+                <div class="pt-slot-dept">{{ slot.department }}</div>
+              </div>
+            </div>
+            <div class="pt-slot-right">
+              <span class="pt-required-tag" *ngIf="slot.required">Required</span>
+              <div class="pt-slot-assignee">
+                <ng-container *ngIf="slot.assignee !== 'Leave vacant'; else vacant">{{ slot.assignee }}</ng-container>
+                <ng-template #vacant><span class="pt-vacant">Vacant</span></ng-template>
+              </div>
+              <button type="button" class="pt-slot-remove" (click)="removeSlot(stage, slot)">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="pt-bottom-bar">
+    <div class="pt-bottom-left">
+      <span class="pt-bottom-check">✅</span>
+      <span class="pt-bottom-text">All required slots filled — ready to publish</span>
+    </div>
+    <button type="button" class="pt-advance-btn">Advance Stage →</button>
+  </div>
+</div>

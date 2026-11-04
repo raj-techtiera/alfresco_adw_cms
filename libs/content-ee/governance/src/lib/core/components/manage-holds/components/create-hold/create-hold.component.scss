@@ -1,0 +1,19 @@
+.aga-create-hold {
+    display: block;
+    padding-top: 20px;
+
+    .aga-manage-hold-control {
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .aga-full-width {
+        width: 100%;
+    }
+
+    .aga-manage-hold-reason,
+    .aga-manage-hold-description {
+        min-height: 56px;
+        max-height: 94px;
+    }
+}

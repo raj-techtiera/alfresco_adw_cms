@@ -1,0 +1,15 @@
+/.angular
+/.nx
+/node_modules
+/dist
+apps/content-ee/src/app.config.json
+apps/content-ee/src/app.config.dev.json
+apps/content-ee/src/app.config.prod.json
+apps/content-ee/src/environments/environment.ts
+apps/content-ee/src/environments/environment.release.ts
+apps/content-ee/src/environments/environment.prod.ts
+apps/content-ee/src/environments/environment.e2e.ts
+.env
+apps/content-ee/src/environments/env-vars.ts
+apps/content-ee/src/environments/environment.interface.ts
+.cursor/rules/architecture.mdc

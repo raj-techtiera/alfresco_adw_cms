@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Applica",
+        "CANCEL": "Annulla",
+        "SWITCH": "Cambia",
+        "CONTINUE": "Continua",
+        "RELOAD": "Ricarica"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Dichiara come record",
+            "SUCCESS": "{{fileName}} è stato dichiarato come record",
+            "FAIL": "Impossibile dichiarare {{fileName}} come record",
+            "DIALOG": {
+                "TITLE": "Dichiara come record",
+                "MESSAGE": "Questo documento è stato dichiarato come record in precedenza ed è stato respinto.",
+                "YES": "Dichiara come record",
+                "NO": "Annulla",
+                "CLOSE": "Chiudi"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "La dichiarazione della cartella come record non è al momento supportata",
+                    "EXISTING-RECORD": "Già dichiarato come record",
+                    "FAILED": "Impossibile dichiarare come record"
+                },
+                "SUCCESS": "L'elemento è stato dichiarato come record"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Record respinto",
+            "CLOSE_LABEL": "Chiudi",
+            "SUB-TITLE": "Il file '{{ nodeName }}' è stato rifiutato come record",
+            "BY": "Da",
+            "AT": "A",
+            "REASON": "Con il motivo",
+            "CONFIRM": "Conferma",
+            "WARNING": "Rimuovendo l'avviso del record respinto le opzioni per dichiarare il file come record saranno nuovamente disponibili.",
+            "FAILED-REMOVE": "Impossibile rimuovere l'avviso di rifiuto di {{nodeName}} : {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Record respinto",
+            "TOOLTIP-MESSAGE": "Rimuovi avviso",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Record respinto",
+                "RECORD-HYPERLINK": "Dichiarato come record",
+                "REJECTED-RECORD-HYPERLINK": "Record rifiutato, visualizzare le informazioni nel file per i dettagli"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Rimuovi",
+            "SUCCESS": "'{{ name }}' è stato rimosso",
+            "FAIL": "Impossibile rimuovere {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Elimina l'istanza del record",
+                "YES-ALL": "RIMUOVI E NON MOSTRARE PIÙ",
+                "YES": "Rimuovi",
+                "NO": "Annulla",
+                "MESSAGE": {
+                    "DELETE": "L'istanza di '{{name}}' verrà rimossa in via definitiva e non sarà possibile recuperarla dal cestino.",
+                    "ADDITIONAL": "Il record '{{name}}' che risiede nel sistema di gestione record dell'organizzazione non sarà interessato dall'operazione."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Record"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Sposta",
+            "MOVE-ITEM": "Sposta '{{ name }}' in...",
+            "SAME-FOLDER-MOVE": "Impossibile spostare nella stessa cartella",
+            "SUCCESSFUL": "Il record è stato spostato correttamente"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Invia all'archivio",
+                "SUCCESS": "Il file {{ name }} verrà archiviato",
+                "FAIL": "Impossibile archiviare {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Elemento già archiviato.",
+                        "PENDING-RESTORE": " Elemento in attesa di ripristino. ",
+                        "RESTORED": "Impossibile archiviare elementi ripristinati",
+                        "FOLDER": "Il ripristino dall'archivio non è al momento supportato"
+                    },
+                    "FAIL": "Impossibile archiviare",
+                    "SUCCESS": "L'elemento verrà archiviato"
+                },
+                "DIALOG": {
+                    "TITLE": "Invia all'archivio",
+                    "MESSAGE": "Si sta per inviare i file a un archivio esterno. Il ripristino dei file dall'archivio potrebbe comportare dei costi. Continuare?",
+                    "YES": "Invia all'archivio",
+                    "NO": "Annulla"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Ripristina da archivio",
+                "SYNC-ERROR": "Il file che si sta tentando di ripristinare non è stato ancora sincronizzato in archivio. L'operazione potrebbe richiedere fino a 24 ore. Riprovare più tardi.",
+                "FAIL": "Impossibile ripristinare {{ name }} dall'archivio",
+                "DIALOG": {
+                    "TITLE": "Ripristina da archivio",
+                    "LABEL": {
+                        "TYPE": "Velocità di ripristino (limite di 250 MB per ripristino)",
+                        "OPTION-FAST": "Veloce: da 1 a 5 min (costo più alto)",
+                        "OPTION-STANDARD": "Standard: da 3 a 5 ore",
+                        "OPTION-SLOW": "Lenta: da 5 a 12 ore (costo più basso)",
+                        "DURATION": "Per quanto tempo verranno ripristinati i file? (giorni)"
+                    },
+                    "YES": "Conferma",
+                    "NO": "Annulla"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Ripristina da archivio",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " I file che si sta tentando di ripristinare non sono stati ancora sincronizzati in archivio. L'operazione potrebbe richiedere fino a 24 ore. Riprovare più tardi.",
+                        "RESTORED": "Elemento già ripristinato",
+                        "PENDING-RESTORE": "L'elemento è già in attesa di ripristino.",
+                        "NOT-STORED": "L'elemento che si sta tentando di ripristinare non è stato ancora sincronizzato in archivio",
+                        "FAIL": "Impossibile ripristinare",
+                        "FOLDER": "Il ripristino di una cartella non è al momento supportato"
+                    },
+                    "SUCCESS": "L'elemento verrà ripristinato"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Aumenta durata di ripristino",
+                "SUCCESS": "La durata verrà aumentata a '{{ days }}' giorni dal {{ date }}",
+                "FAIL": "Impossibile aumentare la durata del ripristino di {{ name }} dall'archivio"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Questo file è archiviato. Per ripristinarlo, fare clic con il tasto destro e selezionare Ripristina da archivio.",
+                "RESTORED": "Ripristinato",
+                "PENDING-RESTORE": "È in corso il ripristino dei file dall'archivio. Se non è possibile visualizzare l'anteprima o scaricare il file, riprovare più tardi."
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Stato dell'operazione in blocco",
+            "FAIL": "Impossibile eseguire l'operazione",
+            "CLOSE": "Chiudi"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Gestisci sospensioni",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Rimuovi sospensione",
+            "DIALOG_TITLE": "Gestisci sospensioni legali",
+            "TAB_EXISTING_HOLDS": "Gestisci sospensioni esistenti",
+            "TAB_CREATE_LEGAL_HOLD": "Crea sospensione legale",
+            "SAVE": "Salva",
+            "CLOSE": "Chiudi",
+            "CANCEL": "Annulla",
+            "NEW_HOLD_NAME": "Nome",
+            "NEW_HOLD_DESCRIPTION": "Descrizione",
+            "NEW_HOLD_REASON": "Motivo",
+            "DIALOG_WARNING_TITLE": "Avvertenza",
+            "DIALOG_WARNING_MESSAGE": "Le modifiche qui non verranno applicate se si passa da una scheda all’altra.",
+            "DOCUMENT_IN_HOLD": "Documento in sospensione legale",
+            "FOLDER_IN_HOLD": "Cartella in sospensione legale",
+            "APPLY_HOLDS_SUCCESS": "L’azione di sospensione legale è andata a buon fine.",
+            "APPLY_HOLDS_NOT_FOUND": "La sospensione legale selezionata o il file specificato non esistono. Verificare la selezione e riprovare.",
+            "BULK_APPLY_HOLDS_SUCCESS": "L’azione di sospensione legale è andata a buon fine. {{ totalItems }} elementi sono stati aggiunti alla sospensione legale.",
+            "BULK_APPLY_HOLDS_STARTED": "Un’azione di sospensione legale di massa è in esecuzione in background. Verrà inviata una notifica quando è stata completata.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "È stato rilevato contenuto salvato, duplicato o bloccato. {{ errorsCount }} elementi non sono stati aggiunti alla sospensione legale.",
+            "BULK_APPLY_HOLDS_FAIL": "Immissione di contenuto nella sospensione legale non riuscita.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "La sospensione legale di massa non può essere applicata alle cartelle",
+            "ACKNOWLEDGE": "Riconosci",
+            "EMPTY_HOLD_LIST": "Nessuna sospensione legale disponibile",
+            "WARNING_DIALOG_TITLE": "Avvertenza: azione di massa",
+            "WARNING_DIALOG_MESSAGE": "Questa azione modificherà lo stato delle sospensioni legali di <strong>tutti i file in questo file di ricerca</strong>.<br><br>Questa sospensione legale <strong>non verrà applicata alle cartelle</strong>.",
+            "WARNING_DIALOG_QUESTION": "Continuare?",
+            "NO_RECORDS_MANAGEMENT_SITE": "L’amministrazione deve creare un sito di gestione dei record per attivare sospensioni legali",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "File correttamente rimosso da sospensione legale.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "File correttamente rimossi da sospensione legale.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Impossibile rimuovere file da sospensione legale.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Impossibile rimuovere i file da sospensione legale.",
+            "LOADING_CAPABILITIES_ERROR": "Impossibile caricare le funzionalità",
+            "NODE_NOT_FOUND": "Impossibile trovare il nodo selezionato. Verifica la tua selezione e riprova.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Elimina elementi contenenti sospensioni?",
+                "TITLE_PLURAL": "Eliminare le {{ count }} sospensioni selezionate e rilasciare i documenti?",
+                "MESSAGE_SINGULAR": "È stata selezionata la sospensione {{ name }} per rimuoverla. Tutti gli elementi in sospensione verranno rilasciati. Questa azione non può essere annullata.",
+                "MESSAGE_PLURAL": "Sono stati selezionati {{ count }} elementi per rimuoverli. Alcuni di questi sono sospensioni, tutti gli elementi in sospensione verranno rilasciati. Questa azione non può essere annullata.",
+                "KEEP_HOLD": "Mantieni sospensione"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Errore durante il salvataggio dei contrassegni di sicurezza",
+            "DIALOG_TITLE": "Modifica contrassegni di sicurezza",
+            "MENU_TITLE": "Contrassegni di sicurezza",
+            "SAVE": "Salva",
+            "CANCEL": "Annulla",
+            "HELP": "Guida",
+            "CLOSE": "Chiudi",
+            "SHOW_ALL": "Mostra tutti",
+            "APPLIED": "Applicati",
+            "NOT_APPLIED": "Non applicati",
+            "COLUMNS": {
+                "NAME": "Contrassegni di sicurezza"
+            },
+            "NO_GROUPS_CREATED": "Nessun gruppo di sicurezza disponibile",
+            "SECURITY_MARKS_HELP": "Guida ai contrassegni di sicurezza",
+            "HELP_ICON_TEXT": "L'applicazione dei contrassegni di sicurezza limiterà l'accesso ai contenuti digitali. Solo gli utenti alle cui autorizzazioni sono applicati gli stessi contrassegni potranno visualizzare o modificare i contenuti contrassegnati."
+        }
+    }
+}

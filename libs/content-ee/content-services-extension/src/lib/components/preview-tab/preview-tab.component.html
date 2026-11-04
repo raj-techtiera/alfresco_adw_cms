@@ -1,0 +1,18 @@
+@if (viewerNodeId) {
+    <adf-alfresco-viewer
+        [nodeId]="viewerNodeId"
+        [overlayMode]="false"
+        [showToolbar]="true"
+        [allowGoBack]="false"
+        [allowDownload]="true"
+        [allowPrint]="false"
+        [allowFullScreen]="true"
+        [allowNavigate]="false"
+        [allowRightSidebar]="false"
+        [showRightSidebar]="false"
+        [readOnly]="false"
+        [hideInfoButton]="true"
+        [canNavigateBefore]="false"
+        [canNavigateNext]="false"
+        [maxRetries]="1" />
+}

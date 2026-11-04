@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "应用",
+        "CANCEL": "取消",
+        "SWITCH": "切换",
+        "CONTINUE": "继续",
+        "RELOAD": "重新加载"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "声明记录",
+            "SUCCESS": "{{fileName}} 已声明为记录",
+            "FAIL": "无法将 {{fileName}} 声明为记录",
+            "DIALOG": {
+                "TITLE": "声明记录",
+                "MESSAGE": "此文档先前被声明为记录，并被拒绝。",
+                "YES": "声明记录",
+                "NO": "取消",
+                "CLOSE": "关闭"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "目前不支持将文件夹声明为记录",
+                    "EXISTING-RECORD": "已声明为记录",
+                    "FAILED": "无法声明为记录"
+                },
+                "SUCCESS": "项目已声明为记录"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "拒绝的记录",
+            "CLOSE_LABEL": "关闭",
+            "SUB-TITLE": "文件 '{{ nodeName }}' 被拒绝作为记录",
+            "BY": "作者",
+            "AT": "时间",
+            "REASON": "含原因",
+            "CONFIRM": "确认",
+            "WARNING": "如果您删除拒绝的记录警告，则声明文件为记录的选项将再次可用。",
+            "FAILED-REMOVE": "无法移除 {{nodeName}} 的拒绝警告：{{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "拒绝的记录",
+            "TOOLTIP-MESSAGE": "删除警告",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "拒绝的记录",
+                "RECORD-HYPERLINK": "声明为记录",
+                "REJECTED-RECORD-HYPERLINK": "记录被拒绝，请查看文件信息以了解详情"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "删除",
+            "SUCCESS": "'{{ name }}' 已被删除",
+            "FAIL": "无法删除 {{recordId}}",
+            "DIALOG": {
+                "TITLE": "删除记录实例",
+                "YES-ALL": "删除，且不要再次显示",
+                "YES": "删除",
+                "NO": "取消",
+                "MESSAGE": {
+                    "DELETE": "名称为 '{{name}}' 的实例将被永久移除，并且无法从垃圾桶中检索。",
+                    "ADDITIONAL": "位于组织内记录管理系统中的 '{{name}}' 记录不会受到影响。"
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "记录"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "移动",
+            "MOVE-ITEM": "将 '{{ name }}' 移动到...",
+            "SAME-FOLDER-MOVE": "无法移动到同一文件夹",
+            "SUCCESSFUL": "记录已成功移动"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "发送到存档",
+                "SUCCESS": "文件 {{ name }} 将被存档",
+                "FAIL": "无法检索 {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "项目已存档。",
+                        "PENDING-RESTORE": " 项目正在等待还原。 ",
+                        "RESTORED": "无法存档已还原的项目",
+                        "FOLDER": "目前不支持从存档还原"
+                    },
+                    "FAIL": "无法存档",
+                    "SUCCESS": "项目将被存档"
+                },
+                "DIALOG": {
+                    "TITLE": "发送到存档",
+                    "MESSAGE": "您即将要将文件发送到外部存档。从该存档中检索文件可能会产生相关费用。确定要继续吗？",
+                    "YES": "发送到存档",
+                    "NO": "取消"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "从存档还原",
+                "SYNC-ERROR": "您尝试还原的文件尚未同步到存档。此操作可能需要长达 24 小时。请稍后再试。",
+                "FAIL": "无法从存档还原 {{ name }}",
+                "DIALOG": {
+                    "TITLE": "从存档还原",
+                    "LABEL": {
+                        "TYPE": "还原速度（每次还原限制为 250MB）",
+                        "OPTION-FAST": "快速 – 持续时间 1-5 分钟（成本最高）",
+                        "OPTION-STANDARD": "标准 - 持续时间 3-5 小时",
+                        "OPTION-SLOW": "慢速 - 持续时间 5-12 小时（成本最低）",
+                        "DURATION": "文件需要多长时间（天）才能还原？"
+                    },
+                    "YES": "确认",
+                    "NO": "取消"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "从存档还原",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " 您尝试还原的文件尚未同步到存档。此操作可能需要长达 24 小时。请稍后再试。",
+                        "RESTORED": "项目已还原",
+                        "PENDING-RESTORE": "项目正在等待还原。",
+                        "NOT-STORED": "您尝试还原的项目尚未同步到存档",
+                        "FAIL": "无法还原",
+                        "FOLDER": "目前不支持还原文件夹"
+                    },
+                    "SUCCESS": "项目将被还原"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "延长还原时间",
+                "SUCCESS": "还原持续时间将从 {{ date }} 延长至其后  '{{ days }}' 天",
+                "FAIL": "无法从存档中延长 {{ name }} 的还原时间"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "文件已存档。如要还原，请右击并选择从存档中还原。",
+                "RESTORED": "已还原",
+                "PENDING-RESTORE": "目前正在从存档中还原文件。如果您无法预览或下载文件，请稍后再试"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "批量操作状态",
+            "FAIL": "无法执行操作",
+            "CLOSE": "关闭"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "管理截留",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "去除保留",
+            "DIALOG_TITLE": "管理法律截留",
+            "TAB_EXISTING_HOLDS": "管理现有截留",
+            "TAB_CREATE_LEGAL_HOLD": "创建法律截留",
+            "SAVE": "保存",
+            "CLOSE": "关闭",
+            "CANCEL": "取消",
+            "NEW_HOLD_NAME": "名称",
+            "NEW_HOLD_DESCRIPTION": "说明",
+            "NEW_HOLD_REASON": "原因",
+            "DIALOG_WARNING_TITLE": "警告",
+            "DIALOG_WARNING_MESSAGE": "如果切换选项卡，将不会应用此处的更改。",
+            "DOCUMENT_IN_HOLD": "法律截留中的文档",
+            "FOLDER_IN_HOLD": "法律截留中的文件夹",
+            "APPLY_HOLDS_SUCCESS": "法律截留操作成功。",
+            "APPLY_HOLDS_NOT_FOUND": "所选法律截留或指定文件不存在。请核实您的选择并重试。",
+            "BULK_APPLY_HOLDS_SUCCESS": "法律截留操作成功。{{ totalItems }} 个项目已添加至法律截留。",
+            "BULK_APPLY_HOLDS_STARTED": "批量法律截留操作正在后台运行。完成后将通知您。",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "检测到已归档、重复或锁定的内容。{{ errorsCount }} 个项目未添加至法律截留。",
+            "BULK_APPLY_HOLDS_FAIL": "无法将内容置于法律截留。",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "批量法律截留无法应用于文件夹",
+            "ACKNOWLEDGE": "确认",
+            "EMPTY_HOLD_LIST": "无可用的法律截留",
+            "WARNING_DIALOG_TITLE": "警告：批量操作",
+            "WARNING_DIALOG_MESSAGE": "此操作将更改<strong>此次搜索文件中所有文件</strong>的法律截留状态。<br><br>此法律截留<strong>将不会应用于文件夹</strong>。",
+            "WARNING_DIALOG_QUESTION": "是否继续？",
+            "NO_RECORDS_MANAGEMENT_SITE": "管理员必须创建记录管理站点方可激活法律截留",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "已成功从法律截留中删除文件。",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "已成功从法律截留中删除文件。",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "无法从法律截留中删除文件。",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "无法从法律截留中删除文件。",
+            "LOADING_CAPABILITIES_ERROR": "无法加载功能",
+            "NODE_NOT_FOUND": "找不到选定的节点。请验证您的选项，然后重试。",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "是否删除包含截留的项目？",
+                "TITLE_PLURAL": "是否删除选定的 {{ count }} 个暂停事项并释放文档?",
+                "MESSAGE_SINGULAR": "已选择要移除 {{ name }} 个截留。其截留的所有项目均将被释放。此操作无法撤消。",
+                "MESSAGE_PLURAL": "已选择要移除 {{ count }} 个项目。其中一些是截留，其截留的所有项目均将被释放。此操作无法撤消。",
+                "KEEP_HOLD": "暂停"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "保存安全标记时出错",
+            "DIALOG_TITLE": "编辑安全标记",
+            "MENU_TITLE": "安全标记",
+            "SAVE": "保存",
+            "CANCEL": "取消",
+            "HELP": "帮助",
+            "CLOSE": "关闭",
+            "SHOW_ALL": "显示全部",
+            "APPLIED": "已应用",
+            "NOT_APPLIED": "未应用",
+            "COLUMNS": {
+                "NAME": "安全标记"
+            },
+            "NO_GROUPS_CREATED": "无可用的安全组",
+            "SECURITY_MARKS_HELP": "安全标记帮助",
+            "HELP_ICON_TEXT": "应用安全标记将限制对数字内容的访问。 只有对其用户权限应用了匹配标记的人才能查看或编辑标记的内容。"
+        }
+    }
+}

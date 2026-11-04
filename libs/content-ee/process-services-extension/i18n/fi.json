@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Uusi prosessi",
+            "SELECT_APPLICATION": "Valitse sovellus",
+            "ERROR": "Et voi käynnistää prosessia, koska prosessimääritelmiä ei ole saatavilla"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Prosessien hallinta",
+            "PROCESS_LIST": {
+                "PROCESSES": "Prosessit"
+            },
+            "START_PROCESS": "Käynnistä prosessi",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Näytä tiedot"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Näytä kommentit"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Prosessien hallinta",
+            "CREATE_NEW_PROCESS": "Käynnistä prosessi",
+            "CREATE_PROCESS_NOT_ALLOWED": "Uutta prosessia ei voida luoda"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Näytä lisää"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Kommentit",
+            "CANCEL_PROCESS": "Peruuta prosessi"
+        },
+        "ERROR": {
+            "NO_FORM": "Prosessimääritelmälle ei ole määritelty lomaketta",
+            "NO_CONTENT": "Tiedoston liittäminen laitteeltasi epäonnistui",
+            "CAN_NOT_ATTACH": "Valitun sisällön liittäminen epäonnistui",
+            "AUDIT_ERROR": "Näytä tehtävävirhe: {{error}}",
+            "TASK_ACCESS_WARNING": "Sinulla ei ole oikeutta muokata tätä tehtävää",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Asiakirjan esikatselu ei ole käytettävissä, koska tehtävää ei ole vielä suoritettu."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "'{{ processName }}'-prosessi luotu",
+            "BACKEND_SERVICE_ERROR": "Tapahtui tuntematon verkkovirhe. Prosessipalveluihin liittyvät ominaisuudet ovat poissa käytöstä.",
+            "ACTION": "Näytä  käynnissä oleva prosessi"
+        },
+        "NO_PROCESS_DEFINITIONS": "Ei prosessimääritelmiä käytettävissä",
+        "SIDE_NAV_TITLE": "Työnkulku",
+        "STATUS": {
+            "COMPLETED": "Valmis",
+            "RUNNING": "Käynnissä",
+            "OPEN": "Avaa",
+            "UNKNOWN": "Tuntematon"
+        },
+        "TASK_LIST": {
+            "TASKS": "Tehtävät",
+            "ACTIONS": {
+                "TASK_DETAILS": "Näytä"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Näytä"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Lomake tallennettiin",
+            "FORM_COMPLETED": "Tehtävä on suoritettu",
+            "CLOSE": "Sulje",
+            "CLAIM_TASK": "Tehtävä on varattu",
+            "UNCLAIM_TASK": "Tehtävä on vapautettu",
+            "CLAIM_FAILED": "Toiminto epäonnistui"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Toiminto epäonnistui",
+            "FAILED_TO_LOAD": "Tehtävän tietojen lataaminen epäonnistui. Yritä hetken kuluttua uudestaan.",
+            "UPDATED": "{{ property }}-ominaisuus päivitettiin",
+            "FAILED_TO_UPDATE": "{{ property }}-ominaisuuden päivittäminen epäonnistui",
+            "METADATA_TOOLTIP": "Näytä tiedot",
+            "NO_TASK_NAME": "Ei nimeä"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Sulje"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Ei prosessimääritelmiä käytettävissä"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Aloittaja",
+            "CREATED": "Alkamispäivä"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Et voi käynnistää prosessia, koska prosessimääritelmiä ei ole saatavilla",
+            "NO_START_FORM": "Tämä prosessi ei vaadi ylimääräisiä määrityksiä",
+            "NO_PROCESS_DEF_SELECTED": "Luokkia/prosesseja ei ole valittu",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Valitse sovellus"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Haluatko peruuttaa prosessin?",
+                "DESCRIPTION": "Tämä prosessi ja kaikki siihen liittyvät tehtävät saavat merkinnän ”Valmis”.",
+                "CONFIRM_BTN": "Vahvista"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' peruutettu onnistuneesti.",
+                "FAIL": "Virhe prosessin peruuttamisessa: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Luontipäivämäärä"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Varaa",
+                "UNCLAIM": "Vapauta"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Käynnissä olevan prosessin osa",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Linkitetty prosessi",
+            "PART_OF_THE_PROCESS_TITLE": "Tämä asiakirja on seuraavien prosessien osa:",
+            "NO_PROCESSES": "Tämä asiakirja ei ole yhdenkään käynnissä olevan prosessin osa.",
+            "CREATED": "Luotu",
+            "VIEW_DETAILS_BTN": "Näytä tiedot"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Prosessipalveluiden automaattinen todennus",
+        "ENABLED": "Käytössä",
+        "ENABLED_DESCRIPTION": "Järjestelmä suorittaa käyttäjän todentamisen automaattisesti uudelleen, jotta käyttäjä voi työskennellä häiriöittä.",
+        "DISABLED": "Poistettu käytöstä",
+        "DISABLED_DESCRIPTION": "Käyttäjän on tunnistauduttava uudelleen käyttäjätunnuksillaan, kun istunto on vanhentunut.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

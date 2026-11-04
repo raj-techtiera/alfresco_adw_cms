@@ -1,0 +1,17 @@
+<div *ngIf="isLoading; else showInfoDrawer">
+    <mat-progress-bar mode="indeterminate"/>
+</div>
+<ng-template #showInfoDrawer>
+    <adf-info-drawer [title]="processInstanceDetails?.name" (currentTab)="onTabChange($event)" [selectedIndex]="focusedTab" class="aps-process-metadata-drawer">
+        <adf-info-drawer-tab label="{{ 'ADF_TASK_LIST.DETAILS.LABELS.INFO_DRAWER_TAB_DETAILS_TITLE' | translate }}">
+            <div class="aps-process-metadata-container">
+                <adf-process-instance-header [processInstance]="processInstanceDetails"/>
+            </div>
+        </adf-info-drawer-tab>
+        <adf-info-drawer-tab label="{{ 'APP.INFO_DRAWER.TABS.COMMENTS' | translate }}">
+            <div class="aps-process-comments-container">
+                <adf-process-instance-comments [processInstanceId]="processInstanceDetails.id" [readOnly]="false"/>
+            </div>
+        </adf-info-drawer-tab>
+    </adf-info-drawer>
+</ng-template>

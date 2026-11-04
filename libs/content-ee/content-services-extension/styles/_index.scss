@@ -1,0 +1,33 @@
+.adw-page-title {
+    cursor: default;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.15px;
+    line-height: 33px;
+    margin: 0;
+    color: var(--adf-theme-foreground-text-color-087);
+    width: 100%;
+}
+
+.adw-toolbar {
+    display: flex;
+    box-sizing: border-box;
+    margin: 0;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    min-height: 64px;
+    height: 64px;
+
+    &.adw-toolbar-primary {
+        padding: 0 16px;
+        background-color: var(--theme-adw-toolbar-background-color);
+        color: var(--theme-text-color, rgba(0, 0, 0, 0.54));
+    }
+}
+
+.adw-toolbar-title {
+    width: 100%;
+    font-size: var(--theme-body-1-font-size);
+    color: var(--theme-text-color, rgba(0, 0, 0, 0.54));
+}

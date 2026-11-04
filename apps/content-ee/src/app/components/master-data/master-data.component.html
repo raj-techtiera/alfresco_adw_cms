@@ -1,0 +1,917 @@
+<main class="md-page">
+  <header class="md-page__header">
+    <button
+      *ngIf="!isSidenavExpanded"
+      class="md-page__nav-toggle"
+      type="button"
+      (click)="openSidenav()"
+      aria-label="Expand navigation menu"
+      title="Expand navigation menu"
+    >
+      &raquo;
+    </button>
+
+    <div class="md-page__header-main">
+      <div>
+        <h1 class="md-page__title">Master Data Management</h1>
+        <p class="md-page__subtitle">
+          Manage regions, assets, facilities, and document numbering fields used across the workspace.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <mat-tab-group
+    [(selectedIndex)]="activeTab"
+    (selectedIndexChange)="onTabChange($event)"
+    class="md-tabs"
+    animationDuration="150ms"
+  >
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="md-tab-icon">account_tree</mat-icon>
+        Asset Hierarchy
+      </ng-template>
+
+      <section class="md-hierarchy">
+        <nav class="md-breadcrumb" aria-label="Hierarchy path" *ngIf="selectedMdRegion">
+          <span class="md-breadcrumb__item md-breadcrumb__item--active">
+            <mat-icon>place</mat-icon>
+            {{ selectedMdRegion.name }}
+          </span>
+          <mat-icon class="md-breadcrumb__sep" *ngIf="selectedMdBlock">chevron_right</mat-icon>
+          <span class="md-breadcrumb__item md-breadcrumb__item--active" *ngIf="selectedMdBlock">
+            <mat-icon>business</mat-icon>
+            {{ selectedMdBlock.name }}
+          </span>
+          <mat-icon class="md-breadcrumb__sep" *ngIf="selectedMdBlock && mdAssets.length">chevron_right</mat-icon>
+          <span class="md-breadcrumb__item" *ngIf="selectedMdBlock && mdAssets.length">
+            <mat-icon>category</mat-icon>
+            {{ mdAssets.length }} facilit{{ mdAssets.length === 1 ? 'y' : 'ies' }}
+          </span>
+        </nav>
+
+        <div class="md-hierarchy__body">
+          <!-- Regions -->
+          <div class="md-column">
+            <div class="md-column__header">
+              <div class="md-column__icon"><mat-icon>place</mat-icon></div>
+              <div class="md-column__heading">
+                <h3 class="md-column__title">Regions</h3>
+                <span class="md-column__count">{{ mdRegions.length }}</span>
+              </div>
+            </div>
+            <div class="md-column__search">
+              <mat-icon>search</mat-icon>
+              <input type="search" [(ngModel)]="mdRegionSearch" placeholder="Search region..." />
+            </div>
+            <div class="md-column__list" role="listbox" aria-label="Regions">
+              <div *ngIf="loadingMdRegions" class="md-column__empty">
+                <mat-icon>hourglass_empty</mat-icon>
+                <p>Loading regions...</p>
+              </div>
+              <div *ngIf="!loadingMdRegions && !filteredMdRegions.length" class="md-column__empty">
+                <mat-icon>place</mat-icon>
+                <p>No regions found</p>
+              </div>
+              <button
+                type="button"
+                class="md-item"
+                role="option"
+                *ngFor="let region of filteredMdRegions; trackBy: trackByMdId"
+                [class.md-item--selected]="selectedMdRegion?.id === region.id"
+                [attr.aria-selected]="selectedMdRegion?.id === region.id"
+                (click)="selectMdRegion(region)"
+              >
+                <div class="md-item__icon"><mat-icon>place</mat-icon></div>
+                <div class="md-item__content">
+                  <span class="md-item__name">{{ region.name }}</span>
+                  <span class="md-item__code">{{ region.code }}</span>
+                </div>
+                <span class="md-status" [class.md-status--inactive]="region.status === 'Inactive'">
+                  <span class="md-status__dot"></span>{{ region.status }}
+                </span>
+              </button>
+            </div>
+            <div class="md-column__footer">
+              <button
+                type="button"
+                class="md-add-btn"
+                [class.md-add-btn--active]="showAddRegion"
+                (click)="toggleAddRegion()"
+              >
+                <mat-icon>add</mat-icon> Add Region
+              </button>
+              <div *ngIf="showAddRegion" class="md-add-form">
+                <p class="md-add-form__title">New Region</p>
+                <div class="md-add-form__field">
+                  <label>Region Name <span>*</span></label>
+                  <input type="text" [(ngModel)]="newRegionName" placeholder="e.g. Sarawak3" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Region Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newRegionCode" placeholder="e.g. SWK3" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newRegionStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option value="Active">Active</mat-option>
+                      <mat-option value="Inactive">Inactive</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newRegionCreatedBy" placeholder="e.g. admin" />
+                </div>
+                <div class="md-add-form__actions">
+                  <button type="button" class="md-add-form__cancel" (click)="cancelAddRegion()" [disabled]="savingMdRegion">
+                    Cancel
+                  </button>
+                  <button type="button" class="md-add-form__save" (click)="saveMdRegion()" [disabled]="savingMdRegion">
+                    {{ savingMdRegion ? 'Saving...' : 'Save' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assets -->
+          <div class="md-column" [class.md-column--disabled]="!selectedMdRegion">
+            <div class="md-column__header">
+              <div class="md-column__icon"><mat-icon>business</mat-icon></div>
+              <div class="md-column__heading">
+                <h3 class="md-column__title">Assets</h3>
+                <span class="md-column__count">{{ mdBlocks.length }}</span>
+              </div>
+            </div>
+            <div class="md-column__search">
+              <mat-icon>search</mat-icon>
+              <input
+                type="search"
+                [(ngModel)]="mdBlockSearch"
+                placeholder="Search asset..."
+                [disabled]="!selectedMdRegion"
+              />
+            </div>
+            <div class="md-column__list" role="listbox" aria-label="Assets">
+              <div *ngIf="loadingMdBlocks" class="md-column__empty">
+                <mat-icon>hourglass_empty</mat-icon>
+                <p>Loading assets...</p>
+              </div>
+              <div *ngIf="!loadingMdBlocks && !selectedMdRegion" class="md-column__empty">
+                <mat-icon>arrow_back</mat-icon>
+                <p>Select a region</p>
+                <span>Choose a region on the left to view its assets</span>
+              </div>
+              <div *ngIf="!loadingMdBlocks && selectedMdRegion && !filteredMdBlocks.length" class="md-column__empty">
+                <mat-icon>business</mat-icon>
+                <p>No assets</p>
+                <span>No assets found for {{ selectedMdRegion.name }}</span>
+              </div>
+              <button
+                type="button"
+                class="md-item"
+                role="option"
+                *ngFor="let block of filteredMdBlocks; trackBy: trackByMdId"
+                [class.md-item--selected]="selectedMdBlock?.id === block.id"
+                [attr.aria-selected]="selectedMdBlock?.id === block.id"
+                (click)="selectMdBlock(block)"
+              >
+                <div class="md-item__icon"><mat-icon>business</mat-icon></div>
+                <div class="md-item__content">
+                  <span class="md-item__name">{{ block.name }}</span>
+                  <span class="md-item__code">{{ block.code }}</span>
+                </div>
+                <span class="md-status" [class.md-status--inactive]="block.status === 'Inactive'">
+                  <span class="md-status__dot"></span>{{ block.status }}
+                </span>
+              </button>
+            </div>
+            <div class="md-column__footer">
+              <button
+                type="button"
+                class="md-add-btn"
+                [class.md-add-btn--active]="showAddBlock"
+                [disabled]="!selectedMdRegion"
+                (click)="toggleAddBlock()"
+              >
+                <mat-icon>add</mat-icon> Add Asset
+              </button>
+              <div *ngIf="showAddBlock && selectedMdRegion" class="md-add-form">
+                <p class="md-add-form__title">New Asset</p>
+                <div class="md-add-form__field">
+                  <label>Region</label>
+                  <div class="md-add-form__fixed-value">
+                    {{ selectedMdRegion.name }} ({{ selectedMdRegion.code }})
+                  </div>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Asset Name <span>*</span></label>
+                  <input type="text" [(ngModel)]="newBlockName" placeholder="e.g. Montara Field" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Asset Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newBlockCode" placeholder="e.g. MT" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newBlockStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option value="Active">Active</mat-option>
+                      <mat-option value="Inactive">Inactive</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newBlockCreatedBy" placeholder="e.g. admin" />
+                </div>
+                <div class="md-add-form__actions">
+                  <button type="button" class="md-add-form__cancel" (click)="cancelAddBlock()" [disabled]="savingMdBlock">
+                    Cancel
+                  </button>
+                  <button type="button" class="md-add-form__save" (click)="saveMdBlock()" [disabled]="savingMdBlock">
+                    {{ savingMdBlock ? 'Saving...' : 'Save' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facilities -->
+          <div class="md-column md-column--last" [class.md-column--disabled]="!selectedMdBlock">
+            <div class="md-column__header">
+              <div class="md-column__icon"><mat-icon>category</mat-icon></div>
+              <div class="md-column__heading">
+                <h3 class="md-column__title">Facilities</h3>
+                <span class="md-column__count">{{ mdAssets.length }}</span>
+              </div>
+            </div>
+            <div class="md-column__search">
+              <mat-icon>search</mat-icon>
+              <input
+                type="search"
+                [(ngModel)]="mdAssetSearch"
+                placeholder="Search facility..."
+                [disabled]="!selectedMdBlock"
+              />
+            </div>
+            <div class="md-column__list" role="list" aria-label="Facilities">
+              <div *ngIf="loadingMdAssets" class="md-column__empty">
+                <mat-icon>hourglass_empty</mat-icon>
+                <p>Loading facilities...</p>
+              </div>
+              <div *ngIf="!loadingMdAssets && !selectedMdBlock" class="md-column__empty">
+                <mat-icon>arrow_back</mat-icon>
+                <p>Select an asset</p>
+                <span>Choose an asset to view its facilities</span>
+              </div>
+              <div *ngIf="!loadingMdAssets && selectedMdBlock && !filteredMdAssets.length" class="md-column__empty">
+                <mat-icon>category</mat-icon>
+                <p>No facilities</p>
+                <span>No facilities found for {{ selectedMdBlock.name }}</span>
+              </div>
+              <div
+                class="md-item md-item--static"
+                role="listitem"
+                *ngFor="let asset of filteredMdAssets; trackBy: trackByMdId"
+              >
+                <div class="md-item__icon"><mat-icon>category</mat-icon></div>
+                <div class="md-item__content">
+                  <span class="md-item__name">{{ asset.name }}</span>
+                  <span class="md-item__code">{{ asset.code }}</span>
+                </div>
+                <span class="md-status" [class.md-status--inactive]="asset.status === 'Inactive'">
+                  <span class="md-status__dot"></span>{{ asset.status }}
+                </span>
+              </div>
+            </div>
+            <div class="md-column__footer">
+              <button
+                type="button"
+                class="md-add-btn"
+                [class.md-add-btn--active]="showAddAsset"
+                [disabled]="!selectedMdBlock"
+                (click)="toggleAddAsset()"
+              >
+                <mat-icon>add</mat-icon> Add Facility
+              </button>
+              <div *ngIf="showAddAsset && selectedMdBlock" class="md-add-form">
+                <p class="md-add-form__title">New Facility</p>
+                <div class="md-add-form__field">
+                  <label>Asset</label>
+                  <div class="md-add-form__fixed-value">
+                    {{ selectedMdBlock.name }} ({{ selectedMdBlock.code }})
+                  </div>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Facility Name <span>*</span></label>
+                  <input
+                    type="text"
+                    [(ngModel)]="newAssetName"
+                    placeholder="e.g. TEST FACILITY 001 - Production Platform"
+                  />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Facility Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newAssetCode" placeholder="e.g. TF001" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newAssetStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option value="Active">Active</mat-option>
+                      <mat-option value="Inactive">Inactive</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newAssetCreatedBy" placeholder="e.g. admin" />
+                </div>
+                <div class="md-add-form__actions">
+                  <button type="button" class="md-add-form__cancel" (click)="cancelAddAsset()" [disabled]="savingMdAsset">
+                    Cancel
+                  </button>
+                  <button type="button" class="md-add-form__save" (click)="saveMdAsset()" [disabled]="savingMdAsset">
+                    {{ savingMdAsset ? 'Saving...' : 'Save' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="md-tab-icon">tune</mat-icon>
+        Document Numberning
+        
+      </ng-template>
+
+      <section class="md-fields">
+        <aside class="md-fields__nav" aria-label="Fields data menu">
+          <p class="md-fields__nav-title">Fields</p>
+          <button
+            type="button"
+            class="md-fields__nav-item"
+            *ngFor="let item of fieldsMenu"
+            [class.md-fields__nav-item--active]="activeFieldsMenu === item.key"
+            (click)="selectFieldsMenu(item.key)"
+          >
+            <span class="md-fields__nav-icon" aria-hidden="true">
+              <mat-icon>{{ item.icon }}</mat-icon>
+            </span>
+            <span class="md-fields__nav-label">{{ item.label }}</span>
+          </button>
+        </aside>
+
+        <div class="md-fields__content">
+          <!-- Categories -->
+          <div *ngIf="activeFieldsMenu === 'categories'" class="md-fields__panel">
+            <div class="md-fields__panel-head">
+              <div class="md-fields__panel-title">
+                <h2>Categories</h2>
+                <p>Manage document numbering categories.</p>
+              </div>
+              <div class="md-fields__panel-actions">
+                <span class="md-fields__count-chip">{{ categories.length }}</span>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-fields__add-btn"
+                  [class.md-fields__add-btn--active]="showAddCategory"
+                  (click)="toggleAddCategory()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Add Category
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="showAddCategory" class="md-fields__form">
+              <p class="md-fields__form-title">
+                {{ editingCategoryId != null ? 'Edit Category' : 'New Category' }}
+              </p>
+              <div class="md-fields__form-grid">
+                <div class="md-add-form__field">
+                  <label>Category Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newCategoryCode" placeholder="e.g. TEST_CATEGORY" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Category Name <span>*</span></label>
+                  <input type="text" [(ngModel)]="newCategoryName" placeholder="e.g. Test Category" />
+                </div>
+                <div class="md-add-form__field md-add-form__field--full">
+                  <label>Description</label>
+                  <input
+                    type="text"
+                    [(ngModel)]="newCategoryDescription"
+                    placeholder="e.g. Test category for document numbering"
+                  />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newCategoryStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option *ngFor="let status of fieldsStatusOptions" [value]="status">
+                        {{ status }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newCategoryCreatedBy" placeholder="e.g. admin" />
+                </div>
+              </div>
+              <div class="md-add-form__actions">
+                <button
+                  type="button"
+                  mat-stroked-button
+                  class="md-add-form__cancel"
+                  (click)="cancelAddCategory()"
+                  [disabled]="savingCategory"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-add-form__save"
+                  (click)="saveCategory()"
+                  [disabled]="savingCategory"
+                >
+                  {{ savingCategory ? 'Saving...' : editingCategoryId != null ? 'Update' : 'Save' }}
+                </button>
+              </div>
+            </div>
+
+            <div class="md-fields__scroll">
+              <div class="md-fields__toolbar">
+                <div class="md-fields__search">
+                  <mat-icon>search</mat-icon>
+                  <input type="search" [(ngModel)]="categorySearch" placeholder="Search categories..." />
+                </div>
+              </div>
+
+              <div class="md-fields__table md-fields__table--scroll-body">
+                <div class="md-fields__table-head" *ngIf="!loadingCategories && filteredCategories.length">
+                  <span>Name</span>
+                  <span>Code</span>
+                  <span>Status</span>
+                  <span class="md-fields__table-head-action">Action</span>
+                </div>
+                <div class="md-fields__table-body">
+                  <div *ngIf="loadingCategories" class="md-fields__empty">
+                    <mat-icon>hourglass_empty</mat-icon>
+                    <p>Loading categories...</p>
+                  </div>
+                  <div *ngIf="!loadingCategories && !filteredCategories.length" class="md-fields__empty">
+                    <mat-icon>category</mat-icon>
+                    <p>No categories found</p>
+                    <span>Try a different search or add a new category</span>
+                  </div>
+                  <div
+                    class="md-fields__row"
+                    *ngFor="let category of filteredCategories; trackBy: trackByCategoryCode"
+                  >
+                    <div class="md-fields__row-main">
+                      <span class="md-fields__row-title">{{ category.categoryName }}</span>
+                      <span class="md-fields__row-meta" *ngIf="category.description">{{ category.description }}</span>
+                    </div>
+                    <span class="md-fields__code">{{ category.categoryCode }}</span>
+                    <span
+                      class="md-status"
+                      [class.md-status--inactive]="(category.status || '').toLowerCase() !== 'active'"
+                    >
+                      <span class="md-status__dot"></span>{{ category.status || 'active' }}
+                    </span>
+                    <button
+                      type="button"
+                      class="md-fields__edit-btn"
+                      aria-label="Edit category"
+                      (click)="startEditCategory(category)"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Countries -->
+          <div *ngIf="activeFieldsMenu === 'countries'" class="md-fields__panel">
+            <div class="md-fields__panel-head">
+              <div class="md-fields__panel-title">
+                <h2>Countries</h2>
+                <p>Manage document numbering countries.</p>
+              </div>
+              <div class="md-fields__panel-actions">
+                <span class="md-fields__count-chip">{{ countries.length }}</span>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-fields__add-btn"
+                  [class.md-fields__add-btn--active]="showAddCountry"
+                  (click)="toggleAddCountry()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Add Country
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="showAddCountry" class="md-fields__form">
+              <p class="md-fields__form-title">
+                {{ editingCountryId != null ? 'Edit Country' : 'New Country' }}
+              </p>
+              <div class="md-fields__form-grid">
+                <div class="md-add-form__field">
+                  <label>Country Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newCountryCode" placeholder="e.g. MYY111" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Country Name <span>*</span></label>
+                  <input type="text" [(ngModel)]="newCountryName" placeholder="e.g. Malaysia" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Numbering Type</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newCountryNumberingType" panelClass="adw-master-data-select-panel">
+                      <mat-option *ngFor="let type of numberingTypeOptions" [value]="type">
+                        {{ type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newCountryStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option *ngFor="let status of fieldsStatusOptions" [value]="status">
+                        {{ status }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newCountryCreatedBy" placeholder="e.g. admin" />
+                </div>
+              </div>
+              <div class="md-add-form__actions">
+                <button
+                  type="button"
+                  mat-stroked-button
+                  class="md-add-form__cancel"
+                  (click)="cancelAddCountry()"
+                  [disabled]="savingCountry"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-add-form__save"
+                  (click)="saveCountry()"
+                  [disabled]="savingCountry"
+                >
+                  {{ savingCountry ? 'Saving...' : editingCountryId != null ? 'Update' : 'Save' }}
+                </button>
+              </div>
+            </div>
+
+            <div class="md-fields__scroll">
+              <div class="md-fields__toolbar">
+                <div class="md-fields__search">
+                  <mat-icon>search</mat-icon>
+                  <input type="search" [(ngModel)]="countrySearch" placeholder="Search countries..." />
+                </div>
+              </div>
+
+              <div class="md-fields__table md-fields__table--scroll-body">
+                <div class="md-fields__table-head" *ngIf="!loadingCountries && filteredCountries.length">
+                  <span>Name</span>
+                  <span>Code</span>
+                  <span>Status</span>
+                  <span class="md-fields__table-head-action">Action</span>
+                </div>
+                <div class="md-fields__table-body">
+                  <div *ngIf="loadingCountries" class="md-fields__empty">
+                    <mat-icon>hourglass_empty</mat-icon>
+                    <p>Loading countries...</p>
+                  </div>
+                  <div *ngIf="!loadingCountries && !filteredCountries.length" class="md-fields__empty">
+                    <mat-icon>public</mat-icon>
+                    <p>No countries found</p>
+                    <span>Try a different search or add a new country</span>
+                  </div>
+                  <div
+                    class="md-fields__row"
+                    *ngFor="let country of filteredCountries; trackBy: trackByCountryCode"
+                  >
+                    <div class="md-fields__row-main">
+                      <span class="md-fields__row-title">{{ country.countryName }}</span>
+                      <span class="md-fields__row-meta" *ngIf="country.numberingType">
+                        Type: {{ country.numberingType }}
+                      </span>
+                    </div>
+                    <span class="md-fields__code">{{ country.countryCode }}</span>
+                    <span
+                      class="md-status"
+                      [class.md-status--inactive]="(country.status || '').toLowerCase() !== 'active'"
+                    >
+                      <span class="md-status__dot"></span>{{ country.status || 'active' }}
+                    </span>
+                    <button
+                      type="button"
+                      class="md-fields__edit-btn"
+                      aria-label="Edit country"
+                      (click)="startEditCountry(country)"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Disciplines -->
+          <div *ngIf="activeFieldsMenu === 'disciplines'" class="md-fields__panel">
+            <div class="md-fields__panel-head">
+              <div class="md-fields__panel-title">
+                <h2>Disciplines</h2>
+                <p>Manage document numbering disciplines.</p>
+              </div>
+              <div class="md-fields__panel-actions">
+                <span class="md-fields__count-chip">{{ disciplines.length }}</span>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-fields__add-btn"
+                  [class.md-fields__add-btn--active]="showAddDiscipline"
+                  (click)="toggleAddDiscipline()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Add Discipline
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="showAddDiscipline" class="md-fields__form">
+              <p class="md-fields__form-title">
+                {{ editingDisciplineId != null ? 'Edit Discipline' : 'New Discipline' }}
+              </p>
+              <div class="md-fields__form-grid">
+                <div class="md-add-form__field">
+                  <label>Discipline Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newDisciplineCode" placeholder="e.g. INS" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Discipline Name <span>*</span></label>
+                  <input type="text" [(ngModel)]="newDisciplineName" placeholder="e.g. Instrumentation" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newDisciplineStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option *ngFor="let status of fieldsStatusOptions" [value]="status">
+                        {{ status }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newDisciplineCreatedBy" placeholder="e.g. admin" />
+                </div>
+              </div>
+              <div class="md-add-form__actions">
+                <button
+                  type="button"
+                  mat-stroked-button
+                  class="md-add-form__cancel"
+                  (click)="cancelAddDiscipline()"
+                  [disabled]="savingDiscipline"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-add-form__save"
+                  (click)="saveDiscipline()"
+                  [disabled]="savingDiscipline"
+                >
+                  {{ savingDiscipline ? 'Saving...' : editingDisciplineId != null ? 'Update' : 'Save' }}
+                </button>
+              </div>
+            </div>
+
+            <div class="md-fields__scroll">
+              <div class="md-fields__toolbar">
+                <div class="md-fields__search">
+                  <mat-icon>search</mat-icon>
+                  <input type="search" [(ngModel)]="disciplineSearch" placeholder="Search disciplines..." />
+                </div>
+              </div>
+
+              <div class="md-fields__table md-fields__table--scroll-body">
+                <div class="md-fields__table-head" *ngIf="!loadingDisciplines && filteredDisciplines.length">
+                  <span>Name</span>
+                  <span>Code</span>
+                  <span>Status</span>
+                  <span class="md-fields__table-head-action">Action</span>
+                </div>
+                <div class="md-fields__table-body">
+                  <div *ngIf="loadingDisciplines" class="md-fields__empty">
+                    <mat-icon>hourglass_empty</mat-icon>
+                    <p>Loading disciplines...</p>
+                  </div>
+                  <div *ngIf="!loadingDisciplines && !filteredDisciplines.length" class="md-fields__empty">
+                    <mat-icon>architecture</mat-icon>
+                    <p>No disciplines found</p>
+                    <span>Try a different search or add a new discipline</span>
+                  </div>
+                  <div
+                    class="md-fields__row"
+                    *ngFor="let discipline of filteredDisciplines; trackBy: trackByDisciplineCode"
+                  >
+                    <div class="md-fields__row-main">
+                      <span class="md-fields__row-title">{{ discipline.disciplineName }}</span>
+                    </div>
+                    <span class="md-fields__code">{{ discipline.disciplineCode }}</span>
+                    <span
+                      class="md-status"
+                      [class.md-status--inactive]="(discipline.status || '').toLowerCase() !== 'active'"
+                    >
+                      <span class="md-status__dot"></span>{{ discipline.status || 'active' }}
+                    </span>
+                    <button
+                      type="button"
+                      class="md-fields__edit-btn"
+                      aria-label="Edit discipline"
+                      (click)="startEditDiscipline(discipline)"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Discipline Type (document-types API) -->
+          <div *ngIf="activeFieldsMenu === 'documentTypes'" class="md-fields__panel">
+            <div class="md-fields__panel-head">
+              <div class="md-fields__panel-title">
+                <h2>Document Type</h2>
+                <p>Manage document numbering document types.</p>
+              </div>
+              <div class="md-fields__panel-actions">
+                <span class="md-fields__count-chip">{{ documentTypes.length }}</span>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-fields__add-btn"
+                  [class.md-fields__add-btn--active]="showAddDocumentType"
+                  (click)="toggleAddDocumentType()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Add Document Type
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="showAddDocumentType" class="md-fields__form">
+              <p class="md-fields__form-title">
+                {{ editingDocumentTypeId != null ? 'Edit Discipline Type' : 'New Discipline Type' }}
+              </p>
+              <div class="md-fields__form-grid">
+                <div class="md-add-form__field">
+                  <label>Code <span>*</span></label>
+                  <input type="text" [(ngModel)]="newDocumentTypeCode" placeholder="e.g. CS" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Name <span>*</span></label>
+                  <input type="text" [(ngModel)]="newDocumentTypeName" placeholder="e.g. Cable_Schedules" />
+                </div>
+                <div class="md-add-form__field">
+                  <label>Category <span>*</span></label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select
+                      [(ngModel)]="newDocumentTypeCategoryCode"
+                      panelClass="adw-master-data-select-panel"
+                    >
+                      <mat-option *ngFor="let category of categories" [value]="category.categoryCode">
+                        {{ category.categoryName }} ({{ category.categoryCode }})
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Status</label>
+                  <mat-form-field appearance="outline" class="md-mat-field" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="newDocumentTypeStatus" panelClass="adw-master-data-select-panel">
+                      <mat-option *ngFor="let status of fieldsStatusOptions" [value]="status">
+                        {{ status }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="md-add-form__field">
+                  <label>Created By</label>
+                  <input type="text" [(ngModel)]="newDocumentTypeCreatedBy" placeholder="e.g. admin" />
+                </div>
+              </div>
+              <div class="md-add-form__actions">
+                <button
+                  type="button"
+                  mat-stroked-button
+                  class="md-add-form__cancel"
+                  (click)="cancelAddDocumentType()"
+                  [disabled]="savingDocumentType"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  mat-flat-button
+                  class="md-add-form__save"
+                  (click)="saveDocumentType()"
+                  [disabled]="savingDocumentType"
+                >
+                  {{ savingDocumentType ? 'Saving...' : editingDocumentTypeId != null ? 'Update' : 'Save' }}
+                </button>
+              </div>
+            </div>
+
+            <div class="md-fields__scroll">
+              <div class="md-fields__toolbar">
+                <div class="md-fields__search">
+                  <mat-icon>search</mat-icon>
+                  <input type="search" [(ngModel)]="documentTypeSearch" placeholder="Search discipline types..." />
+                </div>
+              </div>
+
+              <div class="md-fields__table md-fields__table--with-category md-fields__table--scroll-body">
+                <div
+                  class="md-fields__table-head"
+                  *ngIf="!loadingDocumentTypes && filteredDocumentTypes.length"
+                >
+                  <span>Name</span>
+                  <span>Code</span>
+                  <span>Category</span>
+                  <span>Status</span>
+                  <span class="md-fields__table-head-action">Action</span>
+                </div>
+                <div class="md-fields__table-body">
+                  <div *ngIf="loadingDocumentTypes" class="md-fields__empty">
+                    <mat-icon>hourglass_empty</mat-icon>
+                    <p>Loading discipline types...</p>
+                  </div>
+                  <div *ngIf="!loadingDocumentTypes && !filteredDocumentTypes.length" class="md-fields__empty">
+                    <mat-icon>description</mat-icon>
+                    <p>No discipline types found</p>
+                    <span>Try a different search or add a new discipline type</span>
+                  </div>
+                  <div
+                    class="md-fields__row"
+                    *ngFor="let documentType of filteredDocumentTypes; trackBy: trackByDocumentTypeCode"
+                  >
+                    <div class="md-fields__row-main">
+                      <span class="md-fields__row-title">{{ documentType.documentTypeName }}</span>
+                    </div>
+                    <span class="md-fields__code">{{ documentType.documentTypeCode }}</span>
+                    <span class="md-fields__code">{{ documentType.categoryCode }}</span>
+                    <span
+                      class="md-status"
+                      [class.md-status--inactive]="(documentType.status || '').toLowerCase() !== 'active'"
+                    >
+                      <span class="md-status__dot"></span>{{ documentType.status || 'active' }}
+                    </span>
+                    <button
+                      type="button"
+                      class="md-fields__edit-btn"
+                      aria-label="Edit discipline type"
+                      (click)="startEditDocumentType(documentType)"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </mat-tab>
+  </mat-tab-group>
+</main>

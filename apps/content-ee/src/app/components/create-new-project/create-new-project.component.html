@@ -1,0 +1,1366 @@
+<!-- Expand navigation icon (shown only when global sidenav is collapsed) -->
+@if (!isSidenavExpanded) {
+  <button
+    class="expand-nav-btn"
+    type="button"
+    (click)="openSidenav()"
+    aria-label="Expand navigation menu"
+    title="Expand navigation menu">
+    &raquo;
+  </button>
+}
+
+
+<div class="page">
+  <h1 class="create-project-title">Create Program</h1>
+  <div class="create-layout">
+    <!-- Progress sidebar -->
+    <aside class="progress-sidebar" aria-label="Create program progress">
+      <div class="progress-header">
+        <p class="progress-header__label">Overall progress</p>
+        <p class="progress-header__step">Step {{ currentVisibleStepNumber }} of {{ totalSteps }}</p>
+        <p class="progress-header__sections">{{ currentVisibleStepNumber }}/{{ totalSteps }} sections</p>
+        <div
+          class="progress-header__bar"
+          role="progressbar"
+          aria-label="Overall progress"
+          [attr.aria-valuenow]="progressPercent"
+          aria-valuemin="0"
+          aria-valuemax="100">
+          <div class="progress-header__fill" [style.width.%]="progressPercent"></div>
+        </div>
+      </div>
+
+      <ol class="stepper-list">
+        @for (s of visibleWizardSteps; track s.step; let i = $index) {
+          <li
+            class="stepper-item"
+            [class.stepper-item--active]="currentStep === s.step"
+            [class.stepper-item--done]="isStepDone(s.step)"
+            [class.stepper-item--pending]="isStepPending(s.step)"
+            [class.stepper-item--clickable]="true"
+            role="button"
+            tabindex="0"
+            [attr.aria-current]="currentStep === s.step ? 'step' : null"
+            [attr.aria-label]="'Go to step ' + (i + 1) + ': ' + s.title"
+            (click)="goToStep(s.step)"
+            (keydown.enter)="goToStep(s.step)"
+            (keydown.space)="$event.preventDefault(); goToStep(s.step)">
+            <span class="stepper-item__badge" aria-hidden="true">
+              @if (isStepDone(s.step) && currentStep !== s.step) {
+                <mat-icon class="stepper-item__check">check</mat-icon>
+              } @else {
+                <span class="stepper-item__num">{{ i + 1 }}</span>
+              }
+            </span>
+            <mat-icon class="stepper-item__icon" aria-hidden="true">{{ s.icon }}</mat-icon>
+            <div class="stepper-item__text">
+              <span class="stepper-item__title">{{ s.title }}</span>
+              <span class="stepper-item__desc">{{ s.desc }}</span>
+            </div>
+          </li>
+        }
+      </ol>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-column">
+      <form [formGroup]="programForm" (ngSubmit)="$event.preventDefault()">
+        <!-- Step 1: Program identity -->
+        <div [hidden]="currentStep !== 1" class="card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">apartment</mat-icon>
+                Program identity
+              </h2>
+              <p class="card-head__subtitle">Program name, code, description, category, type, and status.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">
+                All fields marked with <span class="req-mark">*</span> are required. Please provide accurate information to
+                ensure proper program setup.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-body-fields">
+            <div class="form-group full">
+              <label for="programName">Program Name <span class="req-mark">*</span></label>
+              <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('programName')">
+                <mat-icon class="input-shell__icon" aria-hidden="true">apartment</mat-icon>
+                <input
+                  id="programName"
+                  type="text"
+                  formControlName="programName"
+                  placeholder="Enter program name"
+                  autocomplete="off" />
+              </div>
+              @if (isFieldInvalid('programName')) {
+                <small class="field-error">Program Name is required</small>
+              }
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="programCode">Program Code <span class="req-mark">*</span></label>
+                <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('programCode')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">code</mat-icon>
+                  <input id="programCode" type="text" formControlName="programCode" placeholder="CP_001" autocomplete="off" />
+                </div>
+                @if (isFieldInvalid('programCode')) {
+                  <small class="field-error">Program Code is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="programCategorySel">Program Category <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--select" [class.input-shell--invalid]="isFieldInvalid('programCategory')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">category</mat-icon>
+                  <mat-select
+                    id="programCategorySel"
+                    formControlName="programCategory"
+                    panelClass="adw-create-new-project-select-panel"
+                    placeholder="Select program category"
+                    aria-label="Program category">
+                    <mat-option value="">Select program category</mat-option>
+                    @for (category of programCategories; track category) {
+                      <mat-option [value]="category">{{ category }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                @if (isFieldInvalid('programCategory')) {
+                  <small class="field-error">Program Category is required</small>
+                }
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="programTypeSel">Program Type <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--select" [class.input-shell--invalid]="isFieldInvalid('programType')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">layers</mat-icon>
+                  <mat-select
+                    id="programTypeSel"
+                    formControlName="programType"
+                    panelClass="adw-create-new-project-select-panel"
+                    placeholder="Select program type"
+                    aria-label="Program type">
+                    <mat-option value="">Select program type</mat-option>
+                    @for (type of programTypes; track type) {
+                      <mat-option [value]="type">{{ type }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                @if (isFieldInvalid('programType')) {
+                  <small class="field-error">Program Type is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="programStatusSel">Program Status <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--select" [class.input-shell--invalid]="isFieldInvalid('programStatus')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">flag</mat-icon>
+                  <mat-select
+                    id="programStatusSel"
+                    formControlName="programStatus"
+                    panelClass="adw-create-new-project-select-panel"
+                    placeholder="Select program status"
+                    aria-label="Program status">
+                    <mat-option value="">Select program status</mat-option>
+                    @for (status of programStatuses; track status) {
+                      <mat-option [value]="status">{{ status }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                @if (isFieldInvalid('programStatus')) {
+                  <small class="field-error">Program Status is required</small>
+                }
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label for="programDescription">Program Description <span class="req-mark">*</span></label>
+              <div class="input-shell input-shell--textarea" [class.input-shell--invalid]="isFieldInvalid('programDescription')">
+                <mat-icon class="input-shell__icon input-shell__icon--top" aria-hidden="true">subject</mat-icon>
+                <textarea
+                  id="programDescription"
+                  rows="4"
+                  formControlName="programDescription"
+                  placeholder="Describe the program"></textarea>
+              </div>
+              @if (isFieldInvalid('programDescription')) {
+                <small class="field-error">Program Description is required</small>
+              }
+            </div>
+          </div>
+
+          <div class="wizard-tip" role="status">
+            <mat-icon class="wizard-tip__icon" aria-hidden="true">lightbulb</mat-icon>
+            <p class="wizard-tip__text">
+              Tip: Required fields are marked with an asterisk. Use <strong>Back</strong> on later steps to revise earlier
+              sections before you create the program.
+            </p>
+          </div>
+
+          <div class="footer footer--split">
+            <div class="footer__spacer" aria-hidden="true"></div>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Organization -->
+        <div [hidden]="currentStep !== 2" class="card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">business_center</mat-icon>
+                Organization
+              </h2>
+              <p class="card-head__subtitle">Requesting unit, owner, manager, organization, department, and business unit.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">
+                All fields marked with <span class="req-mark">*</span> are required. Please provide accurate information to
+                ensure proper program setup.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-body-fields">
+            <div class="row">
+              <div class="form-group">
+                <label for="requestingUnitSel">Requesting Unit <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--select" [class.input-shell--invalid]="isFieldInvalid('requestingUnit')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">account_balance</mat-icon>
+                  <mat-select
+                    id="requestingUnitSel"
+                    formControlName="requestingUnit"
+                    panelClass="adw-create-new-project-select-panel"
+                    placeholder="Select requesting unit"
+                    aria-label="Requesting unit">
+                    <mat-option value="">Select requesting unit</mat-option>
+                    @for (unit of requestingUnits; track unit) {
+                      <mat-option [value]="unit">{{ unit }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                @if (isFieldInvalid('requestingUnit')) {
+                  <small class="field-error">Requesting Unit is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="businessUnit">Business Unit <span class="req-mark">*</span></label>
+                <div class="input-shell">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">business</mat-icon>
+                  <input id="businessUnit" type="text" formControlName="businessUnit" readonly />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="programOwner">Program Owner <span class="req-mark">*</span></label>
+                <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('programOwner')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">badge</mat-icon>
+                  <input id="programOwner" type="text" formControlName="programOwner" placeholder="Suresh Iyer" autocomplete="off" />
+                </div>
+                @if (isFieldInvalid('programOwner')) {
+                  <small class="field-error">Program Owner is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="programManager">Program Manager <span class="req-mark">*</span></label>
+                <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('programManager')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">person</mat-icon>
+                  <input id="programManager" type="text" formControlName="programManager" placeholder="Rajesh Kumar" autocomplete="off" />
+                </div>
+                @if (isFieldInvalid('programManager')) {
+                  <small class="field-error">Program Manager is required</small>
+                }
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="owningOrganization">Owning Organization <span class="req-mark">*</span></label>
+                <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('owningOrganization')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">domain</mat-icon>
+                  <input
+                    id="owningOrganization"
+                    type="text"
+                    formControlName="owningOrganization"
+                    placeholder="Safran HAL Aircraft Engines Pvt Ltd"
+                    autocomplete="off" />
+                </div>
+                @if (isFieldInvalid('owningOrganization')) {
+                  <small class="field-error">Owning Organization is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="departmentSel">Department <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--select" [class.input-shell--invalid]="isFieldInvalid('department')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">corporate_fare</mat-icon>
+                  <mat-select
+                    id="departmentSel"
+                    formControlName="department"
+                    panelClass="adw-create-new-project-select-panel"
+                    placeholder="Select department"
+                    aria-label="Department">
+                    <mat-option value="">Select department</mat-option>
+                    @for (dept of departments; track dept) {
+                      <mat-option [value]="dept">{{ dept }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                @if (isFieldInvalid('department')) {
+                  <small class="field-error">Department is required</small>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Customer & references -->
+        <div [hidden]="currentStep !== 3" class="card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">badge</mat-icon>
+                Customer &amp; references
+              </h2>
+              <p class="card-head__subtitle">Program customer and SAE, SHAE, and HAL reference numbers.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">
+                Program Customer is required. Reference numbers can be added now or left blank.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-body-fields">
+            <div class="form-group full">
+              <label for="programCustomer">Program Customer <span class="req-mark">*</span></label>
+              <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('programCustomer')">
+                <mat-icon class="input-shell__icon" aria-hidden="true">groups</mat-icon>
+                <input
+                  id="programCustomer"
+                  type="text"
+                  formControlName="programCustomer"
+                  placeholder="Safran Aircraft Engines"
+                  autocomplete="off" />
+              </div>
+              @if (isFieldInvalid('programCustomer')) {
+                <small class="field-error">Program Customer is required</small>
+              }
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="saeReference">SAE Reference</label>
+                <div class="input-shell">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                  <input id="saeReference" type="text" formControlName="saeReference" placeholder="SAE-REF-2026-014" autocomplete="off" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="shaeReference">SHAE Reference</label>
+                <div class="input-shell">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                  <input id="shaeReference" type="text" formControlName="shaeReference" placeholder="SHAE-REF-2026-014" autocomplete="off" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="halReference">HAL Reference</label>
+              <div class="input-shell">
+                <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                <input id="halReference" type="text" formControlName="halReference" placeholder="HAL-REF-2026-014" autocomplete="off" />
+              </div>
+            </div>
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Timeline -->
+        <div [hidden]="currentStep !== 4" class="card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">schedule</mat-icon>
+                Timeline
+              </h2>
+              <p class="card-head__subtitle">Planned and actual start and end dates.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">
+                Planned dates are required. Actual dates can be left empty until the program starts.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-body-fields">
+            <div class="row">
+              <div class="form-group">
+                <label for="plannedStartDate">Planned Start Date <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--date" [class.input-shell--invalid]="isFieldInvalid('plannedStartDate')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">calendar_today</mat-icon>
+                  <input
+                    id="plannedStartDate"
+                    type="date"
+                    formControlName="plannedStartDate"
+                    [min]="todayIso"
+                    title="Planned program start date" />
+                </div>
+                @if (isFieldInvalid('plannedStartDate')) {
+                  <small class="field-error">Planned Start Date is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="plannedEndDate">Planned End Date <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--date" [class.input-shell--invalid]="isFieldInvalid('plannedEndDate')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">event</mat-icon>
+                  <input
+                    id="plannedEndDate"
+                    type="date"
+                    formControlName="plannedEndDate"
+                    [min]="programForm.get('plannedStartDate')?.value || todayIso"
+                    title="Planned program end date" />
+                </div>
+                @if (programForm.get('plannedEndDate')?.touched && programForm.get('plannedEndDate')?.hasError('required')) {
+                  <small class="field-error">
+                    Planned End Date is required
+                  </small>
+                }
+                @if (programForm.get('plannedEndDate')?.touched && programForm.get('plannedEndDate')?.hasError('minDate')) {
+                  <small class="field-error">
+                    Planned End Date must be on or after Planned Start Date
+                  </small>
+                }
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="actualStartDate">Actual Start Date</label>
+                <div class="input-shell input-shell--date">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">event_available</mat-icon>
+                  <input id="actualStartDate" type="date" formControlName="actualStartDate" title="Actual program start date" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="actualEndDate">Actual End Date</label>
+                <div
+                  class="input-shell input-shell--date"
+                  [class.input-shell--invalid]="programForm.get('actualEndDate')?.touched && programForm.get('actualEndDate')?.hasError('minDate')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">event_busy</mat-icon>
+                  <input
+                    id="actualEndDate"
+                    type="date"
+                    formControlName="actualEndDate"
+                    [min]="programForm.get('actualStartDate')?.value || null"
+                    title="Actual program end date" />
+                </div>
+                @if (programForm.get('actualEndDate')?.touched && programForm.get('actualEndDate')?.hasError('minDate')) {
+                  <small class="field-error">
+                    Actual End Date must be on or after Actual Start Date
+                  </small>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Function requirements -->
+        <div [hidden]="currentStep !== 5" class="card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">tune</mat-icon>
+                Function requirements
+              </h2>
+              <p class="card-head__subtitle">Choose which functions this program requires.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">Toggle each function on or off before continuing.</p>
+            </div>
+          </div>
+
+          <div class="card-body-fields field-grid">
+            @for (field of functionRequirementFields; track field.key) {
+              <div class="form-group">
+                <label [id]="field.key + 'Label'">{{ field.label }} <span class="req-mark">*</span></label>
+                <div
+                  class="po-switch"
+                  role="group"
+                  [attr.aria-labelledby]="field.key + 'Label'"
+                  [class.po-switch--on]="isFlag(field.key) === true"
+                  [class.po-switch--off]="isFlag(field.key) === false"
+                  [class.po-switch--invalid]="isFieldInvalid(field.key)">
+                  <button
+                    type="button"
+                    class="po-switch__label"
+                    [class.po-switch__label--active]="isFlag(field.key) === false"
+                    (click)="setFlag(field.key, false)">
+                    No
+                  </button>
+                  <button
+                    type="button"
+                    class="po-switch__track"
+                    role="switch"
+                    [attr.aria-checked]="isFlag(field.key) === true"
+                    [attr.aria-labelledby]="field.key + 'Label'"
+                    (click)="toggleFlag(field.key)">
+                    <span class="po-switch__thumb" aria-hidden="true"></span>
+                  </button>
+                  <button
+                    type="button"
+                    class="po-switch__label"
+                    [class.po-switch__label--active]="isFlag(field.key) === true"
+                    (click)="setFlag(field.key, true)">
+                    Yes
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: DVI & approvals -->
+        <div [hidden]="currentStep !== 6" class="card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">verified_user</mat-icon>
+                DVI &amp; approvals
+              </h2>
+              <p class="card-head__subtitle">I1/I2/I3 gates, quality approvals, DVI category, and number prefix.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">
+                All fields marked with <span class="req-mark">*</span> are required. Please provide accurate information to
+                ensure proper program setup.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-body-fields">
+            <div class="field-grid">
+              @for (field of dviApprovalFields; track field.key) {
+                <div class="form-group">
+                  <label [id]="field.key + 'Label'">{{ field.label }} <span class="req-mark">*</span></label>
+                  <div
+                    class="po-switch"
+                    role="group"
+                    [attr.aria-labelledby]="field.key + 'Label'"
+                    [class.po-switch--on]="isFlag(field.key) === true"
+                    [class.po-switch--off]="isFlag(field.key) === false"
+                    [class.po-switch--invalid]="isFieldInvalid(field.key)">
+                    <button
+                      type="button"
+                      class="po-switch__label"
+                      [class.po-switch__label--active]="isFlag(field.key) === false"
+                      (click)="setFlag(field.key, false)">
+                      No
+                    </button>
+                    <button
+                      type="button"
+                      class="po-switch__track"
+                      role="switch"
+                      [attr.aria-checked]="isFlag(field.key) === true"
+                      [attr.aria-labelledby]="field.key + 'Label'"
+                      (click)="toggleFlag(field.key)">
+                      <span class="po-switch__thumb" aria-hidden="true"></span>
+                    </button>
+                    <button
+                      type="button"
+                      class="po-switch__label"
+                      [class.po-switch__label--active]="isFlag(field.key) === true"
+                      (click)="setFlag(field.key, true)">
+                      Yes
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <div class="row">
+              <div class="form-group">
+                <label for="dviCategorySel">DVI Category <span class="req-mark">*</span></label>
+                <div class="input-shell input-shell--select" [class.input-shell--invalid]="isFieldInvalid('dviCategory')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">category</mat-icon>
+                  <mat-select
+                    id="dviCategorySel"
+                    formControlName="dviCategory"
+                    panelClass="adw-create-new-project-select-panel"
+                    placeholder="Select DVI category"
+                    aria-label="DVI category">
+                    <mat-option value="">Select DVI category</mat-option>
+                    @for (category of dviCategories; track category) {
+                      <mat-option [value]="category">{{ category }}</mat-option>
+                    }
+                  </mat-select>
+                </div>
+                @if (isFieldInvalid('dviCategory')) {
+                  <small class="field-error">DVI Category is required</small>
+                }
+              </div>
+              <div class="form-group">
+                <label for="dviNumberPrefix">DVI Number Prefix <span class="req-mark">*</span></label>
+                <div class="input-shell" [class.input-shell--invalid]="isFieldInvalid('dviNumberPrefix')">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">tag</mat-icon>
+                  <input id="dviNumberPrefix" type="text" formControlName="dviNumberPrefix" placeholder="DVI-" autocomplete="off" />
+                </div>
+                @if (isFieldInvalid('dviNumberPrefix')) {
+                  <small class="field-error">DVI Number Prefix is required</small>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 7: Group permission -->
+        @if (currentStep === 7) {
+        <div class="card card--gp">
+          <div class="gp-layout">
+            <div class="gp-main">
+              <header class="gp-header">
+                <div class="gp-header__icon" aria-hidden="true">
+                  <mat-icon>group</mat-icon>
+                </div>
+                <div class="gp-header__text">
+                  <h2 class="gp-header__title">Group permission</h2>
+                  <p class="gp-header__subtitle">Assign roles to groups to control access and actions.</p>
+                </div>
+              </header>
+
+              <div class="gp-toolbar">
+                <button
+                  type="button"
+                  class="btn-primary gp-add-btn"
+                  (click)="openGroupPermissionEditor()"
+                  [disabled]="showGroupPermissionEditor">
+                  <mat-icon aria-hidden="true">add</mat-icon>
+                  Add group permission
+                </button>
+              </div>
+
+              <div class="gp-details">
+                <h3 class="gp-details__title">
+                  Permission details <span class="req-mark">*</span>
+                </h3>
+                @if (savedGroupPermissions.length === 0 && !showGroupPermissionEditor) {
+                  <p class="gp-hint">
+                    Add at least one group permission before continuing.
+                  </p>
+                }
+                @if (groupPermissionsTouched && (savedGroupPermissions.length === 0 || showGroupPermissionEditor)) {
+                  <small class="gp-required-error">
+                    {{
+                      showGroupPermissionEditor
+                        ? 'Create or cancel group permissions before continuing'
+                        : 'Group permission is required'
+                    }}
+                  </small>
+                }
+
+                @if (savedGroupPermissions.length === 0 && !showGroupPermissionEditor) {
+                  <div
+                    class="gp-empty-state"
+                    [class.gp-empty-state--invalid]="groupPermissionsTouched"
+                    aria-hidden="false">
+                    <div class="gp-empty-state__art" aria-hidden="true">
+                      <mat-icon class="gp-empty-state__folder">folder_shared</mat-icon>
+                    </div>
+                    <p class="gp-empty-state__title">No group permissions added</p>
+                    <p class="gp-empty-state__text">Click 'Add group permission' to start assigning roles to groups.</p>
+                  </div>
+                }
+
+                @if (showGroupPermissionEditor) {
+                <section class="gp-editor" aria-label="Manage permissions">
+                  <header class="gp-editor__header">
+                    <h3 class="gp-editor__title">{{ managePermissionsTitle }}</h3>
+                    <button
+                      type="button"
+                      class="gp-editor__close"
+                      (click)="closeGroupPermissionEditor()"
+                      aria-label="Close permissions editor"
+                      title="Close">
+                      <mat-icon aria-hidden="true">close</mat-icon>
+                    </button>
+                  </header>
+
+                  <div class="gp-table-wrap">
+                    <div class="gp-table-head">
+                      <span class="gp-col-user">Groups</span>
+                      <span class="gp-col-perm">
+                        Permissions
+                        <mat-icon class="gp-col-perm__info" aria-hidden="true" title="Select one role">info</mat-icon>
+                      </span>
+                      <button
+                        type="button"
+                        class="gp-add-row"
+                        (click)="addDraftPermissionRow()"
+                        aria-label="Add group row"
+                        title="Add row">
+                        <mat-icon aria-hidden="true">add</mat-icon>
+                      </button>
+                    </div>
+
+                    <div class="gp-table-body">
+                      @for (row of draftGroupPermissions; track row.id) {
+                        <div class="gp-row">
+                        <div class="gp-col-user">
+                          <div class="input-shell input-shell--select gp-group-select-shell">
+                            <mat-icon class="input-shell__icon" aria-hidden="true">group</mat-icon>
+                            <mat-select
+                              class="gp-group-select"
+                              panelClass="adw-create-new-project-select-panel gp-group-select-panel"
+                              [ngModel]="row.groupId"
+                              [ngModelOptions]="{ standalone: true }"
+                              (ngModelChange)="onGroupSelected(row, $event)"
+                              (openedChange)="onGroupSelectOpened($event)"
+                              [placeholder]="groupsLoading ? 'Loading groups...' : 'Select group'"
+                              [disabled]="groupsLoading"
+                              aria-label="Select group">
+                              <mat-select-trigger>
+                                {{ row.name || (groupsLoading ? 'Loading groups...' : 'Select group') }}
+                              </mat-select-trigger>
+                              <mat-option class="gp-group-search-option" [value]="'__gp_search__'" disabled>
+                                <div class="gp-group-search" (click)="$event.stopPropagation()" (mousedown)="$event.stopPropagation()">
+                                  <mat-icon class="gp-group-search__icon" aria-hidden="true">search</mat-icon>
+                                  <input
+                                    type="search"
+                                    class="gp-group-search__input"
+                                    [(ngModel)]="groupSelectSearch"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    placeholder="Search groups..."
+                                    autocomplete="off"
+                                    (click)="$event.stopPropagation()"
+                                    (mousedown)="$event.stopPropagation()"
+                                    (keydown)="$event.stopPropagation()"
+                                    (keyup)="$event.stopPropagation()"
+                                    (input)="$event.stopPropagation()"
+                                    (keydown.space)="$event.stopPropagation()"
+                                  />
+                                </div>
+                              </mat-option>
+                              <mat-option value="" [class.gp-group-option--hidden]="!!groupSelectSearch.trim()">
+                                Select group
+                              </mat-option>
+                              @if (groupsError) {
+                                <mat-option value="" disabled>{{ groupsError }}</mat-option>
+                              }
+                              @for (group of groupsForRow(row); track group.id) {
+                                <mat-option
+                                  [value]="group.id"
+                                  [class.gp-group-option--hidden]="!matchesGroupSearch(group)">
+                                  {{ group.displayName }}
+                                </mat-option>
+                              }
+                              @if (!groupsLoading && !groupsError && !hasMatchingGroups(row)) {
+                                <mat-option value="" disabled>No groups found</mat-option>
+                              }
+                            </mat-select>
+                          </div>
+                        </div>
+                        <div class="gp-col-perm">
+                          <div class="input-shell input-shell--select gp-perm-select-shell">
+                            <mat-select
+                              class="gp-perm-mat-select"
+                              panelClass="adw-create-new-project-select-panel gp-perm-select-panel"
+                              [ngModel]="row.permission"
+                              [ngModelOptions]="{ standalone: true }"
+                              (ngModelChange)="selectPermission(row, $event)"
+                              placeholder="Select permission"
+                              aria-label="Select permission">
+                              <mat-select-trigger>
+                                {{ formatPermissionLabel(row.permission) }}
+                              </mat-select-trigger>
+                              <mat-option value="">Select permission</mat-option>
+                              @for (opt of permissionOptions; track opt.value) {
+                                <mat-option [value]="opt.value">{{ opt.value }}</mat-option>
+                              }
+                            </mat-select>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          class="gp-row-remove"
+                          (click)="removeDraftPermissionRow(row.id)"
+                          aria-label="Delete row"
+                          title="Delete">
+                          <mat-icon aria-hidden="true">delete</mat-icon>
+                        </button>
+                        </div>
+                      }
+                      @if (groupsLoading) {
+                        <p class="gp-empty">Loading groups…</p>
+                      }
+                      @if (!groupsLoading && groupsError) {
+                        <p class="gp-empty">{{ groupsError }}</p>
+                      }
+                    </div>
+                  </div>
+
+                  <div class="gp-editor__footer">
+                    <button type="button" class="gp-back-link" (click)="closeGroupPermissionEditor()">
+                      <mat-icon aria-hidden="true">chevron_left</mat-icon>
+                      Back
+                    </button>
+                    <div class="gp-editor__actions">
+                      <button type="button" class="btn-outline" (click)="closeGroupPermissionEditor()">Cancel</button>
+                      <button type="button" class="btn-primary" (click)="createGroupPermissions()">Create</button>
+                    </div>
+                  </div>
+                </section>
+                }
+
+                @if (!showGroupPermissionEditor && savedGroupPermissions.length > 0) {
+                <section class="gp-saved" aria-label="Created group permissions">
+                  <div class="gp-saved__table-wrap">
+                    <table class="gp-saved__table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Groups</th>
+                          <th scope="col">Permissions</th>
+                          <th scope="col" class="gp-saved__actions-col">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (row of savedGroupPermissions; track row.id) {
+                          <tr>
+                            <td>{{ row.name }}</td>
+                            <td>{{ formatPermissionLabel(row.permission) }}</td>
+                            <td class="gp-saved__actions-col">
+                              <button
+                                type="button"
+                                class="gp-row-remove"
+                                (click)="removeSavedGroupPermission(row.id)"
+                                aria-label="Delete permission"
+                                title="Delete">
+                                <mat-icon aria-hidden="true">delete</mat-icon>
+                              </button>
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+                }
+              </div>
+            </div>
+
+            <aside class="gp-guide" aria-label="Role Permissions Guide">
+              <h3 class="gp-guide__title">
+                <span class="gp-guide__icon" aria-hidden="true">
+                  <mat-icon>info</mat-icon>
+                </span>
+                Role Permissions Guide
+              </h3>
+              <ul class="gp-guide__list">
+                @for (opt of permissionOptions; track opt.value) {
+                  <li>
+                    <strong>{{ opt.value }}</strong> — {{ opt.description }}
+                  </li>
+                }
+              </ul>
+            </aside>
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button
+                type="button"
+                class="btn-primary"
+                data-automation-id="create-program-continue-from-group-permission"
+                (click)="continueFromGroupPermission()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- Step 8: Governance -->
+        @if (currentStep === 8) {
+        <div class="card card--dm">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">account_tree</mat-icon>
+                Governence
+              </h2>
+              <p class="card-head__subtitle">
+                Add routing rows for the selected function. These values are submitted as
+                <strong>matrixdata</strong>.
+              </p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">
+                Choose a function and add routing rows only for the functions you need.
+              </p>
+            </div>
+          </div>
+
+          <section class="dm-section dm-section--first" aria-label="Routing matrix">
+            <div class="dm-header">
+              <div class="input-shell input-shell--select dm-function-select">
+                <mat-icon class="input-shell__icon" aria-hidden="true">tune</mat-icon>
+                <mat-select
+                  [ngModel]="selectedRoutingFunction"
+                  [ngModelOptions]="{ standalone: true }"
+                  (ngModelChange)="onRoutingFunctionChange($event)"
+                  panelClass="adw-create-new-project-select-panel"
+                  placeholder="Select function"
+                  aria-label="Function matrix">
+                  @for (field of enabledFunctionOptions; track field.key) {
+                    <mat-option [value]="field.key">{{ flagShortLabel(field.label) }}</mat-option>
+                  }
+                </mat-select>
+              </div>
+              <button
+                type="button"
+                class="btn-primary dm-add"
+                (click)="openMatrixEditor()"
+                [disabled]="showMatrixEditor">
+                <mat-icon aria-hidden="true">add</mat-icon>
+                Add row
+              </button>
+            </div>
+
+            <div class="dm-scroll">
+            <h3 class="gp-details__title">Routing details</h3>
+            @if (!hasAnySavedMatrixRows() && !showMatrixEditor) {
+              <p class="gp-hint">
+                Routing rows are optional. Add rows only for the functions you need.
+              </p>
+            }
+            @if (matrixTouched && showMatrixEditor) {
+              <small class="gp-required-error">
+                Create or cancel routing rows before continuing
+              </small>
+            }
+
+            @if (showMatrixEditor) {
+            <section
+              class="gp-editor dm-editor"
+              [class.dm-editor--eng]="!isDviRoutingSelected"
+              aria-label="Manage routing rows">
+              <header class="gp-editor__header">
+                <h3 class="gp-editor__title">Create {{ selectedFunctionLabel() }} routing</h3>
+                <button
+                  type="button"
+                  class="gp-editor__close"
+                  (click)="closeMatrixEditor()"
+                  aria-label="Close routing editor"
+                  title="Close">
+                  <mat-icon aria-hidden="true">close</mat-icon>
+                </button>
+              </header>
+
+              @if (isDviRoutingSelected) {
+              <div class="gp-table-wrap">
+                <div class="gp-table-head">
+                  <span>DVI</span>
+                  <span>Approval group</span>
+                  <button
+                    type="button"
+                    class="gp-add-row"
+                    (click)="addDraftMatrixRow()"
+                    aria-label="Add DVI row"
+                    title="Add row">
+                    <mat-icon aria-hidden="true">add</mat-icon>
+                  </button>
+                </div>
+                <div class="gp-table-body">
+                  @for (row of draftDviRows; track row.id) {
+                    <div class="gp-row">
+                    <div class="input-shell input-shell--select">
+                      <mat-select
+                        [ngModel]="row.dviValue"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="onDraftDviSelected(row, $event)"
+                        panelClass="adw-create-new-project-select-panel"
+                        placeholder="Select"
+                        aria-label="DVI">
+                        <mat-option value="">Select</mat-option>
+                        @for (opt of enabledDviApprovalOptions; track opt.key) {
+                          <mat-option [value]="opt.value" [disabled]="isDviDraftValueTaken(opt.value, row.id)">
+                            {{ opt.label }}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                    <div class="input-shell input-shell--select">
+                      <mat-select
+                        [ngModel]="row.groupId"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="onDraftDviGroupSelected(row, $event)"
+                        panelClass="adw-create-new-project-select-panel"
+                        [placeholder]="groupsLoading ? 'Loading…' : 'Select group'"
+                        [disabled]="groupsLoading"
+                        aria-label="Approval group">
+                        <mat-option value="">{{ groupsLoading ? 'Loading…' : 'Select group' }}</mat-option>
+                        @for (group of availableGroups; track group.id) {
+                          <mat-option [value]="group.id">{{ group.displayName }}</mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                    <button
+                      type="button"
+                      class="gp-row-remove"
+                      (click)="removeDraftDviRow(row.id)"
+                      aria-label="Delete row"
+                      title="Delete">
+                      <mat-icon aria-hidden="true">delete</mat-icon>
+                    </button>
+                    </div>
+                  }
+                </div>
+              </div>
+              } @else {
+              <div class="gp-table-wrap">
+                <div class="gp-table-head">
+                  <span>Discipline</span>
+                  <span>Reviewer group</span>
+                  <span>Approver group</span>
+                  <button
+                    type="button"
+                    class="gp-add-row"
+                    (click)="addDraftMatrixRow()"
+                    aria-label="Add engineering row"
+                    title="Add row">
+                    <mat-icon aria-hidden="true">add</mat-icon>
+                  </button>
+                </div>
+                <div class="gp-table-body">
+                  @for (row of draftEngineeringRows; track row.id) {
+                    <div class="gp-row">
+                    <div class="input-shell input-shell--select">
+                      <mat-select
+                        [ngModel]="row.discipline"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="onDraftDisciplineSelected(row, $event)"
+                        panelClass="adw-create-new-project-select-panel"
+                        placeholder="Select"
+                        aria-label="Discipline">
+                        <mat-option value="">Select</mat-option>
+                        @for (discipline of engineeringDisciplines; track discipline) {
+                          <mat-option [value]="discipline" [disabled]="isDisciplineTaken(discipline, row.id)">
+                            {{ discipline }}
+                          </mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                    <div class="input-shell input-shell--select">
+                      <mat-select
+                        [ngModel]="row.reviewerGroupId"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="onDraftEngineeringGroupSelected(row, 'reviewer', $event)"
+                        panelClass="adw-create-new-project-select-panel"
+                        [placeholder]="groupsLoading ? 'Loading…' : 'Select'"
+                        [disabled]="groupsLoading"
+                        aria-label="Reviewer group">
+                        <mat-option value="">{{ groupsLoading ? 'Loading…' : 'Select' }}</mat-option>
+                        @for (group of availableGroups; track group.id) {
+                          <mat-option [value]="group.id">{{ group.displayName }}</mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                    <div class="input-shell input-shell--select">
+                      <mat-select
+                        [ngModel]="row.approverGroupId"
+                        [ngModelOptions]="{ standalone: true }"
+                        (ngModelChange)="onDraftEngineeringGroupSelected(row, 'approver', $event)"
+                        panelClass="adw-create-new-project-select-panel"
+                        [placeholder]="groupsLoading ? 'Loading…' : 'Select'"
+                        [disabled]="groupsLoading"
+                        aria-label="Approver group">
+                        <mat-option value="">{{ groupsLoading ? 'Loading…' : 'Select' }}</mat-option>
+                        @for (group of availableGroups; track group.id) {
+                          <mat-option [value]="group.id">{{ group.displayName }}</mat-option>
+                        }
+                      </mat-select>
+                    </div>
+                    <button
+                      type="button"
+                      class="gp-row-remove"
+                      (click)="removeDraftEngineeringRow(row.id)"
+                      aria-label="Delete row"
+                      title="Delete">
+                      <mat-icon aria-hidden="true">delete</mat-icon>
+                    </button>
+                    </div>
+                  }
+                </div>
+              </div>
+              }
+
+              <div class="gp-editor__footer">
+                <button type="button" class="gp-back-link" (click)="closeMatrixEditor()">
+                  <mat-icon aria-hidden="true">chevron_left</mat-icon>
+                  Back
+                </button>
+                <div class="gp-editor__actions">
+                  <button type="button" class="btn-outline" (click)="closeMatrixEditor()">Cancel</button>
+                  <button type="button" class="btn-primary" (click)="createMatrixRows()">Create</button>
+                </div>
+              </div>
+            </section>
+            }
+
+            <div class="dm-stack">
+              @for (field of enabledFunctionOptions; track field.key) {
+                <section
+                  class="dm-tab"
+                  [class.dm-tab--active]="selectedRoutingFunction === field.key"
+                  [attr.aria-label]="flagShortLabel(field.label) + ' routing'">
+                  <h4 class="dm-tab__title">{{ flagShortLabel(field.label) }}</h4>
+                  <div class="dm-tab__body">
+                    @if (field.key === 'dvirequired') {
+                      @if (savedDviRows.length > 0) {
+                        @for (row of savedDviRows; track row.id) {
+                          <div class="dm-tab__item">
+                            <span class="dm-tab__key">{{ row.dviValue }}</span>
+                            <span class="dm-tab__value">{{ row.groupName || groupLabel(row.groupId) }}</span>
+                            <button
+                              type="button"
+                              class="gp-row-remove"
+                              (click)="removeSavedDviRow(row.id)"
+                              aria-label="Delete DVI row"
+                              title="Delete">
+                              <mat-icon aria-hidden="true">delete_outline</mat-icon>
+                            </button>
+                          </div>
+                        }
+                      } @else {
+                        <p class="dm-tab__empty">
+                          No {{ flagShortLabel(field.label) }} rows yet. Optional — add a row only if needed.
+                        </p>
+                      }
+                    } @else if (functionRows(field.key).length > 0) {
+                      @for (row of functionRows(field.key); track row.id) {
+                        <div class="dm-tab__item dm-tab__item--eng">
+                          <span class="dm-tab__key">{{ row.discipline }}</span>
+                          <span class="dm-tab__value">{{ row.reviewerGroupName || groupLabel(row.reviewerGroupId) }}</span>
+                          <span class="dm-tab__value">{{ row.approverGroupName || groupLabel(row.approverGroupId) }}</span>
+                          <button
+                            type="button"
+                            class="gp-row-remove"
+                            (click)="removeSavedFunctionRow(field.key, row.id)"
+                            [attr.aria-label]="'Delete ' + flagShortLabel(field.label) + ' row'"
+                            title="Delete">
+                            <mat-icon aria-hidden="true">delete_outline</mat-icon>
+                          </button>
+                        </div>
+                      }
+                    } @else {
+                      <p class="dm-tab__empty">
+                        No {{ flagShortLabel(field.label) }} rows yet. Optional — add a row only if needed.
+                      </p>
+                    }
+                  </div>
+                </section>
+              }
+            </div>
+            </div>
+          </section>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" (click)="goNext()">
+                Continue
+                <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- Step 9: Review & Submit -->
+        <div [hidden]="currentStep !== 9" class="card review-card">
+          <div class="card-head">
+            <div class="card-head__titles">
+              <h2 class="card-head__title">
+                <mat-icon class="card-head__title-icon" aria-hidden="true">task_alt</mat-icon>
+                Review &amp; Submit
+              </h2>
+              <p class="card-head__subtitle">Confirm your program details before creating the program.</p>
+            </div>
+            <div class="info-callout" role="note">
+              <mat-icon class="info-callout__icon" aria-hidden="true">info</mat-icon>
+              <p class="info-callout__text">When you are satisfied with the summary below, use Create Program to start the workflow.</p>
+            </div>
+          </div>
+
+          <div class="card-body-fields review-layout review-layout--stack">
+            @for (section of reviewSections; track section.title) {
+              <h3 class="details-section-title">{{ section.title }}</h3>
+              <dl class="review-summary">
+                @for (field of section.fields; track field.key) {
+                  <div class="review-row" [class.review-row--block]="field.block">
+                    <dt>{{ field.label }}</dt>
+                    <dd>{{ reviewValue(field) }}</dd>
+                  </div>
+                }
+              </dl>
+            }
+
+            <h3 class="details-section-title">Function requirements</h3>
+            <dl class="review-summary">
+              @for (field of functionRequirementFields; track field.key) {
+                <div class="review-row">
+                  <dt>{{ field.label }}</dt>
+                  <dd>{{ flagLabel(programForm.value[field.key]) }}</dd>
+                </div>
+              }
+            </dl>
+
+            @if (isDviRequired) {
+              <h3 class="details-section-title">DVI &amp; approvals</h3>
+              <dl class="review-summary">
+                @for (field of dviApprovalFields; track field.key) {
+                  <div class="review-row">
+                    <dt>{{ field.label }}</dt>
+                    <dd>{{ flagLabel(programForm.value[field.key]) }}</dd>
+                  </div>
+                }
+                <div class="review-row"><dt>DVI Category</dt><dd>{{ displayOrDash(programForm.value.dviCategory) }}</dd></div>
+                <div class="review-row"><dt>DVI Number Prefix</dt><dd>{{ displayOrDash(programForm.value.dviNumberPrefix) }}</dd></div>
+              </dl>
+            }
+
+            <h3 class="details-section-title">Group permission</h3>
+            <dl class="review-summary">
+              <div class="review-row review-row--block">
+                <dt>Assigned access</dt>
+                <dd>
+                  @if (savedGroupPermissions.length > 0) {
+                    <ul class="dm-review-list">
+                      @for (r of savedGroupPermissions; track r.id) {
+                        <li>
+                          <strong>{{ r.name }}</strong>
+                          — {{ formatPermissionLabel(r.permission) }}
+                        </li>
+                      }
+                    </ul>
+                  } @else {
+                    No group permissions added.
+                  }
+                </dd>
+              </div>
+            </dl>
+
+            @for (field of enabledFunctionOptions; track field.key) {
+              <h3 class="details-section-title">{{ flagShortLabel(field.label) }} matrix</h3>
+              @if (field.key === 'dvirequired') {
+                @if (savedDviRows.length > 0) {
+                  <ul class="dm-review-list">
+                    @for (r of savedDviRows; track r.id) {
+                      <li>
+                        <strong>{{ dviPayloadKey(r.dviValue) }}</strong>
+                        — {{ r.groupName || groupLabel(r.groupId) }}
+                      </li>
+                    }
+                  </ul>
+                } @else {
+                  <p class="am-review-empty">No {{ flagShortLabel(field.label) }} rows.</p>
+                }
+              } @else if (functionRows(field.key).length > 0) {
+                <ul class="dm-review-list">
+                  @for (r of functionRows(field.key); track r.id) {
+                    <li>
+                      <strong>{{ r.discipline }}</strong>
+                      — Reviewer: {{ r.reviewerGroupName || groupLabel(r.reviewerGroupId) }},
+                      Approver: {{ r.approverGroupName || groupLabel(r.approverGroupId) }}
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <p class="am-review-empty">No {{ flagShortLabel(field.label) }} rows.</p>
+              }
+            }
+          </div>
+
+          <div class="footer footer--split">
+            <button type="button" class="btn-outline" (click)="goBack()">Back</button>
+            <div class="actions">
+              <button type="button" class="btn-primary" [disabled]="loading" (click)="submitProgram()">
+                @if (!loading) {
+                  <mat-icon aria-hidden="true">check_circle</mat-icon>
+                }
+                {{ loading ? 'Creating...' : 'Create Program' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

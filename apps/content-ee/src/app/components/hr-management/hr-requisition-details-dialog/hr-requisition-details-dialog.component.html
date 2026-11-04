@@ -1,0 +1,107 @@
+<div class="adw-mdrd">
+  <header class="adw-mdrd__header">
+    <div class="adw-mdrd__header-main">
+      <div class="adw-mdrd__icon" aria-hidden="true">
+        <mat-icon>badge</mat-icon>
+      </div>
+      <div class="adw-mdrd__header-text">
+        <h2 mat-dialog-title class="adw-mdrd__heading">Job requisition — {{ displayTitle }}</h2>
+        <span *ngIf="statusBadge" class="adw-mdrd__badge">{{ statusBadge }}</span>
+      </div>
+    </div>
+    <div class="adw-mdrd__header-actions">
+      <button type="button" mat-icon-button mat-dialog-close aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <mat-dialog-content class="adw-mdrd__content">
+    <div class="adw-mdrd-loading" *ngIf="loading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <span>Loading requisition details…</span>
+    </div>
+
+    <p class="adw-mdrd-error" *ngIf="!loading && error" role="alert">{{ error }}</p>
+
+    <div class="adw-mdrd__main" *ngIf="!loading && !error" cdkScrollable>
+      <aside class="adw-mdrd__preview" aria-label="Requisition track">
+        <h3 class="adw-mdrd__section-title">Track</h3>
+        <div class="adw-mdrd__preview-shell adw-mdrd__preview-shell--track">
+          <adw-view-track
+            [steps]="steps"
+            [selectedStepId]="selectedStepId"
+            (stepSelect)="selectStep($event)">
+          </adw-view-track>
+        </div>
+      </aside>
+
+      <div class="adw-mdrd__details">
+        <div class="adw-mdrd__tabs-layout">
+          <nav class="adw-mdrd__tablist" role="tablist" aria-label="Requisition steps">
+            <button
+              type="button"
+              role="tab"
+              class="adw-mdrd__tab"
+              *ngFor="let step of steps"
+              [class.adw-mdrd__tab--active]="selectedStepId === step.id"
+              [class.adw-mdrd__tab--locked]="isStepLocked(step)"
+              [attr.aria-selected]="selectedStepId === step.id"
+              [attr.aria-disabled]="isStepLocked(step)"
+              [disabled]="isStepLocked(step)"
+              (click)="selectStep(step)">
+              <mat-icon aria-hidden="true">{{ isStepLocked(step) ? 'lock' : 'folder' }}</mat-icon>
+              <span>{{ step.name }}</span>
+            </button>
+          </nav>
+
+          <div class="adw-mdrd__panel-scroll" role="region" aria-label="Step properties">
+            <section class="adw-mdrd__panel" *ngIf="selectedStep as step; else lockedHint" role="tabpanel">
+              <h3 class="adw-mdrd__panel-title">
+                <mat-icon aria-hidden="true">folder</mat-icon>
+                {{ step.name }}
+              </h3>
+              <dl class="adw-mdrd__list">
+                @for (row of step.properties; track row.label) {
+                  @if (row.table; as table) {
+                    <div class="adw-hr-json-table">
+                      <div class="adw-mdrd__key adw-hr-json-table__title">{{ row.label }}</div>
+                      <div class="adw-hr-json-table__body">
+                        <table mat-table [dataSource]="table.rows" class="adw-hr-json-mat-table">
+                          @for (header of table.headers; track $index; let colIndex = $index) {
+                            <ng-container [matColumnDef]="'c' + colIndex">
+                              <th mat-header-cell *matHeaderCellDef>{{ header }}</th>
+                              <td mat-cell *matCellDef="let cells">{{ cells[colIndex] }}</td>
+                            </ng-container>
+                          }
+                          <tr mat-header-row *matHeaderRowDef="table.columnIds"></tr>
+                          <tr mat-row *matRowDef="let r; columns: table.columnIds"></tr>
+                        </table>
+                      </div>
+                    </div>
+                  } @else {
+                    <div class="adw-mdrd__pair">
+                      <dt class="adw-mdrd__key">{{ row.label }}</dt>
+                      <dd class="adw-mdrd__value">{{ row.value }}</dd>
+                    </div>
+                  }
+                }
+              </dl>
+            </section>
+            <button mat-raised-button style="margin: 10px 0;" (click)="route_div_folder()">
+              <mat-icon>folder</mat-icon>
+              view documents
+            </button>
+            <ng-template #lockedHint>
+              <p class="adw-mdrd__locked-hint">Select a completed step to view its properties.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-stroked-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

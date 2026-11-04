@@ -1,0 +1,54 @@
+.aps-auth-section-container {
+    margin: 2rem 0 0 2rem;
+    border: 1px solid var(--theme-grey-background-color);
+    border-radius: 1rem;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+
+    .aps-auth-section-title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .aps-auth-section-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .aps-auth-section-description {
+            color: var(--theme-text-light-color);
+            font-weight: 400;
+            letter-spacing: 0.25px;
+            padding: 0 1rem;
+        }
+
+        .aps-auth-section-icon-btn {
+            color: var(--adf-theme-foreground-text-color-054);
+        }
+    }
+
+    mat-slide-toggle {
+        padding-right: 12px;
+    }
+
+    .aps-auth-section-radio {
+        padding: 15px 25px 5px;
+
+        &-label {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 15px;
+
+            span:last-child {
+                color: var(--theme-text-light-color);
+            }
+        }
+    }
+}
+
+.aps-auth-section-loading-spinner {
+    justify-self: center;
+    margin-top: 20px;
+}

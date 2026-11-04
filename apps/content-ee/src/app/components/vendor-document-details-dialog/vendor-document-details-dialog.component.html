@@ -1,0 +1,104 @@
+<h2 mat-dialog-title class="adw-vdd-title">Document — {{ displayTitle }}</h2>
+<hr class="adw-vdd-rule" />
+<mat-dialog-content class="adw-vdd-body">
+  <!-- Explicit scrollport: viewport-based max-height so wheel/touch scroll works even when flex layout fails. -->
+  <div class="adw-vdd-scrollport" cdkScrollable>
+  <div class="adw-vdd-loading" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <span>Loading properties…</span>
+  </div>
+
+  <p class="adw-vdd-error" *ngIf="!loading && error" role="alert">{{ error }}</p>
+
+  <div *ngIf="!loading && !error" class="adw-vdd-main">
+    <aside class="adw-vdd-preview-col" *ngIf="hasPreviewPanel" aria-label="Document preview">
+      <h3 class="adw-vdd-section-title">Preview</h3>
+      <div
+        class="adw-vdd-preview-shell"
+        [class.adw-vdd-preview-shell--pdf]="previewMode === 'pdf'"
+        [class.adw-vdd-preview-shell--text]="previewMode === 'text'">
+        <div class="adw-vdd-preview-loading" *ngIf="previewMode === 'loading'" role="status">
+          <mat-spinner diameter="36"></mat-spinner>
+          <span>{{ previewLoadingMessage }}</span>
+        </div>
+
+        <iframe
+          *ngIf="previewMode === 'pdf' && previewSrc"
+          class="adw-vdd-preview-iframe"
+          [src]="previewSrc"
+          [attr.data-node-id]="resolvedNodeId"
+          [attr.data-preview-gen]="previewGeneration"
+          title="Document preview"></iframe>
+
+        <div *ngIf="previewMode === 'text' && previewTextContent !== null" class="adw-vdd-preview-text-wrap">
+          <pre class="adw-vdd-preview-text" [attr.aria-label]="'Text preview: ' + displayTitle">{{ previewTextContent }}</pre>
+        </div>
+
+        <img
+          *ngIf="previewMode === 'image' && previewSrc"
+          class="adw-vdd-preview-img"
+          [src]="previewSrc"
+          [attr.data-node-id]="resolvedNodeId"
+          [attr.data-preview-gen]="previewGeneration"
+          [alt]="'Preview: ' + displayTitle" />
+
+        <div *ngIf="previewMode === 'unsupported' || previewMode === 'error'" class="adw-vdd-preview-fallback">
+          <p>{{ previewFallbackMessage }}</p>
+          <button
+            *ngIf="contentDirectUrl"
+            type="button"
+            mat-stroked-button
+            (click)="openContentInNewTab()">
+            Open document
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="adw-vdd-details-col" [class.adw-vdd-details-col--full]="!hasPreviewPanel">
+      <mat-tab-group
+        class="adw-vdd-tabs"
+        [(selectedIndex)]="metadataTabIndex"
+        animationDuration="0ms"
+        dynamicHeight>
+        <mat-tab label="Basic details">
+          <div class="adw-vdd-tab-panel" role="region" aria-label="Basic details">
+            <dl class="adw-vdd-list" *ngIf="nodeRows.length; else vddNoBasicDetails">
+              <div class="adw-vdd-pair" *ngFor="let r of nodeRows">
+                <dt class="adw-vdd-key">{{ r.label }}</dt>
+                <dd class="adw-vdd-value">
+                  <pre *ngIf="r.multiline; else vddBasicPlain" class="adw-vdd-pre">{{ r.value }}</pre>
+                  <ng-template #vddBasicPlain>{{ r.value }}</ng-template>
+                </dd>
+              </div>
+            </dl>
+            <ng-template #vddNoBasicDetails>
+              <p class="adw-vdd-empty">No basic details available.</p>
+            </ng-template>
+          </div>
+        </mat-tab>
+        <mat-tab label="Properties">
+          <div class="adw-vdd-tab-panel" role="region" aria-label="Properties">
+            <dl class="adw-vdd-list" *ngIf="propertyRows.length; else vddNoProperties">
+              <div class="adw-vdd-pair" *ngFor="let r of propertyRows">
+                <dt class="adw-vdd-key">{{ r.label }}</dt>
+                <dd class="adw-vdd-value">
+                  <pre *ngIf="r.multiline; else vddPropsPlain" class="adw-vdd-pre">{{ r.value }}</pre>
+                  <ng-template #vddPropsPlain>{{ r.value }}</ng-template>
+                </dd>
+              </div>
+            </dl>
+            <ng-template #vddNoProperties>
+              <p class="adw-vdd-empty">No properties available.</p>
+            </ng-template>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="adw-vdd-actions">
+  <button type="button" mat-stroked-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,165 @@
+<aca-page-layout class="adw-vendor-doc-page adw-vendor-doc-page--projects">
+  <aca-page-layout-content [scrollable]="true">
+    <div class="adw-vendor-doc-projects">
+      <div class="adw-vdr-hero hero">
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1 class="hero-title">HR Management</h1>
+            <div class="hero-lede">
+              <p>Review and track job requisitions across departments, locations, and hiring status.</p>
+              <p>Use the portfolio below to search, filter by requisition state, and open a record when you are ready to review it.</p>
+            </div>
+          </div>
+
+          <div class="hero-stats stats" role="group" aria-label="Requisition counts by status">
+            @for (card of cards; track card.id) {
+              <button
+                type="button"
+                class="stat-card"
+                [ngClass]="'stat-card--' + card.variant"
+                [class.stat-card--active]="statusFilter === card.filter"
+                [attr.aria-pressed]="statusFilter === card.filter"
+                (click)="statusFilter = card.filter; load()">
+                <span class="stat-card__inner">
+                  <mat-icon class="stat-card__icon" aria-hidden="true">{{ card.icon }}</mat-icon>
+                  <span class="stat-card__meta">
+                    <span class="stat-card__value">{{ loading ? '—' : card.count }}</span>
+                    <span class="stat-card__label">{{ card.label }}</span>
+                    <span class="stat-card__trend stat-card__trend--up">
+                      <mat-icon aria-hidden="true">arrow_upward</mat-icon>
+                      <span>from last 30 days</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="portfolio">
+        <div class="container">
+          <div class="adw-hr-filters">
+            <div class="adw-hr-filters__field adw-hr-filters__field--search">
+              <label class="adw-vendor-doc-field-label" for="adw-hr-search">Search</label>
+              <div class="adw-hr-filters__search-row">
+                <div class="input-shell">
+                  <mat-icon class="input-shell__icon" aria-hidden="true">search</mat-icon>
+                  <input
+                    id="adw-hr-search"
+                    type="text"
+                    [(ngModel)]="search"
+                    (keydown.enter)="load()"
+                    name="hrSearch"
+                    placeholder="Search by job id, title, department, or requester..."
+                    aria-label="Search job requisitions" />
+                </div>
+                <button type="button" class="adw-hr-search-btn" (click)="load()">
+                  <mat-icon aria-hidden="true">search</mat-icon>
+                  Search
+                </button>
+              </div>
+            </div>
+            <div class="adw-hr-filters__field adw-hr-filters__field--status">
+              <label class="adw-vendor-doc-field-label" for="adw-hr-status-filter">Requisition status</label>
+              <div class="input-shell input-shell--select">
+                <mat-icon class="input-shell__icon" aria-hidden="true">tune</mat-icon>
+                <mat-select
+                  id="adw-hr-status-filter"
+                  [(ngModel)]="statusFilter"
+                  (ngModelChange)="load()"
+                  name="hrStatusFilter"
+                  panelClass="adw-vendor-doc-select-panel"
+                  placeholder="All status">
+                  <mat-option value="">All status</mat-option>
+                  @for (opt of statusOptions; track opt) {
+                    <mat-option [value]="opt">{{ opt }}</mat-option>
+                  }
+                </mat-select>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="section-title">Job requisitions</h2>
+
+          @if (loading) {
+            <p class="adw-vendor-vdr-status" role="status">Loading job requisitions…</p>
+          } @else if (rows.length === 0) {
+            <p class="adw-vendor-vdr-empty">No job requisitions found.</p>
+          } @else {
+            <div class="applications-table-wrapper">
+              <div class="applications-table-scroll adw-vendor-vdr-table-scroll" role="region" aria-label="Job requisitions">
+                <table mat-table [dataSource]="pageRows" class="applications-table adw-vendor-vdr-table adw-hr-table">
+                  <ng-container matColumnDef="icon">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-col--icon" aria-label="Type"></th>
+                    <td mat-cell *matCellDef class="adw-vendor-vdr-col--icon">
+                      <mat-icon class="adw-vendor-vdr-file-icon">badge</mat-icon>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="jobId">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-col--title">Job Id</th>
+                    <td mat-cell *matCellDef="let row" class="adw-vendor-vdr-col--title">{{ row.jobId }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="jobTitle">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-col--project">Job title</th>
+                    <td mat-cell *matCellDef="let row" class="adw-vendor-vdr-col--project">{{ row.jobTitle }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-col--status">Status</th>
+                    <td mat-cell *matCellDef="let row" class="adw-vendor-vdr-col--status">
+                      <span class="adw-vendor-vdr-status-text" [ngClass]="'adw-vendor-vdr-status-text--' + statusKey(row.status)">
+                        <mat-icon aria-hidden="true">{{ statusIcon(row.status) }}</mat-icon>
+                        <span>{{ row.status }}</span>
+                      </span>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="departmentName">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-col--po">Department</th>
+                    <td mat-cell *matCellDef="let row" class="adw-vendor-vdr-col--po">{{ row.departmentName }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="requestedBy">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-col--line">Requested by</th>
+                    <td mat-cell *matCellDef="let row" class="adw-vendor-vdr-col--line">{{ row.requestedBy }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="priority">
+                    <th mat-header-cell *matHeaderCellDef>Priority</th>
+                    <td mat-cell *matCellDef="let row">{{ row.priority }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="employmentType">
+                    <th mat-header-cell *matHeaderCellDef>Employment type</th>
+                    <td mat-cell *matCellDef="let row">{{ row.employmentType }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="adw-vendor-vdr-actions-col">Actions</th>
+                    <td mat-cell *matCellDef="let row" class="adw-vendor-vdr-actions-cell">
+                      <button
+                        mat-stroked-button
+                        type="button"
+                        class="adw-vendor-vdr-details-btn"
+                        (click)="openDetails(row)"
+                        aria-label="View details">
+                        <mat-icon aria-hidden="true">visibility</mat-icon>
+                        View Details
+                      </button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+              </div>
+              <mat-paginator
+                class="adw-vendor-vdr-paginator"
+                [length]="rows.length"
+                [pageSize]="pageSize"
+                [pageIndex]="pageIndex"
+                [pageSizeOptions]="pageSizeOptions"
+                [showFirstLastButtons]="true"
+                (page)="pageSize = $event.pageSize; pageIndex = $event.pageIndex">
+              </mat-paginator>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </aca-page-layout-content>
+</aca-page-layout>

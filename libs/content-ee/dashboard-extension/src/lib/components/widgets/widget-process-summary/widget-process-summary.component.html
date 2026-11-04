@@ -1,0 +1,60 @@
+<acs-widget-base
+    [displayViewAllButton]="false"
+    [emptyStateMessage]="emptyStateMessage"
+    [hasContent]="hasAnyProcess"
+    [isLoading$]="isLoading$"
+    [widgetTitle]="'WIDGETS.PROCESS_SUMMARY.TITLE'"
+    (refreshWidget)="loadProcesses()">
+    <div class="acs-widget-process-summary-container">
+        <div class="acs-widget-process-summary-info">
+            @if(periodHasProcesses) {
+                <span class="acs-widget-process-summary-success">
+                    <adf-icon [title]="'WIDGETS.PROCESS_SUMMARY.COMPLETED' | translate" [value]="'arrow_upward'" /> {{ completedProcessesPercentage }}%
+                </span>
+                &nbsp;{{'WIDGETS.PROCESS_SUMMARY.SUMMARY_INFO_SUFFIX' | translate }}
+            } @else {
+                <adf-icon [title]="'WIDGETS.PROCESS_SUMMARY.EMPTY' | translate" [value]="'insert_chart_outlined'"/>
+                &nbsp;{{'WIDGETS.PROCESS_SUMMARY.NO_PROCESSES_IN_PERIOD' | translate }}
+            }
+        </div>
+        <ng-container *ngIf="hasAnyProcess">
+            <div class="acs-widget-process-summary-legend">
+                <div class="acs-widget-process-summary-legend-item" *ngFor="let dataset of chartDatasets; let i = index">
+                    <div class="acs-widget-process-summary-legend-color" [style.backgroundColor]="dataset.backgroundColor"></div>
+                    <div class="acs-widget-process-summary-legend-text">
+                        {{ dataset.label }}
+                        <span class="acs-widget-process-summary-legend-text-bold">{{ datasetTotals[i] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="acs-widget-process-summary-filters">
+                <mat-chip class="acs-widget-process-summary-date-chip">
+                    <button class="acs-widget-process-summary-date-chip-button" (click)="onPrevious()">
+                        <adf-icon [title]="'WIDGETS.PROCESS_SUMMARY.PREVIOUS' | translate"
+                                  [attr.aria-label]="'WIDGETS.PROCESS_SUMMARY.PREVIOUS_SCREEN_READER_LABEL' | translate"
+                                  [value]="'chevron_left'"/>
+                    </button>
+                    <span class="acs-widget-process-summary-date-chip-text">
+                        {{ periodStartMonth }} -
+                        {{ periodEndMonth }}
+                        {{ selectedPeriod.value.year}}
+                    </span>
+                    <button class="acs-widget-process-summary-date-chip-button" (click)="onNext()" [disabled]="isNextButtonDisabled">
+                        <adf-icon [title]="'WIDGETS.PROCESS_SUMMARY.NEXT' | translate"
+                                  [attr.aria-label]="'WIDGETS.PROCESS_SUMMARY.NEXT_SCREEN_READER_LABEL' | translate"
+                                  [value]="'chevron_right'"/>
+                    </button>
+                </mat-chip>
+            </div>
+            <div class="acs-widget-process-summary-canvas-container">
+                <canvas baseChart
+                    [type]="'bar'"
+                    [datasets]="chartDatasets"
+                    [labels]="chartLabels"
+                    [options]="chartOptions"
+                    [legend]="chartLegend">
+                </canvas>
+            </div>
+        </ng-container>
+    </div>
+</acs-widget-base>

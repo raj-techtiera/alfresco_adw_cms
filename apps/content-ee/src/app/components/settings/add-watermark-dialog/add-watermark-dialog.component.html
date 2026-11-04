@@ -1,0 +1,124 @@
+<div class="adw-add-watermark-dialog">
+  <h2 mat-dialog-title class="adw-add-watermark-dialog__title">Add watermark</h2>
+
+  <mat-dialog-content class="adw-add-watermark-dialog__content">
+    <p class="adw-add-watermark-dialog__hint">Select the watermark type, then fill in the details.</p>
+
+    <div class="adw-add-watermark-dialog__field">
+      <label for="wm-type">Watermark type</label>
+      <div class="input-shell input-shell--select">
+        <mat-icon class="input-shell__icon" aria-hidden="true">branding_watermark</mat-icon>
+        <mat-select
+          id="wm-type"
+          [(ngModel)]="kind"
+          placeholder="Select type"
+          [disabled]="submitting"
+          panelClass="adw-add-watermark-select-panel"
+          (selectionChange)="onKindChange($event.value)">
+          <mat-option value="text">Text</mat-option>
+          <mat-option value="image">Image</mat-option>
+        </mat-select>
+      </div>
+    </div>
+
+    @if (kind === 'text') {
+      <div class="adw-add-watermark-dialog__field">
+        <label for="wm-title">Title</label>
+        <div class="input-shell">
+          <mat-icon class="input-shell__icon" aria-hidden="true">title</mat-icon>
+          <input
+            id="wm-title"
+            type="text"
+            [(ngModel)]="title"
+            placeholder="e.g. CONFIDENTIAL - PETRONAS MALAYSIA"
+            [disabled]="submitting"
+            autocomplete="off" />
+        </div>
+      </div>
+      <div class="adw-add-watermark-dialog__field">
+        <label for="wm-desc">Description</label>
+        <div class="input-shell input-shell--textarea">
+          <mat-icon class="input-shell__icon input-shell__icon--top" aria-hidden="true">notes</mat-icon>
+          <textarea
+            id="wm-desc"
+            rows="3"
+            [(ngModel)]="description"
+            placeholder="e.g. Default confidential watermark for engineering drawings"
+            [disabled]="submitting"></textarea>
+        </div>
+      </div>
+    }
+
+    @if (kind === 'image') {
+      <div class="adw-add-watermark-dialog__field">
+        <label for="wm-image-desc">Description</label>
+        <div class="input-shell input-shell--textarea">
+          <mat-icon class="input-shell__icon input-shell__icon--top" aria-hidden="true">notes</mat-icon>
+          <textarea
+            id="wm-image-desc"
+            rows="3"
+            [(ngModel)]="description"
+            placeholder="e.g. Default logo watermark for as-built drawings"
+            [disabled]="submitting"></textarea>
+        </div>
+      </div>
+      <div class="adw-add-watermark-dialog__field">
+        <label>Image</label>
+        <input
+          #imageFileInput
+          type="file"
+          accept="image/*"
+          hidden
+          (change)="onImageSelected($event)"
+          [disabled]="submitting" />
+        <div
+          class="wm-dropzone"
+          [class.wm-dropzone--active]="dragOver"
+          [class.wm-dropzone--filled]="!!imagePreviewUrl"
+          [class.wm-dropzone--disabled]="submitting"
+          (click)="openFilePicker()"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)">
+          @if (!imagePreviewUrl) {
+            <span class="wm-dropzone__icon-wrap" aria-hidden="true">
+              <mat-icon>cloud_upload</mat-icon>
+            </span>
+            <p class="wm-dropzone__title">Drop image here, or <span>browse</span></p>
+            <p class="wm-dropzone__hint">PNG, JPG, SVG, or WebP</p>
+          } @else {
+            <div class="wm-dropzone__preview">
+              <img [src]="imagePreviewUrl" [alt]="imageFileName" />
+            </div>
+            <div class="wm-dropzone__meta">
+              <p class="wm-dropzone__name" [title]="imageFileName">{{ imageFileName }}</p>
+              <p class="wm-dropzone__size">{{ imageFileSize }}</p>
+              <div class="wm-dropzone__actions">
+                <button type="button" class="wm-dropzone__link" (click)="openFilePicker(); $event.stopPropagation()">
+                  Change
+                </button>
+                <button type="button" class="wm-dropzone__link wm-dropzone__link--danger" (click)="removeImage($event)">
+                  Remove
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (error) {
+      <p class="adw-add-watermark-dialog__error" role="alert">{{ error }}</p>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-add-watermark-dialog__actions">
+    <button type="button" mat-stroked-button (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="submit()" [disabled]="!canSubmit">
+      @if (submitting) {
+        <mat-spinner diameter="18"></mat-spinner>
+      }
+      <span>{{ submitting ? 'Adding…' : 'Add' }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

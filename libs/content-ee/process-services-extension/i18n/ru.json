@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Новый процесс",
+            "SELECT_APPLICATION": "Выберите приложение",
+            "ERROR": "Невозможно начать процесс, поскольку нет определений процесса"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Управление процессами",
+            "PROCESS_LIST": {
+                "PROCESSES": "Процессы"
+            },
+            "START_PROCESS": "Начать процесс",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Просмотреть сведения"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Показать комментарии"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Управление процессами",
+            "CREATE_NEW_PROCESS": "Запустить процесс",
+            "CREATE_PROCESS_NOT_ALLOWED": "Нельзя создать новый процесс"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Больше"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Комментарии",
+            "CANCEL_PROCESS": "Отменить процесс"
+        },
+        "ERROR": {
+            "NO_FORM": "Определение процесса не имеет определенной формы",
+            "NO_CONTENT": "Нельзя прикрепить файл с вашего устройства",
+            "CAN_NOT_ATTACH": "Не удалось прикрепить выбранное содержимое",
+            "AUDIT_ERROR": "Просмотр ошибки задачи: {{error}}",
+            "TASK_ACCESS_WARNING": "У вас нет права изменять задачу",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Предварительный просмотр документа недоступен, поскольку задача еще не завершена."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Процесс создан '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Произошла неизвестная ошибка сети. Функции, связанные с обслуживанием процессов, отключены.",
+            "ACTION": "Просмотр запущенного процесса"
+        },
+        "NO_PROCESS_DEFINITIONS": "Определения процесса недоступны",
+        "SIDE_NAV_TITLE": "Бизнес-процесс",
+        "STATUS": {
+            "COMPLETED": "Выполнено",
+            "RUNNING": "Выполняется",
+            "OPEN": "Открыть",
+            "UNKNOWN": "Неизвестен"
+        },
+        "TASK_LIST": {
+            "TASKS": "Задачи",
+            "ACTIONS": {
+                "TASK_DETAILS": "Посмотреть"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Посмотреть"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Форма успешно сохранена",
+            "FORM_COMPLETED": "Задача выполнена",
+            "CLOSE": "Закрыть",
+            "CLAIM_TASK": "Задача была заявлена",
+            "UNCLAIM_TASK": "Задача была назначена",
+            "CLAIM_FAILED": "Невозможно выполнить действие"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Невозможно выполнить действие",
+            "FAILED_TO_LOAD": "Не удалось загрузить сведения задачи, повторите через некоторое время",
+            "UPDATED": "Обновлено{{ property }} успешно",
+            "FAILED_TO_UPDATE": "Не удалось обновить {{ property }}",
+            "METADATA_TOOLTIP": "Просмотреть сведения",
+            "NO_TASK_NAME": "Без имени"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Закрыть"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Определения процесса недоступны"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Запущено пользователем",
+            "CREATED": "Дата начала"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Невозможно начать процесс, поскольку нет определений процесса",
+            "NO_START_FORM": "Этот процесс не требует каких-либо дополнительных конфигураций",
+            "NO_PROCESS_DEF_SELECTED": "Категория/процесс не выбраны",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Выберите приложение"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Отменить процесс?",
+                "DESCRIPTION": "Этот процесс и все связанные с ним задачи будут помечены как завершенные.",
+                "CONFIRM_BTN": "Подтвердить"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' успешно отменено.",
+                "FAIL": "Ошибка отмены процесса: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Дата создания"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Принять",
+                "UNCLAIM": "Освободить"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Часть запущенного процесса",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Связанный процесс",
+            "PART_OF_THE_PROCESS_TITLE": "Этот документ является частью следующих процессов",
+            "NO_PROCESSES": "Этот документ не является частью каких-либо запущенных процессов",
+            "CREATED": "Создано",
+            "VIEW_DETAILS_BTN": "Детали"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Автоматическая аутентификация для служб процессов",
+        "ENABLED": "Включено",
+        "ENABLED_DESCRIPTION": "Система автоматически проводит повторную аутентификацию, позволяя пользователю продолжить свою работу без перерыва.",
+        "DISABLED": "Отключено",
+        "DISABLED_DESCRIPTION": "По истечении времени сеанса пользователю придется повторно пройти аутентификацию с помощью своих учетных данных.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "عملية جديدة",
+            "SELECT_APPLICATION": "حدد التطبيق",
+            "ERROR": "لا يمكنك بدء عملية حيث لا توجد تعريفات عملية متاحة"
+        },
+        "BREADCRUMB": {
+            "ROOT": "إدارة العملية",
+            "PROCESS_LIST": {
+                "PROCESSES": "عمليات"
+            },
+            "START_PROCESS": "بدء العملية",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "عرض التفاصيل"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "إظهار التعليقات"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "إدارة العملية",
+            "CREATE_NEW_PROCESS": "بدء العملية",
+            "CREATE_PROCESS_NOT_ALLOWED": "لا يمكن إنشاء عملية جديدة"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "إظهار المزيد"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "تعليقات",
+            "CANCEL_PROCESS": "إلغاء العملية"
+        },
+        "ERROR": {
+            "NO_FORM": "تعريف العملية لا يملك نموذجًا مُعرفًا",
+            "NO_CONTENT": "يتعذر إرفاق الملف من جهازك",
+            "CAN_NOT_ATTACH": "يتعذر إرفاق المحتوى المحدد",
+            "AUDIT_ERROR": "عرض خطأ المهمة: {{error}}",
+            "TASK_ACCESS_WARNING": "ليس لديك الحق لتعديل المهمة",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "معاينة المستند غير متوفرة لأن المهمة لم تكتمل بعد."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "تم إنشاء العملية '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "حدث خطأ شبكة غير معروف. تم تعطيل الميزات المرتبطة بخدمة العملية.",
+            "ACTION": "عرض العملية المشغلة"
+        },
+        "NO_PROCESS_DEFINITIONS": "لا توجد تعريفات عملية متاحة",
+        "SIDE_NAV_TITLE": "سير العمل",
+        "STATUS": {
+            "COMPLETED": "مكتمل",
+            "RUNNING": "تشغيل",
+            "OPEN": "فتح",
+            "UNKNOWN": "غير معروف"
+        },
+        "TASK_LIST": {
+            "TASKS": "المهام",
+            "ACTIONS": {
+                "TASK_DETAILS": "عرض"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "عرض"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "تم حفظ النموذج بنجاح",
+            "FORM_COMPLETED": "اكتملت المهمة",
+            "CLOSE": "إغلاق",
+            "CLAIM_TASK": "تمت المطالبة بالمهمة",
+            "UNCLAIM_TASK": "تم تحرير المهمة",
+            "CLAIM_FAILED": "يتعذر تنفيذ الإجراء"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "يتعذر تنفيذ الإجراء",
+            "FAILED_TO_LOAD": "فشل تحميل تفاصيل المهمة، حاول بعد بعض الوقت",
+            "UPDATED": "تم تحديث {{ property }} بنجاح",
+            "FAILED_TO_UPDATE": "فشل تحديث {{ property }}",
+            "METADATA_TOOLTIP": "عرض التفاصيل",
+            "NO_TASK_NAME": "بدون إسم"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "إغلاق"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "لا توجد تعريفات عملية متاحة"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "بدأ بواسطة",
+            "CREATED": "تاريخ البدء"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "لا يمكنك بدء عملية حيث لا توجد تعريفات عملية متاحة",
+            "NO_START_FORM": "لا تتطلب هذه المهمة أي تكوينات إضافية",
+            "NO_PROCESS_DEF_SELECTED": "لم يتم تحديد فئة/عملية",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "حدد التطبيق"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "إلغاء العملية؟",
+                "DESCRIPTION": "سيتم وضع علامة على هذه العملية وجميع المهام المرتبطة بها عند اكتمالها.",
+                "CONFIRM_BTN": "تأكيد"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "تم إلغاء '{{ processName }}' بنجاح.",
+                "FAIL": "إلغاء خطأ العملية: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "تاريخ الإنشاء"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "مطالبة",
+                "UNCLAIM": "تحرير"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "جزء من عملية التشغيل",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "العملية المرتبطة",
+            "PART_OF_THE_PROCESS_TITLE": "هذا المستند جزء من العمليات التالية",
+            "NO_PROCESSES": "هذا المستند ليس جزءا من أي عمليات قيد التشغيل",
+            "CREATED": "تم الإنشاء",
+            "VIEW_DETAILS_BTN": "عرض التفاصيل"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "المصادقة التلقائية لخدمات العمليات",
+        "ENABLED": "‫مُمكَّن",
+        "ENABLED_DESCRIPTION": "سيقوم النظام بإعادة المصادقة تلقائيًا، مما يتيح للمستخدم مواصلة عمله دون انقطاع.",
+        "DISABLED": "معطّل",
+        "DISABLED_DESCRIPTION": "سيُطلب من المستخدم إعادة المصادقة باستخدام بيانات اعتماده عند انتهاء مدة الجلسة.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

@@ -1,0 +1,203 @@
+{
+    "COMMON": {
+        "APPLY": "Appliquer",
+        "CANCEL": "Annuler",
+        "SWITCH": "Commuter",
+        "CONTINUE": "Continuer",
+        "RELOAD": "Recharger"
+    },
+    "GOVERNANCE": {
+        "DECLARE-RECORD": {
+            "TITLE": "Déclarer comme document d'archives",
+            "SUCCESS": "{{fileName}} a été déclaré comme document d'archives",
+            "FAIL": "Impossible de déclarer {{fileName}} comme document d'archives",
+            "DIALOG": {
+                "TITLE": "Déclarer comme document d'archives",
+                "MESSAGE": "Ce document a été déclaré précédemment comme document d'archives et a été rejeté.",
+                "YES": "Déclarer comme document d'archives",
+                "NO": "Annuler",
+                "CLOSE": "Fermer"
+            },
+            "BULK-OPERATION": {
+                "ERRORS": {
+                    "FOLDER": "La déclaration d'un dossier comme document d'archives n'est actuellement pas prise en charge",
+                    "EXISTING-RECORD": "Déjà déclaré comme document d'archives",
+                    "FAILED": "Impossible de déclarer comme document d'archives"
+                },
+                "SUCCESS": "L'élément a été déclaré comme document d'archives"
+            }
+        },
+        "REJECTED-INFO-RECORD": {
+            "TITLE_LABEL": "Document d'archives rejeté",
+            "CLOSE_LABEL": "Fermer",
+            "SUB-TITLE": "Le fichier '{{ nodeName }}' a été rejeté comme document d'archives",
+            "BY": "Par",
+            "AT": "A",
+            "REASON": "Pour le motif suivant :",
+            "CONFIRM": "Confirmer",
+            "WARNING": "Si vous supprimez l'avertissement associé au rejet du document d'archives, les options permettant de déclarer le fichier comme document d'archives seront de nouveau disponibles",
+            "FAILED-REMOVE": "Impossible de supprimer l'avertissement de rejet de {{nodeName}} : {{errorMessage}}"
+        },
+        "RECORD-NAME": {
+            "REJECT": "Document d'archives rejeté",
+            "TOOLTIP-MESSAGE": "Supprimer l'avertissement",
+            "ICONS-TOOLTIP-MESSAGE": {
+                "REJECTED-RECORD": "Document d'archives rejeté",
+                "RECORD-HYPERLINK": "Déclaré comme document d'archives",
+                "REJECTED-RECORD-HYPERLINK": "Le document d'archives a été rejeté ; voir les informations du fichier pour plus de détails"
+            }
+        },
+        "DELETE-RECORD": {
+            "TITLE": "Supprimer",
+            "SUCCESS": "'{{ name }}' a été supprimé",
+            "FAIL": "Impossible de supprimer {{recordId}}",
+            "DIALOG": {
+                "TITLE": "Supprimer l'instance de document d'archives",
+                "YES-ALL": "Supprimer et ne plus afficher ce message",
+                "YES": "Supprimer",
+                "NO": "Annuler",
+                "MESSAGE": {
+                    "DELETE": "L'instance de '{{name}}' sera définitivement supprimée et ne pourra pas être récupérée dans la corbeille.",
+                    "ADDITIONAL": "Le document d'archives '{{name}}' stocké dans le système de gestion des documents d'archive de votre entreprise ne sera pas affecté."
+                }
+            }
+        },
+        "RECORD-PROPERTIES": {
+            "RECORD_GROUP_TITLE": "Document d'archives"
+        },
+        "MOVE-RECORD": {
+            "TITLE": "Déplacer",
+            "MOVE-ITEM": "Déplacer '{{ name }}' vers...",
+            "SAME-FOLDER-MOVE": "Impossible de déplacer dans le même dossier",
+            "SUCCESSFUL": "Le document d'archives a été déplacé"
+        },
+        "GLACIER": {
+            "STORE": {
+                "TITLE": "Envoyer vers les archives",
+                "SUCCESS": "Le fichier {{ name }} sera archivé",
+                "FAIL": "Impossible d'archiver {{ name }}",
+                "BULK-OPERATION": {
+                    "ERRORS": {
+                        "EXISTING-STORED-NODE": "Élément déjà archivé.",
+                        "PENDING-RESTORE": " Élément en attente de restauration. ",
+                        "RESTORED": "Impossible d'archiver les éléments restaurés",
+                        "FOLDER": "La restauration à partir d'une archive n'est pas actuellement prise en charge"
+                    },
+                    "FAIL": "Impossible d'archiver",
+                    "SUCCESS": "L'élément sera archivé"
+                },
+                "DIALOG": {
+                    "TITLE": "Envoyer vers les archives",
+                    "MESSAGE": "Vous êtes sur le point d'envoyer des fichiers vers une archive externe. Récupérer des fichiers archivés peut entraîner des frais. Voulez-vous continuer ?",
+                    "YES": "Envoyer vers les archives",
+                    "NO": "Annuler"
+                }
+            },
+            "RESTORE": {
+                "TITLE": "Restaurer depuis les archives",
+                "SYNC-ERROR": "Le fichier que vous tentez de restaurer n'a pas encore été synchronisé avec les archives. L'opération peut prendre 24 heures. Veuillez réessayer ultérieurement.",
+                "FAIL": "Impossible de restaurer {{ name }} depuis les archives",
+                "DIALOG": {
+                    "TITLE": "Restaurer depuis les archives",
+                    "LABEL": {
+                        "TYPE": "Vitesse de restauration (250 Mo max par restauration)",
+                        "OPTION-FAST": "Rapide – durée 1-5 min (coût max)",
+                        "OPTION-STANDARD": "Standard – durée 3-5 h",
+                        "OPTION-SLOW": "Lente – durée 5-12 h (coût min)",
+                        "DURATION": "Combien de temps les fichiers seront-ils restaurés ? (jours)"
+                    },
+                    "YES": "Confirmer",
+                    "NO": "Annuler"
+                },
+                "BULK-OPERATION": {
+                    "TITLE": "Restaurer depuis les archives",
+                    "ERRORS": {
+                        "EXISTING-SYNC-ERROR": " Les fichiers que vous tentez de restaurer n'ont pas encore été synchronisés avec les archives. L'opération peut prendre 24 heures. Veuillez réessayer ultérieurement.",
+                        "RESTORED": "Élément déjà restauré",
+                        "PENDING-RESTORE": "Élément déjà en attente de restauration.",
+                        "NOT-STORED": "L'élément que vous tentez de restaurer n'a pas encore été synchronisé avec les archives",
+                        "FAIL": "La restauration a échoué",
+                        "FOLDER": "La restauration d'un dossier n'est pas prise en charge actuellement"
+                    },
+                    "SUCCESS": "L'élément sera restauré"
+                }
+            },
+            "EXTEND-RESTORE": {
+                "TITLE": "Augmenter la durée de restauration",
+                "SUCCESS": "La durée de restauration sera augmentée de '{{ days }}' jours à compter du {{ date }}",
+                "FAIL": "Impossible d'augmenter la durée de restauration de {{ name }} à partir des archives"
+            },
+            "ICONS-TOOLTIP-MESSAGE": {
+                "STORE": "Ce fichier est archivé. Pour le restaurer, faites un clic droit et sélectionnez la fonction restaurer à partir de l'archive.",
+                "RESTORED": "Restauré",
+                "PENDING-RESTORE": "Restauration des fichiers depuis les archives en cours. Si vous ne parvenez pas à prévisualiser le fichier ou à le télécharger, veuillez réessayer ultérieurement"
+            }
+        },
+        "BULK-OPERATION": {
+            "TITLE": "Statut de l'opération en bloc",
+            "FAIL": "Impossible d'effectuer l'opération",
+            "CLOSE": "Fermer"
+        },
+        "MANAGE_HOLDS": {
+            "MENU_TITLE": "Gérer les mises en suspens",
+            "REMOVE_FROM_HOLD_MENU_OPTION": "Supprimer la mise en suspens",
+            "DIALOG_TITLE": "Gérer les mises en suspens juridiques",
+            "TAB_EXISTING_HOLDS": "Gérer les mises en suspens existantes",
+            "TAB_CREATE_LEGAL_HOLD": "Créer une mise en suspens juridique",
+            "SAVE": "Enregistrer",
+            "CLOSE": "Fermer",
+            "CANCEL": "Annuler",
+            "NEW_HOLD_NAME": "Nom",
+            "NEW_HOLD_DESCRIPTION": "Description",
+            "NEW_HOLD_REASON": "Motif",
+            "DIALOG_WARNING_TITLE": "Avertissement",
+            "DIALOG_WARNING_MESSAGE": "Les modifications effectuées ici ne seront pas appliquées si vous changez d’onglet.",
+            "DOCUMENT_IN_HOLD": "Document dans une mise en suspens juridique",
+            "FOLDER_IN_HOLD": "Dossier dans une mise en suspens juridique",
+            "APPLY_HOLDS_SUCCESS": "L’action de mise en suspens juridique a réussi.",
+            "APPLY_HOLDS_NOT_FOUND": "La mise en suspens juridique sélectionnée ou le fichier indiqué n’existe pas. Veuillez vérifier votre sélection et réessayer.",
+            "BULK_APPLY_HOLDS_SUCCESS": "L’action de mise en suspens juridique a réussi. {{ totalItems }} éléments ont été ajoutés à la mise en suspens juridique.",
+            "BULK_APPLY_HOLDS_STARTED": "L’action groupée de mise en suspens juridique est en cours d’exécution en arrière-plan. Vous recevrez une notification une fois qu’elle sera achevée.",
+            "BULK_APPLY_HOLDS_PARTIAL_SUCCESS": "Un contenu archivé, dupliqué ou verrouillé a été détecté. {{ errorsCount }} éléments n’ont pas été ajoutés à la mise en suspens juridique.",
+            "BULK_APPLY_HOLDS_FAIL": "Le placement du contenu dans la mise en suspens juridique a échoué.",
+            "BULK_APPLY_HOLDS_CANNOT_BE_APPLIED_TO_FOLDERS": "L’action groupée de mise en suspens juridique ne peut pas être appliquée à des dossiers",
+            "ACKNOWLEDGE": "Accusé de réception",
+            "EMPTY_HOLD_LIST": "Aucune mise en suspens juridique disponible",
+            "WARNING_DIALOG_TITLE": "Avertissement : action groupée",
+            "WARNING_DIALOG_MESSAGE": "Cette action modifiera le statut des mises en suspens juridiques de <strong>Tous les fichiers dans ces fichiers de recherche</strong>.<br><br>Cette mise en suspens juridique <strong>ne sera pas appliquée aux dossiers</strong>.",
+            "WARNING_DIALOG_QUESTION": "Voulez-vous continuer ?",
+            "NO_RECORDS_MANAGEMENT_SITE": "L’administrateur doit créer un site de gestion des enregistrements afin d’activer les mises en suspens juridiques",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_SUCCESS": "Le fichier a bien été retiré de la mise en suspens juridique.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_SUCCESS": "Les fichiers ont bien été retirés de la mise en suspens juridique.",
+            "REMOVE_SINGLE_FILE_FROM_HOLD_ERROR": "Impossible de retirer le fichier de la mise en suspens juridique.",
+            "REMOVE_MULTIPLE_FILES_FROM_HOLD_ERROR": "Impossible de retirer les fichiers de la mise en suspens juridique.",
+            "LOADING_CAPABILITIES_ERROR": "Échec de chargement des fonctionnalités",
+            "NODE_NOT_FOUND": "Le noeud sélectionné est introuvable. Veuillez vérifier votre sélection et réessayer.",
+            "CONFIRM_DELETE_HOLDS_DIALOG": {
+                "TITLE": "Supprimer les éléments contenant des mises en suspens ?",
+                "TITLE_PLURAL": "Supprimer les {{ count }} mises en suspens sélectionnées et valider les documents ?",
+                "MESSAGE_SINGULAR": "Vous avez sélectionné la mise en suspens {{ name }} pour sa suppression. Tous les éléments qu’elle suspend seront libérés. Cette action ne peut pas être annulée.",
+                "MESSAGE_PLURAL": "Vous avez sélectionné {{ count }} éléments à supprimer. Certains parmi eux sont des mises en suspens, tous les éléments qu’elles suspendent seront libérés. Cette action ne peut pas être annulée.",
+                "KEEP_HOLD": "Conserver la mise en suspens"
+            }
+        },
+        "SECURITY_MARKS": {
+            "EDIT_SECURITY_MARKS_ERROR": "Erreur d'enregistrement des marques de sécurité",
+            "DIALOG_TITLE": "Modifier les marques de sécurité",
+            "MENU_TITLE": "Marques de sécurité",
+            "SAVE": "Enregistrer",
+            "CANCEL": "Annuler",
+            "HELP": "Aide",
+            "CLOSE": "Fermer",
+            "SHOW_ALL": "Afficher tout",
+            "APPLIED": "Appliqué",
+            "NOT_APPLIED": "Pas appliqué",
+            "COLUMNS": {
+                "NAME": "Marques de sécurité"
+            },
+            "NO_GROUPS_CREATED": "Aucun groupe de sécurité disponible",
+            "SECURITY_MARKS_HELP": "Aide pour les marques de sécurité",
+            "HELP_ICON_TEXT": "L'application de marques de sécurité limitera l'accès au contenu numérique. Seules les personnes avec des marques correspondantes appliquées à leur droit d'accèss pourront afficher ou modifier le contenu marqué."
+        }
+    }
+}

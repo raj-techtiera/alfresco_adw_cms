@@ -1,0 +1,65 @@
+<div class="adw-select-wm">
+  <div class="adw-select-wm__header">
+    <div class="adw-select-wm__header-main">
+      <span class="adw-select-wm__icon-wrap" aria-hidden="true">
+        <mat-icon>{{ kind === 'image' ? 'image' : 'title' }}</mat-icon>
+      </span>
+      <div class="adw-select-wm__header-text">
+        <h2 mat-dialog-title class="adw-select-wm__title">{{ title }}</h2>
+        <p class="adw-select-wm__subtitle">
+          Choose a watermark to stamp on
+          <strong>{{ data.fileName || 'this download' }}</strong>.
+        </p>
+      </div>
+    </div>
+    <button mat-icon-button type="button" class="adw-select-wm__close" aria-label="Close" (click)="cancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="adw-select-wm__content">
+    @if (loading) {
+      <div class="adw-select-wm__loading">
+        <mat-spinner diameter="32"></mat-spinner>
+        <span>Loading watermarks…</span>
+      </div>
+    } @else if (error) {
+      <p class="adw-select-wm__error" role="alert">{{ error }}</p>
+    } @else if (templates.length === 0) {
+      <p class="adw-select-wm__empty">No {{ kind }} watermarks are available yet. Add one from Settings.</p>
+    } @else {
+      <mat-radio-group class="adw-select-wm__list" [value]="selectedId" (change)="selectedId = $event.value">
+        @for (item of templates; track item.id) {
+          <label
+            class="adw-select-wm__item"
+            [class.adw-select-wm__item--selected]="selectedId === item.id"
+            (click)="selectTemplate(item)">
+            <mat-radio-button [value]="item.id" [checked]="selectedId === item.id">
+              <span class="cdk-visually-hidden">{{ displayName(item) }}</span>
+            </mat-radio-button>
+            <div class="adw-select-wm__preview" [class.adw-select-wm__preview--image]="kind === 'image'">
+              @if (kind === 'image' && item.contentUrl) {
+                <img [src]="item.contentUrl" [alt]="displayName(item)" />
+              } @else {
+                <span>{{ item.templateValue || item.name }}</span>
+              }
+            </div>
+            <div class="adw-select-wm__meta">
+              <span class="adw-select-wm__name" [title]="displayName(item)">{{ displayName(item) }}</span>
+              @if (kind === 'text' && item.templateDescription) {
+                <span class="adw-select-wm__desc">{{ item.templateDescription }}</span>
+              }
+            </div>
+          </label>
+        }
+      </mat-radio-group>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-select-wm__actions">
+    <button type="button" mat-stroked-button (click)="cancel()">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="confirm()" [disabled]="!selectedTemplate">
+      Download
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,11 @@
+<mat-form-field floatLabel="auto" subscriptSizing="dynamic" class="adw-form-field">
+    <mat-select
+        (click)="$event.stopPropagation()"
+        [placeholder]="placeholder | translate "
+        [value]="value"
+        [disabled]="disabled"
+        (selectionChange)="onMemberRoleChanged($event.value)">
+        <mat-option *ngFor="let role of roles" [value]="role.role">{{ role.label | translate }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

@@ -1,0 +1,15 @@
+aga-security-marks-column {
+    display: flex;
+    width: inherit;
+
+    adf-dynamic-chip-list {
+        width: inherit;
+
+        .adf-dynamic-chip-list-chip {
+            background-color: var(--theme-background-card-colour);
+            border: 1px solid var(--theme-text-color);
+            color: var(--theme-text-color);
+            padding: 0;
+        }
+    }
+}

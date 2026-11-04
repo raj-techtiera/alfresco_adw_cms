@@ -1,0 +1,114 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #e8edf5;
+    background: #0b0d12;
+}
+
+.adw-cad-viewer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+.adw-cad-viewer__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex: 0 0 auto;
+    padding: 10px 14px;
+    border-bottom: 1px solid #232833;
+    background: #11141b;
+}
+
+.adw-cad-viewer__title {
+    min-width: 0;
+}
+
+.adw-cad-viewer__eyebrow {
+    display: block;
+    color: #8b98ab;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.adw-cad-viewer__title h2 {
+    margin: 2px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.adw-cad-viewer__command {
+    display: block;
+    margin-top: 2px;
+    color: #8fd0ff;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.adw-cad-viewer__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+}
+
+.adw-cad-viewer__status {
+    max-width: 360px;
+    color: #c5d0de;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.adw-cad-viewer__bar button {
+    color: #e8edf5;
+}
+
+.adw-cad-viewer__stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    background: #000;
+}
+
+.adw-cad-viewer__canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.adw-cad-viewer__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    pointer-events: none;
+    text-align: center;
+    background: rgba(11, 13, 18, 0.35);
+}
+
+.adw-cad-viewer__overlay p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.adw-cad-viewer__overlay span {
+    color: #8b98ab;
+    font-size: 13px;
+}
+
+.adw-cad-viewer__overlay--error {
+    background: rgba(11, 13, 18, 0.7);
+}

@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "كان الإجراء غير ناجح. حاول مرة أخرى أو اتصل بفريق تكنولوجيا المعلومات.",
+        "PERMISSION_DENIED": "ليس لديك إذن لتنفيذ هذه العملية"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "طلب {{user}} الانضمام إلى {{library}}",
+        "REQUEST_PLURAL": "طلب {{number}} من الأشخاص الانضمام إلى {{library}}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "إدارة الأعضاء",
+        "CLOSE": "إغلاق",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "تفاصيل المكتبة",
+            "MANAGE_MEMBERS": "إدارة الأعضاء"
+        },
+        "TABS": {
+            "PROPERTIES": "الخصائص",
+            "MEMBERS": "الأعضاء",
+            "GROUPS": "مجموعات",
+            "PENDING": "معلق"
+        },
+        "LOAD_MORE": "تحميل المزيد",
+        "CONFIRM_DIALOG": {
+            "TITLE": "تأكيد",
+            "MESSAGE": "هل تريد المتابعة؟"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "رفض طلب العضو",
+            "COMMENT": "ترك تعليق هنا",
+            "YES_LABEL": "رفض",
+            "NO_LABEL": "إلغاء"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "معلومات عضوية المجموعة",
+            "DESCRIPTION": "يملك هذا المستخدم وصولاً إلى المكتبة عبر أدوار المجموعة. إذا كنت تحتاج إلى إزالة العضوية الفردية لهذا المستخدم، فستحتاج إلى إزالتها أولاً من المجموعات الواردة أدناه.",
+            "CLOSE": "إغلاق",
+            "GROUP": "المجموعة",
+            "ROLE": "الدور"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "لا طلبات عضوية معلقة",
+        "PENDING_REQUESTS": "طلبات العضوية المعلقة",
+        "APPROVE": "موافقة",
+        "REJECT": "رفض"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "أعضاء هذه المجموعة",
+        "NO_MEMBERS": "لم يتم العثور على أعضاء",
+        "DELETE_MEMBERS": "حذف الأعضاء المحددين",
+        "GROUP_ROLE": "دور المجموعة",
+        "REMOVE": "إزالة",
+        "A11Y_AVATAR": "الصورة الرمزية للمستخدم",
+        "REFRESH": "تحديث"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "عضوية المجموعة لهذه المكتبة",
+        "NO_GROUPS": "لم يتم العثور على مجموعات",
+        "DELETE_GROUPS": "حذف المجموعات المحددة",
+        "REFRESH": "تحديث",
+        "REMOVE": "إزالة"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "مدير",
+        "SITE_CONTRIBUTOR": "مساهم",
+        "SITE_CONSUMER": "مستهلك",
+        "SITE_COLLABORATOR": "معاون"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "ضبط دور المستخدم",
+        "GROUP_SELECTOR": "ضبط دور المجموعة",
+        "ALL": "ضبط كل الأدوار إلى"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "إضافة مستخدم / مجموعة",
+        "SEARCH_INPUT": "بحث عن مستخدمين أو مجموعات لإضافتها",
+        "NAME": "الاسم",
+        "TITLE_LABEL": "إضافة مستخدم أو مجموعة إلى",
+        "ADD_LABEL": "إضافة",
+        "SELECT_LABEL": "حدد",
+        "CLOSE_LABEL": "إغلاق",
+        "CANCEL_LABEL": "إلغاء"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "الأعضاء"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "تم رفض طلب العضوية",
+        "MEMBERSHIP_ACCEPTED": "تمت إضافة العضو إلى المكتبة",
+        "USER_REMOVE_SUCCESS": "تمت إزالة المستخدم",
+        "USER_REMOVE_PARTIAL_SUCCESS": "تمت إزالة عدد {{count}} مستخدم، تم تخطي {{skipped}}",
+        "USER_REMOVE_FAILED": "فشلت إزالة المستخدم",
+        "GROUP_REMOVE_SUCCESS": "تمت إزالة المجموعة",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "تمت إزالة عدد {{count}} مجموعة، تم تخطي {{skipped}}",
+        "GROUP_REMOVE_FAILED": "فشلت إزالة المجموعة",
+        "ADD_MEMBER_FAILED": "فشلت إضافة عضو إلى الموقع",
+        "ADD_MEMBERS_FAILED": "فشلت إضافة {{count}} أعضاء",
+        "ADD_MEMBERS_SUCCESS": "تمت إضافة عدد {{userCount}} مستخدم وعدد {{groupCount}} مجموعة",
+        "ADD_GROUPS_SUCCESS": "تمت إضافة عدد {{groupCount}} مجموعة",
+        "ADD_USERS_SUCCESS": "تمت إضافة عدد {{userCount}} مستخدم",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "تمت إضافة {{count}} عضو، تم تخطي {{skipped}}",
+        "USER_ROLE_UPDATED": "تم تحديث دور المستخدم",
+        "GROUP_ROLE_UPDATED": "تم تحديث دور المجموعة",
+        "MEMBER_EXISTS": "المستخدم عضو بالفعل بالموقع",
+        "MANAGER_REQUIRED": "يتطلب الموقع مدير موقع واحد على الأقل",
+        "ACTIONS": {
+            "CLOSE": "إغلاق"
+        }
+    }
+}

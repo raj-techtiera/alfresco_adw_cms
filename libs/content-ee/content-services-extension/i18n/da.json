@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Handlingen blev ikke fuldført. Prøv igen, eller kontakt dit it-team.",
+        "PERMISSION_DENIED": "Du har ikke tilladelse til at udføre denne handling"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} har forespurgt om at deltage {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} bruger har forespurgt om at deltage {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Håndtér medlemmer",
+        "CLOSE": "Luk",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Biblioteksoplysninger",
+            "MANAGE_MEMBERS": "Håndtér medlemmer"
+        },
+        "TABS": {
+            "PROPERTIES": "Egenskaber",
+            "MEMBERS": "Medlemmer",
+            "GROUPS": "Grupper",
+            "PENDING": "Ventende"
+        },
+        "LOAD_MORE": "Indlæs flere",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Bekræft",
+            "MESSAGE": "Vil du fortsætte?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Afvis medlemsanmodning",
+            "COMMENT": "Læg en kommentar her",
+            "YES_LABEL": "Afvis",
+            "NO_LABEL": "Annuller"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Oplysninger om gruppemedlemskab",
+            "DESCRIPTION": "Denne bruger har adgang til biblioteket via grupperoller. Hvis du har brug for at fjerne denne brugers individuelle medlemskab, skal du først fjerne dem fra grupperne herunder.",
+            "CLOSE": "Luk",
+            "GROUP": "Gruppe",
+            "ROLE": "Rolle"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Ingen afventende medlemskabsanmodninger",
+        "PENDING_REQUESTS": "Medlemskabsanmodninger afventer",
+        "APPROVE": "Godkend",
+        "REJECT": "Afvis"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Medlemmer af dette bibliotek",
+        "NO_MEMBERS": "Ingen medlemmer fundet",
+        "DELETE_MEMBERS": "Slet de valgte medlemmer",
+        "GROUP_ROLE": "Grupperolle",
+        "REMOVE": "Fjern",
+        "A11Y_AVATAR": "Profilbillede",
+        "REFRESH": "Opdater"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Gruppemedlemskab i dette bibliotek",
+        "NO_GROUPS": "Der blev ikke fundet nogen grupper",
+        "DELETE_GROUPS": "Slet de valgte grupper",
+        "REFRESH": "Opdater",
+        "REMOVE": "Fjern"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Chef",
+        "SITE_CONTRIBUTOR": "Bidragyder",
+        "SITE_CONSUMER": "Forbruger",
+        "SITE_COLLABORATOR": "Samarbejdspartner"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Indstil brugerrolle",
+        "GROUP_SELECTOR": "Indstil grupperolle",
+        "ALL": "Indstil alle roller til"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Tilføj bruger/gruppe",
+        "SEARCH_INPUT": "Søg efter brugere eller grupper, der skal tilføjes",
+        "NAME": "Navn",
+        "TITLE_LABEL": "Føj bruger eller gruppe til",
+        "ADD_LABEL": "Tilføj",
+        "SELECT_LABEL": "Vælg",
+        "CLOSE_LABEL": "Luk",
+        "CANCEL_LABEL": "Annuller"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Medlemmer"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Medlemskabsanmodning afvist",
+        "MEMBERSHIP_ACCEPTED": "Medlem føjet til bibliotek",
+        "USER_REMOVE_SUCCESS": "Bruger fjernet",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} brugere fjernet. {{skipped}} blev sprunget over",
+        "USER_REMOVE_FAILED": "Fjernelse af bruger mislykkedes",
+        "GROUP_REMOVE_SUCCESS": "Gruppe fjernet",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} grupper fjernet. {{skipped}} blev sprunget over",
+        "GROUP_REMOVE_FAILED": "Fjernelse af gruppe mislykkedes",
+        "ADD_MEMBER_FAILED": "Tilføjelse af medlem til sitet mislykkedes",
+        "ADD_MEMBERS_FAILED": "Tilføjelse af {{count}} medlemmer mislykkedes",
+        "ADD_MEMBERS_SUCCESS": "{{userCount}} brugere og {{groupCount}} grupper tilføjet",
+        "ADD_GROUPS_SUCCESS": "{{groupCount}} grupper tilføjet",
+        "ADD_USERS_SUCCESS": "{{userCount}} brugere tilføjet",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} medlem tilføjet. {{skipped}} blev sprunget over",
+        "USER_ROLE_UPDATED": "Brugerrolle opdateret",
+        "GROUP_ROLE_UPDATED": "Grupperolle opdateret",
+        "MEMBER_EXISTS": "Bruger er allerede medlem af sitet",
+        "MANAGER_REQUIRED": "Et site kræver mindst én siteadministrator",
+        "ACTIONS": {
+            "CLOSE": "Luk"
+        }
+    }
+}

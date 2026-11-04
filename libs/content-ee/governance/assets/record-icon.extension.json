@@ -1,0 +1,24 @@
+{
+  "$version": "1.1.0",
+  "$id": "governance-record-icon.plugin",
+  "$name": "governance-record-icon",
+  "$vendor": "Hyland Software, Inc. and its affiliates",
+  "$license": "LGPL-3.0",
+  "$runtime": "1.8.0",
+  "$description": "Record Icon Plugin",
+
+  "features": {
+    "documentList": {
+      "files": [
+        {
+          "id": "app.files.thumbnail",
+          "key": "$thumbnail",
+          "type": "image",
+          "sortable": false,
+          "desktopOnly": false,
+          "template": "app.records.columns.icon"
+        }
+      ]
+    }
+  }
+}

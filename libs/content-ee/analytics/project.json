@@ -1,0 +1,68 @@
+{
+    "name": "content-ee-analytics",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/content-ee/analytics/src",
+    "projectType": "library",
+    "prefix": "lib",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/content-ee/analytics"],
+            "options": {
+                "project": "libs/content-ee/analytics/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/content-ee/analytics/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/content-ee/analytics/tsconfig.lib.json"
+                },
+                "adf": {
+                    "tsConfig": "libs/content-ee/analytics/tsconfig.lib.adf.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "codeCoverage": true,
+                "main": "libs/content-ee/analytics/src/test.ts",
+                "tsConfig": "libs/content-ee/analytics/tsconfig.spec.json",
+                "karmaConfig": "libs/content-ee/analytics/karma.conf.js",
+                "stylePreprocessorOptions": {
+                    "includePaths": ["./node_modules"]
+                }
+            },
+            "outputs": ["{workspaceRoot}/coverage/libs/content-ee/analytics"]
+        },
+        "npm-publish": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "cwd": "dist/libs/content-ee/analytics",
+                "commands": [
+                    {
+                        "command": "npm version --allow-same-version --no-git-tag-version --force {args.new-version}",
+                        "forwardAllArgs": true
+                    },
+                    {
+                        "command": "echo @alfresco:registry=https://npm.pkg.github.com > .npmrc",
+                        "forwardAllArgs": false
+                    },
+                    {
+                        "command": "echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> .npmrc",
+                        "forwardAllArgs": false
+                    },
+                    {
+                        "command": "npm publish --access restricted --tag {args.tag}",
+                        "forwardAllArgs": true
+                    }
+                ],
+                "parallel": false
+            }
+        }
+    },
+    "tags": ["scope:content-ee-analytics", "type:feature", "category:content-ee"]
+}

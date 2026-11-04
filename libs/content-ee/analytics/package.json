@@ -1,0 +1,19 @@
+{
+  "name": "@alfresco/analytics",
+  "version": "0.0.1",
+  "license": "See license in LICENSE file.",
+  "peerDependencies": {
+    "@angular/common": ">=15.2",
+    "@angular/core": ">=15.2"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alfresco/alfresco-applications.git"
+  }
+}

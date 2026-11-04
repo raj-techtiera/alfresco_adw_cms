@@ -1,0 +1,14 @@
+<div class="adw-users-list-container">
+    <adw-member-list
+        [members]="members | async"
+        [loading]="loading | async"
+        [siteId]="siteId"
+        [multiSelect]="true"
+        [showActions]="true"
+        (memberRemoved)="bulkDeleteMember($event)"
+        (memberRoleChanged)="onMemberRoleChanged($event)"
+        (showRowContextMenu)="onShowRowContextMenu($event)"
+        (bulkDelete)="bulkDeleteMember()"
+        #membersList />
+    <adf-pagination acaPagination [target]="membersList" />
+</div>

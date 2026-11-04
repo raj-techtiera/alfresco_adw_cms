@@ -1,0 +1,65 @@
+<acs-widget-base
+    [displayViewAllButton]="false"
+    [emptyStateMessage]="emptyStateMessage"
+    [hasContent]="hasAnyTask"
+    [isLoading$]="isLoading$"
+    [widgetTitle]="'WIDGETS.TASK_HISTORY.TITLE'"
+    (refreshWidget)="loadTasks()">
+    <div class="acs-widget-task-history-container">
+        <div class="acs-widget-task-history-info">
+            @if (monthHasTasks) {
+                <span class="acs-widget-task-history-success">
+                    <adf-icon [title]="'WIDGETS.TASK_SUMMARY.ARROW_UP' | translate" [value]="'arrow_upward'" /> {{ completedTasksPercentage }}%
+                </span>
+                &nbsp;{{'WIDGETS.TASK_HISTORY.SUMMARY_INFO_SUFFIX' | translate }}
+            } @else {
+                <adf-icon [title]="'WIDGETS.TASK_HISTORY.EMPTY' | translate" [value]="'insert_chart_outlined'"/>
+                &nbsp;{{'WIDGETS.TASK_HISTORY.NO_TASKS_IN_MONTH' | translate }}
+            }
+        </div>
+        <ng-container *ngIf="hasAnyTask">
+            <div class="acs-widget-task-history-legend">
+                <div class="acs-widget-task-history-legend-item" *ngFor="let dataset of chartDatasets; let i = index">
+                    <div class="acs-widget-task-history-legend-color" [style.backgroundColor]="dataset.backgroundColor"></div>
+                    <div class="acs-widget-task-history-legend-text">
+                        {{ dataset.label }}
+                        <span class="acs-widget-task-history-legend-text-bold">{{ datasetTotals[i] }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="acs-widget-task-history-filters">
+                <input
+                    [matDatepicker]="datepicker"
+                    [formControl]="selectedDate"
+                    [max]="maxDate"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    class="acs-widget-task-history-hidden-date-input">
+                <mat-chip
+                    tabindex="0"
+                    (click)="openDatePicker()"
+                    (keydown.enter)="openDatePicker()"
+                    class="acs-widget-task-history-date-chip">
+                    <span>
+                        <span class="acs-widget-task-history-date-chip-label">{{ 'WIDGETS.TASK_HISTORY.MONTH_LABEL' | translate }}: </span>
+                        {{ selectedDate.value | adfLocalizedDate:'MMMM yyyy' }}
+                    </span>
+                    <adf-icon [title]="'WIDGETS.TASK_HISTORY.SELECT_MONTH' | translate" [value]="'calendar_month'"/>
+                </mat-chip>
+                <mat-datepicker #datepicker
+                                startView="multi-year"
+                                (monthSelected)="setMonthAndYear($event, datepicker)"
+                                panelClass="acs-widget-task-history-month-picker" />
+            </div>
+            <div class="acs-widget-task-history-canvas-container">
+                <canvas baseChart
+                    [type]="'bar'"
+                    [datasets]="chartDatasets"
+                    [labels]="chartLabels"
+                    [options]="chartOptions"
+                    [legend]="chartLegend">
+                </canvas>
+            </div>
+        </ng-container>
+    </div>
+</acs-widget-base>

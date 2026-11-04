@@ -1,0 +1,61 @@
+aps-process-info-drawer {
+    .aps {
+        &-process-metadata-container {
+            word-break: break-all;
+
+            .adf-card-container {
+                border: 0;
+            }
+        }
+
+        &-process-metadata-drawer {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        &-process-comments-container {
+            margin: 16px;
+            word-break: break-all;
+        }
+    }
+
+    .adf-info-drawer-layout {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        min-height: 100%;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &-header {
+            height: 28px;
+        }
+    }
+
+    /* Force single-tab view: only the active tab content is visible. */
+    .adf-info-drawer-tabs.mat-mdc-tab-group > .mat-mdc-tab-body-wrapper {
+        display: block !important;
+        grid-auto-flow: unset !important;
+        overflow: hidden !important;
+    }
+
+    .adf-info-drawer-tabs.mat-mdc-tab-group > .mat-mdc-tab-body-wrapper > .mat-mdc-tab-body {
+        display: none !important;
+        position: relative !important;
+        width: 100% !important;
+    }
+
+    .adf-info-drawer-tabs.mat-mdc-tab-group
+        > .mat-mdc-tab-body-wrapper
+        > .mat-mdc-tab-body.mat-mdc-tab-body-active {
+        display: block !important;
+    }
+
+    .adf-info-drawer-tabs .mat-mdc-tab-body > .mat-mdc-tab-body-content {
+        transform: none !important;
+        visibility: visible !important;
+        height: auto !important;
+        overflow: auto !important;
+    }
+}

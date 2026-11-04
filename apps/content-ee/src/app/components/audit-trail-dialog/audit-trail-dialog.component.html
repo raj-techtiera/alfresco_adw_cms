@@ -1,0 +1,94 @@
+<h2 mat-dialog-title class="audit-dialog__title">
+    <div class="audit-dialog__heading">
+        <div class="audit-dialog__icon" [ngClass]="{ 'audit-dialog__icon--folder': data.node?.isFolder }">
+            <mat-icon>{{ data.node?.isFolder ? 'folder' : 'description' }}</mat-icon>
+        </div>
+        <div>
+            <div class="audit-dialog__eyebrow">{{ nodeLabel }} Audit Trail</div>
+            <div class="audit-dialog__name">{{ data.node?.name || 'Selected item' }}</div>
+        </div>
+    </div>
+    <button mat-icon-button type="button" (click)="close()" aria-label="Close audit trail dialog">
+        <mat-icon>close</mat-icon>
+    </button>
+</h2>
+
+<mat-dialog-content class="audit-dialog__content">
+    <label class="audit-dialog__search">
+        <span>Search</span>
+        <div class="audit-dialog__search-field">
+            <input matInput [(ngModel)]="searchTerm" (ngModelChange)="onSearchTermChange()" placeholder="Search user, action, or details" autocomplete="off" />
+            <mat-icon>search</mat-icon>
+        </div>
+    </label>
+
+    <div class="audit-dialog__table">
+        <div class="audit-dialog__table-head">
+            <span>Event Date</span>
+            <span>Performed By</span>
+            <span>Event Type</span>
+        </div>
+
+        @if (loading) {
+            <div class="audit-dialog__state audit-dialog__state--loading">
+                <mat-progress-spinner diameter="42" mode="indeterminate" />
+                <p>Loading audit trail...</p>
+            </div>
+        } @else if (error) {
+            <div class="audit-dialog__state">
+                <mat-icon>error_outline</mat-icon>
+                <p>{{ error }}</p>
+            </div>
+        } @else if (filteredEntries.length === 0) {
+            <div class="audit-dialog__state">
+                <mat-icon>history_toggle_off</mat-icon>
+                <p>{{ entries.length === 0 ? 'No audit activity was returned for this item.' : 'No audit entries match your search.' }}</p>
+            </div>
+        } @else {
+            <div class="audit-dialog__table-body">
+                @for (entry of pagedEntries; track entry.id) {
+                    <div class="audit-dialog__row">
+                        <span>{{ entry.createdAt | date: 'MMM d, y, h:mm a' }}</span>
+                        <span>{{ entry.createdBy }}</span>
+                        <span class="audit-dialog__action">{{ entry.action }}</span>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    @if (!loading && !error && filteredEntries.length > 0) {
+        <div class="audit-dialog__pagination">
+            <div class="audit-dialog__pagination-left">
+                <div class="audit-dialog__pagination-summary">
+                    Showing {{ pageStart }}-{{ pageEnd }} of {{ filteredEntries.length }}
+                </div>
+
+                <div class="audit-dialog__page-size-inline">
+                    <span>Items per page</span>
+                    <mat-form-field class="audit-dialog__page-size" appearance="fill" subscriptSizing="dynamic">
+                        <mat-select [(ngModel)]="pageSize" (selectionChange)="onPageSizeChange()" disableOptionCentering>
+                            @for (size of pageSizeOptions; track size) {
+                                <mat-option [value]="size">{{ size }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="audit-dialog__pagination-controls">
+                <span class="audit-dialog__page-indicator">Page {{ currentPage }} of {{ totalPages }}</span>
+                <button mat-icon-button type="button" (click)="goToPreviousPage()" [disabled]="currentPage === 1" aria-label="Previous page">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <button mat-icon-button type="button" (click)="goToNextPage()" [disabled]="currentPage === totalPages" aria-label="Next page">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+            </div>
+        </div>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions class="audit-dialog__actions">
+    <button mat-button type="button" (click)="close()">Close</button>
+</mat-dialog-actions>

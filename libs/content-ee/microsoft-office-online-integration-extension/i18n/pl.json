@@ -1,0 +1,71 @@
+{
+    "MICROSOFT-ONLINE": {
+        "START_SESSION_SUCCESS": "Ten dokument jest edytowany w Office Online.",
+        "CANCEL_SESSION_SUCCESS": "Zmiany wprowadzone w tym dokumencie zostały odrzucone.",
+        "CANCEL_SESSION_DENIED": "Wystąpił błąd. Jeśli będzie się powtarzać, skontaktuj się z administratorem.",
+        "END_SESSION_SUCCESS": "Ten dokument nie jest już edytowany w witrynie Office Online.",
+        "END_SESSION_DENIED": "Wystąpił błąd. Jeśli będzie się powtarzać, skontaktuj się z administratorem.",
+        "RESUME_SESSION": "Ten plik jest edytowany w Office Online. Można edytować go w tym samym czasie.",
+        "END_EDITING_DIALOG": {
+            "END_OPTION": "Zapisz wszystkie edycje tego dokumentu",
+            "END_OPTION_DETAILS": "Zostanie utworzona nowa wersja",
+            "CANCEL_OPTION": "Odrzuć wszystkie edycje",
+            "CHANGES": "Jakiego poziomu zmiany wprowadzono?",
+            "HEADER": "Zakończ edycję",
+            "DESCRIPTION": "Uniemożliwi to dalszą edycję dokumentu wszystkim użytkownikom uzyskującym dostęp do niego za pomocą Microsoft Office Online.",
+            "QUESTION": "Co zrobić z wprowadzonymi zmianami?",
+            "CANCEL": "Anuluj",
+            "END": "Zakończ edycję"
+        },
+        "CREATE_DOCUMENT_DIALOG": {
+            "WORD": {
+                "HEADER": "Utwórz dokument Word"
+            },
+            "EXCEL": {
+                "HEADER": "Utwórz arkusz kalkulacyjny Excel"
+            },
+            "POWERPOINT": {
+                "HEADER": "Utwórz prezentację Powerpoint"
+            },
+            "CANCEL": "Anuluj",
+            "CREATE": "Utwórz",
+            "CREATE_AND_OPEN": "Utwórz i otwórz online",
+            "DESCRIPTION": {
+                "LABEL": "Opis",
+                "PLACEHOLDER": "Zrozumiały opis tego nowego pliku."
+            },
+            "NAME": {
+                "LABEL": "Nazwa"
+            }
+        },
+        "ACTIONS": {
+            "CREATE_EXCEL": {
+                "TITLE": "Arkusz kalkulacyjny Excel",
+                "TOOLTIP": "Utwórz nowy arkusz kalkulacyjny Excel"
+            },
+            "CREATE_POWERPOINT": {
+                "TITLE": "Prezentacja Powerpoint",
+                "TOOLTIP": "Utwórz nową prezentację Powerpoint"
+            },
+            "CREATE_WORD": {
+                "TITLE": "Dokument Word",
+                "TOOLTIP": "Utwórz nowy dokument Word"
+            },
+            "END_SESSION": "Zakończ edycję",
+            "EDIT_WORD": "Edytuj w Word Online",
+            "EDIT_POWERPOINT": "Edytuj w PowerPoint Online",
+            "EDIT_EXCEL": "Edytuj w Excel Online"
+        },
+        "SETTINGS": {
+            "AVAILABILITY_HEADER": "Rozszerzenia: Microsoft Office Online",
+            "AVAILABILITY_TITLE": "Włącz rozszerzenie Microsoft Office Online"
+        },
+        "NODE_FROM_TEMPLATE": {
+            "FORM": {
+                "ERRORS": {
+                    "DESCRIPTION_TOO_LONG": "Opis jest zbyt długi"
+                }
+            }
+        }
+    }
+}

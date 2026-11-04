@@ -1,0 +1,71 @@
+{
+  "MICROSOFT-ONLINE": {
+    "START_SESSION_SUCCESS": "Dette dokumentet redigeres i Office Online.",
+    "CANCEL_SESSION_SUCCESS": "Endringer foretatt i dette dokumentet har blitt forkastet.",
+    "CANCEL_SESSION_DENIED": "Det har oppstått en feil. Kontakt administratoren hvis den vedvarer.",
+    "END_SESSION_SUCCESS": "Dette dokumentet redigeres ikke lenger i Office Online.",
+    "END_SESSION_DENIED": "Det har oppstått en feil. Kontakt administratoren hvis den vedvarer.",
+    "RESUME_SESSION": "Denne filen redigeres i Office Online. Du kan redigere denne filen samtidig.",
+    "END_EDITING_DIALOG": {
+      "END_OPTION": "Lagre alle redigeringer av dette dokumentet",
+      "END_OPTION_DETAILS": "En ny versjon vil bli opprettet",
+      "CANCEL_OPTION": "Avvis alle redigeringer",
+      "CHANGES": "Hvilket nivå av endringer ble gjort?",
+      "HEADER": "Avslutt redigering",
+      "DESCRIPTION": "Dette vil hindre ytterligere redigering av dokumentet for alle brukere som for øyeblikket har tilgang til den med Microsoft Office Online.",
+      "QUESTION": "Hva skal skje med foretatte redigeringer?",
+      "CANCEL": "Avbryt",
+      "END": "Avslutt redigering"
+    },
+    "CREATE_DOCUMENT_DIALOG": {
+      "WORD": {
+        "HEADER": "Opprett et Word-dokument"
+      },
+      "EXCEL": {
+        "HEADER": "Opprett et Excel-regneark"
+      },
+      "POWERPOINT": {
+        "HEADER": "Opprett en Powerpoint-presentasjon"
+      },
+      "CANCEL": "Avbryt",
+      "CREATE": "Opprett",
+      "CREATE_AND_OPEN": "Opprett og åpne online",
+      "DESCRIPTION": {
+        "LABEL": "Beskrivelse",
+        "PLACEHOLDER": "En relevant beskrivelse av denne nye filen."
+      },
+      "NAME": {
+        "LABEL": "Navn"
+      }
+    },
+    "ACTIONS": {
+      "CREATE_EXCEL": {
+        "TITLE": "Excel-regneark",
+        "TOOLTIP": "Opprett et nytt Excel-regneark"
+      },
+      "CREATE_POWERPOINT": {
+        "TITLE": "Powerpoint-presentasjon",
+        "TOOLTIP": "Opprett en ny Powerpoint-presentasjon"
+      },
+      "CREATE_WORD": {
+        "TITLE": "Word-dokument",
+        "TOOLTIP": "Opprett et nytt Word-dokument"
+      },
+      "END_SESSION": "Avslutt redigering",
+      "EDIT_WORD": "Rediger i Word Online",
+      "EDIT_POWERPOINT": "Rediger i PowerPoint Online",
+      "EDIT_EXCEL": "Rediger i Excel Online"
+    },
+    "SETTINGS": {
+      "AVAILABILITY_HEADER": "Utvidelser: Microsoft Office Online",
+      "AVAILABILITY_TITLE": "Aktiver Microsoft Office Online-utvidelse"
+    },
+    "NODE_FROM_TEMPLATE": {
+      "FORM": {
+        "ERRORS": {
+          "DESCRIPTION_TOO_LONG": "Beskrivelsen er for lang"
+        }
+      }
+    }
+  }
+}

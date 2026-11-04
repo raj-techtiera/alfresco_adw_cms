@@ -1,0 +1,147 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "Ny proces",
+            "SELECT_APPLICATION": "Vælg applikation",
+            "ERROR": "Du kan ikke starte en proces, da der ikke er nogen tilgængelige procesdefinitioner"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Processtyring",
+            "PROCESS_LIST": {
+                "PROCESSES": "Processer"
+            },
+            "START_PROCESS": "Start proces",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "Vis detaljer"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Vis kommentarer"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Processtyring",
+            "CREATE_NEW_PROCESS": "Start proces",
+            "CREATE_PROCESS_NOT_ALLOWED": "Ny proces kan ikke oprettes"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Vis flere"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Kommentarer",
+            "CANCEL_PROCESS": "Annuller proces"
+        },
+        "ERROR": {
+            "NO_FORM": "Procesdefinition har ikke en defineret form",
+            "NO_CONTENT": "Kan ikke vedhæfte filen fra din enhed",
+            "CAN_NOT_ATTACH": "Ikke i stand til at vedhæfte det valgte indhold",
+            "AUDIT_ERROR": "Se opgavefejl: {{error}}",
+            "TASK_ACCESS_WARNING": "Du kan ikke redigere i opgaven",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Forhåndsvisning af dokumentet er ikke tilgængelig, da opgaven endnu ikke er færdiggjort."
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Proces oprettet'{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Ukendt opstået netværksfejl. Servicerelateret procesfunktion er deaktiveret.",
+            "ACTION": "Se kørselsproces"
+        },
+        "NO_PROCESS_DEFINITIONS": "Ingen proces definitioner tilgængelig",
+        "SIDE_NAV_TITLE": "Arbejdsgang",
+        "STATUS": {
+            "COMPLETED": "Afsluttet",
+            "RUNNING": "Kører",
+            "OPEN": "Åbn",
+            "UNKNOWN": "Ukendt"
+        },
+        "TASK_LIST": {
+            "TASKS": "Opgaver",
+            "ACTIONS": {
+                "TASK_DETAILS": "Vis"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "Vis"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Formularen er gemt",
+            "FORM_COMPLETED": "Opgaven er gennemført",
+            "CLOSE": "Luk",
+            "CLAIM_TASK": "Der er gjort krav på opgave",
+            "UNCLAIM_TASK": "Opgaven er frigivet",
+            "CLAIM_FAILED": "Ikke i stand til at udføre handlingen"
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Ikke i stand til at udføre handlingen",
+            "FAILED_TO_LOAD": "Kunne ikke indlæse opgavedetaljer, prøv efter noget tid",
+            "UPDATED": "{{ property }} opdateret",
+            "FAILED_TO_UPDATE": "Kunne ikke opdatere {{ property }}",
+            "METADATA_TOOLTIP": "Vis detaljer",
+            "NO_TASK_NAME": "Intet navn"
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Luk"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "Ingen proces definitioner tilgængelig"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Startet af",
+            "CREATED": "Startdato"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "Du kan ikke starte en proces, da der ikke er nogen tilgængelige procesdefinitioner",
+            "NO_START_FORM": "Denne proces kræver ikke yderligere konfigurationer",
+            "NO_PROCESS_DEF_SELECTED": "Ingen kategori/proces valgt",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Vælg applikation"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Annuller proces?",
+                "DESCRIPTION": "Denne proces og alle tilknyttede opgaver vil blive markeret som færdig.",
+                "CONFIRM_BTN": "Bekræft"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' annullerede succesfuldt.",
+                "FAIL": "Annuller procesfejl: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Oprettelsesdato"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "Gør krav på",
+                "UNCLAIM": "Frigiv"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "En del af kørende proces",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Linket Proces",
+            "PART_OF_THE_PROCESS_TITLE": "Dette dokument er en del af følgende processer",
+            "NO_PROCESSES": "Dette dokument er ikke en del af nogen kørende processer",
+            "CREATED": "Oprettet",
+            "VIEW_DETAILS_BTN": "Se detaljer"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatisk godkendelse for procesydelser",
+        "ENABLED": "Aktiveret",
+        "ENABLED_DESCRIPTION": "Systemet godkender brugeren igen automatisk, så denne kan fortsætte sit arbejde uden afbrydelser.",
+        "DISABLED": "Deaktiveret",
+        "DISABLED_DESCRIPTION": "Brugeren skal godkendes igen med sine legitimationsoplysninger, når sessionstiden udløber.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

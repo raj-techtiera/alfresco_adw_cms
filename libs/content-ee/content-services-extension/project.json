@@ -1,0 +1,110 @@
+{
+    "name": "content-ee-content-services-extension",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/content-ee/content-services-extension/src",
+    "prefix": "acs",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/content-ee/content-services-extension"],
+            "options": {
+                "project": "libs/content-ee/content-services-extension/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/content-ee/content-services-extension/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/content-ee/content-services-extension/tsconfig.lib.json"
+                },
+                "adf": {
+                    "tsConfig": "libs/content-ee/content-services-extension/tsconfig.lib.adf.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@angular-devkit/build-angular:karma",
+            "options": {
+                "codeCoverage": true,
+                "main": "libs/content-ee/content-services-extension/src/test.ts",
+                "tsConfig": "libs/content-ee/content-services-extension/tsconfig.spec.json",
+                "karmaConfig": "libs/content-ee/content-services-extension/karma.conf.js",
+                "stylePreprocessorOptions": {
+                    "includePaths": ["./node_modules"]
+                }
+            },
+            "configurations": {
+                "adf": {
+                    "tsConfig": "libs/content-ee/content-services-extension/tsconfig.spec.adf.json",
+                    "karmaConfig": "libs/content-ee/content-services-extension/karma.conf.js",
+                    "progress": false,
+                    "codeCoverage": false,
+                    "stylePreprocessorOptions": {
+                        "includePaths": ["../alfresco-ng2-components/lib/core/src/lib"]
+                    }
+                },
+                "aca": {
+                    "tsConfig": "libs/content-ee/content-services-extension/tsconfig.spec.aca.json",
+                    "karmaConfig": "libs/content-ee/content-services-extension/karma.conf.js",
+                    "progress": false,
+                    "codeCoverage": false
+                },
+                "adfaca": {
+                    "tsConfig": "libs/content-ee/content-services-extension/tsconfig.spec.adf.aca.json",
+                    "karmaConfig": "libs/content-ee/content-services-extension/karma.conf.js",
+                    "progress": false,
+                    "codeCoverage": false,
+                    "stylePreprocessorOptions": {
+                        "includePaths": ["../alfresco-ng2-components/lib/core/src/lib"]
+                    }
+                }
+            },
+            "outputs": ["{workspaceRoot}/coverage/libs/content-ee/content-services-extension"]
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/content-ee/content-services-extension/src/**/*.ts",
+                    "libs/content-ee/content-services-extension/src/**/*.html"
+                ]
+            },
+            "outputs": ["{options.outputFile}"]
+        },
+        "stylelint": {
+            "executor": "nx-stylelint:lint",
+            "options": {
+                "lintFilePatterns": ["libs/content-ee/content-services-extension/**/*.scss"]
+            }
+        },
+        "npm-publish": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "cwd": "dist/libs/content-ee/content-services-extension",
+                "commands": [
+                    {
+                        "command": "npm version --allow-same-version --no-git-tag-version --force {args.new-version}",
+                        "forwardAllArgs": true
+                    },
+                    {
+                        "command": "echo @alfresco:registry=https://npm.pkg.github.com > .npmrc",
+                        "forwardAllArgs": false
+                    },
+                    {
+                        "command": "echo '//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}' >> .npmrc",
+                        "forwardAllArgs": false
+                    },
+                    {
+                        "command": "npm publish --access restricted --tag {args.tag}",
+                        "forwardAllArgs": true
+                    }
+                ],
+                "parallel": false
+            }
+        }
+    },
+    "tags": ["scope:content-ee-content-services-extension", "type:feature"]
+}

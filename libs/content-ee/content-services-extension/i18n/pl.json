@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Wykonanie czynności nie powiodło się. Spróbuj ponownie lub skontaktuj się z zespołem IT.",
+        "PERMISSION_DENIED": "Nie masz uprawnień do wykonania tej operacji"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "Użytkownik {{ user }} zażądał dołączenia do {{ library }}",
+        "REQUEST_PLURAL": "Osoby ({{ number }}) zażądały dołączenia do {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Zarządzaj członkami",
+        "CLOSE": "Zamknij",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Szczegóły biblioteki",
+            "MANAGE_MEMBERS": "Zarządzaj członkami"
+        },
+        "TABS": {
+            "PROPERTIES": "Właściwości",
+            "MEMBERS": "Członkowie",
+            "GROUPS": "Grupy",
+            "PENDING": "Oczekujące"
+        },
+        "LOAD_MORE": "Wczytaj więcej",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Potwierdź",
+            "MESSAGE": "Czy chcesz kontynuować?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Odrzuć żądanie członka",
+            "COMMENT": "Napisz komentarz tutaj",
+            "YES_LABEL": "Odrzuć",
+            "NO_LABEL": "Anuluj"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Informacje o członkostwie w grupie",
+            "DESCRIPTION": "Ten użytkownik ma dostęp do biblioteki dzięki rolom grupy. Aby usunąć członkostwo tego użytkownika, należy najpierw usunąć go z grup wymienionych poniżej.",
+            "CLOSE": "Zamknij",
+            "GROUP": "Grupa",
+            "ROLE": "Rola"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Brak oczekujących żądań członkostwa",
+        "PENDING_REQUESTS": "Oczekujące żądania członkostwa",
+        "APPROVE": "Zatwierdź",
+        "REJECT": "Odrzuć"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Członkowie tej biblioteki",
+        "NO_MEMBERS": "Nie znaleziono członków",
+        "DELETE_MEMBERS": "Usuń wybranych członków",
+        "GROUP_ROLE": "Rola grupy",
+        "REMOVE": "Usuń",
+        "A11Y_AVATAR": "Awatar użytkownika",
+        "REFRESH": "Odśwież"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Członkostwo w grupie tej biblioteki",
+        "NO_GROUPS": "Nie znaleziono grup",
+        "DELETE_GROUPS": "Usuń wybrane grupy",
+        "REFRESH": "Odśwież",
+        "REMOVE": "Usuń"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Menedżer",
+        "SITE_CONTRIBUTOR": "Współautor",
+        "SITE_CONSUMER": "Konsument",
+        "SITE_COLLABORATOR": "Współpracownik"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Ustaw rolę użytkownika",
+        "GROUP_SELECTOR": "Ustaw rolę grupy",
+        "ALL": "Ustaw wszystkie role na"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Dodaj użytkownika/grupę",
+        "SEARCH_INPUT": "Wyszukaj użytkowników lub grupy do dodania",
+        "NAME": "Nazwa",
+        "TITLE_LABEL": "Dodaj użytkownika lub grupę do",
+        "ADD_LABEL": "Dodaj",
+        "SELECT_LABEL": "Wybierz",
+        "CLOSE_LABEL": "Zamknij",
+        "CANCEL_LABEL": "Anuluj"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Członkowie"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Żądanie członkostwa odrzucone",
+        "MEMBERSHIP_ACCEPTED": "Dodano członka do biblioteki",
+        "USER_REMOVE_SUCCESS": "Usunięto użytkownika",
+        "USER_REMOVE_PARTIAL_SUCCESS": "Liczba użytkowników usuniętych: {{count}}, pominiętych: {{skipped}}",
+        "USER_REMOVE_FAILED": "Nie udało się usunąć użytkownika",
+        "GROUP_REMOVE_SUCCESS": "Usunięto grupę",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "Liczba grup usuniętych: {{count}}, pominiętych: {{skipped}}",
+        "GROUP_REMOVE_FAILED": "Nie udało się usunąć grupy",
+        "ADD_MEMBER_FAILED": "Nie udało się dodać członka do witryny",
+        "ADD_MEMBERS_FAILED": "Nie udało się dodać następującej liczby członków: {{count}}",
+        "ADD_MEMBERS_SUCCESS": "Liczba dodanych użytkowników: {{userCount}} i grup: {{groupCount}}",
+        "ADD_GROUPS_SUCCESS": "Liczba dodanych grup: {{groupCount}}",
+        "ADD_USERS_SUCCESS": "Liczba dodanych użytkowników: {{userCount}}",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "Liczba członków dodanych: {{count}}, pominiętych: {{skipped}}",
+        "USER_ROLE_UPDATED": "Zaktualizowano rolę użytkownika",
+        "GROUP_ROLE_UPDATED": "Zaktualizowano rolę grupy",
+        "MEMBER_EXISTS": "Użytkownik jest już członkiem witryny",
+        "MANAGER_REQUIRED": "Witryna wymaga przynajmniej jednego menedżera witryny",
+        "ACTIONS": {
+            "CLOSE": "Zamknij"
+        }
+    }
+}

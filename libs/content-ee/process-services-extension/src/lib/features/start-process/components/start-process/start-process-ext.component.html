@@ -1,0 +1,50 @@
+<aca-page-layout>
+    <aca-page-layout-header>
+        <nav>
+            <div
+                class="adf-breadcrumb-item adf-active"
+                title="{{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}"
+            >
+                <div
+                    aria-current="location"
+                    class="adf-breadcrumb-item-current"
+                >
+                    <div class="adf-breadcrumb-item adf-active" role="listitem">
+                        <div class="adf-breadcrumb-item-current">
+                            {{
+                                'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate
+                            }}
+                        </div>
+                        <mat-icon class="adf-breadcrumb-item-chevron">chevron_right</mat-icon>
+                        <div class="adf-breadcrumb-item-current">
+                            {{
+                                'PROCESS-EXTENSION.BREADCRUMB.START_PROCESS'
+                                    | translate
+                            }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </aca-page-layout-header>
+
+    <aca-page-layout-content>
+        <div class="aca-main-content">
+            <div class="adf-content-area">
+                <div class="adf-content-border">
+                    <adf-start-process
+                        class="adf-start-process-container"
+                        [appId]="appId"
+                        [name]="defaultProcessName"
+                        [processDefinitionName]="defaultProcessDefinition"
+                        [values]="formValues"
+                        [showSelectApplicationDropdown]="true"
+                        (applicationSelection)="onApplicationSelection($event)"
+                        (start)="onProcessCreation($event)"
+                        (cancel)="backFromProcessCreation()"
+                        (processDefinitionSelection)="onProcessDefinitionSelection($event)" />
+                </div>
+            </div>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

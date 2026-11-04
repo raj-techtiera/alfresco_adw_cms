@@ -1,0 +1,156 @@
+{
+  "GOVERNANCE": {
+    "DECLARE-RECORD": {
+      "TITLE": "Erklær oppføring",
+      "SUCCESS": "{{fileName}} er erklært som en oppføring",
+      "FAIL": "Kan ikke erklære {{fileName}} som oppføring",
+      "DIALOG": {
+        "TITLE": "Erklær oppføring",
+        "MESSAGE": "Dette dokumentet ble erklært som en oppføring tidligere, og ble avvist.",
+        "YES": "Erklær oppføring",
+        "NO": "Avbryt",
+        "CLOSE": "Lukk"
+      },
+      "BULK-OPERATION": {
+        "ERRORS": {
+          "FOLDER": "Erklæring av mappe som oppføring støttes ikke for øyeblikket",
+          "EXISTING-RECORD": "Allerede erklært som oppføring",
+          "FAILED": "Kunne ikke erklære som oppføring"
+        },
+        "SUCCESS": "Elementet er erklært som oppføring"
+      }
+    },
+    "REJECTED-INFO-RECORD": {
+      "TITLE_LABEL": "Avvist oppføring",
+      "CLOSE_LABEL": "Lukk",
+      "SUB-TITLE": "Filen '{{ nodeName }}' ble avvist som oppføring",
+      "BY": "Av",
+      "AT": "Den",
+      "REASON": "Med grunnen",
+      "CONFIRM": "Bekreft",
+      "WARNING": "Hvis du fjerner advarselen om avvist oppføring, blir valgene for å erklære en fil som en oppføring, tilgjengelige igjen.",
+      "FAILED-REMOVE": "Kunne ikke fjerne avvist advarsel om {{nodeName}}: {{errorMessage}}"
+    },
+    "RECORD-NAME": {
+      "REJECT": "Avvist oppføring",
+      "TITLE": "Oppføring",
+      "TOOLTIP-MESSAGE": "Fjern advarsel",
+      "ICONS-TOOLTIP-MESSAGE": {
+        "RECORD": "Oppføring",
+        "REJECTED-RECORD": "Avvist oppføring",
+        "RECORD-HYPERLINK": "Erklært som en oppføring",
+        "REJECTED-RECORD-HYPERLINK": "Oppføringen ble avvist, se filinformasjon for detaljer"
+      }
+    },
+    "DELETE-RECORD": {
+      "TITLE": "Fjern",
+      "SUCCESS": "'{{ name }}' har blitt fjernet",
+      "FAIL": "Kunne ikke fjerne {{recordId}}",
+      "DIALOG": {
+        "TITLE": "Fjern oppføringsforekomst",
+        "YES-ALL": "Fjern, og ikke vis dette igjen",
+        "YES": "Fjern",
+        "NO": "Avbryt",
+        "MESSAGE": {
+          "DELETE": "Denne forekomsten av '{{name}}' vil bli permanent fjernet, og kan ikke hentes frem igjen fra papirkurven.",
+          "ADDITIONAL": "Oppføringen '{{name}}' som befinner seg i organisasjonens Records Management-system, vil ikke bli rammet."
+        }
+      }
+    },
+    "RECORD-PROPERTIES": {
+      "RECORD_GROUP_TITLE": "Oppføring",
+      "RETENTION_SCHEDULE_GROUP_TITLE": "Retensjonsplan",
+      "REJECTED_RECORD_GROUP_TITLE": "Avvist oppføring"
+    },
+    "MOVE-RECORD": {
+      "TITLE": "Flytt",
+      "MOVE-ITEM": "Flytt '{{ name }}' til...",
+      "SAME-FOLDER-MOVE": "Kan ikke flytte til samme mappe",
+      "SUCCESSFUL": "Oppføringen er flyttet"
+    },
+    "GLACIER": {
+      "STORE": {
+        "TITLE": "Send til arkiv",
+        "SUCCESS": "Filen {{ name }} blir arkivert",
+        "FAIL": "Kunne ikke arkivere {{ name }}",
+        "BULK-OPERATION": {
+          "ERRORS": {
+            "EXISTING-STORED-NODE": "Element allerede arkivert.",
+            "PENDING-RESTORE": " Element avventer gjenoppretting. ",
+            "RESTORED": "Kunne ikke arkivere de gjenopprettede elementene",
+            "FOLDER": "Gjenoppretting fra arkiv støttes ikke for øyeblikket"
+          },
+          "FAIL": "Kunne ikke arkivere",
+          "SUCCESS": "Elementet blir arkivert"
+        },
+        "DIALOG": {
+          "TITLE": "Send til arkiv",
+          "MESSAGE": "Du er i ferd med å sende filene til et eksternt arkiv. Det kan påløpe en kostnad for å hente filer fra arkivet. Er du sikker på at du vil fortsette?",
+          "YES": "Send til arkiv",
+          "NO": "Avbryt"
+        }
+      },
+      "RESTORE": {
+        "TITLE": "Gjenopprett fra arkiv",
+        "SYNC-ERROR": "Filene du prøver å gjenopprette, har ikke blitt synkronisert til arkivet ennå. Denne operasjonen kan ta opptil 24 timer. Prøv på nytt senere.",
+        "FAIL": "Kunne ikke gjenopprette {{ name }} fra arkivet",
+        "DIALOG": {
+          "TITLE": "Gjenopprett fra arkiv",
+          "LABEL": {
+            "TYPE": "Gjenopprettingshastighet (250 MB grense per gjenoppretting)",
+            "OPTION-FAST": "Rask – varighet 1–5 min (høyeste kostnad)",
+            "OPTION-STANDARD": "Standard – varighet 3–5 t",
+            "OPTION-SLOW": "Langsom – varighet 5–12 t (laveste kostnad)",
+            "DURATION": "I hvor lang tid blir filene gjenopprettet? (dager)"
+          },
+          "YES": "Bekreft",
+          "NO": "Avbryt"
+        },
+        "BULK-OPERATION": {
+          "TITLE": "Gjenopprett fra arkiv",
+          "ERRORS": {
+            "EXISTING-SYNC-ERROR": " Filene du prøver å gjenopprette, har ikke blitt synkronisert til arkivet ennå. Denne operasjonen kan ta opptil 24 timer. Prøv på nytt senere.",
+            "RESTORED": "Elementet er allerede gjenopprettet",
+            "PENDING-RESTORE": "Elementet avventer allerede gjenoppretting.",
+            "NOT-STORED": "Elementet du prøver å gjenopprette, har ikke blitt synkronisert til arkivet ennå",
+            "FAIL": "Gjenoppretting mislyktes",
+            "FOLDER": "Gjenoppretting av en mappe støttes ikke for øyeblikket"
+          },
+          "SUCCESS": "Elementet vil bli gjenopprettet"
+        }
+      },
+      "EXTEND-RESTORE": {
+        "TITLE": "Utvid gjenopprettingstid",
+        "SUCCESS": "Gjenopprettingens varighet blir utvidet til '{{ days }}' dager fra {{ date }}",
+        "FAIL": "Kunne ikke utvide gjenopprettingstiden til {{ name }} fra arkivet"
+      },
+      "ICONS-TOOLTIP-MESSAGE": {
+        "STORE": "Denne filen er arkivert. For å gjenopprette, høyreklikk og velg gjenopprett fra arkivet.",
+        "RESTORED": "Gjenopprettet",
+        "PENDING-RESTORE": "Gjenoppretter nå filer fra arkivet. Hvis du ikke kan forhåndsvise filen eller laste den ned, prøv på nytt senere."
+      }
+    },
+    "BULK-OPERATION": {
+      "TITLE": "Status for masseoperasjon",
+      "FAIL": "Kunne ikke utføre operasjonen",
+      "CLOSE": "Lukk"
+    },
+    "SECURITY_MARKS": {
+      "EDIT_SECURITY_MARKS_ERROR": "Feil ved lagring av sikkerhetsmerker",
+      "DIALOG_TITLE": "Rediger sikkerhetsmerker",
+      "MENU_TITLE": "Sikkerhetsmerker",
+      "SAVE": "Lagre",
+      "CANCEL": "Avbryt",
+      "HELP": "Hjelp",
+      "CLOSE": "Lukk",
+      "SHOW_ALL": "Vis alt",
+      "APPLIED": "Brukt",
+      "NOT_APPLIED": "Ikke brukt",
+      "COLUMNS": {
+        "NAME": "Sikkerhetsmerker"
+      },
+      "SECURITY_MARKS_HELP": "Sikkerhetsmerker hjelper",
+      "HELP_ICON_TEXT": "Påføring av sikkerhetsmerker vil begrense tilgangen til digitalt innhold. Bare personer med samsvarende merker brukt på brukertillatelsen deres kan se eller redigere merket innhold."
+    }
+  }
+}

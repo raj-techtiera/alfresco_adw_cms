@@ -1,0 +1,48 @@
+<header aria-level="2"
+        mat-dialog-title
+        role="heading">
+    {{ header | translate }}
+</header>
+
+<section mat-dialog-content>
+    <form [formGroup]="form" autocomplete="off" novalidate>
+        <mat-form-field class="adw-create-document-form-field" floatLabel="auto">
+            <mat-label>{{ 'MICROSOFT-ONLINE.CREATE_DOCUMENT_DIALOG.NAME.LABEL' | translate }}</mat-label>
+            <input  formControlName="name"
+                    matInput
+                    id="adw-create-document-filename-area"
+                    adf-auto-focus>
+            <mat-error *ngIf="form.controls['name'].errors?.['message']">
+                {{ form.controls['name'].errors?.['message'] | translate }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="adw-create-document-form-field" floatLabel="auto" >
+            <mat-label>{{ 'MICROSOFT-ONLINE.CREATE_DOCUMENT_DIALOG.DESCRIPTION.LABEL' | translate }}</mat-label>
+            <textarea formControlName="description" #input
+                      matInput class="adw-create-document-text-area" id="adw-create-document-description-area"
+                      placeholder="{{ 'MICROSOFT-ONLINE.CREATE_DOCUMENT_DIALOG.DESCRIPTION.PLACEHOLDER' | translate }}"
+            ></textarea>
+            <mat-hint align="end">{{ input.value?.length || 0 }}/512</mat-hint>
+            <mat-error *ngIf="form.controls['description'].errors?.['maxlength']">
+                {{ 'MICROSOFT-ONLINE.NODE_FROM_TEMPLATE.FORM.ERRORS.DESCRIPTION_TOO_LONG' | translate }}
+            </mat-error>
+        </mat-form-field>
+    </form>
+</section>
+<mat-dialog-actions align="end">
+
+    <span class="adf-fill-remaining-space"></span>
+
+    <button mat-button mat-dialog-close id="adw-end-dialog-button">
+        {{ 'MICROSOFT-ONLINE.CREATE_DOCUMENT_DIALOG.CANCEL' | translate }}
+    </button>
+
+    <button [ngClass]="{'adf-dialog-action-button': !ooiEnabled }" [disabled]="!form.valid" mat-button  id="adw-create-dialog-button" (click)="onSubmitCreate()">
+        {{ 'MICROSOFT-ONLINE.CREATE_DOCUMENT_DIALOG.CREATE' | translate }}
+    </button>
+
+    <button *ngIf="ooiEnabled" [disabled]="!form.valid" mat-button class="adf-dialog-action-button"  id="adw-create-and-open-dialog-button" (click)="onSubmitCreateAndOpen()">
+        {{ 'MICROSOFT-ONLINE.CREATE_DOCUMENT_DIALOG.CREATE_AND_OPEN' | translate }}
+    </button>
+
+</mat-dialog-actions>

@@ -1,0 +1,111 @@
+{
+    "SIDEBAR": {
+        "DASHBOARD": "Panel główny"
+    },
+    "DASHBOARD": {
+        "TITLE": "Panel główny"
+    },
+    "WIDGETS": {
+        "WIDGET_ACTIONS": "Akcje widżetu",
+        "REFRESH": "Odśwież",
+        "VIEW_ALL": "Zobacz wszystkie",
+        "TASK_SUMMARY": {
+            "TITLE": "Moje podsumowanie zadań",
+            "SUMMARY_INFO_SUFFIX": "ukończone zadania!",
+            "NO_TASKS_ASSIGNED": "Nie masz żadnych przypisanych zadań.",
+            "NO_TASKS_ERROR": "Wystąpił błąd podczas pobierania zadań. Odśwież widżet.",
+            "COMPLETED": "Zakończone",
+            "INCOMPLETE": "Nieukończone",
+            "OVERDUE": "Zaległe",
+            "TASKS": "Zadania",
+            "ARROW_UP": "Strzałka w górę"
+        },
+        "TASK_LIST": {
+            "TITLE": "Menedżer zadań",
+            "OVERDUE": "Zaległe",
+            "UNASSIGNED": "Nieprzypisane",
+            "IN_PROGRESS": "W toku",
+            "NO_OVERDUE_TASKS": "Nie masz żadnych zaległych zadań.",
+            "NO_UNASSIGNED_TASKS": "Nie masz żadnych nieprzypisanych zadań.",
+            "NO_IN_PROGRESS_TASKS": "Nie masz żadnych zadań w toku.",
+            "ACTIONS": {
+                "VIEW": "Wyświetl zadanie",
+                "COMMENT": "Dodaj komentarz",
+                "CLAIM": "Przypisz zadanie"
+            },
+            "NOTIFICATIONS": {
+                "TASK_CLAIMED": "Zadanie zostało pomyślnie przypisane.",
+                "CLAIMING_FAILED": "Nie można przypisać zadania."
+            }
+        },
+        "FILES_LIST": {
+            "TITLE": "Pliki",
+            "RECENT": "Ostatnie",
+            "FAVORITES": "Ulubione",
+            "PERSONAL": "Osobiste",
+            "SHARED": "Udostępnione",
+            "NO_RECENT_FILES": "Nie masz żadnych ostatnio używanych plików.",
+            "NO_FAVORITES_FILES": "Nie masz żadnych ulubionych plików lub folderów.",
+            "NO_PERSONAL_FILES": "Nie masz żadnych osobistych plików ani folderów.",
+            "NO_SHARED_FILES": "Nie masz żadnych udostępnionych plików.",
+            "ACTIONS": {
+                "VIEW": "Widok",
+                "DOWNLOAD": "Pobierz",
+                "SHARE": "Udostępnij",
+                "SHARED_LINK_SETTINGS": "Ustawienia udostępnionego linku",
+                "FOLDER_INFORMATION": "Informacje o folderze"
+            }
+        },
+        "LIBRARIES_LIST": {
+            "TITLE": "Biblioteki",
+            "PERSONAL": "Moje biblioteki",
+            "ALL": "Wszystkie",
+            "FAVOURITES": "Ulubione",
+            "NO_PERSONAL_LIBRARIES": "Nie masz żadnych osobistych bibliotek.",
+            "NO_ALL_LIBRARIES": "Nie masz żadnych bibliotek.",
+            "NO_FAVORITE_LIBRARIES": "Nie masz żadnych ulubionych bibliotek."
+        },
+        "LEGAL_HOLDS": {
+            "TITLE": "Dokumenty chronione prawnie",
+            "NO_HOLDS": "Nie utworzono żadnych dokumentów chronionych prawnie.",
+            "HOLDS_NAME": "Nazwa dokumentu chronionego prawnie",
+            "CREATED": "Utworzono",
+            "REASON": "Powód",
+            "ACTIONS": {
+                "DOWNLOAD": "Pobierz",
+                "INFORMATION": "Informacje o folderze",
+                "DELETE": "Usuń"
+            }
+        },
+        "TASK_HISTORY": {
+            "TITLE": "Postęp moich zadań: miesięcznie",
+            "WEEK_LABEL": "Tydzień",
+            "MONTH_LABEL": "Miesiąc",
+            "SUMMARY_INFO_SUFFIX": "ukończone zadania w wybranym miesiącu!",
+            "SELECT_MONTH": "Wybierz miesiąc",
+            "NO_TASKS_IN_MONTH": "Brak zadań w wybranym miesiącu.",
+            "EMPTY": "Brak zadań"
+        },
+        "PROCESS_SUMMARY": {
+            "TITLE": "Moje podsumowanie procesów: co 6 miesięcy",
+            "SUMMARY_INFO_SUFFIX": "ukończone procesy w wybranych 6 miesiącach!",
+            "NO_PROCESSES": "Nie masz żadnych procesów.",
+            "NO_PROCESSES_ERROR": "Wystąpił błąd podczas pobierania procesów. Odśwież widżet.",
+            "NO_PROCESSES_IN_PERIOD": "Brak procesów w wybranym okresie.",
+            "RUNNING": "Uruchamianie",
+            "COMPLETED": "Zakończone",
+            "NEXT": "Następny",
+            "NEXT_SCREEN_READER_LABEL": "Podsumowanie moich procesów  – Przejdź do następnych 6 miesięcy",
+            "PREVIOUS": "Poprzedni",
+            "PREVIOUS_SCREEN_READER_LABEL": "Podsumowanie moich procesów  – Przejdź do poprzednich 6 miesięcy",
+            "EMPTY": "Brak procesów"
+        }
+    },
+    "ADD_TASK_COMMENT_DIALOG": {
+        "TITLE": "Komentarze dla {{ taskName }}",
+        "CLOSE": "Zamknij"
+    },
+    "DATATABLE": {
+        "THUMBNAIL_COLUMN_TITLE": "Thumbnail"
+    }
+}

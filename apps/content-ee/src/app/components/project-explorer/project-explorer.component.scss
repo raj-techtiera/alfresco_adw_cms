@@ -1,0 +1,1896 @@
+/* Routed host: flex also set globally on adw-project-explorer (styles.scss) for shell outlet height chain. */
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  align-self: stretch;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+:host > aca-page-layout.adw-project-explorer-layout {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.adw-project-explorer-layout aca-page-layout-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f6f7f9 !important;
+  background-image: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  box-shadow:
+    inset 0 0 0 999px #f6f7f9,
+    0 8px 32px rgba(31, 41, 55, 0.12),
+    0 2px 8px rgba(31, 41, 55, 0.06) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.adw-project-explorer-title {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.adw-project-explorer-layout .adw-project-explorer-breadcrumb {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.adw-project-explorer-layout .adw-project-explorer-breadcrumb adf-breadcrumb {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.adw-project-explorer-layout .adw-project-explorer-breadcrumb {
+  padding: 4px 8px;
+  min-height: 32px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Scope breadcrumb size/alignment to this header only (avoid global impact). */
+.adw-project-explorer-layout .adw-project-explorer-breadcrumb {
+  ::ng-deep .adf-breadcrumb-item {
+    line-height: 20px;
+    min-width: 0;
+    margin-top: 0;
+    align-items: center;
+  }
+
+  ::ng-deep .adf-breadcrumb-item-anchor,
+  ::ng-deep .adf-breadcrumb-item-current {
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* Keep trail on one line; scroll horizontally when path is long */
+  ::ng-deep ol,
+  ::ng-deep ul,
+  ::ng-deep .adf-breadcrumb-container {
+    flex-wrap: nowrap !important;
+    white-space: nowrap;
+  }
+
+  ::ng-deep .adf-breadcrumb-item-chevron {
+    margin-top: 0;
+    font-size: 14px;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.adw-project-explorer-layout .adw-project-explorer-header-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 32px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+/* Start Process button: blue. Search button: normal (default) */
+.adw-project-explorer-layout .adw-project-explorer-header-actions aca-toolbar {
+  flex: 0 1 auto;
+  min-width: 0;
+
+  ::ng-deep mat-toolbar.aca-toolbar {
+    flex-wrap: nowrap !important;
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    align-items: center;
+    padding: 0;
+    gap: 4px;
+    box-sizing: border-box;
+  }
+
+  /* Search / icon button: normal style, same size as others (40px), icon somewhat bigger, gap each side */
+  ::ng-deep .mat-mdc-icon-button,
+  ::ng-deep button.mat-mdc-icon-button {
+    background: transparent !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    box-shadow: none !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    border-radius: 20px;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+  ::ng-deep .mat-mdc-icon-button .mat-icon,
+  ::ng-deep button.mat-mdc-icon-button .mat-icon {
+    font-size: 26px;
+    width: 26px;
+    height: 26px;
+  }
+  ::ng-deep .mat-mdc-icon-button:hover,
+  ::ng-deep button.mat-mdc-icon-button:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
+
+  /* Ask Discovery: keep ACA default look, align with search icon */
+  ::ng-deep aca-agents-button.aca-agents-button {
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+  }
+
+  /* Start Process (text button): blue — exclude Ask Discovery (aca-agents-button) */
+  ::ng-deep button:not(.mat-mdc-icon-button):not(.aca-agents-menu-button),
+  ::ng-deep .mat-mdc-button:not(.mat-mdc-icon-button):not(.aca-agents-menu-button),
+  ::ng-deep .mat-mdc-unelevated-button:not(.mat-mdc-icon-button):not(.aca-agents-menu-button) {
+    background: var(--adw-color-brand-primary) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.25;
+    min-height: 38px;
+    padding: 8px 12px !important;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(31, 78, 140, 0.35);
+    font-size: 13px;
+  }
+  ::ng-deep button:not(.mat-mdc-icon-button):not(.aca-agents-menu-button):hover,
+  ::ng-deep .mat-mdc-button:not(.mat-mdc-icon-button):not(.aca-agents-menu-button):hover,
+  ::ng-deep .mat-mdc-unelevated-button:not(.mat-mdc-icon-button):not(.aca-agents-menu-button):hover {
+    background: var(--adw-color-brand-primary-dark) !important;
+    box-shadow: 0 3px 10px rgba(11, 102, 195, 0.45);
+  }
+
+}
+
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-header-create {
+  height: 34px;
+  min-height: 34px;
+  padding: 0 8px 0 14px !important;
+  border-radius: 999px;
+  background: var(--adw-color-brand-primary, #1b1464) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 13px;
+
+  .adw-header-action-label .mat-icon {
+    color: #ffffff;
+  }
+}
+
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-header-upload {
+  height: 34px;
+  min-height: 34px;
+  padding: 0 10px 0 14px !important;
+  border-radius: 999px;
+  border-color: color-mix(in srgb, var(--adw-color-brand-primary, #1b1464) 35%, white);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--adw-color-brand-primary, #1b1464);
+  font-weight: 600;
+  font-size: 13px;
+
+  .adw-header-action-label .mat-icon {
+    color: var(--adw-color-brand-primary, #1b1464);
+  }
+}
+
+/* Icon + label inside header buttons */
+.adw-project-explorer-layout .adw-project-explorer-header-actions .adw-header-action-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  .mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: #fff;
+  }
+}
+
+/* Shutdown Request: match Distribution Matrix header button */
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-shutdown-request,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-shutdown-request.mat-mdc-stroked-button {
+  background: var(--adw-color-brand-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--adw-color-brand-primary) !important;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.25;
+  min-height: 38px;
+  padding: 8px 12px !important;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(31, 78, 140, 0.35);
+}
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-shutdown-request:hover:not([disabled]) {
+  background: var(--adw-color-brand-primary-dark) !important;
+  border-color: var(--adw-color-brand-primary-dark) !important;
+  box-shadow: 0 3px 10px rgba(11, 102, 195, 0.45);
+}
+
+/* Start Process (template): same size and blue as Upload / Distribution Matrix */
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-start-process,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-start-process.mat-mdc-stroked-button {
+  background: var(--adw-color-brand-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--adw-color-brand-primary) !important;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.25;
+  min-height: 38px;
+  padding: 8px 12px !important;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(31, 78, 140, 0.35);
+}
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-start-process:hover {
+  background: var(--adw-color-brand-primary-dark) !important;
+  border-color: var(--adw-color-brand-primary-dark) !important;
+  box-shadow: 0 3px 10px rgba(11, 102, 195, 0.45);
+}
+
+/* Project actions dropdown trigger and upload: same size and blue as other header pills */
+.adw-mdr-csv-file-input {
+  display: none;
+}
+
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-project-actions-menu,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-project-actions-menu.mat-mdc-stroked-button,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-upload-button,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-upload-button.mat-mdc-stroked-button,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-import-csv,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-jr-request-btn,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-bulk-upload-button {
+  background: var(--adw-color-brand-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--adw-color-brand-primary) !important;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.25;
+  min-height: 38px;
+  padding: 8px 12px !important;
+  border-radius: 8px;
+  box-shadow: none;
+}
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-project-actions-menu:hover,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-upload-button:hover:not([disabled]),
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-import-csv:hover:not([disabled]),
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-jr-request-btn:hover:not([disabled]),
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-bulk-upload-button:hover:not([disabled]) {
+  background: var(--adw-color-brand-primary-dark) !important;
+  border-color: var(--adw-color-brand-primary-dark) !important;
+  box-shadow: 0 3px 10px rgba(11, 102, 195, 0.45);
+}
+
+.adw-project-actions-menu__caret {
+  margin-left: -2px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+::ng-deep .adw-project-actions-menu-panel {
+  .mat-mdc-menu-item {
+    min-height: 44px;
+  }
+
+  .mat-mdc-menu-item mat-icon {
+    margin-right: 12px;
+    color: var(--adw-color-brand-primary, #1f4e8c);
+  }
+}
+
+/* Create PO: match Distribution Matrix header button */
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-create-po,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-create-po.mat-mdc-stroked-button {
+  background: var(--adw-color-brand-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--adw-color-brand-primary) !important;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.25;
+  min-height: 38px;
+  padding: 8px 12px !important;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(31, 78, 140, 0.35);
+}
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-create-po:hover {
+  background: var(--adw-color-brand-primary-dark) !important;
+  border-color: var(--adw-color-brand-primary-dark) !important;
+  box-shadow: 0 3px 10px rgba(11, 102, 195, 0.45);
+}
+
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-request-for-review,
+.adw-project-explorer-layout .adw-project-explorer-header-actions button.adw-request-for-review.mat-mdc-stroked-button {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.25;
+  min-height: 38px;
+  padding: 8px 12px !important;
+  border-radius: 20px;
+}
+
+.adw-project-explorer-layout aca-page-layout-content {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.adw-project-explorer-main-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 12px 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.adw-project-explorer-main-tabs__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.adw-project-explorer-main-tabs__btn mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.adw-project-explorer-main-tabs__btn:hover {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.adw-project-explorer-main-tabs__btn.is-active {
+  color: #1d4ed8;
+  border-bottom-color: #1d4ed8;
+}
+
+.adw-project-explorer-tab-panels {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.adw-project-explorer-tab-panel {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* `[hidden]` alone loses to `.adw-folder-view { display: flex }` — force inactive tab panels off. */
+.adw-project-explorer-tab-panel[hidden],
+.adw-project-explorer-layout .adw-folder-view[hidden] {
+  display: none !important;
+}
+
+.adw-project-explorer-tab-panel--mdr {
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: transparent;
+
+  adw-mdr-dashboard {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Full-width list until a row is selected; with selection, `.adw-folder-view--with-split` switches to grid + splitter */
+.adw-project-explorer-layout .adw-folder-view {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1 1 0%;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/*
+ * List | splitter | Metadata+Preview. Third column width = --adw-explorer-sidebar-px (bound in template).
+ * Drag the splitter to shrink/grow the file list vs detail area.
+ */
+body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split,
+.adw-project-explorer-layout .adw-folder-view--with-split {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 6px minmax(280px, var(--adw-explorer-sidebar-px, 980px));
+  grid-template-rows: minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.adw-project-explorer-layout .adw-folder-view-main {
+  flex: 1 1 0%;
+  min-width: 0;
+  min-height: 0;
+  /* Scroll inside the datatable, not this wrapper — list area stretches to fill the pane */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ * ADF: .adf-datatable is display:block + height:100% + overflow-y:scroll — without a definite parent height it
+ * does not stretch. Use flex column; scroll only .adf-datatable-body so the grid fills the pane above pagination.
+ */
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main adf-document-list.adf-document-list {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main adf-document-list adf-datatable.adf-datatable {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main adf-document-list adf-datatable.adf-datatable > *:not(.adf-datatable-list) {
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main adf-document-list adf-datatable.adf-datatable > .adf-datatable-list {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  /* Let horizontal resize / wide rows scroll; vertical scroll stays on .adf-datatable-body */
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main adf-document-list .adf-datatable-header {
+  flex-shrink: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main adf-document-list .adf-datatable-body {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Column resize: keep handle above cell content and easier to grab (ADF default hit area is thin). */
+:host ::ng-deep .adw-project-explorer-layout .adw-folder-view-main .adf-datatable__resize-handle {
+  z-index: 3 !important;
+  position: relative !important;
+  min-width: 8px !important;
+  box-sizing: content-box !important;
+}
+
+/* DMS-style list: icon tile, Folder pill, date / owner (list mode only, see template `adw-dms-doc-list--rich-list`). */
+:host ::ng-deep .adw-project-explorer-layout .adw-dms-doc-list.adw-dms-doc-list--rich-list {
+  .adf-datatable-header-cell,
+  .adf-datatable-cell {
+    padding-left: 12px;
+    padding-right: 12px;
+    vertical-align: middle;
+  }
+
+  .adf-datatable-header-cell {
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 100;
+    font-size: 12px;
+  }
+
+  .adw-dms-name-column {
+    min-width: 200px;
+  }
+
+  .adw-dms-date-col {
+    min-width: 120px;
+  }
+
+  .adw-dms-owner-col {
+    min-width: 200px;
+  }
+
+  .adw-dms-status-col {
+    min-width: 130px;
+  }
+}
+
+.adw-dms-name-cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 2px 0;
+
+  .aca-locked-by {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 2px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .aca-locked-by--name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.adw-dms-name-cell__main {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.adw-dms-name-cell__title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  min-width: 0;
+}
+
+.adw-dms-name-cell__title {
+  font-size: 14px;
+  font-weight: 100;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.adw-dms-name-cell__title--link {
+  color: #0d4cc5;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.adw-dms-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fafafa;
+  flex: 0 0 auto;
+}
+
+.adw-dms-icon-wrap__main {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.adw-dms-icon-wrap--amber .adw-dms-icon-wrap__main {
+  color: #f9a825;
+}
+
+.adw-dms-icon-wrap--primary .adw-dms-icon-wrap__main {
+  color: #1e4e8c;
+}
+
+.adw-dms-icon-wrap--success .adw-dms-icon-wrap__main {
+  color: #2e7d32;
+}
+
+.adw-dms-icon-wrap--neutral .adw-dms-icon-wrap__main,
+.adw-dms-icon-wrap--locked .adw-dms-icon-wrap__main {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.adw-dms-icon-wrap__tree {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 3px 0 6px 0;
+  line-height: 0;
+
+  .mat-icon {
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+    color: #546e7a;
+  }
+}
+
+.adw-dms-metric {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.adw-dms-metric__icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.45);
+  flex: 0 0 auto;
+}
+
+.adw-dms-metric__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+  min-width: 0;
+  gap: 2px;
+}
+
+.adw-dms-metric__sub {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.adw-dms-owner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.adw-dms-owner__avatar {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: #37474f;
+  background: #eceff1;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.adw-dms-owner__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  line-height: 1.2;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.87);
+  gap: 2px;
+}
+
+.adw-dms-owner__sub {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  word-break: break-all;
+}
+
+.adw-dms-status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.adw-dms-status-badge--approved {
+  color: #15803d;
+  background: rgba(21, 128, 61, 0.1);
+}
+
+.adw-dms-status-badge--review {
+  color: #c2410c;
+  background: rgba(234, 88, 12, 0.1);
+}
+
+.adw-dms-status-badge--draft {
+  color: #5b21b6;
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.adw-dms-status-badge--correction {
+  color: #be123c;
+  background: rgba(225, 29, 72, 0.1);
+}
+
+body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split .adw-folder-view-main,
+.adw-project-explorer-layout .adw-folder-view--with-split .adw-folder-view-main {
+  grid-column: 1;
+  grid-row: 1;
+  flex: none;
+}
+
+.adw-project-explorer-layout .adw-folder-view--with-split > .adw-sidebar-resizer {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: col-resize;
+  z-index: 4;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px,
+    transparent 4px
+  );
+  box-sizing: border-box;
+
+  &:hover {
+    background: linear-gradient(
+      to right,
+      transparent 0,
+      rgba(31, 78, 140, 0.2) 1px,
+      rgba(31, 78, 140, 0.35) 2px,
+      rgba(31, 78, 140, 0.2) 5px,
+      transparent 6px
+    );
+  }
+}
+
+/* Metadata + Preview column */
+body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split > .aca-sidebar,
+.adw-project-explorer-layout .adw-folder-view--with-split > .aca-sidebar {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.adw-project-explorer-layout .aca-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 0 !important;
+  min-height: 0;
+  /* Override content-services-extension preview-tab.scss 550px sidebar — need full width for 3 columns */
+  width: 100% !important;
+  max-width: none !important;
+  flex: 1 1 auto;
+  overflow: hidden;
+  align-self: stretch;
+  margin-bottom: 0 !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0 12px 12px 0;
+  background: #f8fafc;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .aca-sidebar > adf-info-drawer {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .aca-sidebar adf-info-drawer .adf-info-drawer-layout {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ADF defaults: header margin-bottom 40px + content padding 10px — huge gap above columns */
+:host ::ng-deep .adw-project-explorer-layout .aca-sidebar .adf-info-drawer-layout-header {
+  flex-shrink: 0;
+  min-width: 0;
+  margin-bottom: 0 !important;
+  height: auto !important;
+  min-height: 0;
+  padding: 8px 12px 8px;
+  border-bottom: 1px solid #d8dee6;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .aca-sidebar .adf-info-drawer-layout-content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+:host ::ng-deep .adw-project-explorer-layout .aca-sidebar .adf-info-drawer-layout-content > * {
+  margin-bottom: 0 !important;
+}
+
+/* Metadata | Preview columns + vertical rail (toggles top-aligned via flex-start) */
+.adw-project-explorer-drawer-with-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 1 0%;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-width: 0;
+  align-self: stretch;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Flex row (not grid): avoids second column collapsing to 0 when preview/viewer has large min-content */
+/* ADF: .adf-info-drawer-layout-content > :not(.adf-info-drawer-tabs) > * { display: block } — must override or columns stack vertically and the meta column is clipped (overflow: hidden). */
+.adw-project-explorer-drawer-columns {
+  display: flex !important;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1 1 0%;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  align-self: stretch;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Metadata | Preview | rail — content columns share width; rail fixed at end */
+.adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-columns__col--meta,
+.adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-columns__col--preview {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-columns__col--meta + .adw-project-explorer-drawer-columns__col--preview {
+  border-left: 1px solid #e4e8ef;
+}
+
+.adw-project-explorer-drawer-columns__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  padding: 8px 10px 12px;
+  box-sizing: border-box;
+}
+
+.adw-project-explorer-drawer-columns__col--meta,
+.adw-project-explorer-drawer-columns__col--preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+  overflow: hidden;
+}
+
+.adw-project-explorer-drawer-columns__col--meta {
+  padding-bottom: 6px;
+}
+
+.adw-project-explorer-meta-stack {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  gap: 8px;
+}
+
+.adw-project-explorer-meta-block {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+
+  &--properties {
+    flex: 22 1 0;
+    min-height: 120px;
+  }
+
+  /* Comments block (template disabled)
+  &--comments {
+    flex: 4 1 0;
+    min-height: min(148px, 26vh);
+    max-height: min(36vh, 300px);
+  }
+  */
+}
+
+.adw-project-explorer-meta-block--properties > .adw-project-explorer-properties-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* .adw-project-explorer-meta-block--comments > .adw-project-explorer-comments-scroll — see comments-scroll block below */
+
+.adw-project-explorer-drawer-rail {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 0;
+  width: 58px;
+  min-width: 58px;
+  max-width: 58px;
+  padding: 10px 7px;
+  box-sizing: border-box;
+  border-left: 1px solid #e4e8ef;
+  background: transparent;
+  align-self: stretch;
+  box-shadow: inset 4px 0 8px -6px rgba(0, 0, 0, 0.04);
+}
+
+.adw-project-explorer-drawer-rail__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Vertical rail toggles: lavender pills */
+:host ::ng-deep .adw-project-explorer-footer-tabs__btn.mat-mdc-button {
+  --mdc-text-button-container-height: auto;
+  position: relative;
+  overflow: hidden;
+  min-width: 0 !important;
+  width: 100%;
+  max-width: 100%;
+  min-height: 6.75rem;
+  padding: 20px 7px !important;
+  margin: 0 !important;
+  line-height: 1;
+  border-radius: 14px;
+  border: 1px solid rgba(130, 145, 180, 0.28) !important;
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    color 0.2s ease,
+    transform 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+
+  .mdc-button__label,
+  .mat-mdc-button-touch-target {
+    width: 100%;
+  }
+
+  .mdc-button__label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .mat-mdc-button-persistent-ripple {
+    border-radius: 14px;
+  }
+
+  .adw-project-explorer-footer-tabs__label {
+    display: block;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    text-rendering: geometricPrecision;
+  }
+
+  /* Panel hidden — soft ghost on white rail */
+  &:not(.is-active) {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(232, 236, 246, 0.95) 100%) !important;
+    color: #6b7c99 !important;
+    border-color: rgba(140, 155, 190, 0.2) !important;
+    box-shadow:
+      0 1px 2px rgba(20, 35, 70, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+  }
+
+  &:not(.is-active):hover {
+    color: #3d4f6e !important;
+    border-color: rgba(100, 120, 175, 0.35) !important;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(226, 232, 245, 1) 100%) !important;
+    box-shadow:
+      0 2px 8px rgba(25, 45, 95, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(11, 102, 195, 0.55);
+    outline-offset: 2px;
+  }
+
+  &.is-active,
+  &[aria-pressed='true'] {
+    color: #0c2468 !important;
+    border-color: rgba(70, 100, 190, 0.42) !important;
+    background: linear-gradient(165deg, #ebefff 0%, #d8dff8 38%, #c9d2ef 100%) !important;
+    box-shadow:
+      0 4px 14px rgba(28, 58, 140, 0.16),
+      0 1px 3px rgba(28, 58, 140, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.88),
+      inset 0 -1px 0 rgba(60, 90, 180, 0.12) !important;
+  }
+
+  &.is-active:hover,
+  &[aria-pressed='true']:hover {
+    color: #081b52 !important;
+    border-color: rgba(55, 85, 175, 0.48) !important;
+    background: linear-gradient(165deg, #f0f3ff 0%, #dde4fb 40%, #ccd6f2 100%) !important;
+    box-shadow:
+      0 6px 18px rgba(28, 58, 140, 0.18),
+      0 2px 4px rgba(28, 58, 140, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(60, 90, 180, 0.14) !important;
+    transform: translateY(-1px);
+  }
+
+  &--action {
+    min-height: 7.5rem;
+    border-color: rgba(180, 95, 40, 0.28) !important;
+
+    &:not(:hover) {
+      background: linear-gradient(180deg, rgba(255, 252, 248, 0.9) 0%, rgba(255, 241, 228, 0.98) 100%) !important;
+      color: #8a4a12 !important;
+    }
+
+    &:hover {
+      color: #6d3708 !important;
+      border-color: rgba(180, 95, 40, 0.42) !important;
+      background: linear-gradient(180deg, rgba(255, 252, 248, 1) 0%, rgba(255, 230, 210, 1) 100%) !important;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host ::ng-deep .adw-project-explorer-footer-tabs__btn.mat-mdc-button {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* Only on wide layouts — below 1024px rail uses horizontal tabs (horizontal-tb). */
+@media (min-width: 1025px) {
+  @supports (writing-mode: sideways-rl) {
+    :host ::ng-deep .adw-project-explorer-footer-tabs__btn.mat-mdc-button .adw-project-explorer-footer-tabs__label {
+      writing-mode: sideways-rl;
+    }
+  }
+}
+
+/* Comments section styles (template + NodeCommentsComponent disabled)
+.adw-project-explorer-comments-scroll {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+:host ::ng-deep .adw-project-explorer-comments-scroll adf-node-comments {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+:host ::ng-deep .adw-project-explorer-comments-scroll adf-comments {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+
+  .adf-comments-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .adf-comments-container:not(:has(> adf-comment-list)) {
+    flex: 0 0 auto;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .adf-comments-header {
+    flex-shrink: 0;
+    padding: 2px 0 4px;
+  }
+
+  .adf-comments-input-container {
+    flex-shrink: 0;
+    padding-bottom: 0;
+  }
+
+  .adf-comments-input-container .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {
+    padding-top: 4px !important;
+    padding-bottom: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .adf-comments-input-container .mat-mdc-form-field-subscript-wrapper {
+    min-height: 0 !important;
+  }
+
+  .adf-comments-input-container .mat-mdc-form-field:not(.mat-form-field-invalid) .mat-mdc-form-field-subscript-wrapper {
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .adf-comments-input-container textarea.adf-text-text-area {
+    height: 2.5rem;
+    min-height: 2.5rem;
+    max-height: 2.5rem;
+    box-sizing: border-box;
+    line-height: 1.3;
+    resize: none;
+    overflow-y: auto;
+  }
+
+  .adf-comments-input-actions {
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+
+    .mat-mdc-button,
+    button.mdc-button {
+      min-height: 32px;
+      padding: 0 8px;
+      line-height: 32px;
+      margin: 0;
+    }
+  }
+
+  .adf-comments-container > adf-comment-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    order: 3;
+  }
+}
+*/
+
+/*
+ * Properties panel — stacked label above value (MDC floating labels otherwise
+ * collide after infix padding is compacted).
+ */
+:host ::ng-deep .adw-project-explorer-properties-scroll {
+  .adf-metadata-properties.mat-accordion .mat-expansion-panel-header {
+    padding: 6px 10px !important;
+    min-height: 36px !important;
+    height: auto !important;
+  }
+
+  .adf-metadata-properties-expansion-panel .mat-expansion-panel-body {
+    padding: 8px 10px 10px !important;
+  }
+
+  .adf-property-container {
+    padding: 0 !important;
+    margin: 0 0 8px !important;
+  }
+
+  .adf-property-container:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .adf-property {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  mat-form-field.mat-mdc-form-field,
+  .mat-mdc-form-field {
+    width: 100%;
+    display: block;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    --mat-form-field-container-height: auto;
+    --mat-form-field-container-vertical-padding: 0;
+    --mat-form-field-filled-container-height: auto;
+    --mat-form-field-filled-label-display: none;
+  }
+
+  .mat-mdc-form-field-infix::before {
+    display: none !important;
+    content: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .mat-mdc-text-field-wrapper,
+  .mdc-text-field {
+    background-color: #f5f5f5 !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    padding: 6px 12px 8px !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .mat-mdc-form-field-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    min-height: 0 !important;
+    height: auto !important;
+    gap: 0 2px;
+  }
+
+  /* Unwrap infix so date clear/calendar sit on the value row, not under it. */
+  .mat-mdc-form-field-infix {
+    display: contents !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border-top: none !important;
+    width: auto !important;
+  }
+
+  mat-label.adf-property-label,
+  .mdc-floating-label,
+  .mat-mdc-floating-label {
+    position: static !important;
+    display: block !important;
+    transform: none !important;
+    flex: 1 0 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+    margin: 0 0 4px !important;
+    padding: 0 !important;
+    top: auto !important;
+    left: auto !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    color: #64748b !important;
+  }
+
+  .mat-mdc-input-element,
+  .mat-mdc-select-value,
+  .adf-property-value,
+  .adf-textitem-edit-icon {
+    margin-top: 0 !important;
+  }
+
+  input.mat-mdc-input-element,
+  .mat-mdc-select {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+  }
+
+  input.mat-mdc-input-element,
+  textarea.mat-mdc-input-element,
+  .mat-mdc-select-value-text {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    color: #1e293b !important;
+  }
+
+  textarea.mat-mdc-input-element,
+  textarea.mat-input-element {
+    flex: 1 1 100%;
+    max-height: min(96px, 18vh);
+    min-height: 2.5rem;
+    resize: vertical;
+    line-height: 1.35;
+  }
+
+  .mat-mdc-form-field-icon-suffix,
+  .mat-mdc-form-field-icon-prefix {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    align-self: center !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mat-mdc-form-field-icon-suffix .mat-mdc-icon-button,
+  .mat-mdc-form-field-icon-suffix .mat-datepicker-toggle,
+  .mat-mdc-form-field-icon-suffix .mat-datetimepicker-toggle {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    padding: 0 !important;
+    line-height: 28px !important;
+  }
+
+  .mat-mdc-form-field-icon-suffix .mat-mdc-button-touch-target {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .mat-mdc-form-field-icon-suffix .mat-icon {
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .mdc-notched-outline,
+  .mdc-notched-outline__notch {
+    display: contents !important;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing {
+    display: none !important;
+  }
+
+  .mdc-line-ripple,
+  .mat-mdc-form-field-focus-overlay {
+    display: none !important;
+  }
+
+  /* MDC reserves ~20px under every field for hints; that was the large white gap. */
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .mat-mdc-form-field-invalid .mat-mdc-form-field-subscript-wrapper {
+    display: block !important;
+    height: auto !important;
+  }
+}
+
+/* ADF metadata card: flex chain — inner scroll is in global styles.scss */
+:host ::ng-deep .adw-project-explorer-drawer-columns__col--meta .adw-project-explorer-properties-scroll adf-content-metadata-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+:host ::ng-deep .adw-project-explorer-drawer-columns__col--meta .adw-project-explorer-properties-scroll .adf-content-metadata-card-view {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.adw-project-explorer-drawer-columns__heading {
+  margin: 0 0 6px;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #1e293b;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.adw-project-explorer-drawer-columns__col:not(.adw-project-explorer-drawer-columns__col--meta)
+  > *:not(.adw-project-explorer-drawer-columns__heading) {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Preview viewer fills the Preview column (after Metadata + rail) */
+:host ::ng-deep .adw-project-explorer-layout .adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-columns__col--preview adw-preview-tab {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  position: relative !important;
+}
+.project-explorer,
+.adw-project-explorer-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+
+  .project-explorer-breadcrumb,
+  .adw-project-explorer-breadcrumb {
+    flex-shrink: 1;
+    min-width: 0;
+    padding: 8px 16px;
+    border-bottom: none;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+
+    adf-breadcrumb {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  .toolbar,
+  .adw-project-explorer-toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+
+    .toolbar-left,
+    .adw-toolbar-left {
+      h3, .adw-toolbar-title {
+        margin: 0 0 4px 0;
+        font-size: 1.1rem;
+      }
+    }
+    .toolbar-right,
+    .adw-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .search-wrap,
+      .adw-search-wrap {
+        display: inline-flex;
+        align-items: center;
+        position: relative;
+        .search-icon,
+        .adw-search-icon {
+          position: absolute;
+          left: 8px;
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          color: #666;
+          pointer-events: none;
+        }
+        .search-input,
+        .adw-search-input {
+          padding: 6px 10px 6px 34px;
+          border-radius: 20px;
+          border: 1px solid #ddd;
+          min-width: 200px;
+        }
+      }
+    }
+  }
+
+  .folder-view,
+  .adw-folder-view {
+    flex: 1 1 0%;
+    overflow: hidden;
+    padding: 0;
+    min-height: 0;
+
+    adf-document-list {
+      flex: 1 1 0% !important;
+      min-height: 0 !important;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+
+      ::ng-deep adf-datatable.adf-datatable {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+      }
+
+      ::ng-deep adf-datatable.adf-datatable > *:not(.adf-datatable-list) {
+        flex-shrink: 0;
+      }
+
+      ::ng-deep adf-datatable.adf-datatable > .adf-datatable-list {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      ::ng-deep .adf-datatable-header {
+        flex-shrink: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+      }
+
+      ::ng-deep .adf-datatable-body {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      ::ng-deep .adf-datatable__resize-handle {
+        z-index: 3 !important;
+        position: relative !important;
+        min-width: 8px !important;
+        box-sizing: content-box !important;
+      }
+
+      /* Rounded corners for document list rows (match Start Process / Distribution Matrix style) */
+      ::ng-deep .adf-datatable-row {
+        border-radius: 8px;
+      }
+      ::ng-deep .adf-datatable-row .adf-datatable-cell:first-child {
+        border-radius: 8px 0 0 8px;
+      }
+      ::ng-deep .adf-datatable-row .adf-datatable-cell:last-child {
+        border-radius: 0 8px 8px 0;
+      }
+    }
+
+    adf-pagination {
+      flex-shrink: 0;
+      border-top: 1px solid #eee;
+    }
+
+    .adw-empty-folder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: #666;
+      .adw-empty-folder-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 1rem;
+        color: #bbb;
+      }
+      .adw-empty-folder-title {
+        margin: 0 0 0.25rem 0;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .adw-empty-folder-subtitle {
+        margin: 0;
+        font-size: 0.875rem;
+        color: #888;
+      }
+    }
+  }
+}
+
+.btn,
+.adw-btn {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.btn.small,
+.adw-btn-small {
+  padding: 6px 8px;
+  font-size: 0.85rem;
+}
+.btn.primary,
+.adw-btn-primary {
+  background: var(--adw-color-brand-primary);
+  color: #fff;
+}
+.adw-btn-chevron {
+  margin-left: 0;
+  width: 20px;
+  height: 20px;
+}
+.muted,
+.adw-toolbar-muted {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+.adw-upload-primary{
+  background: var(--adw-color-brand-primary) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.25;
+  min-height: 40px;
+  box-shadow: 0 2px 6px rgba(31, 78, 140, 0.35);
+}
+
+:host ::ng-deep .adw-project-explorer-drawer-with-tabs adf-alfresco-viewer,
+:host ::ng-deep .adw-project-explorer-drawer-with-tabs .adf-alfresco-viewer {
+  min-height: 160px;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 1200px) {
+  /* Slightly narrower detail pane so the list stays usable before full stack */
+  body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split,
+  .adw-project-explorer-layout .adw-folder-view--with-split {
+    grid-template-columns: minmax(200px, 1fr) 6px minmax(260px, min(var(--adw-explorer-sidebar-px, 980px), 52vw)) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Keep header on one row: path scrolls, actions stay right-aligned */
+  .adw-project-explorer-layout aca-page-layout-header {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .adw-project-explorer-layout .adw-project-explorer-breadcrumb {
+    flex: 1 1 0%;
+    min-width: 0;
+    order: 0;
+  }
+
+  .adw-project-explorer-layout .adw-project-explorer-header-actions {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 32px;
+    gap: 6px;
+    order: 1;
+  }
+
+  body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split,
+  .adw-project-explorer-layout .adw-folder-view--with-split {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(160px, min(40vh, 420px)) minmax(0, 1fr) !important;
+    align-items: stretch;
+  }
+
+  .adw-project-explorer-layout .adw-folder-view--with-split > .adw-sidebar-resizer {
+    display: none !important;
+  }
+
+  body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split .adw-folder-view-main,
+  .adw-project-explorer-layout .adw-folder-view--with-split .adw-folder-view-main {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  body.adw-node-info-four-columns .adw-project-explorer-layout .adw-folder-view--with-split > .aca-sidebar,
+  .adw-project-explorer-layout .adw-folder-view--with-split > .aca-sidebar {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    border-left: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0 0 12px 12px;
+    min-height: 0;
+  }
+
+  /* Detail: horizontal Metadata / Preview tabs on top, then stacked panels */
+  .adw-project-explorer-drawer-columns {
+    flex-direction: column;
+  }
+
+  .adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-rail {
+    order: -1;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    flex-direction: row;
+    align-items: stretch;
+    align-self: stretch;
+    border-left: none;
+    border-bottom: 1px solid #e4e8ef;
+    padding: 8px 10px;
+    box-shadow: none;
+  }
+
+  .adw-project-explorer-drawer-rail__actions {
+    flex-direction: row;
+    flex: 1;
+    justify-content: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+
+  :host ::ng-deep .adw-project-explorer-footer-tabs__btn.mat-mdc-button {
+    min-height: 44px;
+    min-width: 0 !important;
+    width: auto;
+    flex: 1 1 0%;
+    max-width: none;
+    padding: 10px 12px !important;
+  }
+
+  :host ::ng-deep .adw-project-explorer-footer-tabs__label {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-columns__col--meta {
+    border-right: none;
+    border-bottom: 1px solid #e4e8ef;
+    max-width: none;
+    flex: 0 1 auto;
+    max-height: min(42vh, 400px);
+    min-height: 140px;
+    overflow: hidden;
+  }
+
+  .adw-project-explorer-drawer-columns > .adw-project-explorer-drawer-columns__col--preview {
+    border-left: none;
+    max-width: none;
+    flex: 1 1 0;
+    min-height: min(220px, 35vh);
+    overflow: hidden;
+  }
+
+  .adw-project-explorer-drawer-columns__col {
+    padding: 6px 8px 10px;
+  }
+
+  .adw-project-explorer-meta-stack {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .adw-project-explorer-layout aca-page-layout-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .adw-project-explorer-layout .adw-project-explorer-header-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .adw-project-explorer-drawer-columns__heading {
+    font-size: 12px;
+  }
+
+  .adw-project-explorer-drawer-columns__col {
+    padding: 4px 6px 8px;
+  }
+
+  .adw-project-explorer-meta-block {
+    &--properties {
+      min-height: 100px;
+    }
+
+    /* &--comments { ... } — disabled with comments template */
+  }
+}
+
+/* Very short viewports (comments block disabled in template) */
+@media (max-height: 560px) and (max-width: 1024px) {
+  .adw-project-explorer-meta-block {
+    &--properties {
+      flex: 5 1 0;
+    }
+  }
+  .aca-page-layout .aca-content-header{
+    background: transparent;
+  }
+}

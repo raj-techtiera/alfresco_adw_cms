@@ -1,0 +1,74 @@
+<div class="al-page">
+  <header class="al-head">
+    <div class="al-head__text">
+      <h1 class="al-title">Audit Log</h1>
+      <p class="al-subtitle">System activity across users, documents, and workflows</p>
+      <p class="al-meta">
+        Showing <strong>{{ filteredCount }}</strong> of <strong>{{ totalCount }}</strong> events
+      </p>
+    </div>
+    <button
+      mat-raised-button
+      type="button"
+      class="al-btn"
+      (click)="refresh()"
+      [disabled]="refreshing"
+      aria-label="Refresh audit log">
+      <mat-icon aria-hidden="true">refresh</mat-icon>
+      {{ refreshing ? 'Refreshing…' : 'Refresh' }}
+    </button>
+  </header>
+
+  <div class="al-search-row">
+    <label class="al-search">
+      <mat-icon aria-hidden="true">search</mat-icon>
+      <input
+        type="search"
+        [(ngModel)]="searchLogs"
+        placeholder="Search logs by actor, entity, or details..."
+        aria-label="Search audit logs" />
+    </label>
+    <mat-form-field appearance="outline" class="al-filter-mat-field" subscriptSizing="dynamic">
+      <mat-select
+        [(ngModel)]="actionFilter"
+        panelClass="al-filter-select-panel"
+        placeholder="All actions"
+        aria-label="Filter by action">
+        <mat-option *ngFor="let option of actionOptions" [value]="option.value">{{ option.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="al-table-wrap" *ngIf="filteredAuditEntries.length > 0; else emptyState">
+    <table class="al-table">
+      <thead>
+        <tr>
+          <th scope="col">Time</th>
+          <th scope="col">Actor</th>
+          <th scope="col">Action</th>
+          <th scope="col">Entity</th>
+          <th scope="col">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of filteredAuditEntries; trackBy: trackById">
+          <td class="al-td al-td--time">{{ entry.time }}</td>
+          <td class="al-td al-td--actor">{{ entry.actor }}</td>
+          <td class="al-td">
+            <span class="al-action-tag" [ngClass]="actionTagClass(entry.action)">{{ entry.action }}</span>
+          </td>
+          <td class="al-td al-td--entity">{{ entry.entity }}</td>
+          <td class="al-td al-td--details" [title]="entry.details">{{ entry.details }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="al-empty">
+      <mat-icon class="al-empty-icon" aria-hidden="true">history_toggle_off</mat-icon>
+      <p class="al-empty-text">No audit entries match your filters</p>
+      <p class="al-empty-hint">Try clearing the search or selecting All actions</p>
+    </div>
+  </ng-template>
+</div>

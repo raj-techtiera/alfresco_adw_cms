@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "De actie is mislukt. Probeer het opnieuw of neem contact op met het IT-team.",
+        "PERMISSION_DENIED": "U hebt geen rechten om deze bewerking uit te voeren."
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} heeft aangevraagd om lid te worden van {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} personen hebben aangevraagd om lid te worden van {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Leden beheren",
+        "CLOSE": "Sluiten",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Bibliotheekgegevens",
+            "MANAGE_MEMBERS": "Leden beheren"
+        },
+        "TABS": {
+            "PROPERTIES": "Eigenschappen",
+            "MEMBERS": "Leden",
+            "GROUPS": "Groepen",
+            "PENDING": "Openstaand"
+        },
+        "LOAD_MORE": "Meer laden",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Bevestigen",
+            "MESSAGE": "Wilt u doorgaan?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Aanvraag voor lidmaatschap afwijzen",
+            "COMMENT": "Laat hier een opmerking achter",
+            "YES_LABEL": "Afwijzen",
+            "NO_LABEL": "Annuleren"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Groepslidmaatschap",
+            "DESCRIPTION": "Deze gebruiker heeft toegang tot de bibliotheek via groepsrollen. Als u het individuele lidmaatschap van deze gebruiker moet verwijderen, moet u de gebruiker eerst verwijderen uit de onderstaande groepen.",
+            "CLOSE": "Sluiten",
+            "GROUP": "Groep",
+            "ROLE": "Rol"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Geen aanvragen voor lidmaatschap in behandeling",
+        "PENDING_REQUESTS": "Aanvragen voor lidmaatschap in behandeling",
+        "APPROVE": "Goedkeuren",
+        "REJECT": "Afwijzen"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Leden van deze bibliotheek",
+        "NO_MEMBERS": "Geen leden gevonden",
+        "DELETE_MEMBERS": "Geselecteerde leden verwijderen?",
+        "GROUP_ROLE": "Groepsrol",
+        "REMOVE": "Verwijderen",
+        "A11Y_AVATAR": "Gebruikersavatar",
+        "REFRESH": "Vernieuwen"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Groepslidmaatschp van deze bibliotheek",
+        "NO_GROUPS": "Geen groepen gevonden",
+        "DELETE_GROUPS": "Geselecteerde groepen verwijderen",
+        "REFRESH": "Vernieuwen",
+        "REMOVE": "Verwijderen"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Beheerder",
+        "SITE_CONTRIBUTOR": "Bijdrager",
+        "SITE_CONSUMER": "Consument",
+        "SITE_COLLABORATOR": "Medewerker"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Gebruikersrol instellen",
+        "GROUP_SELECTOR": "Groepsrol instellen",
+        "ALL": "Alle rollen instellen op"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Gebruiker/groep toevoegen",
+        "SEARCH_INPUT": "Zoeken naar gebruikers of groepen om toe te voegen",
+        "NAME": "Naam",
+        "TITLE_LABEL": "Gebruiker of groep toevoegen aan",
+        "ADD_LABEL": "Toevoegen",
+        "SELECT_LABEL": "Selecteren",
+        "CLOSE_LABEL": "Sluiten",
+        "CANCEL_LABEL": "Annuleren"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Leden"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Aanvraag voor lidmaatschap afgewezen",
+        "MEMBERSHIP_ACCEPTED": "Lid toegevoegd aan bibliotheek",
+        "USER_REMOVE_SUCCESS": "Gebruiker verwijderd",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} gebruikers verwijderd, {{skipped}} overgeslagen",
+        "USER_REMOVE_FAILED": "Kan de gebruiker niet verwijderen",
+        "GROUP_REMOVE_SUCCESS": "Groep verwijderd",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} groepen verwijderd, {{skipped}} overgeslagen",
+        "GROUP_REMOVE_FAILED": "Kan de groep niet verwijderen",
+        "ADD_MEMBER_FAILED": "Kan lid niet toevoegen aan de site",
+        "ADD_MEMBERS_FAILED": "Kan {{count}} leden niet toevoegen",
+        "ADD_MEMBERS_SUCCESS": "{{userCount}} gebruiker(s) en {{groupCount}} groep(en) toegevoegd",
+        "ADD_GROUPS_SUCCESS": "{{groupCount}} groep(en) toegevoegd",
+        "ADD_USERS_SUCCESS": "{{userCount}} gebruiker(s) toegevoegd",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} lid toegevoegd, {{skipped}} overgeslagen",
+        "USER_ROLE_UPDATED": "Gebruikersrol bijgewerkt",
+        "GROUP_ROLE_UPDATED": "Groepsrol bijgewerkt",
+        "MEMBER_EXISTS": "Gebruiker is al lid van de site",
+        "MANAGER_REQUIRED": "Voor een site is ten minste één sitebeheerder vereist",
+        "ACTIONS": {
+            "CLOSE": "Sluiten"
+        }
+    }
+}

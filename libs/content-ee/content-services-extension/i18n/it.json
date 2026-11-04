@@ -1,0 +1,111 @@
+{
+    "ERRORS": {
+        "GENERIC": "Azione non eseguita correttamente. Riprovare o contattare il team IT.",
+        "PERMISSION_DENIED": "Non si dispone dell'autorizzazione per eseguire questa operazione"
+    },
+    "LIBRARY_NOTIFICATIONS": {
+        "REQUEST_SINGULAR": "{{ user }} ha richiesto di partecipare a {{ library }}",
+        "REQUEST_PLURAL": "{{ number }} persone hanno richiesto di partecipare a {{ library }}"
+    },
+    "MEMBER_MANAGER": {
+        "TITLE": "Gestisci membri",
+        "CLOSE": "Chiudi",
+        "BREADCRUMB": {
+            "LIBRARY_DETAILS": "Dettagli libreria",
+            "MANAGE_MEMBERS": "Gestisci membri"
+        },
+        "TABS": {
+            "PROPERTIES": "Proprietà",
+            "MEMBERS": "Membri",
+            "GROUPS": "Gruppi",
+            "PENDING": "In attesa"
+        },
+        "LOAD_MORE": "Carica altro",
+        "CONFIRM_DIALOG": {
+            "TITLE": "Conferma",
+            "MESSAGE": "Procedere?"
+        },
+        "REJECT_DIALOG": {
+            "TITLE": "Respingi richiesta membro",
+            "COMMENT": "Lascia un commento qui",
+            "YES_LABEL": "Respingi",
+            "NO_LABEL": "Annulla"
+        },
+        "GROUPS_INFO_DIALOG": {
+            "TITLE": "Informazioni su adesione a gruppo",
+            "DESCRIPTION": "Questo utente può accedere alla libreria mediante i ruoli di gruppo. Per rimuovere l'adesione individuale di questo utente, è necessario innanzitutto rimuoverlo dai gruppi elencati qui di seguito.",
+            "CLOSE": "Chiudi",
+            "GROUP": "Gruppo",
+            "ROLE": "Ruolo"
+        }
+    },
+    "MEMBERSHIP_REQUESTS": {
+        "NO_MEMBERSHIPS": "Nessuna richiesta di adesione in sospeso",
+        "PENDING_REQUESTS": "Richieste di adesione in sospeso",
+        "APPROVE": "Approva",
+        "REJECT": "Respingi"
+    },
+    "MEMBER_LIST": {
+        "MEMBER_COUNT": "Membri della libreria",
+        "NO_MEMBERS": "Nessun membro trovato",
+        "DELETE_MEMBERS": "Elimina membri selezionati",
+        "GROUP_ROLE": "Ruolo gruppo",
+        "REMOVE": "Rimuovi",
+        "A11Y_AVATAR": "Avatar utente",
+        "REFRESH": "Aggiorna"
+    },
+    "GROUP_LIST": {
+        "GROUP_COUNT": "Adesione gruppo alla libreria",
+        "NO_GROUPS": "Nessun gruppo trovato",
+        "DELETE_GROUPS": "Elimina gruppi selezionati",
+        "REFRESH": "Aggiorna",
+        "REMOVE": "Rimuovi"
+    },
+    "ROLES": {
+        "SITE_MANAGER": "Manager",
+        "SITE_CONTRIBUTOR": "Contributore",
+        "SITE_CONSUMER": "Consumatore",
+        "SITE_COLLABORATOR": "Collaboratore"
+    },
+    "ROLE_SELECTOR": {
+        "USER_SELECTOR": "Imposta ruolo utente",
+        "GROUP_SELECTOR": "Imposta ruolo gruppo",
+        "ALL": "Imposta tutti i ruoli su"
+    },
+    "ADD_MEMBER": {
+        "TITLE": "Aggiungi utente/gruppo",
+        "SEARCH_INPUT": "Cerca utenti o gruppi da aggiungere",
+        "NAME": "Nome",
+        "TITLE_LABEL": "Aggiungi utente o gruppo a",
+        "ADD_LABEL": "Aggiungi",
+        "SELECT_LABEL": "Seleziona",
+        "CLOSE_LABEL": "Chiudi",
+        "CANCEL_LABEL": "Annulla"
+    },
+    "SIDEBAR": {
+        "MEMBERS": "Membri"
+    },
+    "NOTIFICATIONS": {
+        "MEMBERSHIP_REJECTED": "Richiesta di adesione respinta",
+        "MEMBERSHIP_ACCEPTED": "Membro aggiunto alla libreria",
+        "USER_REMOVE_SUCCESS": "Utente rimosso",
+        "USER_REMOVE_PARTIAL_SUCCESS": "{{count}} utenti rimossi, {{skipped}} sono stati ignorati",
+        "USER_REMOVE_FAILED": "Impossibile rimuovere l'utente",
+        "GROUP_REMOVE_SUCCESS": "Gruppo rimosso",
+        "GROUP_REMOVE_PARTIAL_SUCCESS": "{{count}} gruppi rimossi, {{skipped}} sono stati ignorati",
+        "GROUP_REMOVE_FAILED": "Impossibile rimuovere il gruppo",
+        "ADD_MEMBER_FAILED": "Impossibile aggiungere membro al sito",
+        "ADD_MEMBERS_FAILED": "Impossibile aggiungere {{count}} membri",
+        "ADD_MEMBERS_SUCCESS": "Aggiunta di {{userCount}} utente/i e {{groupCount}} gruppo/i completata",
+        "ADD_GROUPS_SUCCESS": "Aggiunta di {{groupCount}} gruppo/i completata",
+        "ADD_USERS_SUCCESS": "Aggiunta di {{userCount}} utente/i completata",
+        "ADD_MEMBERS_PARTIAL_SUCCESS": "{{count}} membri aggiunti, {{skipped}} sono stati ignorati",
+        "USER_ROLE_UPDATED": "Ruolo utente aggiornato",
+        "GROUP_ROLE_UPDATED": "Ruolo gruppo aggiornato",
+        "MEMBER_EXISTS": "L'utente è già membro del sito",
+        "MANAGER_REQUIRED": "Un sito deve disporre di almeno un gestore del sito",
+        "ACTIONS": {
+            "CLOSE": "Chiudi"
+        }
+    }
+}

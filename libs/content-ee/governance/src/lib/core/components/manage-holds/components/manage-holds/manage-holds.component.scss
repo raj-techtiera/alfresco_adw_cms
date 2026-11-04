@@ -1,0 +1,67 @@
+@use '../../../../../mat-selectors' as ms;
+
+.aga-manage-holds {
+    height: 100%;
+    min-height: 405px;
+    display: flex;
+    flex-direction: column;
+
+    .adf-dialog-container .adf-dialog-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .adw-dialog-title {
+        margin-bottom: 0;
+        vertical-align: top;
+        display: inline-block;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .adw-dialog-actions {
+        padding: 12px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+    }
+
+    .aga-manage-holds-tabs {
+        height: 400px;
+        margin-bottom: 5px;
+
+        & > div {
+            height: 100%;
+        }
+
+        &-hidden {
+            visibility: hidden;
+        }
+    }
+
+    .aga-loading-spinner-container {
+        position: absolute;
+        z-index: 2;
+        inset: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+
+    #{ms.$mat-tab-label} {
+        font-weight: 600;
+    }
+
+    aca-generic-error {
+        min-height: 400px;
+    }
+}

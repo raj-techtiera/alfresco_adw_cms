@@ -1,0 +1,60 @@
+@if ((isFirstLoading && !(areHoldsLoaded$ | async) || permissionsDataLoading) && !error) {
+    <div class="aga-loading-spinner-container">
+        <mat-progress-spinner [diameter]="50" color="primary" mode="indeterminate" />
+    </div>
+}
+@if (error) {
+    <aca-generic-error [text]="error" />
+}
+@if(!error && !permissionsDataLoading) {
+    <mat-tab-group
+        #tabGroup
+        mat-stretch-tabs
+        [attr.data-automation-id]="'adw-manage-holds-tabs'"
+        (selectedIndexChange)="switchTab(tabGroup, $event)"
+        class="aga-manage-holds-tabs"
+        animationDuration="0"
+        dynamicHeight
+        [class.aga-manage-holds-tabs-hidden]="!(areHoldsLoaded$ | async)"
+    >
+        @if (displayedExistingHoldsTab) {
+            <mat-tab label="{{ 'GOVERNANCE.MANAGE_HOLDS.TAB_EXISTING_HOLDS' | translate }}">
+                <ng-template matTabContent>
+                    @switch (operationMode) {
+                        @case (OperationMode.BULK) {
+                            <aga-manage-bulk-existing-holds
+                                [nodeId]="nodeId"
+                                [operationMode]="OperationMode.BULK"
+                                [isAdditionToHoldAllowed]="isAdditionToHoldAllowed"
+                                [isHoldCreationAllowed]="isHoldCreationAllowed"
+                                (valueChange)="onListValueChange($event)"
+                                (numberOfHoldsLoaded)="onHoldsLoaded($event)"
+                                (switchTabToApplyHold)="tabGroup.selectedIndex = 1"
+                            />
+                        }
+                        @case (OperationMode.SINGLE) {
+                            <aga-manage-single-existing-holds
+                                [nodeId]="nodeId"
+                                [operationMode]="OperationMode.SINGLE"
+                                [isRemovalFromHoldAllowed]="isRemovalFromHoldAllowed"
+                                [isAdditionToHoldAllowed]="isAdditionToHoldAllowed"
+                                [isHoldCreationAllowed]="isHoldCreationAllowed"
+                                (valueChange)="onListValueChange($event)"
+                                (numberOfHoldsLoaded)="onHoldsLoaded($event)"
+                                (switchTabToApplyHold)="tabGroup.selectedIndex = 1"
+                            />
+                        }
+                    }
+                </ng-template>
+            </mat-tab>
+        }
+        @if (isHoldCreationAllowed) {
+            <mat-tab label="{{ 'GOVERNANCE.MANAGE_HOLDS.TAB_CREATE_LEGAL_HOLD' | translate }}">
+                <ng-template matTabContent>
+                    <aga-create-hold (valueChange)="onFormValueChange($event)"
+                                     (formValidationChange)="onFormValidationChange($event)" />
+                </ng-template>
+            </mat-tab>
+        }
+    </mat-tab-group>
+}

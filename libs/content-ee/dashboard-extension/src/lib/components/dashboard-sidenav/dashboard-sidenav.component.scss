@@ -1,0 +1,23 @@
+.adw-dashboard-sidenav {
+    display: block;
+    padding-bottom: 30px;
+
+    &-link {
+        text-decoration: none;
+        color: var(--theme-action-button-text-color);
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        height: 32px;
+
+        &:not(.adw-dashboard-sidenav-selected):hover {
+            background: var(--adf-theme-background-hover-color);
+            color: var(--theme-sidenav-hovered-text-color);
+        }
+    }
+
+    &-selected {
+        color: inherit;
+        background: transparent;
+    }
+}

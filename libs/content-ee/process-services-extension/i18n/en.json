@@ -1,0 +1,190 @@
+{
+    "PROCESS-EXTENSION": {
+        "DIALOG": {
+            "NEW_PROCESS": "New Process",
+            "SELECT_APPLICATION": "Select Application",
+            "ERROR": "You can't start a process as there are no process definitions available"
+        },
+        "BREADCRUMB": {
+            "ROOT": "Process Management",
+            "PROCESS_LIST": {
+                "PROCESSES": "Processes"
+            },
+            "START_PROCESS": "Start process",
+            "ACTIONS": {
+                "INFO-TOOLTIP": "View Details"
+            }
+        },
+        "TOOLBAR": {
+            "SHOW_COMMENTS": "Show comments"
+        },
+        "MENU": {
+            "PROCESS_MANAGEMENT": "Process Management",
+            "CREATE_NEW_PROCESS": "Start Process",
+            "CREATE_PROCESS_NOT_ALLOWED": "New process can not be created"
+        },
+        "PROCESS_SUBMENU": {
+            "MORE": "Show more"
+        },
+        "CONTEXT_MENU": {
+            "COMMENTS": "Comments",
+            "CANCEL_PROCESS": "Cancel Process"
+        },
+        "ERROR": {
+            "NO_FORM": "Process definition does not have a form defined",
+            "NO_CONTENT": "Not able to attach the file from your device",
+            "CAN_NOT_ATTACH": "Not able to attach the selected content",
+            "AUDIT_ERROR": "View task error: {{error}}",
+            "TASK_ACCESS_WARNING": "You don’t have right to modify the task",
+            "PREVIEW_NOT_AVAILABLE_TASK_INCOMPLETE": "Document preview is unavailable as the task is not yet completed.",
+            "PREVIEW_UNSUPPORTED": "Couldn't load preview. Unsupported file type or loading error. Please try refreshing the page.",
+            "ARENDER_REDIRECT_FAILED": "Unable to open the document in ARender. Please sign in again and try once more.",
+            "MLIGHT_OPEN_FAILED": "Unable to open this DWG in MLightCAD. Please sign in again and try once more."
+        },
+        "FILE_PREVIEW": {
+            "TAB_PREVIEW": "Preview",
+            "TAB_PROPERTIES": "Properties",
+            "TAB_COMMENTS": "Comments",
+            "TAB_TASK_COMMENTS": "Task comments",
+            "TAB_DOCUMENT_COMMENTS": "Document comments",
+            "NO_TASK_CONTEXT": "Task comments are not available.",
+            "COLUMNS_REGION": "Preview, properties, and comments tabs with document viewer",
+            "NO_REPOSITORY_LINK": "This attachment is not linked to a document in the repository. Properties and comments are only available for linked documents.",
+            "ACTION_FULLSCREEN": "Full screen",
+            "ACTION_POP_OUT": "Open in new window",
+            "ACTION_OPEN_COMMENTS": "Open comments",
+            "ACTION_OPEN_PROPERTIES": "Open properties",
+            "ACTION_MORE": "More actions",
+            "ACTION_RELATED": "Related content"
+        },
+        "SNACKBAR": {
+            "PROCESS-CREATED": "Process created '{{ processName }}'",
+            "BACKEND_SERVICE_ERROR": "Unknown network error happened. Process service related features are disabled.",
+            "ACTION": "View running process"
+        },
+        "NO_PROCESS_DEFINITIONS": "No process definitions available",
+        "SIDE_NAV_TITLE": "Workflow",
+        "STATUS": {
+            "COMPLETED": "Completed",
+            "RUNNING": "Running",
+            "OPEN": "Open",
+            "UNKNOWN": "Unknown"
+        },
+        "TASK_LIST": {
+            "TASKS": "Tasks",
+            "ACTIONS": {
+                "TASK_DETAILS": "View"
+            }
+        },
+        "PROCESS_LIST": {
+            "ACTIONS": {
+                "PROCESS_DETAILS": "View"
+            }
+        },
+        "TASK_FORM": {
+            "FORM_SAVED": "Form saved successfully",
+            "FORM_COMPLETED": "The task has been completed",
+            "CLOSE": "Close",
+            "CLAIM_TASK": "Task has been claimed",
+            "UNCLAIM_TASK": "Task has been released",
+            "CLAIM_FAILED": "Not able to perform the action",
+            "TABS": {
+                "DETAILS": "Details",
+                "DOCUMENTS": "Documents"
+            }
+        },
+        "TASK_DETAILS": {
+            "ERROR": "Not able to perform the action",
+            "FAILED_TO_LOAD": "Failed to load task details, try after some time",
+            "UPDATED": "Updated {{ property }} successfully",
+            "FAILED_TO_UPDATE": "Failed to update {{ property }}",
+            "METADATA_TOOLTIP": "View Details",
+            "NO_TASK_NAME": "No name",
+            "REASSIGN": {
+                "TAB": "Reassign",
+                "LABEL": "Assignee",
+                "PLACEHOLDER": "Select assignee",
+                "SEARCH_PLACEHOLDER": "Search assignees…",
+                "NO_MATCH": "No assignees found",
+                "REASON_LABEL": "Reassign reason",
+                "REASON_PLACEHOLDER": "Enter reassign reason",
+                "REASON_REQUIRED": "Enter a reassign reason",
+                "SUBMIT": "Submit",
+                "LOADING_USERS": "Loading users…",
+                "SUCCESS": "Task reassigned successfully",
+                "FAILED": "Failed to reassign task",
+                "FAILED_USERS": "Failed to load users",
+                "NO_CHANGE": "Select a different assignee to reassign"
+            }
+        },
+        "PROCESS_DETAILS_DIALOG": {
+            "CLOSE": "Close"
+        },
+        "ATTACH_FILE_CONTENT_SELECTOR": {
+            "SEARCH_PLACEHOLDER": "\ud83d\udd0d Search by name, code, description...",
+            "SEARCH_INPUT_ARIA_LABEL": "Search"
+        }
+    },
+    "SHARED": {
+        "PROCESSES_LIST": {
+            "NO_PROCESS_DEFINITIONS": "No process definitions available"
+        }
+    },
+    "ADF_PROCESS_LIST": {
+        "PROPERTIES": {
+            "CREATED_BY": "Started By",
+            "CREATED": "Start Date"
+        },
+        "START_PROCESS": {
+            "NO_PROCESS_DEFINITIONS": "You can't start a process as there are no process definitions available",
+            "NO_START_FORM": "This process does not require any additional configurations",
+            "NO_PROCESS_DEF_SELECTED": "No category/process selected",
+            "FORM": {
+                "LABEL": {
+                    "SELECT_APPLICATION": "Select Application"
+                }
+            }
+        },
+        "CANCEL_PROCESS": {
+            "DIALOG": {
+                "TITLE": "Cancel process?",
+                "DESCRIPTION": "This process and all associated tasks will be marked as complete.",
+                "CONFIRM_BTN": "Confirm"
+            },
+            "NOTIFICATIONS": {
+                "SUCCESS": "'{{ processName }}' successfully canceled.",
+                "FAIL": "Cancel process error: {{ message }}"
+            }
+        }
+    },
+    "ADF_TASK_LIST": {
+        "PROPERTIES": {
+            "CREATED": "Created Date"
+        },
+        "DETAILS": {
+            "BUTTON": {
+                "CLAIM": "CLAIM",
+                "UNCLAIM": "RELEASE"
+            }
+        }
+    },
+    "RUNNING_PROCESS": {
+        "BADGE_TOOLTIP": "Part of running process",
+        "LINKED_PROCESS_PANEL": {
+            "TITLE": "Linked Process",
+            "PART_OF_THE_PROCESS_TITLE": "This document is part of the following processes",
+            "NO_PROCESSES": "This document is not part of any running processes",
+            "CREATED": "Created",
+            "VIEW_DETAILS_BTN": "View details"
+        }
+    },
+    "AUTO_AUTH_SECTION": {
+        "TITLE": "Automatic authentication for process services",
+        "ENABLED": "Enabled",
+        "ENABLED_DESCRIPTION": "The system will automatically re-authenticate allowing the user to continue their work uninterrupted.",
+        "DISABLED": "Disabled",
+        "DISABLED_DESCRIPTION": "User will need to re-authenticate with their credentials when the session time expires.",
+        "AUTH_FAILED": "Automatic authentication in process services failed. {{error}} {{details}}",
+        "RADIO_GROUP_LABEL": "Automatic authentication for process services state"
+    }
+}

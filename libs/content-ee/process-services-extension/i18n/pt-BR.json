@@ -1,0 +1,100 @@
+{
+  "PROCESS-EXTENSION": {
+    "DIALOG": {
+      "NEW_PROCESS": "Novo processo",
+      "SELECT_APPLICATION": "Selecionar aplicativo",
+      "ERROR": "Você não pode iniciar um processo porque não há definições de processo disponíveis"
+    },
+    "BREADCRUMB": {
+      "ROOT": "Gerenciamento de processos",
+      "PROCESS_LIST": {
+        "PROCESSES": "Processos"
+      },
+      "START_PROCESS": "Iniciar processo",
+      "ACTIONS": {
+        "INFO-TOOLTIP": "Exibir detalhes"
+      }
+    },
+    "MENU": {
+      "PROCESS_MANAGEMENT": "Gerenciamento de processos",
+      "CREATE_NEW_PROCESS": "Iniciar processo",
+      "CREATE_PROCESS_NOT_ALLOWED": "Não é possível criar novo processo"
+    },
+    "PROCESS_SUBMENU": {
+      "MORE": "Mostrar mais"
+    },
+    "ERROR": {
+      "NO_FORM": "A definição de processo não tem um formulário definido",
+      "NO_CONTENT": "Não é possível anexar o arquivo de seu dispositivo",
+      "CAN_NOT_ATTACH": "Não é possível anexar o conteúdo selecionado",
+      "AUDIT_ERROR": "Exibir erro de tarefa: {{error}}",
+      "TASK_ACCESS_WARNING": "Você não tem permissão para modificar a tarefa"
+    },
+    "SNACKBAR": {
+      "PROCESS-CREATED": "Processo criado '{{ processName }}'",
+      "BACKEND_SERVICE_ERROR": "Ocorreu um erro de rede desconhecido. Recursos relacionados ao serviço de processos estão desativados.",
+      "ACTION": "Exibir processo em execução"
+    },
+    "NO_PROCESS_DEFINITIONS": "Sem definições de processo disponíveis",
+    "SIDE_NAV_TITLE": "Fluxo de trabalho",
+    "TASK_LIST": {
+      "TASKS": "Tarefas",
+      "ACTIONS": {
+        "TASK_DETAILS": "Visualizar"
+      }
+    },
+    "PROCESS_LIST": {
+      "ACTIONS": {
+        "PROCESS_DETAILS": "Visualizar"
+      }
+    },
+    "TASK_FORM": {
+      "FORM_SAVED": "Formulário salvo com êxito",
+      "FORM_COMPLETED": "A tarefa foi concluída",
+      "CLOSE": "Fechar",
+      "CLAIM_TASK": "A tarefa foi reivindicada",
+      "UNCLAIM_TASK": "A tarefa foi liberada",
+      "CLAIM_FAILED": "Não é possível executar a ação"
+    },
+    "TASK_DETAILS": {
+      "ERROR": "Não é possível executar a ação",
+      "FAILED_TO_LOAD": "Falha ao carregar os detalhes da tarefa. Tente mais tarde",
+      "UPDATED": "{{ property }} foi atualizado com êxito",
+      "FAILED_TO_UPDATE": "Falha ao atualizar {{ property }}",
+      "METADATA_TOOLTIP": "Exibir detalhes",
+      "NO_TASK_NAME": "Nenhum nome"
+    }
+  },
+  "SHARED": {
+    "PROCESSES_LIST": {
+      "NO_PROCESS_DEFINITIONS": "Sem definições de processo disponíveis"
+    }
+  },
+  "ADF_PROCESS_LIST": {
+    "PROPERTIES": {
+      "CREATED_BY": "Iniciado por",
+      "CREATED": "Data de início"
+    },
+    "START_PROCESS": {
+      "NO_PROCESS_DEFINITIONS": "Você não pode iniciar um processo porque não há definições de processo disponíveis",
+      "NO_START_FORM": "Este processo não requer configurações adicionais",
+      "NO_PROCESS_DEF_SELECTED": "Nenhuma categoria/processo selecionado",
+      "FORM": {
+        "LABEL": {
+          "SELECT_APPLICATION": "Selecionar aplicativo"
+        }
+      }
+    }
+  },
+  "ADF_TASK_LIST": {
+    "PROPERTIES": {
+      "CREATED": "Data de criação"
+    },
+    "DETAILS": {
+      "BUTTON": {
+        "CLAIM": "Reivindicar",
+        "UNCLAIM": "Liberar"
+      }
+    }
+  }
+}

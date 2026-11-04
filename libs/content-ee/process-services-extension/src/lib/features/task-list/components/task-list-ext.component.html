@@ -1,0 +1,109 @@
+<aca-page-layout>
+    <aca-page-layout-header>
+        <h1 class="adw-task-list-title">
+            {{ currentFilter?.name || ('PROCESS-EXTENSION.TASK_LIST.TASKS' | translate) }}
+        </h1>
+        <nav>
+            <div class="adf-breadcrumb-item adf-active" title="{{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}">
+                <div aria-current="location">
+                    <div class="adf-breadcrumb-item adf-active" role="listitem">
+                        <div>
+                            {{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}
+                        </div>
+                        <mat-icon class="adf-breadcrumb-item-chevron">
+                            chevron_right
+                        </mat-icon>
+                        <div>
+                            {{ 'PROCESS-EXTENSION.TASK_LIST.TASKS' | translate }}
+                        </div>
+                        <mat-icon *ngIf="currentFilter" class="adf-breadcrumb-item-chevron">
+                            chevron_right
+                        </mat-icon>
+                        <div *ngIf="currentFilter" class="adf-breadcrumb-item-current">
+                            {{ currentFilter?.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <aca-toolbar [items]="actions"/>
+    </aca-page-layout-header>
+    <aca-page-layout-content>
+        <div class="aca-main-content" *ngIf="currentFilter">
+            <div class="adf-content-area">
+                <div class="adf-content-border">
+                    <adf-tasklist
+                        [appId]="appId || null"
+                        [name]="currentFilter?.filter?.name"
+                        [dueBefore]="dueBefore"
+                        [presetColumn]="taskSchema"
+                        [stickyHeader]="true"
+                        [selectFirstRow]="false"
+                        [selectionMode]="'multiple'"
+                        [multiselect]="true"
+                        [size]="paginationPageSize"
+                        [assignment]="currentFilter?.filter?.assignment"
+                        [state]="currentFilter?.filter?.state"
+                        [sort]="currentFilter?.filter?.sort"
+                        [data]="dataTasks"
+                        [isResizingEnabled]="true"
+                        [blurOnResize]="false"
+                        (rowsSelected)="onRowsSelected($event)"
+                        acaContextActions
+                        [customActions]="taskListContextMenuActions"
+                        #taskList
+                    >
+                        <data-columns>
+                            <data-column
+                                key="status"
+                                type="text"
+                                title="ADF_TASK_LIST.PROPERTIES.STATUS"
+                                [sortable]="false"
+                                class="adf-ellipsis-cell adf-no-grow-cell"
+                                [draggable]="true"
+                            >
+                                <ng-template let-entry="$implicit">
+                                    <div
+                                        class="aps-task-status-cell"
+                                        [class.aps-task-status-cell--completed]="!!entry.row.obj?.endDate"
+                                        [class.aps-task-status-cell--open]="!entry.row.obj?.endDate"
+                                        title="{{ 'PROCESS-EXTENSION.STATUS.' + (entry.row.obj?.endDate ? 'COMPLETED' : 'RUNNING') | translate }}">
+                                        {{ 'PROCESS-EXTENSION.STATUS.' + (entry.row.obj?.endDate ? 'COMPLETED' : 'RUNNING') | translate }}
+                                    </div>
+                                </ng-template>
+                            </data-column>
+                            <data-column
+                                key="assignee"
+                                type="text"
+                                [sortable]="false"
+                                title="ADF_TASK_LIST.PROPERTIES.ASSIGNEE"
+                                class="adf-desktop-only adf-ellipsis-cell"
+                                [draggable]="true"
+                            >
+                                <ng-template let-entry="$implicit">
+                                    <div class="aps-task-assignee-cell" title="{{ entry.row.obj.assignee | fullName }}">
+                                        {{ entry.row.obj.assignee | fullName }}
+                                    </div>
+                                </ng-template>
+                            </data-column>
+                        </data-columns>
+                    </adf-tasklist>
+
+                    <adf-pagination
+                        *ngIf="taskList"
+                        [target]="taskList"
+                        [supportedPageSizes]="supportedPageSizes"
+                        (changePageSize)="onChangePageSize($event)"
+                        #taskListPagination
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="aps-sidebar" *ngIf="infoDrawerOpened && !!lastSelectedTaskId">
+            <aps-task-info-drawer
+                [isLoading]="isLoading"
+                [taskDetails]="infoDrawerTaskDetails"
+                [taskId]="lastSelectedTaskId"/>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

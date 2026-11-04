@@ -1,0 +1,76 @@
+<div class="adw-request-for-review-dialog">
+  <h2 mat-dialog-title class="adw-request-for-review-dialog__title">Request for Review</h2>
+
+  <mat-dialog-content class="adw-request-for-review-dialog__content">
+    @if (step === 'select') {
+      <p class="adw-request-for-review-dialog__hint">
+        Select the files you want to submit for review
+        @if (data.folderName) {
+          in <strong>{{ data.folderName }}</strong>.
+        }
+      </p>
+
+      @if (loadingFiles) {
+        <div class="adw-request-for-review-dialog__loading">
+          <mat-spinner diameter="36"></mat-spinner>
+          <span>Loading files…</span>
+        </div>
+      } @else if (loadError) {
+        <p class="adw-request-for-review-dialog__error">{{ loadError }}</p>
+      } @else if (files.length === 0) {
+        <p class="adw-request-for-review-dialog__empty">No files found in this folder.</p>
+      } @else {
+        <div class="adw-request-for-review-dialog__select-all">
+          <mat-checkbox
+            [checked]="allSelected"
+            [indeterminate]="someSelected"
+            (change)="toggleSelectAll($event.checked)">
+            Select all
+          </mat-checkbox>
+        </div>
+        <ul class="adw-request-for-review-dialog__file-list">
+          @for (file of files; track file.id) {
+            <li class="adw-request-for-review-dialog__file-item">
+              <mat-checkbox
+                [checked]="isSelected(file.id)"
+                (change)="toggleFile(file.id, $event.checked)">
+                <span class="adw-request-for-review-dialog__file-name" [title]="file.name">{{ file.name }}</span>
+              </mat-checkbox>
+            </li>
+          }
+        </ul>
+      }
+    } @else {
+      <p class="adw-request-for-review-dialog__hint">
+        The following {{ selectedFiles.length }} file(s) will be submitted for review:
+      </p>
+      <ul class="adw-request-for-review-dialog__summary-list">
+        @for (file of selectedFiles; track file.id) {
+          <li class="adw-request-for-review-dialog__summary-item">
+            <mat-icon aria-hidden="true">description</mat-icon>
+            <span [title]="file.name">{{ file.name }}</span>
+          </li>
+        }
+      </ul>
+      @if (submitError) {
+        <p class="adw-request-for-review-dialog__error" role="alert">{{ submitError }}</p>
+      }
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="adw-request-for-review-dialog__actions">
+    <button type="button" mat-stroked-button (click)="cancel()" [disabled]="submitting">Cancel</button>
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      (click)="onPrimaryAction()"
+      [disabled]="loadingFiles || submitting || (step === 'select' && files.length === 0)">
+      @if (submitting) {
+        Submitting…
+      } @else {
+        {{ primaryActionLabel }}
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

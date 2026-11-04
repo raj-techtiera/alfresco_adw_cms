@@ -1,0 +1,38 @@
+<aca-page-layout>
+    <aca-page-layout-header>
+        <div
+            class="adf-breadcrumb-item adf-active"
+            title="{{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}"
+            role="listitem">
+            {{ 'PROCESS-EXTENSION.BREADCRUMB.ROOT' | translate }}
+            <mat-icon class="adf-breadcrumb-item-chevron">
+                chevron_right
+            </mat-icon>
+            {{ 'PROCESS-EXTENSION.BREADCRUMB.PROCESS_LIST.PROCESSES' | translate }}
+            <mat-icon class="adf-breadcrumb-item-chevron">
+                chevron_right
+            </mat-icon>
+            <div
+                class="adf-breadcrumb-item-current"
+                aria-current="location">
+                {{ processInstanceDetails?.name }}
+            </div>
+        </div>
+        <aca-toolbar [items]="actions"/>
+    </aca-page-layout-header>
+    <aca-page-layout-content>
+        <aps-process-details-ext
+            class="aca-main-content"
+            [processId]="processInstanceDetails?.id"
+            (infoDrawerTaskDetails)="onInfoDrawerTaskDetails($event)"
+            (isLoading)="onLoading($event)"
+            (selectedTaskId)="onSelectedTaskId($event)"
+        />
+        <div class="aps-sidebar" *ngIf="infoDrawerOpened && !!lastSelectedTaskId">
+            <aps-task-info-drawer
+                [isLoading]="isLoading"
+                [taskDetails]="infoDrawerTaskDetails"
+                [taskId]="lastSelectedTaskId"/>
+        </div>
+    </aca-page-layout-content>
+</aca-page-layout>

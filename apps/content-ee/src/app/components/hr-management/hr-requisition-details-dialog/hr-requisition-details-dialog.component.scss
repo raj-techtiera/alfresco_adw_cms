@@ -1,0 +1,84 @@
+.adw-mdrd__main {
+  grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.adw-mdrd__tablist {
+  flex: 0 0 clamp(140px, 16vw, 180px);
+}
+
+:host ::ng-deep .dvi-flow__step {
+  max-width: 100%;
+  padding: 8px 10px;
+}
+
+:host ::ng-deep .dvi-flow__name {
+  font-size: 0.75rem;
+}
+
+.adw-hr-json-table {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 8px;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #edf1f6;
+}
+
+.adw-hr-json-table__title {
+  border-bottom: none;
+  padding: 0;
+}
+
+.adw-hr-json-table__body {
+  margin: 0;
+  overflow: auto;
+}
+
+.adw-hr-json-mat-table {
+  width: max-content;
+  min-width: 100%;
+  background: transparent;
+}
+
+.adw-hr-json-mat-table .mat-mdc-header-row,
+.adw-hr-json-mat-table .mat-mdc-row {
+  height: auto;
+  background: transparent;
+}
+
+.adw-hr-json-mat-table .mat-mdc-header-cell,
+.adw-hr-json-mat-table .mat-mdc-cell {
+  padding: 8px 10px;
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+}
+
+.adw-hr-json-mat-table .mat-mdc-header-cell {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+}
+
+.adw-hr-json-mat-table .mat-mdc-cell {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+@media (max-width: 960px) {
+  .adw-mdrd__main {
+    grid-template-columns: 1fr;
+  }
+
+  .adw-mdrd__preview,
+  .adw-mdrd__preview-shell {
+    min-height: min(34vh, 300px);
+    max-height: 320px;
+  }
+
+  .adw-mdrd__tablist {
+    flex: 0 0 auto;
+  }
+}
+
